@@ -38,9 +38,9 @@
 		|					
 		|			
 		|-- test 	// 测试
-		|		|
-		|		|-- flow			
-		|			|-- test.html
+		|	|
+		|	|-- flow			
+		|		|-- test.html
 		|
 		|-- dist	// 发布
 		|
