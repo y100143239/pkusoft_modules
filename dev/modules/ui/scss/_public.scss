@@ -1,4 +1,12 @@
-.clear { display:block; clear: both; height: 0;}
-.clearfix:after {
 
+body, html {
+    height: 100%;
+}
+
+.clear{clear:both;height:0;overflow:hidden;}
+.clearfix:after{content:".";display:block;height:0;clear:both;visibility:hidden}
+
+@mixin opacity($opacity:50) {
+    opacity: $opacity / 100;
+    filter: alpha(opacity=$opacity);
 }
