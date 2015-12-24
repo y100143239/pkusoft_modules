@@ -50,7 +50,6 @@ define( [ "utils/utils" ], function ( utils ) {
         destory: function () {
             this.win.document.body.removeChild(this.container);
             this.container = null;
-            this._id = null;
             return this;
         }
     };
