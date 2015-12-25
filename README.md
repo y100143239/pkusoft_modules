@@ -59,8 +59,8 @@
 * 方案
 	1. 定义常量 VERSION，将被每个页面引用
 	2. 开发环境：VERSION = (new Date()).getTime()
-	42. 生成环境：VERSION = "v2.0"
-	1. 以查询字符串的方式追加到请求URL
+	3. 生产环境：VERSION = "v2.0"
+	4. 以查询字符串的方式追加到请求URL
 * 实现
 	1. VERSION的定义及初始化将在 default.jsp进行
 	2. 通过 RequireJS 将请求参数VERSION追加到所有URL
