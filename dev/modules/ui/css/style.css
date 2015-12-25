@@ -150,13 +150,13 @@ body, html {
   top: 0;
   left: 0;
   overflow: hidden; }
-  .overlay-container.show {
+  .overlay-container.active {
     display: block;
     visibility: visible; }
   .overlay-container .overlay {
     height: 100%;
-    opacity: 0.7;
-    filter: alpha(opacity=70);
+    opacity: 0.4;
+    filter: alpha(opacity=40);
     background: #000; }
 
 /*# sourceMappingURL=style.css.map */

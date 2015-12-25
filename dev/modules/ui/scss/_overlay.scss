@@ -7,13 +7,13 @@
     top: 0;
     left: 0;
     overflow: hidden;
-    &.show {
+    &.active {
         display: block;
         visibility: visible;
     }
     .overlay {
         height: 100%;
-        @include opacity(70);
+        @include opacity(40);
         background: #000;
     }
 }

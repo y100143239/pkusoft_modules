@@ -19,9 +19,8 @@
     <script>
         require(["utils/domReady", "ui/overlay"], function(domReady, overlay) {
             domReady( function () {
-                //overlay.show();
-                //console.log(overlay);
-                window.overlay = overlay;
+                window.overlay = overlay.getInstance({idleTime: 3000});
+                // (new (overlay.constructor)).show()
             });
 
         });

@@ -4,29 +4,35 @@
 
 define( [ "utils/utils" ], function ( utils ) {
     var classList = utils.classList,
-        getMaxZindex = utils.getMaxZindex;
+        getMaxZindex = utils.getMaxZindex,
+        extend = utils.extend;
 
-    var overlay = {
-        win: top, // 默认遮罩住顶层
-        _id: "overlay_20151224235800",/* 通用 */
-        container: null,
+    /**
+     * @param options = {
+     *      win: top,
+     *      idleTime: 30000
+     * }
+     *
+     * @constructor
+     */
+    function Overlay(options) {
+        extend(this, options);
+        this.win = this.win || top;
+        this.idleTime = this.idleTime || 30000;
+    }
+
+    Overlay.getInstance = function( options ) {
+        return new Overlay(options);
+    };
+    extend( Overlay.prototype, {
         init: function () {
             var doc,
-                overlayContainer,
-                overlayId;
+                overlayContainer
+                ;
 
             doc = this.win.document;
 
-            // 如果存在则直接使用
-            overlayContainer = doc.getElementById(this._id);
-            if ( overlayContainer ) {
-                this.container = overlayContainer;
-                return this;
-            }
-
-            overlayId = this._id;
             overlayContainer = doc.createElement( "div" );
-            overlayContainer.id = overlayId;
             overlayContainer.className = "overlay-container";
             overlayContainer.style.zIndex = getMaxZindex( this.win ) + 1;
             overlayContainer.innerHTML = '<div class="overlay"></div>';
@@ -36,24 +42,30 @@ define( [ "utils/utils" ], function ( utils ) {
 
             return this;
         },
-
         hide: function () {
+            var _this = this;
             this.container || this.init();
-            classList(this.container ).remove("show");
+            classList(this.container ).remove("active");
+            this.timerId = this.win.setTimeout( function(){
+                _this.destroy();
+            }, this.idleTime );
             return this;
         },
         show: function () {
+            this.timerId && this.win.clearTimeout( this.timerId );
             this.container || this.init();
-            classList(this.container ).add("show");
+            classList(this.container ).add("active");
             return this;
         },
-        destory: function () {
+        destroy: function () {
+            this.container || this.init();
             this.win.document.body.removeChild(this.container);
             this.container = null;
+            this.timerId = null;
             return this;
         }
-    };
+    } );
 
-    return overlay;
+    return Overlay;
 
 } );
