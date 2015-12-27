@@ -7,13 +7,13 @@
             name: 'main'
         }
     ],
-    fileExclusionRegExp: /(^_.*)|(scss)|(.*\.scss$)/,
+    fileExclusionRegExp: /(^_.*)|(scss)|(.*\.scss$)|(.*\.map$)|(images)/,
     optimizeCss: 'standard',
     removeCombined: true,
     paths: {
-        jquery: 'jquery/jquery',
-        flow: "ui/flow",
-        overlay: "ui/overlay"
+        //jquery: 'jquery/jquery',
+        //flow: "ui/flow",
+        //overlay: "ui/overlay"
     },
     shim: {
 

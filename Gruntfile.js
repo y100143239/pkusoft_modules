@@ -9,19 +9,12 @@ module.exports = function(grunt) {
                     optimizationLevel: 3 // png图片优化水平，3是默认值，取值区间0-7
                 },
                 files: [
-                {
-                    expand: true, // 开启动态扩展
-                    cwd: "dev/modules/workbench/images", // 当前工作路径
-                    src: ["**/*.{png,jpg,gif}"], // 要出处理的文件格式(images下的所有png,jpg,gif)
-                    dest: "dev/modules/workbench/images.min" // 输出目录(直接覆盖原图)
-                },
-                {
-                    expand: true, // 开启动态扩展
-                    cwd: "dev/modules/space/images", // 当前工作路径
-                    src: ["**/*.{png,jpg,gif}"], // 要出处理的文件格式(images下的所有png,jpg,gif)
-                    dest: "dev/modules/space/images.min" // 输出目录(直接覆盖原图)
-                },
-
+                    {
+                        expand: true, // 开启动态扩展
+                        cwd: "dev/modules/ui/images", // 当前工作路径
+                        src: ["**/*.{png,jpg,gif}"], // 要出处理的文件格式(images下的所有png,jpg,gif)
+                        dest: "dist/modules/ui/images" // 输出目录(直接覆盖原图)
+                    }
                 ]
             }
         }

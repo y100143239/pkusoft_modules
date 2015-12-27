@@ -3,20 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title></title>
-
-    <!--~~~~~~~~~~ 置入 default.jsp 的部分 ~~~~~~~~~~-->
     <link rel="stylesheet" href="../../dev/modules/ui/css/style.css"/>
-    <script data-main="../../dev/modules/" src="../../dev/modules/require.js"></script>
-    <script>
-        var VERSION; // VERSION = "v2.0";
-        require.config( {
-            urlArgs: "VERSION=" + (VERSION || (new Date()).getTime()),
-            waitSeconds: 15
-        } );
-    </script>
-    <!--/~~~~~~~~~~ 置入 default.jsp 的部分 ~~~~~~~~~-->
-
-    <script>
+    <script data-main="../../dev/modules/main" src="../../dev/modules/require.js"></script>
+    <script type="text/custom">
         require(["utils/domReady", "ui/flow"], function(domReady, flow) {
             domReady( function () {
 
@@ -32,6 +21,29 @@
                 });
             });
 
+        });
+        require(["jquery"], function(jq) {
+            console.info(jq);
+            console.info($)
+        })
+    </script>
+    <script>
+        require(["main"],function(){
+            var domReady = require("utils/domReady");
+            var flow = require("ui/flow");
+            domReady( function () {
+
+                var data = [
+                    { "proid": "420105000061", "operateTypeName": "登记1", "memo": 1, "operateDate": 1450228693001, "opusername": "派出所保管员1" },
+                    { "proid": "420105000062", "operateTypeName": "登记2", "memo": 2, "operateDate": 1450228693002, "opusername": "派出所保管员2" },
+                    { "proid": "420105000063", "operateTypeName": "登记3", "memo": 3, "operateDate": 1450228693003, "opusername": "派出所保管员3" },
+                    { "proid": "420105000064", "operateTypeName": "登记4", "memo": 4, "operateDate": 1450228693004, "opusername": "派出所保管员4" }
+                ];
+                flow.init({
+                    container: document.getElementById("flow-container"),
+                    data: data
+                });
+            });
         });
     </script>
 </head>
