@@ -19,3 +19,5 @@
 
     }
 })
+// $ cd develop/work/pkusoft/pkusoft_modules/
+// $ node r.js -o build.js

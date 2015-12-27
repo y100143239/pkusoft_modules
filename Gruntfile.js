@@ -2,7 +2,13 @@ module.exports = function(grunt) {
 
     // Project configuration.
     grunt.initConfig({
-
+        clean: {
+            cleanoutput: {
+                files: [{
+                    src: 'dist/*'
+                }]
+            }
+        },
         imagemin: {
             dynamic: {
                 options: {
@@ -27,7 +33,7 @@ module.exports = function(grunt) {
 
 
     grunt.registerTask('prod', [
-        //'copy', //复制文件
+        'clean',
         'imagemin' //图片压缩
     ]);
 
