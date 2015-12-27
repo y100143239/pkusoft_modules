@@ -86,10 +86,38 @@ require.config( {
 
 ##2.3 RequireJS的使用
 
-###2.3.1 引入jQuery
+###2.3.1 配置
 
-**在不改变jQuery源码的情况下，引入jQuery，并解除对全局变量“$”的占用**
+**详情请参考 test/main/test.html**
+
+    /* -----------------------
+     config
+     -------------------------*/
+    var VERSION; // VERSION = "v2.0";
+    require.config( {
+        // 给模块URL加版本号阻止浏览器缓存
+        urlArgs: "VERSION=" + (VERSION || (new Date()).getTime()),
+        // 将对 jquery-1.9.0 的引用映射到引用 jquery-private
+        paths: {
+            "jquery": 'jquery/jquery-1.9.0',
+            "jquery-private": 'jquery/jquery-private'
+        },
+        map: {
+            '*': { 'jquery': 'jquery-private' },
+            'jquery-private': { 'jquery': 'jquery' }
+        },
+        // 超时
+        waitSeconds: 15
+    } );
+
+* 对 require.js 的引入 以及配置信息 将放在公共文件进行静态导入
+
+
  
+###2.3.2 jQuery及其插件
+
+* 在不改变jQuery源码的情况下引入jQuery，并解除对全局变量“$”的占用
+* 插件配置参考：<https://github.com/requirejs/example-jquery-shim>
  
 ```
 // 1. 将对模块“jquery”的引用映射到 “jquery-private”
@@ -109,63 +137,44 @@ define(['jquery'], function (jq) {
     return jq.noConflict( true );
 });
 ```
+ 
+   
+```
+// 插件配置
+requirejs.config({    "baseUrl": "js/lib",    "paths": {      "app": "../app"    },    "shim": {        "jquery.alpha": ["jquery"],        "jquery.beta": ["jquery"]    }});
+```
 
-###2.3.2 main.js
+###2.3.3 main.js
+
 
 * 作为入口文件
-* 对RequireJS进行配置
 * 引入所有公共模块；当main.js被Optimizer优化后，可直接从main.js中引用模块
 
 
 ####定义
 ```
 /* -----------------------
-    config
- -------------------------*/
-var VERSION; // VERSION = "v2.0";
-require.config( {
-    // 给模块URL加版本号阻止浏览器缓存
-    urlArgs: "VERSION=" + (VERSION || (new Date()).getTime()),
-    // 将对 jquery-1.9.0 的引用映射到引用 jquery-private
-    paths: {
-        "jquery": 'jquery/jquery-1.9.0',
-        "jquery-private": 'jquery/jquery-private'
-    },
-    map: {
-        '*': { 'jquery': 'jquery-private' },
-        'jquery-private': { 'jquery': 'jquery' }
-    },
-    // 超时
-    waitSeconds: 15
-} );
-
-
-/* -----------------------
      引入所有模块
  -------------------------*/
-(function(){
+define( [
+// utils
+    "utils/domReady",
+    "utils/clone",
+    "utils/doT",
+    "utils/utils",
+    //"utils/sizzle",
 
-    var utils,
-        ui
-        ;
+// ui
+    "ui/flow",
+    "ui/overlay"
 
-    utils = [
-        "utils/domReady",
-        "utils/clone",
-        "utils/doT",
-        "utils/utils"
-        //"utils/sizzle",
-    ];
-    ui = [
-        "ui/flow",
-        "ui/overlay"
-    ];
+] );
 
-    define( utils.concat( ui ) );
-})();
 ```
 
-####引入及使用
+####引入及使用（表现在合并压缩后）
+
+
 ```
 <link rel="stylesheet" href="../../dev/modules/ui/css/style.css"/>
 <script data-main="../../dev/modules/main" src="../../dev/modules/require.js"></script>
@@ -189,20 +198,33 @@ require.config( {
 
 ##3.1 RequireJS Optimizer	
 	
-	dev
-		|-- modules
-		|		|-- ui (存放UI组件)
-		|			|		
-		|			|-- images (统一管理图片资源)
-		|			|	|-- public
-		|			|		
-		|			|-- css
-		|			|	|-- style.css
-		|			|
-		|
-		|		|-- main.js 
+	
+	({
+	    // $ cd develop/work/pkusoft/pkusoft_modules/
+	    // $ node r.js -o build.js
+	    appDir: './dev/',
+	    baseUrl: './modules',
+	    dir: './dist',
+	    modules: [
+	        {
+	            name: 'main'
+	        }
+	    ],
+	    fileExclusionRegExp: /(^_.*)|(scss)|(.*\.scss$)|(.*\.map$)|(images)/,
+	    optimizeCss: 'standard',
+	    removeCombined: true,
+	    paths: {
+	        //jquery: 'jquery/jquery',
+	        //flow: "ui/flow",
+	        //overlay: "ui/overlay"
+	    },
+	    shim: {
+	
+	    }
+	})
 
-* 对main模块进行优化，main依赖的所有模块将被压缩合并到main.js
+
+* main依赖的所有模块将被压缩合并到main.js，被合并的模块文件会被移除
 * 不被main模块依赖的模块文件，将被压缩拷贝到dist目录
 * css文件将被压缩拷贝到dist目录
 * images目录被忽略	
@@ -210,7 +232,7 @@ require.config( {
 	
 ##3.2 gruant插件
 					
-* 清理
+* 清理(可选)
 * 压缩拷贝图片到dist
 
 ###Gruntfile.js
@@ -250,7 +272,7 @@ module.exports = function(grunt) {
 
 
     grunt.registerTask('prod', [
-        'clean',
+        //'clean',
         'imagemin' //图片压缩
     ]);
 
@@ -266,11 +288,7 @@ module.exports = function(grunt) {
 				|
 				|-- utils
 				|	|
-				|	|-- domReady.js (类似jQuery.ready())
-				|	|-- doT.js (模板引擎)	
 				|	|-- sizzle.js (通过css选择器获取dom)
-				|	|-- clone.js (用于对象克隆)
-				|	|-- utils.js (常用工具库)
 				|
 				|-- jquery
 				|	|
@@ -279,12 +297,14 @@ module.exports = function(grunt) {
 				|	|-- plugin (存放jQuery插件)
 				|	
 		 		|-- ui (存放UI组件)
-		 			|		
-		 			|-- images (统一管理图片资源)
-		 			|	|-- public
-		 			|		
-		 			|-- css
-		 			|	|-- style.css
-		 			|
-					|-- ui.js		
+		 		|	|		
+		 		|	|-- images (统一管理图片资源)
+		 		|	|	|-- public
+		 		|	|		
+		 		|	|-- css
+		 		|	|	|-- style.css
+		 		|	|
+				|
+				|-- main.js
+			
 				

@@ -1,4 +1,6 @@
 ({
+    // $ cd develop/work/pkusoft/pkusoft_modules/
+    // $ node r.js -o build.js
     appDir: './dev/',
     baseUrl: './modules',
     dir: './dist',
@@ -19,5 +21,3 @@
 
     }
 })
-// $ cd develop/work/pkusoft/pkusoft_modules/
-// $ node r.js -o build.js

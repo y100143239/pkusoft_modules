@@ -33,7 +33,7 @@ module.exports = function(grunt) {
 
 
     grunt.registerTask('prod', [
-        'clean',
+        //'clean',
         'imagemin' //图片压缩
     ]);
 
