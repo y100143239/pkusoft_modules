@@ -328,4 +328,11 @@ module.exports = function(grunt) {
 	* jQuery（1.9.0） DOM操作 
 	* EasyUI	实现所有业务功能
 
+* 单页复杂应用
+	* 参考：<http://www.zhihu.com/question/21170137> 
+	* Backbone
+		* 兼容 IE6 - IE11  	
+	* AngularJS
+		* 兼容 IE8+
+
 				
