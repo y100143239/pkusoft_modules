@@ -320,29 +320,47 @@ module.exports = function(grunt) {
 
 ###4.2.1 概要
 
-* 前台页面
-	* jQuery（1.9.0） 
-		* 应用：DOM操作	 
-	* Bootstrap（v3）	
-		* 应用：页面制作
-		* IE8兼容：参考<http://www.mamicode.com/info-detail-503562.html>
-	* artDialog	
-		* 应用：弹框
-		* 官网：<http://lab.seaning.com/>
-	* verifyjs
-		* 应用：表单验证	 
-		* 官网：<http://parsleyjs.org/>
-	
-* 后台管理 
-	* jQuery（1.9.0） DOM操作 
-	* EasyUI	实现所有业务功能
+####1. 前台页面
 
-* *单页复杂应用
-	* 参考：<http://www.zhihu.com/question/21170137> 
-	* Backbone
-		* 兼容 IE6 - IE11  	
-	* AngularJS
-		* 兼容 IE8+
+##### jQuery（1.11.3） 
+
+* 应用：DOM操作	
+  
+##### Bootstrap（v3）	
+
+* 应用：页面制作
+* IE8兼容：参考<http://www.mamicode.com/info-detail-503562.html>
+* 好处：主流页面风格，有大量的在线网站样式可以借鉴；文档齐全
+
+##### artDialog	
+
+* 应用：弹框
+* 官网：<http://lab.seaning.com/>
+* 好处：灵活，使用广泛，一直在升级维护；样式可定制；开源，源码托管在GitHub
+
+##### parsleyjs
+
+* 应用：表单验证	 
+* 官网：<http://parsleyjs.org/>
+* 比较：verifyjs & parsleyjs & validatejs
+* 好处：Google以及GitHub上排名均位列第一；文档齐全，开源。
+
+****
+**思考：前台页面是否也采用EasyUI，artDialog、parsleyjs是否应该采用？**
+****
+	
+####2. 后台管理 
+
+* jQuery（1.11.3） DOM操作 
+* EasyUI	实现所有业务功能
+
+####3. *单页复杂应用
+
+* 参考：<http://www.zhihu.com/question/21170137> 
+* Backbone
+	* 兼容 IE6 - IE11  	
+* AngularJS
+	* 兼容 IE8+
 
 ###4.2.2 Boostrap
 
