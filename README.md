@@ -307,4 +307,25 @@ module.exports = function(grunt) {
 				|
 				|-- main.js
 			
+			
+ 
+ 				
+#4. 前端框架
+
+##4.1 内网
+
+* 内网主要使用ExtJS制作后台管理界面
+
+##4.2 外网
+
+* 前台页面
+	* jQuery（1.9.0） DOM操作	 
+	* Bootstrap	页面制作
+	* artDialog	弹框
+	* 表单验证？<http://www.iteye.com/news/23823>
+	
+* 后台管理 
+	* jQuery（1.9.0） DOM操作 
+	* EasyUI	实现所有业务功能
+
 				
