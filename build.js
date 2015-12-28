@@ -9,7 +9,7 @@
             name: 'main'
         }
     ],
-    fileExclusionRegExp: /(^_.*)|(scss)|(.*\.scss$)|(.*\.map$)|(images)/,
+    fileExclusionRegExp: /(^_.*)|(scss)|(images)(.*\.map$)/,
     optimizeCss: 'standard',
     removeCombined: true,
     paths: {

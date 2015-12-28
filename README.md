@@ -318,21 +318,34 @@ module.exports = function(grunt) {
 
 ##4.2 外网
 
+###4.2.1 概要
+
 * 前台页面
-	* jQuery（1.9.0） DOM操作	 
-	* Bootstrap	页面制作
-	* artDialog	弹框
-	* 表单验证？<http://www.iteye.com/news/23823>
+	* jQuery（1.9.0） 
+		* 应用：DOM操作	 
+	* Bootstrap（v3）	
+		* 应用：页面制作
+		* IE8兼容：参考<http://www.mamicode.com/info-detail-503562.html>
+	* artDialog	
+		* 应用：弹框
+		* 官网：<http://lab.seaning.com/>
+	* verifyjs
+		* 应用：表单验证	 
+		* 官网：<http://parsleyjs.org/>
 	
 * 后台管理 
 	* jQuery（1.9.0） DOM操作 
 	* EasyUI	实现所有业务功能
 
-* 单页复杂应用
+* *单页复杂应用
 	* 参考：<http://www.zhihu.com/question/21170137> 
 	* Backbone
 		* 兼容 IE6 - IE11  	
 	* AngularJS
 		* 兼容 IE8+
 
-				
+###4.2.2 Boostrap
+
+
+###4.2.3 artDialog
+
