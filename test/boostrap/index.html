@@ -24,7 +24,10 @@
                 "jquery-private": 'jquery/jquery-private'
             },
             map: {
-                '*': { 'jquery': 'jquery-private' },
+                '*': {
+                    'jquery': 'jquery-private',
+                    'css': 'utils/css'
+                },
                 'jquery-private': { 'jquery': 'jquery' }
             },
             // 非模块化的

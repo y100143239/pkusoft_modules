@@ -2,6 +2,8 @@
      引入所有模块
  -------------------------*/
 define( [
+// css
+    "css!ui/css/style",
 // utils
 
 // ui

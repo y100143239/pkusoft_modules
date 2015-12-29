@@ -9,7 +9,7 @@
     <title>modules</title>
     <link rel="stylesheet" href="../../dev/modules/lib/bootstrap/css/bootstrap.css"/>
     <link rel="stylesheet" href="./css/style.css"/><!-- 自定义css -->
-    <link rel="stylesheet" href="../../dev/modules/ui/css/style.css"/>
+    <!--<link rel="stylesheet" href="../../dev/modules/ui/css/style.css"/>-->
     <title>modules</title>
     <script data-main="../../dev/modules/" src="../../dev/modules/require.js"></script>
     <script >
@@ -26,7 +26,9 @@
                 "jquery-private": 'jquery/jquery-private'
             },
             map: {
-                '*': { 'jquery': 'jquery-private' },
+                '*': { 'jquery': 'jquery-private',
+                    'css': 'utils/css'
+                },
                 'jquery-private': { 'jquery': 'jquery' }
             },
             // 非模块化的

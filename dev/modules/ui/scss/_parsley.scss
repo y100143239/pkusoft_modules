@@ -23,9 +23,10 @@
         list-style: none;
         color: #6C6C6B;
         position: absolute;
-        top: 0px;
-        left: 100%;
+        top: -120%;
+        left: 50%;
         width: 50%;
+        min-width: 100px;
         background: #FFFFDA;
         border: solid 1px #FEAE18;
         box-shadow: 0 0 5px rgba(0,0,0,.2);
@@ -38,21 +39,21 @@
             line-height: 0;
             font-size: 0;
             border: solid 6px transparent;
-            border-left:0 none;
+            border-bottom:0 none;
         }
         &:before {
-            top: 50%;
-            left: 0;
-            margin-top: -5px;
+            bottom: 0;
+            left: 50%;
+            margin-bottom: -6px;
             margin-left: -7px;
-            border-right-color: #FEAE18;
+            border-top-color: #FEAE18;
         }
         &:after {
-            top: 50%;
-            left: 0;
-            margin-top: -5px;
-            margin-left: -6px;
-            border-right-color: #FFFFDA;
+            bottom: 0;
+            left: 50%;
+            margin-bottom: -5px;
+            margin-left: -7px;
+            border-top-color: #FFFFDA;
             display: none \9;
         }
     }

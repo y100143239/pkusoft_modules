@@ -64,8 +64,56 @@
 
 ##2.1.3 css文件的引入
 
-* 可使用\<link>标签来引入
-* 可使用RequireJS按需载入css文件，参考<http://segmentfault.com/a/1190000002390643>
+* 使用\<link>标签来手动引入
+	* bootstrap样式文件 modules/lib/css/bootstrap.css
+
+* 使用require-css按需载入css文件 
+	* 参考
+		* <https://github.com/guybedford/require-css>
+		* <http://segmentfault.com/a/1190000002390643>
+	* 好处
+		* 	以模块化的方式管理css文件（以及图片和字体）
+	* 使用
+
+```
+require.config( {
+        
+	map: {
+	    '*': {
+	        'css': 'utils/css'
+	    }	
+	}
+    
+} );
+
+/* -----------------------
+     引入所有模块
+ -------------------------*/
+define( [
+
+    "css!ui/css/style",
+
+] );
+
+		
+```
+
+****
+**实践：手动引入与按需载入的应用场景？**
+ 
+* \<link>方式
+	* 适合于 要求在渲染树构建之前引入 的场景 
+* require-css方式
+	* 适合于动态生成HTML的模块来使用
+	 
+****
+
+##2.1.4 第三方库版本
+
+* jQuery
+	* 1.11.3
+
+
 
 ##2.2 避免浏览器缓存
 
