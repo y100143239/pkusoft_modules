@@ -441,3 +441,23 @@ module.exports = function(grunt) {
 
 ###4.2.3 artDialog
 
+* “占位符”
+
+###4.2.4 文件上传
+
+* 方案1，使用插件
+	* uploadify
+	* 参考：<http://www.uploadify.com/>
+ 
+* 方案2，自己实现
+	* 美化上传按钮，参考 <http://www.haorooms.com/post/css_input_uploadmh>
+	* 进度条的实现：服务器端计算文件上传进度，客户端轮询的方式。参考 <https://github.com/xiatiansong/fileupload.sys> 
+
+* 方案3，学习Flex4
+	* 视频教程：<https://item.taobao.com/item.htm?spm=a230r.1.14.13.4j2c4f&id=525647359455&ns=1&abbucket=9#detail> 	 
+
+###4.2.5 表单提交
+
+* ajaxForm
+	* 应用：简化Ajax提交表单
+	* 参考：<http://malsup.com/jquery/form/> 
