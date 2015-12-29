@@ -11,7 +11,7 @@
     ],
     fileExclusionRegExp: /(^_.*)|(scss)|(images)(.*\.map$)/,
     optimizeCss: 'standard',
-    removeCombined: true,
+    removeCombined: false,
     paths: {
         //jquery: 'jquery/jquery',
         //flow: "ui/flow",

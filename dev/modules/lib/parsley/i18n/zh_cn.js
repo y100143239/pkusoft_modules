@@ -27,3 +27,7 @@ Parsley.addMessages('zh-cn', {
 });
 
 Parsley.setLocale('zh-cn');
+
+Parsley.addMessages('zh-cn', {
+  dateiso: "请输入正确格式的日期 (YYYY-MM-DD)."
+});

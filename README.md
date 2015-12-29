@@ -50,7 +50,7 @@
 
 #2. 说明
 
-##2.1 命名
+##2.1 约定
 
 ##2.1.1 文件名
 
@@ -61,6 +61,11 @@
 * JavaScript
 	* 私有变量以“\_”（下划线）开头，如 \_this 、\_global
 	* 被jQuery包装的对象以“$”开头，如 $this = $(this) 
+
+##2.1.3 css文件的引入
+
+* 可使用\<link>标签来引入
+* 可使用RequireJS按需载入css文件，参考<http://segmentfault.com/a/1190000002390643>
 
 ##2.2 避免浏览器缓存
 
@@ -212,7 +217,7 @@ define( [
 	    ],
 	    fileExclusionRegExp: /(^_.*)|(scss)|(.*\.scss$)|(.*\.map$)|(images)/,
 	    optimizeCss: 'standard',
-	    removeCombined: true,
+	    removeCombined: false,
 	    paths: {
 	        //jquery: 'jquery/jquery',
 	        //flow: "ui/flow",
@@ -224,7 +229,7 @@ define( [
 	})
 
 
-* main依赖的所有模块将被压缩合并到main.js，被合并的模块文件会被移除
+* main依赖的所有模块将被压缩合并到main.js，被合并的模块文件不被移除
 * 不被main模块依赖的模块文件，将被压缩拷贝到dist目录
 * css文件将被压缩拷贝到dist目录
 * images目录被忽略	
@@ -364,6 +369,27 @@ module.exports = function(grunt) {
 
 ###4.2.2 Boostrap
 
+#### 引入Boostrap
+
+	require.config( {
+	    // 给模块URL加版本号阻止浏览器缓存
+	    urlArgs: "VERSION=" + (VERSION || (new Date()).getTime()),
+	    // 将对 jquery-1.9.0 的引用映射到引用 jquery-private
+	    paths: {
+	        "jquery": 'jquery/jquery-1.11.3',
+	        "jquery-private": 'jquery/jquery-private'
+	    },
+	    map: {
+	        '*': { 'jquery': 'jquery-private' },
+	        'jquery-private': { 'jquery': 'jquery' }
+	    },
+	    // 非模块化的
+	    "shim": {
+	        "lib/bootstrap/js/bootstrap":["jquery"]
+	    },
+	    // 超时
+	    waitSeconds: 15
+	} );
 
 ###4.2.3 artDialog
 
