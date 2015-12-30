@@ -1,10 +1,15 @@
-define(["lib/ie/ie", "main_outer", "lib/datetimepickter/js/datetimepicker"],function(){
+define(["lib/ie/ie",
+        "lib/datetimepickter/js/datetimepicker",
+        "jquery",
+        "utils/utils",
+        "lib/parsley/parsley",
+        "css!ui/css/style"
+    ],
+    function ( ie, datetimepicker, $, utils, parsley ) {
+
     var main,
-        $,
-        utils, extend
+        extend
         ;
-    $ = require("jquery");
-    utils = require("utils/utils");
     extend = utils.extend;
 
     main = {
