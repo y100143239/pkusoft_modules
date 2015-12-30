@@ -1,0 +1,19 @@
+.overlay-container {
+    display: none;
+    visibility: hidden;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    &.active {
+        display: block;
+        visibility: visible;
+    }
+    .overlay {
+        height: 100%;
+        @include opacity(40);
+        background: #000;
+    }
+}

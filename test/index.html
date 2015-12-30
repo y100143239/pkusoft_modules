@@ -1,0 +1,14 @@
+<!--~~~~~~~~~~ 置入 default.jsp 的部分 ~~~~~~~~~~-->
+
+<link rel="stylesheet" href="../dev/modules/ui/css/style.css"/>
+<script data-main="../dev/modules/" src="../dev/modules/require.js"></script>
+<script>
+    var VERSION; // VERSION = "v2.0";
+    require.config( {
+        urlArgs: "VERSION=" + (VERSION || (new Date()).getTime()),
+        waitSeconds: 15
+    } );
+</script>
+
+<!--/~~~~~~~~~~ 置入 default.jsp 的部分 ~~~~~~~~~-->
+

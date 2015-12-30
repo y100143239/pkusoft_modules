@@ -1,0 +1,41 @@
+body {
+  color: #333; }
+
+.content {
+  padding-top: 50px; }
+
+.sidebar {
+  position: fixed;
+  top: 51px;
+  bottom: 0;
+  left: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  background-color: #f5f5f5;
+  border-right: 1px solid #eee; }
+  .sidebar .nav-sidebar {
+    margin-right: -21px;
+    /* 20px padding + 1px border */
+    margin-bottom: 20px;
+    margin-left: -20px; }
+    .sidebar .nav-sidebar > li > a {
+      padding-right: 20px;
+      padding-left: 20px; }
+    .sidebar .nav-sidebar > li.active > a, .sidebar .nav-sidebar > li.active > a:hover, .sidebar .nav-sidebar > li.active > a:focus {
+      color: #fff;
+      background-color: #428bca; }
+
+.main {
+  padding: 20px; }
+
+.dropdown-menu {
+  max-height: 20em;
+  overflow: auto; }
+  .dropdown-menu a[data-value] {
+    cursor: pointer; }
+
+.btn-save {
+  width: 12em;
+  margin-top: 1em; }
+
+/*# sourceMappingURL=style.css.map */

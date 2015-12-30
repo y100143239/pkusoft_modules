@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+
+    <!--~~~~~~~~~~ 置入 default.jsp 的部分 ~~~~~~~~~~-->
+    <link rel="stylesheet" href="../../dev/modules/ui/css/style.css"/>
+    <script data-main="../../dev/modules/" src="../../dev/modules/require.js"></script>
+    <script>
+        var VERSION; // VERSION = "v2.0";
+        require.config( {
+            urlArgs: "VERSION=" + ( VERSION || (new Date()).getTime()),
+            waitSeconds: 15
+        } );
+    </script>
+    <!--/~~~~~~~~~~ 置入 default.jsp 的部分 ~~~~~~~~~-->
+
+    <script>
+        require(["utils/domReady", "ui/overlay"], function(domReady, overlay) {
+            domReady( function () {
+                window.overlay = overlay.getInstance({idleTime: 3000});
+                // (new (overlay.constructor)).show()
+            });
+
+        });
+    </script>
+</head>
+<body>
+2015年10月下旬,叙利亚战局再次发生惊天逆转。从2015年10月16日开始,
+叙利亚政府军派出绰号“老虎部队”的精锐机械化旅,突然沿着42号公路,
+进而折向北支路,挥出了一记漂亮的“右勾拳”。
+</body>
+</html>

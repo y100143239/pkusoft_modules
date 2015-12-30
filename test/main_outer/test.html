@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>main</title>
+    <script data-main="../../dist/modules/" src="../../dist/modules/require.js"></script>
+    <script >
+        /* -----------------------
+         config
+         -------------------------*/
+        var VERSION; // VERSION = "v2.0";
+        require.config( {
+            // 给模块URL加版本号阻止浏览器缓存
+            urlArgs: "VERSION=" + (VERSION || (new Date()).getTime()),
+            // 将对 jquery-1.9.0 的引用映射到引用 jquery-private
+            paths: {
+                "jquery": 'jquery/jquery-1.11.3',
+                "jquery-private": 'jquery/jquery-private'
+            },
+            map: {
+                '*': { 'jquery': 'jquery-private',
+                    'css': 'utils/css/css'
+                },
+                'jquery-private': { 'jquery': 'jquery' }
+            },
+            // 非模块化的
+            "shim": {
+                "lib/bootstrap/js/bootstrap":["jquery"]
+            },
+            // 超时
+            waitSeconds: 15
+        } );
+    </script>
+    <script>
+        require(["require","main_outer"],function(require, main_outer){
+            console.info( require("jquery") );
+        });
+    </script>
+</head>
+<body>
+
+</body>
+</html>
