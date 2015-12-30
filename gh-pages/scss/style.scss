@@ -1,0 +1,24 @@
+body {
+    background: #fefefe;
+}
+.navbar-brand {
+    img {
+        width: 24px;
+        border-radius: 100%;
+    }
+}
+.thumbnail {
+    & > a {
+        display: block;
+        height: 66%;
+        overflow: hidden;
+        img {
+        }
+    }
+    &:hover {
+        box-shadow: 0 0 10px rgba(0,0,0,.2);
+    }
+    .caption {
+        background: #fff;
+    }
+}
