@@ -417,7 +417,7 @@ module.exports = function(grunt) {
 
 ###4.2.2 Boostrap
 
-#### 引入Boostrap
+#### 1. 引入Boostrap
 
 	require.config( {
 	    // 给模块URL加版本号阻止浏览器缓存
@@ -438,7 +438,51 @@ module.exports = function(grunt) {
 	    // 超时
 	    waitSeconds: 15
 	} );
+	
+#### 2. 将 dropdown-menu 改为 select	
 
+* HTML
+
+```
+	<div class="input-group js--select">
+	    <input type="text" class="form-control js--input" required="" data-value="" readonly>
+	    <div class="input-group-btn">
+	        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" >选择 
+	        <span class="caret"></span></button>
+	        <ul class="dropdown-menu dropdown-menu-right">
+	            <li><a data-value="01">国有企业</a></li>
+	            <li><a data-value="02">集体企业</a></li>
+	            <li><a data-value="03">联营企业</a></li>
+	        </ul>
+	    </div>
+	</div>
+```
+
+* js
+
+
+```
+$('.js--select .dropdown-menu a').on('click', function(event) {
+    var $this,
+        $select,
+        $input,
+        text,
+        value
+        ;
+    $this = $(this);
+    $select = $this.parents(".js--select" ).eq(0);
+    $input = $select.find(".js--input");
+    text = $this.text();
+    value = $this.attr("data-value");
+
+    $input.attr("data-value", value ).val(text );
+
+    $input.parsley().validate(); // 再次validate
+
+    event.preventDefault();
+
+});
+```
 ###4.2.3 artDialog
 
 * “占位符”
@@ -447,7 +491,9 @@ module.exports = function(grunt) {
 
 * 方案1，使用插件
 	* uploadify
-	* 参考：<http://www.uploadify.com/>
+		* 参考：<http://www.uploadify.com/>
+	* jQuery-File-Upload
+		* 参考：<https://github.com/blueimp/jQuery-File-Upload> 
  
 * 方案2，自己实现
 	* 美化上传按钮，参考 <http://www.haorooms.com/post/css_input_uploadmh>

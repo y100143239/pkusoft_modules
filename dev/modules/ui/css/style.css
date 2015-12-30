@@ -176,6 +176,7 @@ body, html {
   list-style: none;
   color: #6C6C6B;
   position: absolute;
+  z-index: 3;
   top: -120%;
   left: 50%;
   width: 50%;

@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>main</title>
-
     <script data-main="../../dist/modules/" src="../../dist/modules/require.js"></script>
-    <script>
+    <script >
         /* -----------------------
          config
          -------------------------*/
@@ -15,43 +14,27 @@
             urlArgs: "VERSION=" + (VERSION || (new Date()).getTime()),
             // 将对 jquery-1.9.0 的引用映射到引用 jquery-private
             paths: {
-                "jquery": 'jquery/jquery-1.9.0',
+                "jquery": 'jquery/jquery-1.11.3',
                 "jquery-private": 'jquery/jquery-private'
             },
             map: {
-                '*': { 'jquery': 'jquery-private' },
+                '*': { 'jquery': 'jquery-private',
+                    'css': 'utils/css/css'
+                },
                 'jquery-private': { 'jquery': 'jquery' }
+            },
+            // 非模块化的
+            "shim": {
+                "lib/bootstrap/js/bootstrap":["jquery"]
             },
             // 超时
             waitSeconds: 15
         } );
     </script>
     <script>
-
-        /*
-         // utils
-         "utils/domReady",
-         "utils/clone",
-         "utils/doT",
-         "utils/utils",
-         //"utils/sizzle",
-
-         // ui
-         "ui/flow",
-         "ui/overlay"
-        */
-        require(["require","main"],function(require){
-            console.info( require("utils/domReady") );
-            console.info( require("utils/clone") );
-            console.info( require("utils/doT") );
-            console.info( require("utils/utils") );
-            console.info( "sizzle", require("utils/sizzle") );
-            console.info( require("ui/flow") );
-            console.info( require("ui/overlay") );
-
-            console.info("jquery", require("jquery"));
+        require(["require","main_outer"],function(require, main_outer){
+            console.info( require("jquery") );
         });
-
     </script>
 </head>
 <body>

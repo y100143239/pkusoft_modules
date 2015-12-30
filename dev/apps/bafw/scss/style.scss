@@ -39,4 +39,11 @@ body {
 .dropdown-menu {
     max-height: 20em;
     overflow: auto;
+    a[data-value] {
+        cursor: pointer;
+    }
+}
+.btn-save {
+    width: 12em;
+    margin-top: 1em;
 }

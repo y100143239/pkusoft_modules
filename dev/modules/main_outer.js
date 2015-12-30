@@ -5,12 +5,13 @@ define( [
 // css
     "css!ui/css/style",
 // utils
+    "utils/utils",
 
 // ui
 
 // lib
-    "lib/ie/ie",
-    "jquery",
+    //"lib/ie/ie",
     "lib/bootstrap/js/bootstrap",
     "lib/parsley/parsley"
+    //"lib/datetimepickter/js/datetimepicker"
 ] );

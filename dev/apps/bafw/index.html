@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="images/favicon.ico">
+    <title>modules</title>
+    <link rel="stylesheet" href="../../../dist/modules/lib/bootstrap/css/bootstrap.css"/>
+    <link rel="stylesheet" href="css/style.css"/><!-- 自定义css -->
+    <title>modules</title>
+    <script data-main="../../../dist/modules/" src="../../../dist/modules/require.js"></script>
+    <script >
+        var VERSION; // VERSION = "v2.0";
+        require.config( {
+            urlArgs: "VERSION=" + (VERSION || (new Date()).getTime()),
+            paths: {
+                "jquery": 'jquery/jquery-1.11.3',
+                "jquery-private": 'jquery/jquery-private'
+            },
+            map: {
+                '*': { 'jquery': 'jquery-private',
+                    'css': 'utils/css/css'
+                },
+                'jquery-private': { 'jquery': 'jquery' }
+            },
+            // 非模块化的
+            "shim": {
+                "lib/bootstrap/js/bootstrap":["jquery"]
+            },
+            // 超时
+            waitSeconds: 15
+        } );
+    </script>
+    <script>
+        require(["./js/main.js"]);
+        /*require(["jquery", "lib/datetimepickter/js/datetimepicker"],function($,d){
+            console.info($);
+            $(function(){
+                $('.form_date').datetimepicker({
+                    weekStart: 1,
+                    todayBtn:  1,
+                    autoclose: 1,
+                    todayHighlight: 1,
+                    startView: 2,
+                    minView: 2,
+                    forceParse: 0
+                });
+            });
+        });*/
+    </script>
+</head>
+<body>
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">PKU Modules</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#">设置</a></li>
+                <li><a href="#">帮助</a></li>
+            </ul>
+            <form class="navbar-form navbar-right">
+                <input type="text" class="form-control" placeholder="Search...">
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid content">
+    <div class="row">
+        <div class="col-sm-3 sidebar">
+            <ul class="nav nav-sidebar">
+                <li class="active"><a href="#company">公司信息</a></li>
+                <li><a href="#company2">公司信息2</a></li>
+                <li><a href="#company3">公司信息3</a></li>
+            </ul>
+            <ul class="nav nav-sidebar">
+                <li><a href="#reg">法定代表人信息</a></li>
+                <li><a href="#reg">法定代表人信息2</a></li>
+                <li><a href="#reg">法定代表人信息3</a></li>
+            </ul>
+            <ul class="nav nav-sidebar">
+                <li><a href="#reg">主要负责人信息</a></li>
+                <li><a href="#reg">主要负责人信息2</a></li>
+                <li><a href="#reg">主要负责人信息3</a></li>
+            </ul>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 main">
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">公司信息</h3>
+                </div>
+                <div class="panel-body">
+                    <form class="form-horizontal parsley" id="form-1" data-parsley-validate="">
+                        <div class="form-group">
+                            <label  class="col-sm-2 control-label">公司名称</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" name="username" placeholder="公司名称" required="" data-parsley-minlength="6" data-parsley-trigger="focusin focusout">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label  class="col-sm-2 control-label">公司性质</label>
+                            <div class="col-sm-4">
+                                <div class="input-group js--select">
+                                    <input type="text" class="form-control js--input" required="" data-value="" readonly>
+                                    <div class="input-group-btn">
+                                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" >选择 <span class="caret"></span></button>
+                                        <ul class="dropdown-menu dropdown-menu-right">
+                                            <li><a data-value="01">国有企业</a></li>
+                                            <li><a data-value="02">集体企业</a></li>
+                                            <li><a data-value="03">联营企业</a></li>
+                                            <li><a data-value="04">股份合作制企业</a></li>
+                                            <li><a data-value="05">私营企业</a></li>
+                                            <li><a data-value="06">个体户</a></li>
+                                            <li><a data-value="07">合伙企业</a></li>
+                                            <li><a data-value="08">有限责任公司</a></li>
+                                            <li><a data-value="09">股份有限公司</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <label  class="col-sm-2 control-label">管理人数</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" name="password" placeholder="" required="" data-parsley-type="integer" data-parsley-min="0">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label  class="col-sm-2 control-label">公司设立时间</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control form_date" name="password" placeholder="" required="" data-parsley-type="integer" data-parsley-min="0">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <button type="submit" class="btn btn-primary  center-block btn-save">保 存</button>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+
+
+
+
+        </div>
+    </div>
+</div>
+</body>
+</html>

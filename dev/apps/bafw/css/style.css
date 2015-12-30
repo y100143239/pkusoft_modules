@@ -31,5 +31,11 @@ body {
 .dropdown-menu {
   max-height: 20em;
   overflow: auto; }
+  .dropdown-menu a[data-value] {
+    cursor: pointer; }
+
+.btn-save {
+  width: 12em;
+  margin-top: 1em; }
 
 /*# sourceMappingURL=style.css.map */

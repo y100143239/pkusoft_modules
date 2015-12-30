@@ -7,10 +7,11 @@ define( [
     "utils/clone",
     "utils/doT",
     "utils/utils",
-    //"utils/sizzle",
+    "utils/sizzle",
 
 // ui
     "ui/flow",
-    "ui/overlay"
+    "ui/overlay",
 
+    "jquery"
 ] );
