@@ -56,3 +56,15 @@ body {
     margin-right: 2em;
 }
 
+.panel {
+    .panel-title {
+        .icon {
+            float: right;
+            font-size: 1.2em;
+            color: #286292;
+            &:hover {
+                color: #3b8ed4;
+            }
+        }
+    }
+}

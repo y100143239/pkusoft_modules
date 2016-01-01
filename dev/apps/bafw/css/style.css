@@ -41,4 +41,11 @@ body {
 .radio label {
   margin-right: 2em; }
 
+.panel .panel-title .icon {
+  float: right;
+  font-size: 1.2em;
+  color: #286292; }
+  .panel .panel-title .icon:hover {
+    color: #3b8ed4; }
+
 /*# sourceMappingURL=style.css.map */
