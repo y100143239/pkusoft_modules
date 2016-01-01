@@ -531,7 +531,7 @@ $('.js--select .dropdown-menu a').on('click', function(event) {
 * 说明
 	* 必须：\#nav-container (容器)、.nav
 	* 切换 nav > li 的active类
-
+* 补充：不好用，替代库 [stickUp](https://github.com/LiranCohen/stickUp)
 
 ```
 <body data-spy="scroll" data-target="#nav-container" data-offset="70">
@@ -547,4 +547,4 @@ $('.js--select .dropdown-menu a').on('click', function(event) {
 	</div>
 </body>
 ```
-	
+

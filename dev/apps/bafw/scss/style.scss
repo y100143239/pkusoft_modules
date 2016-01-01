@@ -2,12 +2,16 @@
 body {
     color: #333;
 }
-
-.content {
-    padding-top: 65px;
+.navbar {
+    margin-left: -2px;
+    margin-right: -2px;
 }
+.content {
+    //padding-top: 65px;
+}
+
 .sidebar {
-    position: fixed;
+    //position: fixed;
     padding-left: 12px;
     overflow-x: hidden;
     overflow-y: auto;
@@ -39,6 +43,10 @@ body {
 .btn-save {
     width: 12em;
     margin-top: 1em;
+    box-shadow: 0 0 5px rgba(0,0,0,.1);
+    .glyphicon {
+        vertical-align: -2px;
+    }
 }
 .js--select {
     .input-group-addon {
@@ -57,13 +65,24 @@ body {
 }
 
 .panel {
-    .panel-title {
-        .icon {
-            float: right;
-            font-size: 1.2em;
-            color: #286292;
-            &:hover {
-                color: #3b8ed4;
+    box-shadow: 0 0 5px rgba(0,0,0,.1);
+    .panel-heading {
+        position: relative;
+        .panel-title {
+            cursor: pointer;
+        }
+        .btn-group {
+            position: absolute;
+            top: -1px;
+            right: -1px;
+            bottom: -1px;
+            .btn {
+                height: 100%;
+                border-radius: 0;
+                &:last-child {
+                    border-top-right-radius: 4px;
+                }
+
             }
         }
     }
