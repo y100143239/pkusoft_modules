@@ -479,11 +479,15 @@ $('.js--select .dropdown-menu a').on('click', function(event) {
 
 });
 ```
+
 ###4.2.3 artDialog
 
 * “占位符”
 
 ###4.2.4 文件上传
+
+####1. 方案
+
 
 * 方案1，使用插件
 	* uploadify
@@ -497,16 +501,50 @@ $('.js--select .dropdown-menu a').on('click', function(event) {
 
 * 方案3，学习Flex4
 	* 视频教程：<https://item.taobao.com/item.htm?spm=a230r.1.14.13.4j2c4f&id=525647359455&ns=1&abbucket=9#detail> 	 
+ 
+####2. 实践
+
 
 ###4.2.5 表单提交
 
 * ajaxForm
 	* 应用：简化Ajax提交表单
 	* 参考：<http://malsup.com/jquery/form/> 
+ 
+  
+  
 
-###4.2.6 日历控件
+  
+ 
+###4.3 Bootstrap插件
 
-* bootstrap-datetimepicker
-	* 参考：[bootstrap-datepicker project](https://github.com/eternicode/bootstrap-datepicker).
+参考：[为你下一个项目准备的 50 个 Bootstrap 插件](http://www.oschina.net/news/56950/jquery-bootstrap-plugins-for-your-next-projects)
 
+####4.3.1 日历控件（bootstrap-datetimepicker）
+
+
+* 参考：[bootstrap-datepicker project](https://github.com/eternicode/bootstrap-datepicker).
+
+####4.3.2 滚动监听（scrollspy）
+
+* 作用：根据滚动条所处的位置来自动更新导航active项的
+* 说明
+	* 必须：\#nav-container (容器)、.nav
+	* 切换 nav > li 的active类
+
+
+```
+<body data-spy="scroll" data-target="#nav-container" data-offset="70">
+	<div id="nav-container">
+		<ul class="nav">
+			<li class="active"><a href="_1"></a></li>
+			<li><a href="_2"></a></li>		
+		</ul>
+	</div>
+	<div class="content">
+		<section id="_1">。。。</section>
+		<section id="_2">。。。</section>	
+	</div>
+</body>
+```
 	

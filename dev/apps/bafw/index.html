@@ -10,10 +10,10 @@
     <link rel="stylesheet" href="../../../dist/modules/lib/bootstrap/css/bootstrap.css"/>
     <link rel="stylesheet" href="css/style.css"/><!-- 自定义css -->
     <title>modules</title>
-    <script data-main="../../../dist/modules/" src="../../../dist/modules/require.js"></script>
+    <script data-main="../../../dev/modules/" src="../../../dev/modules/require.js"></script>
     <script >
         var VERSION;
-        VERSION = "v2.0";
+//        VERSION = "v2.0";
         require.config( {
             urlArgs: "VERSION=" + (VERSION || (new Date()).getTime()),
             paths: {
@@ -30,7 +30,8 @@
             "shim": {
                 "lib/bootstrap/js/bootstrap":["jquery"],
                 "lib/datetimepickter/js/bootstrap-datetimepicker": ["jquery"],
-                "lib/datetimepickter/js/locales/bootstrap-datetimepicker.zh-CN": ["lib/datetimepickter/js/bootstrap-datetimepicker"]
+                "lib/datetimepickter/js/locales/bootstrap-datetimepicker.zh-CN": ["lib/datetimepickter/js/bootstrap-datetimepicker"],
+                "lib/switch/js/bootstrap-switch": ["lib/bootstrap/js/bootstrap", "css!lib/switch/css/bootstrap-switch"]
             },
             // 超时
             waitSeconds: 15
@@ -40,7 +41,7 @@
         require(["./js/main.js"]);
     </script>
 </head>
-<body>
+<body data-spy="scroll" data-target="#sidebar" data-offset="70">
 <div class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -52,10 +53,10 @@
             </button>
             <a class="navbar-brand" href="#">PKU Modules</a>
         </div>
-        <div id="navbar" class="navbar-collapse collapse">
+        <div  class="navbar-collapse collapse" >
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">设置</a></li>
-                <li><a href="#">帮助</a></li>
+                <li><a href="#company">设置</a></li>
+                <li><a href="#faren">帮助</a></li>
             </ul>
             <form class="navbar-form navbar-right">
                 <input type="text" class="form-control" placeholder="Search...">
@@ -66,31 +67,22 @@
 
 <div class="container-fluid content">
     <div class="row">
-        <div class="col-sm-3 sidebar">
-            <ul class="nav nav-sidebar">
-                <li class="active"><a href="#company">公司信息</a></li>
-                <li><a href="#company2">公司信息2</a></li>
-                <li><a href="#company3">公司信息3</a></li>
-            </ul>
-            <ul class="nav nav-sidebar">
-                <li><a href="#reg">法定代表人信息</a></li>
-                <li><a href="#reg">法定代表人信息2</a></li>
-                <li><a href="#reg">法定代表人信息3</a></li>
-            </ul>
-            <ul class="nav nav-sidebar">
-                <li><a href="#reg">主要负责人信息</a></li>
-                <li><a href="#reg">主要负责人信息2</a></li>
-                <li><a href="#reg">主要负责人信息3</a></li>
+        <div class="col-sm-2" id="sidebar" >
+            <ul class="sidebar col-sm-2 nav list-group" >
+                <li class="active list-group-item"><a href="#company" class="">公司信息<span class="glyphicon glyphicon-chevron-right"></span></a></li>
+                <li class="list-group-item"><a href="#faren" class="">法定代表人信息<span class="glyphicon glyphicon-chevron-right"></span></a></li>
+                <li class="list-group-item"><a href="#fuzeren" class="">主要负责人信息<span class="glyphicon glyphicon-chevron-right"></span></a></li>
             </ul>
         </div>
-        <div class="col-sm-9 col-sm-offset-3 main">
 
-            <div class="panel panel-default">
+        <div class="col-sm-10 main">
+
+            <div class="panel panel-default" id="company">
                 <div class="panel-heading">
                     <h3 class="panel-title">公司信息</h3>
                 </div>
                 <div class="panel-body">
-                    <form class="form-horizontal parsley" id="form-1" data-parsley-validate="">
+                    <form class="form-horizontal parsley" data-parsley-validate="">
                         <div class="form-group">
                             <label  class="col-sm-2 control-label">公司名称</label>
                             <div class="col-sm-10">
@@ -134,6 +126,28 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div class="form-group">
+                            <label  class="col-sm-2 control-label">经营范围</label>
+                            <div class="col-sm-4">
+                                <div class="checkbox ">
+                                    <label> <input type="checkbox"> 五金交电 </label>
+                                    <label> <input type="checkbox"> 日用百货 </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label  class="col-sm-2 control-label">企业规模</label>
+                            <div class="col-sm-4">
+                                <div class="radio ">
+                                    <label> <input type="radio" name="_radio"> 大 </label>
+                                    <label> <input type="radio" name="_radio"> 中 </label>
+                                    <label> <input type="radio" name="_radio"> 小 </label>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="form-group">
                             <div class="col-sm-12">
                                 <button type="submit" class="btn btn-primary  center-block btn-save">保 存</button>
@@ -144,6 +158,146 @@
                 </div>
             </div>
 
+
+
+            <div class="panel panel-default" id="faren">
+                <div class="panel-heading">
+                    <h3 class="panel-title">法定代表人信息</h3>
+                </div>
+                <div class="panel-body">
+                    <form class="form-horizontal parsley"  data-parsley-validate="">
+                        <div class="form-group">
+                            <label  class="col-sm-2 control-label">姓名</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" name="username" placeholder="姓名" required="">
+                            </div>
+                            <label  class="col-sm-2 control-label">性别</label>
+                            <div class="col-sm-4">
+                                <div class="switch">
+                                    <input type="checkbox" name="_checkbox" data-on-text="女" data-off-text="男"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label  class="col-sm-2 control-label">证件类型</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" name="username" placeholder="" required="">
+                            </div>
+                            <label  class="col-sm-2 control-label">证件号码</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" name="username" placeholder="" required="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label  class="col-sm-2 control-label">民族</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" name="username" placeholder="" required="">
+                            </div>
+                            <label  class="col-sm-2 control-label">政治面貌</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" name="username" placeholder="" required="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label  class="col-sm-2 control-label">实际居住地市县（区）</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" name="username" placeholder="" required="">
+                            </div>
+                            <label  class="col-sm-2 control-label">实际居住地详址</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" name="username" placeholder="" required="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label  class="col-sm-2 control-label">户籍地省市县（区）</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" name="username" placeholder="" required="">
+                            </div>
+                            <label  class="col-sm-2 control-label">户籍地详址</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" name="username" placeholder="" required="">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <button type="submit" class="btn btn-primary  center-block btn-save">保 存</button>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+
+
+            <div class="panel panel-default" id="fuzeren">
+                <div class="panel-heading">
+                    <h3 class="panel-title">主要负责人信息</h3>
+                </div>
+                <div class="panel-body">
+                    <form class="form-horizontal parsley"  data-parsley-validate="">
+                        <div class="form-group">
+                            <label  class="col-sm-2 control-label">负责人姓名</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" name="username" placeholder="姓名" required="">
+                            </div>
+                            <label  class="col-sm-2 control-label">负责人性别</label>
+                            <div class="col-sm-4">
+                                <div class="switch">
+                                    <input type="checkbox" name="_checkbox" data-on-text="女" data-off-text="男"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label  class="col-sm-2 control-label">户籍地省市县（区）</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" name="username" placeholder="" required="">
+                            </div>
+                            <label  class="col-sm-2 control-label">户籍地详址</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" name="username" placeholder="" required="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label  class="col-sm-2 control-label">户籍地省市县（区）</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" name="username" placeholder="" required="">
+                            </div>
+                            <label  class="col-sm-2 control-label">户籍地详址</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" name="username" placeholder="" required="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label  class="col-sm-2 control-label">户籍地省市县（区）</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" name="username" placeholder="" required="">
+                            </div>
+                            <label  class="col-sm-2 control-label">户籍地详址</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" name="username" placeholder="" required="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label  class="col-sm-2 control-label">户籍地省市县（区）</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" name="username" placeholder="" required="">
+                            </div>
+                            <label  class="col-sm-2 control-label">户籍地详址</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" name="username" placeholder="" required="">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <button type="submit" class="btn btn-primary  center-block btn-save">保 存</button>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
 
 
 

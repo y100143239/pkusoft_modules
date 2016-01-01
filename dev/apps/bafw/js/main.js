@@ -3,7 +3,8 @@ define(["lib/ie/ie",
         "jquery",
         "utils/utils",
         "lib/parsley/parsley",
-        "css!ui/css/style"
+        "css!ui/css/style",
+        "lib/switch/js/bootstrap-switch"
     ],
     function ( ie, datetimepicker, $, utils, parsley ) {
 
@@ -27,6 +28,7 @@ define(["lib/ie/ie",
 
             this._wrapDropdownMenu();
             this._wrapDatetimePicker();
+            this._wrapCheckbox();
 
             this.$forms.parsley();
 
@@ -55,6 +57,7 @@ define(["lib/ie/ie",
             $(".js-clear" ).on("click",function(){
                 $(this).parents(".js--select").find(".js--input" ).val("");
             });
+            return this;
         },
         _wrapDatetimePicker: function() {
             $('.js--date').datetimepicker({
@@ -69,6 +72,11 @@ define(["lib/ie/ie",
             } ).on("changeDate",function(){
                 $(this ).find(".js--input" ).parsley().validate(); // 再次validate
             } );
+            return this;
+        },
+        _wrapCheckbox: function () {
+            $(".switch input:checkbox" ).bootstrapSwitch();
+            return this;
         }
     };
 
