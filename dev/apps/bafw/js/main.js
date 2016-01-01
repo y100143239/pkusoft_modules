@@ -26,6 +26,7 @@ define(["lib/ie/ie",
         bind: function() {
 
             this._wrapDropdownMenu();
+            this._wrapDatetimePicker();
 
             this.$forms.parsley();
 
@@ -50,40 +51,31 @@ define(["lib/ie/ie",
 
                 event.preventDefault();
 
+            } );
+            $(".js-clear" ).on("click",function(){
+                $(this).parents(".js--select").find(".js--input" ).val("");
             });
+        },
+        _wrapDatetimePicker: function() {
+            $('.js--date').datetimepicker({
+                language:  'zh-CN',
+                weekStart: 1, // Day of the week start. 0 (Sunday) to 6 (Saturday)
+                todayBtn:  1,
+                autoclose: 1, // Whether or not to close the datetimepicker immediately when a date is selected.
+                todayHighlight: 1,
+                startView: 2, //  * 0 or 'hour' for the hour view * 1 or 'day' for the day view * 2 or 'month' for month view (the default) * 3 or 'year' for the 12-month overview * 4 or 'decade' for the 10-year overview
+                minView: 2,
+                forceParse: 1
+            } ).on("changeDate",function(){
+                $(this ).find(".js--input" ).parsley().validate(); // 再次validate
+            } );
         }
     };
 
 
     $(function () {
         main.init({$forms:$("form.parsley")});
-        $('.form_date').datetimepicker({
-            language:  'zh-CN',
-            weekStart: 1,
-            todayBtn:  1,
-            autoclose: 1,
-            todayHighlight: 1,
-            startView: 2,
-            minView: 2,
-            forceParse: 0
-        });
     });
-/*
-
-    require(["lib/datetimepickter/js/datetimepicker"], function(){
-        $('.form_date').datetimepicker({
-            language:  'zh-CN',
-            weekStart: 1,
-            todayBtn:  1,
-            autoclose: 1,
-            todayHighlight: 1,
-            startView: 2,
-            minView: 2,
-            forceParse: 0
-        });
-    });
-*/
-
 
     return main;
 

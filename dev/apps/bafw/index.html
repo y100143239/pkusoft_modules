@@ -38,20 +38,6 @@
     </script>
     <script>
         require(["./js/main.js"]);
-        /*require(["jquery", "lib/datetimepickter/js/datetimepicker"],function($,d){
-            console.info($);
-            $(function(){
-                $('.form_date').datetimepicker({
-                    weekStart: 1,
-                    todayBtn:  1,
-                    autoclose: 1,
-                    todayHighlight: 1,
-                    startView: 2,
-                    minView: 2,
-                    forceParse: 0
-                });
-            });
-        });*/
     </script>
 </head>
 <body>
@@ -116,8 +102,9 @@
                             <div class="col-sm-4">
                                 <div class="input-group js--select">
                                     <input type="text" class="form-control js--input" required="" data-value="" readonly>
+                                    <span class="input-group-addon js-clear"><span class="glyphicon glyphicon-remove"></span></span>
                                     <div class="input-group-btn">
-                                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" >选择 <span class="caret"></span></button>
+                                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" ><span class="glyphicon glyphicon-chevron-down"></span></button>
                                         <ul class="dropdown-menu dropdown-menu-right">
                                             <li><a data-value="01">国有企业</a></li>
                                             <li><a data-value="02">集体企业</a></li>
@@ -140,7 +127,11 @@
                         <div class="form-group">
                             <label  class="col-sm-2 control-label">公司设立时间</label>
                             <div class="col-sm-4">
-                                <input type="text" class="form-control form_date" name="password" placeholder="" required="" data-parsley-type="integer" data-parsley-min="0">
+                                <div class="input-group date js--date " data-date-format="yyyy-mm-dd" >
+                                    <input class="form-control js--input" size="16" type="text" value="" readonly required="">
+                                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                                </div>
                             </div>
                         </div>
                         <div class="form-group">

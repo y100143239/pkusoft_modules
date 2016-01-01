@@ -76,25 +76,12 @@
 	* 使用
 
 ```
-require.config( {
-        
+require.config( {      
 	map: {
-	    '*': {
-	        'css': 'utils/css'
-	    }	
+	    '*': { 'css': 'utils/css' }	
 	}
-    
 } );
-
-/* -----------------------
-     引入所有模块
- -------------------------*/
-define( [
-
-    "css!ui/css/style",
-
-] );
-
+define( [ "css!ui/css/style"], function(){...} );
 		
 ```
 
@@ -113,6 +100,15 @@ define( [
 * jQuery
 	* 1.11.3
 
+##2.1.5 在HTML中添加JS钩子
+
+* 以 “js--”打头，如下
+
+```
+<div class="js--date" ...>
+    <input class="form-control js--input" ...>
+ </div>
+```
 
 
 ##2.2 避免浏览器缓存
@@ -507,3 +503,10 @@ $('.js--select .dropdown-menu a').on('click', function(event) {
 * ajaxForm
 	* 应用：简化Ajax提交表单
 	* 参考：<http://malsup.com/jquery/form/> 
+
+###4.2.6 日历控件
+
+* bootstrap-datetimepicker
+	* 参考：[bootstrap-datepicker project](https://github.com/eternicode/bootstrap-datepicker).
+
+	

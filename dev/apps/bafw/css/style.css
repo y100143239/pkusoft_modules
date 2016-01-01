@@ -38,4 +38,10 @@ body {
   width: 12em;
   margin-top: 1em; }
 
+.js--select .input-group-addon {
+  cursor: pointer; }
+
+.form-control[readonly] {
+  cursor: not-allowed; }
+
 /*# sourceMappingURL=style.css.map */
