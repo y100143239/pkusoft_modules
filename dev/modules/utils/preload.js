@@ -1,6 +1,6 @@
 +function(){
 
-        document.write('<div class="preloader" id="preloader"><div class="item"><div class="spinner"><!--[if lt IE 9]><span>Loading!</span><![endif]--></div></div></div>');
+    document.write('<div class="preloader" id="preloader"><div class="item"><div class="spinner"><!--[if lt IE 9]><span>Loading!</span><![endif]--></div></div></div>');
 
     if( window.addEventListener )  {
         window.addEventListener("load",preLoadhandler, false);

@@ -42,7 +42,7 @@
         require(["./js/main.js"]);
     </script>
 </head>
-<body data-spy="scroll" data-target="#sidebar" data-offset="80">
+<body data-spy="scroll" data-target="#sidebar">
 
 <div class="navbar navbar-default ">
     <div class="container-fluid">
@@ -55,13 +55,13 @@
             </button>
             <a class="navbar-brand" href="#">PKU Modules</a>
         </div>
-        <div  class="navbar-collapse collapse" >
+        <div  class="navbar-collapse collapse" id="navbar">
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="#company">设置</a></li>
                 <li><a href="#faren">帮助</a></li>
             </ul>
             <form class="navbar-form navbar-right">
-                <input type="text" class="form-control" placeholder="Search...">
+                <input type="text" class="form-control" placeholder="搜索...">
             </form>
         </div>
     </div>
@@ -163,7 +163,6 @@
                 </div>
 
             </div>
-
 
 
             <div class="panel panel-default" id="faren">
