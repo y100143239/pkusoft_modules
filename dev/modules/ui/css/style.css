@@ -185,7 +185,8 @@ body, html {
   background: #FFFFDA;
   border: solid 1px #FEAE18;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-  border-radius: 2px; }
+  border-radius: 2px;
+  cursor: pointer; }
   .parsley .parsley-errors-list:before, .parsley .parsley-errors-list:after {
     content: ".";
     position: absolute;

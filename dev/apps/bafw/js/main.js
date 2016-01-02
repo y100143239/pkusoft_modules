@@ -31,8 +31,21 @@ define(["lib/ie/ie",
             this._wrapCheckbox();
             this._wrapMenu();
 
-            this.$forms.parsley();
+            this._formsValidate();
 
+        },
+        _formsValidate: function _formsValidate() {
+            this.$forms.parsley();
+            window.Parsley.on('form:validated', function() {
+                this.$element.find(".parsley-errors-list" ).one("click" ,function(){
+                    $(this ).removeClass("filled");
+                });
+            }).on('field:validated', function() {
+                this.$element.siblings(".parsley-errors-list" ).one("click" ,function(){
+                    $(this ).removeClass("filled");
+                });
+            });
+            return this;
         },
         _wrapDropdownMenu: function() { // 封装bootstrap 的 dropdown-menu
             $('.js--select .dropdown-menu a').on('click', function(event) {
