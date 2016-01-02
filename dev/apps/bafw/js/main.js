@@ -82,19 +82,18 @@ define(["lib/ie/ie",
         _freezeMenu: function() {
             var $freezeMenus,
                 scrollTop, // 滚动条 top
-                marginTop, // menu margin-top
                 docTop, // menu的 文档top
                 docLeft
                 ;
-                $freezeMenus = $(".js--freezeMenu");
-                docTop = parseInt( $freezeMenus.offset().top );
-                docLeft = parseInt( $freezeMenus.offset().left );
-            $(document ).on("scroll", function(){
-                scrollTop = parseInt( $(document).scrollTop() ) ;
-                marginTop = parseInt( $freezeMenus.css('margin-top') );
-                // console.info( "scrollTop = " + scrollTop + "，marginTop = " + marginTop + "，top = " + docTop  );
+            $freezeMenus = $(".js--freezeMenu");
+            docTop = parseInt( $freezeMenus.offset().top );
+            docLeft = parseInt( $freezeMenus.offset().left );
+
+            $(window).on("scroll", function(){
+                scrollTop = parseInt( $(window).scrollTop() ) ;
+                //console.info( "scrollTop = " + scrollTop + "，top = " + docTop  );
                 $freezeMenus.offset({
-                    top: scrollTop > marginTop + docTop ? scrollTop : docTop,
+                    top: scrollTop > docTop ? scrollTop : docTop,
                     left: docLeft
                 });
 
