@@ -1,11 +1,11 @@
 body {
   color: #333; }
 
-.content {
-  padding-top: 65px; }
+.navbar {
+  margin-left: -2px;
+  margin-right: -2px; }
 
 .sidebar {
-  position: fixed;
   padding-left: 12px;
   overflow-x: hidden;
   overflow-y: auto; }
@@ -27,7 +27,10 @@ body {
 
 .btn-save {
   width: 12em;
-  margin-top: 1em; }
+  margin-top: 1em;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); }
+  .btn-save .glyphicon {
+    vertical-align: -2px; }
 
 .js--select .input-group-addon {
   cursor: pointer; }
@@ -40,5 +43,22 @@ body {
 
 .radio label {
   margin-right: 2em; }
+
+.panel {
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); }
+  .panel .panel-heading {
+    position: relative; }
+    .panel .panel-heading .panel-title {
+      cursor: pointer; }
+    .panel .panel-heading .btn-group {
+      position: absolute;
+      top: -1px;
+      right: -1px;
+      bottom: -1px; }
+      .panel .panel-heading .btn-group .btn {
+        height: 100%;
+        border-radius: 0; }
+        .panel .panel-heading .btn-group .btn:last-child {
+          border-top-right-radius: 4px; }
 
 /*# sourceMappingURL=style.css.map */

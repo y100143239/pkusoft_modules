@@ -4,7 +4,8 @@ define(["lib/ie/ie",
         "utils/utils",
         "lib/parsley/parsley",
         "css!ui/css/style",
-        "lib/switch/js/bootstrap-switch"
+        "lib/switch/js/bootstrap-switch",
+        "lib/stickUp/stickUp"
     ],
     function ( ie, datetimepicker, $, utils, parsley ) {
 
@@ -29,6 +30,7 @@ define(["lib/ie/ie",
             this._wrapDropdownMenu();
             this._wrapDatetimePicker();
             this._wrapCheckbox();
+            //this._stickUp();
 
             this.$forms.parsley();
 
@@ -77,6 +79,27 @@ define(["lib/ie/ie",
         _wrapCheckbox: function () {
             $(".switch input:checkbox" ).bootstrapSwitch();
             return this;
+        },
+        _stickUp: function() {
+            $(".stickUp").stickUp({
+                parts: getAnchors()
+                /*{
+                    0:'home',
+                    1:'features',
+                    2: 'updates',
+                }*/,
+                itemClass: 'list-group-item',
+                itemHover: 'active',
+                topMargin: 'auto'
+            });
+            function getAnchors() {
+                var $anchors,
+                    date = {};
+                $anchors = $(".stickUp .list-group-item a" );
+                $anchors.each(function(index, e){
+                    date[ index + 1 ] = $(e ).attr("href" ).replace("#");
+                });
+            }
         }
     };
 
