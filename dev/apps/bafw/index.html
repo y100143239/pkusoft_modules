@@ -14,7 +14,7 @@
     <script data-main="../../../dev/modules/" src="../../../dev/modules/require.js"></script>
     <script >
         var VERSION;
-//        VERSION = "v2.0";
+        VERSION = "v2.0";
         require.config( {
             urlArgs: "VERSION=" + (VERSION || (new Date()).getTime()),
             paths: {
@@ -88,7 +88,7 @@
                     </div>
                 </div>
                 <div class="panel-body collapse in" id="panel-body-company">
-                    <form class="form-horizontal parsley" data-parsley-validate="">
+                    <form class="form-horizontal parsley" data-parsley-validate="" data-parsley-trigger="focusin focusout">
                         <div class="form-group">
                             <label  class="col-sm-2 control-label">公司名称</label>
                             <div class="col-sm-10">
@@ -135,10 +135,11 @@
 
                         <div class="form-group">
                             <label  class="col-sm-2 control-label">经营范围</label>
-                            <div class="col-sm-4">
+                            <div class="col-sm-10">
                                 <div class="checkbox ">
-                                    <label> <input type="checkbox"> 五金交电 </label>
-                                    <label> <input type="checkbox"> 日用百货 </label>
+                                    <label> <input type="checkbox" name="_2" data-parsley-mincheck="1" required=""> 五金交电 </label>
+                                    <label> <input type="checkbox" name="_2"> 日用百货 </label>
+                                    <label> <input type="checkbox" name="_2"> 日用百货2 </label>
                                 </div>
                             </div>
                         </div>
@@ -147,8 +148,8 @@
                             <label  class="col-sm-2 control-label">企业规模</label>
                             <div class="col-sm-4">
                                 <div class="radio ">
-                                    <label> <input type="radio" name="_radio"> 大 </label>
-                                    <label> <input type="radio" name="_radio"> 中 </label>
+                                    <label> <input type="radio" name="_radio" > 大 </label>
+                                    <label> <input type="radio" name="_radio" checked> 中 </label>
                                     <label> <input type="radio" name="_radio"> 小 </label>
                                 </div>
                             </div>

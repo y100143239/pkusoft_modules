@@ -47,17 +47,15 @@ body, html {
     transform: scale(1);
     -webkit-transform: scale(1);
     opacity: 0; } }
-.sidebar {
-  padding-left: 12px; }
-  .sidebar .glyphicon-chevron-right {
-    float: right;
-    opacity: 0.8; }
-  .sidebar.nav .list-group-item {
-    padding: 0; }
-  .sidebar.nav .active a {
-    color: #fff; }
-  .sidebar.nav .active > a:hover, .sidebar.nav .active > a:focus {
-    background-color: transparent; }
+.sidebar .glyphicon-chevron-right {
+  float: right;
+  opacity: 0.8; }
+.sidebar.nav .list-group-item {
+  padding: 0; }
+.sidebar.nav .active a {
+  color: #fff; }
+.sidebar.nav .active > a:hover, .sidebar.nav .active > a:focus {
+  background-color: transparent; }
 
 .dropdown-menu {
   max-height: 20em;
