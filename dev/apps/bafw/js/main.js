@@ -29,7 +29,7 @@ define(["lib/ie/ie",
             this._wrapDropdownMenu();
             this._wrapDatetimePicker();
             this._wrapCheckbox();
-            this._freezeMenu();
+            this._wrapMenu();
 
             this.$forms.parsley();
 
@@ -79,26 +79,34 @@ define(["lib/ie/ie",
             $(".switch input:checkbox" ).bootstrapSwitch();
             return this;
         },
-        _freezeMenu: function() {
+        _wrapMenu: function() {
             var $freezeMenus,
                 scrollTop, // 滚动条 top
-                marginTop, // menu margin-top
                 docTop, // menu的 文档top
                 docLeft
                 ;
-                $freezeMenus = $(".js--freezeMenu");
-                docTop = parseInt( $freezeMenus.offset().top );
-                docLeft = parseInt( $freezeMenus.offset().left );
-            $(document ).on("scroll", function(){
-                scrollTop = parseInt( $(document).scrollTop() ) ;
-                marginTop = parseInt( $freezeMenus.css('margin-top') );
-                // console.info( "scrollTop = " + scrollTop + "，marginTop = " + marginTop + "，top = " + docTop  );
+            $freezeMenus = $(".js--freezeMenu");
+            docTop = parseInt( $freezeMenus.offset().top );
+            docLeft = parseInt( $freezeMenus.offset().left );
+
+            $(window).on("scroll", function(){
+                scrollTop = parseInt( $(window).scrollTop() ) ;
+                //console.info( "scrollTop = " + scrollTop + "，top = " + docTop  );
                 $freezeMenus.offset({
-                    top: scrollTop > marginTop + docTop ? scrollTop : docTop,
+                    top: scrollTop > docTop ? scrollTop : docTop,
                     left: docLeft
                 });
-
             });
+
+            // 添加滚动动画
+            $freezeMenus.find("a[href^='#']" ).on("click",function(event){
+                var target,
+                    docTop;
+                target = $( $(this ).attr("href") );
+                docTop = target.offset().top;
+                $( "body,html" ).stop().animate({ scrollTop: docTop }, 300);
+                event.preventDefault();
+            })
         }
     };
 
