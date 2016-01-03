@@ -4,6 +4,8 @@
 		|
 		|-- dev		// 开发 
 		|	|			
+		|	|-- apps  // app
+		|	|		|-- bafw // 保安服务
 		|	|-- modules
 		|		|
 		|		|-- require.js		
@@ -17,32 +19,27 @@
 		|		|	|-- utils.js (常用工具库)
 		|		|
 		|		|-- jquery
-		|		|	|
 		|		|	|-- jquery.js
-		|		|	|		
 		|		|	|-- plugin (存放jQuery插件)
 		|		|
 		|		|-- ui (存放UI组件)
-		|			|		
 		|			|-- images (统一管理图片资源)
 		|			|	|-- public
-		|			|		
 		|			|-- scss (采用scss编写css)
 		|			|	|-- style.scss (管理所有组件的样式)
-		|			|	|-- _flow.scss 
-		|			|		
+		|			|	|-- _flow.scss 	
 		|			|-- css
 		|			|	|-- style.css
-		|			|
 		|			|-- flow.js (用于流程展示)
 		|					
-		|			
 		|-- test 	// 测试
 		|	|
 		|	|-- flow			
 		|		|-- test.html
 		|
 		|-- dist	// 发布
+		|
+		|-- gh-pages // 展示 http://forwardnow.github.io/pkusoft_modules/
 		|
 		|-- Gruntfile.js
 		|-- README.md
@@ -109,6 +106,17 @@ define( [ "css!ui/css/style"], function(){...} );
     <input class="form-control js--input" ...>
  </div>
 ```
+
+##2.1.6 “代码块”（立即执行的函数）
+
+* 以 “+”打头（参考bootstrap.js代码风格），如下：
+
+```
++function(){
+	// 代码块内容
+}();
+```
+
 
 
 ##2.2 避免浏览器缓存
