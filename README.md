@@ -167,7 +167,7 @@ require.config( {
         waitSeconds: 15
     } );
 
-* 对 require.js 的引入 以及配置信息 将放在公共文件进行静态导入
+* 对 require.js 的引入 以及配置信息 将放在公共文件（require.jspf）进行静态导入
 
 
  

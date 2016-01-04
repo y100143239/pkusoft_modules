@@ -4,7 +4,8 @@ define(["lib/ie/ie",
         "utils/utils",
         "lib/parsley/parsley",
         "css!ui/css/style",
-        "lib/switch/js/bootstrap-switch"
+        "lib/switch/js/bootstrap-switch",
+        "uploadify"
     ],
     function ( ie, datetimepicker, $, utils, parsley ) {
 
@@ -30,6 +31,7 @@ define(["lib/ie/ie",
             this._wrapDatetimePicker();
             this._wrapCheckbox();
             this._wrapMenu();
+            this._wrapUploadify();
 
             this._formsValidate();
 
@@ -120,6 +122,40 @@ define(["lib/ie/ie",
                 $( "body,html" ).stop().animate({ scrollTop: docTop }, 300);
                 event.preventDefault();
             })
+        },
+        _wrapUploadify: function() {
+            var uplodifyUrl,
+                lastSlashPos,
+                dir,
+                swfPath
+                ;
+            uplodifyUrl = require.toUrl("uploadify");
+            lastSlashPos = uplodifyUrl.lastIndexOf("/");
+            dir = uplodifyUrl.substring(0, lastSlashPos + 1);
+            swfPath = dir + "uploadify.swf";
+            console.info(swfPath);
+            setTimeout(function(){
+                $(".js--uploadify").uploadify({
+                'swf'      : swfPath,
+                'uploader' : 'Upload',
+
+                'auto'     : true, // 选择玩文件不自动上传
+
+                //'buttonClass' : 'btn btn-default',
+                'buttonText' : '选择上传文件',
+
+                'uploadLimit' : 3, // 允许上传的文件数
+                'fileSizeLimit' : '1000KB',
+
+                'queueSizeLimit' : 3, // 可同时上传的文件数
+                'removeCompleted' : false, // 完成后删除
+
+
+                'onUploadSuccess' : function(file, data, response) {
+                    console.log('The file ' + file.name + ' was successfully uploaded with a response of ' + response + ':' + data);
+                }
+            });
+        },10);
         }
     };
 
