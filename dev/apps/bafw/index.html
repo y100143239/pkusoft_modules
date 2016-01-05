@@ -9,7 +9,7 @@
     <title>modules</title>
     <link rel="stylesheet" href="../../../dist/modules/lib/bootstrap/css/bootstrap.css"/>
     <link rel="stylesheet" href="css/style.css"/><!-- 自定义css -->
-    <!--<script src="../../../dev/modules/utils/preload.js"></script>-->
+    <script src="../../../dev/modules/utils/preload.js"></script>
     <title>modules</title>
     <script data-main="../../../dev/modules/" src="../../../dev/modules/require.js"></script>
     <script >
@@ -345,8 +345,8 @@
                             <label  class="col-sm-2 control-label">文件上传</label>
                             <div class="col-sm-10">
                                 <input type="file" name="file_upload" id="uploadify_1" class="js--uploadify" />
-                                <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-upload"></span> 开始上传
-                                </button>
+                                <button type="button" class="btn btn-primary" onclick="javascript:jQuery('#uploadify_1').uploadify('upload', '*')">
+                                    <span class="glyphicon glyphicon-upload"></span> 开始上传 </button>
                             </div>
                         </div>
 
