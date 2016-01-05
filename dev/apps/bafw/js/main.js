@@ -139,15 +139,17 @@ define(["lib/ie/ie",
                 'swf'      : swfPath,
                 'uploader' : 'Upload',
 
-                'auto'     : true, // 选择玩文件不自动上传
+                'auto'     : false, // 选择玩文件不自动上传
 
-                //'buttonClass' : 'btn btn-default',
+                //'buttonClass' : 'btn btn-success',
                 'buttonText' : '选择上传文件',
+                'width': "120",
+                'height': "34",
 
-                'uploadLimit' : 3, // 允许上传的文件数
+                'uploadLimit' : 10, // 允许上传的文件数
                 'fileSizeLimit' : '1000KB',
 
-                'queueSizeLimit' : 3, // 可同时上传的文件数
+                'queueSizeLimit' : 10, // 可同时上传的文件数
                 'removeCompleted' : false, // 完成后删除
 
 

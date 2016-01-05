@@ -1724,11 +1724,13 @@ SWFUpload.Console.writeLine = function(d) {
 							// Wrap the instance
 							var $wrapper = $('<div />', {
 								'id' : settings.id,
-								'class' : 'uploadify',
+								'class' : 'uploadify btn btn-success',
+
 								'css' : {
-									'height' : settings.height + 'px',
-									'width' : settings.width + 'px'
+									//'height' : settings.height + 'px',
+									//'width' : settings.width + 'px'
 								}
+
 							});
 							$('#' + swfuploadify.movieName).wrap($wrapper);
 							// Recreate the reference to wrapper
@@ -1750,12 +1752,12 @@ SWFUpload.Console.writeLine = function(d) {
 								});
 							}
 							$button.html(
-									'<span class="uploadify-button-text">'
+									'<span class="glyphicon glyphicon-plus"></span> <span class="uploadify-button-text">'
 											+ settings.buttonText + '</span>')
 									.css({
-										'height' : settings.height + 'px',
-										'line-height' : settings.height + 'px',
-										'width' : settings.width + 'px'
+										//'height' : settings.height + 'px',
+										//'line-height' : settings.height + 'px',
+										//'width' : settings.width + 'px'
 									});
 							// Append the button to the wrapper
 							$wrapper.append($button);
@@ -1763,7 +1765,11 @@ SWFUpload.Console.writeLine = function(d) {
 							// Adjust the styles of the movie
 							$('#' + swfuploadify.movieName).css({
 								'position' : 'absolute',
-								'z-index' : 1
+								'z-index' : 1,
+                                'top': '0',
+                                'left': '0',
+                                'width': '100%',
+                                'height': '100%'
 							});
 
 							// Create the file queue
