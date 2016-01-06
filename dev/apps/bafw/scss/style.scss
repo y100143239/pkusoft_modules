@@ -214,6 +214,11 @@ body,html {
     @at-root .form-control[readonly] {
         cursor: not-allowed;
     }
+    @at-root .control-label.require:before {
+        content:"*";
+        color: #d9534f;
+        font-family: "Courier New", sans-serif;
+    }
 
     @at-root .checkbox label {
         margin-right: 2em;
