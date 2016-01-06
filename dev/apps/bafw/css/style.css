@@ -150,6 +150,10 @@ body, html {
   cursor: pointer; }
 .form-control[readonly] {
   cursor: not-allowed; }
+.control-label.require:before {
+  content: "*";
+  color: #d9534f;
+  font-family: "Courier New", sans-serif; }
 .checkbox label {
   margin-right: 2em; }
 .radio label {
