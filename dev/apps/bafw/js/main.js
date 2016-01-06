@@ -41,7 +41,7 @@ define(["lib/ie/ie",
 
         },
         _wrapPanelOpe: function() {
-            $(".js--edit" ).on("click", function() {
+            $(".js--edit" ).off("click").on("click", function() {
                 var $edit = $(this);
                 var $panel = $edit.parents(".panel[id]");
                 var $submit = $panel.find(".js--submit");
@@ -51,13 +51,13 @@ define(["lib/ie/ie",
                 var curWwwPath = window.document.location.href;
                 var lastSlashPos = curWwwPath.lastIndexOf("/");
                 var curPath = curWwwPath.substring(0, lastSlashPos + 1);
-                require(["text!" + curPath + "/tpl/company_edit.tpl", "jquery","utils/doT"], function(tpl, $, doT){
+                require(["text!" + curPath + "tpl/company_edit.tpl", "jquery","utils/doT"], function(tpl, $, doT){
                     $("#panel-body-company" ).html( tpl );
                     _main.init({$forms:$("form.parsley")});
                 });
 
             });
-            $(".js--submit" ).on("click", function(){
+            $(".js--submit" ).off("click").on("click", function(){
                 var $submit = $(this);
                 var $panel = $submit.parents(".panel[id]");
                 var $edit = $panel.find(".js--edit");
@@ -77,7 +77,7 @@ define(["lib/ie/ie",
                 var curWwwPath = window.document.location.href;
                 var lastSlashPos = curWwwPath.lastIndexOf("/");
                 var curPath = curWwwPath.substring(0, lastSlashPos + 1);
-                require(["text!" + curPath + "/tpl/company_detail.tpl", "jquery","utils/doT"], function(tpl, $, doT){
+                require(["text!" + curPath + "tpl/company_detail.tpl", "jquery","utils/doT"], function(tpl, $, doT){
                     var data = {
                         gsmc: "北大高科",
                         gsxz: "北大高科2",
@@ -141,6 +141,7 @@ define(["lib/ie/ie",
             return this;
         },
         _wrapDatetimePicker: function() {
+            $(".datetimepicker").remove();
             $('.js--date').datetimepicker({
                 language:  'zh-CN',
                 weekStart: 1, // Day of the week start. 0 (Sunday) to 6 (Saturday)
