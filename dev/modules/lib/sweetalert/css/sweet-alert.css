@@ -331,7 +331,10 @@
   animation: pulseWarningIns 0.75s infinite alternate;
 }
 .sweet-overlay {
+  background-color: #000;
+  filter: alpha(opacity=40);
   background-color: rgba(0, 0, 0, 0.4);
+
   position: fixed;
   left: 0;
   right: 0;
