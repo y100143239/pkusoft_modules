@@ -131,8 +131,8 @@
                         <div class="form-group">
                             <label  class="col-sm-2 control-label">公司设立时间</label>
                             <div class="col-sm-4">
-                                <div class="input-group date js--date " data-date-format="yyyy-mm-dd" >
-                                    <input class="form-control js--input" size="16" type="text" value="" readonly>
+                                <div class="input-group date js--datepicker-container " data-date-format="yyyy-mm-dd" >
+                                    <input class="form-control js--datepicker-input" size="16" type="text" value="" readonly>
                                     <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                                     <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
                                 </div>
@@ -184,7 +184,7 @@
                             </div>
                             <label  class="col-sm-2 control-label">性别</label>
                             <div class="col-sm-4">
-                                <div class="switch">
+                                <div class="js--switch">
                                     <input type="checkbox" name="_checkbox" data-on-text="女" data-off-text="男"/>
                                 </div>
                             </div>
@@ -334,7 +334,7 @@
                             </div>
                             <label  class="col-sm-2 control-label">负责人性别</label>
                             <div class="col-sm-4">
-                                <div class="switch">
+                                <div class="js--switch">
                                     <input type="checkbox" name="_checkbox" data-on-text="女" data-off-text="男"/>
                                 </div>
                             </div>
@@ -343,7 +343,7 @@
                             <label  class="col-sm-2 control-label">文件上传</label>
                             <div class="col-sm-10">
                                 <input type="file" name="file_upload" id="uploadify_1" class="js--uploadify" />
-                                <button type="button" class="btn btn-primary" onclick="javascript:jQuery('#uploadify_1').uploadify('upload', '*')">
+                                <button type="button" class="btn btn-primary" onclick="jQuery('#uploadify_1').uploadify('upload', '*')">
                                     <span class="glyphicon glyphicon-upload"></span> 开始上传 </button>
                             </div>
                         </div>
