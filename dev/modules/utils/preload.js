@@ -11,6 +11,6 @@
         setTimeout( function(){
             ( window.jQuery && jQuery("#preloader" ).fadeOut(500) ) ||
             ( document.getElementById("preloader").style.display = "none" );
-        }, 2000);
+        }, 200);
     }
 }();

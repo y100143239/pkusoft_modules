@@ -5,8 +5,7 @@ define(["lib/ie/ie",
         "lib/parsley/parsley",
         "css!ui/css/style",
         "lib/switch/js/bootstrap-switch",
-        "uploadify",
-        "sweetalert"
+        "uploadify"
     ],
     function ( ie, datetimepicker, $, utils, parsley ) {
 
@@ -17,7 +16,7 @@ define(["lib/ie/ie",
 
     main = {
         $forms: null,
-        isIE8: (navigator.appName == "Microsoft Internet Explorer" && navigator.appVersion.match(/8./i) == "8."),
+        //isIE8: (navigator.appName == "Microsoft Internet Explorer" && navigator.appVersion.match(/8./i) == "8."),
         init: function( options ){
             extend(this, options);
             this.render().bind();
@@ -34,7 +33,7 @@ define(["lib/ie/ie",
             this._wrapCheckbox();
             this._wrapMenu();
             this._wrapUploadify();
-            this._wrapDialog();
+            //this._wrapDialog();
             this._wrapPanelOpe();
 
             this._formsValidate();
@@ -141,7 +140,7 @@ define(["lib/ie/ie",
             return this;
         },
         _wrapDatetimePicker: function() {
-            $(".datetimepicker").remove();
+            //$(".datetimepicker").remove();
             $('.js--date').datetimepicker({
                 language:  'zh-CN',
                 weekStart: 1, // Day of the week start. 0 (Sunday) to 6 (Saturday)
@@ -151,7 +150,7 @@ define(["lib/ie/ie",
                 startView: 2, //  * 0 or 'hour' for the hour view * 1 or 'day' for the day view * 2 or 'month' for month view (the default) * 3 or 'year' for the 12-month overview * 4 or 'decade' for the 10-year overview
                 minView: 2,
                 forceParse: 1
-            } ).off("changeDate").on("changeDate",function(){
+            } ).on("changeDate",function(){
                 $(this ).find(".js--input" ).parsley().validate(); // 再次validate
             } );
             return this;
@@ -221,9 +220,9 @@ define(["lib/ie/ie",
 
                 'onUploadSuccess' : function(file, data, response) {
                     console.log('The file ' + file.name + ' was successfully uploaded with a response of ' + response + ':' + data);
-                }
-            });
-        },10);
+                    }
+                });
+            },10);
         }
     };
 

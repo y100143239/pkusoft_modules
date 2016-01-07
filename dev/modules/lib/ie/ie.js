@@ -5,7 +5,7 @@ define(
         return b.getElementsByTagName("i" ).length === 1;
     }())
     ?
-    ["lib/ie/es5-shim","lib/ie/html5shiv","lib/ie/respond"]
+    ["lib/ie/html5shiv","lib/ie/respond"]
     :
     ["require"]
 );
