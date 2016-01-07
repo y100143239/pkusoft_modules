@@ -1,7 +1,7 @@
 // SweetAlert
 // 2014 (c) - Tristan Edwards
 // github.com/t4t5/sweetalert
-(function(window, document) {
+(function(window, document, $) {
 
   var modalClass   = '.sweet-alert',
       overlayClass = '.sweet-overlay',
@@ -29,14 +29,128 @@
 
 
   /*
+   * 跨浏览器的事件处理器添加方式 http://www.jb51.net/article/70995.htm
+   */
+  var EventUtil = {
+    addHandler : function(elem, type, handler){
+      if(elem.addEventListener){
+        elem.addEventListener(type, handler, false);
+      }
+      else if(elem.attachEvent){
+        elem.attachEvent("on" + type, handler);//添加多个同一类型的handler时，IE方式的规则是最后添加的最先触发
+      }
+      else{
+        if(typeof elem["on" + type] === 'function'){
+          var oldHandler = elem["on" + type];
+          elem["on" + type] = function(){
+            oldHandler();
+            handler();
+          }
+        }
+        else{
+          elem["on" + type] = handler;//支持添加多个事件处理器
+        }
+      }
+    },
+
+    getEvent : function(event){
+      return event ? event : window.event;
+    },
+
+    getTarget : function(event){
+      return event.target || event.srcElement;
+    },
+
+    preventDefault : function(event){
+      if(event.preventDefault){
+        event.preventDefault();
+      }
+      else{
+        event.returnValue = false;
+      }
+    },
+
+    removeHandler : function(elem, type, handler){
+      if(elem.removeEventListener){
+        elem.removeEventListener(type, handler, false);
+      }
+      else if(elem.detachEvent){
+        elem.detachEvent("on" + type, handler);
+      }
+      else{
+        elem["on" + type] = null;//不支持移除单一事件处理器，只能全部移除
+      }
+    },
+
+    stopPropagation : function(event){
+      if(event.stopPropagation){
+        event.stopPropagation();
+      }
+      else{
+        event.cancelBubble = true;
+      }
+    },
+
+    getRelatedTarget : function(event){
+      if(event.relatedTarget){
+        return event.relatedTarget;
+      }
+      else if(event.toElement && event.type == "mouseout"){
+        return event.toElement;
+      }
+      else if(event.fromElement && event.type == "mouseover"){
+        return event.fromElement;
+      }
+      else{
+        return null;
+      }
+    },
+
+    /*IE8点击左键和中键都是0；FF无法识别中键；Chrome正常*/
+    getButton : function(event){//返回0，1，2 - 左，中，右
+      if(document.implementation.hasFeature("MouseEvents", "2.0")){
+        return event.button;
+      }
+      else{
+        switch(event.button){
+          case 0:case 1:case 3:case 5:case 7:
+          return 0;
+          break;
+          case 2:case 6:
+          return 2;
+          break;
+          case 4:
+            return 1;
+            break;
+          default:
+            break;
+        }
+      }
+    },
+
+    /*只能检测keypress事件，返回值等于将要显示的字符编码*/
+    /*IE和Chrome只有能显示的字符键才触发，FF其它键也能触发，返回值为0*/
+    getCharCode : function(event){
+      if(typeof event.charCode == "number"){
+        return event.charCode;
+      }
+      else{
+        return event.keyCode;
+      }
+    }
+  };
+
+  /*
    * Manipulate DOM
    */
 
   var getModal = function() {
-      return document.querySelector(modalClass);
+      //return document.querySelector(modalClass);
+      return $(modalClass)[0];
     },
     getOverlay = function() {
-      return document.querySelector(overlayClass);
+      //return document.querySelector(overlayClass);
+      return $(overlayClass)[0];
     },
     hasClass = function(elem, className) {
       return new RegExp(' ' + className + ' ').test(' ' + elem.className + ' ');
@@ -99,7 +213,8 @@
       elem.style.display = 'block';
 
       var height = elem.clientHeight;
-      var padding = parseInt(getComputedStyle(elem).getPropertyValue('padding'), 10);
+      //var padding = parseInt(getComputedStyle(elem).getPropertyValue('padding'), 10);
+      var padding = parseInt( $(elem ).css("padding-top") );
 
       elem.style.left = '';
       elem.style.display = 'none';
@@ -268,7 +383,7 @@
 
     // Mouse interactions
     var onButtonEvent = function(e) {
-
+      e = e || window.event;
       var target = e.target || e.srcElement,
           targetedConfirm    = (target.className.indexOf('confirm') > -1),
           modalIsVisible     = hasClass(modal, 'visible'),
@@ -304,7 +419,8 @@
       }
     };
 
-    var $buttons = modal.querySelectorAll('button');
+    //var $buttons = modal.querySelectorAll('button');
+    var $buttons = $('button', modal);
     for (var i = 0; i < $buttons.length; i++) {
       $buttons[i].onclick     = onButtonEvent;
     }
@@ -312,10 +428,13 @@
     // Remember the current document.onclick event.
     previousDocumentClick = document.onclick;
     document.onclick = function(e) {
+
+      e = e || window.event;
+
       var target = e.target || e.srcElement;
 
       var clickedOnModal = (modal === target),
-          clickedOnModalChild = isDescendant(modal, e.target),
+          clickedOnModalChild = isDescendant(modal, target),
           modalIsVisible = hasClass(modal, 'visible'),
           outsideClickIsAllowed = modal.getAttribute('data-allow-ouside-click') === 'true';
 
@@ -326,12 +445,16 @@
 
 
     // Keyboard interactions
-    var $okButton = modal.querySelector('button.confirm'),
-        $cancelButton = modal.querySelector('button.cancel'),
-        $modalButtons = modal.querySelectorAll('button:not([type=hidden])');
+    //var $okButton = modal.querySelector('button.confirm'),
+    //    $cancelButton = modal.querySelector('button.cancel'),
+    //    $modalButtons = modal.querySelectorAll('button:not([type=hidden])');
+    var $okButton = $('button.confirm', modal)[0],
+        $cancelButton = $('button.cancel', modal)[0],
+        $modalButtons = $('button:not([type=hidden])', modal);
 
 
     function handleKeyDown(e) {
+      e = e || window.event;
       var keyCode = e.keyCode || e.which;
 
       if ([9,13,32,27].indexOf(keyCode) === -1) {
@@ -389,12 +512,14 @@
       }
     }
 
-    previousWindowKeyDown = window.onkeydown;
-    window.onkeydown = handleKeyDown;
+    //previousWindowKeyDown = window.onkeydown;
+    //window.onkeydown = handleKeyDown;
 
     function handleOnBlur(e) {
+      e = e || window.event;
       var $targetElement = e.target || e.srcElement,
-          $focusElement = e.relatedTarget,
+          //$focusElement = e.relatedTarget,
+          $focusElement = EventUtil.getRelatedTarget(e),
           modalIsVisible = hasClass(modal, 'visible');
 
       if (modalIsVisible) {
@@ -465,10 +590,15 @@
   function setParameters(params) {
     var modal = getModal();
 
-    var $title = modal.querySelector('h2'),
-        $text = modal.querySelector('p'),
-        $cancelBtn = modal.querySelector('button.cancel'),
-        $confirmBtn = modal.querySelector('button.confirm');
+    //var $title = modal.querySelector('h2'),
+    //    $text = modal.querySelector('p'),
+    //    $cancelBtn = modal.querySelector('button.cancel'),
+    //    $confirmBtn = modal.querySelector('button.confirm');
+
+    var $title = $('h2', modal)[0],
+        $text = $('p', modal)[0],
+        $cancelBtn = $('button.cancel', modal)[0],
+        $confirmBtn = $('button.confirm', modal)[0];
 
     // Title
     $title.innerHTML = escapeHtml(params.title).split("\n").join("<br>");
@@ -480,7 +610,8 @@
     }
 
     // Icon
-    hide(modal.querySelectorAll('.icon'));
+    //hide(modal.querySelectorAll('.icon'));
+    hide($('.icon',modal));
     if (params.type) {
       var validType = false;
       for (var i = 0; i < alertTypes.length; i++) {
@@ -493,24 +624,30 @@
         window.console.error('Unknown alert type: ' + params.type);
         return false;
       }
-      var $icon = modal.querySelector('.icon.' + params.type);
+      //var $icon = modal.querySelector('.icon.' + params.type);
+      var $icon = $('.icon.' + params.type, modal)[0];
       show($icon);
 
       // Animate icon
       switch (params.type) {
         case "success":
           addClass($icon, 'animate');
-          addClass($icon.querySelector('.tip'), 'animateSuccessTip');
-          addClass($icon.querySelector('.long'), 'animateSuccessLong');
+          //addClass($icon.querySelector('.tip'), 'animateSuccessTip');
+          //addClass($icon.querySelector('.long'), 'animateSuccessLong');
+          addClass($('.tip',$icon)[0], 'animateSuccessTip');
+          addClass($('.long',$icon)[0], 'animateSuccessLong');
           break;
         case "error":
           addClass($icon, 'animateErrorIcon');
-          addClass($icon.querySelector('.x-mark'), 'animateXMark');
+          //addClass($icon.querySelector('.x-mark'), 'animateXMark');
+          addClass($('.x-mark', $icon)[0], 'animateXMark');
           break;
         case "warning":
           addClass($icon, 'pulseWarning');
-          addClass($icon.querySelector('.body'), 'pulseWarningIns');
-          addClass($icon.querySelector('.dot'), 'pulseWarningIns');
+          //addClass($icon.querySelector('.body'), 'pulseWarningIns');
+          //addClass($icon.querySelector('.dot'), 'pulseWarningIns');
+          addClass($('.body',$icon)[0], 'pulseWarningIns');
+          addClass($('.dot',$icon)[0], 'pulseWarningIns');
           break;
       }
 
@@ -518,7 +655,8 @@
 
     // Custom image
     if (params.imageUrl) {
-      var $customIcon = modal.querySelector('.icon.custom');
+      //var $customIcon = modal.querySelector('.icon.custom');
+      var $customIcon = $('.icon.custom',modal)[0];
 
       $customIcon.style.backgroundImage = 'url(' + params.imageUrl + ')';
       show($customIcon);
@@ -683,19 +821,30 @@
 
     // Reset icon animations
 
-    var $successIcon = modal.querySelector('.icon.success');
+    //var $successIcon = modal.querySelector('.icon.success');
+    //removeClass($successIcon, 'animate');
+    //removeClass($successIcon.querySelector('.tip'), 'animateSuccessTip');
+    //removeClass($successIcon.querySelector('.long'), 'animateSuccessLong');
+    var $successIcon = $('.icon.success',modal)[0];
     removeClass($successIcon, 'animate');
-    removeClass($successIcon.querySelector('.tip'), 'animateSuccessTip');
-    removeClass($successIcon.querySelector('.long'), 'animateSuccessLong');
+    removeClass($('.tip',$successIcon)[0], 'animateSuccessTip');
+    removeClass($('.long',$successIcon)[0], 'animateSuccessLong');
 
-    var $errorIcon = modal.querySelector('.icon.error');
+    //var $errorIcon = modal.querySelector('.icon.error');
+    //removeClass($errorIcon, 'animateErrorIcon');
+    //removeClass($errorIcon.querySelector('.x-mark'), 'animateXMark');
+    var $errorIcon = $('.icon.error',modal)[0];
     removeClass($errorIcon, 'animateErrorIcon');
-    removeClass($errorIcon.querySelector('.x-mark'), 'animateXMark');
+    removeClass($('.x-mark',$errorIcon)[0], 'animateXMark');
 
-    var $warningIcon = modal.querySelector('.icon.warning');
+    //var $warningIcon = modal.querySelector('.icon.warning');
+    //removeClass($warningIcon, 'pulseWarning');
+    //removeClass($warningIcon.querySelector('.body'), 'pulseWarningIns');
+    //removeClass($warningIcon.querySelector('.dot'), 'pulseWarningIns');
+    var $warningIcon = $('.icon.warning',modal)[0];
     removeClass($warningIcon, 'pulseWarning');
-    removeClass($warningIcon.querySelector('.body'), 'pulseWarningIns');
-    removeClass($warningIcon.querySelector('.dot'), 'pulseWarningIns');
+    removeClass($('.body',$warningIcon)[0], 'pulseWarningIns');
+    removeClass($('.dot',$warningIcon)[0], 'pulseWarningIns');
 
 
     // Reset the page to its previous state
@@ -742,4 +891,4 @@
     }
   })();
 
-})(window, document);
+})(window, document, jQuery);
