@@ -1,0 +1,192 @@
+@mixin hotmap($num,$left,$top,$width,$height,$tipLeft:0,$tipTop:0,$tipWidth: 50) {
+    left       : #{$left}px;
+    top        : #{$top}px;
+    width      : #{$width}px;
+    height     : #{$height}px;
+    background : url("../images/map_#{$num}.png") no-repeat;
+    &:hover, &.active {
+        background-image : url("../images/map_#{$num}_hover.png");
+        .tip {
+            display : block;
+        }
+    }
+    .tip {
+        font-size : 12px;
+        position  : absolute;
+        top       : #{$tipTop}px;
+        left      : #{$tipLeft}px;
+        width     : #{$tipWidth}px;
+    }
+
+}
+
+* {
+    margin  : 0;
+    padding : 0;
+}
+
+.wd-container {
+    margin           : 10px auto;
+    width            : 800px;
+    height           : 500px;
+    border           : solid 7px #eeeeee;
+    padding          : 1px;
+    background-color : #e0e2e7;
+    font-family      : "Microsoft Yahei", sans-serif;
+    color            : #333333;
+    font-size        : 14px;
+    .wd-wrap {
+        height     : 100%;
+        background : url(../images/platform_bg.png) repeat-x #ffffff;
+    }
+    .wd-main {
+        height : 88%;
+    }
+    .wd-bottom {
+        height           : 12%;
+        background-color : #ffffff;
+        border-top       : solid 1px #eeeeee;
+    }
+    .bottom-menu {
+        overflow    : hidden;
+        line-height : 1;
+        color       : #6176be;
+        .bottom-menu-item {
+            float       : left;
+            width       : 16.5%;
+            font-size   : 16px;
+            padding     : 24px 0 30px 0;
+            text-indent : 46px;
+            cursor      : pointer;
+            background  : url(../images/sprit.png) no-repeat 18px 21px;
+            &:hover, &.active {
+                color                 : #ffffff;
+                background-color      : #62a0ea;
+                background-position-y : -106px !important;
+            }
+        }
+    }
+    .wd-qjsj {
+        overflow: hidden;
+        .qjsj-map {
+            width: 340px;
+            float: left;
+            padding: 10px 0 0 10px;
+            .map-hot {
+                width      : 333px;
+                height     : 246px;
+                background : url(../images/map.png) no-repeat;
+                position   : relative;
+                .map-hot-item {
+                    position : absolute;
+                    .tip {
+                        display          : none;
+                        padding          : 2px;
+                        color            : #ffffff;
+                        background-color : #31b0d5;
+                        border-color     : #269abc;
+                    }
+                }
+                #map-00 {
+                    @include hotmap("00", 0, 0, 83, 64, 54, 44, 25);
+                }
+                #map-01 {
+                    @include hotmap("01", 0, 139, 112, 107, 20, -20, 37);
+                }
+                #map-02 {
+                    @include hotmap("02", 104, 206, 20, 20, -28, 0, 25);
+                }
+                #map-03 {
+                    @include hotmap("03", 100, 192, 67, 54, 0, 56);
+                }
+                #map-04 {
+                    @include hotmap("04", 91, 165, 58, 39, 0, -20);
+                }
+                #map-05 {
+                    @include hotmap("05", 156, 186, 20, 32, 10, 36);
+                }
+                #map-06 {
+                    @include hotmap("06", 140, 162, 30, 46, 0, -20, 25);
+                }
+                #map-07 {
+                    @include hotmap("07", 154, 155, 54, 55, 24, 58);
+                }
+                #map-08 {
+                    @include hotmap("08", 165, 103, 107, 86);
+                }
+                #map-09 {
+                    @include hotmap("09", 226, 126, 56, 69, 0, 70, 25);
+                }
+                #map-10 {
+                    @include hotmap("10", 260, 121, 53, 58, 60, 30, 25);
+                }
+                #map-11 {
+                    @include hotmap("11", 262, 90, 48, 56, 50, 10, 25);
+                }
+                #map-12 {
+                    @include hotmap("12", 219, 0, 114, 100, -10, 10);
+                }
+            }
+            .map-current {
+                font-size: 16px;
+                margin-top: 2em;
+                .label {
+                    color: #999;
+                }
+                .cur-city {
+                    color: #333;
+                }
+            }
+        }
+        .qujsj-data {
+            float: right;
+            width: 400px;
+            color: #666;
+            .data-panel {
+                background: #fff;
+                margin: 20px 20px 0 0 ;
+                .panel-heading {
+                    overflow: hidden;
+                    height: 39px;
+                    line-height: 39px;
+                    font-size: 18px;
+                    background-color: #f5f5f5;
+                    border: 1px solid #ddd;
+                    .title {
+                    }
+                    .total {
+                        float: right;
+                        font-size: 14px;
+                        width: 50%;
+                    }
+                    .icon {
+                        vertical-align: middle;
+                        margin-left: 4px;
+                        margin-right: 4px;
+                    }
+                }
+                .panel-body {
+                    overflow: hidden;
+                    border: 1px solid #ddd;
+                    border-top: none 0;
+                    padding-top: 1em;
+                    .data-item {
+                        float: left;
+                        width: 50%;
+                        margin-bottom: 1em;
+                        &.line-first {
+                            text-indent: 2em;
+                        }
+                    }
+                }
+                .label {
+
+                }
+                .cont {
+
+                }
+            }
+        }
+    }
+}
+

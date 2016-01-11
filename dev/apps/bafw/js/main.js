@@ -3,15 +3,15 @@ define( [ "lib/ie/ie",
         "jquery",
         "utils/utils",
         "lib/parsley/parsley",
+        "utils/doT",
         "css!ui/css/style",
         "lib/switch/js/bootstrap-switch",
         "uploadify",
         "sweetalert"
     ],
-    function ( ie, datetimepicker, $, utils, parsley ) {
+    function ( ie, datetimepicker, $, utils, parsley, doT ) {
 
         var main,
-            extend,
             Panel,
             Form,
             DropdownMenu,
@@ -20,25 +20,15 @@ define( [ "lib/ie/ie",
             DatetimePicker,
             Sidebar
             ;
-        extend = utils.extend;
 
-        Panel = {
-            $self: null,
-            showWaiting: function () {
-                this.$self.append( '<div class="panel-overlay"></div>' );
-                this.$self.append( '<div class="sk-circle"> <!--[if lt IE 9]><div style="color:#fff">waiting</div><![endif]--><div class="sk-circle1 sk-child"></div> <div class="sk-circle2 sk-child"></div> <div class="sk-circle3 sk-child"></div> <div class="sk-circle4 sk-child"></div> <div class="sk-circle5 sk-child"></div> <div class="sk-circle6 sk-child"></div> <div class="sk-circle7 sk-child"></div> <div class="sk-circle8 sk-child"></div> <div class="sk-circle9 sk-child"></div> <div class="sk-circle10 sk-child"></div> <div class="sk-circle11 sk-child"></div> <div class="sk-circle12 sk-child"></div> </div>' );
-            },
-            removeWaiting: function () {
-                this.$self.find( ".panel-overlay , sk-circle" ).remove();
-            }
-        };
         Form = {
-            init: function ( $forms ) {
-                $forms.parsley();
-                this.hideMsgOnClick();
+            hookClass: ".js--form",
+            init: function () {
+                $( this.hookClass ).parsley();
+                this.bind();
                 return this;
             },
-            hideMsgOnClick: function () {
+            bind: function () {
                 window.Parsley.on( 'form:validated', function () {
                     this.$element.find( ".parsley-errors-list" ).off( "click" ).one( "click", function () {
                         $( this ).removeClass( "filled" );
@@ -49,43 +39,53 @@ define( [ "lib/ie/ie",
                     } );
                 } );
                 return this;
+            },
+            wrap: function wrap( $target ) {
+                $target.parsley();
+                return this;
             }
         };
 
         DropdownMenu = {
+            hookClass: ".js--DropdownMenu-container",
             init: function () {
-                $( '.js--DropdownMenu-container .dropdown-menu a' ).off( "click" ).on( 'click', function ( event ) {
+                this.bind( $( this.hookClass ) );
+            },
+            bind: function ( $target ) {
+                $target.find( '.dropdown-menu a' ).on( 'click', function ( event ) {
                     var $this,
                         $select,
                         $input,
+                        $hidden,
                         text,
                         value
                         ;
                     $this = $( this );
                     $select = $this.parents( ".js--DropdownMenu-container" ).eq( 0 );
                     $input = $select.find( ".js--DropdownMenu-input" );
+                    $hidden = $input.siblings( ".js--DropdownMenu-hidden" );
                     text = $this.text();
                     value = $this.attr( "data-value" );
 
-                    $input.attr( "data-value", value ).val( text );
-
+                    $input.val( text );
+                    $hidden.val( value );
                     $input.parsley().validate(); // 再次validate
 
                     event.preventDefault();
 
                 } );
-                //TODO
-                /*$(".js--DropdownMenu-input").off( "click" ).on("click",function(){
-                 $( this ).parents( ".js--DropdownMenu-container" ).find( '[data-toggle="dropdown"]' ).parent().addClass("open");
-                 console.info($( this ).parents( ".js--DropdownMenu-container" ).find( '[data-toggle="dropdown"]' ).parent());
-                 });*/
-                $( ".js--DropdownMenu-clear" ).off( "click" ).on( "click", function () {
+
+                $target.find( ".js--DropdownMenu-clear" ).on( "click", function () {
                     $( this ).parents( ".js--DropdownMenu-container" ).find( ".js--DropdownMenu-input" ).val( "" ).parsley().validate();
                 } );
+            },
+            wrap: function ( $target ) {
+                this.bind( $target );
             }
         };
 
         Uploadify = {
+            hookClass: ".js--uploadify",
             options: {
                 'swf': null,
                 'uploader': 'Upload',
@@ -109,7 +109,7 @@ define( [ "lib/ie/ie",
             },
             init: function () {
                 this.options.swf = this.getSwfPath();
-                $( ".js--uploadify" ).uploadify( this.options );
+                $( this.hookClass ).uploadify( this.options );
             },
             getSwfPath: function () {
                 var uplodifyUrl,
@@ -122,17 +122,26 @@ define( [ "lib/ie/ie",
                 dir = uplodifyUrl.substring( 0, lastSlashPos + 1 );
                 swfPath = dir + "uploadify.swf";
                 return swfPath;
+            },
+            wrap: function wrap( $target ) {
+                $target.uploadify( this.options );
+                return this;
             }
 
         };
 
         Switch = {
+            hookClass: ".js--switch input:checkbox",
             init: function () {
-                $( ".js--switch input:checkbox" ).bootstrapSwitch();
+                $( this.hookClass ).bootstrapSwitch();
+            },
+            wrap: function wrap( $target ) {
+                $target.bootstrapSwitch();
             }
         };
 
         DatetimePicker = {
+            hookClass: ".js--datepicker-container",
             options: {
                 language: 'zh-CN',
                 weekStart: 1, // Day of the week start. 0 (Sunday) to 6 (Saturday)
@@ -144,13 +153,17 @@ define( [ "lib/ie/ie",
                 forceParse: 1
             },
             init: function () {
-                $( '.js--datepicker-container').datetimepicker( this.options ).on( "changeDate", function () {
+                this.wrap( $( this.hookClass ) );
+                return this;
+            },
+            wrap: function ( $target ) {
+                $target.datetimepicker( this.options ).on( "changeDate", function () {
                     $( this ).find( ".js--datepicker-input" ).parsley().validate(); // 再次validate
                 } );
                 return this;
             },
             remove: function ( $datepicker ) {
-                $datepicker.datetimepicker('remove');
+                $datepicker.datetimepicker( 'remove' );
                 return this;
             },
             clearAll: function () {
@@ -164,7 +177,7 @@ define( [ "lib/ie/ie",
             init: function init() {
                 this.render().bind();
             },
-            render: function render () {
+            render: function render() {
                 var $freezeMenus,
                     docTop, // menu的 文档top
                     docLeft
@@ -211,104 +224,165 @@ define( [ "lib/ie/ie",
             }
         };
 
-        main = {
-            $forms: null,
-            //isIE8: (navigator.appName == "Microsoft Internet Explorer" && navigator.appVersion.match(/8./i) == "8."),
-            init: function ( options ) {
-                extend( this, options )
-
-                DropdownMenu.init();
-
-                Form.init( this.$forms );
-
-                Uploadify.init();
-
-                Switch.init();
-
-                DatetimePicker.init();
-
-                Sidebar.init();
-
+        Panel = {
+            $self: null,
+            $submit: null,
+            $edit: null,
+            init: function () {
+                $.each( [ Form, DropdownMenu, Uploadify, Switch, DatetimePicker, Sidebar ], function () {
+                    this.init();
+                } );
                 this.render().bind();
-                return this;
+            },
+            wrap: function ( $panel ) {
+                $.each( [ Form, DropdownMenu, Uploadify, Switch, DatetimePicker ], function () {
+                    this.wrap( $panel.find( this.hookClass ) );
+                } );
             },
             render: function () {
-
+                this.$self = $( ".js--panel" );
+                this.$submit = $( ".js--form-submit" );
+                this.$edit = $( ".js--form-edit" );
                 return this;
             },
             bind: function () {
-                this._wrapPanelOpe();
-            },
-
-            _wrapPanelOpe: function () {
-                var _this = this;
-                $( ".js--edit" ).off( "click" ).on( "click", function () {
-                    var $edit = $( this );
-                    var $panel = $edit.parents( ".panel[id]" );
-                    var $submit = $panel.find( ".js--submit" );
-                    $edit.addClass( "hidden" );
-                    $submit.removeClass( "hidden" );
-
-                    var curWwwPath = window.document.location.href;
-                    var lastSlashPos = curWwwPath.lastIndexOf( "/" );
-                    var curPath = curWwwPath.substring( 0, lastSlashPos + 1 );
-                    require( [ "text!" + curPath + "tpl/company_edit.tpl", "jquery", "utils/doT" ], function ( tpl, $, doT ) {
-                        $( "#panel-body-company" ).html( tpl );
-                        _main.init( { $forms: $( "form.parsley" ) } );
-                    } );
-
-                } );
-                $( ".js--submit" ).off( "click" ).on( "click", function () {
-                    var $submit = $( this );
-                    var $panel = $submit.parents( ".panel[id]" );
-                    var $edit = $panel.find( ".js--edit" );
-                    var $form = $panel.find( "form.parsley" );
-                    var isValid;
-
+                var _this = this,
+                    $panel,
+                    $form,
+                    isValid
+                    ;
+                this.$submit.on( "click", function submitClickHandler() {
+                    $panel = $( this ).parents( ".js--panel" );
+                    $form = $panel.find( ".js--form" );
                     isValid = $form.parsley().validate();
                     if ( !isValid ) {
                         return;
                     }
+                    _this.showWaiting( $panel );
+                    _this.doSubmit( $form, function ( data ) {
+                        _this.removeWaiting( $panel );
+                        _this.toggleBtn( $panel );
+                        DatetimePicker.remove( $( ".js--datepicker-container" ) );
+                        swal( {
+                            title: " ",
+                            text: "保存成功!",
+                            type: "success",
+                            //showConfirmButton: true,
+                            confirmButtonText: "确定",
+                            timer: 1500
+                        } );
+                        _this.showDetail( $panel, data );
+                    } )
+                } );
 
-                    $edit.removeClass( "hidden" );
-                    $submit.addClass( "hidden" );
+                this.$edit.on( "click", function submitClickHandler() {
+                    $panel = $( this ).parents( ".js--panel" );
+                    $form = $panel.find( ".js--form" );
+                    _this.showWaiting( $panel );
+                    _this.doEdit( $form, function ( data ) {
+                        _this.removeWaiting( $panel );
+                        _this.toggleBtn( $panel );
+                        _this.showEdit( $panel, data );
+                    } )
+                } );
 
-                    //$form.submit();
+                return this;
+            },
+            showWaiting: function ( $panel ) {
+                $panel.append( '<div class="panel-overlay"></div>' );
+                $panel.append( '<div class="sk-circle"> <!--[if lt IE 9]><div style="color:#fff">waiting</div><![endif]--><div class="sk-circle1 sk-child"></div> <div class="sk-circle2 sk-child"></div> <div class="sk-circle3 sk-child"></div> <div class="sk-circle4 sk-child"></div> <div class="sk-circle5 sk-child"></div> <div class="sk-circle6 sk-child"></div> <div class="sk-circle7 sk-child"></div> <div class="sk-circle8 sk-child"></div> <div class="sk-circle9 sk-child"></div> <div class="sk-circle10 sk-child"></div> <div class="sk-circle11 sk-child"></div> <div class="sk-circle12 sk-child"></div> </div>' );
+                return this;
+            },
+            removeWaiting: function ( $panel ) {
+                $panel.find( ".panel-overlay , .sk-circle" ).remove();
+                return this;
+            },
+            toggleBtn: function ( $panel ) {
+                $panel.find( ".js--form-edit" ).toggleClass( "hidden" );
+                $panel.find( ".js--form-submit" ).toggleClass( "hidden" );
+                return this;
+            },
+            doSubmit: function ( $form, callback ) {
+                // Ajax
+                var data = { // all data
+                    //gsmc: "北大高科gsmc",
+                    //gsxz: "北大高科gsxz",
+                    //glrs: "北大高科glrs",
+                    //clsj: "北大高科clsj",
+                    //jyfw: "北大高科jyfw",
+                    //qygm: "北大高科qygm"
+                };
+                var queryString = $form.serialize();
+                $.each( queryString.split( "&" ), function () {
+                    var pair = this.split( "=" );
+                    var key = pair[ 0 ];
+                    var value = pair[ 1 ] || "";
+                    if ( data[ key ] ) {
+                        data[ key ] += "," + value;
+                    } else {
+                        data[ key ] = value;
+                    }
+                } );
+                //console.info(queryString,data);
+                setTimeout( function () {
+                    callback( data );
+                }, 2000 )
+            },
+            doEdit: function doEdit( $form, callback ) {
+                var data = {
+                    gsmc: "北大高科",
+                    gsxz: "03",
+                    dic_gsxz: {
+                        "01": "国有企业",
+                        "02": "集体企业",
+                        "03": "联营企业",
+                        "04": "股份合作制企业",
+                        "05": "私营企业",
+                        "06": "个体户",
+                        "07": "合伙企业",
+                        "08": "有限责任公司",
+                        "09": "股份有限公司"
+                    },
+                    glrs: "20",
+                    clsj: "2012-12-12",
+                    //jyfw: "北大高科jyfw",
+                    //qygm: "北大高科qygm"
+                };
+                setTimeout( function () {
+                    callback( data );
+                }, 2000 )
+            },
+            showEdit: function showEdit( $panel, data ) {
+                var _this = this;
+                this._getTemplate( $panel.attr( "data-template" ), "_edit", function ( template ) {
+                    $panel.find( ".panel-body" ).html( doT.template( template )( data ) );
+                    _this.wrap( $panel );
+                } );
+            },
+            showDetail: function showDetail( $panel, data ) {
+                // data
 
-                    var curWwwPath = window.document.location.href;
-                    var lastSlashPos = curWwwPath.lastIndexOf( "/" );
-                    var curPath = curWwwPath.substring( 0, lastSlashPos + 1 );
-                    require( [ "text!" + curPath + "tpl/company_detail.tpl", "jquery", "utils/doT" ], function ( tpl, $, doT ) {
-                        var data = {
-                            gsmc: "北大高科",
-                            gsxz: "北大高科2",
-                            glrs: "北大高科3",
-                            clsj: "北大高科4",
-                            jyfw: "北大高科5",
-                            qygm: "北大高科6"
-                        };
-                        $( "#panel-body-company" ).html( doT.template( tpl )( data ) );
-                        _main.init( { $forms: $( "form.parsley" ) } );
-                    } );
-                    /*swal({
-                     title: " ",
-                     text: "保存成功!",
-                     type: "success",
-                     showConfirmButton: true,
-                     confirmButtonText: "确定",
-                     timer: 1500
-                     });*/
-                    _this._panelWaiting( $( this ).parents( ".panel" ) );
+                // template
+                this._getTemplate( $panel.attr( "data-template" ), "_detail", function ( template ) {
+                    $panel.find( ".panel-body" ).html( doT.template( template )( data ) );
+                } );
+            },
+            _getTemplate: function ( templateName, templateType, callback ) {
+                var curWwwPath = window.document.location.href;
+                var lastSlashPos = curWwwPath.lastIndexOf( "/" );
+                var curPath = curWwwPath.substring( 0, lastSlashPos + 1 );
+                require( [ "text!" + curPath + "tpl/" + templateName + templateType + ".tpl" ], function ( template ) {
+                    callback( template );
                 } );
             }
         };
 
 
         $( function () {
-            main.init( { $forms: $( "form.parsley" ) } );
+            Panel.init();
         } );
 
         window._main = main;
-        
+
         return main;
     } );

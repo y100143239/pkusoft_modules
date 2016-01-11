@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dot Example</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <script src="../js/libs/doT.js"></script>
+    <script src="../js/libs/jquery/jquery-1.7.2.min.js"></script>
+</head>
+<body>
+
+<div id="header"><h1>header</h1></div>
+
+<!-- holders where populated templates will be inserted -->
+<div id="simpleDataHolder"></div>
+<div id="simpleArrayHolder"></div>
+<div id="dataArrayHolder"></div>
+
+<br />
+<div id="simpleArrayLoopHolder"></div>
+
+
+
+
+
+<script id="simpleTemplate" type="text/x-dot-template">
+    {{#def.header}}
+    {{#def.header}}
+
+    <!-- creates and assigns custom header if it is not set -->
+    {{##def.customHeader : <div><h1>custom header {{=it.firstName}}</h1></div> #}}
+
+    {{#def.customHeader}}
+    {{#def.customHeader}}
+
+    {{#def.loadfile('/snippet.txt')}}<br />
+    {{#def['file.txt'] || (def['file.txt'] = def.loadfile('file.txt'))}}
+    {{#def['file.txt']}}
+
+    <!-- setting index value -->
+    {{##def.index = 0#}}
+    {{ if ({{#def.index == 1}}) { }}
+    <br />index is set to 1
+    {{ }else{ }}
+    <br />index is set to unknown value
+    {{ } }}
+
+    <!-- defining function -->
+    {{##def.someFunction = function(){
+    return "<br />text from someFunction";
+    }
+    #}}
+
+    <!-- calling function -->
+    {{#def.someFunction()}}
+
+    <div>{{=it.firstName}}<div>
+        <div>{{=it.lastName || it.zip || "Last name is not set"}}</div>
+
+        <!-- ENCODING -->
+        <div>{{!it.url}}</div>
+
+
+</script>
+
+<script id="simpleArrayTemplate" type="text/x-dot-template">
+
+    <!-- printing only one item from array -->
+    <div>{{=it[0]}}<div>
+
+        <!-- loop through array -->
+        <div>
+            {{~it :value:index}}
+            <span>{{=value}} </span>
+            {{~}}
+        </div>
+</script>
+
+<script id="dataArrayTemplate" type="text/x-dot-template">
+
+    <!-- printing only first name from first object in array -->
+    <div>{{=it[0].firstName}}<div>
+
+        <!-- loop through objects in array -->
+        <div>
+            {{~it :value:index}}
+            <span>{{=value.firstName}} </span>
+            {{~}}
+        </div>
+
+        <!-- EVALUATION -->
+        <!-- print array index 0, 1, 2, 3 -->
+        {{ for(var prop in it) { }}
+        <div>{{=prop}}</div>
+        {{ } }}
+
+        <!-- print objects name : value pair that is at index 1 position in array -->
+        {{ for(var prop in it[1]) { }}
+        <span>{{=prop}} : {{=it[1][prop]}} </span>
+        {{ } }}
+
+        <!-- loop over objects in array and prints their name : value pairs -->
+        {{ for(var index in it) { }}
+        <div>
+            {{ for(var item in it[index]) { }}
+            <span>{{=item}} : {{=it[index][item]}} </span>
+            {{ } }}
+        </div>
+        {{ } }}
+
+
+        <!-- CONDITIONAL !-->
+        <!-- if -->
+        <div>
+            {{? it[0].firstName }}
+            {{=it[0].firstName }}
+            {{?}}
+        </div>
+
+        <!-- if / else if / else -->
+        <div>
+            <!-- if -->
+            {{? it[0].lastName }}
+            <span>First name is set</span>
+
+            <!-- else if -->
+            {{?? it[0].zip}}
+            <span>You don't have a last name</span>
+            <!-- else if -->
+            {{?? it[0].firstName}}
+            <span>Your firstName is: {{=it[0].firstName}}</span>
+
+            <!-- else if end -->
+            {{??}}
+
+            <!-- else -->
+            <span>You didn't set your name</span>
+
+            <!-- if end -->
+            {{?}}
+        </div>
+
+
+
+</script>
+
+<script id="simpleArrayLoopTemplate" type="text/x-dot-template">
+    {{~it.array :value:index}}
+    <span>{{=value}} </span>
+    {{~}}
+</script>
+
+
+
+
+<script>
+
+    //          doT.templateSettings = {
+    //              evaluate:    /\{\{([\s\S]+?)\}\}/g,
+    //              interpolate: /\{\{=([\s\S]+?)\}\}/g,
+    //              encode:      /\{\{!([\s\S]+?)\}\}/g,
+    //              use:         /\{\{#([\s\S]+?)\}\}/g,
+    //              define:      /\{\{##\s*([\w\.$]+)\s*(\:|=)([\s\S]+?)#\}\}/g,
+    //              conditional: /\{\{\?(\?)?\s*([\s\S]*?)\s*\}\}/g,
+    //              iterate:     /\{\{~\s*(?:\}\}|([\s\S]+?)\s*\:\s*([\w$]+)\s*(?:\:\s*([\w$]+))?\s*\}\})/g,
+    //              varname: 'it',
+    //              strip: true,
+    //              append: true,
+    //              selfcontained: false
+    //            };
+
+
+    // setting data for testing
+    var simpleObject = {firstName : "Stasha", url: "<a href='http://www.stasha.info'>http://www.stasha.info</a>"};
+    var simpleArray = ['one', 'two', 'three', 'four'];
+    var dataArray = [{firstName: "First Name 0"},{firstName: "First Name 1", lastName : "Last Name"},{firstName: "First Name 2"},{firstName: "First Name 3"}];
+    var objectArray = {array : ['one', 'two', 'three', 'four']};
+
+    var def = {
+        header : $("#header").html(),
+        //customHeader: "<h1>TEST CUSTOM HEADER</h1>"
+        loadfile: function(url){
+            return "function that returns file content from url: " + url;
+        }
+    };
+
+    // getting/creating empty templates from "scriptlets" like
+    // <script id="simpleTemplate" type="text/x-dot-template"> or
+    // from html tags like <div id="simpleTemplate">
+    var simpleTemplate = $("#simpleTemplate").html();
+    var simpleArrayTemplate = $("#simpleArrayTemplate").html();
+    var dataArrayTemplate = $("#dataArrayTemplate").html();
+    var simpleArrayLoopTemplate = $("#simpleArrayLoopTemplate").html();
+
+    // filling templates with data
+    var populatedSimpleTemplate = doT.template(simpleTemplate, undefined, def)(simpleObject);
+    var populatedSimpleArrayTemplate = doT.template(simpleArrayTemplate)(simpleArray);
+    var populatedDataArrayTemplate = doT.template(dataArrayTemplate)(dataArray);
+    var populatedSimpleArrayLoopTemplate = doT.template(simpleArrayLoopTemplate)(objectArray);
+
+    // rendering templates with data
+    $("#simpleDataHolder").html(populatedSimpleTemplate);
+    $("#simpleArrayHolder").html(populatedSimpleArrayTemplate);
+    $("#dataArrayHolder").html(populatedDataArrayTemplate);
+    $("#simpleArrayLoopHolder").html(populatedSimpleArrayLoopTemplate);
+</script>
+
+</body>
+</html>
