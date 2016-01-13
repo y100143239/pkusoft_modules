@@ -5,13 +5,18 @@ body {
   width: 24px;
   border-radius: 100%; }
 
-.thumbnail > a {
-  display: block;
-  height: 66%;
-  overflow: hidden; }
-.thumbnail:hover {
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); }
-.thumbnail .caption {
-  background: #fff; }
+.thumbnail {
+  height: 300px; }
+  .thumbnail > a {
+    display: block;
+    height: 200px;
+    overflow: hidden; }
+    .thumbnail > a img {
+      height: 100%; }
+  .thumbnail:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); }
+  .thumbnail .caption {
+    height: 90px;
+    background: #fff; }
 
 /*# sourceMappingURL=style.css.map */

@@ -8,17 +8,20 @@ body {
     }
 }
 .thumbnail {
+    height: 300px;
     & > a {
         display: block;
-        height: 66%;
+        height: 200px;
         overflow: hidden;
         img {
+            height: 100%;
         }
     }
     &:hover {
         box-shadow: 0 0 10px rgba(0,0,0,.2);
     }
     .caption {
+        height: 90px;
         background: #fff;
     }
 }
