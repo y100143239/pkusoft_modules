@@ -11,6 +11,20 @@ a {
   height: 0;
   font-size: 0; }
 
+.wait-overlay {
+  display: block;
+  background-color: rgba(0, 0, 0, 0.4);
+  filter: progid:DXImageTransform.Microsoft.gradient(enabled='true', startColorstr='#66000000', endColorstr='#66000000');
+  position: absolute;
+  z-index: 10;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url(../images/loading.gif);
+  background-position: center center;
+  background-repeat: no-repeat; }
+
 .wd-container {
   margin: 10px auto;
   width: 800px;
@@ -20,7 +34,8 @@ a {
   background-color: #e0e2e7;
   font-family: "Microsoft Yahei", "宋体",sans-serif;
   color: #333333;
-  font-size: 14px; }
+  font-size: 14px;
+  line-height: 1.5; }
   .wd-container .wd-wrap {
     height: 100%;
     background: url(../images/platform_bg.png) repeat-x #ffffff; }
@@ -277,7 +292,8 @@ a {
             width: 50px; }
       .wd-container .wd-qjsj .qjsj-map .map-current {
         font-size: 16px;
-        margin-top: 2em; }
+        margin-top: 2em;
+        text-align: right; }
         .wd-container .wd-qjsj .qjsj-map .map-current .label {
           color: #999; }
         .wd-container .wd-qjsj .qjsj-map .map-current .cur-city {
@@ -344,23 +360,24 @@ a {
     .wd-container .wd-ywjg .tabs-business-total .tabs-body {
       padding-top: 4px;
       height: 190px; }
-    .wd-container .wd-ywjg .tabs-business-total .chart {
+    .chart {
+      position: relative;
       width: 740px;
       height: 80%;
       padding-top: 18px;
       font-size: 12px;
-      margin: 0 auto;
+      margin-left: 2em;
       border-left: solid 1px #e6e6e6;
       border-bottom: solid 1px #e6e6e6; }
-      .wd-container .wd-ywjg .tabs-business-total .chart .chart-item {
+      .chart .chart-item {
         float: left;
         height: 100%;
         width: 8%;
         text-align: center; }
-        .wd-container .wd-ywjg .tabs-business-total .chart .chart-item .total {
+        .chart .chart-item .total {
           position: relative;
           height: 100%; }
-          .wd-container .wd-ywjg .tabs-business-total .chart .chart-item .total .percent {
+          .chart .chart-item .total .percent {
             position: absolute;
             left: 50%;
             bottom: 0;
@@ -369,13 +386,21 @@ a {
             background-color: #ccdde7;
             border: solid 1px #97bbcd;
             overflow: visible; }
-            .wd-container .wd-ywjg .tabs-business-total .chart .chart-item .total .percent .num {
+            .chart .chart-item .total .percent .num {
               line-height: 1;
               display: block;
               margin-top: -1.2em;
               *zoom: 1; }
-            .wd-container .wd-ywjg .tabs-business-total .chart .chart-item .total .percent:hover, .wd-container .wd-ywjg .tabs-business-total .chart .chart-item .total .percent.active {
+            .chart .chart-item .total .percent:hover {
               background-color: #91DBF0; }
+            .chart .chart-item .total .percent.active {
+              background-color: #22c2f0; }
+      .chart .chart-title {
+        position: absolute;
+        top: 0;
+        left: -1.4em;
+        width: 1em;
+        color: #337AB7; }
     .wd-container .wd-ywjg .tabs-business-view {
       margin-top: 5px; }
       .wd-container .wd-ywjg .tabs-business-view .tabs-body {
@@ -456,35 +481,37 @@ a {
               background-position: -48px 0; }
             .wd-container .wd-ywjg .tabs-business-view .table-grid .tbody-operation .pagination .pagination-btn.refresh {
               background-position: -64px 0; }
-    .wd-container .wd-ywjg .tabs {
+    .tabs {
       width: 778px;
       margin-left: auto;
       margin-right: auto; }
-      .wd-container .wd-ywjg .tabs .tabs-nav {
+      .tabs .tabs-nav {
         border-bottom: solid 1px #dddddd; }
-        .wd-container .wd-ywjg .tabs .tabs-nav .nav-item {
+        .tabs .tabs-nav .nav-item {
           float: left;
+          height: 20px;
+          line-height: 20px;
           padding: 10px 12px;
           border: solid 1px transparent;
-          margin-bottom: -1px; }
-          .wd-container .wd-ywjg .tabs .tabs-nav .nav-item select {
-            display: none;
+          margin-bottom: -2px; }
+          .tabs .tabs-nav .nav-item select {
+            visibility: hidden;
             margin-left: 1em;
             vertical-align: middle; }
-          .wd-container .wd-ywjg .tabs .tabs-nav .nav-item a {
+          .tabs .tabs-nav .nav-item a {
             color: #337ab7; }
-          .wd-container .wd-ywjg .tabs .tabs-nav .nav-item:hover {
+          .tabs .tabs-nav .nav-item:hover {
             background-color: #eee; }
-          .wd-container .wd-ywjg .tabs .tabs-nav .nav-item.active {
+          .tabs .tabs-nav .nav-item.active {
             background-color: #fff;
             border-color: #dddddd;
             border-bottom-color: #fff; }
-            .wd-container .wd-ywjg .tabs .tabs-nav .nav-item.active a {
+            .tabs .tabs-nav .nav-item.active a {
               color: #555555;
               cursor: default; }
-            .wd-container .wd-ywjg .tabs .tabs-nav .nav-item.active select {
-              display: inline-block; }
-      .wd-container .wd-ywjg .tabs .tabs-body {
+            .tabs .tabs-nav .nav-item.active select {
+              visibility: visible; }
+      .tabs .tabs-body {
         background-color: #fff;
         border: solid 1px #dddddd;
         border-top-width: 0; }
