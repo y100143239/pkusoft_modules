@@ -6,7 +6,8 @@
     <link rel="stylesheet" href="./css/style.css"/>
     <script src="../../../dev/modules/jquery/jquery-1.9.0.js"></script>
     <script src="../../../dev/modules/utils/doT.js"></script>
-    <script src="./js/main.js"></script>
+    <script src="./js/main.js?v=0.2" charset="utf-8"></script>
+    <script src="./js/external.js?v=0.2" charset="utf-8"></script>
 </head>
 <body>
 
@@ -14,8 +15,12 @@
         <div class="wd-wrap">
             <div class="wd-main">
                 <!-- 区级数据 -->
-                <div class="wd-qjsj" id="qjsj" style="display: none;">
-                    <div class="qjsj-map">
+                <div class="wd-qjsj" id="qjsj" style="display: block;">
+                    <div class="qjsj-map"
+                         data-url="http://www.baidu.com"
+                         data-success-callback="mapSuccessCallback"
+                         data-error-callback="mapErrorCallback" >
+
                         <div class="map-hot">
                             <div class="map-hot-item" id="map-00" data-city-id="00"><span class="tip">内蒙</span></div>
                             <div class="map-hot-item active" id="map-01" data-city-id="01"><span class="tip">阿拉善</span></div>
@@ -69,7 +74,7 @@
                 <!-- /区级数据 -->
 
                 <!-- 业务监管 -->
-                <div class="wd-ywjg" id="ywjg" style="display: block;">
+                <div class="wd-ywjg" id="ywjg" style="display: none;">
                     <div class="time-menu">
                         <a href="#" class="time-menu-item active" data-value="day">本日数据</a>
                         <a href="#" class="time-menu-item" data-value="week">本周数据</a>
@@ -237,14 +242,226 @@
                 </div>
                 <!-- /业务监管 -->
 
-                
+                <!-- 异地办理 -->
+                <div class="wd-ydbl" id="ydbl" style="display: none">
+                    <div class="tabs">
+                        <div class="tabs-nav">
+                            <div class="nav-item active" data-value="00"><a href="#">异地证件受理</a></div>
+                            <div class="nav-item" data-value=""><a href="#">未完成的异地证件受理</a></div>
+                            <div class="nav-item" data-value=""><a href="#">受理变更</a></div>
+                            <div class="nav-item" data-value=""><a href="#">撤销办理</a></div>
+                            <div class="nav-item" data-value=""><a href="#">重新受理</a></div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="tabs-body">
+                            <div class="search">
+                                <form action="" class="form">
+                                    <div class="form-group">
+                                        <label class="form-label" for="">姓名：</label>
+                                        <input type="text" class="form-control" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label" for="">公民身份证号码：</label>
+                                        <input type="text" class="form-control"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>&nbsp;</label><input type="button" class="form-btn" value="搜索"/>
+                                    </div>
+                                    <div class="clear"></div>
+                                </form>
+                            </div>
+                            <table class="table-grid">
+                                <col width="32"/> <!--#-->
+                                <col width="80"/> <!--类型-->
+                                <col width="80"/> <!--申请人-->
+                                <col width="180"/> <!--公民身份证号码-->
+                                <col width="100"/> <!--受理日期-->
+                                <col width="100"/> <!--证件状态-->
+                                <col width="100"/> <!--所属盟市-->
+                                <tbody class="tbody-heading">
+                                <tr>
+                                    <th>#</th>
+                                    <th>类型</th>
+                                    <th>申请人</th>
+                                    <th>公民身份证号码</th>
+                                    <th>受理日期</th>
+                                    <th>证件状态</th>
+                                    <th>所属盟市</th>
+                                </tr>
+                                </tbody>
+                                <tbody class="tbody-main">
+                                <tr> <th>1</th> <td><p>区内异地</p></td> <td><p>张三</p></td> <td><p>123456789012345678</p></td> <td><p>2016-01-15</p></td> <td><p>受理待审核</p></td> <td><p>呼和浩特市</p></td> </tr> </tbody>
+                                <tr> <th>2</th> <td><p>区内异地</p></td> <td><p>张三</p></td> <td><p>123456789012345678</p></td> <td><p>2016-01-15</p></td> <td><p>受理待审核</p></td> <td><p>呼和浩特市</p></td> </tr> </tbody>
+                                <tr> <th>3</th> <td><p>区内异地</p></td> <td><p>张三</p></td> <td><p>123456789012345678</p></td> <td><p>2016-01-15</p></td> <td><p>受理待审核</p></td> <td><p>呼和浩特市</p></td> </tr> </tbody>
+                                <tr> <th>4</th> <td><p>区内异地</p></td> <td><p>张三</p></td> <td><p>123456789012345678</p></td> <td><p>2016-01-15</p></td> <td><p>受理待审核</p></td> <td><p>呼和浩特市</p></td> </tr> </tbody>
+                                <tr> <th>5</th> <td><p>区内异地</p></td> <td><p>张三</p></td> <td><p>123456789012345678</p></td> <td><p>2016-01-15</p></td> <td><p>受理待审核</p></td> <td><p>呼和浩特市</p></td> </tr> </tbody>
+                                <tr> <th>6</th> <td><p>区内异地</p></td> <td><p>张三</p></td> <td><p>123456789012345678</p></td> <td><p>2016-01-15</p></td> <td><p>受理待审核</p></td> <td><p>呼和浩特市</p></td> </tr> </tbody>
+                                <tr> <th>7</th> <td><p>区内异地</p></td> <td><p>张三</p></td> <td><p>123456789012345678</p></td> <td><p>2016-01-15</p></td> <td><p>受理待审核</p></td> <td><p>呼和浩特市</p></td> </tr> </tbody>
+                                <tr> <th>8</th> <td><p>区内异地</p></td> <td><p>张三</p></td> <td><p>123456789012345678</p></td> <td><p>2016-01-15</p></td> <td><p>受理待审核</p></td> <td><p>呼和浩特市</p></td> </tr> </tbody>
+                                <tr> <th>9</th> <td><p>区内异地</p></td> <td><p>张三</p></td> <td><p>123456789012345678</p></td> <td><p>2016-01-15</p></td> <td><p>受理待审核</p></td> <td><p>呼和浩特市</p></td> </tr> </tbody>
+                                <tr> <th>10</th> <td><p>区内异地</p></td> <td><p>张三</p></td> <td><p>123456789012345678</p></td> <td><p>2016-01-15</p></td> <td><p>受理待审核</p></td> <td><p>呼和浩特市</p></td> </tr> </tbody>
+                                <tbody class="tbody-operation">
+                                <tr>
+                                    <td colspan="7">
+                                        <div class="pagination">
+                                            <a href="#" class="pagination-btn page-first"></a>
+                                            <a href="#" class="pagination-btn page-pre"></a>
+                                            <span class="pagination-divider"></span>
+                                            <span class="pagination-num"><input type="text" value="1"/> / <span class="total">20</span></span>
+                                            <span class="pagination-divider"></span>
+                                            <a href="#" class="pagination-btn page-next"></a>
+                                            <a href="#" class="pagination-btn page-last"></a>
+                                            <span class="pagination-divider"></span>
+                                            <a href="#" class="pagination-btn refresh"></a>
+                                            <span class="pagination-divider"></span>
+                                            <span class="pagination-total">总数：80</span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!-- /异地办理 -->
+
+                <!-- 数据质量 -->
+                <div class="wd-sjzl" id="sjzl" style="display: none;">
+                    <!-- 数据质量问题 -->
+                    <div class="tabs tabs-quality-problems">
+                        <div class="tabs-nav">
+                            <div class="nav-item active" data-value="00"><a href="#">全部数据质量问题</a></div>
+                            <div class="nav-item" data-value=""><a href="#">分类数据质量问题</a>
+                                <select name="" >
+                                    <option value="01">公民身份号码为空</option>
+                                    <option value="02">单项数据质量问题2</option>
+                                    <option value="03">单项数据质量问题3</option>
+                                </select>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="tabs-body">
+                            <div class="chart">
+                                <div class="chart-item js--hhht">
+                                    <div class="total"> <div class="percent" style="height: 2%;"><span class="num">12345</span></div> </div>
+                                    <div class="title">呼和浩特</div>
+                                </div>
+                                <div class="chart-item js--bt">
+                                    <div class="total"> <div class="percent" style="height: 12%;"><span class="num">12345</span></div> </div>
+                                    <div class="title">包头</div>
+                                </div>
+                                <div class="chart-item js--wh">
+                                    <div class="total"> <div class="percent" style="height: 22%;"><span class="num">12345</span></div> </div>
+                                    <div class="title">乌海</div>
+                                </div>
+                                <div class="chart-item js--cf">
+                                    <div class="total"> <div class="percent" style="height: 32%;"><span class="num">12345</span></div> </div>
+                                    <div class="title">赤峰</div>
+                                </div>
+                                <div class="chart-item js--tl">
+                                    <div class="total"> <div class="percent" style="height: 42%;"><span class="num">12345</span></div> </div>
+                                    <div class="title">通辽</div>
+                                </div>
+                                <div class="chart-item js--eeds">
+                                    <div class="total"> <div class="percent" style="height: 52%;"><span class="num">12345</span></div> </div>
+                                    <div class="title">鄂尔多斯</div>
+                                </div>
+                                <div class="chart-item js--hlbe">
+                                    <div class="total"> <div class="percent" style="height: 62%;"><span class="num">12345</span></div> </div>
+                                    <div class="title">呼伦贝尔</div>
+                                </div>
+                                <div class="chart-item js--wlcb">
+                                    <div class="total"> <div class="percent" style="height: 72%;"><span class="num">12345</span></div> </div>
+                                    <div class="title">乌兰察布</div>
+                                </div>
+                                <div class="chart-item js--byne">
+                                    <div class="total"> <div class="percent" style="height: 82%;"><span class="num">12345</span></div> </div>
+                                    <div class="title">巴彦淖尔</div>
+                                </div>
+                                <div class="chart-item js--xa">
+                                    <div class="total"> <div class="percent" style="height: 92%;"><span class="num">12345</span></div> </div>
+                                    <div class="title">兴安</div>
+                                </div>
+                                <div class="chart-item js--als">
+                                    <div class="total"> <div class="percent" style="height: 88%;"><span class="num">12345</span></div> </div>
+                                    <div class="title">阿拉善</div>
+                                </div>
+                                <div class="chart-item js--xlgl">
+                                    <div class="total"> <div class="percent" style="height: 100%;"><span class="num">12345</span></div> </div>
+                                    <div class="title">锡林郭勒</div>
+                                </div>
+                                <div class="clear"></div>
+                                <div class="chart-title">全部数据质量问题</div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /数据质量问题 -->
+
+                    <!-- 重证号 -->
+                    <div class="tabs tabs-duplicate-code">
+                        <div class="tabs-nav">
+                            <div class="nav-item active" data-value="00"><a href="#">跨盟市重证号</a></div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="tabs-body">
+                            <table class="table-grid">
+                                <col width="36"/> <!--#-->
+                                <col width="160"/> <!--重号号码-->
+                                <col width="80"/> <!--姓名-->
+                                <col width="36"/> <!--性别-->
+                                <col width="100"/> <!--出生日期-->
+                                <col width=""/> <!--户籍所在地-->
+                                <col width="120"/> <!--联系电话-->
+                                <tbody class="tbody-heading">
+                                <tr>
+                                    <th>#</th>
+                                    <th>重号号码</th>
+                                    <th>姓名</th>
+                                    <th>性别</th>
+                                    <th>出生日期</th>
+                                    <th>户籍所在地</th>
+                                    <th>联系电话</th>
+                                </tr>
+                                </tbody>
+                                <tbody class="tbody-main">
+                                <tr> <th>1</th> <td><p>123456789012345678</p></td> <td><p>张三</p></td> <td><p>男</p></td> <td><p>1999-07-01</p></td> <td><p>呼和浩特市新城区海东路1号</p></td> <td><p>18781222788</p></td> </tr>
+                                <tr> <th>2</th> <td><p></p></td> <td><p>张三</p></td> <td><p>男</p></td> <td><p>1999-07-01</p></td> <td><p>呼和浩特市新城区海东路1号</p></td> <td><p>18781222788</p></td> </tr>
+                                <tr> <th>3</th> <td><p>123456789012345678</p></td> <td><p>张三</p></td> <td><p>男</p></td> <td><p>1999-07-01</p></td> <td><p>呼和浩特市新城区海东路1号</p></td> <td><p>18781222788</p></td> </tr>
+                                <tr> <th>4</th> <td><p></p></td> <td><p>张三</p></td> <td><p>男</p></td> <td><p>1999-07-01</p></td> <td><p>呼和浩特市新城区海东路1号</p></td> <td><p>18781222788</p></td> </tr>
+                                </tbody>
+                                <tbody class="tbody-operation">
+                                <tr>
+                                    <td colspan="7">
+                                        <div class="pagination">
+                                            <a href="#" class="pagination-btn page-first"></a>
+                                            <a href="#" class="pagination-btn page-pre"></a>
+                                            <span class="pagination-divider"></span>
+                                            <span class="pagination-num"><input type="text" value="1"/> / <span class="total">20</span></span>
+                                            <span class="pagination-divider"></span>
+                                            <a href="#" class="pagination-btn page-next"></a>
+                                            <a href="#" class="pagination-btn page-last"></a>
+                                            <span class="pagination-divider"></span>
+                                            <a href="#" class="pagination-btn refresh"></a>
+                                            <span class="pagination-divider"></span>
+                                            <span class="pagination-total">总数：80</span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- /重证号 -->
+                </div>
+                <!-- /数据质量 -->
+
 
             </div>
             <div class="wd-bottom bottom-menu">
-                <div class="bottom-menu-item" data-id="qjsj" style="background-position: 18px 21px;">区级数据</div>
-                <div class="bottom-menu-item active" data-id="ywjg" style="background-position: -112px 21px;">业务监管</div>
-                <div class="bottom-menu-item" style="background-position: -244px 21px;">异地办理</div>
-                <div class="bottom-menu-item" style="background-position: -376px 21px;">数据质量</div>
+                <div class="bottom-menu-item active" data-id="qjsj" style="background-position: 18px 21px;">区级数据</div>
+                <div class="bottom-menu-item" data-id="ywjg" style="background-position: -112px 21px;">业务监管</div>
+                <div class="bottom-menu-item" data-id="ydbl" style="background-position: -244px 21px;">异地办理</div>
+                <div class="bottom-menu-item" data-id="sjzl" style="background-position: -376px 21px;">数据质量</div>
                 <div class="bottom-menu-item" style="background-position: -511px 21px;;">相片检测</div>
                 <div class="bottom-menu-item" style="background-position: -644px 21px;">数据服务</div>
             </div>

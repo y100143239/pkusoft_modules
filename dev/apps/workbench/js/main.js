@@ -49,7 +49,7 @@
     main = {
         $bottomMenu: null,
         init: function () {
-            qjsj.map.init();
+            qjsj.init();
             ywjg.init();
             this.render().bind();
         },
@@ -72,11 +72,32 @@
         }
     };
 
-    qjsj.map = {
+    // 区级数据
+    qjsj = {
         $container: null,
         $items: null,
+        isUpading: false,
+        requestSetting: {
+            $target: ".qjsj-map",
+            url: null,
+            successCallback: null,
+            errorCallback: null
+        },
+        _getRequestSetting: function _getRequestSetting() {
+            var requestSetting,
+                $target
+                ;
+            requestSetting = this.requestSetting;
+            $target = $( requestSetting.$target );
+            requestSetting.url = $target.attr("data-url");
+            requestSetting.successCallback = $target.attr("data-success-callback");
+            requestSetting.errorCallback = $target.attr("data-error-callback");
+            return this;
+        },
         init: function () {
+            this._getRequestSetting();
             this.render().bind();
+            this.update( this.$items.eq( 0 ) );
         },
         render: function () {
             this.$container = $( ".js--qjsj-data" );
@@ -87,11 +108,22 @@
             var _this = this;
             this.$items.on( "click", function () {
                 var $this = $( this );
-                // 1. 更改状态
-                _this._updateStatus( $this );
-                // 2. 更新数据
-                _this._updateData( $this.attr( "data-city-id" ) );
+                if ( _this.isUpading ) {
+                    Utils.wait.show( _this.$container );
+                    return;
+                }
+                _this.isUpading = true;
+
+                _this.update( $this );
             } );
+            return this;
+        },
+        update: function ($item) {
+            var _this = this;
+            // 1. 更改状态
+            _this._updateStatus( $item );
+            // 2. 更新数据
+            _this._updateData( $item.attr( "data-city-id" ) );
             return this;
         },
         _updateStatus: function _updateStatus( $target ) {
@@ -107,25 +139,44 @@
             var _this = this,
                 template,
                 data,
-                html
+                html,
+                requestSetting,
+                url,
+                successCallback,
+                errorCallback
                 ;
 
             template = Template.qjsj.template;
 
+            requestSetting = _this.requestSetting;
+            url = requestSetting.url;
+            successCallback = requestSetting.successCallback;
+            errorCallback = requestSetting.errorCallback;
+
             Utils.ajax( {
-                url: "",
+                url: url,
                 data: { "cityId": cityId },
                 success: function ( responseData ) {
+
+                    window[ successCallback ]( arguments );
+
                     html = doT.template( template )( responseData );
                     _this.$container.html( html );
+                    _this.isUpading = false;
+                    Utils.wait.hide( _this.$container );
                 },
                 error: function () { // 此处为测试数据
+
+                    //window[ errorCallback ]( arguments );
+
                     data = Template.qjsj.data;
-                    data[ 0 ].heading.cont = "3333_" + cityId;
-                    data[ 1 ].heading.cont = "3333_" + cityId;
-                    data[ 2 ].heading.cont = "3333_" + cityId;
+
+                    window[ errorCallback ]( data, cityId );
+
                     html = doT.template( template )( data );
                     _this.$container.html( html );
+                    _this.isUpading = false;
+                    Utils.wait.hide( _this.$container );
                 }
             } );
 
@@ -162,9 +213,9 @@
 
     // 业务监管-业务总量
     ywjg.totality = {
-        $container: ".tabs-business-total",
+        $container: "#ywjg .tabs-business-total",
         $navItems: ".nav-item",
-        $chart: ".chart",
+        $chart: "#ywjg .chart",
         $timeMenuItems: "#ywjg .time-menu-item",
         isUpading: false, // 是否在更新数据
         data: {
@@ -190,7 +241,7 @@
         },
         render: function render() {
             this.$container = $( this.$container );
-            this.$chart = $( this.$chart, this.$container );
+            this.$chart = $( this.$chart );
             this.$navItems = $( this.$navItems, this.$container );
             this.$timeMenuItems = $( this.$timeMenuItems );
             return this;
@@ -503,9 +554,6 @@
     $( function () {
 
         main.init();
-
-        // 区级数据
-        qjsj.map.$items[ 0 ].click();
 
     } );
 
