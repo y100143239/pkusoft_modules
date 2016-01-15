@@ -153,6 +153,7 @@
                 var $this = $( this );
                 $this.addClass( "active" ).siblings().removeClass( "active" );
                 ywjg.totality.update();
+                ywjg.view.update();
                 event.preventDefault();
             } );
             return this;
@@ -200,6 +201,10 @@
             $navItems.on( "click", function navItemClickHandler(event) {
                 var $this = $( this )
                     ;
+                // 判断是否为 active
+                if ( $this.hasClass( "active" ) ) {
+                    return;
+                }
                 // 0. 判断是否在更新数据
                 if ( _this.isUpading ) {
                     Utils.wait.show( _this.$container );
@@ -232,9 +237,11 @@
         update: function update() {
             var _this = this,
                 time,
+                timeText,
                 type,
                 title,
-                $activeNavItem
+                $activeNavItem,
+                $activeTimeMenuItem
                 ;
 
             // 0. 判断是否正在更新数据
@@ -245,7 +252,9 @@
             this.isUpading = true;
 
             $activeNavItem = _this.$navItems.filter( ".active" );
-            time = _this.$timeMenuItems.filter( ".active" ).attr( "data-value" );
+            $activeTimeMenuItem = _this.$timeMenuItems.filter( ".active" );
+            time = $activeTimeMenuItem.attr( "data-value" );
+            timeText = $activeTimeMenuItem.text().substring(0,2);
             type = $activeNavItem.attr( "data-value" );
             title = $activeNavItem.find( "select option:selected" ).text() || $activeNavItem.text();
 
@@ -254,7 +263,7 @@
                 { "time": time, "type": type },
                 function getDataSuccessHandler( responseData ) {
                     // 2. 更新到页面（获取数据成功）
-                    _this._render( responseData, title );
+                    _this._render( responseData, title + "|" + timeText  );
                 },
                 function getDataErrorHandler() { // 测试数据
                     var data = _this.data;
@@ -262,7 +271,7 @@
                         if ( prop === "maxNum" ) continue;
                         data[ prop ] = ( data[ "maxNum" ] * Math.random() ).toFixed( 0 );
                     }
-                    _this._render( data, title );
+                    _this._render( data, title + " |" + timeText );
                 }
             );
 
@@ -335,6 +344,10 @@
             $navItems.on( "click", function navItemClickHandler( event) {
                 var $this = $( this )
                     ;
+                // 判断是否为 active
+                if ( $this.hasClass( "active" ) ) {
+                    return;
+                }
                 // 0. 判断是否在更新数据
                 if ( _this.isUpading ) {
                     Utils.wait.show( _this.$container );

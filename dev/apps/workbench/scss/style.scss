@@ -293,10 +293,10 @@ a {
                                 *zoom:1
                             }
                             &:hover {
-                                background-color: #91DBF0;
+                                //background-color: #91DBF0;
                             }
                             &.active {
-                                background-color: #22c2f0;
+                                //background-color: #22c2f0;
                             }
                         }
                     }
@@ -309,7 +309,8 @@ a {
                     top: 0;
                     left: -1.4em;
                     width: 1em;
-                    color: #337AB7;
+                    color: #333;
+                    text-align: center;
                 }
             }
         }

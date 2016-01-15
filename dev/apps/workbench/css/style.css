@@ -391,16 +391,13 @@ a {
               display: block;
               margin-top: -1.2em;
               *zoom: 1; }
-            .chart .chart-item .total .percent:hover {
-              background-color: #91DBF0; }
-            .chart .chart-item .total .percent.active {
-              background-color: #22c2f0; }
       .chart .chart-title {
         position: absolute;
         top: 0;
         left: -1.4em;
         width: 1em;
-        color: #337AB7; }
+        color: #333;
+        text-align: center; }
     .wd-container .wd-ywjg .tabs-business-view {
       margin-top: 5px; }
       .wd-container .wd-ywjg .tabs-business-view .tabs-body {
