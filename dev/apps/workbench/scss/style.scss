@@ -293,10 +293,10 @@ a {
                                 *zoom:1
                             }
                             &:hover {
-                                background-color: #91DBF0;
+                                //background-color: #91DBF0;
                             }
                             &.active {
-                                background-color: #22c2f0;
+                                //background-color: #22c2f0;
                             }
                         }
                     }
@@ -309,7 +309,9 @@ a {
                     top: 0;
                     left: -1.4em;
                     width: 1em;
-                    color: #337AB7;
+                    color: #333;
+                    text-align: center;
+                    line-height: 1.2;
                 }
             }
         }
@@ -319,7 +321,7 @@ a {
             .tabs-body {
                 padding: 4px 0;
             }
-            .table-grid {
+            @at-root .table-grid {
                 border-collapse: collapse;
                 table-layout: fixed;
                 background-color: #fff;
@@ -329,7 +331,7 @@ a {
                 border: solid 1px #dddddd;
                 margin: 0 auto;
                 white-space: nowrap;
-                tr:first-child th {
+                .tbody-heading th {
                     border-bottom-style:  solid;
                 }
                 th, td {
@@ -379,6 +381,7 @@ a {
                                 padding: 1px;
                                 width: 2em;
                                 height: auto;
+                                text-align: center;
                             }
                             .total {
 
@@ -462,6 +465,71 @@ a {
                 background-color: #fff;
                 border: solid 1px #dddddd;
                 border-top-width: 0;
+            }
+        }
+    }
+
+    // 异地办理
+    .wd-ydbl {
+        padding-top: 16px;
+        .tabs-body {
+            padding: 1.2em 0 2em 0;;
+        }
+        .search {
+            margin: 0 0 1.2em 1em;
+            @at-root .form {
+                .form-group {
+                    float: left;
+                    margin-right: 1em;
+                }
+                .form-label {
+                    color: #666666;
+                }
+                .form-control {
+                    width: 172px;
+                    height: 24px;
+                    border: solid 1px #94b7e8;
+                    font-size: 14px;
+                    text-indent: 0.5em;
+                    line-height : 24px;
+                    vertical-align: middle;
+                }
+                .form-btn {
+                    border: none 0;
+                    padding: 0;
+                    width: 69px;
+                    height: 27px;
+                    cursor: pointer;
+                    font-size: 13px;
+                    font-family: "Microsoft Yahei", sans-serif;
+                    color: #555;
+                    text-indent: 1em;
+                    background: url(../images/form_btn.png) no-repeat 0 0;
+                    &:hover {
+                        background: url(../images/form_btn_hover_2.png) no-repeat 1px 1px;
+                        color: #fff;
+                    }
+                }
+            }
+        }
+    }
+
+    // 数据质量
+    .wd-sjzl {
+        .tabs-quality-problems {
+            padding-top: 6px;
+            .tabs-body {
+                padding-top: 4px;
+                height: 190px;
+            }
+        }
+        .tabs-duplicate-code {
+            margin-top: 6px;
+            .tabs-body {
+                padding: 5px 0 5px 0;
+            }
+            .table-grid {
+
             }
         }
     }
