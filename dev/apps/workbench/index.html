@@ -82,7 +82,10 @@
                         <div class="clear"></div>
                     </div>
                     <!-- 业务总量 -->
-                    <div class="tabs tabs-business-total">
+                    <div class="tabs tabs-business-total"
+                             data-url="http://www.baidu.com"
+                             data-success-callback="businessTotalSuccessCallback"
+                             data-error-callback="businessTotalErrorCallback" >
                         <div class="tabs-nav">
                             <div class="nav-item active" data-value="00"><a href="#">全部业务总数</a></div>
                             <div class="nav-item" data-value=""><a href="#">单项业务总数</a>
@@ -164,7 +167,10 @@
                     <!-- /业务总量 -->
 
                     <!-- 业务查看 -->
-                    <div class="tabs tabs-business-view">
+                    <div class="tabs tabs-business-view"
+                         data-url="http://www.baidu.com"
+                         data-success-callback="businessViewSuccessCallback"
+                         data-error-callback="businessViewErrorCallback">
                         <div class="tabs-nav">
                             <div class="nav-item active" data-value="00"><a href="#">全部业务查看</a></div>
                             <div class="nav-item" data-value=""><a href="#">单项业务查看</a>
@@ -220,17 +226,17 @@
                                     <tr>
                                         <td colspan="8">
                                             <div class="pagination">
-                                                <a href="#" class="pagination-btn page-first"></a>
-                                                <a href="#" class="pagination-btn page-pre"></a>
+                                                <a href="#" class="pagination-btn page-first" title="第1页"></a>
+                                                <a href="#" class="pagination-btn page-pre" title="前一页"></a>
                                                 <span class="pagination-divider"></span>
-                                                <span class="pagination-num"><input type="text" value="1"/> / <span class="total">20</span></span>
+                                                <span class="pagination-num">第 <input type="text" value="1" class="js--currentPage"/> 页</span>
                                                 <span class="pagination-divider"></span>
-                                                <a href="#" class="pagination-btn page-next"></a>
-                                                <a href="#" class="pagination-btn page-last"></a>
+                                                <a href="#" class="pagination-btn page-next" title="下一页"></a>
+                                                <!--<a href="#" class="pagination-btn page-last hidden"></a>-->
                                                 <span class="pagination-divider"></span>
-                                                <a href="#" class="pagination-btn refresh"></a>
+                                                <a href="#" class="pagination-btn refresh"  title="刷新"></a>
                                                 <span class="pagination-divider"></span>
-                                                <span class="pagination-total">总数：80</span>
+                                                <!--<span class="pagination-total hidden">总数：<span class="js&#45;&#45;totalRecords">80</span></span>-->
                                             </div>
                                         </td>
                                     </tr>

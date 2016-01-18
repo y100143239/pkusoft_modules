@@ -9,7 +9,8 @@
             type: "POST", //请求方式 ("POST" 或 "GET")
             url: "", // 请求的URL
             data: { name: "value" },
-            timeout: 3000, // 设置请求超时时间（毫秒）
+            timeout: 15000, // 设置请求超时时间（毫秒）
+            cache: false, // 不缓存此页面
             dataType: "json", // 预期服务器返回的数据类型。
             error: null, // 请求失败时调用此函数
             success: null, // 请求成功后的回调函数。参数：由服务器返回，并根据 dataType 参数进行处理后的数据
@@ -24,20 +25,20 @@
     };
     Utils.wait = {
         show: function show( $target ) {
-            if ( ! this._isAdded( $target ) ) {
+            if ( !this._isAdded( $target ) ) {
                 this._add( $target );
             }
-            $target.find(".wait-overlay" ).show();
+            $target.find( ".wait-overlay" ).show();
             return this;
         },
         hide: function hide( $target ) {
-            $target.find(".wait-overlay" ).hide();
+            $target.find( ".wait-overlay" ).hide();
             return this;
         },
         _add: function ( $target ) {
-            $target.css("position", function ( index, val ) {
+            $target.css( "position", function ( index, val ) {
                 return val === "static" ? "relative" : val;
-            });
+            } );
             $target.append( "<div class='wait-overlay'></div>" );
             return this;
         },
@@ -89,9 +90,9 @@
                 ;
             requestSetting = this.requestSetting;
             $target = $( requestSetting.$target );
-            requestSetting.url = $target.attr("data-url");
-            requestSetting.successCallback = $target.attr("data-success-callback");
-            requestSetting.errorCallback = $target.attr("data-error-callback");
+            requestSetting.url = $target.attr( "data-url" );
+            requestSetting.successCallback = $target.attr( "data-success-callback" );
+            requestSetting.errorCallback = $target.attr( "data-error-callback" );
             return this;
         },
         init: function () {
@@ -108,8 +109,8 @@
             var _this = this;
             this.$items.on( "click", function () {
                 var $this = $( this );
+                Utils.wait.show( _this.$container );
                 if ( _this.isUpading ) {
-                    Utils.wait.show( _this.$container );
                     return;
                 }
                 _this.isUpading = true;
@@ -118,7 +119,7 @@
             } );
             return this;
         },
-        update: function ($item) {
+        update: function ( $item ) {
             var _this = this;
             // 1. 更改状态
             _this._updateStatus( $item );
@@ -158,7 +159,7 @@
                 data: { "cityId": cityId },
                 success: function ( responseData ) {
 
-                    window[ successCallback ]( arguments );
+                    responseData = window[ successCallback ]( responseData );
 
                     html = doT.template( template )( responseData );
                     _this.$container.html( html );
@@ -234,7 +235,25 @@
             als: 0,   // 11. 阿拉善
             xlgl: 0   // 12. 锡林郭勒
         },
+        requestSetting: {
+            $target: "#ywjg .tabs-business-total",
+            url: null,
+            successCallback: null,
+            errorCallback: null
+        },
+        _getRequestSetting: function _getRequestSetting() {
+            var requestSetting,
+                $target
+                ;
+            requestSetting = this.requestSetting;
+            $target = $( requestSetting.$target );
+            requestSetting.url = $target.attr( "data-url" );
+            requestSetting.successCallback = $target.attr( "data-success-callback" );
+            requestSetting.errorCallback = $target.attr( "data-error-callback" );
+            return this;
+        },
         init: function init() {
+            this._getRequestSetting();
             this.render()
                 .bind()
                 .update();
@@ -249,7 +268,7 @@
         bind: function bind() {
             var $navItems = this.$navItems,
                 _this = this;
-            $navItems.on( "click", function navItemClickHandler(event) {
+            $navItems.on( "click", function navItemClickHandler( event ) {
                 var $this = $( this )
                     ;
                 // 判断是否为 active
@@ -292,12 +311,15 @@
                 type,
                 title,
                 $activeNavItem,
-                $activeTimeMenuItem
+                $activeTimeMenuItem,
+                requestSetting,
+                successCallback,
+                errorCallback
                 ;
 
             // 0. 判断是否正在更新数据
+            Utils.wait.show( this.$container );
             if ( this.isUpading ) {
-                Utils.wait.show( this.$container );
                 return this;
             }
             this.isUpading = true;
@@ -305,23 +327,28 @@
             $activeNavItem = _this.$navItems.filter( ".active" );
             $activeTimeMenuItem = _this.$timeMenuItems.filter( ".active" );
             time = $activeTimeMenuItem.attr( "data-value" );
-            timeText = $activeTimeMenuItem.text().substring(0,2);
+            timeText = $activeTimeMenuItem.text().substring( 0, 2 );
             type = $activeNavItem.attr( "data-value" );
             title = $activeNavItem.find( "select option:selected" ).text() || $activeNavItem.text();
+            requestSetting = this.requestSetting;
+            successCallback = requestSetting.successCallback;
+            errorCallback = requestSetting.errorCallback;
 
             // 1. 获取数据
             this._getData(
                 { "time": time, "type": type },
                 function getDataSuccessHandler( responseData ) {
+                    // 处理服务器返回的数据
+                    responseData = window[ successCallback ]( responseData );
                     // 2. 更新到页面（获取数据成功）
-                    _this._render( responseData, title + "|" + timeText  );
+                    _this._render( responseData, title + "|" + timeText );
                 },
                 function getDataErrorHandler() { // 测试数据
+
+                    window[ errorCallback ]( _this.data );
+
                     var data = _this.data;
-                    for ( var prop in data ) {
-                        if ( prop === "maxNum" ) continue;
-                        data[ prop ] = ( data[ "maxNum" ] * Math.random() ).toFixed( 0 );
-                    }
+
                     _this._render( data, title + " |" + timeText );
                 }
             );
@@ -329,8 +356,9 @@
 
         },
         _getData: function getData( queryData, successCallback, errorCallback ) {
+            var requestSetting = this.requestSetting;
             Utils.ajax( {
-                url: "xx",
+                url: requestSetting.url,
                 data: queryData, // { "time": time, "type": type }
                 success: successCallback,
                 error: errorCallback
@@ -376,15 +404,34 @@
         $timeMenuItems: "#ywjg .time-menu-item",
         $tbody: ".tbody-main",
         isUpading: false, // 是否在更新数据
+        requestSetting: {
+            $target: "#ywjg .tabs-business-view",
+            url: null,
+            successCallback: null,
+            errorCallback: null
+        },
+        _getRequestSetting: function _getRequestSetting() {
+            var requestSetting,
+                $target
+                ;
+            requestSetting = this.requestSetting;
+            $target = $( requestSetting.$target );
+            requestSetting.url = $target.attr( "data-url" );
+            requestSetting.successCallback = $target.attr( "data-success-callback" );
+            requestSetting.errorCallback = $target.attr( "data-error-callback" );
+            return this;
+        },
         init: function init() {
-            this.render()
-                .bind()
-                .update();
+            this._getRequestSetting();
+            this.render();
+            this.bind();
+            this.pagination.init();
+            this.update();
             return this;
         },
         render: function render() {
             this.$container = $( this.$container );
-            this.$navItems = $( this.$navItems , this.$container );
+            this.$navItems = $( this.$navItems, this.$container );
             this.$timeMenuItems = $( this.$timeMenuItems );
             this.$tbody = $( this.$tbody, this.$container );
             return this;
@@ -392,7 +439,7 @@
         bind: function bind() {
             var $navItems = this.$navItems,
                 _this = this;
-            $navItems.on( "click", function navItemClickHandler( event) {
+            $navItems.on( "click", function navItemClickHandler( event ) {
                 var $this = $( this )
                     ;
                 // 判断是否为 active
@@ -404,6 +451,10 @@
                     Utils.wait.show( _this.$container );
                     return;
                 }
+
+                // 将分页还原
+                _this.pagination.restore();
+
                 // 1. 改变状态
                 $this.addClass( "active" ).siblings().removeClass( "active" );
                 $this.attr( "data-value", $this.find( "select" ).val() || "00" );
@@ -425,16 +476,17 @@
 
             return this;
         },
-        update: function update() {
+        update: function update( pageNum ) {
             var _this = this,
+                queryData = {},
                 time,
                 type,
                 $activeNavItem
                 ;
 
             // 0. 判断是否正在更新数据
+            Utils.wait.show( this.$container );
             if ( this.isUpading ) {
-                Utils.wait.show( this.$container );
                 return this;
             }
             this.isUpading = true;
@@ -443,23 +495,36 @@
             time = _this.$timeMenuItems.filter( ".active" ).attr( "data-value" );
             type = $activeNavItem.attr( "data-value" );
 
+            queryData[ "time" ] = time;
+            queryData[ "type" ] = type;
+            queryData[ "pageNum" ] = pageNum || 1;
+
             // 1. 获取数据
             this._getData(
-                { "time": time, "type": type },
+                queryData,
                 function getDataSuccessHandler( responseData ) {
+
+                    responseData = window[ _this.requestSetting.successCallback ]( responseData );
+
                     // 2. 更新到页面（获取数据成功）
                     _this._render( responseData, Template.ywjg.template );
+                    _this.pagination.update( responseData[ "totalRecords" ] || "", responseData[ "pageNum" ] || "1" );
                 },
                 function getDataErrorHandler() { // 测试数据
-                    _this._render( Template.ywjg.data.slice(0, Math.floor( 4 * Math.random() ) ), Template.ywjg.template );
+
+                    window[ _this.requestSetting.errorCallback ]();
+
+                    _this._render( Template.ywjg.data.slice( 0, Math.floor( 4 * Math.random() ) ), Template.ywjg.template );
+                    _this.pagination.update( "1", "1" );
                 }
             );
 
 
         },
         _getData: function getData( queryData, successCallback, errorCallback ) {
+            var _this = this;
             Utils.ajax( {
-                url: "xx",
+                url: _this.requestSetting.url,
                 data: queryData, // { "time": time, "type": type }
                 success: successCallback,
                 error: errorCallback
@@ -471,10 +536,105 @@
             // 更新完毕
             Utils.wait.hide( _this.$container );
             _this.isUpading = false;
-            this.$tbody.html( doT.template( template ) ( data ) );
+            this.$tbody.html( doT.template( template )( data ) );
+            //
             return this;
         }
     };
+
+    ywjg.view.pagination = {
+        pageSize: 4,
+        $container: ".tabs-business-view",
+        $firstPage: ".page-first",
+        $prevPage: ".page-pre",
+        $currentPage: "input.js--currentPage",
+        //$totalPage: ".js--totalPages",
+        $nextPage: ".page-next",
+        //$lastPage: ".page-last",
+        $refresh: ".refresh",
+        //$totalRecords: ".js--totalRecords",
+        init: function init() {
+            this.render().bind();
+        },
+        restore: function restore() {
+            var _this = this;
+            _this.$currentPage.val( 1 );
+            return this;
+        },
+        render: function render() {
+            var _this = this;
+            _this.$container = $( _this.$container );
+            _this.$firstPage = $( _this.$firstPage, _this.$container );
+            _this.$prevPage = $( _this.$prevPage, _this.$container );
+            _this.$currentPage = $( _this.$currentPage, _this.$container );
+            //_this.$totalPage = $( _this.$totalPage, _this.$container  );
+            _this.$nextPage = $( _this.$nextPage, _this.$container );
+            //_this.$lastPage = $( _this.$lastPage, _this.$container  );
+            _this.$refresh = $( _this.$refresh, _this.$container );
+            //_this.$totalRecords = $( _this.$totalRecords, _this.$container  );
+            return _this;
+        },
+        bind: function bind() {
+            var _this = this;
+            _this.$refresh.on( "click", function ( event ) {
+                event.preventDefault();
+                var currentPage = parseInt( _this.$currentPage.val() ) || 1;
+                _this.refresh( currentPage );
+            } );
+            _this.$firstPage.on( "click", function ( event ) {
+                _this.refresh( 1 );
+                event.preventDefault();
+            } );
+            _this.$prevPage.on( "click", function ( event ) {
+                event.preventDefault();
+                var currentPage = parseInt( _this.$currentPage.val() ) || 1;
+                if ( currentPage <= 1 ) {
+                    return;
+                }
+                _this.refresh( currentPage - 1 );
+            } );
+            /*_this.$lastPage.on("click", function(event){
+             event.preventDefault();
+             var lastPage = parseInt( _this.$totalPage.text() ) || 1;
+             _this.refresh( lastPage );
+             });*/
+            _this.$nextPage.on( "click", function ( event ) {
+                event.preventDefault();
+                var currentPage = parseInt( _this.$currentPage.val() ) || 1;
+                /*var totalPages = parseInt( _this.$totalPage.text() ) || 1;
+                 if ( currentPage >= totalPages ) {
+                 return;
+                 }*/
+                _this.refresh( currentPage + 1 );
+            } );
+            _this.$currentPage.on( "keypress", function ( event ) {
+                var keyCode = event.keyCode;
+                if ( keyCode == 13 ) {
+                    _this.$refresh.trigger( "click" );
+                    return;
+                }
+                if ( keyCode < 48 || keyCode > 57 ) {
+                    event.preventDefault();
+                }
+            } );
+
+
+        },
+        refresh: function refresh( pageNum ) {
+            var _this = this;
+            ywjg.view.update( pageNum );
+            _this.$currentPage.val( pageNum );
+            return this;
+        },
+        update: function ( totalRecords, currentPage ) {
+            var _this = this;
+            //_this.$totalPage.text( Math.ceil( totalRecords / _this.pageSize ) );
+            _this.$currentPage.val( Math.ceil( currentPage ) );
+            return this;
+        }
+
+    };
+
 
     var Template = {
         qjsj: {
@@ -516,13 +676,48 @@
         },
         ywjg: {
             data: [
-                { num: 1, blsj: "2017-01-14 17:01", ywlx: "出生登记", ywmc: "张三办理出生登记业务", ssms: "呼和浩特", "slr": "李四", "spr": "王五", "ywzt": "已通过" },
-                { num: 2, blsj: "2017-01-13 17:01", ywlx: "出生登记2", ywmc: "张三办理出生登记业务2", ssms: "呼和浩特2", "slr": "李四2", "spr": "王五2", "ywzt": "已通过2" },
-                { num: 3, blsj: "2017-01-12 17:01", ywlx: "出生登记3", ywmc: "张三办理出生登记业务3", ssms: "呼和浩特3", "slr": "李四3", "spr": "王五3", "ywzt": "已通过3" },
-                { num: 4, blsj: "2017-01-11 17:01", ywlx: "出生登记4", ywmc: "张三办理出生登记业务4", ssms: "呼和浩特4", "slr": "李四4", "spr": "王五4", "ywzt": "已通过4" }
+                {
+                    num: 1,
+                    blsj: "2017-01-14 17:01",
+                    ywlx: "出生登记",
+                    ywmc: "张三办理出生登记业务",
+                    ssms: "呼和浩特",
+                    "slr": "李四",
+                    "spr": "王五",
+                    "ywzt": "已通过"
+                },
+                {
+                    num: 2,
+                    blsj: "2017-01-13 17:01",
+                    ywlx: "出生登记2",
+                    ywmc: "张三办理出生登记业务2",
+                    ssms: "呼和浩特2",
+                    "slr": "李四2",
+                    "spr": "王五2",
+                    "ywzt": "已通过2"
+                },
+                {
+                    num: 3,
+                    blsj: "2017-01-12 17:01",
+                    ywlx: "出生登记3",
+                    ywmc: "张三办理出生登记业务3",
+                    ssms: "呼和浩特3",
+                    "slr": "李四3",
+                    "spr": "王五3",
+                    "ywzt": "已通过3"
+                },
+                {
+                    num: 4,
+                    blsj: "2017-01-11 17:01",
+                    ywlx: "出生登记4",
+                    ywmc: "张三办理出生登记业务4",
+                    ssms: "呼和浩特4",
+                    "slr": "李四4",
+                    "spr": "王五4",
+                    "ywzt": "已通过4"
+                }
             ],
-            template:
-                '{{~it:value:index}}\
+            template: '{{~it:value:index}}\
                     <tr> \
                         <th>{{= value.num }}</th> \
                         <td><p title="{{= value.blsj }}">{{= value.blsj }}</p></td> \

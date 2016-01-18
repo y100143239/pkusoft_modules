@@ -11,6 +11,13 @@ a {
   height: 0;
   font-size: 0; }
 
+.hidden {
+  visibility: hidden !important;
+  display: none !important; }
+
+.disabled {
+  cursor: not-allowed; }
+
 .wait-overlay {
   display: block;
   background-color: rgba(0, 0, 0, 0.4);
@@ -337,6 +344,7 @@ a {
     padding-top: 6px; }
     .wd-container .wd-ywjg .time-menu {
       position: absolute;
+      z-index: 3;
       top: 0;
       right: 0;
       overflow: hidden;
