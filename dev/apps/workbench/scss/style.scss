@@ -479,6 +479,25 @@ a {
     // 异地办理
     .wd-ydbl {
         padding-top: 16px;
+        .tabs {
+            position: relative;
+        }
+        .top-menu {
+            position: absolute;
+            top: 0;
+            right: 0;
+            .top-menu-item {
+                float: left;
+                padding: 0.5em 1em 0.5em 0;
+                a {
+                    color: #6176be;
+                    border-bottom: dotted 1px;
+                    &:hover {
+                        color: #758de3;
+                    }
+                }
+            }
+        }
         .tabs-body {
             padding: 1.2em 0 2em 0;;
         }

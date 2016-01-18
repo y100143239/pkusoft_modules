@@ -524,6 +524,20 @@ a {
         border-top-width: 0; }
   .wd-container .wd-ydbl {
     padding-top: 16px; }
+    .wd-container .wd-ydbl .tabs {
+      position: relative; }
+    .wd-container .wd-ydbl .top-menu {
+      position: absolute;
+      top: 0;
+      right: 0; }
+      .wd-container .wd-ydbl .top-menu .top-menu-item {
+        float: left;
+        padding: 0.5em 1em 0.5em 0; }
+        .wd-container .wd-ydbl .top-menu .top-menu-item a {
+          color: #6176be;
+          border-bottom: dotted 1px; }
+          .wd-container .wd-ydbl .top-menu .top-menu-item a:hover {
+            color: #758de3; }
     .wd-container .wd-ydbl .tabs-body {
       padding: 1.2em 0 2em 0; }
     .wd-container .wd-ydbl .search {

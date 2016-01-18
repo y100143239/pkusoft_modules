@@ -3,6 +3,7 @@ $page-width: 1000px;
 body,html {
     color: #333;
     height: 100%;
+    background-color: #EDEDF0;
 }
 .clearfix:after {
     content:" ";
@@ -164,6 +165,21 @@ body,html {
     @at-root .navbar {
         //margin-left: -2px;
         //margin-right: -2px;
+        background-color: #fff;
+        box-shadow: 0 1px 2px rgba(0,0,0,.2);
+        -moz-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+        -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+        -ms-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+        border-color: #fff;
+        border-radius: 0;
+        .navbar-nav {
+            a {
+                color: #3497db!important;
+                &:hover {
+                    opacity: 0.8;
+                }
+            }
+        }
     }
     @at-root .content {
         //padding-top: 65px;
@@ -242,7 +258,7 @@ body,html {
                 bottom: -1px;
                 .btn {
                     height: 100%;
-                    border-radius: 0 4px 0 0!important;
+                    border-radius: 0 2px 0 0!important;
 
                 }
             }

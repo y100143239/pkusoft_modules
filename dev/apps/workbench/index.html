@@ -15,7 +15,7 @@
         <div class="wd-wrap">
             <div class="wd-main">
                 <!-- 区级数据 -->
-                <div class="wd-qjsj" id="qjsj" style="display: block;">
+                <div class="wd-qjsj" id="qjsj" style="display: none;">
                     <div class="qjsj-map"
                          data-url="http://www.baidu.com"
                          data-success-callback="mapSuccessCallback"
@@ -249,14 +249,19 @@
                 <!-- /业务监管 -->
 
                 <!-- 异地办理 -->
-                <div class="wd-ydbl" id="ydbl" style="display: none">
+                <div class="wd-ydbl" id="ydbl" style="display: block;">
                     <div class="tabs">
+                        <div class="top-menu">
+                            <div class="top-menu-item">导航：</div>
+                            <div class="top-menu-item"><a href="#">异地证件受理</a></div>
+                            <div class="top-menu-item"><a href="#">未完成的异地证件受理</a></div>
+                            <div class="top-menu-item"><a href="#">受理变更</a></div>
+                            <div class="top-menu-item"><a href="#">撤销办理</a></div>
+                            <div class="top-menu-item"><a href="#">重新受理</a></div>
+                            <div class="clear"></div>
+                        </div>
                         <div class="tabs-nav">
-                            <div class="nav-item active" data-value="00"><a href="#">异地证件受理</a></div>
-                            <div class="nav-item" data-value=""><a href="#">未完成的异地证件受理</a></div>
-                            <div class="nav-item" data-value=""><a href="#">受理变更</a></div>
-                            <div class="nav-item" data-value=""><a href="#">撤销办理</a></div>
-                            <div class="nav-item" data-value=""><a href="#">重新受理</a></div>
+                            <div class="nav-item active" data-value="00"><a href="#">异地办证(受理中)</a></div>
                             <div class="clear"></div>
                         </div>
                         <div class="tabs-body">
@@ -278,7 +283,7 @@
                             </div>
                             <table class="table-grid">
                                 <col width="32"/> <!--#-->
-                                <col width="80"/> <!--类型-->
+                                <col width="120"/> <!--类型-->
                                 <col width="80"/> <!--申请人-->
                                 <col width="180"/> <!--公民身份证号码-->
                                 <col width="100"/> <!--受理日期-->
@@ -304,8 +309,6 @@
                                 <tr> <th>6</th> <td><p>区内异地</p></td> <td><p>张三</p></td> <td><p>123456789012345678</p></td> <td><p>2016-01-15</p></td> <td><p>受理待审核</p></td> <td><p>呼和浩特市</p></td> </tr> </tbody>
                                 <tr> <th>7</th> <td><p>区内异地</p></td> <td><p>张三</p></td> <td><p>123456789012345678</p></td> <td><p>2016-01-15</p></td> <td><p>受理待审核</p></td> <td><p>呼和浩特市</p></td> </tr> </tbody>
                                 <tr> <th>8</th> <td><p>区内异地</p></td> <td><p>张三</p></td> <td><p>123456789012345678</p></td> <td><p>2016-01-15</p></td> <td><p>受理待审核</p></td> <td><p>呼和浩特市</p></td> </tr> </tbody>
-                                <tr> <th>9</th> <td><p>区内异地</p></td> <td><p>张三</p></td> <td><p>123456789012345678</p></td> <td><p>2016-01-15</p></td> <td><p>受理待审核</p></td> <td><p>呼和浩特市</p></td> </tr> </tbody>
-                                <tr> <th>10</th> <td><p>区内异地</p></td> <td><p>张三</p></td> <td><p>123456789012345678</p></td> <td><p>2016-01-15</p></td> <td><p>受理待审核</p></td> <td><p>呼和浩特市</p></td> </tr> </tbody>
                                 <tbody class="tbody-operation">
                                 <tr>
                                     <td colspan="7">
