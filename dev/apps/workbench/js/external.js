@@ -172,3 +172,60 @@ function businessViewSuccessCallback( responseData ) {
 function businessViewErrorCallback() {
 
 }
+
+
+/* 异地办理
+
+ HTML
+
+ 1) 设置
+     <div class="wd-ydbl" id="ydbl" style="display: block;">
+     <div class="tabs"
+             data-url=""
+             data-success-callback="ydblSuccessCallback"
+             data-error-callback="ydblErrorCallback">
+
+ 2) 请求参数
+
+    // xm
+     <label class="form-label" for="">姓名：</label>
+     <input type="text" class="form-control" name="xm"/>
+
+    // islikequery (1或0)
+     <input type="checkbox" name="islikequery"/><span>模糊查询</span></label>
+
+    // gmsfzhm
+     <label class="form-label" for="">公民身份证号码：</label>
+     <input type="text" class="form-control" name="gmsfzhm"/>
+
+    // pageNum
+
+ Ajax
+
+ $.ajax({
+     url: “data-url”,
+     data: { "pageNum": 1, "pageSize": 10,  "xm": xm, "islikequery": islikequery, "gmsfzhm": gmsfzhm },
+     success: “data-success-callback”, // 将服务器返回的数据处理成指定的格式
+     error: “data-error-callback”
+ });
+ pageSize: 每页的记录数
+ pageNum: 请求的哪一页
+ */
+function ydblSuccessCallback( responseData ) {
+    // 将服务器返回的数据处理成指定的格式，然后返回
+    var sampeData =  [
+        { num: 1, lx: "区内异地", sqr: "张三", gmsfzhm: "123456789012345678", slrq: "2016-01-15", "zjzt": "受理待审核", "ssms": "呼和浩特市" },
+        { num: 2, lx: "区内异地2", sqr: "张三2", gmsfzhm: "123456789012345678", slrq: "2016-01-15", "zjzt": "受理待审核2", "ssms": "呼和浩特市2" }
+    ];
+
+    // 在数组对象上挂载属性
+    sampeData[ "pageNum" ] = 1;
+
+    responseData = sampeData;
+
+    return responseData;
+}
+function ydblErrorCallback() {
+
+}
+
