@@ -82,7 +82,10 @@
                         <div class="clear"></div>
                     </div>
                     <!-- 业务总量 -->
-                    <div class="tabs tabs-business-total">
+                    <div class="tabs tabs-business-total"
+                             data-url="http://www.baidu.com"
+                             data-success-callback="businessTotalSuccessCallback"
+                             data-error-callback="businessTotalErrorCallback" >
                         <div class="tabs-nav">
                             <div class="nav-item active" data-value="00"><a href="#">全部业务总数</a></div>
                             <div class="nav-item" data-value=""><a href="#">单项业务总数</a>
@@ -164,7 +167,10 @@
                     <!-- /业务总量 -->
 
                     <!-- 业务查看 -->
-                    <div class="tabs tabs-business-view">
+                    <div class="tabs tabs-business-view"
+                         data-url="http://www.baidu.com"
+                         data-success-callback="businessViewSuccessCallback"
+                         data-error-callback="businessViewErrorCallback">
                         <div class="tabs-nav">
                             <div class="nav-item active" data-value="00"><a href="#">全部业务查看</a></div>
                             <div class="nav-item" data-value=""><a href="#">单项业务查看</a>
@@ -190,14 +196,16 @@
                         </div>
                         <div class="tabs-body">
                             <table class="table-grid">
-                                <col width="30"/> <!--#-->
-                                <col width="100"/> <!--办理时间-->
-                                <col width="120"/> <!--业务类型-->
-                                <col width=""/> <!--业务名称-->
-                                <col width="80"/> <!--所属盟市-->
-                                <col width="60"/> <!--受理人-->
-                                <col width="60"/> <!--审批人-->
-                                <col width="80"/> <!--业务状态-->
+                                <colgroup>
+                                    <col width="30"/> <!--#-->
+                                    <col width="100"/> <!--办理时间-->
+                                    <col width="120"/> <!--业务类型-->
+                                    <col width=""/> <!--业务名称-->
+                                    <col width="80"/> <!--所属盟市-->
+                                    <col width="60"/> <!--受理人-->
+                                    <col width="60"/> <!--审批人-->
+                                    <col width="80"/> <!--业务状态-->
+                                </colgroup>
                                 <tbody class="tbody-heading">
                                     <tr>
                                         <th>#</th>
@@ -220,17 +228,17 @@
                                     <tr>
                                         <td colspan="8">
                                             <div class="pagination">
-                                                <a href="#" class="pagination-btn page-first"></a>
-                                                <a href="#" class="pagination-btn page-pre"></a>
+                                                <a href="#" class="pagination-btn page-first" title="第1页"></a>
+                                                <a href="#" class="pagination-btn page-pre" title="前一页"></a>
                                                 <span class="pagination-divider"></span>
-                                                <span class="pagination-num"><input type="text" value="1"/> / <span class="total">20</span></span>
+                                                <span class="pagination-num">第 <input type="text" value="1" class="js--currentPage"/> 页</span>
                                                 <span class="pagination-divider"></span>
-                                                <a href="#" class="pagination-btn page-next"></a>
-                                                <a href="#" class="pagination-btn page-last"></a>
+                                                <a href="#" class="pagination-btn page-next" title="下一页"></a>
+                                                <!--<a href="#" class="pagination-btn page-last hidden"></a>-->
                                                 <span class="pagination-divider"></span>
-                                                <a href="#" class="pagination-btn refresh"></a>
+                                                <a href="#" class="pagination-btn refresh"  title="刷新"></a>
                                                 <span class="pagination-divider"></span>
-                                                <span class="pagination-total">总数：80</span>
+                                                <!--<span class="pagination-total hidden">总数：<span class="js&#45;&#45;totalRecords">80</span></span>-->
                                             </div>
                                         </td>
                                     </tr>
@@ -243,26 +251,30 @@
                 <!-- /业务监管 -->
 
                 <!-- 异地办理 -->
-                <div class="wd-ydbl" id="ydbl" style="display: none">
-                    <div class="tabs">
+                <div class="wd-ydbl" id="ydbl" style="display: none;">
+                    <div class="tabs"
+                         data-url=""
+                         data-success-callback="ydblSuccessCallback"
+                         data-error-callback="ydblErrorCallback">
+                        <div class="ydbl-statistic">
+                            <p class="bdw"><label>本单位：</label><span>受理 <strong>235</strong> 个异地证件，审核 <strong>235</strong> 个异地证件。</span></p>
+                            <p class="qq"><label>全区：</label><span>受理 <strong>2345</strong> 个异地证件。</span></p>
+                        </div>
                         <div class="tabs-nav">
-                            <div class="nav-item active" data-value="00"><a href="#">异地证件受理</a></div>
-                            <div class="nav-item" data-value=""><a href="#">未完成的异地证件受理</a></div>
-                            <div class="nav-item" data-value=""><a href="#">受理变更</a></div>
-                            <div class="nav-item" data-value=""><a href="#">撤销办理</a></div>
-                            <div class="nav-item" data-value=""><a href="#">重新受理</a></div>
+                            <div class="nav-item active" data-value="00"><a href="#">异地办证（受理中）</a></div>
                             <div class="clear"></div>
                         </div>
                         <div class="tabs-body">
                             <div class="search">
                                 <form action="" class="form">
-                                    <div class="form-group">
+                                    <div class="form-group ">
                                         <label class="form-label" for="">姓名：</label>
-                                        <input type="text" class="form-control" />
+                                        <input type="text" class="form-control" name="xm"/><!--
+                                     --><label class="like-query form-control"><input type="checkbox" name="islikequery"/><span>模糊查询</span></label>
                                     </div>
                                     <div class="form-group">
                                         <label class="form-label" for="">公民身份证号码：</label>
-                                        <input type="text" class="form-control"/>
+                                        <input type="text" class="form-control" name="gmsfzhm"/>
                                     </div>
                                     <div class="form-group">
                                         <label>&nbsp;</label><input type="button" class="form-btn" value="搜索"/>
@@ -271,13 +283,15 @@
                                 </form>
                             </div>
                             <table class="table-grid">
-                                <col width="32"/> <!--#-->
-                                <col width="80"/> <!--类型-->
-                                <col width="80"/> <!--申请人-->
-                                <col width="180"/> <!--公民身份证号码-->
-                                <col width="100"/> <!--受理日期-->
-                                <col width="100"/> <!--证件状态-->
-                                <col width="100"/> <!--所属盟市-->
+                                <colgroup>
+                                    <col width="32"/> <!--#-->
+                                    <col width="120"/> <!--类型-->
+                                    <col width="80"/> <!--申请人-->
+                                    <col width="180"/> <!--公民身份证号码-->
+                                    <col width="100"/> <!--受理日期-->
+                                    <col width="100"/> <!--证件状态-->
+                                    <col width="100"/> <!--所属盟市-->
+                                </colgroup>
                                 <tbody class="tbody-heading">
                                 <tr>
                                     <th>#</th>
@@ -290,16 +304,16 @@
                                 </tr>
                                 </tbody>
                                 <tbody class="tbody-main">
-                                <tr> <th>1</th> <td><p>区内异地</p></td> <td><p>张三</p></td> <td><p>123456789012345678</p></td> <td><p>2016-01-15</p></td> <td><p>受理待审核</p></td> <td><p>呼和浩特市</p></td> </tr> </tbody>
-                                <tr> <th>2</th> <td><p>区内异地</p></td> <td><p>张三</p></td> <td><p>123456789012345678</p></td> <td><p>2016-01-15</p></td> <td><p>受理待审核</p></td> <td><p>呼和浩特市</p></td> </tr> </tbody>
-                                <tr> <th>3</th> <td><p>区内异地</p></td> <td><p>张三</p></td> <td><p>123456789012345678</p></td> <td><p>2016-01-15</p></td> <td><p>受理待审核</p></td> <td><p>呼和浩特市</p></td> </tr> </tbody>
-                                <tr> <th>4</th> <td><p>区内异地</p></td> <td><p>张三</p></td> <td><p>123456789012345678</p></td> <td><p>2016-01-15</p></td> <td><p>受理待审核</p></td> <td><p>呼和浩特市</p></td> </tr> </tbody>
-                                <tr> <th>5</th> <td><p>区内异地</p></td> <td><p>张三</p></td> <td><p>123456789012345678</p></td> <td><p>2016-01-15</p></td> <td><p>受理待审核</p></td> <td><p>呼和浩特市</p></td> </tr> </tbody>
-                                <tr> <th>6</th> <td><p>区内异地</p></td> <td><p>张三</p></td> <td><p>123456789012345678</p></td> <td><p>2016-01-15</p></td> <td><p>受理待审核</p></td> <td><p>呼和浩特市</p></td> </tr> </tbody>
-                                <tr> <th>7</th> <td><p>区内异地</p></td> <td><p>张三</p></td> <td><p>123456789012345678</p></td> <td><p>2016-01-15</p></td> <td><p>受理待审核</p></td> <td><p>呼和浩特市</p></td> </tr> </tbody>
-                                <tr> <th>8</th> <td><p>区内异地</p></td> <td><p>张三</p></td> <td><p>123456789012345678</p></td> <td><p>2016-01-15</p></td> <td><p>受理待审核</p></td> <td><p>呼和浩特市</p></td> </tr> </tbody>
-                                <tr> <th>9</th> <td><p>区内异地</p></td> <td><p>张三</p></td> <td><p>123456789012345678</p></td> <td><p>2016-01-15</p></td> <td><p>受理待审核</p></td> <td><p>呼和浩特市</p></td> </tr> </tbody>
-                                <tr> <th>10</th> <td><p>区内异地</p></td> <td><p>张三</p></td> <td><p>123456789012345678</p></td> <td><p>2016-01-15</p></td> <td><p>受理待审核</p></td> <td><p>呼和浩特市</p></td> </tr> </tbody>
+                                <tr> <th>1</th> <td><p>区内异地</p></td> <td><p>张三</p></td> <td><p>123456789012345678</p></td> <td><p>2016-01-15</p></td> <td><p>受理待审核</p></td> <td><p>呼和浩特市</p></td> </tr>
+                                <tr> <th>2</th> <td><p>区内异地</p></td> <td><p>张三</p></td> <td><p>123456789012345678</p></td> <td><p>2016-01-15</p></td> <td><p>受理待审核</p></td> <td><p>呼和浩特市</p></td> </tr>
+                                <tr> <th>3</th> <td><p>区内异地</p></td> <td><p>张三</p></td> <td><p>123456789012345678</p></td> <td><p>2016-01-15</p></td> <td><p>受理待审核</p></td> <td><p>呼和浩特市</p></td> </tr>
+                                <tr> <th>4</th> <td><p>区内异地</p></td> <td><p>张三</p></td> <td><p>123456789012345678</p></td> <td><p>2016-01-15</p></td> <td><p>受理待审核</p></td> <td><p>呼和浩特市</p></td> </tr>
+                                <tr> <th>5</th> <td><p>区内异地</p></td> <td><p>张三</p></td> <td><p>123456789012345678</p></td> <td><p>2016-01-15</p></td> <td><p>受理待审核</p></td> <td><p>呼和浩特市</p></td> </tr>
+                                <tr> <th>6</th> <td><p>区内异地</p></td> <td><p>张三</p></td> <td><p>123456789012345678</p></td> <td><p>2016-01-15</p></td> <td><p>受理待审核</p></td> <td><p>呼和浩特市</p></td> </tr>
+                                <tr> <th>7</th> <td><p>区内异地</p></td> <td><p>张三</p></td> <td><p>123456789012345678</p></td> <td><p>2016-01-15</p></td> <td><p>受理待审核</p></td> <td><p>呼和浩特市</p></td> </tr>
+                                <tr> <th>8</th> <td><p>区内异地</p></td> <td><p>张三</p></td> <td><p>123456789012345678</p></td> <td><p>2016-01-15</p></td> <td><p>受理待审核</p></td> <td><p>呼和浩特市</p></td> </tr>
+                                <tr> <th>9</th> <td><p>区内异地</p></td> <td><p>张三</p></td> <td><p>123456789012345678</p></td> <td><p>2016-01-15</p></td> <td><p>受理待审核</p></td> <td><p>呼和浩特市</p></td> </tr>
+                                <tr> <th>10</th> <td><p>区内异地</p></td> <td><p>张三</p></td> <td><p>123456789012345678</p></td> <td><p>2016-01-15</p></td> <td><p>受理待审核</p></td> <td><p>呼和浩特市</p></td> </tr>
                                 <tbody class="tbody-operation">
                                 <tr>
                                     <td colspan="7">
@@ -307,20 +321,29 @@
                                             <a href="#" class="pagination-btn page-first"></a>
                                             <a href="#" class="pagination-btn page-pre"></a>
                                             <span class="pagination-divider"></span>
-                                            <span class="pagination-num"><input type="text" value="1"/> / <span class="total">20</span></span>
+                                            <span class="pagination-num">第 <input type="text" value="1" class="js--currentPage"/> 页</span>
                                             <span class="pagination-divider"></span>
                                             <a href="#" class="pagination-btn page-next"></a>
-                                            <a href="#" class="pagination-btn page-last"></a>
+                                            <!--<a href="#" class="pagination-btn page-last"></a>-->
                                             <span class="pagination-divider"></span>
                                             <a href="#" class="pagination-btn refresh"></a>
-                                            <span class="pagination-divider"></span>
-                                            <span class="pagination-total">总数：80</span>
+                                            <!--<span class="pagination-divider"></span>-->
+                                            <!--<span class="pagination-total">总数：80</span>-->
                                         </div>
                                     </td>
                                 </tr>
                                 </tbody>
                             </table>
                         </div>
+                    </div>
+                    <div class="quick-links">
+                        <div class="quick-links-item">导航：</div>
+                        <div class="quick-links-item"><a href="#" target="_parent">异地证件受理</a></div>
+                        <div class="quick-links-item"><a href="#" target="_parent">未完成的异地证件受理</a></div>
+                        <div class="quick-links-item"><a href="#" target="_parent">受理变更</a></div>
+                        <div class="quick-links-item"><a href="#" target="_parent">撤销办理</a></div>
+                        <div class="quick-links-item"><a href="#" target="_parent">重新受理</a></div>
+                        <div class="clear"></div>
                     </div>
                 </div>
                 <!-- /异地办理 -->

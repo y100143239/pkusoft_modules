@@ -1,4 +1,5 @@
 @charset "UTF-8";
+/*h1,h2,p,table,tr,th,td,strong*/
 * {
   margin: 0;
   padding: 0; }
@@ -10,6 +11,13 @@ a {
   clear: both;
   height: 0;
   font-size: 0; }
+
+.hidden {
+  visibility: hidden !important;
+  display: none !important; }
+
+.disabled {
+  cursor: not-allowed; }
 
 .wait-overlay {
   display: block;
@@ -337,6 +345,7 @@ a {
     padding-top: 6px; }
     .wd-container .wd-ywjg .time-menu {
       position: absolute;
+      z-index: 3;
       top: 0;
       right: 0;
       overflow: hidden;
@@ -400,18 +409,16 @@ a {
         text-align: center;
         line-height: 1.2; }
     .wd-container .wd-ywjg .tabs-business-view {
-      margin-top: 5px; }
-      .wd-container .wd-ywjg .tabs-business-view .tabs-body {
-        padding: 4px 0; }
+      margin-top: 16px; }
       .table-grid {
         border-collapse: collapse;
         table-layout: fixed;
         background-color: #fff;
         font-size: 12px;
         color: #333;
-        width: 756px;
+        width: 778px;
         border: solid 1px #dddddd;
-        margin: 0 auto;
+        margin-left: -1px !important;
         white-space: nowrap; }
         .table-grid .tbody-heading th {
           border-bottom-style: solid; }
@@ -516,8 +523,67 @@ a {
         border-top-width: 0; }
   .wd-container .wd-ydbl {
     padding-top: 16px; }
+    .wd-container .wd-ydbl .tabs {
+      position: relative; }
+    .wd-container .wd-ydbl .ydbl-statistic {
+      position: absolute;
+      top: 10px;
+      right: 0;
+      font-size: 12px;
+      color: #666666; }
+      .wd-container .wd-ydbl .ydbl-statistic p {
+        float: left;
+        margin-left: 1em; }
+        .wd-container .wd-ydbl .ydbl-statistic p label {
+          color: #888; }
+        .wd-container .wd-ydbl .ydbl-statistic p strong {
+          font-weight: normal;
+          font-size: 14px; }
+      .wd-container .wd-ydbl .ydbl-statistic .bdw label {
+        color: #62a0ea; }
+      .wd-container .wd-ydbl .ydbl-statistic .bdw strong {
+        color: #ff916b; }
+        .wd-container .wd-ydbl .ydbl-statistic .bdw strong:first-child {
+          color: #ffc56b; }
+    .wd-container .wd-ydbl .quick-links {
+      margin: 0.8em 0 0 0.6em;
+      font-size: 12px; }
+      .wd-container .wd-ydbl .quick-links .quick-links-item {
+        float: left;
+        padding: 0.25em;
+        margin-right: 1em; }
+        .wd-container .wd-ydbl .quick-links .quick-links-item:first-child {
+          color: #888;
+          padding-right: 0;
+          margin-right: 0; }
+        .wd-container .wd-ydbl .quick-links .quick-links-item a {
+          color: #6176be;
+          border-bottom: dotted 1px; }
+          .wd-container .wd-ydbl .quick-links .quick-links-item a:hover {
+            color: #758de3; }
     .wd-container .wd-ydbl .tabs-body {
-      padding: 1.2em 0 2em 0; }
+      padding: 1.2em 0 0 0; }
+      .wd-container .wd-ydbl .tabs-body .like-query {
+        display: inline-block;
+        margin-left: -1px;
+        padding: 0 0.5em;
+        vertical-align: middle;
+        width: auto;
+        cursor: pointer;
+        text-indent: 0;
+        font-size: 12px;
+        color: #666;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none; }
+        .wd-container .wd-ydbl .tabs-body .like-query input {
+          margin-right: 0.5em;
+          vertical-align: middle; }
+        .wd-container .wd-ydbl .tabs-body .like-query:hover {
+          color: #333;
+          background-color: #e6e6e6;
+          border-color: #adadad; }
     .wd-container .wd-ydbl .search {
       margin: 0 0 1.2em 1em; }
       .form .form-group {
@@ -527,17 +593,18 @@ a {
         color: #666666; }
       .form .form-control {
         width: 172px;
-        height: 24px;
-        border: solid 1px #94b7e8;
+        height: 28px;
+        border: solid 1px #ccc;
         font-size: 14px;
         text-indent: 0.5em;
-        line-height: 24px;
-        vertical-align: middle; }
+        line-height: 28px;
+        vertical-align: middle;
+        background-color: #f8f8f8; }
       .form .form-btn {
         border: none 0;
         padding: 0;
         width: 69px;
-        height: 27px;
+        height: 31px;
         cursor: pointer;
         font-size: 13px;
         font-family: "Microsoft Yahei", sans-serif;
@@ -545,7 +612,7 @@ a {
         text-indent: 1em;
         background: url(../images/form_btn.png) no-repeat 0 0; }
         .form .form-btn:hover {
-          background: url(../images/form_btn_hover_2.png) no-repeat 1px 1px;
+          background: url(../images/form_btn_hover.png) no-repeat 1px 1px;
           color: #fff; }
   .wd-container .wd-sjzl .tabs-quality-problems {
     padding-top: 6px; }
