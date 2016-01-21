@@ -229,3 +229,116 @@ function ydblErrorCallback() {
 
 }
 
+/* 数据质量-数据质量问题
+
+ HTML
+
+ 1) 设置
+ <div class="tabs tabs-quality-problems"
+     data-url="http://www.baidu.com"
+     data-success-callback="problemsSuccessCallback"
+     data-error-callback="problemsErrorCallback">
+
+ 2) 请求参数
+
+ // type， data-value的值标志 “全部数据质量问题”以及各个单项数据质量问题
+ <div class="nav-item active" data-value="00"><a href="#">全部数据质量问题</a></div>
+ <div class="nav-item" data-value=""><a href="#">分类数据质量问题</a>
+     <select name="" >
+         <option value="01">公民身份号码为空</option>
+         <option value="02">单项数据质量问题2</option>
+         <option value="03">单项数据质量问题3</option>
+     </select>
+ </div>
+
+ Ajax
+
+ $.ajax({
+     url: “data-url”,
+     data: { "type": type },
+     success: “data-success-callback”, // 将服务器返回的数据处理成指定的格式
+     error: “data-error-callback”
+ });
+ */
+function problemsSuccessCallback( responseData ) {
+    var _sampleData =  {
+        maxNum: 1000, // 指定最大数，当柱形高度为100%时的数量
+        hhht: 0,  // 1. 呼和浩特
+        bt: 0,    // 2. 包头
+        wh: 0,    // 3. 乌海
+        cf: 0,    // 4. 赤峰
+        tl: 0,    // 5. 通辽
+        eeds: 0,  // 6. 鄂尔多斯
+        hlbe: 0,  // 7. 呼伦贝尔
+        wlcb: 0,  // 8. 乌兰察布
+        byne: 0,  // 9. 巴彦淖尔
+        xa: 0,    // 10. 兴安
+        als: 0,   // 11. 阿拉善
+        xlgl: 0   // 12. 锡林郭勒
+    };
+    responseData = _sampleData;
+    return responseData;
+}
+function problemsErrorCallback(responseData) {
+// 将服务器返回的数据处理成指定的格式，然后返回
+    var _sampleData =  {
+        maxNum: 1000, // 指定最大数，当柱形高度为100%时的数量
+        hhht: 0,  // 1. 呼和浩特
+        bt: 0,    // 2. 包头
+        wh: 0,    // 3. 乌海
+        cf: 0,    // 4. 赤峰
+        tl: 0,    // 5. 通辽
+        eeds: 0,  // 6. 鄂尔多斯
+        hlbe: 0,  // 7. 呼伦贝尔
+        wlcb: 0,  // 8. 乌兰察布
+        byne: 0,  // 9. 巴彦淖尔
+        xa: 0,    // 10. 兴安
+        als: 0,   // 11. 阿拉善
+        xlgl: 0   // 12. 锡林郭勒
+    };
+    responseData = _sampleData;
+    for ( var prop in _sampleData ) {
+        if ( prop === "maxNum" ) continue;
+        _sampleData[ prop ] = ( _sampleData[ "maxNum" ] * Math.random() ).toFixed( 0 );
+    }
+    return responseData;
+}
+
+
+/* 数据质量-重证号
+
+ HTML
+
+ 1) 设置
+ <div class="tabs tabs-duplicate-code"
+     data-url="http://www.baidu.com"
+     data-success-callback="duplicateSuccessCallback"
+     data-error-callback="duplicateErrorCallback">
+
+ 2) 请求参数
+
+    pageNum: 第几页
+    pageSize: 每页的记录数
+
+ Ajax
+
+ $.ajax({
+     url: “data-url”,
+     data: { "pageNum": pageNum, "pageSize": pageSize },
+     success: “data-success-callback”, // 将服务器返回的数据处理成指定的格式
+     error: “data-error-callback”
+ });
+ */
+function duplicateSuccessCallback(responseData) {
+    var _sampleData = [
+        { num: 1, chhm: "123456789012345678", xm: "张三", xb: "男", csrq: "1988-08-12", hjszd: "呼和浩特市新城区海东路1号", lxdh: "18781222788" },
+        { num: 2, chhm: "", xm: "张三2", xb: "男", csrq: "1988-08-12", hjszd: "呼和浩特市新城区海东路1号", lxdh: "18781222788" },
+        { num: 3, chhm: "123456789012345678", xm: "张三3", xb: "男", csrq: "1988-08-12", hjszd: "呼和浩特市新城区海东路1号", lxdh: "18781222788" },
+        { num: 4, chhm: "", xm: "张三4", xb: "男", csrq: "1988-08-12", hjszd: "呼和浩特市新城区海东路1号", lxdh: "18781222788" }
+    ];
+    responseData = _sampleData;
+    return responseData;
+}
+function duplicateErrorCallback() {
+
+}

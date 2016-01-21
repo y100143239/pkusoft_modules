@@ -10,12 +10,26 @@
             display : block;
         }
     }
+    &.error {
+        background-image : url("../images/map_#{$num}_error.png");
+    }
     .tip {
         font-size : 12px;
         position  : absolute;
         top       : #{$tipTop}px;
-        left      : #{$tipLeft}px;
-        width     : #{$tipWidth}px;
+        left      : #{$tipLeft - 20}px;
+        width     : #{$tipWidth + 20}px;
+        vertical-align: middle;
+        img {
+            height: 12px;
+            vertical-align: middle;
+        }
+        &:hover {
+            color: #fff;
+            img {
+                margin: -1px 0 0 1px;
+            }
+        }
     }
 
 }
@@ -36,6 +50,9 @@
 }
 a {
     text-decoration: none;
+    img {
+        border: none 0;
+    }
 }
 .clear {
     clear: both;
@@ -49,6 +66,48 @@ a {
 .disabled {
     cursor: not-allowed;
 }
+
+.alert {
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    font-size: 14px;
+    &.alert-warning {
+        color: #8a6d3b;
+        background-color: #fcf8e3;
+        border-color: #faebcc;
+    }
+
+    button.close {
+        padding: 0;
+        margin: 0;
+        cursor: pointer;
+        background: 0 0;
+        border: 0;
+        float: right;
+        font-size: 21px;
+        font-weight: 700;
+        line-height: 1;
+        color: #000;
+        filter: alpha(opacity=20);
+        opacity: .2;
+        vertical-align: middle;
+        position: relative;
+        top: -2px;
+        &:hover {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+            filter: alpha(opacity=50);
+            opacity: .5;
+        }
+    }
+    strong {
+        font-weight: 700;
+    }
+}
+
 .wait-overlay {
     display: block;
     background-color : rgba(0, 0, 0, 0.4);
@@ -112,9 +171,12 @@ a {
     .wd-qjsj {
         overflow: hidden;
         .qjsj-map {
-            width: 340px;
+            width: 354px;
             float: left;
-            padding: 10px 0 0 10px;
+            padding: 10px;
+            margin: -1px 0 0 -1px;
+            border: solid 1px #eee;
+            background: #fff;
             .map-hot {
                 width      : 333px;
                 height     : 246px;
@@ -125,13 +187,14 @@ a {
                     .tip {
                         display          : none;
                         padding          : 2px;
-                        color            : #ffffff;
+                        color            : #CFEBF4;
                         background-color : #31b0d5;
                         border-color     : #269abc;
                     }
                 }
+                // hotmap($num,$left,$top,$width,$height,$tipLeft:0,$tipTop:0,$tipWidth: 50)
                 #map-00 {
-                    @include hotmap("00", 0, 0, 83, 64, 54, 44, 25);
+                    @include hotmap("00", 0, 0, 83, 64, 54 + 20, 44, 5);
                 }
                 #map-01 {
                     @include hotmap("01", 0, 139, 112, 107, 20, -20, 37);
@@ -140,31 +203,31 @@ a {
                     @include hotmap("02", 104, 206, 20, 20, -28, 0, 25);
                 }
                 #map-03 {
-                    @include hotmap("03", 100, 192, 67, 54, 0, 56);
+                    @include hotmap("03", 100, 192, 67, 54, 0, 53);
                 }
                 #map-04 {
                     @include hotmap("04", 91, 165, 58, 39, 0, -20);
                 }
                 #map-05 {
-                    @include hotmap("05", 156, 186, 20, 32, 10, 36);
+                    @include hotmap("05", 156, 186, 20, 32, 28, 27);
                 }
                 #map-06 {
-                    @include hotmap("06", 140, 162, 30, 46, 0, -20, 25);
+                    @include hotmap("06", 140, 162, 30, 46, 29, -18, 25);
                 }
                 #map-07 {
-                    @include hotmap("07", 154, 155, 54, 55, 24, 58);
+                    @include hotmap("07", 154, 155, 54, 55, 44, 50);
                 }
                 #map-08 {
                     @include hotmap("08", 165, 103, 107, 86);
                 }
                 #map-09 {
-                    @include hotmap("09", 226, 126, 56, 69, 0, 70, 25);
+                    @include hotmap("09", 226, 126, 56, 69, 30, 63, 25);
                 }
                 #map-10 {
-                    @include hotmap("10", 260, 121, 53, 58, 60, 30, 25);
+                    @include hotmap("10", 260, 121, 53, 58, 68, 30, 25);
                 }
                 #map-11 {
-                    @include hotmap("11", 262, 90, 48, 56, 50, 10, 25);
+                    @include hotmap("11", 262, 90, 48, 56, 60, 10, 25);
                 }
                 #map-12 {
                     @include hotmap("12", 219, 0, 114, 100, -10, 10);
@@ -172,7 +235,7 @@ a {
             }
             .map-current {
                 font-size: 16px;
-                margin-top: 2em;
+                margin-top: 1em;
                 text-align: right;
                 .label {
                     color: #999;
@@ -183,12 +246,17 @@ a {
             }
         }
         .qujsj-data {
-            float: right;
-            width: 400px;
+            float: left;
+            width: 425px;
             color: #666;
             .data-panel {
                 background: #fff;
-                margin: 20px 20px 0 0 ;
+                &:first-child {
+                    .panel-body {
+                        height: 61px;
+                    }
+                }
+
                 .panel-heading {
                     overflow: hidden;
                     height: 39px;
@@ -201,7 +269,7 @@ a {
                     .total {
                         float: right;
                         font-size: 14px;
-                        width: 50%;
+                        width: 51%;
                     }
                     .icon {
                         vertical-align: middle;
@@ -213,11 +281,12 @@ a {
                     overflow: hidden;
                     border: 1px solid #ddd;
                     border-top: none 0;
-                    padding-top: 1em;
+                    //padding-top: 1em;
+                    height: 60px;
                     .data-item {
                         float: left;
-                        width: 50%;
-                        margin-bottom: 1em;
+                        width: 49%;
+                        margin-top: 0.5em;
                         &.line-first {
                             text-indent: 2em;
                         }
@@ -229,6 +298,57 @@ a {
                 .cont {
 
                 }
+            }
+        }
+        .service-status {
+            clear: both;
+            margin-top: 2em;
+            .service-status-item {
+                position: relative;
+                float: left;
+                width: 120px;
+                height: 78px;
+                color: #666;
+                font-size: 16px;
+                border: solid 1px #e0f3d7;
+                margin-left: 10px;
+                background: url(../images/server_status_ok.png) no-repeat center center;
+                &:first-child {
+                    //margin-left: 8px;
+                }
+                &.empty {
+                    background: none;
+                    border-color: #eee;
+                }
+                &.error {
+                    border-color: #f7dfdf;
+                    background-image: url(../images/server_status_error.png);
+                    .tip.error {
+                        display: block;
+                        background-color: #ffeded;
+                        color: #b70000;
+                    }
+                }
+                .text {
+                    width: 90%;
+                    line-height: 1.2;
+                    margin: 1.5em auto 0 auto;
+                    text-align: center;
+                }
+                .tip {
+                    position: absolute;
+                    right: 0;
+                    bottom: 0;
+                    line-height: 1;
+                    font-size: 12px;
+                    color: #349200;
+                    background-color: #ecf7e6;
+                    padding: 3px 2px;
+                    &.error {
+                        display: none;
+                    }
+                }
+
             }
         }
     }
@@ -614,9 +734,9 @@ a {
             }
         }
         .tabs-duplicate-code {
-            margin-top: 6px;
+            margin-top: 16px;
             .tabs-body {
-                padding: 5px 0 5px 0;
+                //padding: 5px 0 5px 0;
             }
             .table-grid {
 
