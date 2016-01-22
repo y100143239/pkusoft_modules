@@ -6,7 +6,7 @@
         ydbl = {},  // 异地办理
         sjzl = {}   // 数据质量
         ;
-
+    window.Utils = Utils;
     Utils.ajax = function ( options ) {
         var setting = {
             type: "POST", //请求方式 ("POST" 或 "GET")
@@ -52,6 +52,30 @@
     };
     Utils.alert = {
         html: '<div class="alert alert-warning"> <button type="button" class="close" ><span>×</span></button> <strong>提示：</strong>网络繁忙，请稍后重试！</div>',
+        show: function show( $target ) {
+            if ( !this._isAdded( $target ) ) {
+                this._add( $target );
+            }
+            $target.find( ".alert-warning" ).show();
+            return this;
+        },
+        hide: function hide( $target ) {
+            $target.find( ".alert-warning" ).hide();
+            return this;
+        },
+        _add: function ( $target ) {
+            var _this = this;
+            $target.css( "position", function ( index, val ) {
+                return val === "static" ? "relative" : val;
+            } );
+            $( this.html ).appendTo( $target ).find(".close" ).on("click", function() {
+                _this.hide( $target );
+            });
+            return this;
+        },
+        _isAdded: function ( $target ) {
+            return $target.find( ".alert-warning" ).length > 0;
+        }
     };
 
     function Pagination ( setting ) {
@@ -157,7 +181,7 @@
             return this;
         },
         bind: function () {
-            this.$bottomMenu.find( ".bottom-menu-item" ).on( "click", function bottomMenuItemClickHandler() {
+            this.$bottomMenu.find( ".bottom-menu-item" ).not(".disabled").on( "click", function bottomMenuItemClickHandler() {
                 var $this = $( this ),
                     targetId = $this.attr( "data-id" );
 
@@ -173,8 +197,9 @@
 
     // 区级数据
     qjsj = {
-        $container: null,
-        $items: null,
+        $container: ".js--qjsj-data",
+        $items: ".map-hot-item",
+        $serviceStatus: ".js--service-status",
         isUpading: false,
         requestSetting: {
             $target: ".qjsj-map",
@@ -199,8 +224,9 @@
             this.update( this.$items.eq( 0 ) );
         },
         render: function () {
-            this.$container = $( ".js--qjsj-data" );
-            this.$items = $( ".map-hot-item" );
+            this.$container = $( this.$container );
+            this.$items = $( this.$items );
+            this.$serviceStatus = $( this.$serviceStatus );
             return this;
         },
         bind: function () {
@@ -263,12 +289,14 @@
 
                     html = doT.template( template )( responseData );
                     _this.$container.html( html );
+
+                    // 服务状况
+                    _this.$serviceStatus.html( doT.template( Template.qjsj.serviceStatus.template ) ( responseData.serviceStatus ) );
+
                     _this.isUpading = false;
                     Utils.wait.hide( _this.$container );
                 },
                 error: function () { // 此处为测试数据
-
-
 
                     data = Template.qjsj.data;
 
@@ -278,11 +306,14 @@
 
                     _this.isUpading = false;
                     Utils.wait.hide( _this.$container );
+                    Utils.alert.show( _this.$container );
 
                     //---- 测试数据
                     if ( IS_DEV !== true ) return;
                     html = doT.template( template )( data );
                     _this.$container.html( html );
+                    // 服务状况
+                    _this.$serviceStatus.html( doT.template( Template.qjsj.serviceStatus.template ) ( data.serviceStatus ) );
                 }
             } );
 
@@ -450,10 +481,15 @@
                 },
                 function getDataErrorHandler() { // 测试数据
 
+                    _this.isUpading = false;
+                    Utils.wait.hide( _this.$container );
+                    Utils.alert.show( _this.$container );
+
                     window[ errorCallback ]( _this.data );
+                    //---- 测试数据
+                    if ( IS_DEV !== true ) return;
 
                     var data = _this.data;
-
                     _this._render( data, title + " |" + timeText );
                 }
             );
@@ -617,7 +653,15 @@
                 },
                 function getDataErrorHandler() { // 测试数据
 
+
+                    _this.isUpading = false;
+                    Utils.wait.hide( _this.$container );
+                    Utils.alert.show( _this.$container );
+
                     window[ _this.requestSetting.errorCallback ]();
+                    //---- 测试数据
+                    if ( IS_DEV !== true ) return;
+
 
                     _this._render( Template.ywjg.data.slice( 0, Math.floor( 4 * Math.random() ) ), Template.ywjg.template );
                     _this.pagination.update( "1", "1" );
@@ -743,7 +787,13 @@
                 },
                 function getDataErrorHandler() { // 测试数据
 
+                    _this.isUpading = false;
+                    Utils.wait.hide( _this.$container );
+                    Utils.alert.show( _this.$container );
+
                     window[ _this.requestSetting.errorCallback ]();
+                    //---- 测试数据
+                    if ( IS_DEV !== true ) return;
 
                     _this._render( Template.ydbl.data.slice( 0, Math.floor( 4 * Math.random() ) ), Template.ydbl.template );
                     _this.pagination.update( "1", "1" );
@@ -918,8 +968,13 @@
                     _this._render( responseData, title );
                 },
                 function getDataErrorHandler() { // 测试数据
+                    _this.isUpading = false;
+                    Utils.wait.hide( _this.$container );
+                    Utils.alert.show( _this.$container );
 
                     var data = window[ errorCallback ]( _this.data );
+                    //---- 测试数据
+                    if ( IS_DEV !== true ) return;
 
                     _this._render( data, title );
                 }
@@ -1031,12 +1086,17 @@
                     responseData = window[ _this.requestSetting.successCallback ]( responseData );
 
                     // 2. 更新到页面（获取数据成功）
-                    _this._render( responseData, Template.ywjg.template );
+                    _this._render( responseData, Template.sjzl.template );
                     _this.pagination.update( responseData[ "totalRecords" ] || "", responseData[ "pageNum" ] || "1" );
                 },
                 function getDataErrorHandler() { // 测试数据
+                    _this.isUpading = false;
+                    Utils.wait.hide( _this.$container );
+                    Utils.alert.show( _this.$container );
 
                     window[ _this.requestSetting.errorCallback ]();
+                    //---- 测试数据
+                    if ( IS_DEV !== true ) return;
 
                     _this._render( Template.sjzl.data.slice( 0, Math.floor( 4 * Math.random() ) ), Template.sjzl.template );
                     _this.pagination.update( "1", "1" );
@@ -1098,15 +1158,6 @@
                     body: [{ label: "标准地址总数：", "cont": "4444_" }]
                 }
             ],
-            /*
-            data.serviceStatus:[
-                { serviceName: "信息通信服务平台", status: "" },
-                { serviceName: "异地办证平台", status: "error" },
-                { serviceName: "区级指纹平台", status: "" },
-                { serviceName: "自动统计服务", status: "" },
-                { serviceName: "制证打包服务", status: "" }
-            ],
-            */
             template: '{{~it:value:index}}\
                     <div class="data-panel">\
                         <div class="panel-heading">\
@@ -1123,7 +1174,29 @@
                         {{?}}\
                         </div>\
                     </div>\
-                {{~}}'
+                {{~}}',
+            serviceStatus: {
+                data:  {
+                    data:[ // status属性值为"error"时显示为“运行异常”
+                        { serviceName: "信息通信服务平台", status: "" },
+                        { serviceName: "异地办证平台", status: "" },
+                        { serviceName: "区级指纹平台", status: "" },
+                        { serviceName: "自动统计服务", status: "" },
+                        { serviceName: "制证打包服务", status: "" }
+                    ]
+                },
+                template:
+                    '{{~it.data:value:index}}\
+                        <div class="service-status-item {{? value.status && value.status === "error"  }}error{{?}}">\
+                            <p class="text">{{= value.serviceName }}</p>\
+                            <span class="tip">运行良好</span>\
+                            <span class="tip error">运行异常</span>\
+                        </div>\
+                    {{~}}    \
+                    {{  for ( var i = 0, len = 6 - it.data.length; i < len; i++ ) {  }}\
+                        <div class="service-status-item empty"></div>\
+                    {{ } }}'
+            }
         },
         // 业务监管
         ywjg: {

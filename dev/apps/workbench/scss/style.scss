@@ -68,8 +68,12 @@ a {
 }
 
 .alert {
+    position: absolute;
+    //width: 50%;
+    top: 30%;
+    left: 20%;
+    right: 20%;
     padding: 15px;
-    margin-bottom: 20px;
     border: 1px solid transparent;
     border-radius: 4px;
     font-size: 14px;
@@ -81,7 +85,6 @@ a {
 
     button.close {
         padding: 0;
-        margin: 0;
         cursor: pointer;
         background: 0 0;
         border: 0;
@@ -93,8 +96,7 @@ a {
         filter: alpha(opacity=20);
         opacity: .2;
         vertical-align: middle;
-        position: relative;
-        top: -2px;
+        margin-top: -3px;
         &:hover {
             color: #000;
             text-decoration: none;
@@ -164,6 +166,11 @@ a {
                 color                 : #ffffff;
                 background-color      : #62a0ea;
                 background-position-y : -106px !important;
+            }
+            &.disabled {
+                color      : #e6e6e6;
+                background-color: #fff;
+                cursor: not-allowed;
             }
         }
     }

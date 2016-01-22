@@ -45,12 +45,39 @@ function mapSuccessCallback( responseData ) {
             body: []
         }
     ];
+
+    // 服务状况
+    var test = Math.round( Math.random() ) == 1; // 用于测试
+
+    // 将服务状况挂载到数值对象上：serviceName 的值可自行更改；status的值为"error"时表示运行异常
+    _sampleData.serviceStatus = {
+        data:[ // status属性值为"error"时显示为“运行异常”
+            { serviceName: "信息通信服务平台", status: "" },
+            { serviceName: "异地办证平台", status: "" },
+            { serviceName: "区级指纹平台", status: "" },
+            { serviceName: "自动统计服务", status: "" },
+            { serviceName: "制证打包服务", status: test ? "error": "" }
+        ]
+    };
     responseData = _sampleData;
 }
 function mapErrorCallback( data, cityId ) {
     data[ 0 ].heading.cont = "3333_" + cityId;
     data[ 1 ].heading.cont = "3333_" + cityId;
     data[ 2 ].heading.cont = "3333_" + cityId;
+
+    var test = Math.round( Math.random() ) == 1; // 用于测试
+    data.serviceStatus = {
+        data:[ // status属性值为"error"时显示为“运行异常”
+            { serviceName: "信息通信服务平台", status: "" },
+            { serviceName: "异地办证平台", status: "" },
+            { serviceName: "区级指纹平台", status: "" },
+            { serviceName: "自动统计服务", status: "" },
+            { serviceName: "制证打包服务", status: test ? "error": "" }
+        ]
+    }
+
+
 }
 
 /* 业务监管-业务总量
