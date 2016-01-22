@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title></title>
     <link rel="stylesheet" href="./css/style.css"/>
+    <script>var IS_DEV = true;</script>
     <script src="../../../dev/modules/jquery/jquery-1.9.0.js"></script>
     <script src="../../../dev/modules/utils/doT.js"></script>
     <script src="./js/main.js?v=0.2" charset="utf-8"></script>
@@ -15,26 +16,26 @@
         <div class="wd-wrap">
             <div class="wd-main">
                 <!-- 区级数据 -->
-                <div class="wd-qjsj" id="qjsj" style="display: block;">
+                <div class="wd-qjsj" id="qjsj" style="display: none;">
                     <div class="qjsj-map"
                          data-url="http://www.baidu.com"
                          data-success-callback="mapSuccessCallback"
                          data-error-callback="mapErrorCallback" >
 
                         <div class="map-hot">
-                            <div class="map-hot-item" id="map-00" data-city-id="00"><span class="tip">内蒙</span></div>
-                            <div class="map-hot-item active" id="map-01" data-city-id="01"><span class="tip">阿拉善</span></div>
-                            <div class="map-hot-item" id="map-03" data-city-id="03"><span class="tip">鄂尔多斯</span></div>
-                            <div class="map-hot-item" id="map-02" data-city-id="02"><span class="tip">乌海</span></div>
-                            <div class="map-hot-item" id="map-04" data-city-id="04"><span class="tip">巴彦淖尔</span></div>
-                            <div class="map-hot-item" id="map-08" data-city-id="08"><span class="tip">锡林郭勒</span></div>
-                            <div class="map-hot-item" id="map-07" data-city-id="07"><span class="tip">乌兰察布</span></div>
-                            <div class="map-hot-item" id="map-06" data-city-id="06"><span class="tip">包头</span></div>
-                            <div class="map-hot-item" id="map-05" data-city-id="05"><span class="tip">呼和浩特</span></div>
-                            <div class="map-hot-item" id="map-09" data-city-id="09"><span class="tip">赤峰</span></div>
-                            <div class="map-hot-item" id="map-10" data-city-id="10"><span class="tip">通辽</span></div>
-                            <div class="map-hot-item" id="map-11" data-city-id="11"><span class="tip">兴安</span></div>
-                            <div class="map-hot-item" id="map-12" data-city-id="12"><span class="tip">呼伦贝尔</span></div>
+                            <div class="map-hot-item" id="map-00" data-city-id="00"><a class="tip">内蒙</a></div>
+                            <div class="map-hot-item active" id="map-01" data-city-id="01"><a class="tip" title="访问该盟市(阿拉善)系统" href="http://css.doyoe.com/" target="_blank">阿拉善 <img src="./images/icon_link.png" alt=""/></a></div>
+                            <div class="map-hot-item" id="map-03" data-city-id="03"><a class="tip" title="访问该盟市(鄂尔多斯)系统" href="http://css.doyoe.com/" target="_blank">鄂尔多斯 <img src="./images/icon_link.png" alt=""/></a></div>
+                            <div class="map-hot-item" id="map-02" data-city-id="02"><a class="tip" title="访问该盟市(乌海)系统" href="http://css.doyoe.com/" target="_blank">乌海 <img src="./images/icon_link.png" alt=""/></a></div>
+                            <div class="map-hot-item error" id="map-04" data-city-id="04"><a class="tip" title="访问该盟市(巴彦淖尔)系统" href="http://css.doyoe.com/" target="_blank">巴彦淖尔 <img src="./images/icon_link.png" alt=""/></a></div>
+                            <div class="map-hot-item" id="map-08" data-city-id="08"><a class="tip" title="访问该盟市(锡林郭勒)系统" href="http://css.doyoe.com/" target="_blank">锡林郭勒 <img src="./images/icon_link.png" alt=""/></a></div>
+                            <div class="map-hot-item" id="map-07" data-city-id="07"><a class="tip" title="访问该盟市(乌兰察布)系统" href="http://css.doyoe.com/" target="_blank">乌兰察布 <img src="./images/icon_link.png" alt=""/></a></div>
+                            <div class="map-hot-item" id="map-06" data-city-id="06"><a class="tip" title="访问该盟市(包头)系统" href="http://css.doyoe.com/" target="_blank">包头 <img src="./images/icon_link.png" alt=""/></a></div>
+                            <div class="map-hot-item" id="map-05" data-city-id="05"><a class="tip" title="访问该盟市(呼和浩特)系统" href="http://css.doyoe.com/" target="_blank">呼和浩特 <img src="./images/icon_link.png" alt=""/></a></div>
+                            <div class="map-hot-item" id="map-09" data-city-id="09"><a class="tip" title="访问该盟市(赤峰)系统" href="http://css.doyoe.com/" target="_blank">赤峰 <img src="./images/icon_link.png" alt=""/></a></div>
+                            <div class="map-hot-item" id="map-10" data-city-id="10"><a class="tip" title="访问该盟市(通辽)系统" href="http://css.doyoe.com/" target="_blank">通辽 <img src="./images/icon_link.png" alt=""/></a></div>
+                            <div class="map-hot-item" id="map-11" data-city-id="11"><a class="tip" title="访问该盟市(兴安)系统" href="http://css.doyoe.com/" target="_blank">兴安 <img src="./images/icon_link.png" alt=""/></a></div>
+                            <div class="map-hot-item" id="map-12" data-city-id="12"><a class="tip" title="访问该盟市(呼伦贝尔)系统" href="http://css.doyoe.com/" target="_blank">呼伦贝尔 <img src="./images/icon_link.png" alt=""/></a></div>
                         </div>
                         <div class="map-current"><span class="label">当前查看：</span><span class="cur-city">阿拉善</span></div>
                     </div>
@@ -68,7 +69,22 @@
                                 <p class="total"><span class="label">总数：</span><span class="cont">16238653</span></p>
                                 <img class="icon" src="./images/data_icon_3.png"><span class="title">地址</span>
                             </div>
+                            <div class="panel-body">
+                                <div class="data-item line-first"><span class="label">标准地址总数：</span><span class="cont">9238653</span></div>
+                            </div>
                         </div>
+                    </div>
+
+                    <div class="clear"></div>
+
+                    <div class="service-status">
+                        <div class="service-status-item"><p class="text">信息通信服务平台</p> <span class="tip">运行良好</span><span class="tip error">运行异常</span></div>
+                        <div class="service-status-item error"><p class="text">异地办证平台</p> <span class="tip">运行良好</span><span class="tip error">运行异常</span></div>
+                        <div class="service-status-item"><p class="text">区级指纹平台</p> <span class="tip">运行良好</span><span class="tip error">运行异常</span></div>
+                        <div class="service-status-item"><p class="text">自动统计服务</p> <span class="tip">运行良好</span><span class="tip error">运行异常</span></div>
+                        <div class="service-status-item"><p class="text">制证打包服务</p> <span class="tip">运行良好</span><span class="tip error">运行异常</span></div>
+                        <div class="service-status-item empty"></div>
+                        <div class="clear"></div>
                     </div>
                 </div>
                 <!-- /区级数据 -->
@@ -349,9 +365,12 @@
                 <!-- /异地办理 -->
 
                 <!-- 数据质量 -->
-                <div class="wd-sjzl" id="sjzl" style="display: none;">
+                <div class="wd-sjzl" id="sjzl" style="display: block;">
                     <!-- 数据质量问题 -->
-                    <div class="tabs tabs-quality-problems">
+                    <div class="tabs tabs-quality-problems"
+                         data-url="http://www.baidu.com"
+                         data-success-callback="problemsSuccessCallback"
+                         data-error-callback="problemsErrorCallback">
                         <div class="tabs-nav">
                             <div class="nav-item active" data-value="00"><a href="#">全部数据质量问题</a></div>
                             <div class="nav-item" data-value=""><a href="#">分类数据质量问题</a>
@@ -421,20 +440,25 @@
                     <!-- /数据质量问题 -->
 
                     <!-- 重证号 -->
-                    <div class="tabs tabs-duplicate-code">
+                    <div class="tabs tabs-duplicate-code"
+                         data-url="http://www.baidu.com"
+                         data-success-callback="duplicateSuccessCallback"
+                         data-error-callback="duplicateErrorCallback">
                         <div class="tabs-nav">
                             <div class="nav-item active" data-value="00"><a href="#">跨盟市重证号</a></div>
                             <div class="clear"></div>
                         </div>
                         <div class="tabs-body">
                             <table class="table-grid">
-                                <col width="36"/> <!--#-->
-                                <col width="160"/> <!--重号号码-->
-                                <col width="80"/> <!--姓名-->
-                                <col width="36"/> <!--性别-->
-                                <col width="100"/> <!--出生日期-->
-                                <col width=""/> <!--户籍所在地-->
-                                <col width="120"/> <!--联系电话-->
+                                <colgroup>
+                                    <col width="36"/> <!--#-->
+                                    <col width="160"/> <!--重号号码-->
+                                    <col width="80"/> <!--姓名-->
+                                    <col width="36"/> <!--性别-->
+                                    <col width="100"/> <!--出生日期-->
+                                    <col width=""/> <!--户籍所在地-->
+                                    <col width="120"/> <!--联系电话-->
+                                </colgroup>
                                 <tbody class="tbody-heading">
                                 <tr>
                                     <th>#</th>
@@ -456,17 +480,17 @@
                                 <tr>
                                     <td colspan="7">
                                         <div class="pagination">
-                                            <a href="#" class="pagination-btn page-first"></a>
-                                            <a href="#" class="pagination-btn page-pre"></a>
+                                            <a href="#" class="pagination-btn page-first" title="第1页"></a>
+                                            <a href="#" class="pagination-btn page-pre" title="前一页"></a>
                                             <span class="pagination-divider"></span>
-                                            <span class="pagination-num"><input type="text" value="1"/> / <span class="total">20</span></span>
+                                            <span class="pagination-num">第 <input type="text" value="1" class="js--currentPage"/> 页</span>
                                             <span class="pagination-divider"></span>
-                                            <a href="#" class="pagination-btn page-next"></a>
-                                            <a href="#" class="pagination-btn page-last"></a>
+                                            <a href="#" class="pagination-btn page-next" title="下一页"></a>
+                                            <!--<a href="#" class="pagination-btn page-last hidden"></a>-->
                                             <span class="pagination-divider"></span>
-                                            <a href="#" class="pagination-btn refresh"></a>
+                                            <a href="#" class="pagination-btn refresh"  title="刷新"></a>
                                             <span class="pagination-divider"></span>
-                                            <span class="pagination-total">总数：80</span>
+                                            <!--<span class="pagination-total hidden">总数：<span class="js&#45;&#45;totalRecords">80</span></span>-->
                                         </div>
                                     </td>
                                 </tr>

@@ -6,6 +6,8 @@
 
 a {
   text-decoration: none; }
+  a img {
+    border: none 0; }
 
 .clear {
   clear: both;
@@ -18,6 +20,41 @@ a {
 
 .disabled {
   cursor: not-allowed; }
+
+.alert {
+  padding: 15px;
+  margin-bottom: 20px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  font-size: 14px; }
+  .alert.alert-warning {
+    color: #8a6d3b;
+    background-color: #fcf8e3;
+    border-color: #faebcc; }
+  .alert button.close {
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    background: 0 0;
+    border: 0;
+    float: right;
+    font-size: 21px;
+    font-weight: 700;
+    line-height: 1;
+    color: #000;
+    filter: alpha(opacity=20);
+    opacity: .2;
+    vertical-align: middle;
+    position: relative;
+    top: -2px; }
+    .alert button.close:hover {
+      color: #000;
+      text-decoration: none;
+      cursor: pointer;
+      filter: alpha(opacity=50);
+      opacity: .5; }
+  .alert strong {
+    font-weight: 700; }
 
 .wait-overlay {
   display: block;
@@ -74,9 +111,12 @@ a {
   .wd-container .wd-qjsj {
     overflow: hidden; }
     .wd-container .wd-qjsj .qjsj-map {
-      width: 340px;
+      width: 354px;
       float: left;
-      padding: 10px 0 0 10px; }
+      padding: 10px;
+      margin: -1px 0 0 -1px;
+      border: solid 1px #eee;
+      background: #fff; }
       .wd-container .wd-qjsj .qjsj-map .map-hot {
         width: 333px;
         height: 246px;
@@ -87,7 +127,7 @@ a {
           .wd-container .wd-qjsj .qjsj-map .map-hot .map-hot-item .tip {
             display: none;
             padding: 2px;
-            color: #ffffff;
+            color: #CFEBF4;
             background-color: #31b0d5;
             border-color: #269abc; }
         .wd-container .wd-qjsj .qjsj-map .map-hot #map-00 {
@@ -100,12 +140,22 @@ a {
             background-image: url("../images/map_00_hover.png"); }
             .wd-container .wd-qjsj .qjsj-map .map-hot #map-00:hover .tip, .wd-container .wd-qjsj .qjsj-map .map-hot #map-00.active .tip {
               display: block; }
+          .wd-container .wd-qjsj .qjsj-map .map-hot #map-00.error {
+            background-image: url("../images/map_00_error.png"); }
           .wd-container .wd-qjsj .qjsj-map .map-hot #map-00 .tip {
             font-size: 12px;
             position: absolute;
             top: 44px;
             left: 54px;
-            width: 25px; }
+            width: 25px;
+            vertical-align: middle; }
+            .wd-container .wd-qjsj .qjsj-map .map-hot #map-00 .tip img {
+              height: 12px;
+              vertical-align: middle; }
+            .wd-container .wd-qjsj .qjsj-map .map-hot #map-00 .tip:hover {
+              color: #fff; }
+              .wd-container .wd-qjsj .qjsj-map .map-hot #map-00 .tip:hover img {
+                margin: -1px 0 0 1px; }
         .wd-container .wd-qjsj .qjsj-map .map-hot #map-01 {
           left: 0px;
           top: 139px;
@@ -116,12 +166,22 @@ a {
             background-image: url("../images/map_01_hover.png"); }
             .wd-container .wd-qjsj .qjsj-map .map-hot #map-01:hover .tip, .wd-container .wd-qjsj .qjsj-map .map-hot #map-01.active .tip {
               display: block; }
+          .wd-container .wd-qjsj .qjsj-map .map-hot #map-01.error {
+            background-image: url("../images/map_01_error.png"); }
           .wd-container .wd-qjsj .qjsj-map .map-hot #map-01 .tip {
             font-size: 12px;
             position: absolute;
             top: -20px;
-            left: 20px;
-            width: 37px; }
+            left: 0px;
+            width: 57px;
+            vertical-align: middle; }
+            .wd-container .wd-qjsj .qjsj-map .map-hot #map-01 .tip img {
+              height: 12px;
+              vertical-align: middle; }
+            .wd-container .wd-qjsj .qjsj-map .map-hot #map-01 .tip:hover {
+              color: #fff; }
+              .wd-container .wd-qjsj .qjsj-map .map-hot #map-01 .tip:hover img {
+                margin: -1px 0 0 1px; }
         .wd-container .wd-qjsj .qjsj-map .map-hot #map-02 {
           left: 104px;
           top: 206px;
@@ -132,12 +192,22 @@ a {
             background-image: url("../images/map_02_hover.png"); }
             .wd-container .wd-qjsj .qjsj-map .map-hot #map-02:hover .tip, .wd-container .wd-qjsj .qjsj-map .map-hot #map-02.active .tip {
               display: block; }
+          .wd-container .wd-qjsj .qjsj-map .map-hot #map-02.error {
+            background-image: url("../images/map_02_error.png"); }
           .wd-container .wd-qjsj .qjsj-map .map-hot #map-02 .tip {
             font-size: 12px;
             position: absolute;
             top: 0px;
-            left: -28px;
-            width: 25px; }
+            left: -48px;
+            width: 45px;
+            vertical-align: middle; }
+            .wd-container .wd-qjsj .qjsj-map .map-hot #map-02 .tip img {
+              height: 12px;
+              vertical-align: middle; }
+            .wd-container .wd-qjsj .qjsj-map .map-hot #map-02 .tip:hover {
+              color: #fff; }
+              .wd-container .wd-qjsj .qjsj-map .map-hot #map-02 .tip:hover img {
+                margin: -1px 0 0 1px; }
         .wd-container .wd-qjsj .qjsj-map .map-hot #map-03 {
           left: 100px;
           top: 192px;
@@ -148,12 +218,22 @@ a {
             background-image: url("../images/map_03_hover.png"); }
             .wd-container .wd-qjsj .qjsj-map .map-hot #map-03:hover .tip, .wd-container .wd-qjsj .qjsj-map .map-hot #map-03.active .tip {
               display: block; }
+          .wd-container .wd-qjsj .qjsj-map .map-hot #map-03.error {
+            background-image: url("../images/map_03_error.png"); }
           .wd-container .wd-qjsj .qjsj-map .map-hot #map-03 .tip {
             font-size: 12px;
             position: absolute;
-            top: 56px;
-            left: 0px;
-            width: 50px; }
+            top: 53px;
+            left: -20px;
+            width: 70px;
+            vertical-align: middle; }
+            .wd-container .wd-qjsj .qjsj-map .map-hot #map-03 .tip img {
+              height: 12px;
+              vertical-align: middle; }
+            .wd-container .wd-qjsj .qjsj-map .map-hot #map-03 .tip:hover {
+              color: #fff; }
+              .wd-container .wd-qjsj .qjsj-map .map-hot #map-03 .tip:hover img {
+                margin: -1px 0 0 1px; }
         .wd-container .wd-qjsj .qjsj-map .map-hot #map-04 {
           left: 91px;
           top: 165px;
@@ -164,12 +244,22 @@ a {
             background-image: url("../images/map_04_hover.png"); }
             .wd-container .wd-qjsj .qjsj-map .map-hot #map-04:hover .tip, .wd-container .wd-qjsj .qjsj-map .map-hot #map-04.active .tip {
               display: block; }
+          .wd-container .wd-qjsj .qjsj-map .map-hot #map-04.error {
+            background-image: url("../images/map_04_error.png"); }
           .wd-container .wd-qjsj .qjsj-map .map-hot #map-04 .tip {
             font-size: 12px;
             position: absolute;
             top: -20px;
-            left: 0px;
-            width: 50px; }
+            left: -20px;
+            width: 70px;
+            vertical-align: middle; }
+            .wd-container .wd-qjsj .qjsj-map .map-hot #map-04 .tip img {
+              height: 12px;
+              vertical-align: middle; }
+            .wd-container .wd-qjsj .qjsj-map .map-hot #map-04 .tip:hover {
+              color: #fff; }
+              .wd-container .wd-qjsj .qjsj-map .map-hot #map-04 .tip:hover img {
+                margin: -1px 0 0 1px; }
         .wd-container .wd-qjsj .qjsj-map .map-hot #map-05 {
           left: 156px;
           top: 186px;
@@ -180,12 +270,22 @@ a {
             background-image: url("../images/map_05_hover.png"); }
             .wd-container .wd-qjsj .qjsj-map .map-hot #map-05:hover .tip, .wd-container .wd-qjsj .qjsj-map .map-hot #map-05.active .tip {
               display: block; }
+          .wd-container .wd-qjsj .qjsj-map .map-hot #map-05.error {
+            background-image: url("../images/map_05_error.png"); }
           .wd-container .wd-qjsj .qjsj-map .map-hot #map-05 .tip {
             font-size: 12px;
             position: absolute;
-            top: 36px;
-            left: 10px;
-            width: 50px; }
+            top: 27px;
+            left: 8px;
+            width: 70px;
+            vertical-align: middle; }
+            .wd-container .wd-qjsj .qjsj-map .map-hot #map-05 .tip img {
+              height: 12px;
+              vertical-align: middle; }
+            .wd-container .wd-qjsj .qjsj-map .map-hot #map-05 .tip:hover {
+              color: #fff; }
+              .wd-container .wd-qjsj .qjsj-map .map-hot #map-05 .tip:hover img {
+                margin: -1px 0 0 1px; }
         .wd-container .wd-qjsj .qjsj-map .map-hot #map-06 {
           left: 140px;
           top: 162px;
@@ -196,12 +296,22 @@ a {
             background-image: url("../images/map_06_hover.png"); }
             .wd-container .wd-qjsj .qjsj-map .map-hot #map-06:hover .tip, .wd-container .wd-qjsj .qjsj-map .map-hot #map-06.active .tip {
               display: block; }
+          .wd-container .wd-qjsj .qjsj-map .map-hot #map-06.error {
+            background-image: url("../images/map_06_error.png"); }
           .wd-container .wd-qjsj .qjsj-map .map-hot #map-06 .tip {
             font-size: 12px;
             position: absolute;
-            top: -20px;
-            left: 0px;
-            width: 25px; }
+            top: -18px;
+            left: 9px;
+            width: 45px;
+            vertical-align: middle; }
+            .wd-container .wd-qjsj .qjsj-map .map-hot #map-06 .tip img {
+              height: 12px;
+              vertical-align: middle; }
+            .wd-container .wd-qjsj .qjsj-map .map-hot #map-06 .tip:hover {
+              color: #fff; }
+              .wd-container .wd-qjsj .qjsj-map .map-hot #map-06 .tip:hover img {
+                margin: -1px 0 0 1px; }
         .wd-container .wd-qjsj .qjsj-map .map-hot #map-07 {
           left: 154px;
           top: 155px;
@@ -212,12 +322,22 @@ a {
             background-image: url("../images/map_07_hover.png"); }
             .wd-container .wd-qjsj .qjsj-map .map-hot #map-07:hover .tip, .wd-container .wd-qjsj .qjsj-map .map-hot #map-07.active .tip {
               display: block; }
+          .wd-container .wd-qjsj .qjsj-map .map-hot #map-07.error {
+            background-image: url("../images/map_07_error.png"); }
           .wd-container .wd-qjsj .qjsj-map .map-hot #map-07 .tip {
             font-size: 12px;
             position: absolute;
-            top: 58px;
+            top: 50px;
             left: 24px;
-            width: 50px; }
+            width: 70px;
+            vertical-align: middle; }
+            .wd-container .wd-qjsj .qjsj-map .map-hot #map-07 .tip img {
+              height: 12px;
+              vertical-align: middle; }
+            .wd-container .wd-qjsj .qjsj-map .map-hot #map-07 .tip:hover {
+              color: #fff; }
+              .wd-container .wd-qjsj .qjsj-map .map-hot #map-07 .tip:hover img {
+                margin: -1px 0 0 1px; }
         .wd-container .wd-qjsj .qjsj-map .map-hot #map-08 {
           left: 165px;
           top: 103px;
@@ -228,12 +348,22 @@ a {
             background-image: url("../images/map_08_hover.png"); }
             .wd-container .wd-qjsj .qjsj-map .map-hot #map-08:hover .tip, .wd-container .wd-qjsj .qjsj-map .map-hot #map-08.active .tip {
               display: block; }
+          .wd-container .wd-qjsj .qjsj-map .map-hot #map-08.error {
+            background-image: url("../images/map_08_error.png"); }
           .wd-container .wd-qjsj .qjsj-map .map-hot #map-08 .tip {
             font-size: 12px;
             position: absolute;
             top: 0px;
-            left: 0px;
-            width: 50px; }
+            left: -20px;
+            width: 70px;
+            vertical-align: middle; }
+            .wd-container .wd-qjsj .qjsj-map .map-hot #map-08 .tip img {
+              height: 12px;
+              vertical-align: middle; }
+            .wd-container .wd-qjsj .qjsj-map .map-hot #map-08 .tip:hover {
+              color: #fff; }
+              .wd-container .wd-qjsj .qjsj-map .map-hot #map-08 .tip:hover img {
+                margin: -1px 0 0 1px; }
         .wd-container .wd-qjsj .qjsj-map .map-hot #map-09 {
           left: 226px;
           top: 126px;
@@ -244,12 +374,22 @@ a {
             background-image: url("../images/map_09_hover.png"); }
             .wd-container .wd-qjsj .qjsj-map .map-hot #map-09:hover .tip, .wd-container .wd-qjsj .qjsj-map .map-hot #map-09.active .tip {
               display: block; }
+          .wd-container .wd-qjsj .qjsj-map .map-hot #map-09.error {
+            background-image: url("../images/map_09_error.png"); }
           .wd-container .wd-qjsj .qjsj-map .map-hot #map-09 .tip {
             font-size: 12px;
             position: absolute;
-            top: 70px;
-            left: 0px;
-            width: 25px; }
+            top: 63px;
+            left: 10px;
+            width: 45px;
+            vertical-align: middle; }
+            .wd-container .wd-qjsj .qjsj-map .map-hot #map-09 .tip img {
+              height: 12px;
+              vertical-align: middle; }
+            .wd-container .wd-qjsj .qjsj-map .map-hot #map-09 .tip:hover {
+              color: #fff; }
+              .wd-container .wd-qjsj .qjsj-map .map-hot #map-09 .tip:hover img {
+                margin: -1px 0 0 1px; }
         .wd-container .wd-qjsj .qjsj-map .map-hot #map-10 {
           left: 260px;
           top: 121px;
@@ -260,12 +400,22 @@ a {
             background-image: url("../images/map_10_hover.png"); }
             .wd-container .wd-qjsj .qjsj-map .map-hot #map-10:hover .tip, .wd-container .wd-qjsj .qjsj-map .map-hot #map-10.active .tip {
               display: block; }
+          .wd-container .wd-qjsj .qjsj-map .map-hot #map-10.error {
+            background-image: url("../images/map_10_error.png"); }
           .wd-container .wd-qjsj .qjsj-map .map-hot #map-10 .tip {
             font-size: 12px;
             position: absolute;
             top: 30px;
-            left: 60px;
-            width: 25px; }
+            left: 48px;
+            width: 45px;
+            vertical-align: middle; }
+            .wd-container .wd-qjsj .qjsj-map .map-hot #map-10 .tip img {
+              height: 12px;
+              vertical-align: middle; }
+            .wd-container .wd-qjsj .qjsj-map .map-hot #map-10 .tip:hover {
+              color: #fff; }
+              .wd-container .wd-qjsj .qjsj-map .map-hot #map-10 .tip:hover img {
+                margin: -1px 0 0 1px; }
         .wd-container .wd-qjsj .qjsj-map .map-hot #map-11 {
           left: 262px;
           top: 90px;
@@ -276,12 +426,22 @@ a {
             background-image: url("../images/map_11_hover.png"); }
             .wd-container .wd-qjsj .qjsj-map .map-hot #map-11:hover .tip, .wd-container .wd-qjsj .qjsj-map .map-hot #map-11.active .tip {
               display: block; }
+          .wd-container .wd-qjsj .qjsj-map .map-hot #map-11.error {
+            background-image: url("../images/map_11_error.png"); }
           .wd-container .wd-qjsj .qjsj-map .map-hot #map-11 .tip {
             font-size: 12px;
             position: absolute;
             top: 10px;
-            left: 50px;
-            width: 25px; }
+            left: 40px;
+            width: 45px;
+            vertical-align: middle; }
+            .wd-container .wd-qjsj .qjsj-map .map-hot #map-11 .tip img {
+              height: 12px;
+              vertical-align: middle; }
+            .wd-container .wd-qjsj .qjsj-map .map-hot #map-11 .tip:hover {
+              color: #fff; }
+              .wd-container .wd-qjsj .qjsj-map .map-hot #map-11 .tip:hover img {
+                margin: -1px 0 0 1px; }
         .wd-container .wd-qjsj .qjsj-map .map-hot #map-12 {
           left: 219px;
           top: 0px;
@@ -292,27 +452,38 @@ a {
             background-image: url("../images/map_12_hover.png"); }
             .wd-container .wd-qjsj .qjsj-map .map-hot #map-12:hover .tip, .wd-container .wd-qjsj .qjsj-map .map-hot #map-12.active .tip {
               display: block; }
+          .wd-container .wd-qjsj .qjsj-map .map-hot #map-12.error {
+            background-image: url("../images/map_12_error.png"); }
           .wd-container .wd-qjsj .qjsj-map .map-hot #map-12 .tip {
             font-size: 12px;
             position: absolute;
             top: 10px;
-            left: -10px;
-            width: 50px; }
+            left: -30px;
+            width: 70px;
+            vertical-align: middle; }
+            .wd-container .wd-qjsj .qjsj-map .map-hot #map-12 .tip img {
+              height: 12px;
+              vertical-align: middle; }
+            .wd-container .wd-qjsj .qjsj-map .map-hot #map-12 .tip:hover {
+              color: #fff; }
+              .wd-container .wd-qjsj .qjsj-map .map-hot #map-12 .tip:hover img {
+                margin: -1px 0 0 1px; }
       .wd-container .wd-qjsj .qjsj-map .map-current {
         font-size: 16px;
-        margin-top: 2em;
+        margin-top: 1em;
         text-align: right; }
         .wd-container .wd-qjsj .qjsj-map .map-current .label {
           color: #999; }
         .wd-container .wd-qjsj .qjsj-map .map-current .cur-city {
           color: #333; }
     .wd-container .wd-qjsj .qujsj-data {
-      float: right;
-      width: 400px;
+      float: left;
+      width: 425px;
       color: #666; }
       .wd-container .wd-qjsj .qujsj-data .data-panel {
-        background: #fff;
-        margin: 20px 20px 0 0; }
+        background: #fff; }
+        .wd-container .wd-qjsj .qujsj-data .data-panel:first-child .panel-body {
+          height: 61px; }
         .wd-container .wd-qjsj .qujsj-data .data-panel .panel-heading {
           overflow: hidden;
           height: 39px;
@@ -323,7 +494,7 @@ a {
           .wd-container .wd-qjsj .qujsj-data .data-panel .panel-heading .total {
             float: right;
             font-size: 14px;
-            width: 50%; }
+            width: 51%; }
           .wd-container .wd-qjsj .qujsj-data .data-panel .panel-heading .icon {
             vertical-align: middle;
             margin-left: 4px;
@@ -332,13 +503,52 @@ a {
           overflow: hidden;
           border: 1px solid #ddd;
           border-top: none 0;
-          padding-top: 1em; }
+          height: 60px; }
           .wd-container .wd-qjsj .qujsj-data .data-panel .panel-body .data-item {
             float: left;
-            width: 50%;
-            margin-bottom: 1em; }
+            width: 49%;
+            margin-top: 0.5em; }
             .wd-container .wd-qjsj .qujsj-data .data-panel .panel-body .data-item.line-first {
               text-indent: 2em; }
+    .wd-container .wd-qjsj .service-status {
+      clear: both;
+      margin-top: 2em; }
+      .wd-container .wd-qjsj .service-status .service-status-item {
+        position: relative;
+        float: left;
+        width: 120px;
+        height: 78px;
+        color: #666;
+        font-size: 16px;
+        border: solid 1px #e0f3d7;
+        margin-left: 10px;
+        background: url(../images/server_status_ok.png) no-repeat center center; }
+        .wd-container .wd-qjsj .service-status .service-status-item.empty {
+          background: none;
+          border-color: #eee; }
+        .wd-container .wd-qjsj .service-status .service-status-item.error {
+          border-color: #f7dfdf;
+          background-image: url(../images/server_status_error.png); }
+          .wd-container .wd-qjsj .service-status .service-status-item.error .tip.error {
+            display: block;
+            background-color: #ffeded;
+            color: #b70000; }
+        .wd-container .wd-qjsj .service-status .service-status-item .text {
+          width: 90%;
+          line-height: 1.2;
+          margin: 1.5em auto 0 auto;
+          text-align: center; }
+        .wd-container .wd-qjsj .service-status .service-status-item .tip {
+          position: absolute;
+          right: 0;
+          bottom: 0;
+          line-height: 1;
+          font-size: 12px;
+          color: #349200;
+          background-color: #ecf7e6;
+          padding: 3px 2px; }
+          .wd-container .wd-qjsj .service-status .service-status-item .tip.error {
+            display: none; }
   .wd-container .wd-ywjg {
     position: relative;
     color: #333;
@@ -620,8 +830,6 @@ a {
       padding-top: 4px;
       height: 190px; }
   .wd-container .wd-sjzl .tabs-duplicate-code {
-    margin-top: 6px; }
-    .wd-container .wd-sjzl .tabs-duplicate-code .tabs-body {
-      padding: 5px 0 5px 0; }
+    margin-top: 16px; }
 
 /*# sourceMappingURL=style.css.map */
