@@ -16,7 +16,7 @@
         <div class="wd-wrap">
             <div class="wd-main">
                 <!-- 区级数据 -->
-                <div class="wd-qjsj" id="qjsj" style="display: none;">
+                <div class="wd-qjsj" id="qjsj" style="display: block;">
                     <div class="qjsj-map"
                          data-url="http://www.baidu.com"
                          data-success-callback="mapSuccessCallback"
@@ -77,9 +77,9 @@
 
                     <div class="clear"></div>
 
-                    <div class="service-status">
+                    <div class="service-status js--service-status">
                         <div class="service-status-item"><p class="text">信息通信服务平台</p> <span class="tip">运行良好</span><span class="tip error">运行异常</span></div>
-                        <div class="service-status-item error"><p class="text">异地办证平台</p> <span class="tip">运行良好</span><span class="tip error">运行异常</span></div>
+                        <div class="service-status-item"><p class="text">异地办证平台</p> <span class="tip">运行良好</span><span class="tip error">运行异常</span></div>
                         <div class="service-status-item"><p class="text">区级指纹平台</p> <span class="tip">运行良好</span><span class="tip error">运行异常</span></div>
                         <div class="service-status-item"><p class="text">自动统计服务</p> <span class="tip">运行良好</span><span class="tip error">运行异常</span></div>
                         <div class="service-status-item"><p class="text">制证打包服务</p> <span class="tip">运行良好</span><span class="tip error">运行异常</span></div>
@@ -365,7 +365,7 @@
                 <!-- /异地办理 -->
 
                 <!-- 数据质量 -->
-                <div class="wd-sjzl" id="sjzl" style="display: block;">
+                <div class="wd-sjzl" id="sjzl" style="display: none;">
                     <!-- 数据质量问题 -->
                     <div class="tabs tabs-quality-problems"
                          data-url="http://www.baidu.com"
@@ -445,7 +445,7 @@
                          data-success-callback="duplicateSuccessCallback"
                          data-error-callback="duplicateErrorCallback">
                         <div class="tabs-nav">
-                            <div class="nav-item active" data-value="00"><a href="#">跨盟市重证号</a></div>
+                            <div class="nav-item active" data-value="00"><a href="javascript:void(0)">跨盟市重证号</a></div>
                             <div class="clear"></div>
                         </div>
                         <div class="tabs-body">
@@ -509,8 +509,8 @@
                 <div class="bottom-menu-item" data-id="ywjg" style="background-position: -112px 21px;">业务监管</div>
                 <div class="bottom-menu-item" data-id="ydbl" style="background-position: -244px 21px;">异地办理</div>
                 <div class="bottom-menu-item" data-id="sjzl" style="background-position: -376px 21px;">数据质量</div>
-                <div class="bottom-menu-item" style="background-position: -511px 21px;;">相片检测</div>
-                <div class="bottom-menu-item" style="background-position: -644px 21px;">数据服务</div>
+                <div class="bottom-menu-item disabled" style="background-position: -511px 21px;;">相片检测</div>
+                <div class="bottom-menu-item disabled" style="background-position: -644px 21px;">数据服务</div>
             </div>
         </div>
     </div>
