@@ -127,53 +127,53 @@
                         </div>
                         <div class="tabs-body">
                             <div class="chart">
-                                <div class="chart-item js--hhht">
-                                    <div class="total"> <div class="percent" style="height: 2%;"><span class="num">12345</span></div> </div>
-                                    <div class="title">呼和浩特</div>
-                                </div>
-                                <div class="chart-item js--bt">
-                                    <div class="total"> <div class="percent" style="height: 12%;"><span class="num">12345</span></div> </div>
-                                    <div class="title">包头</div>
-                                </div>
-                                <div class="chart-item js--wh">
-                                    <div class="total"> <div class="percent" style="height: 22%;"><span class="num">12345</span></div> </div>
-                                    <div class="title">乌海</div>
-                                </div>
-                                <div class="chart-item js--cf">
-                                    <div class="total"> <div class="percent" style="height: 32%;"><span class="num">12345</span></div> </div>
-                                    <div class="title">赤峰</div>
-                                </div>
-                                <div class="chart-item js--tl">
-                                    <div class="total"> <div class="percent" style="height: 42%;"><span class="num">12345</span></div> </div>
-                                    <div class="title">通辽</div>
-                                </div>
-                                <div class="chart-item js--eeds">
+                                <div class="chart-item js--hhht active" data-city-id="01">
                                     <div class="total"> <div class="percent" style="height: 52%;"><span class="num">12345</span></div> </div>
-                                    <div class="title">鄂尔多斯</div>
+                                    <div class="title">呼和浩特<span class="indicator"></span></div>
                                 </div>
-                                <div class="chart-item js--hlbe">
+                                <div class="chart-item js--bt" data-city-id="02">
+                                    <div class="total"> <div class="percent" style="height: 12%;"><span class="num">12345</span></div> </div>
+                                    <div class="title">包头<span class="indicator"></span></div>
+                                </div>
+                                <div class="chart-item js--wh" data-city-id="03">
+                                    <div class="total"> <div class="percent" style="height: 22%;"><span class="num">12345</span></div> </div>
+                                    <div class="title">乌海<span class="indicator"></span></div>
+                                </div>
+                                <div class="chart-item js--cf" data-city-id="04">
+                                    <div class="total"> <div class="percent" style="height: 32%;"><span class="num">12345</span></div> </div>
+                                    <div class="title">赤峰<span class="indicator"></span></div>
+                                </div>
+                                <div class="chart-item js--tl" data-city-id="05">
+                                    <div class="total"> <div class="percent" style="height: 42%;"><span class="num">12345</span></div> </div>
+                                    <div class="title">通辽<span class="indicator"></span></div>
+                                </div>
+                                <div class="chart-item js--eeds" data-city-id="06">
+                                    <div class="total"> <div class="percent" style="height: 52%;"><span class="num">12345</span></div> </div>
+                                    <div class="title">鄂尔多斯<span class="indicator"></span></div>
+                                </div>
+                                <div class="chart-item js--hlbe" data-city-id="07">
                                     <div class="total"> <div class="percent" style="height: 62%;"><span class="num">12345</span></div> </div>
-                                    <div class="title">呼伦贝尔</div>
+                                    <div class="title">呼伦贝尔<span class="indicator"></span></div>
                                 </div>
-                                <div class="chart-item js--wlcb">
+                                <div class="chart-item js--wlcb" data-city-id="08">
                                     <div class="total"> <div class="percent" style="height: 72%;"><span class="num">12345</span></div> </div>
-                                    <div class="title">乌兰察布</div>
+                                    <div class="title">乌兰察布<span class="indicator"></span></div>
                                 </div>
-                                <div class="chart-item js--byne">
+                                <div class="chart-item js--byne" data-city-id="09">
                                     <div class="total"> <div class="percent" style="height: 82%;"><span class="num">12345</span></div> </div>
-                                    <div class="title">巴彦淖尔</div>
+                                    <div class="title">巴彦淖尔<span class="indicator"></span></div>
                                 </div>
-                                <div class="chart-item js--xa">
+                                <div class="chart-item js--xa" data-city-id="10">
                                     <div class="total"> <div class="percent" style="height: 92%;"><span class="num">12345</span></div> </div>
-                                    <div class="title">兴安</div>
+                                    <div class="title">兴安<span class="indicator"></span></div>
                                 </div>
-                                <div class="chart-item js--als">
+                                <div class="chart-item js--als" data-city-id="11">
                                     <div class="total"> <div class="percent" style="height: 88%;"><span class="num">12345</span></div> </div>
-                                    <div class="title">阿拉善</div>
+                                    <div class="title">阿拉善<span class="indicator"></span></div>
                                 </div>
-                                <div class="chart-item js--xlgl">
+                                <div class="chart-item js--xlgl" data-city-id="12">
                                     <div class="total"> <div class="percent" style="height: 100%;"><span class="num">12345</span></div> </div>
-                                    <div class="title">锡林郭勒</div>
+                                    <div class="title">锡林郭勒<span class="indicator"></span></div>
                                 </div>
                                 <div class="clear"></div>
                                 <div class="chart-title">全部业务总数</div>
@@ -188,8 +188,8 @@
                          data-success-callback="businessViewSuccessCallback"
                          data-error-callback="businessViewErrorCallback">
                         <div class="tabs-nav">
-                            <div class="nav-item active" data-value="00"><a href="#">全部业务查看</a></div>
-                            <div class="nav-item" data-value=""><a href="#">单项业务查看</a>
+                            <div class="nav-item active pull-0" data-value="00"><a href="#">业务查看</a></div>
+                            <!--<div class="nav-item" data-value=""><a href="#">单项业务查看</a>
                                 <select>
                                     <option value="01">出生登记</option>
                                     <option value="02">死亡注销</option>
@@ -207,7 +207,7 @@
                                     <option value="14">主项变更</option>
                                     <option value="15">辅项变更</option>
                                 </select>
-                            </div>
+                            </div>-->
                             <div class="clear"></div>
                         </div>
                         <div class="tabs-body">
