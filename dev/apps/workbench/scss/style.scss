@@ -44,6 +44,18 @@
     -ms-user-select: none;
     user-select: none;
 }
+
+@mixin triangle_up($size:7px) {
+    display:inline-block;width:0;height:0;overflow:hidden;line-height:0;font-size:0;
+    vertical-align:middle;
+    border-bottom:$size solid #fb700f;
+    border-top:0 none;
+    border-left:$size solid transparent;
+    border-right:$size solid transparent;
+    _color:#FF3FFF;
+    _filter:chroma(color=#FF3FFF);
+}
+
 /*h1,h2,p,table,tr,th,td,strong*/ * {
     margin  : 0;
     padding : 0;
@@ -397,6 +409,7 @@ a {
             .tabs-body {
                 padding-top: 4px;
                 height: 190px;
+                padding-bottom: 7px;
             }
             @at-root  .chart {
                 position: relative;
@@ -413,9 +426,31 @@ a {
                     height: 100%;
                     width: 8%;
                     text-align: center;
+                    &:hover {
+                        .total {
+                            .percent {
+                                background-color: #91DBF0;
+                            }
+                        }
+                    }
+                    &.active {
+                        .total {
+                            .percent {
+                                background-color : #ffa86b;
+                                border-color: #fb700f;
+                            }
+                        }
+                        .title {
+                            color: #ff8c3b;
+                            .indicator {
+                                display: block;
+                            }
+                        }
+                    }
                     .total {
                         position: relative;
                         height: 100%;
+                        cursor: pointer;
                         .percent {
                             position: absolute;
                             left: 50%;
@@ -431,16 +466,19 @@ a {
                                 margin-top: -1.2em;
                                 *zoom:1
                             }
-                            &:hover {
-                                //background-color: #91DBF0;
-                            }
-                            &.active {
-                                //background-color: #22c2f0;
-                            }
                         }
                     }
                     .title {
-
+                        position: relative;
+                        .indicator {
+                            @include triangle_up(7px);
+                            display: none;
+                            position: absolute;
+                            top: 21px;
+                            *top: 20px;
+                            left: 50%;
+                            margin-left: -7px;
+                        }
                     }
                 }
                 .chart-title {
@@ -456,10 +494,29 @@ a {
         }
 
         .tabs-business-view {
-            margin-top: 16px;
-            .tabs-body {
-                //padding-top: 6px;
+            position: relative;
+            top: -1px;
+            &.tabs {
+                .tabs-nav {
+                    border-color: #fb700f;
+                    .nav-item.active {
+                        position: relative;
+                        border-color: #fb700f #fb700f #fff #fb700f;
+                        @for $i from 0 through 11 {
+                            &.pull-#{$i} { position: relative;left : 59px * $i;}
+                        }
+                    }
+                }
+                .tabs-body {
+                    border-color: #fb700f;
+                    //padding-top: 1px;
+                }
             }
+            .table-grid {
+                width: 776px;
+                margin-left: 0!important;
+            }
+
             @at-root .table-grid {
                 border-collapse: collapse;
                 table-layout: fixed;

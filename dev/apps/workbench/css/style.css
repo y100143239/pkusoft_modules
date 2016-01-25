@@ -583,7 +583,8 @@ a {
           background: url(../images/btn_time_menu.png) no-repeat center center; }
     .wd-container .wd-ywjg .tabs-business-total .tabs-body {
       padding-top: 4px;
-      height: 190px; }
+      height: 190px;
+      padding-bottom: 7px; }
     .chart {
       position: relative;
       width: 740px;
@@ -598,9 +599,19 @@ a {
         height: 100%;
         width: 8%;
         text-align: center; }
+        .chart .chart-item:hover .total .percent {
+          background-color: #91DBF0; }
+        .chart .chart-item.active .total .percent {
+          background-color: #ffa86b;
+          border-color: #fb700f; }
+        .chart .chart-item.active .title {
+          color: #ff8c3b; }
+          .chart .chart-item.active .title .indicator {
+            display: block; }
         .chart .chart-item .total {
           position: relative;
-          height: 100%; }
+          height: 100%;
+          cursor: pointer; }
           .chart .chart-item .total .percent {
             position: absolute;
             left: 50%;
@@ -615,6 +626,28 @@ a {
               display: block;
               margin-top: -1.2em;
               *zoom: 1; }
+        .chart .chart-item .title {
+          position: relative; }
+          .chart .chart-item .title .indicator {
+            display: inline-block;
+            width: 0;
+            height: 0;
+            overflow: hidden;
+            line-height: 0;
+            font-size: 0;
+            vertical-align: middle;
+            border-bottom: 7px solid #fb700f;
+            border-top: 0 none;
+            border-left: 7px solid transparent;
+            border-right: 7px solid transparent;
+            _color: #FF3FFF;
+            _filter: chroma(color=#FF3FFF);
+            display: none;
+            position: absolute;
+            top: 21px;
+            *top: 20px;
+            left: 50%;
+            margin-left: -7px; }
       .chart .chart-title {
         position: absolute;
         top: 0;
@@ -624,7 +657,54 @@ a {
         text-align: center;
         line-height: 1.2; }
     .wd-container .wd-ywjg .tabs-business-view {
-      margin-top: 16px; }
+      position: relative;
+      top: -1px; }
+      .wd-container .wd-ywjg .tabs-business-view.tabs .tabs-nav {
+        border-color: #fb700f; }
+        .wd-container .wd-ywjg .tabs-business-view.tabs .tabs-nav .nav-item.active {
+          position: relative;
+          border-color: #fb700f #fb700f #fff #fb700f; }
+          .wd-container .wd-ywjg .tabs-business-view.tabs .tabs-nav .nav-item.active.pull-0 {
+            position: relative;
+            left: 0px; }
+          .wd-container .wd-ywjg .tabs-business-view.tabs .tabs-nav .nav-item.active.pull-1 {
+            position: relative;
+            left: 59px; }
+          .wd-container .wd-ywjg .tabs-business-view.tabs .tabs-nav .nav-item.active.pull-2 {
+            position: relative;
+            left: 118px; }
+          .wd-container .wd-ywjg .tabs-business-view.tabs .tabs-nav .nav-item.active.pull-3 {
+            position: relative;
+            left: 177px; }
+          .wd-container .wd-ywjg .tabs-business-view.tabs .tabs-nav .nav-item.active.pull-4 {
+            position: relative;
+            left: 236px; }
+          .wd-container .wd-ywjg .tabs-business-view.tabs .tabs-nav .nav-item.active.pull-5 {
+            position: relative;
+            left: 295px; }
+          .wd-container .wd-ywjg .tabs-business-view.tabs .tabs-nav .nav-item.active.pull-6 {
+            position: relative;
+            left: 354px; }
+          .wd-container .wd-ywjg .tabs-business-view.tabs .tabs-nav .nav-item.active.pull-7 {
+            position: relative;
+            left: 413px; }
+          .wd-container .wd-ywjg .tabs-business-view.tabs .tabs-nav .nav-item.active.pull-8 {
+            position: relative;
+            left: 472px; }
+          .wd-container .wd-ywjg .tabs-business-view.tabs .tabs-nav .nav-item.active.pull-9 {
+            position: relative;
+            left: 531px; }
+          .wd-container .wd-ywjg .tabs-business-view.tabs .tabs-nav .nav-item.active.pull-10 {
+            position: relative;
+            left: 590px; }
+          .wd-container .wd-ywjg .tabs-business-view.tabs .tabs-nav .nav-item.active.pull-11 {
+            position: relative;
+            left: 649px; }
+      .wd-container .wd-ywjg .tabs-business-view.tabs .tabs-body {
+        border-color: #fb700f; }
+      .wd-container .wd-ywjg .tabs-business-view .table-grid {
+        width: 776px;
+        margin-left: 0 !important; }
       .table-grid {
         border-collapse: collapse;
         table-layout: fixed;

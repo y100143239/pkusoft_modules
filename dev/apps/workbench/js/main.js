@@ -327,8 +327,8 @@
         $timeMenuItems: null,
         init: function init() {
             this.render().bind();
-            this.totality.init();
             this.view.init();
+            this.totality.init().update();
             return this;
         },
         render: function render() {
@@ -341,7 +341,7 @@
                 var $this = $( this );
                 $this.addClass( "active" ).siblings().removeClass( "active" );
                 ywjg.totality.update();
-                ywjg.view.update();
+                //ywjg.view.update();
                 event.preventDefault();
             } );
             return this;
@@ -350,9 +350,11 @@
 
     // 业务监管-业务总量
     ywjg.totality = {
+        __view: ywjg.view,
         $container: "#ywjg .tabs-business-total",
         $navItems: ".nav-item",
         $chart: "#ywjg .chart",
+        $chartItems: "#ywjg .chart .chart-item",
         $timeMenuItems: "#ywjg .time-menu-item",
         isUpading: false, // 是否在更新数据
         data: {
@@ -391,19 +393,23 @@
         init: function init() {
             this._getRequestSetting();
             this.render()
-                .bind()
-                .update();
+                .bind();
+                //.update();
+            return this;
         },
         render: function render() {
+            this.__view = ywjg.view;
             this.$container = $( this.$container );
             this.$chart = $( this.$chart );
+            this.$chartItems = $( this.$chartItems );
             this.$navItems = $( this.$navItems, this.$container );
             this.$timeMenuItems = $( this.$timeMenuItems );
             return this;
         },
         bind: function bind() {
             var $navItems = this.$navItems,
-                _this = this;
+                _this = this,
+                __view = _this.__view;
             $navItems.on( "click", function navItemClickHandler( event ) {
                 var $this = $( this )
                     ;
@@ -435,8 +441,28 @@
                 event.stopPropagation();
             } );
 
-            _this.$chart.find( ".percent" ).on( "click", function () {
-                $( this ).toggleClass( "active" );
+            _this.$chartItems.on( "click", function () {
+                var $this = $( this ),
+                    offset,
+                    oldOffsetClassReg;
+
+                // view
+                // 0. 判断是否正在更新数据
+                if ( __view.isUpading ) {
+                    return;
+                }
+
+                // 1. 更改状体
+
+                // 切换自身的状态
+                $this.addClass( "active" ).siblings().removeClass("active");
+
+                // 2. 更改标题
+                //view.$navItems.find("a" ).text( _this.$navItems.filter(".active" ).find("a" ).text().replace("总数", "详情") );
+
+                // 3. 更新数据
+                __view.update(1);
+
             } );
             return this;
         },
@@ -494,6 +520,8 @@
                 }
             );
 
+            // 更新view
+            _this.__view.update();
 
         },
         _getData: function getData( queryData, successCallback, errorCallback ) {
@@ -540,6 +568,7 @@
 
     // 业务监管-业务查看
     ywjg.view = {
+        __totality: ywjg.totality,
         $container: "#ywjg .tabs-business-view",
         $navItems: ".nav-item",
         $timeMenuItems: "#ywjg .time-menu-item",
@@ -567,7 +596,7 @@
             this.render();
             this.bind();
             this.pagination.init();
-            this.update();
+            //this.update();
             return this;
         },
         render: function render() {
@@ -580,6 +609,7 @@
         bind: function bind() {
             var $navItems = this.$navItems,
                 _this = this;
+            /*
             $navItems.on( "click", function navItemClickHandler( event ) {
                 var $this = $( this )
                     ;
@@ -614,7 +644,7 @@
             } ).on( "click", function selectClickHandler( event ) {
                 event.stopPropagation();
             } );
-
+        */
             return this;
         },
         update: function update( pageNum ) {
@@ -622,26 +652,46 @@
                 queryData = {},
                 time,
                 type,
-                $activeNavItem
+                cityId,
+                $activeNavItem,
+                $totalityActiveNavItem,
+                __totality = _this.__totality,
+                offset,
+                oldOffsetClassReg
                 ;
 
             // 0. 判断是否正在更新数据
-            Utils.wait.show( this.$container );
+            Utils.wait.show( _this.$container );
             if ( this.isUpading ) {
                 return this;
             }
-            this.isUpading = true;
-
+            _this.isUpading = true;
             $activeNavItem = _this.$navItems.filter( ".active" );
+            $totalityActiveNavItem = __totality.$navItems.filter( ".active" );
             time = _this.$timeMenuItems.filter( ".active" ).attr( "data-value" );
-            type = $activeNavItem.attr( "data-value" );
+            type = $totalityActiveNavItem.attr( "data-value" );
+            cityId = __totality.$chartItems.filter(".active" ).attr("data-city-id");
 
             queryData[ "time" ] = time;
             queryData[ "type" ] = type;
+            queryData[ "cityId" ] = cityId;
             queryData[ "pageNum" ] = pageNum || 1;
+            queryData[ "pageSize" ] = _this.pagination.pageSize;
 
+            // 更改标题
+            $activeNavItem.find("a" ).text( $totalityActiveNavItem.find("a" ).text().replace("总数", "详情") );
+            offset = __totality.$chartItems.filter(".active").index();
+            oldOffsetClassReg = /pull-[0-9]{1,2}/g;
+            _this.$navItems.removeClass( function(){
+                var allClass, pullClass;
+                allClass = $(this).attr("class");
+                pullClass = oldOffsetClassReg.exec( allClass );
+                if ( pullClass ) {
+                    return pullClass.join(" ");
+                }
+            } ).addClass( "pull-" + offset );
             // 1. 获取数据
-            this._getData(
+            _this._getData(
                 queryData,
                 function getDataSuccessHandler( responseData ) {
 
@@ -674,7 +724,7 @@
             var _this = this;
             Utils.ajax( {
                 url: _this.requestSetting.url,
-                data: queryData, // { "time": time, "type": type, "pageNum": pageNum }
+                data: queryData, // { "time": time, "type": type, "cityId": cityId,  "pageNum": pageNum, "pageSize": pageSize }
                 success: successCallback,
                 error: errorCallback
             } );
