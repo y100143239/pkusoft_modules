@@ -1,0 +1,5 @@
+@mixin centerBlock($width) {
+    width: $width;
+    margin-left: auto;
+    margin-right: auto;
+}
