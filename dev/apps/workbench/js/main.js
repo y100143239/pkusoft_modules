@@ -172,29 +172,50 @@
 
     main = {
         $bottomMenu: null,
+        qjsj: null,
+        ywjg: null,
+        ydbl: null,
+        sjzl: null,
+        sjfw: null,
         init: function () {
-            qjsj.init();
-            ywjg.init();
-            ydbl.init();
-            sjzl.init();
-            sjfw.init();
             this.render().bind();
+            //qjsj.init();
+            //ywjg.init();
+            //ydbl.init();
+            //sjzl.init();
+            //sjfw.init();
         },
         render: function () {
             this.$bottomMenu = $( ".bottom-menu" );
+            this.qjsj = qjsj;
+            this.ywjg = ywjg;
+            this.ydbl = ydbl;
+            this.sjzl = sjzl;
+            this.sjfw = sjfw;
             return this;
         },
         bind: function () {
+            var _this = this;
             this.$bottomMenu.find( ".bottom-menu-item" ).not(".disabled").on( "click", function bottomMenuItemClickHandler() {
                 var $this = $( this ),
-                    targetId = $this.attr( "data-id" );
+                    targetId = $this.attr( "data-id" ),
+                    _module = _this[ targetId ];
 
                 $this.addClass( "active" ).siblings().removeClass( "active" );
+
                 if ( !targetId ) {
                     return;
                 }
+
                 $( "#" + targetId ).show().siblings().hide();
-            } );
+
+                if ( _module._isInited  === true ) {
+                    return;
+                }
+                _module._isInited = true;
+                _module.init();
+
+            } ).filter(".active" ).trigger("click");
             return this;
         }
     };
