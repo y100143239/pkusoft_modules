@@ -9,6 +9,9 @@
     <script src="../../../dev/modules/utils/doT.js"></script>
     <script src="./js/main.js?version=1.0" charset="utf-8"></script>
     <script src="./js/external.js?version=1.0" charset="utf-8"></script>
+    <script src="./js/echarts-all.js?version=1.0" charset="utf-8"></script>
+    <script src="./js/echarts-theme-macarons.js?version=1.0" charset="utf-8"></script>
+
 </head>
 <body>
 
@@ -514,84 +517,100 @@
                             <div class="nav-item" data-value="01"><a href="#">分析</a></div>
                             <div class="clear"></div>
                             <div class="conditions">
-                                <div class="conditions-city ">
+                                <div class="conditions-city">
                                     <span class="label">盟市：</span>
-                                    <div class="city">
-                                        <span class="city-input" data-value="01" >呼和浩特</span>
-                                        <span class="indicator-down"></span>
-                                        <div class="city-select">
-                                            <a href="#" class="city-select-item" data-value="01">呼和浩特</a>
-                                            <a href="#" class="city-select-item" data-value="02">包头</a>
-                                            <a href="#" class="city-select-item" data-value="03">乌海</a>
-                                            <a href="#" class="city-select-item" data-value="04">赤峰</a>
-                                            <a href="#" class="city-select-item" data-value="05">通辽</a>
-                                            <a href="#" class="city-select-item" data-value="06">鄂尔多斯</a>
-                                            <a href="#" class="city-select-item" data-value="07">呼伦贝尔</a>
-                                            <a href="#" class="city-select-item" data-value="08">乌兰察布</a>
-                                            <a href="#" class="city-select-item" data-value="09">巴彦淖尔</a>
-                                            <a href="#" class="city-select-item" data-value="10">兴安</a>
-                                            <a href="#" class="city-select-item" data-value="11">阿拉善</a>
-                                            <a href="#" class="city-select-item" data-value="12">锡林郭勒</a>
+                                    <div class="city dropdown-menu "><!-- active -->
+                                        <div class="dropdown-menu-heading">
+                                            <!--  通过 span.dropdown-menu-input 的“data-value” 设置初始值-->
+                                            <span class="dropdown-menu-input" data-value="02" >呼和浩特</span>
+                                            <span class="dropdown-menu-indicator"></span>
+                                            <div class="border-bottom"></div>
                                         </div>
-                                        <div class="border-bottom"></div>
+                                        <div class="city-select dropdown-menu-body">
+                                            <div class="city-select-item active"><a href="#" data-value="01">呼和浩特</a></div>
+                                            <div class="city-select-item"><a href="#" data-value="02">包头</a></div>
+                                            <div class="city-select-item"><a href="#" data-value="03">乌海</a></div>
+                                            <div class="city-select-item"><a href="#" data-value="04">赤峰</a></div>
+                                            <div class="city-select-item"><a href="#" data-value="05">通辽</a></div>
+                                            <div class="city-select-item"><a href="#" data-value="06">鄂尔多斯</a></div>
+                                            <div class="city-select-item"><a href="#" data-value="07">呼伦贝尔</a></div>
+                                            <div class="city-select-item"><a href="#" data-value="08">乌兰察布</a></div>
+                                            <div class="city-select-item"><a href="#" data-value="09">巴彦淖尔</a></div>
+                                            <div class="city-select-item"><a href="#" data-value="10">兴安</a></div>
+                                            <div class="city-select-item"><a href="#" data-value="11">阿拉善</a></div>
+                                            <div class="city-select-item"><a href="#" data-value="12">锡林郭勒</a></div>
+                                        </div>
                                     </div>
-                                    <div class="clear"></div>
                                 </div>
-                                <div class="time"></div>
+                                <div class="conditions-time">
+                                    <span class="label">时间：</span>
+                                    <div class="time-start dropdown-menu"><!-- active -->
+                                        <div class="dropdown-menu-heading">
+                                            <!--  通过 span.dropdown-menu-input 的“data-value” 设置初始值（yyyymm）-->
+                                            <span class="dropdown-menu-input" data-value="201409" ><span class="yyyy">2015</span>年<span class="mm">01</span>月</span>
+                                            <span class="dropdown-menu-indicator"></span>
+                                            <div class="border-bottom"></div>
+                                        </div>
+                                        <div class="time-select dropdown-menu-body">
+                                            <div class="year">
+                                                <span class="prev"><span class="arrow"></span></span>
+                                                <h2 class="current" data-value="2015"><span class="num">2015</span>年</h2>
+                                                <span class="next"><span class="arrow"></span></span>
+                                            </div>
+                                            <div class="month">
+                                                <div class="month-item active"><a href="#" data-value="01"><span class="num">1</span>月</a></div>
+                                                <div class="month-item"><a href="#" data-value="02"><span class="num">2</span>月</a></div>
+                                                <div class="month-item"><a href="#" data-value="03"><span class="num">3</span>月</a></div>
+                                                <div class="month-item"><a href="#" data-value="04"><span class="num">4</span>月</a></div>
+                                                <div class="month-item"><a href="#" data-value="05"><span class="num">5</span>月</a></div>
+                                                <div class="month-item"><a href="#" data-value="06"><span class="num">6</span>月</a></div>
+                                                <div class="month-item"><a href="#" data-value="07"><span class="num">7</span>月</a></div>
+                                                <div class="month-item"><a href="#" data-value="08"><span class="num">8</span>月</a></div>
+                                                <div class="month-item"><a href="#" data-value="09"><span class="num">9</span>月</a></div>
+                                                <div class="month-item"><a href="#" data-value="10"><span class="num">10</span>月</a></div>
+                                                <div class="month-item"><a href="#" data-value="11"><span class="num">11</span>月</a></div>
+                                                <div class="month-item"><a href="#" data-value="12"><span class="num">12</span>月</a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <span class="label goto">到</span>
+                                    <div class="time-end dropdown-menu"><!-- active -->
+                                        <div class="dropdown-menu-heading">
+                                            <!--  通过 span.dropdown-menu-input 的“data-value” 设置初始值（yyyymm）-->
+                                            <span class="dropdown-menu-input" data-value="201602" ><span class="yyyy">2015</span>年<span class="mm">02</span>月</span>
+                                            <span class="dropdown-menu-indicator"></span>
+                                            <div class="border-bottom"></div>
+                                        </div>
+                                        <div class="time-select dropdown-menu-body">
+                                            <div class="year">
+                                                <span class="prev"><span class="arrow"></span></span>
+                                                <h2 class="current" data-value="2015"><span class="num">2015</span>年</h2>
+                                                <span class="next"><span class="arrow"></span></span>
+                                            </div>
+                                            <div class="month">
+                                                <div class="month-item active"><a href="#" data-value="01"><span class="num">1</span>月</a></div>
+                                                <div class="month-item"><a href="#" data-value="02"><span class="num">2</span>月</a></div>
+                                                <div class="month-item"><a href="#" data-value="03"><span class="num">3</span>月</a></div>
+                                                <div class="month-item"><a href="#" data-value="04"><span class="num">4</span>月</a></div>
+                                                <div class="month-item"><a href="#" data-value="05"><span class="num">5</span>月</a></div>
+                                                <div class="month-item"><a href="#" data-value="06"><span class="num">6</span>月</a></div>
+                                                <div class="month-item"><a href="#" data-value="07"><span class="num">7</span>月</a></div>
+                                                <div class="month-item"><a href="#" data-value="08"><span class="num">8</span>月</a></div>
+                                                <div class="month-item"><a href="#" data-value="09"><span class="num">9</span>月</a></div>
+                                                <div class="month-item"><a href="#" data-value="10"><span class="num">10</span>月</a></div>
+                                                <div class="month-item"><a href="#" data-value="11"><span class="num">11</span>月</a></div>
+                                                <div class="month-item"><a href="#" data-value="12"><span class="num">12</span>月</a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
                             </div>
                         </div>
                         <div class="tabs-body">
-                            <div class="chart">
-                                <div class="chart-item js--hhht">
-                                    <div class="total"> <div class="percent" style="height: 2%;"><span class="num">12345</span></div> </div>
-                                    <div class="title">呼和浩特</div>
-                                </div>
-                                <div class="chart-item js--bt">
-                                    <div class="total"> <div class="percent" style="height: 12%;"><span class="num">12345</span></div> </div>
-                                    <div class="title">包头</div>
-                                </div>
-                                <div class="chart-item js--wh">
-                                    <div class="total"> <div class="percent" style="height: 22%;"><span class="num">12345</span></div> </div>
-                                    <div class="title">乌海</div>
-                                </div>
-                                <div class="chart-item js--cf">
-                                    <div class="total"> <div class="percent" style="height: 32%;"><span class="num">12345</span></div> </div>
-                                    <div class="title">赤峰</div>
-                                </div>
-                                <div class="chart-item js--tl">
-                                    <div class="total"> <div class="percent" style="height: 42%;"><span class="num">12345</span></div> </div>
-                                    <div class="title">通辽</div>
-                                </div>
-                                <div class="chart-item js--eeds">
-                                    <div class="total"> <div class="percent" style="height: 52%;"><span class="num">12345</span></div> </div>
-                                    <div class="title">鄂尔多斯</div>
-                                </div>
-                                <div class="chart-item js--hlbe">
-                                    <div class="total"> <div class="percent" style="height: 62%;"><span class="num">12345</span></div> </div>
-                                    <div class="title">呼伦贝尔</div>
-                                </div>
-                                <div class="chart-item js--wlcb">
-                                    <div class="total"> <div class="percent" style="height: 72%;"><span class="num">12345</span></div> </div>
-                                    <div class="title">乌兰察布</div>
-                                </div>
-                                <div class="chart-item js--byne">
-                                    <div class="total"> <div class="percent" style="height: 82%;"><span class="num">12345</span></div> </div>
-                                    <div class="title">巴彦淖尔</div>
-                                </div>
-                                <div class="chart-item js--xa">
-                                    <div class="total"> <div class="percent" style="height: 92%;"><span class="num">12345</span></div> </div>
-                                    <div class="title">兴安</div>
-                                </div>
-                                <div class="chart-item js--als">
-                                    <div class="total"> <div class="percent" style="height: 88%;"><span class="num">12345</span></div> </div>
-                                    <div class="title">阿拉善</div>
-                                </div>
-                                <div class="chart-item js--xlgl">
-                                    <div class="total"> <div class="percent" style="height: 100%;"><span class="num">12345</span></div> </div>
-                                    <div class="title">锡林郭勒</div>
-                                </div>
-                                <div class="clear"></div>
-                                <div class="chart-title">全部数据质量问题</div>
+                            <div class="echart" id="sjfw-echart">
+
                             </div>
                         </div>
                     </div>
@@ -620,7 +639,7 @@
                 <div class="bottom-menu-item" data-id="ywjg">业务监管</div>
                 <div class="bottom-menu-item" data-id="ydbl">异地办理</div>
                 <div class="bottom-menu-item" data-id="sjzl">数据质量</div>
-                <div class="bottom-menu-item disabled" data-id="xpjc">相片检测</div>
+                <!--<div class="bottom-menu-item disabled" data-id="xpjc">相片检测</div>-->
                 <div class="bottom-menu-item" data-id="sjfw">数据服务</div>
             </div>
         </div>
