@@ -4,9 +4,12 @@
         qjsj = {},  // 区级数据
         ywjg = {},  // 业务监管
         ydbl = {},  // 异地办理
-        sjzl = {}   // 数据质量
+        sjzl = {},  // 数据质量
+        sjfw = {}   // 数据服务
         ;
-    window.Utils = Utils;
+
+    //window.Utils = Utils;
+
     Utils.ajax = function ( options ) {
         var setting = {
             type: "POST", //请求方式 ("POST" 或 "GET")
@@ -174,6 +177,7 @@
             ywjg.init();
             ydbl.init();
             sjzl.init();
+            sjfw.init();
             this.render().bind();
         },
         render: function () {
@@ -1185,6 +1189,242 @@
         $container : ".tabs-duplicate-code"
     });
 
+
+    // 数据服务
+    sjfw = {
+        $container: "#sjfw",
+        $cityCondition: ".conditions-city",
+        $timeCondition: ".conditions-time",
+        chart: null,
+        init: function init () {
+            this.render();
+            this.bind();
+            this.initCitySelect();
+            this.initTimeSelect();
+            this.chart.init();
+            return this;
+        },
+        render: function render () {
+            var _this = this;
+            _this.$container = $( _this.$container );
+            _this.$cityCondition = $( _this.$cityCondition, _this.$container );
+            _this.$timeCondition = $( _this.$timeCondition, _this.$container );
+            return _this;
+        },
+        bind: function bind () {
+            var _this = this,
+                $cityConditionDropdownMenu,
+                $cityConditionInput,
+                $timeSelect
+                ;
+            $cityConditionDropdownMenu = _this.$cityCondition.find(".dropdown-menu");
+            $cityConditionInput = $cityConditionDropdownMenu.find(".dropdown-menu-input");
+            $timeSelect = _this.$timeCondition.find(".time-select");
+
+            // dropdown-menu
+            _this.$container.find(".dropdown-menu").on( "mouseenter", function dropdownMenuMouseEnterHandler () {
+                var $this = $(this);
+                $this.addClass("active");
+            } ).on( "mouseleave", function dropdownMenuMouseLeaveHandler () {
+                var $this = $(this);
+                $this.removeClass("active");
+            } );
+
+            // 盟市
+            _this.$cityCondition.find(".city-select-item a" ).on("click",  function citySelectItemClickHandler ( event ) {
+                var $this = $(this ),
+                    value,
+                    text
+                    ;
+
+                value = $this.attr("data-value");
+                text = $this.text();
+
+                // 改变状态
+                $this.closest(".city-select-item" ).addClass("active" ).siblings(".city-select-item" ).removeClass("active");
+
+                // 改变值
+                $cityConditionInput.attr("data-value", value ).text( text );
+
+                // 隐藏面板
+                // $cityConditionDropdownMenu.removeClass("active");
+
+                event.preventDefault();
+            } );
+
+
+            // 时间 - 年
+            $timeSelect.find(".year .prev").on("click", function prevYearClickHandler () {
+                changeYear( $(this), true);
+            });
+            $timeSelect.find(".year .next").on("click", function nextYearClickHandler () {
+                changeYear( $(this), false );
+            });
+            // 时间 - 月
+            $timeSelect.find(".month-item a").on("click", function monthClickHandler ( event ) {
+                var $this = $(this),
+                    month,
+                    $input
+                    ;
+
+                month = $this.attr("data-value");
+                $input = $this.closest(".dropdown-menu" ).find(".dropdown-menu-input");
+
+                // 1. 改变状态
+                $this.parent(".month-item" ).addClass("active" ).siblings(".month-item" ).removeClass("active");
+
+                // 2. 改变值
+                $input.attr("data-value", function (index, oldValue) {
+                    return oldValue.replace(/[0-9]{2}$/, month + "" );
+                } ).find(".mm" ).text(month);
+
+                event.preventDefault();
+            });
+
+
+            function changeYear( $target, isReduce ) {
+                var $this = $target,
+                    $current,
+                    year,
+                    newYear,
+                    $input
+                    ;
+
+                isReduce = isReduce ? -1 : 1;
+                $current = $this.siblings(".current" );
+                year = $current.attr("data-value");
+                newYear = parseInt( year ) + isReduce;
+
+                $input = $this.closest(".dropdown-menu" ).find(".dropdown-menu-input");
+
+                // 1. 改变 current
+                $current.attr("data-value", newYear ).find(".num").text(newYear);
+
+                // 2. 改变 input
+                $input.find(".yyyy" ).text(newYear);
+                $input.attr("data-value",function (index, oldValue) {
+                    return oldValue.replace(/^[0-9]{4}/, newYear + "");
+                });
+            }
+
+            return _this;
+        },
+        initCitySelect: function initCitySelect() {
+            var _this = this,
+                $citySelect
+                ;
+            $citySelect = _this.$container.find(".city-select");
+
+            $citySelect.each( function () {
+                var $this = $(this),
+                    value,
+                    text,
+                    $dropdownMenu,
+                    $input,
+                    $activeCitySelectItem
+                    ;
+                $dropdownMenu = $this.closest(".dropdown-menu" );
+                $input = $dropdownMenu.find(".dropdown-menu-input");
+                value = $input.attr("data-value");
+                $activeCitySelectItem = $dropdownMenu.find(".city-select-item" ).has("a[data-value='" + value + "']");
+                text = $activeCitySelectItem.find("a" ).text();
+
+                $activeCitySelectItem.addClass("active" ).siblings().removeClass("active");
+                $input.text(text);
+            } );
+
+        },
+        initTimeSelect: function initTimeSelect() {
+            var _this = this,
+                $timeSelect
+                ;
+            $timeSelect = _this.$container.find(".time-select");
+
+            $timeSelect.each( function () {
+                var $this = $(this),
+                    value,
+                    $dropdownMenu,
+                    $input,
+                    $inputYear,
+                    $inputMonth,
+                    $current,
+                    $activeMonthItem,
+                    year,
+                    month
+                    ;
+                $dropdownMenu = $this.closest(".dropdown-menu" );
+                $input = $dropdownMenu.find(".dropdown-menu-input");
+
+                value = $input.attr("data-value");
+                year = value.substring(0, 4);
+                month = value.substring(4);
+
+                $inputYear = $input.find(".yyyy");
+                $inputMonth = $input.find(".mm");
+                $current = $this.find(".current");
+
+                $activeMonthItem = $this.find(".month-item" ).has("a[data-value='" + month + "']");
+
+                // 更改月份的 active
+                $activeMonthItem.addClass("active" ).siblings().removeClass("active");
+
+                // 更改年份
+                $current.attr("data-value", year ).find(".num" ).text(year);
+
+                // 更改 input
+                $inputYear.text(year);
+                $inputMonth.text(month);
+
+            } );
+        }
+    };
+
+
+    sjfw.chart = {
+        $container: "#sjfw-echart",
+        init: function init() {
+
+            this.$container = $( this.$container );
+
+            // 基于准备好的dom，初始化echarts图表
+            var myChart = echarts.init( this.$container.get(0), macaronsEchartsTheme );
+
+            var option = {
+                tooltip: {
+                    show: true
+                },
+                legend: {
+                    data:['数据统计']
+                },
+                xAxis : [
+                    {
+                        type : 'category',
+                        data : ["数据项1","数据项2","数据项3","数据项4","数据项5","数据项6"]
+                    }
+                ],
+                yAxis : [
+                    {
+                        type : 'value'
+                    }
+                ],
+                series : [
+                    {
+                        "name":"销量",
+                        "type":"bar",
+                        "data":[10, 100, 200, 600, 700, 1020],
+                        markPoint : {
+                            data : [
+                                {type : 'max', name: '最大值'}
+                            ]
+                        }
+                    }
+                ]
+            };
+
+            // 为echarts对象加载数据
+            myChart.setOption(option);
+        }
+    };
     /*
         说明：
             “data”应该使用 对象“{}”来封装，而不是使用数组“[]”；

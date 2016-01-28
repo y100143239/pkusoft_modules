@@ -9,6 +9,9 @@
     <script src="../../../dev/modules/utils/doT.js"></script>
     <script src="./js/main.js?version=1.0" charset="utf-8"></script>
     <script src="./js/external.js?version=1.0" charset="utf-8"></script>
+    <script src="./js/echarts-all.js?version=1.0" charset="utf-8"></script>
+    <script src="./js/echarts-theme-macarons.js?version=1.0" charset="utf-8"></script>
+
 </head>
 <body>
 
@@ -16,7 +19,7 @@
         <div class="wd-wrap">
             <div class="wd-main">
                 <!-- 区级数据 -->
-                <div class="wd-qjsj" id="qjsj" style="display: block;">
+                <div class="wd-qjsj" id="qjsj" style="display: none;">
                     <div class="qjsj-map"
                          data-url="http://www.baidu.com"
                          data-success-callback="mapSuccessCallback"
@@ -502,15 +505,142 @@
                 </div>
                 <!-- /数据质量 -->
 
+                <!-- 数据服务 -->
+                <div class="wd-sjfw" id="sjfw" style="display: block;">
+                    <!-- 统计与分析 -->
+                    <div class="tabs"
+                         data-url="http://www.baidu.com"
+                         data-success-callback="problemsSuccessCallback"
+                         data-error-callback="problemsErrorCallback">
+                        <div class="tabs-nav">
+                            <div class="nav-item active" data-value="00"><a href="#">统计</a></div>
+                            <div class="nav-item" data-value="01"><a href="#">分析</a></div>
+                            <div class="clear"></div>
+                            <div class="conditions">
+                                <div class="conditions-city">
+                                    <span class="label">盟市：</span>
+                                    <div class="city dropdown-menu "><!-- active -->
+                                        <div class="dropdown-menu-heading">
+                                            <!--  通过 span.dropdown-menu-input 的“data-value” 设置初始值-->
+                                            <span class="dropdown-menu-input" data-value="02" >呼和浩特</span>
+                                            <span class="dropdown-menu-indicator"></span>
+                                            <div class="border-bottom"></div>
+                                        </div>
+                                        <div class="city-select dropdown-menu-body">
+                                            <div class="city-select-item active"><a href="#" data-value="01">呼和浩特</a></div>
+                                            <div class="city-select-item"><a href="#" data-value="02">包头</a></div>
+                                            <div class="city-select-item"><a href="#" data-value="03">乌海</a></div>
+                                            <div class="city-select-item"><a href="#" data-value="04">赤峰</a></div>
+                                            <div class="city-select-item"><a href="#" data-value="05">通辽</a></div>
+                                            <div class="city-select-item"><a href="#" data-value="06">鄂尔多斯</a></div>
+                                            <div class="city-select-item"><a href="#" data-value="07">呼伦贝尔</a></div>
+                                            <div class="city-select-item"><a href="#" data-value="08">乌兰察布</a></div>
+                                            <div class="city-select-item"><a href="#" data-value="09">巴彦淖尔</a></div>
+                                            <div class="city-select-item"><a href="#" data-value="10">兴安</a></div>
+                                            <div class="city-select-item"><a href="#" data-value="11">阿拉善</a></div>
+                                            <div class="city-select-item"><a href="#" data-value="12">锡林郭勒</a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="conditions-time">
+                                    <span class="label">时间：</span>
+                                    <div class="time-start dropdown-menu"><!-- active -->
+                                        <div class="dropdown-menu-heading">
+                                            <!--  通过 span.dropdown-menu-input 的“data-value” 设置初始值（yyyymm）-->
+                                            <span class="dropdown-menu-input" data-value="201409" ><span class="yyyy">2015</span>年<span class="mm">01</span>月</span>
+                                            <span class="dropdown-menu-indicator"></span>
+                                            <div class="border-bottom"></div>
+                                        </div>
+                                        <div class="time-select dropdown-menu-body">
+                                            <div class="year">
+                                                <span class="prev"><span class="arrow"></span></span>
+                                                <h2 class="current" data-value="2015"><span class="num">2015</span>年</h2>
+                                                <span class="next"><span class="arrow"></span></span>
+                                            </div>
+                                            <div class="month">
+                                                <div class="month-item active"><a href="#" data-value="01"><span class="num">1</span>月</a></div>
+                                                <div class="month-item"><a href="#" data-value="02"><span class="num">2</span>月</a></div>
+                                                <div class="month-item"><a href="#" data-value="03"><span class="num">3</span>月</a></div>
+                                                <div class="month-item"><a href="#" data-value="04"><span class="num">4</span>月</a></div>
+                                                <div class="month-item"><a href="#" data-value="05"><span class="num">5</span>月</a></div>
+                                                <div class="month-item"><a href="#" data-value="06"><span class="num">6</span>月</a></div>
+                                                <div class="month-item"><a href="#" data-value="07"><span class="num">7</span>月</a></div>
+                                                <div class="month-item"><a href="#" data-value="08"><span class="num">8</span>月</a></div>
+                                                <div class="month-item"><a href="#" data-value="09"><span class="num">9</span>月</a></div>
+                                                <div class="month-item"><a href="#" data-value="10"><span class="num">10</span>月</a></div>
+                                                <div class="month-item"><a href="#" data-value="11"><span class="num">11</span>月</a></div>
+                                                <div class="month-item"><a href="#" data-value="12"><span class="num">12</span>月</a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <span class="label goto">到</span>
+                                    <div class="time-end dropdown-menu"><!-- active -->
+                                        <div class="dropdown-menu-heading">
+                                            <!--  通过 span.dropdown-menu-input 的“data-value” 设置初始值（yyyymm）-->
+                                            <span class="dropdown-menu-input" data-value="201602" ><span class="yyyy">2015</span>年<span class="mm">02</span>月</span>
+                                            <span class="dropdown-menu-indicator"></span>
+                                            <div class="border-bottom"></div>
+                                        </div>
+                                        <div class="time-select dropdown-menu-body">
+                                            <div class="year">
+                                                <span class="prev"><span class="arrow"></span></span>
+                                                <h2 class="current" data-value="2015"><span class="num">2015</span>年</h2>
+                                                <span class="next"><span class="arrow"></span></span>
+                                            </div>
+                                            <div class="month">
+                                                <div class="month-item active"><a href="#" data-value="01"><span class="num">1</span>月</a></div>
+                                                <div class="month-item"><a href="#" data-value="02"><span class="num">2</span>月</a></div>
+                                                <div class="month-item"><a href="#" data-value="03"><span class="num">3</span>月</a></div>
+                                                <div class="month-item"><a href="#" data-value="04"><span class="num">4</span>月</a></div>
+                                                <div class="month-item"><a href="#" data-value="05"><span class="num">5</span>月</a></div>
+                                                <div class="month-item"><a href="#" data-value="06"><span class="num">6</span>月</a></div>
+                                                <div class="month-item"><a href="#" data-value="07"><span class="num">7</span>月</a></div>
+                                                <div class="month-item"><a href="#" data-value="08"><span class="num">8</span>月</a></div>
+                                                <div class="month-item"><a href="#" data-value="09"><span class="num">9</span>月</a></div>
+                                                <div class="month-item"><a href="#" data-value="10"><span class="num">10</span>月</a></div>
+                                                <div class="month-item"><a href="#" data-value="11"><span class="num">11</span>月</a></div>
+                                                <div class="month-item"><a href="#" data-value="12"><span class="num">12</span>月</a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tabs-body">
+                            <div class="echart" id="sjfw-echart">
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /统计与分析 -->
+                    
+                    <!-- 导航 -->
+                    <div class="report-links">
+                        <a href="#" class="report-link-item">民族人口统计报表<span class="external-link"></span></a>
+                        <a href="#" class="report-link-item">户籍变动业务信息统计报表<span class="external-link"></span></a>
+                        <a href="#" class="report-link-item">人口及其变动情况统计报表<span class="external-link"></span></a>
+                        <a href="#" class="report-link-item">非农业人口增减情况统计报表<span class="external-link"></span></a>
+                        <a href="#" class="report-link-item">常住人口迁移流动情况统计月报表<span class="external-link"></span></a>
+                        <a href="#" class="report-link-item">城镇人口增减情况统计报表<span class="external-link"></span></a>
+                        <div class="clear"></div>
+                        <div class="label">导航</div>
+                    </div>
+                    <!-- /导航 -->
+                </div>
+                <!-- /数据服务 -->
+
 
             </div>
             <div class="wd-bottom bottom-menu">
-                <div class="bottom-menu-item active" data-id="qjsj" style="background-position: 18px 21px;">区级数据</div>
-                <div class="bottom-menu-item" data-id="ywjg" style="background-position: -112px 21px;">业务监管</div>
-                <div class="bottom-menu-item" data-id="ydbl" style="background-position: -244px 21px;">异地办理</div>
-                <div class="bottom-menu-item" data-id="sjzl" style="background-position: -376px 21px;">数据质量</div>
-                <div class="bottom-menu-item disabled" style="background-position: -511px 21px;;">相片检测</div>
-                <div class="bottom-menu-item disabled" style="background-position: -644px 21px;">数据服务</div>
+                <!-- “data-id”被样式表使用： &[data-id="qjsj"] { background-position: 18px 21px; } -->
+                <div class="bottom-menu-item active" data-id="qjsj">区级数据</div>
+                <div class="bottom-menu-item" data-id="ywjg">业务监管</div>
+                <div class="bottom-menu-item" data-id="ydbl">异地办理</div>
+                <div class="bottom-menu-item" data-id="sjzl">数据质量</div>
+                <!--<div class="bottom-menu-item disabled" data-id="xpjc">相片检测</div>-->
+                <div class="bottom-menu-item" data-id="sjfw">数据服务</div>
             </div>
         </div>
     </div>

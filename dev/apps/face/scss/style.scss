@@ -1,0 +1,81 @@
+@import "../../../modules/ui/scss/reset";
+@import "../../../modules/ui/scss/minx";
+@import "../../../modules/ui/scss/preloader";
+
+$pageWidth : 1200px;
+.page {
+    font-size: 14px;
+    font-family: "Microsoft Yahei", sans-serif;
+    color: #333;
+    background-color: #fff;
+    .icon {
+        display: inline-block;
+        width: 32px;
+        height: 32px;
+        background: no-repeat center center;
+        vertical-align: middle;
+        &.icon-clock {
+            background-image: url(../images/icon_clock.png);
+        }
+        &.icon-setting {
+            background-image: url(../images/icon_setting.png);
+        }
+    }
+    .switch {
+        display: inline-block;
+        width: 82px;
+        height: 33px;
+        background: no-repeat center center;
+        vertical-align: middle;
+        cursor: pointer;
+        &.switch-off {
+            background-image: url(../images/switch_off.png);
+        }
+        &.switch-on {
+            background-image: url(../images/switch_on.png);
+        }
+    }
+    @at-root .header {
+        height: 100px;
+        box-shadow: 0 2px 4px rgba(136,136,136,.22);
+        .wrap {
+            @include centerBlock($pageWidth);
+        }
+        .logo {
+            float: left;
+            font-size: 36px;
+            line-height: 100px;
+            a {
+                color: inherit;
+            }
+        }
+        .time, .capture, .setting {
+            margin-top: 35px;
+            .icon {
+                margin-left: 0.5em;
+                margin-right: 0.5em;
+            }
+        }
+        .time {
+            float: right;
+            margin-right: 5em;
+        }
+        .capture {
+            float: right;
+            margin-right: 2em;
+            color: #666;
+        }
+        .setting {
+            float: right;
+            a {
+                color: #82dffa;
+            }
+        }
+    }
+    @at-root .main {
+
+    }
+    @at-root .footer {
+
+    }
+}
