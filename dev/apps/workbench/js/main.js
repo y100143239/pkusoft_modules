@@ -1403,47 +1403,61 @@
 
     sjfw.chart = {
         $container: "#sjfw-echart",
+        myChart: null,
+        option: {
+            tooltip: {
+                show: true
+            },
+            legend: {
+                data:['数据统计']
+            },
+            xAxis : [
+                {
+                    type : 'category',
+                    data : ["数据项1","数据项2","数据项3","数据项4","数据项5","数据项6"]
+                }
+            ],
+            yAxis : [
+                {
+                    type : 'value'
+                }
+            ],
+            series : [
+                {
+                    "name":"数量",
+                    "type":"bar",
+                    "data":[10, 100, 200, 600, 700, 1020],
+                    markPoint : {
+                        data : [
+                            {type : 'max', name: '最大值'}
+                        ]
+                    }
+                }
+            ]
+        },
         init: function init() {
-
+            this.render();
+            this.update();
+        },
+        render: function render() {
             this.$container = $( this.$container );
+            this.myChart = echarts.init( this.$container.get(0), macaronsEchartsTheme );
+        },
+        bind: function bind() {
 
-            // 基于准备好的dom，初始化echarts图表
-            var myChart = echarts.init( this.$container.get(0), macaronsEchartsTheme );
-
-            var option = {
-                tooltip: {
-                    show: true
-                },
-                legend: {
-                    data:['数据统计']
-                },
-                xAxis : [
-                    {
-                        type : 'category',
-                        data : ["数据项1","数据项2","数据项3","数据项4","数据项5","数据项6"]
-                    }
-                ],
-                yAxis : [
-                    {
-                        type : 'value'
-                    }
-                ],
-                series : [
-                    {
-                        "name":"销量",
-                        "type":"bar",
-                        "data":[10, 100, 200, 600, 700, 1020],
-                        markPoint : {
-                            data : [
-                                {type : 'max', name: '最大值'}
-                            ]
-                        }
-                    }
-                ]
-            };
-
+        },
+        update: function update(option) {
+            var _option = this.option;
+            for ( var p in option ) {
+                if ( !option.hasOwnProperty( p ) ) {
+                    continue;
+                }
+                _option[ p ] = option[ p ];
+            }
             // 为echarts对象加载数据
-            myChart.setOption(option);
+            this.myChart.setOption(_option);
+
+            return this;
         }
     };
     /*
