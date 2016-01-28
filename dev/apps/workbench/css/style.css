@@ -928,6 +928,25 @@ a {
     margin-top: 16px; }
   .wd-container .wd-sjfw {
     padding-top: 10px; }
+    .wd-container .wd-sjfw .refresh {
+      float: left;
+      height: 20px;
+      color: #ff8c3b;
+      font-size: 14px;
+      line-height: 20px;
+      cursor: pointer;
+      margin: 10px 0 0 20px; }
+      .wd-container .wd-sjfw .refresh .icon {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        background: url(../images/refresh.png) no-repeat -40px 0;
+        vertical-align: middle;
+        margin-right: 8px; }
+      .wd-container .wd-sjfw .refresh:hover {
+        color: #62a0ea; }
+        .wd-container .wd-sjfw .refresh:hover .icon {
+          background-position: -20px 0; }
     .wd-container .wd-sjfw .echart {
       height: 99%; }
     .wd-container .wd-sjfw .tabs .tabs-nav {

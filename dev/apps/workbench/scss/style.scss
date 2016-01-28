@@ -835,6 +835,29 @@ a {
     // 数据服务
     .wd-sjfw {
         padding-top: 10px;
+        .refresh {
+            float: left;
+            height: 20px;
+            color: #ff8c3b;
+            font-size: 14px;
+            line-height: 20px;
+            cursor: pointer;
+            margin: 10px 0 0 20px;
+            .icon {
+                display: inline-block;
+                width: 20px;
+                height: 20px;
+                background: url(../images/refresh.png) no-repeat -40px 0;
+                vertical-align: middle;
+                margin-right: 8px;
+            }
+            &:hover {
+                color: #62a0ea;
+                .icon {
+                    background-position: -20px 0;
+                }
+            }
+        }
         .echart {
             height: 99%;
         }
