@@ -369,3 +369,101 @@ function duplicateSuccessCallback(responseData) {
 function duplicateErrorCallback() {
 
 }
+
+
+/* 数据服务
+
+ HTML
+
+ 1) 设置
+     <div class="tabs"
+         data-url="http://www.baidu.com"
+         data-success-callback="dataServiceSuccessCallback"
+         data-error-callback="dataServiceErrorCallback">
+
+ 2) 请求参数
+
+     1. type： （data-value）是统计还是分析
+
+         <div class="nav-item active" data-value="00"><a href="#">统计</a></div>
+         <div class="nav-item" data-value="01"><a href="#">分析</a></div>
+
+     2. cityId：（data-value）盟市
+
+         <div class="city-select dropdown-menu-body">
+             <div class="city-select-item active"><a href="#" data-value="01">呼和浩特</a></div>
+             <div class="city-select-item"><a href="#" data-value="02">包头</a></div>
+             <div class="city-select-item"><a href="#" data-value="03">乌海</a></div>
+             <div class="city-select-item"><a href="#" data-value="04">赤峰</a></div>
+             <div class="city-select-item"><a href="#" data-value="05">通辽</a></div>
+             <div class="city-select-item"><a href="#" data-value="06">鄂尔多斯</a></div>
+             <div class="city-select-item"><a href="#" data-value="07">呼伦贝尔</a></div>
+             <div class="city-select-item"><a href="#" data-value="08">乌兰察布</a></div>
+             <div class="city-select-item"><a href="#" data-value="09">巴彦淖尔</a></div>
+
+     3. startTime：（data-value）开始时间
+         <div class="time-start dropdown-menu"><!-- active -->
+         <div class="dropdown-menu-heading">
+            <span class="dropdown-menu-input" data-value="201409" ><span class="yyyy">2015</span>年<span class="mm">01</span>月</span>
+
+
+     4. endTime：（data-value）结束时间
+         <div class="time-start dropdown-menu"><!-- active -->
+         <div class="dropdown-menu-heading">
+            <span class="dropdown-menu-input" data-value="201409" ><span class="yyyy">2015</span>年<span class="mm">01</span>月</span>
+
+ Ajax
+
+ $.ajax({
+     url: “data-url”,
+     data: { "type": type, "cityId": cityId, "startTime": startTime, "endTime": endTime },
+     success: “data-success-callback”, // 将服务器返回的数据处理成指定的格式
+     error: “data-error-callback”
+ });
+ */
+function dataServiceSuccessCallback( responseData ) { // 将服务器返回的数据处理成指定的格式
+    var sampleData = {
+        title: "数据统计" , // 柱状图的标题
+        type: "数量",
+        data: [ // 数据，
+            { name: "数据项1", value: "100" },
+            { name: "数据项2", value: "200" },
+            { name: "数据项3", value: "300" },
+            { name: "数据项4", value: "400" },
+            { name: "数据项5", value: "500" }
+        ]
+    };
+    var random = parseInt( Math.random() * 20 );
+    for ( var i = 0; i < random; i++ ) {
+        sampleData.data[ i ] = { name: "数据项" + (i+1), value: i + 1 };
+    }
+    sampleData["title"] = "数据统计" + random;
+    sampleData["type"] = "数量" + random;
+
+    return sampleData;
+}
+function dataServiceErrorCallback() {
+    if ( IS_DEV === false ) {
+        return;
+    }
+    var sampleData = {
+        title: "数据统计" , // 柱状图的标题
+        type: "数量",
+        data: [ // 数据，
+            { name: "数据项1", value: "100" },
+            { name: "数据项2", value: "200" },
+            { name: "数据项3", value: "300" },
+            { name: "数据项4", value: "400" },
+            { name: "数据项5", value: "500" }
+        ]
+    };
+    var random = parseInt( Math.random() * 20 );
+    for ( var i = 0; i < random; i++ ) {
+        sampleData.data[ i ] = { name: "数据项" + (i+1), value: i + 1 };
+    }
+    sampleData["title"] = "数据统计" + random;
+    sampleData["type"] = "数量" + random;
+
+    return sampleData;
+}
+
