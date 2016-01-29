@@ -467,9 +467,8 @@
             } );
 
             _this.$chartItems.on( "click", function () {
-                var $this = $( this ),
-                    offset,
-                    oldOffsetClassReg;
+                var $this = $( this )
+                    ;
 
                 // view
                 // 0. 判断是否正在更新数据
@@ -632,9 +631,9 @@
             return this;
         },
         bind: function bind() {
+            /*
             var $navItems = this.$navItems,
                 _this = this;
-            /*
             $navItems.on( "click", function navItemClickHandler( event ) {
                 var $this = $( this )
                     ;
@@ -1611,14 +1610,6 @@
 
         },
         update: function update( option ) {
-            /*
-            for ( var p in option ) {
-                if ( ! option.hasOwnProperty( p ) ) {
-                    continue;
-                }
-                this.option[ p ] = option[ p ];
-            }
-            */
             this.myChart.clear();
             this.myChart.setOption( option );
             return this;
