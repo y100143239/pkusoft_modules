@@ -1214,15 +1214,48 @@
     // 数据服务
     sjfw = {
         $container: "#sjfw",
+        $navItems: ".nav-item",
         $cityCondition: ".conditions-city",
         $timeCondition: ".conditions-time",
+        $refresh: ".refresh",
         chart: null,
+        isUpading: false, // 是否在更新数据
+        data: {
+            title: "数据统计" , // 柱状图的标题
+            type: "数量",
+            data: [ // 数据，
+                { name: "数据项1", value: "100" },
+                { name: "数据项2", value: "200" },
+                { name: "数据项3", value: "300" },
+                { name: "数据项4", value: "400" },
+                { name: "数据项5", value: "500" }
+            ]
+        },
+        requestSetting: {
+            $target: "#sjfw .tabs",
+            url: null,
+            successCallback: null,
+            errorCallback: null
+        },
+        _getRequestSetting: function _getRequestSetting() {
+            var requestSetting,
+                $target
+                ;
+            requestSetting = this.requestSetting;
+            $target = $( requestSetting.$target );
+            requestSetting.url = $target.attr( "data-url" );
+            requestSetting.successCallback = $target.attr( "data-success-callback" );
+            requestSetting.errorCallback = $target.attr( "data-error-callback" );
+            return this;
+        },
         init: function init () {
+            this._getRequestSetting();
             this.render();
             this.bind();
             this.initCitySelect();
             this.initTimeSelect();
             this.chart.init();
+            this.update();
             return this;
         },
         render: function render () {
@@ -1230,6 +1263,8 @@
             _this.$container = $( _this.$container );
             _this.$cityCondition = $( _this.$cityCondition, _this.$container );
             _this.$timeCondition = $( _this.$timeCondition, _this.$container );
+            _this.$refresh = $( _this.$refresh, _this.$container );
+            _this.$navItems = $( _this.$navItems, _this.$container );
             return _this;
         },
         bind: function bind () {
@@ -1250,6 +1285,18 @@
                 var $this = $(this);
                 $this.removeClass("active");
             } );
+
+            // tabs
+            _this.$navItems.on("click", function ( event ) {
+
+                // 1. 更改状态
+                $( this ).addClass( "active" ).siblings().removeClass("active");
+
+                // 2. 刷新数据
+                _this.update();
+
+                event.preventDefault();
+            });
 
             // 盟市
             _this.$cityCondition.find(".city-select-item a" ).on("click",  function citySelectItemClickHandler ( event ) {
@@ -1328,7 +1375,123 @@
                 });
             }
 
+            // 刷新按钮
+            _this.$refresh.on("click", function refreshClickHandler() {
+                _this.update();
+            });
+
             return _this;
+        },
+        update: function update () {
+            var _this = this,
+                queryData = {},
+                type,
+                cityId,
+                startTime,
+                endTime,
+                successCallback,
+                errorCallback
+                ;
+
+            // 0. 判断是否正在更新数据
+            Utils.wait.show( this.$container );
+            if ( this.isUpading ) {
+                return this;
+            }
+            this.isUpading = true;
+
+            // 获取请求参数
+            type = _this.$navItems.filter(".active" ).attr("data-value");
+            cityId = _this.$cityCondition.find(".dropdown-menu-input" ).attr("data-value");
+            startTime = _this.$timeCondition.find(".time-start .dropdown-menu-input" ).attr("data-value");
+            endTime = _this.$timeCondition.find(".time-end .dropdown-menu-input" ).attr("data-value");
+
+            queryData[ "type" ] = type;
+            queryData[ "cityId" ] = cityId;
+            queryData[ "startTime" ] = startTime;
+            queryData[ "endTime" ] = endTime;
+
+            successCallback = _this.requestSetting.successCallback;
+            errorCallback = _this.requestSetting.errorCallback;
+
+            // 发送请求
+            // 1. 获取数据
+            this._getData(
+                queryData,
+                function getDataSuccessHandler( responseData ) {
+                    // 处理服务器返回的数据
+                    responseData = window[ successCallback ]( responseData );
+                    // 2. 更新到页面（获取数据成功）
+                    _this._render( responseData );
+                },
+                function getDataErrorHandler() { // 测试数据
+                    _this.isUpading = false;
+                    Utils.wait.hide( _this.$container );
+                    Utils.alert.show( _this.$container );
+
+                    var data = window[ errorCallback ]( _this.data );
+                    //---- 测试数据
+                    if ( IS_DEV !== true ) return;
+
+                    _this._render( data );
+                }
+            );
+
+        },
+        _getData: function getData( queryData, successCallback, errorCallback ) {
+            var requestSetting = this.requestSetting;
+            Utils.ajax( {
+                url: requestSetting.url,
+                data: queryData,
+                success: successCallback,
+                error: errorCallback
+            } );
+            return this;
+        },
+        _render: function _render( data ) {
+            var _this = this,
+                chart,
+                option,
+                pairs,
+                names,
+                values
+                ;
+
+            chart = _this.chart;
+            option = chart.option;
+
+            // data ==> option
+            /*
+             data: {
+                 title: "数据统计" , // 柱状图的标题
+                 type: "数量",
+                 data: [ // 数据，
+                     { name: "数据项1", value: "100" },
+                     { name: "数据项2", value: "200" },
+                     { name: "数据项3", value: "300" },
+                     { name: "数据项4", value: "400" },
+                     { name: "数据项5", value: "500" }
+                 ]
+             },
+            */
+            option.legend.data[0] = data["title"];
+            option.series[0].name = data["type"];
+            names = option.xAxis[0].data = [];
+            values = option.series[0].data = [];
+
+            pairs = data["data"];
+
+            for ( var i = 0, len = pairs.length; i < len; i++ ) {
+                names.push( pairs[i ].name );
+                values.push( pairs[i ].value );
+            }
+
+            chart.update( option );
+
+            // 更新完毕
+            this.isUpading = false;
+            Utils.wait.hide( this.$container );
+            return this;
         },
         initCitySelect: function initCitySelect() {
             var _this = this,
@@ -1435,9 +1598,10 @@
                 }
             ]
         },
+
         init: function init() {
             this.render();
-            this.update();
+            //this.update();
         },
         render: function render() {
             this.$container = $( this.$container );
@@ -1446,17 +1610,17 @@
         bind: function bind() {
 
         },
-        update: function update(option) {
-            var _option = this.option;
+        update: function update( option ) {
+            /*
             for ( var p in option ) {
-                if ( !option.hasOwnProperty( p ) ) {
+                if ( ! option.hasOwnProperty( p ) ) {
                     continue;
                 }
-                _option[ p ] = option[ p ];
+                this.option[ p ] = option[ p ];
             }
-            // 为echarts对象加载数据
-            this.myChart.setOption(_option);
-
+            */
+            this.myChart.clear();
+            this.myChart.setOption( option );
             return this;
         }
     };
@@ -1624,6 +1788,7 @@
 
         main.init();
 
+        window._main = main;
     } );
 
 }( jQuery );
