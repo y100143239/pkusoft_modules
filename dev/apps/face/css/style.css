@@ -111,11 +111,24 @@ h1, h2, h3, h4, h5 {
     transform: scale(1);
     -webkit-transform: scale(1);
     opacity: 0; } }
+body, html {
+  height: 100%; }
+
+.clearfix:after {
+  content: "";
+  display: block;
+  height: 0;
+  clear: both; }
+
 .page {
   font-size: 14px;
   font-family: "Microsoft Yahei", sans-serif;
   color: #333;
-  background-color: #fff; }
+  background: url(../images/bg.png) no-repeat center top #fff;
+  height: 100%;
+  overflow: hidden; }
+  .page * {
+    transition: all 0.3s ease-in; }
   .page .icon {
     display: inline-block;
     width: 32px;
@@ -123,22 +136,25 @@ h1, h2, h3, h4, h5 {
     background: no-repeat center center;
     vertical-align: middle; }
     .page .icon.icon-clock {
-      background-image: url(../images/icon_clock.png); }
+      background-image: url(../images/top_09.png); }
     .page .icon.icon-setting {
-      background-image: url(../images/icon_setting.png); }
+      background-image: url(../images/top_12.png); }
   .page .switch {
     display: inline-block;
-    width: 82px;
+    width: 138px;
     height: 33px;
     background: no-repeat center center;
     vertical-align: middle;
     cursor: pointer; }
     .page .switch.switch-off {
-      background-image: url(../images/switch_off.png); }
+      background-image: url(../images/top_17.png); }
     .page .switch.switch-on {
-      background-image: url(../images/switch_on.png); }
+      background-image: url(../images/top_06.png); }
   .header {
-    height: 100px;
+    position: relative;
+    z-index: 3;
+    height: 60px;
+    background-color: rgba(255, 255, 255, 0.95);
     box-shadow: 0 2px 4px rgba(136, 136, 136, 0.22); }
     .header .wrap {
       width: 1200px;
@@ -147,11 +163,11 @@ h1, h2, h3, h4, h5 {
     .header .logo {
       float: left;
       font-size: 36px;
-      line-height: 100px; }
+      line-height: 60px; }
       .header .logo a {
         color: inherit; }
     .header .time, .header .capture, .header .setting {
-      margin-top: 35px; }
+      margin-top: 16px; }
       .header .time .icon, .header .capture .icon, .header .setting .icon {
         margin-left: 0.5em;
         margin-right: 0.5em; }
@@ -164,7 +180,128 @@ h1, h2, h3, h4, h5 {
       color: #666; }
     .header .setting {
       float: right; }
-      .header .setting a {
-        color: #82dffa; }
+      .header .setting:hover {
+        transform: rotate(360deg); }
+  .main {
+    position: relative;
+    z-index: 2; }
+    .main .wrap {
+      width: 1200px;
+      margin-left: auto;
+      margin-right: auto; }
+    .main .display {
+      float: left;
+      width: 600px;
+      height: 450px;
+      background: url(../images/display_area_03.png) no-repeat;
+      background-size: 100% auto;
+      padding: 3px 3px 50px 3px;
+      margin-top: 32px; }
+      .main .display .display-area {
+        width: 100%;
+        height: 100%;
+        background-color: red;
+        overflow: hidden; }
+        .main .display .display-area img {
+          height: 100%; }
+    .main .info {
+      position: relative;
+      top: -30px;
+      padding-top: 40px;
+      float: right;
+      width: 560px;
+      height: 700px;
+      background: url(../images/info_bg_03.png) no-repeat;
+      background-size: 100% auto; }
+      .main .info .photos > * {
+        float: left; }
+      .main .info .photos .photo {
+        width: 142px;
+        height: 160px;
+        background: url(../images/photo_frame_03.png) no-repeat;
+        background-size: 100% auto; }
+      .main .info .photos .photo-left {
+        margin: 0 0 0 61px; }
+      .main .info .photos .result {
+        width: 100px;
+        height: 100px;
+        background: no-repeat;
+        background-size: 100% auto;
+        margin: 20px 20px 0 20px; }
+        .main .info .photos .result.result-search {
+          background-image: url(../images/result_10.png); }
+      .main .info .data {
+        width: 454px;
+        line-height: 38px;
+        margin: 10px 0 0 29px; }
+        .main .info .data .row {
+          margin-bottom: 10px; }
+          .main .info .data .row .col-1 {
+            width: 8.33333%;
+            float: left; }
+          .main .info .data .row .col-2 {
+            width: 16.66667%;
+            float: left; }
+          .main .info .data .row .col-3 {
+            width: 25%;
+            float: left; }
+          .main .info .data .row .col-4 {
+            width: 33.33333%;
+            float: left; }
+          .main .info .data .row .col-5 {
+            width: 41.66667%;
+            float: left; }
+          .main .info .data .row .col-6 {
+            width: 50%;
+            float: left; }
+          .main .info .data .row .col-7 {
+            width: 58.33333%;
+            float: left; }
+          .main .info .data .row .col-8 {
+            width: 66.66667%;
+            float: left; }
+          .main .info .data .row .col-9 {
+            width: 75%;
+            float: left; }
+          .main .info .data .row .col-10 {
+            width: 83.33333%;
+            float: left; }
+          .main .info .data .row .col-11 {
+            width: 91.66667%;
+            float: left; }
+          .main .info .data .row .col-12 {
+            width: 100%;
+            float: left; }
+          .main .info .data .row:after {
+            content: "";
+            height: 0;
+            display: block;
+            clear: both; }
+          .main .info .data .row .label {
+            text-align: right;
+            color: #945328; }
+        .main .info .data .form-control {
+          width: 100%;
+          height: 38px;
+          border: none 0;
+          padding: 0;
+          background-color: #fff;
+          box-shadow: 0 1px 2px #c5c5c5 inset;
+          border-radius: 3px;
+          text-indent: 0.5em;
+          font-size: 16px; }
+        .main .info .data textarea.form-control {
+          height: 4em; }
+  .footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.34); }
+    .footer .copyright {
+      text-align: center; }
 
 /*# sourceMappingURL=style.css.map */
