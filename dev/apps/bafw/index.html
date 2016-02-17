@@ -7,14 +7,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="images/favicon.ico">
     <title>modules</title>
-    <link rel="stylesheet" href="../../../dev/modules/lib/bootstrap/css/bootstrap2.css"/>
+    <link rel="stylesheet" href="../../modules/lib/bootstrap/css/bootstrap2.css"/>
     <link rel="stylesheet" href="css/style.css"/><!-- 自定义css -->
-    <script src="../../../dev/modules/utils/preload.js"></script>
+    <script src="../../modules/utils/preload.js"></script>
     <title>modules</title>
-    <script data-main="../../../dev/modules/" src="../../../dev/modules/require.js"></script>
+    <script data-main="../../modules/" src="../../modules/require.js"></script>
     <script >
+        window.CTX || ( window.CTX = "/gdbaweb" );
         var VERSION;
-//        VERSION = "v2.0";
+        //        VERSION = "v2.0";
         require.config( {
             urlArgs: "VERSION=" + (VERSION || (new Date()).getTime()),
             paths: {
@@ -73,15 +74,15 @@
     <div class="row">
         <div class="col-sm-2" id="sidebar" >
             <ul class="sidebar nav list-group js--freezeMenu" >
-                <li class="active list-group-item"><a href="#company" class="">公司信息<span class="glyphicon glyphicon-chevron-right"></span></a></li>
-                <li class="list-group-item"><a href="#faren" class="">法定代表人信息<span class="glyphicon glyphicon-chevron-right"></span></a></li>
+                <li class="active list-group-item"><a href="#company" class="">公司基本信息<span class="glyphicon glyphicon-chevron-right"></span></a></li>
+                <li class="list-group-item"><a href="#faren" class="">公司法人信息<span class="glyphicon glyphicon-chevron-right"></span></a></li>
                 <li class="list-group-item"><a href="#fuzeren" class="">主要负责人信息<span class="glyphicon glyphicon-chevron-right"></span></a></li>
-                <li class="list-group-item"><a href="#upload" class="">文件上传<span class="glyphicon glyphicon-chevron-right"></span></a></li>
+                <li class="list-group-item"><a href="#upload" class="">材料上传<span class="glyphicon glyphicon-chevron-right"></span></a></li>
             </ul>
         </div>
         <div class="col-sm-10 main">
 
-            <div class="panel panel-default js--panel" id="company" data-template="company">
+            <div class="panel panel-default js--panel" id="company" data-mark="/oweb/company" >
                 <div class="panel-heading">
                     <h3 class="panel-title" data-toggle="collapse" data-target="#panel-body-company">公司信息</h3>
                     <div class="btn-group">
@@ -91,75 +92,119 @@
                 </div>
                 <div class="panel-body collapse in" id="panel-body-company">
 
+                    <!-- 详情： /gdbaweb/WebRoot/WEB-INF/views/oweb/company/detail.jsp -->
+                    <!-- 编辑： /gdbaweb/WebRoot/WEB-INF/views/oweb/company/edit.jsp -->
                     <form class="form-horizontal parsley js--form" data-parsley-validate="" data-parsley-trigger="focusin focusout">
                         <div class="form-group">
-                            <label  class="col-sm-2 control-label require">公司名称</label>
+                            <label class="col-sm-2 control-label require">公司名称</label>
+
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" name="gsmc"  required>
+                                <input type="text" class="form-control" name="gsmc" value="" required>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label  class="col-sm-2 control-label require">公司性质</label>
+                            <label class="col-sm-2 control-label require">公司性质</label>
+
                             <div class="col-sm-4">
                                 <div class="input-group js--DropdownMenu-container">
-                                    <input type="text" class="form-control js--DropdownMenu-input" readonly>
-                                    <input type="hidden" name="gsxz" class="js--DropdownMenu-hidden"/>
-                                    <span class="input-group-addon js--DropdownMenu-clear"><span class="glyphicon glyphicon-remove"></span></span>
+                                    <input type="text" class="form-control js--DropdownMenu-input" readonly value="">
+                                    <input type="hidden" name="gsxz" class="js--DropdownMenu-hidden" value=""/>
                                     <div class="input-group-btn">
-                                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" ><span class="glyphicon glyphicon-chevron-down"></span></button>
+                                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span
+                                                class="glyphicon glyphicon-chevron-down"></span></button>
                                         <ul class="dropdown-menu dropdown-menu-right">
-                                            <li><a data-value="01">国有企业</a></li>
-                                            <li><a data-value="02">集体企业</a></li>
-                                            <li><a data-value="03">联营企业</a></li>
-                                            <li><a data-value="04">股份合作制企业</a></li>
-                                            <li><a data-value="05">私营企业</a></li>
-                                            <li><a data-value="06">个体户</a></li>
-                                            <li><a data-value="07">合伙企业</a></li>
-                                            <li><a data-value="08">有限责任公司</a></li>
-                                            <li><a data-value="09">股份有限公司</a></li>
+                                            <li><a data-value="01">国有全资</a></li>
+                                            <li><a data-value="02">集体全资</a></li>
+                                            <li><a data-value="03">股份合作</a></li>
+                                            <li><a data-value="04">联营</a></li>
+                                            <li><a data-value="05">个人（自然人投资）独资企业</a></li>
+                                            <li><a data-value="06">中外合资企业</a></li>
+                                            <li><a data-value="07">外商独资企业</a></li>
+                                            <li><a data-value="08">中外合作企业</a></li>
+                                            <li><a data-value="09">国有联营</a></li>
                                         </ul>
                                     </div>
                                 </div>
                             </div>
-                            <label  class="col-sm-2 control-label">管理人数</label>
+                            <label class="col-sm-2 control-label">管理人数</label>
+
                             <div class="col-sm-4">
-                                <input type="text" class="form-control" name="glrs" placeholder="" data-parsley-type="integer" data-parsley-min="0">
+                                <input type="text" class="form-control" name="glrs" value="" data-parsley-type="integer"
+                                       data-parsley-min="0">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label  class="col-sm-2 control-label">公司设立时间</label>
+                            <label class="col-sm-2 control-label require">注册资金</label>
                             <div class="col-sm-4">
-                                <div class="input-group date js--datepicker-container " data-date-format="yyyy-mm-dd" >
-                                    <input class="form-control js--datepicker-input" size="16" type="text" value="" readonly name="clsj">
-                                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
-                                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                                <div class="input-group">
+                                    <span class="input-group-addon">￥</span>
+                                    <input type="text" class="form-control text-right">
+                                    <span class="input-group-addon">万</span>
                                 </div>
+                            </div>
+
+                            <label class="col-sm-2 control-label require">营业执照注册号</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control">
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label  class="col-sm-2 control-label">经营范围</label>
+                            <label class="col-sm-2 control-label require">公司地址省市县（区）</label>
+
                             <div class="col-sm-10">
-                                <div class="checkbox ">
-                                    <label> <input type="checkbox" name="jyfw" data-parsley-mincheck="1" value="01"> 五金交电 </label>
-                                    <label> <input type="checkbox" name="jyfw" value="02"> 日用百货 </label>
-                                    <label> <input type="checkbox" name="jyfw" value="03"> 日用百货2 </label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" >
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-chevron-down"></span></button>
+                                    </span>
+
                                 </div>
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label  class="col-sm-2 control-label">企业规模</label>
-                            <div class="col-sm-4">
-                                <div class="radio">
-                                    <label> <input type="radio" name="qygm" value="big"> 大 </label>
-                                    <label> <input type="radio" name="qygm" checked value="medium"> 中 </label>
-                                    <label> <input type="radio" name="qygm" value="small"> 小 </label>
+                            <label class="col-sm-2 control-label require">公司详细地址</label>
+
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" >
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label require">辖区派出所</label>
+
+                            <div class="col-sm-10">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" >
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-chevron-down"></span></button>
+                                    </span>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label require">经营范围</label>
+
+                            <div class="col-sm-10">
+                                <div class="checkbox">
+                                    <label> <input type="checkbox" name="qygm" value="01">门卫</label>
+                                    <label> <input type="checkbox" name="qygm" value="02">巡逻</label>
+                                    <label> <input type="checkbox" name="qygm" value="03">守护</label>
+                                    <label> <input type="checkbox" name="qygm" value="04">押运</label>
+                                    <label> <input type="checkbox" name="qygm" value="05">随身护卫</label>
+                                    <label> <input type="checkbox" name="qygm" value="06">安全检查</label>
+                                    <label> <input type="checkbox" name="qygm" value="07">安全技术防范</label>
+                                    <label> <input type="checkbox" name="qygm" value="08">安全风险评估</label>
+                                    <label> <input type="checkbox" name="qygm" value="09">秩序维护</label>
+                                    <label> <input type="checkbox" name="qygm" value="10">其他</label>
                                 </div>
                             </div>
                         </div>
                     </form>
-
                 </div>
 
             </div>
@@ -167,10 +212,10 @@
 
             <div class="panel panel-default" id="faren">
                 <div class="panel-heading">
-                    <h3 class="panel-title" data-toggle="collapse" data-target="#panel-body-faren">法定代表人信息</h3>
+                    <h3 class="panel-title" data-toggle="collapse" data-target="#panel-body-company">主要负责人信息</h3>
                     <div class="btn-group">
-                        <button type="button" class="btn btn-sm btn-default"><span class="glyphicon glyphicon-edit"></span> 修改</button>
-                        <button type="button" class="btn btn-sm btn-default"><span class="glyphicon glyphicon-floppy-disk"></span> 保存</button>
+                        <button type="button" class="btn btn-default js--form-edit"><span class="glyphicon glyphicon-edit"></span> 修改</button>
+                        <button type="button" class="btn btn-warning js--form-submit hidden"><span class="glyphicon glyphicon-floppy-disk"></span> 保存</button>
                     </div>
                 </div>
                 <div class="panel-body collapse in" id="panel-body-faren">
@@ -228,11 +273,6 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <div class="col-sm-12">
-                                <button type="submit" class="btn btn-default btn-lg center-block btn-save"><span class="glyphicon glyphicon-floppy-disk"></span> 保 存</button>
-                            </div>
-                        </div>
                     </form>
 
                 </div>
