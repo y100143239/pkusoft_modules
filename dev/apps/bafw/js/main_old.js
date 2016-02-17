@@ -1,18 +1,17 @@
 define( [ "lib/ie/ie",
         "lib/datetimepickter/js/datetimepicker",
         "jquery",
-        //"utils/utils",
+        "utils/utils",
         "lib/parsley/parsley",
-        //"utils/doT",
+        "utils/doT",
         "css!ui/css/style",
         "lib/switch/js/bootstrap-switch",
         "uploadify",
         "sweetalert"
     ],
-    function ( ie, datetimepicker, $, /*utils,*/ parsley) {
+    function ( ie, datetimepicker, $, utils, parsley, doT ) {
 
-        var Utils = {},
-            main,
+        var main,
             Panel,
             Form,
             DropdownMenu,
@@ -21,77 +20,6 @@ define( [ "lib/ie/ie",
             DatetimePicker,
             Sidebar
             ;
-
-        Utils.ajax = function ( options ) {
-            var setting = {
-                type: "POST", //请求方式 ("POST" 或 "GET")
-                url: "", // 请求的URL
-                data: { name: "value" },
-                timeout: 30000, // 设置请求超时时间（毫秒）
-                contentType: "application/x-www-form-urlencoded; charset=utf-8",
-                cache: false, // 不缓存此页面
-                dataType: "json", // 预期服务器返回的数据类型。
-                error: null, // 请求失败时调用此函数
-                success: null, // 请求成功后的回调函数。参数：由服务器返回，并根据 dataType 参数进行处理后的数据
-                complete: null // 当请求完成之后调用这个函数，无论成功或失败。
-            };
-            for ( var p in options ) {
-                if ( options.hasOwnProperty( p ) ) {
-                    setting[ p ] = options[ p ];
-                }
-            }
-            $.ajax( setting );
-        };
-        Utils.wait = {
-            show: function show( $target ) {
-                if ( !this._isAdded( $target ) ) {
-                    this._add( $target );
-                }
-                $target.find( ".wait-overlay" ).show();
-                return this;
-            },
-            hide: function hide( $target ) {
-                $target.find( ".wait-overlay" ).hide();
-                return this;
-            },
-            _add: function ( $target ) {
-                $target.css( "position", function ( index, val ) {
-                    return val === "static" ? "relative" : val;
-                } );
-                $target.append( "<div class='wait-overlay'></div>" );
-                return this;
-            },
-            _isAdded: function ( $target ) {
-                return $target.find( ".wait-overlay" ).length > 0;
-            }
-        };
-        Utils.alert = {
-            html: '<div class="alert alert-warning"> <button type="button" class="close" ><span>×</span></button> <strong>提示：</strong>网络繁忙，请稍后重试！</div>',
-            show: function show( $target ) {
-                if ( !this._isAdded( $target ) ) {
-                    this._add( $target );
-                }
-                $target.find( ".alert-warning" ).show();
-                return this;
-            },
-            hide: function hide( $target ) {
-                $target.find( ".alert-warning" ).hide();
-                return this;
-            },
-            _add: function ( $target ) {
-                var _this = this;
-                $target.css( "position", function ( index, val ) {
-                    return val === "static" ? "relative" : val;
-                } );
-                $( this.html ).appendTo( $target ).find(".close" ).on("click", function() {
-                    _this.hide( $target );
-                });
-                return this;
-            },
-            _isAdded: function ( $target ) {
-                return $target.find( ".alert-warning" ).length > 0;
-            }
-        };
 
         Form = {
             hookClass: ".js--form",
@@ -146,11 +74,10 @@ define( [ "lib/ie/ie",
                     event.preventDefault();
 
                 } );
-                /*
+
                 $target.find( ".js--DropdownMenu-clear" ).on( "click", function () {
                     $( this ).parents( ".js--DropdownMenu-container" ).find( ".js--DropdownMenu-input" ).val( "" ).parsley().validate();
                 } );
-                */
             },
             wrap: function ( $target ) {
                 this.bind( $target );
@@ -298,19 +225,14 @@ define( [ "lib/ie/ie",
         };
 
         Panel = {
-            $self: ".js--panel",
-            $submit: ".js--form-submit",
-            $edit: ".js--form-edit",
-            mark: null,
+            $self: null,
+            $submit: null,
+            $edit: null,
             init: function () {
-                var _this = this;
                 $.each( [ Form, DropdownMenu, Uploadify, Switch, DatetimePicker, Sidebar ], function () {
                     this.init();
                 } );
                 this.render().bind();
-                this.$self.each( function () {
-                    //_this.showDetailMode( $(this) );
-                } );
             },
             wrap: function ( $panel ) {
                 $.each( [ Form, DropdownMenu, Uploadify, Switch, DatetimePicker ], function () {
@@ -318,9 +240,9 @@ define( [ "lib/ie/ie",
                 } );
             },
             render: function () {
-                this.$self = $( this.$self );
-                this.$submit = $( this.$submit );
-                this.$edit = $( this.$edit );
+                this.$self = $( ".js--panel" );
+                this.$submit = $( ".js--form-submit" );
+                this.$edit = $( ".js--form-edit" );
                 return this;
             },
             bind: function () {
@@ -336,44 +258,10 @@ define( [ "lib/ie/ie",
                     if ( !isValid ) {
                         return;
                     }
-                    _this.doSubmit( $panel );
-                } );
-
-                // 点击“修改”：切换为修改模式
-                this.$edit.on( "click", function submitClickHandler() {
-                    $panel = $( this ).parents( ".js--panel" );
-                    _this.doEdit( $panel );
-                } );
-
-                return this;
-            },
-            doSubmit: function ( $panel ) {
-                var queryString,
-                    _this,
-                    mark,
-                    url
-                    ;
-                _this = this;
-                mark = $panel.attr("data-mark");
-                url = CTX + mark + "/save";
-
-                queryString = $panel.find(".js--form").serialize();
-
-                Utils.ajax({
-                    url: url,
-                    data: queryString,
-                    dataType: "text",
-                    success: successHandler,
-                    error: errorHandler,
-                    complete: completeHandler
-                });
-
-                function errorHandler() {
-                    Utils.alert.show($panel);
-                }
-
-                function successHandler( responseData ) {
-                    if ( responseData === "success" ) {
+                    _this.showWaiting( $panel );
+                    _this.doSubmit( $form, function ( data ) {
+                        _this.removeWaiting( $panel );
+                        _this.toggleBtn( $panel );
                         DatetimePicker.remove( $( ".js--datepicker-container" ) );
                         swal( {
                             title: " ",
@@ -383,78 +271,109 @@ define( [ "lib/ie/ie",
                             confirmButtonText: "确定",
                             timer: 1500
                         } );
-                        _this.showDetailMode( $panel );
-                        return;
+                        _this.showDetail( $panel, data );
+                    } )
+                } );
+
+                this.$edit.on( "click", function submitClickHandler() {
+                    $panel = $( this ).parents( ".js--panel" );
+                    $form = $panel.find( ".js--form" );
+                    _this.showWaiting( $panel );
+                    _this.doEdit( $form, function ( data ) {
+                        _this.removeWaiting( $panel );
+                        _this.toggleBtn( $panel );
+                        _this.showEdit( $panel, data );
+                    } )
+                } );
+
+                return this;
+            },
+            showWaiting: function ( $panel ) {
+                $panel.append( '<div class="panel-overlay"></div>' );
+                $panel.append( '<div class="sk-circle"> <!--[if lt IE 9]><div style="color:#fff">waiting</div><![endif]--><div class="sk-circle1 sk-child"></div> <div class="sk-circle2 sk-child"></div> <div class="sk-circle3 sk-child"></div> <div class="sk-circle4 sk-child"></div> <div class="sk-circle5 sk-child"></div> <div class="sk-circle6 sk-child"></div> <div class="sk-circle7 sk-child"></div> <div class="sk-circle8 sk-child"></div> <div class="sk-circle9 sk-child"></div> <div class="sk-circle10 sk-child"></div> <div class="sk-circle11 sk-child"></div> <div class="sk-circle12 sk-child"></div> </div>' );
+                return this;
+            },
+            removeWaiting: function ( $panel ) {
+                $panel.find( ".panel-overlay , .sk-circle" ).remove();
+                return this;
+            },
+            toggleBtn: function ( $panel ) {
+                $panel.find( ".js--form-edit" ).toggleClass( "hidden" );
+                $panel.find( ".js--form-submit" ).toggleClass( "hidden" );
+                return this;
+            },
+            doSubmit: function ( $form, callback ) {
+                // Ajax
+                var data = { // all data
+                    //gsmc: "北大高科gsmc",
+                    //gsxz: "北大高科gsxz",
+                    //glrs: "北大高科glrs",
+                    //clsj: "北大高科clsj",
+                    //jyfw: "北大高科jyfw",
+                    //qygm: "北大高科qygm"
+                };
+                var queryString = $form.serialize();
+                $.each( queryString.split( "&" ), function () {
+                    var pair = this.split( "=" );
+                    var key = pair[ 0 ];
+                    var value = pair[ 1 ] || "";
+                    if ( data[ key ] ) {
+                        data[ key ] += "," + value;
+                    } else {
+                        data[ key ] = value;
                     }
-
-                    swal( {
-                        title: " ",
-                        text: "保存失败!",
-                        type: "error",
-                        //showConfirmButton: true,
-                        confirmButtonText: "确定",
-                        timer: 1500
-                    } );
-
-                }
-
-                function completeHandler() {
-                }
+                } );
+                //console.info(queryString,data);
+                setTimeout( function () {
+                    callback( data );
+                }, 2000 )
             },
-            doEdit: function doEdit( $panel ) {
-                this.showEditMode( $panel );
-            },
-            changeMode: function changeModel( $panel, type, callback ) { // type="detail":详情模式(默认)；type="edit":编辑模式
-                var mark,
-                    url
-                    ;
-                mark = $panel.attr("data-mark");
-                url = CTX + mark + "/" + (type || "detail");
-
-                if ( ! mark ) {
-                    throw "请给data-mark赋值";
-                }
-
-                // 1. 获取详情页
-                Utils.ajax({
-                    url: url,
-                    dataType: "text",
-                    success: successHandler,
-                    error: function errorHandler() {
-                        //alert( "数据获取失败" );
-                        Utils.alert.show($panel);
+            doEdit: function doEdit( $form, callback ) {
+                var data = {
+                    gsmc: "北大高科",
+                    gsxz: "03",
+                    dic_gsxz: {
+                        "01": "国有企业",
+                        "02": "集体企业",
+                        "03": "联营企业",
+                        "04": "股份合作制企业",
+                        "05": "私营企业",
+                        "06": "个体户",
+                        "07": "合伙企业",
+                        "08": "有限责任公司",
+                        "09": "股份有限公司"
                     },
-                    complete: callback
-                });
-
-                // 2. 置入panel
-                function successHandler( responseData ) {
-                    //console.info( responseData );
-                    $panel.find(".panel-body" ).html(responseData);
-                }
+                    glrs: "20",
+                    clsj: "2012-12-12",
+                    //jyfw: "北大高科jyfw",
+                    //qygm: "北大高科qygm"
+                };
+                setTimeout( function () {
+                    callback( data );
+                }, 2000 )
             },
-            showEditMode: function showEdit( $panel ) {
+            showEdit: function showEdit( $panel, data ) {
                 var _this = this;
-                Utils.wait.show( $panel );
-                this.changeMode( $panel, "edit", function callback() {
-                    Utils.wait.hide( $panel );
+                this._getTemplate( $panel.attr( "data-template" ), "_edit", function ( template ) {
+                    $panel.find( ".panel-body" ).html( doT.template( template )( data ) );
                     _this.wrap( $panel );
-                    // 重置按钮
-                    _this.$submit.removeClass("hidden");
-                    _this.$edit.addClass("hidden");
                 } );
-                return this;
             },
-            showDetailMode: function showDetail( $panel ) {
-                var _this = this;
-                Utils.wait.show( $panel );
-                this.changeMode( $panel, "detail", function callback() {
-                    Utils.wait.hide( $panel );
-                    // 重置按钮
-                    _this.$edit.removeClass("hidden");
-                    _this.$submit.addClass("hidden");
+            showDetail: function showDetail( $panel, data ) {
+                // data
+
+                // template
+                this._getTemplate( $panel.attr( "data-template" ), "_detail", function ( template ) {
+                    $panel.find( ".panel-body" ).html( doT.template( template )( data ) );
                 } );
-                return this;
+            },
+            _getTemplate: function ( templateName, templateType, callback ) {
+                var curWwwPath = window.document.location.href;
+                var lastSlashPos = curWwwPath.lastIndexOf( "/" );
+                var curPath = curWwwPath.substring( 0, lastSlashPos + 1 );
+                require( [ "text!" + curPath + "tpl/" + templateName + templateType + ".tpl" ], function ( template ) {
+                    callback( template );
+                } );
             }
         };
 

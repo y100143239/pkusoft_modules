@@ -1,7 +1,10 @@
 module.exports = function(grunt) {
 
-    // Project configuration.
-    grunt.initConfig({
+    var defaultConfig,
+        bafwConfig
+        ;
+
+    defaultConfig = {
         clean: {
             cleanoutput: {
                 files: [{
@@ -9,6 +12,7 @@ module.exports = function(grunt) {
                 }]
             }
         },
+
         imagemin: {
             dynamic: {
                 options: {
@@ -24,19 +28,98 @@ module.exports = function(grunt) {
                 ]
             }
         }
-    });
+
+    };
+
+    bafwConfig = {
+        clean: {
+            cleanoutput: {
+                files: [{
+                    src: '/Users/forwardNow/develop/workspace/gdbaweb/WebRoot/static/modules/'
+                }]
+            }
+        },
+        copy: {
+            modules: {
+                files: [
+                    {
+                        expand: true,
+                        cwd: 'dev/modules',
+                        src: '**',
+                        dest: '/Users/forwardNow/develop/workspace/gdbaweb/WebRoot/static/modules/'
+                    }
+                ]
+            },
+            app: {
+                files: [
+                    {
+                        expand: true,
+                        cwd: 'dev/apps/bafw',
+                        src: ["css/**","images/*.{png,jpg,gif}","js/main.js"],
+                        dest: '/Users/forwardNow/develop/workspace/gdbaweb/WebRoot/static/web/'
+                    }
+                ]
+            }
+            ,
+            htmls: {
+                files: [
+                    {
+                        expand: true,
+                        cwd: 'dev/apps/bafw',
+                        src: ["index.html"],
+                        dest: '/Users/forwardNow/develop/workspace/gdbaweb/WebRoot/static/web/'
+                    }
+                ]
+            },
+            scripts: {
+                files: [
+                    {
+                        expand: true,
+                        cwd: 'dev/apps/bafw',
+                        src: ["js/main.js"],
+                        dest: '/Users/forwardNow/develop/workspace/gdbaweb/WebRoot/static/web/'
+                    }
+                ]
+            },
+            styles: {
+                files: [
+                    {
+                        expand: true,
+                        cwd: 'dev/apps/bafw',
+                        src: ["css/style.css"],
+                        dest: '/Users/forwardNow/develop/workspace/gdbaweb/WebRoot/static/web/'
+                    }
+                ]
+            }
+        },
+        watch: {
+            htmls: {
+                files: ['dev/apps/bafw/index.html'],
+                tasks: ['copy:htmls']
+            },
+            scripts: {
+                files: ['dev/apps/bafw/js/main.js'],
+                tasks: ['copy:scripts']
+            },
+            styles: {
+                files: ['dev/apps/bafw/css/style.css'],
+                tasks: ['copy:styles']
+            }
+        }
+    };
+
+    // Project configuration.
+    grunt.initConfig(bafwConfig);
 
     // 加载插件。
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-copy');
-    grunt.loadNpmTasks('grunt-contrib-imagemin');
+    grunt.loadNpmTasks('grunt-contrib-watch');
+    //grunt.loadNpmTasks('grunt-contrib-imagemin');
 
 
-    grunt.registerTask('prod', [
-        //'clean',
-        'imagemin' //图片压缩
-    ]);
+    //grunt.registerTask('prod', [ /*'clean', 'copy:modules',*/ 'copy:app' ] );
 
     // 默认被执行的任务列表。
-    grunt.registerTask('default', [ 'prod']);
+    //grunt.registerTask('default', [ 'prod']);
 };
