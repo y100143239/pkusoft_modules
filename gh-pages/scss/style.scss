@@ -37,3 +37,39 @@ body {
         }
     }
 }
+
+#note {
+    .thumbnail {
+        height: 308px;
+        & > a {
+            height: 180px;
+        }
+        .caption {
+            padding-top: 0;
+            h4 {
+                min-height: 42px;
+                line-height: 1.5;
+            }
+            .footer {
+                color: #888;
+                .item {
+                    line-height: 1.5;
+                    &:first-child {
+                        //float:left;
+                        text-align: left;
+                    }
+                    &:last-child {
+                        //float: right;
+                        text-align: right;
+                    }
+                }
+                .fa {
+                    margin-right: 0.2em;
+                }
+                .badge {
+                    border-radius: 2px;
+                }
+            }
+        }
+    }
+}

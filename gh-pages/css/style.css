@@ -71,4 +71,26 @@ body {
       .thumbnail .caption p:hover {
         color: #EF7F00; }
 
+#note .thumbnail {
+  height: 308px; }
+  #note .thumbnail > a {
+    height: 180px; }
+  #note .thumbnail .caption {
+    padding-top: 0; }
+    #note .thumbnail .caption h4 {
+      min-height: 42px;
+      line-height: 1.5; }
+    #note .thumbnail .caption .footer {
+      color: #888; }
+      #note .thumbnail .caption .footer .item {
+        line-height: 1.5; }
+        #note .thumbnail .caption .footer .item:first-child {
+          text-align: left; }
+        #note .thumbnail .caption .footer .item:last-child {
+          text-align: right; }
+      #note .thumbnail .caption .footer .fa {
+        margin-right: 0.2em; }
+      #note .thumbnail .caption .footer .badge {
+        border-radius: 2px; }
+
 /*# sourceMappingURL=style.css.map */
