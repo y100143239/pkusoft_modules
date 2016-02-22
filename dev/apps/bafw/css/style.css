@@ -219,8 +219,9 @@ body, html {
   color: #d9534f;
   font-family: "Courier New", sans-serif; }
 .checkbox label {
-  margin-bottom: 0.5em;
   min-width: 24%; }
+  .checkbox label:hover {
+    color: #ec971f; }
 .radio label {
   margin-right: 2em; }
 .panel {

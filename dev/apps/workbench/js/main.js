@@ -331,7 +331,7 @@
 
                     _this.isUpading = false;
                     Utils.wait.hide( _this.$container );
-                    Utils.alert.show( _this.$container );
+                    IS_DEV || Utils.alert.show( _this.$container );
 
                     //---- 测试数据
                     if ( IS_DEV !== true ) return;
@@ -533,7 +533,7 @@
 
                     _this.isUpading = false;
                     Utils.wait.hide( _this.$container );
-                    Utils.alert.show( _this.$container );
+                    IS_DEV || Utils.alert.show( _this.$container );
 
                     window[ errorCallback ]( _this.data );
                     //---- 测试数据
@@ -730,7 +730,7 @@
 
                     _this.isUpading = false;
                     Utils.wait.hide( _this.$container );
-                    Utils.alert.show( _this.$container );
+                    IS_DEV || Utils.alert.show( _this.$container );
 
                     window[ _this.requestSetting.errorCallback ]();
                     //---- 测试数据
@@ -863,7 +863,7 @@
 
                     _this.isUpading = false;
                     Utils.wait.hide( _this.$container );
-                    Utils.alert.show( _this.$container );
+                    IS_DEV || Utils.alert.show( _this.$container );
 
                     window[ _this.requestSetting.errorCallback ]();
                     //---- 测试数据
@@ -1044,7 +1044,7 @@
                 function getDataErrorHandler() { // 测试数据
                     _this.isUpading = false;
                     Utils.wait.hide( _this.$container );
-                    Utils.alert.show( _this.$container );
+                    IS_DEV || Utils.alert.show( _this.$container );
 
                     var data = window[ errorCallback ]( _this.data );
                     //---- 测试数据
@@ -1166,7 +1166,7 @@
                 function getDataErrorHandler() { // 测试数据
                     _this.isUpading = false;
                     Utils.wait.hide( _this.$container );
-                    Utils.alert.show( _this.$container );
+                    IS_DEV || Utils.alert.show( _this.$container );
 
                     window[ _this.requestSetting.errorCallback ]();
                     //---- 测试数据
@@ -1426,7 +1426,7 @@
                 function getDataErrorHandler() { // 测试数据
                     _this.isUpading = false;
                     Utils.wait.hide( _this.$container );
-                    Utils.alert.show( _this.$container );
+                    IS_DEV || Utils.alert.show( _this.$container );
 
                     var data = window[ errorCallback ]( _this.data );
                     //---- 测试数据

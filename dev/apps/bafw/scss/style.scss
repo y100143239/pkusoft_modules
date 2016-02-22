@@ -297,9 +297,10 @@ body,html {
     }
 
     @at-root .checkbox label {
-        //margin-right: 2em;
-        margin-bottom: 0.5em;
         min-width: 24%;
+        &:hover {
+            color: #ec971f;
+        }
     }
     @at-root .radio label {
         margin-right: 2em;

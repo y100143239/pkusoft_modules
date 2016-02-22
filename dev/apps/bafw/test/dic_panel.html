@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+
+    <style>
+        body, div, table, h1, h2, h3, h4, h5, h6, ul, ol, li, p, dl, dt, dd, th, td, form, fieldset {
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            color: #333;
+            font: 400 12px/1.6 arial,sans-serif;
+        }
+        .ks-overlay {
+            position: absolute;
+            left: -9999px;
+            top: -9999px;
+            z-index: 999999;
+        }
+
+        .city-select-tab {
+            border-bottom: 1px solid #ccc;
+            border-right: 1px solid #ccc;
+            border-top: 1px solid #ccc;
+            width: 299px;
+            height: 35px;
+            background: #f0f0f0;
+        }
+
+        .city-select-tab .current {
+            background: #fff;
+            border-bottom: 1px solid #fff;
+            color: #f60;
+        }
+        .city-select-tab a {
+            float: left;
+            display: inline;
+            margin-bottom: -1px;
+            padding: 8px 20px;
+            width: 33px;
+            border-left: 1px solid #ccc;
+            border-bottom: 1px solid transparent;
+            color: #4D4D4D;
+            text-align: center;
+            outline: 0;
+        }
+        .city-select {
+            border: 1px #ccc solid;
+            border-top: 0;
+            padding: 10px 15px;
+            width: 268px;
+            background: #fff;
+            font-size: 12px;
+        }
+        .city-select a {
+            display: inline-block;
+            color: #4D4D4D;
+            padding: 0 10px;
+            outline: 0;
+            text-decoration: none;
+            white-space: nowrap;
+            margin-right: 2px;
+        }
+        .city-select a:hover, .city-select a:focus {
+            background-color: #fff8f3;
+            border-radius: 2px;
+            color: #f60;
+        }
+        .city-select a.current {
+            background-color: #f60;
+            color: #fff;
+            border-radius: 2px;
+        }
+        .city-select dt {
+            display: inline-block;
+            width: 25px;
+            float: left;
+            padding-right: 10px;
+            font-weight: 700;
+            text-align: right;
+        }
+        .city-select dd {
+            width: 233px;
+            display: inline;
+            float: left;
+            margin-left: 0;
+        }
+        .city-select dl {
+            line-height: 2;
+            clear: both;
+            padding: 3px 0;
+            margin: 0;
+        }
+        .city-select dl:after {
+            clear: both;
+            content: " ";
+            display: block;
+            font-size: 0;
+            height: 0;
+            visibility: hidden;
+        }
+        .city-select .border-top {
+            border-top: 1px solid #ccc;
+        }
+        .tip-icon {
+            position: absolute;
+            bottom: 15px;
+            right: 10px;
+            width: 16px;
+            height: 16px;
+            background: url(//img.alicdn.com/tps/i4/TB1eMKBGFXXXXb4XXXXAz6UFXXX-16-16.png) no-repeat;
+        }
+        .city-select-province dd, .city-select-city dd, .city-select-street dd, .city-select-district dd {
+            width: 270px;
+        }
+
+    </style>
+
+</head>
+<body>
+
+
+<div id="ks-component15018" class="ks-overlay" style="width: 300px; left: 10px; top: 27px;">
+
+    <div id="ks-content-ks-component15018" class="ks-overlay-content">
+        <div class="city-select-warp">
+            <div class="city-select-tab">
+                <a class="current" attr-cont="city-province" data-spm-anchor-id="0.0.0.0">省份</a>
+                <a class="" attr-cont="city-city" data-spm-anchor-id="0.0.0.0">城市</a>
+                <a class="" attr-cont="city-district" data-spm-anchor-id="0.0.0.0">县区</a>
+                <a class="last" attr-cont="city-street" data-spm-anchor-id="0.0.0.0">街道</a>
+            </div>
+            <div class="city-select-content">
+                <div class="city-select city-province" style="display: block;">
+                    <dl class="fn-clear"><dt>A-G</dt><dd><a title="安徽" attr-id="340000" href="javascript:;" data-spm-anchor-id="0.0.0.0" class="current">安徽</a><a title="北京" attr-id="110000" href="javascript:;">北京</a><a title="重庆" attr-id="500000" href="javascript:;">重庆</a><a title="福建" attr-id="350000" href="javascript:;">福建</a><a title="甘肃" attr-id="620000" href="javascript:;">甘肃</a><a title="广东" attr-id="440000" href="javascript:;">广东</a><a title="广西" attr-id="450000" href="javascript:;">广西</a><a title="贵州" attr-id="520000" href="javascript:;">贵州</a></dd></dl>
+                    <dl class="fn-clear"><dt>H-K</dt><dd><a title="海南" attr-id="460000" href="javascript:;">海南</a><a title="河北" attr-id="130000" href="javascript:;">河北</a><a title="黑龙江" attr-id="230000" href="javascript:;">黑龙江</a><a title="河南" attr-id="410000" href="javascript:;">河南</a><a title="湖北" attr-id="420000" href="javascript:;">湖北</a><a title="湖南" attr-id="430000" href="javascript:;">湖南</a><a title="江苏" attr-id="320000" href="javascript:;">江苏</a><a title="江西" attr-id="360000" href="javascript:;">江西</a><a title="吉林" attr-id="220000" href="javascript:;">吉林</a></dd></dl>
+                    <dl class="fn-clear"><dt>L-S</dt><dd><a title="辽宁" attr-id="210000" href="javascript:;">辽宁</a><a title="内蒙古" attr-id="150000" href="javascript:;">内蒙古</a><a title="宁夏" attr-id="640000" href="javascript:;">宁夏</a><a title="青海" attr-id="630000" href="javascript:;">青海</a><a title="山东" attr-id="370000" href="javascript:;">山东</a><a title="上海" attr-id="310000" href="javascript:;">上海</a><a title="山西" attr-id="140000" href="javascript:;">山西</a><a title="陕西" attr-id="610000" href="javascript:;">陕西</a><a title="四川" attr-id="510000" href="javascript:;">四川</a></dd></dl>
+                    <dl class="fn-clear"><dt>T-Z</dt><dd><a title="天津" attr-id="120000" href="javascript:;">天津</a><a title="新疆" attr-id="650000" href="javascript:;">新疆</a><a title="西藏" attr-id="540000" href="javascript:;">西藏</a><a title="云南" attr-id="530000" href="javascript:;">云南</a><a title="浙江" attr-id="330000" href="javascript:;">浙江</a></dd></dl>
+                </div>
+                <div class="city-select city-city" style="display: none;">
+                    <dl class="fn-clear city-select-city"><dd><a title="合肥" attr-id="340100" href="javascript:;" data-spm-anchor-id="0.0.0.0" class="current">合肥</a><a title="芜湖" attr-id="340200" href="javascript:;">芜湖</a><a title="蚌埠" attr-id="340300" href="javascript:;">蚌埠</a><a title="淮南" attr-id="340400" href="javascript:;">淮南</a><a title="马鞍山" attr-id="340500" href="javascript:;">马鞍山</a><a title="淮北" attr-id="340600" href="javascript:;">淮北</a><a title="铜陵" attr-id="340700" href="javascript:;">铜陵</a><a title="安庆" attr-id="340800" href="javascript:;">安庆</a><a title="黄山" attr-id="341000" href="javascript:;">黄山</a><a title="滁州" attr-id="341100" href="javascript:;">滁州</a><a title="阜阳" attr-id="341200" href="javascript:;">阜阳</a><a title="宿州" attr-id="341300" href="javascript:;">宿州</a><a title="六安" attr-id="341500" href="javascript:;">六安</a><a title="亳州" attr-id="341600" href="javascript:;">亳州</a><a title="池州" attr-id="341700" href="javascript:;">池州</a><a title="宣城" attr-id="341800" href="javascript:;">宣城</a></dd></dl>
+                </div>
+                <div class="city-select city-district" style="display: none;">
+                    <dl class="fn-clear city-select-district"><dd><a title="瑶海" attr-id="340102" href="javascript:;">瑶海</a><a title="庐阳" attr-id="340103" href="javascript:;">庐阳</a><a title="蜀山" attr-id="340104" href="javascript:;">蜀山</a><a title="包河" attr-id="340111" href="javascript:;" data-spm-anchor-id="0.0.0.0" class="current">包河</a><a title="长丰" attr-id="340121" href="javascript:;">长丰</a><a title="肥东" attr-id="340122" href="javascript:;">肥东</a><a title="肥西" attr-id="340123" href="javascript:;">肥西</a><a title="巢湖" attr-id="341400" href="javascript:;">巢湖</a><a title="庐江" attr-id="341421" href="javascript:;">庐江</a></dd></dl>
+                    <dl class="fn-clear city-select-district border-top"><dd><a title="高新区 (蜀山区)" attr-id="340104" href="javascript:;">高新区 (蜀山区)</a><a title="居巢区 (巢湖市)" attr-id="341400" href="javascript:;">居巢区 (巢湖市)</a></dd></dl>
+                    <div class="tip-icon" title="如您无法找到原地址所属的区域，可能该去已被合并或属于虚拟；行政区（地方经济开发区，非国家三级行政区），请根；据提示选择正确的区县"></div>
+                </div>
+                <div class="city-select city-street" style="display: none;">
+                    <dl class="fn-clear city-select-street"><dd><a title="骆岗街道" attr-id="340111001" href="javascript:;" attr-parent-id="340111">骆岗街道</a><a title="常青街道" attr-id="340111002" href="javascript:;" attr-parent-id="340111">常青街道</a><a title="芜湖路街道" attr-id="340111003" href="javascript:;" attr-parent-id="340111">芜湖路街道</a><a title="包公街道" attr-id="340111004" href="javascript:;" attr-parent-id="340111">包公街道</a><a title="望湖街道" attr-id="340111005" href="javascript:;" attr-parent-id="340111">望湖街道</a><a title="义城街道" attr-id="340111006" href="javascript:;" attr-parent-id="340111">义城街道</a><a title="烟墩街道" attr-id="340111007" href="javascript:;" attr-parent-id="340111">烟墩街道</a><a title="滨湖世纪社区" attr-id="340111008" href="javascript:;" attr-parent-id="340111">滨湖世纪社区</a><a title="淝河镇" attr-id="340111100" href="javascript:;" attr-parent-id="340111">淝河镇</a><a title="大圩镇" attr-id="340111102" href="javascript:;" attr-parent-id="340111">大圩镇</a></dd></dl>
+                    <dl class="fn-clear city-select-street border-top"><dd><a title="稍后再说" attr-id="-1" href="javascript:;">稍后再说</a><span style="color:#ccc">先填详细地址，稍后再获取街道地址 </span></dd></dl>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
