@@ -1124,8 +1124,8 @@
             this._getRequestSetting();
             this.render();
             this.bind();
-            this.pagination.init();
-            this.update();
+            //this.pagination.init();
+            //this.update();
             return this;
         },
         render: function render() {
@@ -1658,24 +1658,23 @@
             serviceStatus: {
                 data:  {
                     data:[ // status属性值为"error"时显示为“运行异常”
-                        { serviceName: "信息通信服务平台", status: "" },
-                        { serviceName: "异地办证平台", status: "" },
-                        { serviceName: "区级指纹平台", status: "" },
-                        { serviceName: "自动统计服务", status: "" },
-                        { serviceName: "制证打包服务", status: "" }
+                        { serviceName: "信息通信服务平台", icon: "xxtx", status: "" },
+                        { serviceName: "异地办证平台", icon: "ydbz", status: "" },
+                        { serviceName: "区级指纹平台", icon: "qjzw", status: "" },
+                        { serviceName: "自动统计服务", icon: "zdtj", status: "" },
+                        { serviceName: "制证打包服务", icon: "zzdb", status: "" }
                     ]
                 },
                 template:
                     '{{~it.data:value:index}}\
-                        <div class="service-status-item {{? value.status && value.status === "error"  }}error{{?}}">\
-                            <p class="text">{{= value.serviceName }}</p>\
-                            <span class="tip">运行良好</span>\
-                            <span class="tip error">运行异常</span>\
+                        <div class="service-status-item {{= value.icon }} {{? value.status && value.status === "error"  }}error{{?}}">\
+                            <div class="icon"></div><p class="text">{{= value.serviceName }}</p>\
                         </div>\
                     {{~}}    \
                     {{  for ( var i = 0, len = 6 - it.data.length; i < len; i++ ) {  }}\
                         <div class="service-status-item empty"></div>\
-                    {{ } }}'
+                    {{ } }}\
+                    <div class="clear"></div>'
             }
         },
         // 业务监管

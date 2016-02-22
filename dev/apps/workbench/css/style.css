@@ -128,15 +128,15 @@ a {
   .wd-container .wd-qjsj {
     overflow: hidden; }
     .wd-container .wd-qjsj .qjsj-map {
+      position: relative;
       width: 354px;
       float: left;
       padding: 10px;
-      margin: -1px 0 0 -1px;
-      border: solid 1px #eee;
+      border: solid 1px transparent;
       background: #fff; }
       .wd-container .wd-qjsj .qjsj-map .map-hot {
         width: 333px;
-        height: 246px;
+        height: 286px;
         background: url(../images/map.png) no-repeat;
         position: relative; }
         .wd-container .wd-qjsj .qjsj-map .map-hot .map-hot-item {
@@ -146,7 +146,9 @@ a {
             padding: 2px;
             color: #CFEBF4;
             background-color: #31b0d5;
-            border-color: #269abc; }
+            border-color: #269abc;
+            opacity: 0.7;
+            filter: alpha(opacity=70); }
         .wd-container .wd-qjsj .qjsj-map .map-hot #map-00 {
           left: 0px;
           top: 0px;
@@ -486,86 +488,125 @@ a {
               .wd-container .wd-qjsj .qjsj-map .map-hot #map-12 .tip:hover img {
                 margin: -1px 0 0 1px; }
       .wd-container .wd-qjsj .qjsj-map .map-current {
-        font-size: 16px;
-        margin-top: 1em;
-        text-align: right; }
+        position: absolute;
+        bottom: 16px;
+        right: 16px;
+        width: 100px; }
         .wd-container .wd-qjsj .qjsj-map .map-current .label {
+          font-size: 14px;
           color: #999; }
         .wd-container .wd-qjsj .qjsj-map .map-current .cur-city {
-          color: #333; }
+          color: #ffb74b;
+          font-size: 16px; }
+        .wd-container .wd-qjsj .qjsj-map .map-current .text {
+          text-align: right; }
+        .wd-container .wd-qjsj .qjsj-map .map-current .view {
+          display: inline-block;
+          width: 28px;
+          height: 28px;
+          background: url(../images/view.gif) no-repeat center center;
+          vertical-align: middle; }
+      .wd-container .wd-qjsj .qjsj-map .qjsj-map-subheading {
+        position: absolute;
+        border: solid 1px;
+        font-size: 14px;
+        text-align: center; }
+        .wd-container .wd-qjsj .qjsj-map .qjsj-map-subheading.data {
+          top: 50%;
+          right: -2px;
+          margin-top: -51px;
+          width: 14px;
+          padding: 14px 8px;
+          border-color: #bce8f1 #f8fdff #bce8f1 #bce8f1;
+          background-color: #f8fdff;
+          color: #2b92a7; }
+        .wd-container .wd-qjsj .qjsj-map .qjsj-map-subheading.status {
+          left: 50%;
+          bottom: -3px;
+          margin-left: -50px;
+          padding: 4px 0;
+          width: 100px;
+          border-color: #56c237 #56c237 #f5fefa #56c237;
+          background-color: #f5fefa;
+          color: #2f9711; }
     .wd-container .wd-qjsj .qujsj-data {
       float: left;
-      width: 425px;
-      color: #666; }
-      .wd-container .wd-qjsj .qujsj-data .data-panel {
-        background: #fff; }
-        .wd-container .wd-qjsj .qujsj-data .data-panel:first-child .panel-body {
-          height: 61px; }
-        .wd-container .wd-qjsj .qujsj-data .data-panel .panel-heading {
-          overflow: hidden;
-          height: 39px;
-          line-height: 39px;
-          font-size: 18px;
-          background-color: #f5f5f5;
-          border: 1px solid #ddd; }
-          .wd-container .wd-qjsj .qujsj-data .data-panel .panel-heading .total {
-            float: right;
-            font-size: 14px;
-            width: 51%; }
-          .wd-container .wd-qjsj .qujsj-data .data-panel .panel-heading .icon {
-            vertical-align: middle;
-            margin-left: 4px;
-            margin-right: 4px; }
-        .wd-container .wd-qjsj .qujsj-data .data-panel .panel-body {
-          overflow: hidden;
-          border: 1px solid #ddd;
-          border-top: none 0;
-          height: 60px; }
-          .wd-container .wd-qjsj .qujsj-data .data-panel .panel-body .data-item {
-            float: left;
-            width: 49%;
-            margin-top: 0.5em; }
-            .wd-container .wd-qjsj .qujsj-data .data-panel .panel-body .data-item.line-first {
-              text-indent: 2em; }
+      width: 423px;
+      color: #666;
+      background-color: #f8fdff;
+      border-left: solid 1px #bce8f1;
+      height: 308px; }
+      .wd-container .wd-qjsj .qujsj-data .data-panel:first-child .panel-body {
+        height: 61px; }
+      .wd-container .wd-qjsj .qujsj-data .data-panel .panel-heading {
+        overflow: hidden;
+        height: 39px;
+        line-height: 39px;
+        font-size: 18px;
+        background-color: #d9edf7;
+        color: #31708f; }
+        .wd-container .wd-qjsj .qujsj-data .data-panel .panel-heading .total {
+          float: right;
+          font-size: 14px;
+          width: 51%; }
+        .wd-container .wd-qjsj .qujsj-data .data-panel .panel-heading .icon {
+          vertical-align: middle;
+          margin-left: 4px;
+          margin-right: 4px; }
+      .wd-container .wd-qjsj .qujsj-data .data-panel .panel-body {
+        overflow: hidden;
+        height: 60px; }
+        .wd-container .wd-qjsj .qujsj-data .data-panel .panel-body .data-item {
+          float: left;
+          width: 49%;
+          margin-top: 0.5em; }
+          .wd-container .wd-qjsj .qujsj-data .data-panel .panel-body .data-item.line-first {
+            text-indent: 2em; }
     .wd-container .wd-qjsj .service-status {
       clear: both;
-      margin-top: 2em; }
+      height: 132px;
+      border-top: solid 1px #56c237;
+      background-color: #f5fefa;
+      padding-left: 16px; }
       .wd-container .wd-qjsj .service-status .service-status-item {
+        *zoom: 1;
         position: relative;
         float: left;
-        width: 120px;
-        height: 78px;
-        color: #666;
-        font-size: 16px;
-        border: solid 1px #e0f3d7;
-        margin-left: 10px;
-        background: url(../images/server_status_ok.png) no-repeat center center; }
+        width: 106px;
+        height: 112px;
+        padding: 4px;
+        margin-right: 16px;
+        margin-top: 5px;
+        background: url(../images/service_status.png) no-repeat 0 0; }
+        .wd-container .wd-qjsj .service-status .service-status-item.qjzw .icon {
+          background-position: 0px center; }
+        .wd-container .wd-qjsj .service-status .service-status-item.xxtx .icon {
+          background-position: -106px center; }
+        .wd-container .wd-qjsj .service-status .service-status-item.ydbz .icon {
+          background-position: -212px center; }
+        .wd-container .wd-qjsj .service-status .service-status-item.zdtj .icon {
+          background-position: -318px center; }
+        .wd-container .wd-qjsj .service-status .service-status-item.zzdb .icon {
+          background-position: -424px center; }
+        .wd-container .wd-qjsj .service-status .service-status-item .icon {
+          height: 80px;
+          background: url(../images/service_status_icon.png) no-repeat 9999px 9999px; }
         .wd-container .wd-qjsj .service-status .service-status-item.empty {
+          display: none;
           background: none;
-          border-color: #eee; }
+          border: dashed 1px #eee;
+          width: 104px; }
         .wd-container .wd-qjsj .service-status .service-status-item.error {
-          border-color: #f7dfdf;
-          background-image: url(../images/server_status_error.png); }
-          .wd-container .wd-qjsj .service-status .service-status-item.error .tip.error {
-            display: block;
-            background-color: #ffeded;
-            color: #b70000; }
+          background-position: 0 -130px; }
+          .wd-container .wd-qjsj .service-status .service-status-item.error .text {
+            color: #fdefeb; }
         .wd-container .wd-qjsj .service-status .service-status-item .text {
           width: 90%;
           line-height: 1.2;
-          margin: 1.5em auto 0 auto;
-          text-align: center; }
-        .wd-container .wd-qjsj .service-status .service-status-item .tip {
-          position: absolute;
-          right: 0;
-          bottom: 0;
-          line-height: 1;
-          font-size: 12px;
-          color: #349200;
-          background-color: #ecf7e6;
-          padding: 3px 2px; }
-          .wd-container .wd-qjsj .service-status .service-status-item .tip.error {
-            display: none; }
+          margin-top: 4px;
+          margin-left: 5%;
+          text-align: center;
+          color: #ecfff7; }
   .wd-container .wd-ywjg {
     position: relative;
     color: #333;

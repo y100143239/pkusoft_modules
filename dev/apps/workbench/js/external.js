@@ -52,11 +52,11 @@ function mapSuccessCallback( responseData ) {
     // 将服务状况挂载到数值对象上：serviceName 的值可自行更改；status的值为"error"时表示运行异常
     _sampleData.serviceStatus = {
         data:[ // status属性值为"error"时显示为“运行异常”
-            { serviceName: "信息通信服务平台", status: "" },
-            { serviceName: "异地办证平台", status: "" },
-            { serviceName: "区级指纹平台", status: "" },
-            { serviceName: "自动统计服务", status: "" },
-            { serviceName: "制证打包服务", status: test ? "error": "" }
+            { serviceName: "信息通信服务平台", icon: "xxtx", status: "" },
+            { serviceName: "异地办证平台", icon: "ydbz", status: "" },
+            { serviceName: "区级指纹平台", icon: "qjzw", status: "" },
+            { serviceName: "自动统计服务", icon: "zdtj", status: "" },
+            { serviceName: "制证打包服务", icon: "zzdb", status: test ? "error": "" }
         ]
     };
     responseData = _sampleData;
@@ -69,11 +69,11 @@ function mapErrorCallback( data, cityId ) {
     var test = Math.round( Math.random() ) == 1; // 用于测试
     data.serviceStatus = {
         data:[ // status属性值为"error"时显示为“运行异常”
-            { serviceName: "信息通信服务平台", status: "" },
-            { serviceName: "异地办证平台", status: "" },
-            { serviceName: "区级指纹平台", status: "" },
-            { serviceName: "自动统计服务", status: "" },
-            { serviceName: "制证打包服务", status: test ? "error": "" }
+            { serviceName: "信息通信服务平台", icon: "xxtx", status: "" },
+            { serviceName: "异地办证平台", icon: "ydbz", status: "" },
+            { serviceName: "区级指纹平台", icon: "qjzw", status: "" },
+            { serviceName: "自动统计服务", icon: "zdtj", status: "" },
+            { serviceName: "制证打包服务", icon: "zzdb", status: test ? "error": "" }
         ]
     }
 

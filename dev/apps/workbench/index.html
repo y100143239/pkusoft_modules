@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title></title>
-    <link rel="stylesheet" href="./css/style.css?version=1.0"/>
+    <link rel="stylesheet" href="./css/style.css?version=2.0"/>
     <script>var IS_DEV = true;</script>
     <script src="../../../dev/modules/jquery/jquery-1.9.0.js"></script>
     <script src="../../../dev/modules/utils/doT.js"></script>
@@ -25,6 +25,9 @@
                          data-success-callback="mapSuccessCallback"
                          data-error-callback="mapErrorCallback" >
 
+                        <div class="qjsj-map-subheading data">数据概况</div>
+                        <div class="qjsj-map-subheading status">服务状况</div>
+
                         <div class="map-hot">
                             <div class="map-hot-item" id="map-00" data-city-id="00"><a class="tip">内蒙</a></div>
                             <div class="map-hot-item active" id="map-01" data-city-id="01"><a class="tip" title="访问该盟市(阿拉善)系统" href="http://css.doyoe.com/" target="_blank">阿拉善 <img src="./images/icon_link.png" alt=""/></a></div>
@@ -40,11 +43,10 @@
                             <div class="map-hot-item" id="map-11" data-city-id="11"><a class="tip" title="访问该盟市(兴安)系统" href="http://css.doyoe.com/" target="_blank">兴安 <img src="./images/icon_link.png" alt=""/></a></div>
                             <div class="map-hot-item" id="map-12" data-city-id="12"><a class="tip" title="访问该盟市(呼伦贝尔)系统" href="http://css.doyoe.com/" target="_blank">呼伦贝尔 <img src="./images/icon_link.png" alt=""/></a></div>
                         </div>
-                        <div class="map-current"><span class="label">当前查看：</span><span class="cur-city">阿拉善</span></div>
+                        <div class="map-current"><span class="label">当前查看<span class="view"></span></span><p class="text"><span class="cur-city">阿拉善</span></p></div>
                     </div>
 
                     <div class="qujsj-data js--qjsj-data">
-
                         <div class="data-panel">
                             <div class="panel-heading">
                                 <p class="total"><span class="label">总数：</span><span class="cont">16238653</span></p>
@@ -81,11 +83,11 @@
                     <div class="clear"></div>
 
                     <div class="service-status js--service-status">
-                        <div class="service-status-item"><p class="text">信息通信服务平台</p> <span class="tip">运行良好</span><span class="tip error">运行异常</span></div>
-                        <div class="service-status-item"><p class="text">异地办证平台</p> <span class="tip">运行良好</span><span class="tip error">运行异常</span></div>
-                        <div class="service-status-item"><p class="text">区级指纹平台</p> <span class="tip">运行良好</span><span class="tip error">运行异常</span></div>
-                        <div class="service-status-item"><p class="text">自动统计服务</p> <span class="tip">运行良好</span><span class="tip error">运行异常</span></div>
-                        <div class="service-status-item"><p class="text">制证打包服务</p> <span class="tip">运行良好</span><span class="tip error">运行异常</span></div>
+                        <div class="service-status-item"><div class="icon"></div><p class="text">信息通信服务平台</p></div>
+                        <div class="service-status-item"><div class="icon"></div><p class="text">异地办证平台</p></div>
+                        <div class="service-status-item"><div class="icon"></div><p class="text">区级指纹平台</p></div>
+                        <div class="service-status-item"><div class="icon"></div><p class="text">自动统计服务</p></div>
+                        <div class="service-status-item error"><div class="icon"></div><p class="text">制证打包服务</p></div>
                         <div class="service-status-item empty"></div>
                         <div class="clear"></div>
                     </div>
@@ -639,9 +641,9 @@
                 <div class="bottom-menu-item" data-id="qjsj">区级数据</div>
                 <div class="bottom-menu-item" data-id="ywjg">业务监管</div>
                 <div class="bottom-menu-item" data-id="ydbl">异地办理</div>
-                <div class="bottom-menu-item" data-id="sjzl">数据质量</div>
+                <div class="bottom-menu-item active" data-id="sjzl">数据质量</div>
                 <!--<div class="bottom-menu-item disabled" data-id="xpjc">相片检测</div>-->
-                <div class="bottom-menu-item active" data-id="sjfw">数据服务</div>
+                <div class="bottom-menu-item" data-id="sjfw">数据服务</div>
             </div>
         </div>
     </div>

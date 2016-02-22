@@ -214,15 +214,16 @@ a {
     .wd-qjsj {
         overflow: hidden;
         .qjsj-map {
+            position: relative;
             width: 354px;
             float: left;
             padding: 10px;
-            margin: -1px 0 0 -1px;
-            border: solid 1px #eee;
+            //margin: -1px 0 0 -1px;
+            border: solid 1px transparent;
             background: #fff;
             .map-hot {
                 width      : 333px;
-                height     : 246px;
+                height     : 286px;
                 background : url(../images/map.png) no-repeat;
                 position   : relative;
                 .map-hot-item {
@@ -233,6 +234,7 @@ a {
                         color            : #CFEBF4;
                         background-color : #31b0d5;
                         border-color     : #269abc;
+                        @include opacity(70);
                     }
                 }
                 // hotmap($num,$left,$top,$width,$height,$tipLeft:0,$tipTop:0,$tipWidth: 50)
@@ -277,23 +279,71 @@ a {
                 }
             }
             .map-current {
-                font-size: 16px;
-                margin-top: 1em;
-                text-align: right;
+                position: absolute;
+                bottom: 16px;
+                right: 16px;
+                width: 100px;
+                //margin-top: 1em;
+
                 .label {
+                    font-size: 14px;
                     color: #999;
                 }
                 .cur-city {
-                    color: #333;
+                    color: #ffb74b;
+                    font-size: 16px;
+
+                }
+                .text {
+                    text-align: right;
+                }
+                .view {
+                    display: inline-block;
+                    width: 28px;
+                    height: 28px;
+                    background: url(../images/view.gif) no-repeat center center;
+                    vertical-align: middle;
+                }
+            }
+            .qjsj-map-subheading {
+                position: absolute;
+                //height: 72px;
+                border: solid 1px;
+                font-size: 14px;
+                text-align: center;
+                &.data {
+                    top: 50%;
+                    right: -2px;
+                    margin-top: -51px;
+                    width: 14px;
+                    //height: 84px;
+                    padding: 14px 8px;
+                    border-color: #bce8f1 #f8fdff #bce8f1 #bce8f1;
+                    background-color: #f8fdff;
+                    color: #2b92a7;
+                }
+                &.status {
+                    left: 50%;
+                    bottom: -3px;
+                    margin-left: -50px;
+                    padding: 4px 0;
+                    //letter-spacing: 0.5em;
+                    width: 100px;
+                    border-color: #56c237 #56c237 #f5fefa #56c237;
+                    background-color: #f5fefa;
+                    color: #2f9711;
                 }
             }
         }
         .qujsj-data {
             float: left;
-            width: 425px;
+            width: 423px;
             color: #666;
+            background-color: #f8fdff;
+            border-left: solid 1px #bce8f1;
+            height: 308px;
             .data-panel {
-                background: #fff;
+                //background: #fff;
                 &:first-child {
                     .panel-body {
                         height: 61px;
@@ -305,8 +355,9 @@ a {
                     height: 39px;
                     line-height: 39px;
                     font-size: 18px;
-                    background-color: #f5f5f5;
-                    border: 1px solid #ddd;
+                    background-color: #d9edf7;
+                    color: #31708f;
+                    //border: 1px solid #ddd;
                     .title {
                     }
                     .total {
@@ -322,8 +373,9 @@ a {
                 }
                 .panel-body {
                     overflow: hidden;
-                    border: 1px solid #ddd;
-                    border-top: none 0;
+                    //border: 1px solid #ddd;
+                    //border-top: none 0;
+                    //background-color: #f8fdff;
                     //padding-top: 1em;
                     height: 60px;
                     .data-item {
@@ -345,51 +397,59 @@ a {
         }
         .service-status {
             clear: both;
-            margin-top: 2em;
+            //margin-top: 2em;
+            height: 132px;
+            border-top: solid 1px #56c237;
+            background-color: #f5fefa;
+            padding-left: 16px;
             .service-status-item {
+                *zoom: 1;
                 position: relative;
                 float: left;
-                width: 120px;
-                height: 78px;
-                color: #666;
-                font-size: 16px;
-                border: solid 1px #e0f3d7;
-                margin-left: 10px;
-                background: url(../images/server_status_ok.png) no-repeat center center;
-                &:first-child {
-                    //margin-left: 8px;
+                width: 106px;
+                height: 112px;
+                padding: 4px;
+                margin-right: 16px;
+                margin-top: 5px;
+                background: url(../images/service_status.png) no-repeat 0 0;
+                &.qjzw .icon {
+                    background-position: (-106px * 0) center;
+                }
+                &.xxtx .icon {
+                    background-position: (-106px * 1) center;
+                }
+                &.ydbz .icon {
+                    background-position: (-106px * 2) center;
+                }
+                &.zdtj .icon {
+                    background-position: (-106px * 3) center;
+                }
+                &.zzdb .icon {
+                    background-position: (-106px * 4) center;
+                }
+                .icon {
+                    height: 80px;
+                    background: url(../images/service_status_icon.png) no-repeat 9999px 9999px;
                 }
                 &.empty {
+                    display: none;
                     background: none;
-                    border-color: #eee;
+                    border: dashed 1px #eee;
+                    width: 104px;
                 }
                 &.error {
-                    border-color: #f7dfdf;
-                    background-image: url(../images/server_status_error.png);
-                    .tip.error {
-                        display: block;
-                        background-color: #ffeded;
-                        color: #b70000;
+                    background-position: 0 -130px;
+                    .text {
+                         color: #fdefeb;
                     }
                 }
                 .text {
                     width: 90%;
                     line-height: 1.2;
-                    margin: 1.5em auto 0 auto;
+                    margin-top:4px;
+                    margin-left: 5%;
                     text-align: center;
-                }
-                .tip {
-                    position: absolute;
-                    right: 0;
-                    bottom: 0;
-                    line-height: 1;
-                    font-size: 12px;
-                    color: #349200;
-                    background-color: #ecf7e6;
-                    padding: 3px 2px;
-                    &.error {
-                        display: none;
-                    }
+                    color: #ecfff7;
                 }
 
             }
