@@ -214,7 +214,7 @@ define( [ "lib/ie/ie",
         };
 
         DatetimePicker = {
-            hookClass: ".js--datepicker-container",
+            hookClass: ".js--datepicker",
             options: {
                 language: 'zh-CN',
                 weekStart: 1, // Day of the week start. 0 (Sunday) to 6 (Saturday)
@@ -230,9 +230,7 @@ define( [ "lib/ie/ie",
                 return this;
             },
             wrap: function ( $target ) {
-                $target.datetimepicker( this.options ).on( "changeDate", function () {
-                    $( this ).find( ".js--datepicker-input" ).parsley().validate(); // 再次validate
-                } );
+                $target.datetimepicker( this.options );
                 return this;
             },
             remove: function ( $datepicker ) {

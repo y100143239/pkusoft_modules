@@ -151,7 +151,7 @@ body, html {
   .preloader .spinner {
     width: 40px;
     height: 40px;
-    margin: 0px auto;
+    margin: 0 auto;
     background-color: #333;
     border-radius: 100%;
     -webkit-animation: scaleout 1.0s infinite ease-in-out;
@@ -191,11 +191,10 @@ body, html {
       opacity: 0.8; }
 .sidebar .glyphicon-chevron-right {
   float: right;
-  opacity: 0.8; }
+  opacity: 0.8;
+  margin-right: -0.6em; }
 .sidebar.nav .list-group-item {
   padding: 0; }
-  .sidebar.nav .list-group-item a {
-    font-size: 12px; }
 .sidebar.nav .active a {
   color: #fff; }
 .sidebar.nav .active > a:hover, .sidebar.nav .active > a:focus {
@@ -220,8 +219,9 @@ body, html {
   color: #d9534f;
   font-family: "Courier New", sans-serif; }
 .checkbox label {
-  margin-bottom: 0.5em;
   min-width: 24%; }
+  .checkbox label:hover {
+    color: #ec971f; }
 .radio label {
   margin-right: 2em; }
 .panel {
@@ -239,5 +239,12 @@ body, html {
       .panel .panel-heading .btn-group .btn {
         height: 100%;
         border-radius: 0 2px 0 0 !important; }
+.date .input-group-addon {
+  background-color: #fff;
+  cursor: pointer; }
+  .date .input-group-addon:hover {
+    color: #333;
+    background-color: #e6e6e6;
+    border-color: #adadad; }
 
 /*# sourceMappingURL=style.css.map */

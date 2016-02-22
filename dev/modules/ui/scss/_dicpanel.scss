@@ -1,0 +1,101 @@
+$component-overlay-hotcolor: #f60;
+.component-overlay, .ks-overlay {
+    position: absolute;
+    left: -9999px;
+    top: -9999px;
+    z-index: 999999;
+}
+.component-dicpanel {
+    color: #333;
+    font: 400 12px/1.6 arial,sans-serif;
+    .city-select-tab {
+        border-bottom: 1px solid #ccc;
+        border-right: 1px solid #ccc;
+        border-top: 1px solid #ccc;
+        width: 299px;
+        height: 35px;
+        background: #f0f0f0;
+        a {
+            float: left;
+            display: inline;
+            margin-bottom: -1px;
+            padding: 8px 20px;
+            width: 33px;
+            border-left: 1px solid #ccc;
+            border-bottom: 1px solid transparent;
+            color: #4D4D4D;
+            text-align: center;
+            outline: 0;
+            cursor: pointer;
+        }
+        .current {
+            background: #fff;
+            border-bottom: 1px solid #fff;
+            color: $component-overlay-hotcolor;
+        }
+        .last {
+            width: 36px;
+        }
+    }
+    .city-select {
+        border: 1px #ccc solid;
+        border-top: 0;
+        padding: 10px 15px;
+        width: 268px;
+        background: #fff;
+        font-size: 12px;
+        a {
+            display: inline-block;
+            color: #4D4D4D;
+            padding: 0 10px;
+            outline: 0;
+            text-decoration: none;
+            white-space: nowrap;
+            margin-right: 2px;
+            &:hover, &:focus {
+                background-color: #fff8f3;
+                border-radius: 2px;
+                color: $component-overlay-hotcolor;
+            }
+            &.current {
+                background-color: $component-overlay-hotcolor;
+                color: #fff;
+                border-radius: 2px;
+            }
+        }
+        dl {
+            line-height: 2;
+            clear: both;
+            padding: 3px 0;
+            margin: 0;
+            &:after {
+                clear: both;
+                content: " ";
+                display: block;
+                font-size: 0;
+                height: 0;
+                visibility: hidden;
+            }
+        }
+        dt {
+            display: inline-block;
+            width: 25px;
+            float: left;
+            padding-right: 10px;
+            font-weight: 700;
+            text-align: right;
+        }
+        dd {
+            width: 233px;
+            display: inline;
+            float: left;
+            margin-left: 0;
+        }
+        .border-top {
+            border-top: 1px solid #ccc;
+        }
+    }
+    .city-select-province dd, .city-select-city dd, .city-select-street dd, .city-select-district dd {
+        width: 270px;
+    }
+}

@@ -268,4 +268,90 @@ Released under the MIT License <http://www.opensource.org/licenses/mit-license.p
 .sweet-alert > h2, .sweet-alert > .text-muted {
   position: relative; }
 
+.component-overlay, .ks-overlay {
+  position: absolute;
+  left: -9999px;
+  top: -9999px;
+  z-index: 999999; }
+
+.component-dicpanel {
+  color: #333;
+  font: 400 12px/1.6 arial,sans-serif; }
+  .component-dicpanel .city-select-tab {
+    border-bottom: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    border-top: 1px solid #ccc;
+    width: 299px;
+    height: 35px;
+    background: #f0f0f0; }
+    .component-dicpanel .city-select-tab a {
+      float: left;
+      display: inline;
+      margin-bottom: -1px;
+      padding: 8px 20px;
+      width: 33px;
+      border-left: 1px solid #ccc;
+      border-bottom: 1px solid transparent;
+      color: #4D4D4D;
+      text-align: center;
+      outline: 0;
+      cursor: pointer; }
+    .component-dicpanel .city-select-tab .current {
+      background: #fff;
+      border-bottom: 1px solid #fff;
+      color: #f60; }
+    .component-dicpanel .city-select-tab .last {
+      width: 36px; }
+  .component-dicpanel .city-select {
+    border: 1px #ccc solid;
+    border-top: 0;
+    padding: 10px 15px;
+    width: 268px;
+    background: #fff;
+    font-size: 12px; }
+    .component-dicpanel .city-select a {
+      display: inline-block;
+      color: #4D4D4D;
+      padding: 0 10px;
+      outline: 0;
+      text-decoration: none;
+      white-space: nowrap;
+      margin-right: 2px; }
+      .component-dicpanel .city-select a:hover, .component-dicpanel .city-select a:focus {
+        background-color: #fff8f3;
+        border-radius: 2px;
+        color: #f60; }
+      .component-dicpanel .city-select a.current {
+        background-color: #f60;
+        color: #fff;
+        border-radius: 2px; }
+    .component-dicpanel .city-select dl {
+      line-height: 2;
+      clear: both;
+      padding: 3px 0;
+      margin: 0; }
+      .component-dicpanel .city-select dl:after {
+        clear: both;
+        content: " ";
+        display: block;
+        font-size: 0;
+        height: 0;
+        visibility: hidden; }
+    .component-dicpanel .city-select dt {
+      display: inline-block;
+      width: 25px;
+      float: left;
+      padding-right: 10px;
+      font-weight: 700;
+      text-align: right; }
+    .component-dicpanel .city-select dd {
+      width: 233px;
+      display: inline;
+      float: left;
+      margin-left: 0; }
+    .component-dicpanel .city-select .border-top {
+      border-top: 1px solid #ccc; }
+  .component-dicpanel .city-select-province dd, .component-dicpanel .city-select-city dd, .component-dicpanel .city-select-street dd, .component-dicpanel .city-select-district dd {
+    width: 270px; }
+
 /*# sourceMappingURL=style.css.map */
