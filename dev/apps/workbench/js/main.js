@@ -80,6 +80,61 @@
             return $target.find( ".alert-warning" ).length > 0;
         }
     };
+    // 本地存储
+    Utils.store = {
+        hname: location.hostname ? location.hostname : 'localStatus',
+        isLocalStorage: window.localStorage ? true : false,
+        dataDom: null,
+        initDom: function () {
+            if (!this.dataDom) {
+                try {
+                    this.dataDom = document.createElement('input');
+                    this.dataDom.type = 'hidden';
+                    this.dataDom.style.display = "none";
+                    this.dataDom.addBehavior('#default#userData');
+                    document.body.appendChild(this.dataDom);
+                    var exDate = new Date();
+                    exDate = exDate.getDate() + 30;
+                    this.dataDom.expires = exDate.toUTCString();
+                } catch (ex) {
+                    return false;
+                }
+            }
+            return true;
+        },
+        set: function (key, value) {
+            if (this.isLocalStorage) {
+                window.localStorage.setItem(key, value);
+            } else {
+                if (this.initDom()) {
+                    this.dataDom.load(this.hname);
+                    this.dataDom.setAttribute(key, value);
+                    this.dataDom.save(this.hname)
+                }
+            }
+        },
+        get: function (key) {
+            if (this.isLocalStorage) {
+                return window.localStorage.getItem(key);
+            } else {
+                if (this.initDom()) {
+                    this.dataDom.load(this.hname);
+                    return this.dataDom.getAttribute(key);
+                }
+            }
+        },
+        remove: function (key) {
+            if (this.isLocalStorage) {
+                localStorage.removeItem(key);
+            } else {
+                if (this.initDom()) {
+                    this.dataDom.load(this.hname);
+                    this.dataDom.removeAttribute(key);
+                    this.dataDom.save(this.hname)
+                }
+            }
+        }
+    };
 
     function Pagination ( setting ) {
 
@@ -225,6 +280,7 @@
         $container: ".js--qjsj-data",
         $items: ".map-hot-item",
         $serviceStatus: ".js--service-status",
+        $monkeyWizard: ".monkey-wizard",
         isUpading: false,
         requestSetting: {
             $target: ".qjsj-map",
@@ -247,11 +303,13 @@
             this._getRequestSetting();
             this.render().bind();
             this.update( this.$items.eq( 0 ) );
+            this._initMonkeyWizard();
         },
         render: function () {
             this.$container = $( this.$container );
             this.$items = $( this.$items );
             this.$serviceStatus = $( this.$serviceStatus );
+            this.$monkeyWizard = $( this.$monkeyWizard );
             return this;
         },
         bind: function () {
@@ -267,6 +325,11 @@
                 _this.update( $this );
             } ).find(".tip" ).on("click", function( event ) {
                 event.stopPropagation();
+            });
+            this.$monkeyWizard.on("click", function monkeyWizardClickHandler() {
+                var $this = $( this );
+                $this.toggleClass("help");
+                Utils.store.set("monkeyWizardClass", $this.attr("class"));
             });
             return this;
         },
@@ -342,6 +405,14 @@
                 }
             } );
 
+            return this;
+        },
+        _initMonkeyWizard: function _initMonkeyWizard() {
+            var classes;
+            classes = Utils.store.get("monkeyWizardClass");
+            if ( classes ) {
+                this.$monkeyWizard.attr("class", classes);
+            }
             return this;
         }
     };
@@ -1126,6 +1197,18 @@
             this.bind();
             //this.pagination.init();
             //this.update();
+
+            var html,
+                body,
+                startPos,endPos
+                ;
+            html = $( ".tabs-duplicate-code .table-grid" ).html();
+            //body = html.replace(/<!--heading start-->.*<!--heading end-->/, "");
+            body = html.replace(/<!--heading start-->[\s\S]*<!--heading end-->/, "");
+
+
+            console.info( body );
+
             return this;
         },
         render: function render() {

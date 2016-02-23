@@ -42,6 +42,8 @@
                             <div class="map-hot-item" id="map-10" data-city-id="10"><a class="tip" title="访问该盟市(通辽)系统" href="http://css.doyoe.com/" target="_blank">通辽 <img src="./images/icon_link.png" alt=""/></a></div>
                             <div class="map-hot-item" id="map-11" data-city-id="11"><a class="tip" title="访问该盟市(兴安)系统" href="http://css.doyoe.com/" target="_blank">兴安 <img src="./images/icon_link.png" alt=""/></a></div>
                             <div class="map-hot-item" id="map-12" data-city-id="12"><a class="tip" title="访问该盟市(呼伦贝尔)系统" href="http://css.doyoe.com/" target="_blank">呼伦贝尔 <img src="./images/icon_link.png" alt=""/></a></div>
+                            <!-- 向导 -->
+                            <div class="monkey-wizard"><span class="close">×</span><span class="icon">?</span></div>
                         </div>
                         <div class="map-current"><span class="label">当前查看<span class="view"></span></span><p class="text"><span class="cur-city">阿拉善</span></p></div>
                     </div>
@@ -464,6 +466,7 @@
                                     <col width=""/> <!--户籍所在地-->
                                     <col width="120"/> <!--联系电话-->
                                 </colgroup>
+                                <!--heading start-->
                                 <tbody class="tbody-heading">
                                 <tr>
                                     <th>#</th>
@@ -475,6 +478,7 @@
                                     <th>联系电话</th>
                                 </tr>
                                 </tbody>
+                                <!--heading end-->
                                 <tbody class="tbody-main">
                                 <tr> <th>1</th> <td><p>123456789012345678</p></td> <td><p>张三</p></td> <td><p>男</p></td> <td><p>1999-07-01</p></td> <td><p>呼和浩特市新城区海东路1号</p></td> <td><p>18781222788</p></td> </tr>
                                 <tr> <th>2</th> <td><p></p></td> <td><p>张三</p></td> <td><p>男</p></td> <td><p>1999-07-01</p></td> <td><p>呼和浩特市新城区海东路1号</p></td> <td><p>18781222788</p></td> </tr>
@@ -501,9 +505,17 @@
                                 </tr>
                                 </tbody>
                             </table>
+
+                            <div class="duplicate-code-others">
+
+                            </div>
+
                         </div>
                     </div>
                     <!-- /重证号 -->
+
+
+
                 </div>
                 <!-- /数据质量 -->
 
@@ -638,10 +650,10 @@
             </div>
             <div class="wd-bottom bottom-menu">
                 <!-- “data-id”被样式表使用： &[data-id="qjsj"] { background-position: 18px 21px; } -->
-                <div class="bottom-menu-item" data-id="qjsj">区级数据</div>
+                <div class="bottom-menu-item active" data-id="qjsj">全区数据</div>
                 <div class="bottom-menu-item" data-id="ywjg">业务监管</div>
                 <div class="bottom-menu-item" data-id="ydbl">异地办理</div>
-                <div class="bottom-menu-item active" data-id="sjzl">数据质量</div>
+                <div class="bottom-menu-item" data-id="sjzl">数据质量</div>
                 <!--<div class="bottom-menu-item disabled" data-id="xpjc">相片检测</div>-->
                 <div class="bottom-menu-item" data-id="sjfw">数据服务</div>
             </div>

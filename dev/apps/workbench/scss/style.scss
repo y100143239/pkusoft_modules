@@ -277,6 +277,52 @@ a {
                 #map-12 {
                     @include hotmap("12", 219, 0, 114, 100, -10, 10);
                 }
+                .monkey-wizard {
+                    position: absolute;
+                    top: 60px;
+                    left: 60px;
+                    width: 150px;
+                    height: 100px;
+                    background: url(../images/monkey_wizard.gif) no-repeat;
+                    .icon {
+                        display: none;
+                    }
+                    .close, &.help .icon  {
+                        float: right;
+                        cursor: pointer;
+                        width: 18px;
+                        height: 18px;
+                        @include opacity(20);
+                        font-size: 18px;
+                        font-weight: 700;
+                        line-height: 18px;
+                        color: #e40113;
+                        background-color: #fff;
+                        //margin-top: -6px;
+                        border: solid 1px;
+                        //vertical-align: middle;
+                        text-align: center;
+                        &:hover {
+                            @include opacity(80);
+                        }
+                    }
+                    &.help {
+                        background: none;
+                        width: 18px;
+                        height: 18px;
+                        top: -8px;
+                        right: -28px;
+                        left: auto;
+                        .close {
+                            display: none;
+                        }
+                        .icon {
+                            display: block;
+                            font-weight: normal;
+                            color: #083d80;
+                        }
+                    }
+                }
             }
             .map-current {
                 position: absolute;
@@ -888,6 +934,16 @@ a {
             }
             .table-grid {
 
+            }
+            position: relative;
+            overflow: hidden;
+            .duplicate-code-others {
+                position: absolute;
+                top: 88px;
+                left: 0;
+                width: 100%;
+                height: 68px;
+                background: #fff;
             }
         }
     }
