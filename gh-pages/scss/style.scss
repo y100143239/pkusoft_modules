@@ -40,7 +40,9 @@ body {
 
 #note {
     .thumbnail {
+        position: relative;
         height: 308px;
+        overflow: hidden;
         & > a {
             height: 180px;
         }
@@ -70,6 +72,20 @@ body {
                     border-radius: 2px;
                 }
             }
+        }
+    }
+    .todo {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 200px;
+        padding: 1.2em 0 0.5em 0;
+        background-color: #FD5E06;
+        text-align: center;
+        transform: rotate(-30deg) translate(-66px,-47px);
+        &:before {
+            content: "未完成";
+            color: #fff;
         }
     }
 }

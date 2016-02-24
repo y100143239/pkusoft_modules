@@ -142,6 +142,15 @@ a {
     background-position: center center;
     background-repeat: no-repeat;
 }
+
+.frozen-body {
+    overflow-x: hidden;
+    overflow-y: auto;
+    tr:hover td {
+        background-color: #ffcf87!important;
+    }
+}
+
 .wd-container {
     margin           : 10px auto;
     width            : 800px;
@@ -284,12 +293,12 @@ a {
                     width: 150px;
                     height: 100px;
                     background: url(../images/monkey_wizard.gif) no-repeat;
+                    cursor: pointer;
                     .icon {
                         display: none;
                     }
                     .close, &.help .icon  {
                         float: right;
-                        cursor: pointer;
                         width: 18px;
                         height: 18px;
                         @include opacity(20);
@@ -302,7 +311,9 @@ a {
                         border: solid 1px;
                         //vertical-align: middle;
                         text-align: center;
-                        &:hover {
+                    }
+                    &:hover  {
+                        .close,.icon {
                             @include opacity(80);
                         }
                     }
@@ -458,20 +469,35 @@ a {
                 margin-right: 16px;
                 margin-top: 5px;
                 background: url(../images/service_status.png) no-repeat 0 0;
-                &.qjzw .icon {
+                &._0_qjzw .icon { // 区级指纹平台
                     background-position: (-106px * 0) center;
                 }
-                &.xxtx .icon {
+                &._1_ydbz .icon { // 异地办证平台
                     background-position: (-106px * 1) center;
                 }
-                &.ydbz .icon {
+                &._2_zdtj .icon { // 自动统计服务
                     background-position: (-106px * 2) center;
                 }
-                &.zdtj .icon {
+                &._3_rxbd .icon { // 人像比对平台
                     background-position: (-106px * 3) center;
                 }
-                &.zzdb .icon {
+                &._4_qjjw .icon { // 区级警务综合
                     background-position: (-106px * 4) center;
+                }
+                &._5_bjlw .icon { // 部级联网查询
+                    background-position: (-106px * 5) center;
+                }
+                &._6_rkgl .icon { // 人口管理信息
+                    background-position: (-106px * 6) center;
+                }
+                &._7_rkzdtj .icon { // 人口自动统计
+                    background-position: (-106px * 7) center;
+                }
+                &._8_rkzddb .icon { // 人口自动打包
+                    background-position: (-106px * 8) center;
+                }
+                &._9_rkywba .icon { // 人口业务备案
+                    background-position: (-106px * 9) center;
                 }
                 .icon {
                     height: 80px;
@@ -855,6 +881,7 @@ a {
             }
         }
         .tabs-body {
+            position: relative;
             padding: 1.2em 0 0 0;
             .like-query {
                 display: inline-block;
@@ -875,6 +902,49 @@ a {
                     color: #333;
                     background-color: #e6e6e6;
                     border-color: #adadad;
+                }
+            }
+            .column-tips {
+                position: absolute;
+                top: -8px;
+                width: 261px;
+                *width: 263px;
+                .text {
+                    text-align: center;
+                    line-height: 20px;
+                    height: 20px;
+                }
+                .symbol {
+                    margin: 0 auto -1px auto;
+                    //width: 84px;
+                    height: 24px;
+                    padding: 0 2em;
+                    line-height: 24px;
+                    text-align: center;
+                    //border: solid 1px gray;
+                    border: dotted 1px #dddddd;
+                }
+                &.left {
+                    left: 236px;
+                    *left: 231px;
+                    color: #ff9f0e;
+                    border-bottom-color: #ffd79b;
+                    .symbol {
+                        background-color: #fff9f0;
+                        //border-color: #ffd79b #ffd79b #fff9f0 #ffd79b;
+                        *border-color: #dddddd #dddddd #fff9f0 #dddddd;
+                    }
+                }
+                &.right {
+                    left: 496px;
+                    *left: 493px;
+                    color: #ff8c63;
+                    border-bottom-color: #ffd79b;
+                    .symbol {
+                        background-color: #fff4f0;
+                        //border-color: #ffc0a9 #ffc0a9 #fff4f0 #ffc0a9;
+                        *border-color: #dddddd #dddddd #fff4f0 #dddddd
+                    }
                 }
             }
         }

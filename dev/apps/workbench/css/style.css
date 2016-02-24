@@ -71,6 +71,12 @@ a {
   background-position: center center;
   background-repeat: no-repeat; }
 
+.frozen-body {
+  overflow-x: hidden;
+  overflow-y: auto; }
+  .frozen-body tr:hover td {
+    background-color: #ffcf87 !important; }
+
 .wd-container {
   margin: 10px auto;
   width: 800px;
@@ -493,12 +499,12 @@ a {
           left: 60px;
           width: 150px;
           height: 100px;
-          background: url(../images/monkey_wizard.gif) no-repeat; }
+          background: url(../images/monkey_wizard.gif) no-repeat;
+          cursor: pointer; }
           .wd-container .wd-qjsj .qjsj-map .map-hot .monkey-wizard .icon {
             display: none; }
           .wd-container .wd-qjsj .qjsj-map .map-hot .monkey-wizard .close, .wd-container .wd-qjsj .qjsj-map .map-hot .monkey-wizard.help .icon {
             float: right;
-            cursor: pointer;
             width: 18px;
             height: 18px;
             opacity: 0.2;
@@ -510,9 +516,9 @@ a {
             background-color: #fff;
             border: solid 1px;
             text-align: center; }
-            .wd-container .wd-qjsj .qjsj-map .map-hot .monkey-wizard .close:hover, .wd-container .wd-qjsj .qjsj-map .map-hot .monkey-wizard.help .icon:hover {
-              opacity: 0.8;
-              filter: alpha(opacity=80); }
+          .wd-container .wd-qjsj .qjsj-map .map-hot .monkey-wizard:hover .close, .wd-container .wd-qjsj .qjsj-map .map-hot .monkey-wizard:hover .icon {
+            opacity: 0.8;
+            filter: alpha(opacity=80); }
           .wd-container .wd-qjsj .qjsj-map .map-hot .monkey-wizard.help {
             background: none;
             width: 18px;
@@ -617,16 +623,26 @@ a {
         margin-right: 16px;
         margin-top: 5px;
         background: url(../images/service_status.png) no-repeat 0 0; }
-        .wd-container .wd-qjsj .service-status .service-status-item.qjzw .icon {
+        .wd-container .wd-qjsj .service-status .service-status-item._0_qjzw .icon {
           background-position: 0px center; }
-        .wd-container .wd-qjsj .service-status .service-status-item.xxtx .icon {
+        .wd-container .wd-qjsj .service-status .service-status-item._1_ydbz .icon {
           background-position: -106px center; }
-        .wd-container .wd-qjsj .service-status .service-status-item.ydbz .icon {
+        .wd-container .wd-qjsj .service-status .service-status-item._2_zdtj .icon {
           background-position: -212px center; }
-        .wd-container .wd-qjsj .service-status .service-status-item.zdtj .icon {
+        .wd-container .wd-qjsj .service-status .service-status-item._3_rxbd .icon {
           background-position: -318px center; }
-        .wd-container .wd-qjsj .service-status .service-status-item.zzdb .icon {
+        .wd-container .wd-qjsj .service-status .service-status-item._4_qjjw .icon {
           background-position: -424px center; }
+        .wd-container .wd-qjsj .service-status .service-status-item._5_bjlw .icon {
+          background-position: -530px center; }
+        .wd-container .wd-qjsj .service-status .service-status-item._6_rkgl .icon {
+          background-position: -636px center; }
+        .wd-container .wd-qjsj .service-status .service-status-item._7_rkzdtj .icon {
+          background-position: -742px center; }
+        .wd-container .wd-qjsj .service-status .service-status-item._8_rkzddb .icon {
+          background-position: -848px center; }
+        .wd-container .wd-qjsj .service-status .service-status-item._9_rkywba .icon {
+          background-position: -954px center; }
         .wd-container .wd-qjsj .service-status .service-status-item .icon {
           height: 80px;
           background: url(../images/service_status_icon.png) no-repeat 9999px 9999px; }
@@ -947,6 +963,7 @@ a {
           .wd-container .wd-ydbl .quick-links .quick-links-item a:hover {
             color: #758de3; }
     .wd-container .wd-ydbl .tabs-body {
+      position: relative;
       padding: 1.2em 0 0 0; }
       .wd-container .wd-ydbl .tabs-body .like-query {
         display: inline-block;
@@ -969,6 +986,38 @@ a {
           color: #333;
           background-color: #e6e6e6;
           border-color: #adadad; }
+      .wd-container .wd-ydbl .tabs-body .column-tips {
+        position: absolute;
+        top: -8px;
+        width: 261px;
+        *width: 263px; }
+        .wd-container .wd-ydbl .tabs-body .column-tips .text {
+          text-align: center;
+          line-height: 20px;
+          height: 20px; }
+        .wd-container .wd-ydbl .tabs-body .column-tips .symbol {
+          margin: 0 auto -1px auto;
+          height: 24px;
+          padding: 0 2em;
+          line-height: 24px;
+          text-align: center;
+          border: dotted 1px #dddddd; }
+        .wd-container .wd-ydbl .tabs-body .column-tips.left {
+          left: 236px;
+          *left: 231px;
+          color: #ff9f0e;
+          border-bottom-color: #ffd79b; }
+          .wd-container .wd-ydbl .tabs-body .column-tips.left .symbol {
+            background-color: #fff9f0;
+            *border-color: #dddddd #dddddd #fff9f0 #dddddd; }
+        .wd-container .wd-ydbl .tabs-body .column-tips.right {
+          left: 496px;
+          *left: 493px;
+          color: #ff8c63;
+          border-bottom-color: #ffd79b; }
+          .wd-container .wd-ydbl .tabs-body .column-tips.right .symbol {
+            background-color: #fff4f0;
+            *border-color: #dddddd #dddddd #fff4f0 #dddddd; }
     .wd-container .wd-ydbl .search {
       margin: 0 0 1.2em 1em; }
       .form .form-group {

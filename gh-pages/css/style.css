@@ -1,3 +1,4 @@
+@charset "UTF-8";
 .preloader {
   position: fixed;
   top: 0;
@@ -72,7 +73,9 @@ body {
         color: #EF7F00; }
 
 #note .thumbnail {
-  height: 308px; }
+  position: relative;
+  height: 308px;
+  overflow: hidden; }
   #note .thumbnail > a {
     height: 180px; }
   #note .thumbnail .caption {
@@ -92,5 +95,17 @@ body {
         margin-right: 0.2em; }
       #note .thumbnail .caption .footer .badge {
         border-radius: 2px; }
+#note .todo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200px;
+  padding: 1.2em 0 0.5em 0;
+  background-color: #FD5E06;
+  text-align: center;
+  transform: rotate(-30deg) translate(-66px, -47px); }
+  #note .todo:before {
+    content: "未完成";
+    color: #fff; }
 
 /*# sourceMappingURL=style.css.map */
