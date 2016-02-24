@@ -136,6 +136,44 @@
         }
     };
 
+    Utils.table = {
+        frozenHeader: function frozenHeader( $target ) {
+            var $tempContainer,
+                totalHeight,
+                headerHeight,
+                bodyHeight,
+                $tableCopy,
+                $newHeader,
+                $newBody
+                ;
+
+            // 更改每列的颜色
+            $target.find("tr td:nth-of-type(2), tr td:nth-of-type(3), tr th:nth-of-type(3), tr th:nth-of-type(4)" ).css("background-color", "#fff9f0");
+            $target.find("tr td:nth-of-type(4), tr td:nth-of-type(5), tr th:nth-of-type(5), tr th:nth-of-type(6)" ).css("background-color", "#fff4f0");
+
+            $tableCopy = $target.clone();
+
+            $tempContainer = $("<div class='frozen-container'> <div class='frozen-header'></div><div class='frozen-body'></div> </div>");
+
+            totalHeight = $target.attr("data-height");
+            headerHeight = $target.find(".tbody-heading" ).height();
+            bodyHeight = parseInt( totalHeight ) - parseInt( headerHeight );
+
+            $tempContainer.appendTo( $target.parent() );
+            $newHeader =  $tempContainer.find(".frozen-header");
+            $newBody =  $tempContainer.find(".frozen-body");
+
+            $newBody.css( "height", bodyHeight );
+
+            $tableCopy.find(".tbody-main").remove();
+            $target.find(".tbody-heading").remove();
+
+            $newHeader.append( $tableCopy );
+            $newBody.append( $target );
+
+        }
+    };
+
     function Pagination ( setting ) {
 
         //this.updateData = ywjg.view.update;
@@ -872,8 +910,9 @@
             this._getRequestSetting();
             this.render();
             this.bind();
-            this.pagination.init();
-            this.update();
+            //this.pagination.init();
+            //this.update();
+            Utils.table.frozenHeader($(".js--frozen-head"));
             return this;
         },
         render: function render() {

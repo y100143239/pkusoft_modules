@@ -142,6 +142,15 @@ a {
     background-position: center center;
     background-repeat: no-repeat;
 }
+
+.frozen-body {
+    overflow-x: hidden;
+    overflow-y: auto;
+    tr:hover td {
+        background-color: #ffcf87!important;
+    }
+}
+
 .wd-container {
     margin           : 10px auto;
     width            : 800px;
@@ -872,6 +881,7 @@ a {
             }
         }
         .tabs-body {
+            position: relative;
             padding: 1.2em 0 0 0;
             .like-query {
                 display: inline-block;
@@ -892,6 +902,49 @@ a {
                     color: #333;
                     background-color: #e6e6e6;
                     border-color: #adadad;
+                }
+            }
+            .column-tips {
+                position: absolute;
+                top: -8px;
+                width: 261px;
+                *width: 263px;
+                .text {
+                    text-align: center;
+                    line-height: 20px;
+                    height: 20px;
+                }
+                .symbol {
+                    margin: 0 auto -1px auto;
+                    //width: 84px;
+                    height: 24px;
+                    padding: 0 2em;
+                    line-height: 24px;
+                    text-align: center;
+                    //border: solid 1px gray;
+                    border: dotted 1px #dddddd;
+                }
+                &.left {
+                    left: 236px;
+                    *left: 231px;
+                    color: #ff9f0e;
+                    border-bottom-color: #ffd79b;
+                    .symbol {
+                        background-color: #fff9f0;
+                        //border-color: #ffd79b #ffd79b #fff9f0 #ffd79b;
+                        *border-color: #dddddd #dddddd #fff9f0 #dddddd;
+                    }
+                }
+                &.right {
+                    left: 496px;
+                    *left: 493px;
+                    color: #ff8c63;
+                    border-bottom-color: #ffd79b;
+                    .symbol {
+                        background-color: #fff4f0;
+                        //border-color: #ffc0a9 #ffc0a9 #fff4f0 #ffc0a9;
+                        *border-color: #dddddd #dddddd #fff4f0 #dddddd
+                    }
                 }
             }
         }

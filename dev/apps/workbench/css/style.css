@@ -71,6 +71,12 @@ a {
   background-position: center center;
   background-repeat: no-repeat; }
 
+.frozen-body {
+  overflow-x: hidden;
+  overflow-y: auto; }
+  .frozen-body tr:hover td {
+    background-color: #ffcf87 !important; }
+
 .wd-container {
   margin: 10px auto;
   width: 800px;
@@ -957,6 +963,7 @@ a {
           .wd-container .wd-ydbl .quick-links .quick-links-item a:hover {
             color: #758de3; }
     .wd-container .wd-ydbl .tabs-body {
+      position: relative;
       padding: 1.2em 0 0 0; }
       .wd-container .wd-ydbl .tabs-body .like-query {
         display: inline-block;
@@ -979,6 +986,38 @@ a {
           color: #333;
           background-color: #e6e6e6;
           border-color: #adadad; }
+      .wd-container .wd-ydbl .tabs-body .column-tips {
+        position: absolute;
+        top: -8px;
+        width: 261px;
+        *width: 263px; }
+        .wd-container .wd-ydbl .tabs-body .column-tips .text {
+          text-align: center;
+          line-height: 20px;
+          height: 20px; }
+        .wd-container .wd-ydbl .tabs-body .column-tips .symbol {
+          margin: 0 auto -1px auto;
+          height: 24px;
+          padding: 0 2em;
+          line-height: 24px;
+          text-align: center;
+          border: dotted 1px #dddddd; }
+        .wd-container .wd-ydbl .tabs-body .column-tips.left {
+          left: 236px;
+          *left: 231px;
+          color: #ff9f0e;
+          border-bottom-color: #ffd79b; }
+          .wd-container .wd-ydbl .tabs-body .column-tips.left .symbol {
+            background-color: #fff9f0;
+            *border-color: #dddddd #dddddd #fff9f0 #dddddd; }
+        .wd-container .wd-ydbl .tabs-body .column-tips.right {
+          left: 496px;
+          *left: 493px;
+          color: #ff8c63;
+          border-bottom-color: #ffd79b; }
+          .wd-container .wd-ydbl .tabs-body .column-tips.right .symbol {
+            background-color: #fff4f0;
+            *border-color: #dddddd #dddddd #fff4f0 #dddddd; }
     .wd-container .wd-ydbl .search {
       margin: 0 0 1.2em 1em; }
       .form .form-group {
