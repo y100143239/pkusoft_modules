@@ -1741,11 +1741,17 @@
             serviceStatus: {
                 data:  {
                     data:[ // status属性值为"error"时显示为“运行异常”
-                        { serviceName: "信息通信服务平台", icon: "xxtx", status: "" },
-                        { serviceName: "异地办证平台", icon: "ydbz", status: "" },
-                        { serviceName: "区级指纹平台", icon: "qjzw", status: "" },
-                        { serviceName: "自动统计服务", icon: "zdtj", status: "" },
-                        { serviceName: "制证打包服务", icon: "zzdb", status: "" }
+                        { serviceName: "区级指纹平台", icon: "_0_qjzw", status: ""},
+                        { serviceName: "异地办证平台", icon: "_1_ydbz", status: ""},
+                        { serviceName: "自动统计服务", icon: "_2_zdtj", status: ""},
+                        { serviceName: "人像比对平台", icon: "_3_rxbd", status: ""},
+                        { serviceName: "区级警务综合", icon: "_4_qjjw", status: ""},
+                        { serviceName: "部级联网查询", icon: "_5_bjlw", status: ""}
+                        //,
+                        //{ serviceName: "人口管理信息", icon: "_6_rkgl", status: ""},
+                        //{ serviceName: "人口自动统计", icon: "_7_rkzdtj", status: ""},
+                        //{ serviceName: "人口自动打包", icon: "_8_rkzddb", status: ""},
+                        //{ serviceName: "人口业务备案", icon: "_9_rkywba", status: ""}
                     ]
                 },
                 template:
@@ -1763,10 +1769,10 @@
         // 业务监管
         ywjg: {
             data: [
-                { num: 1, blsj: "2017-01-14 17:01", ywlx: "出生登记", ywmc: "张三办理出生登记业务", ssms: "呼和浩特", "slr": "李四", "spr": "王五", "ywzt": "已通过" },
-                { num: 2, blsj: "2017-01-13 17:01", ywlx: "出生登记2", ywmc: "张三办理出生登记业务2", ssms: "呼和浩特2", "slr": "李四2", "spr": "王五2", "ywzt": "已通过2" },
-                { num: 3, blsj: "2017-01-12 17:01", ywlx: "出生登记3", ywmc: "张三办理出生登记业务3", ssms: "呼和浩特3", "slr": "李四3", "spr": "王五3", "ywzt": "已通过3" },
-                { num: 4, blsj: "2017-01-11 17:01", ywlx: "出生登记4", ywmc: "张三办理出生登记业务4", ssms: "呼和浩特4", "slr": "李四4", "spr": "王五4", "ywzt": "已通过4" }
+                { num: 1, blsj: "2017-01-14 17:01", ywlx: "出生登记", ywmc: "张三办理出生登记业务", sldw: "呼和浩特分局", "slr": "李四", "spr": "王五", "ywzt": "已通过" },
+                { num: 2, blsj: "2017-01-13 17:01", ywlx: "出生登记2", ywmc: "张三办理出生登记业务2", sldw: "呼和浩特派出所呼和浩特派出所", "slr": "李四2", "spr": "王五2", "ywzt": "已通过2" },
+                { num: 3, blsj: "2017-01-12 17:01", ywlx: "出生登记3", ywmc: "张三办理出生登记业务3", sldw: "呼和浩特派出所3呼和浩特派出所3", "slr": "李四3", "spr": "王五3", "ywzt": "已通过3" },
+                { num: 4, blsj: "2017-01-11 17:01", ywlx: "出生登记4", ywmc: "张三办理出生登记业务4", sldw: "呼和浩特派出所4呼和浩特派出所4", "slr": "李四4", "spr": "王五4", "ywzt": "已通过4" }
             ],
             template: '{{~it:value:index}}\
                     <tr> \
@@ -1774,7 +1780,7 @@
                         <td><p title="{{= value.blsj }}">{{= value.blsj }}</p></td> \
                         <td><p title="{{= value.ywlx }}">{{= value.ywlx }}</p></td> \
                         <td><p title="{{= value.ywmc }}">{{= value.ywmc }}</p></td> \
-                        <td><p title="{{= value.ssms }}">{{= value.ssms }}</p></td> \
+                        <td><p title="{{= value.sldw }}">{{= value.sldw }}</p></td> \
                         <td><p title="{{= value.slr }}">{{= value.slr }}</p></td> \
                         <td><p title="{{= value.spr }}">{{= value.spr }}</p></td> \
                         <td><p title="{{= value.ywzt }}">{{= value.ywzt }}</p></td> \

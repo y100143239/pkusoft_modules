@@ -493,12 +493,12 @@ a {
           left: 60px;
           width: 150px;
           height: 100px;
-          background: url(../images/monkey_wizard.gif) no-repeat; }
+          background: url(../images/monkey_wizard.gif) no-repeat;
+          cursor: pointer; }
           .wd-container .wd-qjsj .qjsj-map .map-hot .monkey-wizard .icon {
             display: none; }
           .wd-container .wd-qjsj .qjsj-map .map-hot .monkey-wizard .close, .wd-container .wd-qjsj .qjsj-map .map-hot .monkey-wizard.help .icon {
             float: right;
-            cursor: pointer;
             width: 18px;
             height: 18px;
             opacity: 0.2;
@@ -510,9 +510,9 @@ a {
             background-color: #fff;
             border: solid 1px;
             text-align: center; }
-            .wd-container .wd-qjsj .qjsj-map .map-hot .monkey-wizard .close:hover, .wd-container .wd-qjsj .qjsj-map .map-hot .monkey-wizard.help .icon:hover {
-              opacity: 0.8;
-              filter: alpha(opacity=80); }
+          .wd-container .wd-qjsj .qjsj-map .map-hot .monkey-wizard:hover .close, .wd-container .wd-qjsj .qjsj-map .map-hot .monkey-wizard:hover .icon {
+            opacity: 0.8;
+            filter: alpha(opacity=80); }
           .wd-container .wd-qjsj .qjsj-map .map-hot .monkey-wizard.help {
             background: none;
             width: 18px;
@@ -617,16 +617,26 @@ a {
         margin-right: 16px;
         margin-top: 5px;
         background: url(../images/service_status.png) no-repeat 0 0; }
-        .wd-container .wd-qjsj .service-status .service-status-item.qjzw .icon {
+        .wd-container .wd-qjsj .service-status .service-status-item._0_qjzw .icon {
           background-position: 0px center; }
-        .wd-container .wd-qjsj .service-status .service-status-item.xxtx .icon {
+        .wd-container .wd-qjsj .service-status .service-status-item._1_ydbz .icon {
           background-position: -106px center; }
-        .wd-container .wd-qjsj .service-status .service-status-item.ydbz .icon {
+        .wd-container .wd-qjsj .service-status .service-status-item._2_zdtj .icon {
           background-position: -212px center; }
-        .wd-container .wd-qjsj .service-status .service-status-item.zdtj .icon {
+        .wd-container .wd-qjsj .service-status .service-status-item._3_rxbd .icon {
           background-position: -318px center; }
-        .wd-container .wd-qjsj .service-status .service-status-item.zzdb .icon {
+        .wd-container .wd-qjsj .service-status .service-status-item._4_qjjw .icon {
           background-position: -424px center; }
+        .wd-container .wd-qjsj .service-status .service-status-item._5_bjlw .icon {
+          background-position: -530px center; }
+        .wd-container .wd-qjsj .service-status .service-status-item._6_rkgl .icon {
+          background-position: -636px center; }
+        .wd-container .wd-qjsj .service-status .service-status-item._7_rkzdtj .icon {
+          background-position: -742px center; }
+        .wd-container .wd-qjsj .service-status .service-status-item._8_rkzddb .icon {
+          background-position: -848px center; }
+        .wd-container .wd-qjsj .service-status .service-status-item._9_rkywba .icon {
+          background-position: -954px center; }
         .wd-container .wd-qjsj .service-status .service-status-item .icon {
           height: 80px;
           background: url(../images/service_status_icon.png) no-repeat 9999px 9999px; }
