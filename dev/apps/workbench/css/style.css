@@ -965,6 +965,8 @@ a {
     .wd-container .wd-ydbl .tabs-body {
       position: relative;
       padding: 1.2em 0 0 0; }
+      .wd-container .wd-ydbl .tabs-body.ydbz-tj {
+        padding-top: 24px; }
       .wd-container .wd-ydbl .tabs-body .like-query {
         display: inline-block;
         margin-left: -1px;
@@ -988,7 +990,7 @@ a {
           border-color: #adadad; }
       .wd-container .wd-ydbl .tabs-body .column-tips {
         position: absolute;
-        top: -8px;
+        top: -1px;
         width: 261px;
         *width: 263px; }
         .wd-container .wd-ydbl .tabs-body .column-tips .text {

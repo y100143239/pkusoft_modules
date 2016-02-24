@@ -883,6 +883,9 @@ a {
         .tabs-body {
             position: relative;
             padding: 1.2em 0 0 0;
+            &.ydbz-tj {
+                padding-top: 24px;
+            }
             .like-query {
                 display: inline-block;
                 margin-left: -1px;
@@ -906,7 +909,7 @@ a {
             }
             .column-tips {
                 position: absolute;
-                top: -8px;
+                top: -1px;
                 width: 261px;
                 *width: 263px;
                 .text {
