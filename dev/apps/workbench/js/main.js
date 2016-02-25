@@ -137,7 +137,7 @@
     };
 
     Utils.table = {
-        frozenHeader: function frozenHeader( $target ) {
+        frozenHeader: function frozenHeader( $target ) { // <table class="table-grid frozen-head js--frozen-head" data-height="320px">
             var $tempContainer,
                 totalHeight,
                 headerHeight,
@@ -146,10 +146,6 @@
                 $newHeader,
                 $newBody
                 ;
-
-            // 更改每列的颜色
-            $target.find("tr td:nth-of-type(2), tr td:nth-of-type(3), tr th:nth-of-type(3), tr th:nth-of-type(4)" ).css("background-color", "#fff9f0");
-            $target.find("tr td:nth-of-type(4), tr td:nth-of-type(5), tr th:nth-of-type(5), tr th:nth-of-type(6)" ).css("background-color", "#fff4f0");
 
             $tableCopy = $target.clone();
 
@@ -886,11 +882,176 @@
     // 异地办理
     ydbl = {
         $container: "#ydbl",
+        $tabs: ".tabs",
+        $tabsBody: ".tabs-body",
+        init: function init() {
+            this.render();
+            this.bind();
+
+            // 异地办证情况统计
+            this.tj.init();
+
+            // 异地办证（受理中）
+            this.cx.init();
+
+            return this;
+        },
+        render: function render() {
+            this.$container = $( this.$container );
+            this.$tabs = $( this.$tabs, this.$container );
+            this.$tabsBody = $( this.$tabsBody, this.$tabs );
+            return this;
+        },
+        bind: function bind() {
+            var _this = this;
+            // tabs
+            _this.$tabs.find(".tabs-nav .nav-item" ).on( "click", function navItemClickHandler() {
+                var $this,
+                    tabBodyId,
+                    $activeTabBody
+                    ;
+                $this = $( this );
+                tabBodyId = $this.attr("data-body-id");
+                $activeTabBody = _this.$tabsBody.filter("[data-id=" + tabBodyId + "]");
+
+                $this.addClass("active" ).siblings(".nav-item" ).removeClass("active");
+
+                $activeTabBody.show().siblings(".tabs-body" ).hide();
+
+            } ).find( "a" ).on("click", function navItemAnchorClickHandler( event ){
+                event.preventDefault();
+            });
+            return _this;
+        }
+    };
+
+    // 异地办证-异地办证情况统计
+    ydbl.tj = {
+        $container: "#ydbl .ydbz-tj",
+        $tbody: ".tbody-main",
+        $refresh: ".refresh",
+        isUpading: false, // 是否在更新数据
+        requestSetting: {
+            $target: "#ydbl .ydbz-tj",
+            url: null,
+            successCallback: null,
+            errorCallback: null
+        },
+        _getRequestSetting: function _getRequestSetting() {
+            var requestSetting,
+                $target
+                ;
+            requestSetting = this.requestSetting;
+            $target = $( requestSetting.$target );
+            requestSetting.url = $target.attr( "data-url" );
+            requestSetting.successCallback = $target.attr( "data-success-callback" );
+            requestSetting.errorCallback = $target.attr( "data-error-callback" );
+            return this;
+        },
+        init: function init () {
+            this._getRequestSetting();
+            this.render();
+            this.bind();
+            this.update();
+        },
+        render: function render() {
+            this.$container = $( this.$container );
+            this.$tbody = $( this.$tbody, this.$container );
+            this.$refresh = $( this.$refresh, this.$container );
+        },
+        bind: function bind() {
+            var _this
+                ;
+            _this = this;
+
+            // table
+            Utils.table.frozenHeader( $(".table-grid.frozen-head") );
+
+            // refresh
+            this.$refresh.on("click", function refreshClickHandler() {
+                _this.update();
+            });
+        },
+        update: function update( ) {
+            var _this = this,
+                queryData
+                ;
+
+            // 0. 判断是否正在更新数据
+            Utils.wait.show( _this.$container );
+            if ( this.isUpading ) {
+                return this;
+            }
+            _this.isUpading = true;
+
+            queryData = null;
+
+            // 1. 获取数据
+            _this._getData(
+                queryData,
+                function getDataSuccessHandler( responseData ) {
+
+                    responseData = window[ _this.requestSetting.successCallback ]( responseData );
+
+                    // 2. 更新到页面（获取数据成功）
+                    _this._render( responseData, Template.ydbl.tj.template );
+                },
+                function getDataErrorHandler() { // 测试数据
+
+
+                    _this.isUpading = false;
+                    Utils.wait.hide( _this.$container );
+                    IS_DEV || Utils.alert.show( _this.$container );
+
+                    window[ _this.requestSetting.errorCallback ]();
+                    //---- 测试数据
+                    if ( IS_DEV !== true ) return;
+
+                    var list = Template.ydbl.tj.data.list;
+
+                    list[ list.length ] = list[0];
+                    list[ list.length ] = list[1];
+
+                    _this._render( Template.ydbl.tj.data, Template.ydbl.tj.template );
+                }
+            );
+
+
+        },
+        _getData: function getData( queryData, successCallback, errorCallback ) {
+            var _this = this;
+            Utils.ajax( {
+                url: _this.requestSetting.url,
+                data: queryData,
+                success: successCallback,
+                error: errorCallback
+            } );
+            return this;
+        },
+        _render: function _render( data, template ) {
+            var _this = this;
+            // 更新完毕
+            Utils.wait.hide( _this.$container );
+            _this.isUpading = false;
+            _this.$tbody.html( doT.template( template )( data ) );
+            // 更改每列的颜色
+            _this.$container.find("tr td:nth-of-type(2), tr td:nth-of-type(3), tr th:nth-of-type(3), tr th:nth-of-type(4)" ).addClass("color-key1");
+            _this.$container.find("tr td:nth-of-type(4), tr td:nth-of-type(5), tr th:nth-of-type(5), tr th:nth-of-type(6)" ).addClass("color-key2");
+            //
+            return this;
+        }
+
+    };
+
+
+    // 异地办证-异地办证（受理中）
+    ydbl.cx = {
+        $container: "#ydbl .ydbl-cx",
         $form: ".search form",
         $tbody: ".tbody-main",
         isUpading: false, // 是否在更新数据
         requestSetting: {
-            $target: "#ydbl .tabs",
+            $target: "#ydbl .ydbl-cx",
             url: null,
             successCallback: null,
             errorCallback: null
@@ -910,9 +1071,8 @@
             this._getRequestSetting();
             this.render();
             this.bind();
-            //this.pagination.init();
-            //this.update();
-            Utils.table.frozenHeader($(".js--frozen-head"));
+            this.pagination.init();
+            this.update();
             return this;
         },
         render: function render() {
@@ -1006,14 +1166,17 @@
             return this;
         }
     };
-    ydbl.pagination = new Pagination({
+    ydbl.cx.pagination = new Pagination({
         updateData: function( pageNum ) {
-            var _this = ydbl;
+            var _this = ydbl.cx;
             _this.update.call( _this, pageNum );
         },
         pageSize: 10,
         $container : "#ydbl"
     });
+
+
+
 
     // 数据质量
     sjzl = {
@@ -1865,7 +2028,40 @@
                         <td><p>&nbsp;</p></td> \
                         <td><p>&nbsp;</p></td> \
                     </tr>   \
+                {{ } }}',
+            tj: {
+                data: {
+                    /*  swmc：       单位名称。
+                        sl_sldw：    受理(按受理单位)。
+                        shqf_sldw：  审核签发(按受理单位)。
+                        sl_sjgs：    受理(按数据归属单位)。
+                        shqf_sjgs：  审核签发(按数据归属单位)。 */
+                    list: [
+                        { swmc: "呼和浩特市", sl_sldw: 1111, shqf_sldw: 2222, sl_sjgs: 3333, shqf_sjgs: 4444 },
+                        { swmc: "呼和浩特市22222", sl_sldw: 33, shqf_sldw: 555, sl_sjgs: 22211, shqf_sjgs: 347511 }
+                    ]
+                },
+                template: '{{~it.list:value:index}}\
+                    <tr> \
+                        <th>{{= index + 1 }}</th> \
+                        <td><p title="{{= value.swmc }}">{{= value.swmc }}</p></td> \
+                        <td><p class="text-right" title="{{= value.sl_sldw }}">{{= value.sl_sldw }}</p></td> \
+                        <td><p class="text-right" title="{{= value.shqf_sldw }}">{{= value.shqf_sldw }}</p></td> \
+                        <td><p class="text-right" title="{{= value.sl_sjgs }}">{{= value.sl_sjgs }}</p></td> \
+                        <td><p class="text-right" title="{{= value.shqf_sjgs }}">{{= value.shqf_sjgs }}</p></td> \
+                    </tr> \
+                {{~}}    \
+                {{  for ( var i = 0, len = 12 - it.length; i < len; i++ ) {  }}\
+                    <tr> \
+                        <th>&nbsp;</th> \
+                        <td><p>&nbsp;</p></td> \
+                        <td><p>&nbsp;</p></td> \
+                        <td><p>&nbsp;</p></td> \
+                        <td><p>&nbsp;</p></td> \
+                        <td><p>&nbsp;</p></td> \
+                    </tr>   \
                 {{ } }}'
+            }
         },
         // 数据质量
         sjzl: {
