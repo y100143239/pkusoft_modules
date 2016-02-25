@@ -18,6 +18,19 @@ a {
   visibility: hidden !important;
   display: none !important; }
 
+.lead {
+  font-weight: bold;
+  font-size: 14px; }
+
+.text-left {
+  text-align: left; }
+
+.text-center {
+  text-align: center; }
+
+.text-right {
+  text-align: right; }
+
 .disabled {
   cursor: not-allowed; }
 
@@ -544,7 +557,8 @@ a {
           color: #ffb74b;
           font-size: 16px; }
         .wd-container .wd-qjsj .qjsj-map .map-current .text {
-          text-align: right; }
+          text-align: right;
+          line-height: 28px; }
         .wd-container .wd-qjsj .qjsj-map .map-current .view {
           display: inline-block;
           width: 28px;
@@ -924,6 +938,10 @@ a {
         border-top-width: 0; }
   .wd-container .wd-ydbl {
     padding-top: 16px; }
+    .wd-container .wd-ydbl .color-key1 {
+      background-color: #fff9f0; }
+    .wd-container .wd-ydbl .color-key2 {
+      background-color: #fff4f0; }
     .wd-container .wd-ydbl .tabs {
       position: relative; }
     .wd-container .wd-ydbl .ydbl-statistic {
@@ -947,7 +965,7 @@ a {
         .wd-container .wd-ydbl .ydbl-statistic .bdw strong:first-child {
           color: #ffc56b; }
     .wd-container .wd-ydbl .quick-links {
-      margin: 0.8em 0 0 0.6em;
+      margin: 0.4em 0 0 0.6em;
       font-size: 12px; }
       .wd-container .wd-ydbl .quick-links .quick-links-item {
         float: left;
@@ -966,7 +984,27 @@ a {
       position: relative;
       padding: 1.2em 0 0 0; }
       .wd-container .wd-ydbl .tabs-body.ydbz-tj {
-        padding-top: 24px; }
+        padding-top: 28px; }
+        .wd-container .wd-ydbl .tabs-body.ydbz-tj .refresh {
+          position: absolute;
+          top: -32px;
+          right: 2px;
+          height: 20px;
+          color: #ff8c3b;
+          font-size: 14px;
+          line-height: 20px;
+          cursor: pointer; }
+          .wd-container .wd-ydbl .tabs-body.ydbz-tj .refresh .icon {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            background: url(../images/refresh.png) no-repeat -40px 0;
+            vertical-align: middle;
+            margin-right: 8px; }
+          .wd-container .wd-ydbl .tabs-body.ydbz-tj .refresh:hover {
+            color: #62a0ea; }
+            .wd-container .wd-ydbl .tabs-body.ydbz-tj .refresh:hover .icon {
+              background-position: -20px 0; }
       .wd-container .wd-ydbl .tabs-body .like-query {
         display: inline-block;
         margin-left: -1px;
@@ -977,6 +1015,7 @@ a {
         text-indent: 0;
         font-size: 12px;
         color: #666;
+        background: #fff;
         -webkit-user-select: none;
         -moz-user-select: none;
         -ms-user-select: none;
@@ -990,7 +1029,7 @@ a {
           border-color: #adadad; }
       .wd-container .wd-ydbl .tabs-body .column-tips {
         position: absolute;
-        top: -1px;
+        top: 3px;
         width: 261px;
         *width: 263px; }
         .wd-container .wd-ydbl .tabs-body .column-tips .text {

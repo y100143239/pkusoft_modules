@@ -216,16 +216,15 @@ function businessViewErrorCallback() {
 }
 
 
-/* 异地办理
+/* 异地办理-异地办证（受理中）
 
  HTML
 
  1) 设置
-     <div class="wd-ydbl" id="ydbl" style="display: block;">
-     <div class="tabs"
-             data-url=""
-             data-success-callback="ydblSuccessCallback"
-             data-error-callback="ydblErrorCallback">
+ <div class="tabs-body ydbl-cx" data-id="1" style="display: none;"
+     data-url=""
+     data-success-callback="ydblCxSuccessCallback"
+     data-error-callback="ydblCxErrorCallback">
 
  2) 请求参数
 
@@ -253,7 +252,7 @@ function businessViewErrorCallback() {
  pageSize: 每页的记录数
  pageNum: 请求的哪一页
  */
-function ydblSuccessCallback( responseData ) {
+function ydblCxSuccessCallback( responseData ) {
     // 将服务器返回的数据处理成指定的格式，然后返回
     var sampeData =  [
         { num: 1, lx: "区内异地", sqr: "张三", gmsfzhm: "123456789012345678", slrq: "2016-01-15", "zjzt": "受理待审核", "ssms": "呼和浩特市" },
@@ -267,9 +266,56 @@ function ydblSuccessCallback( responseData ) {
 
     return responseData;
 }
-function ydblErrorCallback() {
+function ydblCxErrorCallback() {
 
 }
+
+
+/* 异地办理-异地办证情况统计
+
+ HTML
+
+ 1) 设置
+     <div class="tabs-body ydbz-tj" data-id="0" style="display: block;"
+         data-url=""
+         data-success-callback="ydblTjSuccessCallback"
+         data-error-callback="ydblTjErrorCallback">
+
+ 2) 请求参数
+
+
+ Ajax
+
+ $.ajax({
+     url: “data-url”,
+     data: null,
+     success: “data-success-callback”, // 将服务器返回的数据处理成指定的格式
+     error: “data-error-callback”
+ });
+ */
+function ydblTjSuccessCallback( responseData ) {
+    // 将服务器返回的数据处理成指定的格式，然后返回
+    var sampeData =  {
+        /*  swmc：       单位名称。
+         sl_sldw：    受理(按受理单位)。
+         shqf_sldw：  审核签发(按受理单位)。
+         sl_sjgs：    受理(按数据归属单位)。
+         shqf_sjgs：  审核签发(按数据归属单位)。 */
+        list: [
+            { swmc: "呼和浩特市", sl_sldw: 1111, shqf_sldw: 2222, sl_sjgs: 3333, shqf_sjgs: 4444 },
+            { swmc: "呼和浩特市22222", sl_sldw: 33, shqf_sldw: 555, sl_sjgs: 22211, shqf_sjgs: 347511 }
+        ]
+    };
+
+
+    responseData = sampeData;
+
+    return responseData;
+}
+function ydblTjErrorCallback() {
+
+}
+
 
 /* 数据质量-数据质量问题
 
