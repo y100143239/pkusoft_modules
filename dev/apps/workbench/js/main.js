@@ -161,7 +161,7 @@
 
             $newBody.css( "height", bodyHeight );
 
-            $tableCopy.find(".tbody-main").remove();
+            $tableCopy.find(".tbody-main , .tbody-operation").remove();
             $target.find(".tbody-heading").remove();
 
             $newHeader.append( $tableCopy );
@@ -930,6 +930,7 @@
         $container: "#ydbl .ydbz-tj",
         $tbody: ".tbody-main",
         $refresh: ".refresh",
+        $tableGrid: ".table-grid",
         isUpading: false, // 是否在更新数据
         requestSetting: {
             $target: "#ydbl .ydbz-tj",
@@ -958,14 +959,15 @@
             this.$container = $( this.$container );
             this.$tbody = $( this.$tbody, this.$container );
             this.$refresh = $( this.$refresh, this.$container );
+            this.$tableGrid = $( this.$tableGrid, this.$container );
         },
         bind: function bind() {
             var _this
                 ;
             _this = this;
 
-            // table
-            Utils.table.frozenHeader( $(".table-grid.frozen-head") );
+            // tableGrid
+            Utils.table.frozenHeader( this.$tableGrid );
 
             // refresh
             this.$refresh.on("click", function refreshClickHandler() {
@@ -1035,14 +1037,13 @@
             _this.isUpading = false;
             _this.$tbody.html( doT.template( template )( data ) );
             // 更改每列的颜色
-            _this.$container.find("tr td:nth-of-type(2), tr td:nth-of-type(3), tr th:nth-of-type(3), tr th:nth-of-type(4)" ).addClass("color-key1");
-            _this.$container.find("tr td:nth-of-type(4), tr td:nth-of-type(5), tr th:nth-of-type(5), tr th:nth-of-type(6)" ).addClass("color-key2");
+            //_this.$container.find("tr td:nth-of-type(2), tr td:nth-of-type(3), tr th:nth-of-type(3), tr th:nth-of-type(4)" ).addClass("color-key1");
+            //_this.$container.find("tr td:nth-of-type(4), tr td:nth-of-type(5), tr th:nth-of-type(5), tr th:nth-of-type(6)" ).addClass("color-key2");
             //
             return this;
         }
 
     };
-
 
     // 异地办证-异地办证（受理中）
     ydbl.cx = {
@@ -1172,7 +1173,7 @@
             _this.update.call( _this, pageNum );
         },
         pageSize: 10,
-        $container : "#ydbl"
+        $container : "#ydbl .ydbl-cx"
     });
 
 
@@ -1375,6 +1376,7 @@
     sjzl.duplicate = {
         $container: "#sjzl .tabs-duplicate-code",
         $tbody: ".tbody-main",
+        $tableGrid: ".table-grid",
         isUpading: false, // 是否在更新数据
         requestSetting: {
             $target: "#sjzl .tabs-duplicate-code",
@@ -1397,29 +1399,20 @@
             this._getRequestSetting();
             this.render();
             this.bind();
-            //this.pagination.init();
-            //this.update();
-
-            var html,
-                body,
-                startPos,endPos
-                ;
-            html = $( ".tabs-duplicate-code .table-grid" ).html();
-            //body = html.replace(/<!--heading start-->.*<!--heading end-->/, "");
-            body = html.replace(/<!--heading start-->[\s\S]*<!--heading end-->/, "");
-
-
-            console.info( body );
+            this.pagination.init();
+            this.update();
 
             return this;
         },
         render: function render() {
             this.$container = $( this.$container );
             this.$tbody = $( this.$tbody, this.$container );
+            this.$tableGrid = $( this.$tableGrid, this.$container );
             return this;
         },
         bind: function bind() {
-
+            // tableGrid
+            Utils.table.frozenHeader( this.$tableGrid );
             return this;
         },
         update: function update( pageNum ) {
@@ -1457,7 +1450,47 @@
                     //---- 测试数据
                     if ( IS_DEV !== true ) return;
 
-                    _this._render( Template.sjzl.data.slice( 0, Math.floor( 4 * Math.random() ) ), Template.sjzl.template );
+                    var _sampleData = [
+                        {  chhm: "123456789012345678", xm: "张三1", xb: "男", csrq: "1988-08-12", pcs: "派出所1号", lxdh: "18781222788" },
+                        {  chhm: "123456789012345678", xm: "张三2", xb: "男", csrq: "1988-08-12", pcs: "派出所1号", lxdh: "18781222788" },
+
+                        {  chhm: "123456789012345679", xm: "李四1", xb: "男", csrq: "1988-08-12", pcs: "派出所2号", lxdh: "18781222788" },
+                        {  chhm: "123456789012345679", xm: "李四2", xb: "男", csrq: "1988-08-12", pcs: "派出所2号", lxdh: "18781222788" },
+                        {  chhm: "123456789012345679", xm: "李四3", xb: "男", csrq: "1988-08-12", pcs: "派出所2号", lxdh: "18781222788" },
+
+                        {  chhm: "123456789012345670", xm: "王五1", xb: "男", csrq: "1988-08-12", pcs: "派出所3号", lxdh: "18781222788" },
+                        {  chhm: "123456789012345670", xm: "王五2", xb: "男", csrq: "1988-08-12", pcs: "派出所3号", lxdh: "18781222788" },
+                        {  chhm: "123456789012345670", xm: "王五3", xb: "男", csrq: "1988-08-12", pcs: "派出所3号", lxdh: "18781222788" },
+                        {  chhm: "123456789012345670", xm: "王五4", xb: "男", csrq: "1988-08-12", pcs: "派出所3号", lxdh: "18781222788" },
+
+                        {  chhm: "123456789012345672", xm: "赵六1", xb: "男", csrq: "1988-08-12", pcs: "派出所4号", lxdh: "18781222788" },
+                        {  chhm: "123456789012345672", xm: "赵六2", xb: "男", csrq: "1988-08-12", pcs: "派出所4号", lxdh: "18781222788" },
+                        {  chhm: "123456789012345672", xm: "赵六3", xb: "男", csrq: "1988-08-12", pcs: "派出所4号", lxdh: "18781222788" },
+                        {  chhm: "123456789012345672", xm: "赵六3", xb: "男", csrq: "1988-08-12", pcs: "派出所4号", lxdh: "18781222788" },
+                        {  chhm: "123456789012345672", xm: "赵六4", xb: "男", csrq: "1988-08-12", pcs: "派出所4号", lxdh: "18781222788" }
+                    ];
+
+                    // 给每组重证号，每个元素 用 copy标志是否是重复的，groupId标志一组
+                    var i = 0,
+                        len = _sampleData.length,
+                        curElt = null,
+                        preElt = {},
+                        counter = 1
+                        ;
+                    for ( ; i < len; i++ ) {
+                        curElt = _sampleData[ i ];
+                        if ( curElt.chhm === preElt.chhm ) { // 如果跟前一个一样，则加上 “copy标志”
+                            curElt.copy = 1;
+                            curElt.groupId = preElt.groupId;
+                        } else {
+                            curElt.copy = 0;
+                            curElt.groupId = counter;
+                            counter++;
+                        }
+                        preElt = curElt;
+                    }
+
+                    _this._render( _sampleData , Template.sjzl.template );
                     _this.pagination.update( "1", "1" );
                 }
             );
@@ -1480,7 +1513,22 @@
             Utils.wait.hide( _this.$container );
             _this.isUpading = false;
             this.$tbody.html( doT.template( template )( data ) );
-            //
+
+            // 添加事件-点击每组的第一行
+            this.$tbody.find( ".lead-copy" ).on( "click", function leadCodyClickHandler(){
+                var $this,
+                    groupId,
+                    $copys
+                ;
+                $this = $( this );
+                groupId = $this.attr("data-group-id");
+                $copys = $this.siblings( ".copy[data-group-id=" + groupId + "]");
+                $this.toggleClass("active");
+                $copys.toggleClass("active");
+            } )
+            // 添加 indicator
+                .find("th:eq(0)" ).append("<span class='indicator'></span>");
+
             return this;
         }
     };
@@ -2045,10 +2093,11 @@
                     <tr> \
                         <th>{{= index + 1 }}</th> \
                         <td><p title="{{= value.swmc }}">{{= value.swmc }}</p></td> \
-                        <td><p class="text-right" title="{{= value.sl_sldw }}">{{= value.sl_sldw }}</p></td> \
-                        <td><p class="text-right" title="{{= value.shqf_sldw }}">{{= value.shqf_sldw }}</p></td> \
-                        <td><p class="text-right" title="{{= value.sl_sjgs }}">{{= value.sl_sjgs }}</p></td> \
-                        <td><p class="text-right" title="{{= value.shqf_sjgs }}">{{= value.shqf_sjgs }}</p></td> \
+                        <td class="color-key1"><p class="text-right" title="{{= value.sl_sldw }}">{{= value.sl_sldw }}</p></td> \
+                        <td class="color-key1"><p class="text-right" title="{{= value.shqf_sldw }}">{{= value.shqf_sldw }}</p></td> \
+                        <td class="color-key2"><p class="text-right" title="{{= value.sl_sjgs }}">{{= value.sl_sjgs }}</p></td> \
+                        <td class="color-key2"><p class="text-right" title="{{= value.shqf_sjgs }}">{{= value.shqf_sjgs }}</p></td> \
+                        <td>&nbsp;</td> \
                     </tr> \
                 {{~}}    \
                 {{  for ( var i = 0, len = 12 - it.length; i < len; i++ ) {  }}\
@@ -2066,20 +2115,27 @@
         // 数据质量
         sjzl: {
             data: [
-                { num: 1, chhm: "123456789012345678", xm: "张三", xb: "男", csrq: "1988-08-12", hjszd: "呼和浩特市新城区海东路1号", lxdh: "18781222788" },
-                { num: 2, chhm: "", xm: "张三2", xb: "男", csrq: "1988-08-12", hjszd: "呼和浩特市新城区海东路1号", lxdh: "18781222788" },
-                { num: 3, chhm: "123456789012345678", xm: "张三3", xb: "男", csrq: "1988-08-12", hjszd: "呼和浩特市新城区海东路1号", lxdh: "18781222788" },
-                { num: 4, chhm: "", xm: "张三4", xb: "男", csrq: "1988-08-12", hjszd: "呼和浩特市新城区海东路1号", lxdh: "18781222788" }
+                {  chhm: "123456789012345678", xm: "张三", xb: "男", csrq: "1988-08-12", pcs: "派出所1号", lxdh: "18781222788" },
+                {  chhm: "123456789012345678", xm: "张三2", xb: "男", csrq: "1988-08-12", pcs: "派出所1号", lxdh: "18781222788" },
+                {  chhm: "123456789012345679", xm: "张三3", xb: "男", csrq: "1988-08-12", pcs: "派出所1号", lxdh: "18781222788" },
+                {  chhm: "123456789012345679", xm: "张三4", xb: "男", csrq: "1988-08-12", pcs: "派出所1号", lxdh: "18781222788" }
             ],
             template: '{{~it:value:index}}\
-                    <tr> \
-                        <th>{{= value.num }}</th> \
+                    <tr {{? value.copy  === 1  }} \
+                            class="copy" \
+                        {{?? value.copy  === 0 }}\
+                            class="lead-copy"\
+                        {{??}} \
+                        {{?}} \
+                        data-group-id="{{= value.groupId }}"> \
+                        <th>{{? value.copy  === 0  }} {{= value.groupId }} {{?}}</th> \
                         <td><p title="{{= value.chhm }}">{{= value.chhm }}</p></td> \
                         <td><p title="{{= value.xm }}">{{= value.xm }}</p></td> \
                         <td><p title="{{= value.xb }}">{{= value.xb }}</p></td> \
                         <td><p title="{{= value.csrq }}">{{= value.csrq }}</p></td> \
-                        <td><p title="{{= value.hjszd }}">{{= value.hjszd }}</p></td> \
+                        <td><p title="{{= value.pcs }}">{{= value.pcs }}</p></td> \
                         <td><p title="{{= value.lxdh }}">{{= value.lxdh }}</p></td> \
+                        <td>&nbsp;</td> \
                     </tr> \
                 {{~}}    \
                 {{  for ( var i = 0, len = 4 - it.length; i < len; i++ ) {  }}\
