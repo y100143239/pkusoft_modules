@@ -419,10 +419,12 @@ function problemsErrorCallback(responseData) {
  */
 function duplicateSuccessCallback(responseData) {
     var _sampleData = [
-        { num: 1, chhm: "123456789012345678", xm: "张三", xb: "男", csrq: "1988-08-12", hjszd: "呼和浩特市新城区海东路1号", lxdh: "18781222788" },
-        { num: 2, chhm: "", xm: "张三2", xb: "男", csrq: "1988-08-12", hjszd: "呼和浩特市新城区海东路1号", lxdh: "18781222788" },
-        { num: 3, chhm: "123456789012345678", xm: "张三3", xb: "男", csrq: "1988-08-12", hjszd: "呼和浩特市新城区海东路1号", lxdh: "18781222788" },
-        { num: 4, chhm: "", xm: "张三4", xb: "男", csrq: "1988-08-12", hjszd: "呼和浩特市新城区海东路1号", lxdh: "18781222788" }
+        {  chhm: "123456789012345678", xm: "张三", xb: "男", csrq: "1988-08-12", pcs: "派出所1号", lxdh: "18781222788" },
+        {  chhm: "123456789012345678", xm: "张三2", xb: "男", csrq: "1988-08-12", pcs: "派出所1号", lxdh: "18781222788" },
+        {  chhm: "123456789012345679", xm: "张三3", xb: "男", csrq: "1988-08-12", pcs: "派出所1号", lxdh: "18781222788" },
+        {  chhm: "123456789012345679", xm: "张三4", xb: "男", csrq: "1988-08-12", pcs: "派出所1号", lxdh: "18781222788" },
+        {  chhm: "123456789012345679", xm: "张三4", xb: "男", csrq: "1988-08-12", pcs: "派出所1号", lxdh: "18781222788" },
+        {  chhm: "123456789012345679", xm: "张三4", xb: "男", csrq: "1988-08-12", pcs: "派出所1号", lxdh: "18781222788" }
     ];
     responseData = _sampleData;
     return responseData;

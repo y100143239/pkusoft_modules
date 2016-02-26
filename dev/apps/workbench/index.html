@@ -290,7 +290,7 @@
 
                         <!-- 异地办证情况统计 -->
                         <div class="tabs-body ydbz-tj" data-id="0" style="display: block;"
-                             data-url=""
+                             data-url="http://www.baidu.com/ydbz-tj"
                              data-success-callback="ydblTjSuccessCallback"
                              data-error-callback="ydblTjErrorCallback">
                             <div class="refresh"><span class="icon"></span>刷新</div>
@@ -300,7 +300,7 @@
                             <div class="column-tips right">
                                 <div class="symbol">按数据归属单位</div>
                             </div>
-                            <table class="table-grid frozen-head" data-height="320px">
+                            <table class="table-grid" data-height="320px">
                                 <colgroup>
                                     <col width="32"/> <!--#-->
                                     <col width=""/> <!--单位名称-->
@@ -314,10 +314,10 @@
                                 <tr>
                                     <th>#</th>
                                     <th>单位名称</th>
-                                    <th><span class="lead">受理 </span>二代证数<!--按受理单位--></th>
-                                    <th><span class="lead">审核签发 </span>二代证数<!--按受理单位--></th>
-                                    <th><span class="lead">受理 </span>二代证数<!--按数据归属单位--></th>
-                                    <th><span class="lead">审核签发 </span>二代证数<!--按数据归属单位--></th>
+                                    <th class="color-key1"><span class="lead">受理 </span>二代证数<!--按受理单位--></th>
+                                    <th class="color-key1"><span class="lead">审核签发 </span>二代证数<!--按受理单位--></th>
+                                    <th class="color-key2"><span class="lead">受理 </span>二代证数<!--按数据归属单位--></th>
+                                    <th class="color-key2"><span class="lead">审核签发 </span>二代证数<!--按数据归属单位--></th>
                                     <th><!--空的--></th>
                                 </tr>
                                 </tbody>
@@ -330,7 +330,7 @@
 
                         <!-- 异地办证（受理中） -->
                         <div class="tabs-body ydbl-cx" data-id="1" style="display: none;"
-                             data-url=""
+                             data-url="http://www.baidu.com/ydbl-cx"
                              data-success-callback="ydblCxSuccessCallback"
                              data-error-callback="ydblCxErrorCallback">
                             <div class="search">
@@ -502,17 +502,17 @@
                             <div class="clear"></div>
                         </div>
                         <div class="tabs-body">
-                            <table class="table-grid">
+                            <table class="table-grid" data-height="139px;">
                                 <colgroup>
                                     <col width="36"/> <!--#-->
                                     <col width="160"/> <!--重号号码-->
                                     <col width="80"/> <!--姓名-->
                                     <col width="36"/> <!--性别-->
                                     <col width="100"/> <!--出生日期-->
-                                    <col width=""/> <!--户籍所在地-->
+                                    <col width=""/> <!--派出所-->
                                     <col width="120"/> <!--联系电话-->
+                                    <col width="20"/> <!---->
                                 </colgroup>
-                                <!--heading start-->
                                 <tbody class="tbody-heading">
                                 <tr>
                                     <th>#</th>
@@ -520,20 +520,32 @@
                                     <th>姓名</th>
                                     <th>性别</th>
                                     <th>出生日期</th>
-                                    <th>户籍所在地</th>
+                                    <th><!--户籍所在地-->派出所</th>
                                     <th>联系电话</th>
+                                    <th>&nbsp;</th>
                                 </tr>
                                 </tbody>
-                                <!--heading end-->
                                 <tbody class="tbody-main">
-                                <tr> <th>1</th> <td><p>123456789012345678</p></td> <td><p>张三</p></td> <td><p>男</p></td> <td><p>1999-07-01</p></td> <td><p>呼和浩特市新城区海东路1号</p></td> <td><p>18781222788</p></td> </tr>
-                                <tr> <th>2</th> <td><p></p></td> <td><p>张三</p></td> <td><p>男</p></td> <td><p>1999-07-01</p></td> <td><p>呼和浩特市新城区海东路1号</p></td> <td><p>18781222788</p></td> </tr>
-                                <tr> <th>3</th> <td><p>123456789012345678</p></td> <td><p>张三</p></td> <td><p>男</p></td> <td><p>1999-07-01</p></td> <td><p>呼和浩特市新城区海东路1号</p></td> <td><p>18781222788</p></td> </tr>
-                                <tr> <th>4</th> <td><p></p></td> <td><p>张三</p></td> <td><p>男</p></td> <td><p>1999-07-01</p></td> <td><p>呼和浩特市新城区海东路1号</p></td> <td><p>18781222788</p></td> </tr>
+                                <tr> <th>&nbsp;</th> <td><p>&nbsp;</p></td> <td><p>&nbsp;</p></td> <td><p>&nbsp;</p></td> <td><p>&nbsp;</p></td> <td><p>&nbsp;</p></td> <td><p>&nbsp;</p></td> <td>&nbsp;</td></tr>
+                                <tr> <th>&nbsp;</th> <td><p>&nbsp;</p></td> <td><p>&nbsp;</p></td> <td><p>&nbsp;</p></td> <td><p>&nbsp;</p></td> <td><p>&nbsp;</p></td> <td><p>&nbsp;</p></td> <td>&nbsp;</td></tr>
+                                <tr> <th>&nbsp;</th> <td><p>&nbsp;</p></td> <td><p>&nbsp;</p></td> <td><p>&nbsp;</p></td> <td><p>&nbsp;</p></td> <td><p>&nbsp;</p></td> <td><p>&nbsp;</p></td> <td>&nbsp;</td></tr>
+                                <tr> <th>&nbsp;</th> <td><p>&nbsp;</p></td> <td><p>&nbsp;</p></td> <td><p>&nbsp;</p></td> <td><p>&nbsp;</p></td> <td><p>&nbsp;</p></td> <td><p>&nbsp;</p></td> <td>&nbsp;</td></tr>
+                                <!--
+                                <tr> <th>1</th> <td><p>123456789012345678</p></td> <td><p>张三</p></td> <td><p>男</p></td> <td><p>1999-07-01</p></td> <td><p>派出所1号</p></td> <td><p>18781222788</p></td> <td>&nbsp;</td></tr>
+                                <tr> <th>2</th> <td><p></p></td> <td><p>张三</p></td> <td><p>男</p></td> <td><p>1999-07-01</p></td> <td><p>派出所1号</p></td> <td><p>18781222788</p></td> <td>&nbsp;</td></tr>
+                                <tr> <th>3</th> <td><p>123456789012345678</p></td> <td><p>张三</p></td> <td><p>男</p></td> <td><p>1999-07-01</p></td> <td><p>派出所1号</p></td> <td><p>18781222788</p></td> <td>&nbsp;</td></tr>
+                                <tr> <th>4</th> <td><p></p></td> <td><p>张三</p></td> <td><p>男</p></td> <td><p>1999-07-01</p></td> <td><p>派出所1号</p></td> <td><p>18781222788</p></td> <td>&nbsp;</td></tr>
+                                <tr> <th>5</th> <td><p></p></td> <td><p>张三</p></td> <td><p>男</p></td> <td><p>1999-07-01</p></td> <td><p>派出所1号</p></td> <td><p>18781222788</p></td> <td>&nbsp;</td></tr>
+                                <tr> <th>6</th> <td><p></p></td> <td><p>张三</p></td> <td><p>男</p></td> <td><p>1999-07-01</p></td> <td><p>派出所1号</p></td> <td><p>18781222788</p></td> <td>&nbsp;</td></tr>
+                                <tr> <th>7</th> <td><p></p></td> <td><p>张三</p></td> <td><p>男</p></td> <td><p>1999-07-01</p></td> <td><p>派出所1号</p></td> <td><p>18781222788</p></td> <td>&nbsp;</td></tr>
+                                <tr> <th>8</th> <td><p></p></td> <td><p>张三</p></td> <td><p>男</p></td> <td><p>1999-07-01</p></td> <td><p>派出所1号</p></td> <td><p>18781222788</p></td> <td>&nbsp;</td></tr>
+                                <tr> <th>9</th> <td><p></p></td> <td><p>张三</p></td> <td><p>男</p></td> <td><p>1999-07-01</p></td> <td><p>派出所1号</p></td> <td><p>18781222788</p></td> <td>&nbsp;</td></tr>
+                                <tr> <th>10</th> <td><p></p></td> <td><p>张三</p></td> <td><p>男</p></td> <td><p>1999-07-01</p></td> <td><p>派出所1号</p></td> <td><p>18781222788</p></td> <td>&nbsp;</td></tr>
+                                -->
                                 </tbody>
                                 <tbody class="tbody-operation">
                                 <tr>
-                                    <td colspan="7">
+                                    <td colspan="8">
                                         <div class="pagination">
                                             <a href="#" class="pagination-btn page-first" title="第1页"></a>
                                             <a href="#" class="pagination-btn page-pre" title="前一页"></a>
@@ -551,10 +563,6 @@
                                 </tr>
                                 </tbody>
                             </table>
-
-                            <div class="duplicate-code-others">
-
-                            </div>
 
                         </div>
                     </div>
@@ -698,8 +706,8 @@
                 <!-- “data-id”被样式表使用： &[data-id="qjsj"] { background-position: 18px 21px; } -->
                 <div class="bottom-menu-item" data-id="qjsj">全区数据</div>
                 <div class="bottom-menu-item" data-id="ywjg">业务监管</div>
-                <div class="bottom-menu-item active" data-id="ydbl">异地办理</div>
-                <div class="bottom-menu-item" data-id="sjzl">数据质量</div>
+                <div class="bottom-menu-item" data-id="ydbl">异地办理</div>
+                <div class="bottom-menu-item active" data-id="sjzl">数据质量</div>
                 <!--<div class="bottom-menu-item disabled" data-id="xpjc">相片检测</div>-->
                 <div class="bottom-menu-item" data-id="sjfw">数据服务</div>
             </div>
