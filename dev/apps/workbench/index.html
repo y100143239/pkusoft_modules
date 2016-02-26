@@ -497,12 +497,17 @@
                          data-url="http://www.baidu.com"
                          data-success-callback="duplicateSuccessCallback"
                          data-error-callback="duplicateErrorCallback">
+
+                        <div class="tabs-tools">
+                            <div class="view-mode" title="切换表格查看模式"></div>
+                        </div>
+
                         <div class="tabs-nav">
                             <div class="nav-item active" data-value="00"><a href="javascript:void(0)">跨盟市重证号</a></div>
                             <div class="clear"></div>
                         </div>
                         <div class="tabs-body">
-                            <table class="table-grid" data-height="139px;">
+                            <table class="table-grid" data-height="137px;">
                                 <colgroup>
                                     <col width="36"/> <!--#-->
                                     <col width="160"/> <!--重号号码-->
@@ -515,7 +520,7 @@
                                 </colgroup>
                                 <tbody class="tbody-heading">
                                 <tr>
-                                    <th>#</th>
+                                    <th>#<span class="indicator"></span></th>
                                     <th>重号号码</th>
                                     <th>姓名</th>
                                     <th>性别</th>

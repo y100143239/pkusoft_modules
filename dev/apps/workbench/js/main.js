@@ -1377,6 +1377,8 @@
         $container: "#sjzl .tabs-duplicate-code",
         $tbody: ".tbody-main",
         $tableGrid: ".table-grid",
+        $viewMode: ".tabs-tools .view-mode",
+        $headIndicator: ".tbody-heading th:first-child",
         isUpading: false, // 是否在更新数据
         requestSetting: {
             $target: "#sjzl .tabs-duplicate-code",
@@ -1398,6 +1400,7 @@
         init: function init() {
             this._getRequestSetting();
             this.render();
+            this._frozenTableHead();
             this.bind();
             this.pagination.init();
             this.update();
@@ -1406,13 +1409,42 @@
         },
         render: function render() {
             this.$container = $( this.$container );
-            this.$tbody = $( this.$tbody, this.$container );
+            //this.$tbody = $( this.$tbody, this.$container );
             this.$tableGrid = $( this.$tableGrid, this.$container );
+            this.$viewMode = $( this.$viewMode, this.$container );
+            //this.$headIndicator = $( this.$headIndicator, this.$container );
             return this;
         },
-        bind: function bind() {
-            // tableGrid
+        _frozenTableHead: function _frozenTableHead() {
+            // 冻结表头
             Utils.table.frozenHeader( this.$tableGrid );
+            this.$tbody = $( this.$tbody, this.$container );
+            this.$headIndicator = $( this.$headIndicator, this.$container );
+            //console.info(this.$headIndicator)
+        },
+        bind: function bind() {
+            var _this
+                ;
+            _this = this;
+
+            this.$viewMode.on("click", function viewModeClickHandler() {
+                $( this ).toggleClass( "small" );
+                _this.$container.toggleClass( "view-mode-max" );
+            });
+
+            this.$headIndicator.on( "click", function headingIndicatorClickHandler() {
+                var $this
+                    ;
+                $this = $( this );
+                if ( $this.is(".active") ) {
+                    _this._collapseRows();
+                } else {
+                    _this._showRows();
+                }
+                //$this.toggleClass("active");
+            } );
+
+
             return this;
         },
         update: function update( pageNum ) {
@@ -1529,7 +1561,22 @@
             // 添加 indicator
                 .find("th:eq(0)" ).append("<span class='indicator'></span>");
 
+            // 判断整体的折叠情况
+            if ( _this.$headIndicator.is( ".active" ) ) {
+                _this._showRows();
+            } else {
+                _this._collapseRows();
+            }
+
             return this;
+        },
+        _collapseRows: function _collapseRows() {
+            this.$tbody.find( "tr" ).removeClass( "active" );
+            this.$headIndicator.removeClass( "active" );
+        },
+        _showRows: function _showRows() {
+            this.$tbody.find( "tr" ).addClass( "active" );
+            this.$headIndicator.addClass( "active" );
         }
     };
 

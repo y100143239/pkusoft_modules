@@ -97,6 +97,21 @@ a {
 .disabled {
     cursor: not-allowed;
 }
+.view-mode {
+    width: 24px;
+    height: 24px;
+    background: url(../images/table_view_mode.png) no-repeat 0 0;
+    cursor: pointer;
+    &:hover {
+        background-position: 0 -24px;
+    }
+    &.small {
+        background-position: -24px 0;
+        &:hover {
+            background-position: -24px -24px;
+        }
+    }
+}
 
 .alert {
     position: absolute;
@@ -1038,6 +1053,22 @@ a {
 
     // 数据质量
     .wd-sjzl {
+        position: relative;
+        .view-mode-max {
+            position: absolute!important;
+            top: 0;
+            left: 11px;
+            background-color: #fff;
+            margin-top: 0!important;
+            .frozen-body {
+                height: 360px!important;
+            }
+        }
+        .tabs-tools {
+            position: absolute;
+            top: 14px;
+            right: 0;
+        }
         .lead-copy {
             cursor: pointer;
             .indicator {
@@ -1077,6 +1108,22 @@ a {
         }
         .tabs-duplicate-code {
             margin-top: 16px;
+            .tbody-heading {
+                th:first-child {
+                    cursor: pointer;
+                    &:hover {
+                        background-color: #bbb9ec;
+                    }
+                    &.active {
+                        .indicator {
+                            @include triangle_up(5px, #6d68d2);
+                        }
+                    }
+                }
+                .indicator {
+                    @include triangle_down(5px, #6d68d2);
+                }
+            }
             .tabs-body {
                 //padding: 5px 0 5px 0;
             }
