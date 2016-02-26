@@ -4,6 +4,24 @@
   margin: 0;
   padding: 0; }
 
+.scrollbar-blue, html, body {
+  scrollbar-face-color: #ddeeff;
+  scrollbar-highlight-color: #ffffff;
+  scrollbar-shadow-color: #99bbcc;
+  scrollbar-3dlight-color: #aaccdd;
+  scrollbar-arrow-color: #6688aa;
+  scrollbar-track-color: #eeeeee;
+  scrollbar-darkshadow-color: #ddeeff; }
+
+.scrollbar-gray, .frozen-body {
+  scrollbar-face-color: #eeeeee;
+  scrollbar-highlight-color: #fdfdfd;
+  scrollbar-shadow-color: #c8c8c8;
+  scrollbar-3dlight-color: #eeeeee;
+  scrollbar-arrow-color: #888888;
+  scrollbar-track-color: #f3f3f3;
+  scrollbar-darkshadow-color: #f2f1f1; }
+
 a {
   text-decoration: none; }
   a img {
