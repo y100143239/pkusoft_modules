@@ -1,5 +1,6 @@
 +function ( $ ) {
-    var Utils = {},
+    var isIE = false,
+        Utils = {},
         main = {},
         qjsj = {},  // 区级数据
         ywjg = {},  // 业务监管
@@ -9,6 +10,10 @@
         ;
 
     //window.Utils = Utils;
+
+    if ( window.attachEvent ) {
+        isIE = true;
+    }
 
     Utils.ajax = function ( options ) {
         var setting = {
@@ -38,8 +43,13 @@
             $target.find( ".wait-overlay" ).show();
             return this;
         },
-        hide: function hide( $target ) {
-            $target.find( ".wait-overlay" ).hide();
+        hide: function hide( $target, delay ) {
+            if ( isIE && IS_DEV ) {
+                delay = delay || 500;
+                $target.find( ".wait-overlay" ).delay( delay ).hide( 1 );
+            } else {
+                $target.find( ".wait-overlay" ).hide();
+            }
             return this;
         },
         _add: function ( $target ) {
@@ -248,7 +258,7 @@
             var _this = this;
             // ywjg.view.update( pageNum );
             _this.updateData( pageNum );
-            _this.$currentPage.val( pageNum );
+            //_this.$currentPage.val( pageNum );
             return this;
         },
         update: function ( totalRecords, currentPage ) {
@@ -1404,7 +1414,6 @@
             this.bind();
             this.pagination.init();
             this.update();
-
             return this;
         },
         render: function render() {
@@ -1486,14 +1495,14 @@
                         {  chhm: "123456789012345678", xm: "张三1", xb: "男", csrq: "1988-08-12", pcs: "派出所1号", lxdh: "18781222788" },
                         {  chhm: "123456789012345678", xm: "张三2", xb: "男", csrq: "1988-08-12", pcs: "派出所1号", lxdh: "18781222788" },
 
-                        {  chhm: "123456789012345679", xm: "李四1", xb: "男", csrq: "1988-08-12", pcs: "派出所2号", lxdh: "18781222788" },
-                        {  chhm: "123456789012345679", xm: "李四2", xb: "男", csrq: "1988-08-12", pcs: "派出所2号", lxdh: "18781222788" },
-                        {  chhm: "123456789012345679", xm: "李四3", xb: "男", csrq: "1988-08-12", pcs: "派出所2号", lxdh: "18781222788" },
-
                         {  chhm: "123456789012345670", xm: "王五1", xb: "男", csrq: "1988-08-12", pcs: "派出所3号", lxdh: "18781222788" },
                         {  chhm: "123456789012345670", xm: "王五2", xb: "男", csrq: "1988-08-12", pcs: "派出所3号", lxdh: "18781222788" },
                         {  chhm: "123456789012345670", xm: "王五3", xb: "男", csrq: "1988-08-12", pcs: "派出所3号", lxdh: "18781222788" },
                         {  chhm: "123456789012345670", xm: "王五4", xb: "男", csrq: "1988-08-12", pcs: "派出所3号", lxdh: "18781222788" },
+
+                        {  chhm: "123456789012345679", xm: "李四1", xb: "男", csrq: "1988-08-12", pcs: "派出所2号", lxdh: "18781222788" },
+                        {  chhm: "123456789012345679", xm: "李四2", xb: "男", csrq: "1988-08-12", pcs: "派出所2号", lxdh: "18781222788" },
+                        {  chhm: "123456789012345679", xm: "李四3", xb: "男", csrq: "1988-08-12", pcs: "派出所2号", lxdh: "18781222788" },
 
                         {  chhm: "123456789012345672", xm: "赵六1", xb: "男", csrq: "1988-08-12", pcs: "派出所4号", lxdh: "18781222788" },
                         {  chhm: "123456789012345672", xm: "赵六2", xb: "男", csrq: "1988-08-12", pcs: "派出所4号", lxdh: "18781222788" },
@@ -1504,13 +1513,14 @@
 
                     // 给每组重证号，每个元素 用 copy标志是否是重复的，groupId标志一组
                     var i = 0,
-                        len = _sampleData.length,
+                        data = _sampleData,
+                        len = data.length,
                         curElt = null,
                         preElt = {},
                         counter = 1
                         ;
                     for ( ; i < len; i++ ) {
-                        curElt = _sampleData[ i ];
+                        curElt = data[ i ];
                         if ( curElt.chhm === preElt.chhm ) { // 如果跟前一个一样，则加上 “copy标志”
                             curElt.copy = 1;
                             curElt.groupId = preElt.groupId;
@@ -1522,7 +1532,7 @@
                         preElt = curElt;
                     }
 
-                    _this._render( _sampleData , Template.sjzl.template );
+                    _this._render( data , Template.sjzl.template );
                     _this.pagination.update( "1", "1" );
                 }
             );
