@@ -66,6 +66,28 @@
     margin  : 0;
     padding : 0;
 }
+.scrollbar-blue {
+    scrollbar-face-color       : #ddeeff;  // 立体滚动条的颜色
+    scrollbar-highlight-color  : #ffffff;  // 设置滚动框的和滚动条箭头左上边缘的颜色
+    scrollbar-shadow-color     : #99bbcc;  // 立体滚动条阴影的颜色
+    scrollbar-3dlight-color    : #aaccdd;  // 滚动条空白部分的颜色
+    scrollbar-arrow-color      : #6688aa;  // 三角箭头的颜色
+    scrollbar-track-color      : #eeeeee;  // 立体滚动条背景颜色
+    scrollbar-darkshadow-color : #ddeeff;  // 立体滚动条强阴影的颜色
+}
+.scrollbar-gray {
+    scrollbar-face-color       : #eeeeee;  // 立体滚动条的颜色
+    scrollbar-highlight-color  : #fdfdfd;  // 设置滚动框的和滚动条箭头左上边缘的颜色
+    scrollbar-shadow-color     : #c8c8c8;  // 立体滚动条阴影的颜色
+    scrollbar-3dlight-color    : #eeeeee;  // 滚动条空白部分的颜色
+    scrollbar-arrow-color      : #888888;  // 三角箭头的颜色
+    scrollbar-track-color      : #f3f3f3;  // 立体滚动条背景颜色
+    scrollbar-darkshadow-color : #f2f1f1;  // 立体滚动条强阴影的颜色
+}
+// 滚动条样式（仅针对IE，参考 http://www.lyblog.net/detail/314.html）
+html,body {
+    @extend .scrollbar-blue;
+}
 a {
     text-decoration: none;
     img {
@@ -177,6 +199,7 @@ a {
     tr:hover td {
         background-color: #ffcf87!important;
     }
+    @extend .scrollbar-gray;
 }
 
 .wd-container {
