@@ -9,9 +9,14 @@
     <script src="../../../dev/modules/utils/doT.js"></script>
     <script src="./js/main.js?version=1.0" charset="utf-8"></script>
     <script src="./js/external.js?version=1.0" charset="utf-8"></script>
+    <!--
     <script src="./js/echarts-all.js?version=1.0" charset="utf-8"></script>
     <script src="./js/echarts-theme-macarons.js?version=1.0" charset="utf-8"></script>
-
+    -->
+    <!-- datepicker -->
+    <link rel="stylesheet" href="../../../dev/modules/jquery/plugin/datepicker/dp.css"/>
+    <script src="../../../dev/modules/jquery/plugin/datepicker/datepicker_lang_CN.js" charset="utf-8"></script>
+    <script src="../../../dev/modules/jquery/plugin/datepicker/jquery.datepicker.js" charset="utf-8"></script>
 </head>
 <body>
 
@@ -581,7 +586,7 @@
                 <!-- 数据服务 -->
                 <div class="wd-sjfw" id="sjfw" style="display: none;">
                     <!-- 统计与分析 -->
-                    <div class="tabs"
+                    <!--<div class="tabs"
                          data-url="http://www.baidu.com"
                          data-success-callback="dataServiceSuccessCallback"
                          data-error-callback="dataServiceErrorCallback">
@@ -592,9 +597,9 @@
                             <div class="conditions">
                                 <div class="conditions-city">
                                     <span class="label">盟市：</span>
-                                    <div class="city dropdown-menu "><!-- active -->
+                                    <div class="city dropdown-menu ">&lt;!&ndash; active &ndash;&gt;
                                         <div class="dropdown-menu-heading">
-                                            <!--  通过 span.dropdown-menu-input 的“data-value” 设置初始值-->
+                                            &lt;!&ndash;  通过 span.dropdown-menu-input 的“data-value” 设置初始值&ndash;&gt;
                                             <span class="dropdown-menu-input" data-value="02" >呼和浩特</span>
                                             <span class="dropdown-menu-indicator"></span>
                                             <div class="border-bottom"></div>
@@ -617,9 +622,9 @@
                                 </div>
                                 <div class="conditions-time">
                                     <span class="label">时间：</span>
-                                    <div class="time-start dropdown-menu"><!-- active -->
+                                    <div class="time-start dropdown-menu">&lt;!&ndash; active &ndash;&gt;
                                         <div class="dropdown-menu-heading">
-                                            <!--  通过 span.dropdown-menu-input 的“data-value” 设置初始值（yyyymm）-->
+                                            &lt;!&ndash;  通过 span.dropdown-menu-input 的“data-value” 设置初始值（yyyymm）&ndash;&gt;
                                             <span class="dropdown-menu-input" data-value="201409" ><span class="yyyy">2015</span>年<span class="mm">01</span>月</span>
                                             <span class="dropdown-menu-indicator"></span>
                                             <div class="border-bottom"></div>
@@ -648,9 +653,9 @@
                                     </div>
 
                                     <span class="label goto">到</span>
-                                    <div class="time-end dropdown-menu"><!-- active -->
+                                    <div class="time-end dropdown-menu">&lt;!&ndash; active &ndash;&gt;
                                         <div class="dropdown-menu-heading">
-                                            <!--  通过 span.dropdown-menu-input 的“data-value” 设置初始值（yyyymm）-->
+                                            &lt;!&ndash;  通过 span.dropdown-menu-input 的“data-value” 设置初始值（yyyymm）&ndash;&gt;
                                             <span class="dropdown-menu-input" data-value="201602" ><span class="yyyy">2015</span>年<span class="mm">02</span>月</span>
                                             <span class="dropdown-menu-indicator"></span>
                                             <div class="border-bottom"></div>
@@ -687,11 +692,11 @@
 
                             </div>
                         </div>
-                    </div>
+                    </div>-->
                     <!-- /统计与分析 -->
                     
                     <!-- 导航 -->
-                    <div class="report-links">
+                    <!--<div class="report-links">
                         <a href="#" class="report-link-item">民族人口统计报表<span class="external-link"></span></a>
                         <a href="#" class="report-link-item">户籍变动业务信息统计报表<span class="external-link"></span></a>
                         <a href="#" class="report-link-item">人口及其变动情况统计报表<span class="external-link"></span></a>
@@ -700,13 +705,50 @@
                         <a href="#" class="report-link-item">城镇人口增减情况统计报表<span class="external-link"></span></a>
                         <div class="clear"></div>
                         <div class="label">导航</div>
-                    </div>
+                    </div>-->
                     <!-- /导航 -->
+
+                    <div class="conditions">
+
+                        <!-- 统计单位 -->
+                        <div class="condition-tjdw">
+                            <div class="input-group">
+                                <label class="label">统计单位：</label><input type="text" class="form-control">
+                                <div class="indicator"><span class="icon"></span></div>
+                            </div>
+                        </div>
+                        <!-- /统计单位 -->
+
+                        <!-- 统计时间 -->
+                        <div class="condition-tjsj">
+                            <div class="input-group tjsj-starttime">
+                                <label class="label">统计时间：</label><input type="text" class="form-control">
+                                <div class="indicator"><span class="icon"></span></div>
+                            </div>
+                            <div class="input-group tjsj-endtime">
+                                <label class="label">到</label><input type="text" class="form-control">
+                                <div class="indicator"><span class="icon"></span></div>
+                            </div>
+                        </div>
+                        <!-- /统计时间 -->
+
+                    </div>
+
+                    <div class="icon-list">
+                        <a href="http://www.baidu.com" class="icon-item icon_mzrk"><p class="text">民族人口统计报表</p></a>
+                        <a href="http://www.baidu.com" class="icon-item icon_hjbd"><p class="text">户籍变动业务信息统计报表</p></a>
+                        <a href="http://www.baidu.com" class="icon-item icon_rkbd"><p class="text">人口及其变动情况统计报表</p></a>
+                        <a href="http://www.baidu.com" class="icon-item icon_fny"><p class="text">非农业人口增减情况统计报表</p></a>
+                        <a href="http://www.baidu.com" class="icon-item icon_czrk"><p class="text">常住人口迁移流动情况统计月报表</p></a>
+                        <a href="http://www.baidu.com" class="icon-item icon_chengzrk"><p class="text">城镇人口增减情况统计报表</p></a>
+                        <div class="clear"></div>
+                    </div>
+
+
                 </div>
                 <!-- /数据服务 -->
-
-
             </div>
+
             <div class="wd-bottom bottom-menu">
                 <!-- “data-id”被样式表使用： &[data-id="qjsj"] { background-position: 18px 21px; } -->
                 <div class="bottom-menu-item" data-id="qjsj">全区数据</div>
@@ -718,6 +760,5 @@
             </div>
         </div>
     </div>
-
 </body>
 </html>
