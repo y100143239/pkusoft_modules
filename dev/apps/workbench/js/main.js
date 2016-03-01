@@ -6,7 +6,7 @@
         ywjg = {},  // 业务监管
         ydbl = {},  // 异地办理
         sjzl = {},  // 数据质量
-        sjfw = {}   // 数据服务
+        sjfw = {}   // 数据服务、统计分析
         ;
 
     //window.Utils = Utils;
@@ -1187,8 +1187,6 @@
     });
 
 
-
-
     // 数据质量
     sjzl = {
         //$container: "#sjzl",
@@ -1600,7 +1598,8 @@
     });
 
 
-    // 数据服务
+    // 数据服务(废弃)
+    /*
     sjfw = {
         $container: "#sjfw",
         $navItems: ".nav-item",
@@ -1850,7 +1849,7 @@
             option = chart.option;
 
             // data ==> option
-            /*
+            /!*
              data: {
                  title: "数据统计" , // 柱状图的标题
                  type: "数量",
@@ -1862,7 +1861,7 @@
                      { name: "数据项5", value: "500" }
                  ]
              },
-            */
+            *!/
             option.legend.data[0] = data["title"];
             option.series[0].name = data["type"];
             names = option.xAxis[0].data = [];
@@ -1951,8 +1950,6 @@
             } );
         }
     };
-
-
     sjfw.chart = {
         $container: "#sjfw-echart",
         myChart: null,
@@ -2005,6 +2002,14 @@
             return this;
         }
     };
+    */
+
+    // 数据服务、统计分析
+    sjfw = {
+
+    }
+
+
     /*
         说明：
             “data”应该使用 对象“{}”来封装，而不是使用数组“[]”；
