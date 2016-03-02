@@ -140,7 +140,7 @@ border-collapse:separate;
 }
 
 .bbit-dp-inner .bbit-dp-active{cursor:pointer;color:black;}
-.bbit-dp-inner .bbit-dp-selected a{background:#dfecfb url(../images/default/shared/glass-bg.gif) repeat-x left top;border:1px solid #8db2e3;padding:1px 4px;}
+.bbit-dp-inner .bbit-dp-selected a{background:#dfecfb url(images/dp/glass-bg.gif) repeat-x left top;border:1px solid #8db2e3;padding:1px 4px;}
 .bbit-dp-inner .bbit-dp-today a{border:1px solid darkred;padding:1px 4px;}
 .bbit-dp-inner .bbit-dp-selected span{font-weight:bold;}
 .bbit-dp-inner .bbit-dp-prevday a,.bbit-dp-inner .bbit-dp-nextday a{color:#aaa;text-decoration:none!important;}

@@ -1481,6 +1481,9 @@ a {
         .condition-tjdw {
             float: left;
             margin: 20px 0 0 20px;
+            .input-group {
+                float: left;
+            }
             .form-control {
                 width: 240px;
             }
@@ -1524,18 +1527,10 @@ a {
         }
         .indicator {
             position: absolute;
-            right: 2px;
-            top: 2px;
-            padding: 11px 10px 12px 10px;
-            line-height: 0;
-            font-size: 0;
-            cursor: pointer;
-            .icon {
-                @include triangle_down(7px, #62a0ea);
-            }
-            &:hover {
-                background-color: #e7f0fa;
-            }
+            right: 8px;
+            top: 50%;
+            margin-top: -4px;
+            @include triangle_down(7px, #62a0ea);
             &:active {
                 @include triangle_up(7px, #62a0ea);
             }
@@ -1568,22 +1563,22 @@ a {
                 margin: 120px auto 0 auto;
             }
             .icon_mzrk {
-                background-position: (-196px * 0) 0;
+                background-position: (-196px * 0) -5px;
             }
             .icon_hjbd {
-                background-position: (-196px * 1) 0;
+                background-position: (-196px * 1) -5px;
             }
             .icon_rkbd {
-                background-position: (-196px * 2) 0;
+                background-position: (-196px * 2) -5px;
             }
             .icon_fny {
-                background-position: (-196px * 3) 0;
+                background-position: (-196px * 3) -5px;
             }
             .icon_czrk {
-                background-position: (-196px * 0) -180px;
+                background-position: (-196px * 0) -185px;
             }
             .icon_chengzrk {
-                background-position: (-196px * 1) -180px;
+                background-position: (-196px * 1) -185px;
             }
 
         }
