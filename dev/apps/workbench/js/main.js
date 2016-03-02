@@ -2006,8 +2006,58 @@
 
     // 数据服务、统计分析
     sjfw = {
+        $container: "#sjfw",
+        $startDate: "#tjsj-starttime-input",
+        $endDate: "#tjsj-endtime-input",
+        init: function init() {
+            this.render();
+            this.bind();
+        },
+        render: function render() {
+            this.$container = $( this.$container );
+            this.$startDate = $( this.$startDate );
+            this.$endDate = $( this.$endDate );
+        },
+        bind: function bind() {
+            var _this
+                ;
+            _this = this;
 
-    }
+            // datepicker
+            this.$startDate.datepicker({ picker: this.$startDate, applyrule: function () {
+                return dateHandler( "enddate", _this.$endDate );
+            } });
+            this.$endDate.datepicker({ picker: this.$endDate, applyrule: function () {
+                return dateHandler( "startdate", _this.$startDate );
+            } });
+
+            function dateHandler( datePointName, $target ) {
+                var returnObj,
+                    targetDate,
+                    date,
+                    year,
+                    month,
+                    day
+                    ;
+                targetDate = $target.val() || null;
+                returnObj = {};
+                if ( ! targetDate ) {
+                    return null;
+                }
+                targetDate = targetDate.split(/\D/);
+
+                year = parseInt( targetDate[ 0 ] );
+                month = parseInt( targetDate[ 1 ] );
+                day = parseInt( targetDate[ 2 ] );
+
+                date = new Date( year, month - 1, day );
+
+                returnObj[ datePointName ] = date;
+
+                return returnObj;
+            }
+        }
+    };
 
 
     /*

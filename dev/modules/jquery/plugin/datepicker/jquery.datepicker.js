@@ -84,9 +84,14 @@
         }
     }
     var userAgent = window.navigator.userAgent.toLowerCase();
-    $.browser.msie8 = $.browser.msie && /msie 8\.0/i.test(userAgent);
-    $.browser.msie7 = $.browser.msie && /msie 7\.0/i.test(userAgent);
-    $.browser.msie6 = !$.browser.msie8 && !$.browser.msie7 && $.browser.msie && /msie 6\.0/i.test(userAgent);
+    //$.browser.msie8 = $.browser.msie && /msie 8\.0/i.test(userAgent);
+    //$.browser.msie7 = $.browser.msie && /msie 7\.0/i.test(userAgent);
+    //$.browser.msie6 = !$.browser.msie8 && !$.browser.msie7 && $.browser.msie && /msie 6\.0/i.test(userAgent);
+    $.browser = $.browser || {};
+    $.browser.msie8 = navigator.appName == "Microsoft Internet Explorer" && navigator.appVersion.match(/6./i) == "6.";
+    $.browser.msie7 = navigator.appName == "Microsoft Internet Explorer" && navigator.appVersion.match(/7./i)=="7.";
+    $.browser.msie6 = navigator.appName == "Microsoft Internet Explorer" && navigator.appVersion.match(/8./i)=="8.";
+
     if ($.fn.noSelect == undefined) {
         $.fn.noSelect = function(p) { //no select plugin by me :-)
             if (p == null)
