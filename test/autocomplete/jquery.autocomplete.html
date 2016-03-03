@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="../../dev/modules/ui/css/autocomplete.css"/>
+    <script src="data.js" charset="utf-8"></script>
+    <script data-main="../../dev/modules/" src="../../dev/modules/require.js"></script>
+    <script>
+        var VERSION;
+//         VERSION = "v2.0";
+        require.config( {
+            urlArgs: "VERSION=" + ( VERSION || (new Date()).getTime()),
+            shim: {
+                'ui/autocomplete': ['jquery/jquery-1.9.0']
+            },
+            waitSeconds: 15
+        } );
+        require(["ui/autocomplete"], function () {
+            // 参考 http://blog.csdn.net/happymagic/article/details/8773760
+            $( "#test" ).autocomplete( data, {
+                max: 10,    //列表里的条目数
+                minChars: 0,    //自动完成激活之前填入的最小字符
+                width: 400,     //提示的宽度，溢出隐藏
+                scrollHeight: 300,   //提示的高度，溢出显示滚动条
+                matchContains: true,    //包含匹配，就是data参数里的数据，是否只要包含文本框里的数据就显示
+                autoFill: false,    //自动填充
+                clickFire: true,
+                formatItem: function ( row, i, max ) {
+                    return i + '）' + row[1] + '[' + row[0] + ']';
+                },
+                formatMatch: function ( row, i, max ) {
+                    return row[1] + row[2];
+                },
+                formatResult: function ( row ) {
+                    return row[1];
+                }
+            } )
+        } );
+    </script>
+</head>
+<body>
+
+<input type="text" id="test"/>
+
+<div class="ac_results" style="position: absolute; width: 400px; top: 27px; left: 8px; display: none;">
+    <ul style="max-height: 300px; overflow: auto;">
+        <li class="ac_even">1）乌拉特中旗[150824]</li>
+        <li class="ac_odd">2）巴中市[511900]</li>
+        <li class="ac_even">3）西充县[511325]</li>
+        <li class="ac_odd">4）崇文区[110103]</li>
+        <li class="ac_even">5）崇礼县[130733]</li>
+        <li class="ac_odd">6）崇明县[310230]</li>
+        <li class="ac_even">7）崇安区[320202]</li>
+        <li class="ac_odd">8）崇川区[320602]</li>
+        <li class="ac_even">9）崇义县[360725]</li>
+        <li class="ac_odd">10）崇仁县[361024]</li>
+    </ul>
+    <div class="ac_pagnation">
+        <div class="display">
+            <label>页数：</label><span class="current-page">99999</span> / <span class="total-page">99999</span>
+        </div>
+        <div class="tips">
+            <div class="tips-item">选择记录：</div>
+            <div class="tips-item tips-prev-item"><span class="icon"></span></div>
+            <div class="tips-item tips-next-item"><span class="icon"></span></div>
+            <div class="tips-item">翻页：</div>
+            <div class="tips-item tips-prev-page"><span class="icon"></span></div>
+            <div class="tips-item tips-next-page"><span class="icon"></span></div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

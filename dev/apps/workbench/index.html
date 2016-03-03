@@ -17,6 +17,11 @@
     <link rel="stylesheet" href="../../../dev/modules/jquery/plugin/datepicker/dp.css"/>
     <script src="../../../dev/modules/jquery/plugin/datepicker/datepicker_lang_CN.js" charset="utf-8"></script>
     <script src="../../../dev/modules/jquery/plugin/datepicker/jquery.datepicker.js" charset="utf-8"></script>
+
+    <!-- autocomplete -->
+    <link rel="stylesheet" href="../../../dev/modules/ui/css/autocomplete.css"/>
+    <script src="../../../dev/modules/ui/autocomplete.js" charset="utf-8"></script>
+    <script src="../../../test/autocomplete/data.js" charset="utf-8"></script>
 </head>
 <body>
 
@@ -713,7 +718,7 @@
                         <!-- 统计单位 -->
                         <div class="condition-tjdw">
                             <div class="input-group">
-                                <label class="label">统计单位：</label><input type="text" class="form-control">
+                                <label class="label">统计单位：</label><input type="text" class="form-control" id="sjfw-tjdw-input">
                                 <span class="indicator"></span>
                             </div>
                         </div>
@@ -722,11 +727,11 @@
                         <!-- 统计时间 -->
                         <div class="condition-tjsj">
                             <div class="input-group tjsj-starttime">
-                                <label class="label">统计时间：</label><input id="tjsj-starttime-input" type="text" class="form-control">
+                                <label class="label">统计时间：</label><input id="sjfw-starttime-input" type="text" class="form-control" readonly>
                                 <span class="indicator"></span>
                             </div>
                             <div class="input-group tjsj-endtime">
-                                <label class="label">到</label><input id="tjsj-endtime-input" type="text" class="form-control">
+                                <label class="label">到</label><input id="sjfw-endtime-input" type="text" class="form-control">
                                 <span class="indicator"></span>
                             </div>
                         </div>

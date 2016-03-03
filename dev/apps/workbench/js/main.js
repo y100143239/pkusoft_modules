@@ -2007,8 +2007,9 @@
     // 数据服务、统计分析
     sjfw = {
         $container: "#sjfw",
-        $startDate: "#tjsj-starttime-input",
-        $endDate: "#tjsj-endtime-input",
+        $tjdw: "#sjfw-tjdw-input",
+        $startDate: "#sjfw-starttime-input",
+        $endDate: "#sjfw-endtime-input",
         init: function init() {
             this.render();
             this.bind();
@@ -2017,6 +2018,7 @@
             this.$container = $( this.$container );
             this.$startDate = $( this.$startDate );
             this.$endDate = $( this.$endDate );
+            this.$tjdw = $( this.$tjdw );
         },
         bind: function bind() {
             var _this
@@ -2030,6 +2032,26 @@
             this.$endDate.datepicker({ picker: this.$endDate, applyrule: function () {
                 return dateHandler( "startdate", _this.$startDate );
             } });
+
+            // autocomplete
+            this.$tjdw.autocomplete( data, {
+                max: 10,    //列表里的条目数
+                minChars: 0,    //自动完成激活之前填入的最小字符
+                width: 400,     //提示的宽度，溢出隐藏
+                scrollHeight: 300,   //提示的高度，溢出显示滚动条
+                matchContains: true,    //包含匹配，就是data参数里的数据，是否只要包含文本框里的数据就显示
+                autoFill: false,    //自动填充
+                clickFire: true,
+                formatItem: function ( row, i, max ) {
+                    return i + '）' + row[1] + '[' + row[0] + ']';
+                },
+                formatMatch: function ( row, i, max ) {
+                    return row[1] + row[2];
+                },
+                formatResult: function ( row ) {
+                    return row[1];
+                }
+            } );
 
             function dateHandler( datePointName, $target ) {
                 var returnObj,
