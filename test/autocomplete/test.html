@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="data.js" charset="utf-8"></script>
+    <script data-main="../../dev/modules/" src="../../dev/modules/require.js"></script>
+    <script>
+        var VERSION; // VERSION = "v2.0";
+        require.config( {
+            urlArgs: "VERSION=" + ( VERSION || (new Date()).getTime()),
+            waitSeconds: 15
+        } );
+        require(["jquery/jquery-1.9.0", "ui/autocomplete"]);
+    </script>
+</head>
+<body>
+</body>
+</html>
