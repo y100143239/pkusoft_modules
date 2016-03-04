@@ -147,33 +147,41 @@ a {
     .wd-container .bottom-menu .bottom-menu-item {
       float: left;
       width: 16.5%;
+      height: 64px;
+      line-height: 64px;
       font-size: 16px;
-      padding: 24px 0 30px 0;
-      text-indent: 46px;
-      cursor: pointer;
-      background: url(../images/sprit.png) no-repeat 18px 21px; }
+      text-align: center;
+      cursor: pointer; }
+      .wd-container .bottom-menu .bottom-menu-item .icon {
+        display: inline-block;
+        width: 39px;
+        height: 40px;
+        background: url(../images/sprit.png) no-repeat 0 -410px;
+        vertical-align: middle;
+        margin-top: -4px; }
       .wd-container .bottom-menu .bottom-menu-item:hover {
         background-color: #e6e6e6; }
       .wd-container .bottom-menu .bottom-menu-item.active {
         color: #ffffff;
-        background-color: #62a0ea;
-        background-position-y: -106px !important; }
+        background-color: #62a0ea; }
+        .wd-container .bottom-menu .bottom-menu-item.active .icon {
+          background-position-y: 0 !important; }
       .wd-container .bottom-menu .bottom-menu-item.disabled {
         color: #e6e6e6;
         background-color: #ffffff;
         cursor: not-allowed; }
-      .wd-container .bottom-menu .bottom-menu-item[data-id="qjsj"] {
-        background-position: 18px 21px; }
-      .wd-container .bottom-menu .bottom-menu-item[data-id="ywjg"] {
-        background-position: -112px 21px; }
-      .wd-container .bottom-menu .bottom-menu-item[data-id="ydbl"] {
-        background-position: -244px 21px; }
-      .wd-container .bottom-menu .bottom-menu-item[data-id="sjzl"] {
-        background-position: -376px 21px; }
-      .wd-container .bottom-menu .bottom-menu-item[data-id="xpjc"] {
-        background-position: -511px 21px; }
-      .wd-container .bottom-menu .bottom-menu-item[data-id="sjfw"] {
-        background-position: -644px 21px; }
+      .wd-container .bottom-menu .bottom-menu-item[data-id="qjsj"] .icon {
+        background-position: 0px -41px; }
+      .wd-container .bottom-menu .bottom-menu-item[data-id="ywjg"] .icon {
+        background-position: -40px -41px; }
+      .wd-container .bottom-menu .bottom-menu-item[data-id="ydbl"] .icon {
+        background-position: -80px -41px; }
+      .wd-container .bottom-menu .bottom-menu-item[data-id="sjzl"] .icon {
+        background-position: -120px -41px; }
+      .wd-container .bottom-menu .bottom-menu-item[data-id="sjfw"] .icon {
+        background-position: -160px -41px; }
+      .wd-container .bottom-menu .bottom-menu-item[data-id="rkcx"] .icon {
+        background-position: -200px -41px; }
   .wd-container .wd-qjsj {
     overflow: hidden; }
     .wd-container .wd-qjsj .qjsj-map {

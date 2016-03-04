@@ -6,7 +6,8 @@
         ywjg = {},  // 业务监管
         ydbl = {},  // 异地办理
         sjzl = {},  // 数据质量
-        sjfw = {}   // 数据服务、统计分析
+        sjfw = {},   // 数据服务、统计分析
+        rkcx = {}   // 人口查询
         ;
 
     //window.Utils = Utils;
@@ -276,6 +277,7 @@
         ydbl: null,
         sjzl: null,
         sjfw: null,
+        rkcx: null,
         init: function () {
             this.render().bind();
             //qjsj.init();
@@ -291,6 +293,7 @@
             this.ydbl = ydbl;
             this.sjzl = sjzl;
             this.sjfw = sjfw;
+            this.rkcx = rkcx;
             return this;
         },
         bind: function () {
@@ -2081,6 +2084,12 @@
         }
     };
 
+    // 人口查询
+    rkcx = {
+        init: function init() {
+
+        }
+    };
 
     /*
         说明：
