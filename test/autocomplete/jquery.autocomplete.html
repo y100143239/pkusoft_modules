@@ -27,7 +27,7 @@
                 autoFill: false,    //自动填充
                 clickFire: true,
                 formatItem: function ( row, i, max ) {
-                    return i + '）' + row[1] + '[' + row[0] + ']';
+                    return '<span class="ac_right">' + row[0] + '</span><span class="ac_num">' + i + '</span><span class="ac_cont">' + row[1] + '</span>';
                 },
                 formatMatch: function ( row, i, max ) {
                     return row[1] + row[2];
@@ -43,22 +43,31 @@
 
 <input type="text" id="test"/>
 
-<div class="ac_results" style="position: absolute; width: 400px; top: 27px; left: 8px; display: none;">
+<div class="ac_results" style="position: absolute; width: 400px; top: 27px; left: 8px; display: block;">
     <ul style="max-height: 300px; overflow: auto;">
-        <li class="ac_even">1）乌拉特中旗[150824]</li>
-        <li class="ac_odd">2）巴中市[511900]</li>
-        <li class="ac_even">3）西充县[511325]</li>
-        <li class="ac_odd">4）崇文区[110103]</li>
-        <li class="ac_even">5）崇礼县[130733]</li>
-        <li class="ac_odd">6）崇明县[310230]</li>
-        <li class="ac_even">7）崇安区[320202]</li>
-        <li class="ac_odd">8）崇川区[320602]</li>
-        <li class="ac_even">9）崇义县[360725]</li>
-        <li class="ac_odd">10）崇仁县[361024]</li>
+        <li class="ac_even"><span class="ac_right">711325</span><span class="ac_num">1</span><span
+                class="cont">北埔<strong>乡</strong></span></li>
+        <li class="ac_odd"><span class="ac_right">712806</span><span class="ac_num">2</span><span
+                class="cont">北竿<strong>乡</strong></span></li>
+        <li class="ac_even"><span class="ac_right">711221</span><span class="ac_num">3</span><span
+                class="cont">大同<strong>乡</strong></span></li>
+        <li class="ac_odd"><span class="ac_right">711425</span><span class="ac_num">4</span><span
+                class="cont">大园<strong>乡</strong></span></li>
+        <li class="ac_even"><span class="ac_right">711531</span><span class="ac_num">5</span><span
+                class="cont">大湖<strong>乡</strong></span></li>
+        <li class="ac_odd"><span class="ac_right">711741</span><span class="ac_num">6</span><span
+                class="cont">大村<strong>乡</strong></span></li>
+        <li class="ac_even"><span class="ac_right">711750</span><span class="ac_num">7</span><span
+                class="cont">大城<strong>乡</strong></span></li>
+        <li class="ac_odd"><span class="ac_right">711924</span><span class="ac_num">8</span><span
+                class="cont">大埔<strong>乡</strong></span></li>
+        <li class="ac_even"><span class="ac_right">712122</span><span class="ac_num">9</span><span
+                class="cont">大埤<strong>乡</strong></span></li>
+        <li class="ac_odd"><span class="ac_right">712530</span><span class="ac_num">10</span><span
+                class="cont">大武<strong>乡</strong></span></li>
     </ul>
     <div class="ac_pagnation">
-        <div class="display">
-            <label>页数：</label><span class="current-page">99999</span> / <span class="total-page">99999</span>
+        <div class="display"><label>页数：</label><span class="current-page">1</span> / <span class="total-page">18</span>
         </div>
         <div class="tips">
             <div class="tips-item">选择记录：</div>
@@ -70,6 +79,5 @@
         </div>
     </div>
 </div>
-
 </body>
 </html>
