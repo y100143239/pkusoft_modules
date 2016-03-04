@@ -2042,10 +2042,10 @@
                 matchContains: true,    //包含匹配，就是data参数里的数据，是否只要包含文本框里的数据就显示
                 autoFill: false,    //自动填充
                 clickFire: true,
-                formatItem: function ( row, i, max ) {
-                    return i + '）' + row[1] + '[' + row[0] + ']';
+                formatItem: function ( row, i ) {
+                    return '<span class="ac_right">' + row[0] + '</span><span class="ac_num">' + i + '</span><span class="ac_cont">' + row[1] + '</span>';
                 },
-                formatMatch: function ( row, i, max ) {
+                formatMatch: function ( row ) {
                     return row[1] + row[2];
                 },
                 formatResult: function ( row ) {
