@@ -30,19 +30,17 @@ function mapSuccessCallback( responseData ) {
     // 将服务器返回的数据处理成指定的格式
     var _sampleData = [
         {
-            heading: { title: "人口", icon: "data_icon_1", label: "总数：", cont: "333333_" },
+            heading: { title: "人口", icon: "icon-rk", label: "总数：", cont: "333333_" },
             body: [ { label: "女性：", "cont": "22222_" }, { label: "男性：", "cont": "11111_" } ]
+
         },
         {
-            heading: { title: "户", icon: "data_icon_2", label: "总数：", cont: "4444_" },
-            body: [ { label: "家庭户：", "cont": "3333_" }, { label: "集体户：", "cont": "0001_" }, {
-                label: "农业户：",
-                "cont": "0010_"
-            }, { label: "城镇户：", "cont": "1100_" } ]
+            heading: { title: "户", icon: "icon-hj", label: "总数：", cont: "4444_" },
+            body: [ { label: "家庭户：", "cont": "3333_" }, { label: "集体户：", "cont": "0001_" }, { label: "农业户：", "cont": "0010_" }, { label: "城镇户：", "cont": "1100_" } ]
         },
         {
-            heading: { title: "地址", icon: "data_icon_3", label: "总数：", cont: "99999_" },
-            body: []
+            heading: { title: "地址", icon: "icon-dz", label: "总数：", cont: "99999_" },
+            body: [{ label: "标准地址总数：", "cont": "4444_" }]
         }
     ];
 

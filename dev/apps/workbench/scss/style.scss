@@ -492,9 +492,21 @@ a {
                         width     : 51%;
                     }
                     .icon {
+                        display: inline-block;
+                        width: 32px;
+                        height: 32px;
                         vertical-align : middle;
-                        margin-left    : 4px;
-                        margin-right   : 4px;
+                        background: url(../images/qjsj_data_icons.png) no-repeat 999px 999px;
+                        margin: 0 6px 0 6px;
+                        &.icon-rk {
+                            background-position: -33px * 0 0;
+                        }
+                        &.icon-hj {
+                            background-position: -33px * 1 0;
+                        }
+                        &.icon-dz {
+                            background-position: -33px * 2 0;
+                        }
                     }
                 }
                 .panel-body {

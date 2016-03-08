@@ -20,7 +20,7 @@
         var setting = {
             type: "POST", //请求方式 ("POST" 或 "GET")
             url: "", // 请求的URL
-            data: { name: "value" },
+            data: null, // { name: "value" },
             timeout: 30000, // 设置请求超时时间（毫秒）
             contentType: "application/x-www-form-urlencoded; charset=utf-8",
             cache: false, // 不缓存此页面
@@ -178,6 +178,107 @@
             $newHeader.append( $tableCopy );
             $newBody.append( $target );
 
+        }
+    };
+
+    Utils.dic = {
+        defaults: {
+            max: 10,    //列表里的条目数
+            minChars: 0,    //自动完成激活之前填入的最小字符
+            width: 400,     //提示的宽度，溢出隐藏
+            scrollHeight: 300,   //提示的高度，溢出显示滚动条
+            matchContains: true,    //包含匹配，就是data参数里的数据，是否只要包含文本框里的数据就显示
+            autoFill: false,    //自动填充
+            clickFire: true,
+            formatItem: function ( row, i ) {
+                return this._formatItem( i, row["code"], row["text"], row["spell"] );
+            },
+            formatMatch: function ( row ) {
+                return row[ "spell" ] + row[ "aspell" ] + row[ "text" ] + row[ "code" ];
+            },
+            formatResult: function ( row ) {
+                return row[ "text" ];
+            },
+            _formatItem: function ( num, code, text, spell ) {
+                return '<span class="ac_right">' + code + '</span>\
+                        <span class="ac_right">' + spell + '</span>\
+                        <span class="ac_num">' + num + '</span>\
+                        <span class="ac_cont">' + text + '</span>';
+            }
+
+        },
+        _getData: function _getData( $target, callback ) {
+            var url
+                ;
+            url = $target.attr("data-dic-src");
+
+            // 1. 获取xml
+            Utils.ajax({
+                dataType: "xml",
+                url: url,
+                success: successHandler
+            });
+
+            // 2. xml 转 json
+            function successHandler( responseData ) {
+                var data,
+                    rowNode,
+                    rowNodeList,
+                    code, text, spell, aspell,
+                    i, len
+                    ;
+
+                data = [ { "aspell": "neimengguzizhiqugonganting",  "spell": "nmgzzqgat", "text": "内蒙古自治区公安厅", "code":"150000000000" } ];
+
+                rowNodeList = responseData.getElementsByTagName( "row" );
+
+                for ( i = 0, len = rowNodeList.length; i < len; i++ ) {
+
+                    rowNode = rowNodeList[ i ];
+
+                    code = rowNode.getAttribute( "DIC_CODE" );
+                    text = rowNode.getAttribute( "DIC_TEXT" );
+                    spell = rowNode.getAttribute( "DIC_SPELL" );
+                    aspell = rowNode.getAttribute( "DIC_ASPELL" );
+
+                    data[ i ] = { code: code, text: text, spell: spell, aspell: aspell  };
+                }
+
+
+                callback( data );
+            }
+
+        },
+        render: function render( $target, options ) {
+
+            var _this,
+                defaults,
+                opts
+                ;
+            _this = this;
+            defaults = _this.defaults;
+            options = options || {};
+            opts = {};
+
+            _this._extend( opts, defaults );
+            _this._extend( opts, options );
+            opts[ "$target" ] = $target;
+
+            this._getData( $target, function ( data ) {
+                $target
+                    .autocomplete( data, opts )
+                    .result( function ( event, row ) {
+                        $target.attr("data-code", row[ "code" ]);
+                    });
+            } );
+        },
+        _extend: function (src, target) {
+            for ( var prop in target ) {
+                if ( target.hasOwnProperty( prop ) ) {
+                    src[ prop ] = target[ prop ];
+                }
+            }
+            return src;
         }
     };
 
@@ -1479,9 +1580,34 @@
 
                     responseData = window[ _this.requestSetting.successCallback ]( responseData );
 
+
+
+                    // 给每组重证号，每个元素 用 copy标志是否是重复的，groupId标志一组
+                    var i = 0,
+                        data = responseData,
+                        len = data.length,
+                        curElt = null,
+                        preElt = {},
+                        counter = 1
+                        ;
+                    for ( ; i < len; i++ ) {
+                        curElt = data[ i ];
+                        if ( curElt.chhm === preElt.chhm ) { // 如果跟前一个一样，则加上 “copy标志”
+                            curElt.copy = 1;
+                            curElt.groupId = preElt.groupId;
+                        } else {
+                            curElt.copy = 0;
+                            curElt.groupId = counter;
+                            counter++;
+                        }
+                        preElt = curElt;
+                    }
+
+
                     // 2. 更新到页面（获取数据成功）
-                    _this._render( responseData, Template.sjzl.template );
+                    _this._render( data, Template.sjzl.template );
                     _this.pagination.update( responseData[ "totalRecords" ] || "", responseData[ "pageNum" ] || "1" );
+
                 },
                 function getDataErrorHandler() { // 测试数据
                     _this.isUpading = false;
@@ -2013,6 +2139,7 @@
         $tjdw: "#sjfw-tjdw-input",
         $startDate: "#sjfw-starttime-input",
         $endDate: "#sjfw-endtime-input",
+        $dicSrc: "#sjfw-tjdw-input",
         init: function init() {
             this.render();
             this.bind();
@@ -2022,6 +2149,7 @@
             this.$startDate = $( this.$startDate );
             this.$endDate = $( this.$endDate );
             this.$tjdw = $( this.$tjdw );
+            this.$dicSrc = $( this.$dicSrc ).attr("data-dic-src");
         },
         bind: function bind() {
             var _this
@@ -2036,25 +2164,8 @@
                 return dateHandler( "startdate", _this.$startDate );
             } });
 
-            // autocomplete
-            this.$tjdw.autocomplete( data, {
-                max: 10,    //列表里的条目数
-                minChars: 0,    //自动完成激活之前填入的最小字符
-                width: 400,     //提示的宽度，溢出隐藏
-                scrollHeight: 300,   //提示的高度，溢出显示滚动条
-                matchContains: true,    //包含匹配，就是data参数里的数据，是否只要包含文本框里的数据就显示
-                autoFill: false,    //自动填充
-                clickFire: true,
-                formatItem: function ( row, i ) {
-                    return '<span class="ac_right">' + row[0] + '</span><span class="ac_num">' + i + '</span><span class="ac_cont">' + row[1] + '</span>';
-                },
-                formatMatch: function ( row ) {
-                    return row[1] + row[2];
-                },
-                formatResult: function ( row ) {
-                    return row[1];
-                }
-            } );
+            // dic
+            Utils.dic.render( this.$tjdw );
 
             function dateHandler( datePointName, $target ) {
                 var returnObj,
@@ -2101,16 +2212,16 @@
         qjsj: {
             data: [
                 {
-                    heading: { title: "人口", icon: "data_icon_1", label: "总数：", cont: "333333_" },
+                    heading: { title: "人口", icon: "icon-rk", label: "总数：", cont: "333333_" },
                     body: [ { label: "女性：", "cont": "22222_" }, { label: "男性：", "cont": "11111_" } ]
 
                 },
                 {
-                    heading: { title: "户", icon: "data_icon_2", label: "总数：", cont: "4444_" },
+                    heading: { title: "户", icon: "icon-hj", label: "总数：", cont: "4444_" },
                     body: [ { label: "家庭户：", "cont": "3333_" }, { label: "集体户：", "cont": "0001_" }, { label: "农业户：", "cont": "0010_" }, { label: "城镇户：", "cont": "1100_" } ]
                 },
                 {
-                    heading: { title: "地址", icon: "data_icon_3", label: "总数：", cont: "99999_" },
+                    heading: { title: "地址", icon: "icon-dz", label: "总数：", cont: "99999_" },
                     body: [{ label: "标准地址总数：", "cont": "4444_" }]
                 }
             ],
@@ -2118,7 +2229,7 @@
                     <div class="data-panel">\
                         <div class="panel-heading">\
                             <p class="total"><span class="label">{{= value.heading.label }}</span><span class="cont">{{= value.heading.cont }}</span></p>\
-                            <img class="icon" src="./images/{{= value.heading.icon }}.png"><span class="title">{{= value.heading.title }} </span>\
+                            <span class="icon {{= value.heading.icon }}"></span><span class="title">{{= value.heading.title }} </span>\
                         </div>\
                         <div class="panel-body">\
                         {{? value.body && value.body.length > 0  }}\

@@ -49,13 +49,14 @@
 }
 
 .ac_over
-, .ac_results li:hover
+//, .ac_results li:hover
 {
     background-color: #388ffa;
-    color: white;
-    .ac_num {
+    color: #fff;
+    .ac_num, .ac_right, .ac_cont {
         color: #fff;
     }
+
 }
 
 .ac_num {
@@ -68,6 +69,7 @@
 .ac_right {
     float: right;
     margin-right: 1em;
+    color: #888;
 }
 
 .ac_pagnation {

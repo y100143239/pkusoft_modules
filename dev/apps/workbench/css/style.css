@@ -647,9 +647,18 @@ a {
           font-size: 14px;
           width: 51%; }
         .wd-container .wd-qjsj .qujsj-data .data-panel .panel-heading .icon {
+          display: inline-block;
+          width: 32px;
+          height: 32px;
           vertical-align: middle;
-          margin-left: 4px;
-          margin-right: 4px; }
+          background: url(../images/qjsj_data_icons.png) no-repeat 999px 999px;
+          margin: 0 6px 0 6px; }
+          .wd-container .wd-qjsj .qujsj-data .data-panel .panel-heading .icon.icon-rk {
+            background-position: 0px 0; }
+          .wd-container .wd-qjsj .qujsj-data .data-panel .panel-heading .icon.icon-hj {
+            background-position: -33px 0; }
+          .wd-container .wd-qjsj .qujsj-data .data-panel .panel-heading .icon.icon-dz {
+            background-position: -66px 0; }
       .wd-container .wd-qjsj .qujsj-data .data-panel .panel-body {
         overflow: hidden;
         height: 60px; }
