@@ -18,7 +18,7 @@
     <!-- autocomplete -->
     <link rel="stylesheet" href="../../../dev/modules/ui/css/autocomplete.css"/>
     <script src="../../../dev/modules/ui/autocomplete.js" charset="utf-8"></script>
-    <script src="../../../test/autocomplete/data.js" charset="utf-8"></script>
+    <!--<script src="../../../test/autocomplete/data.js" charset="utf-8"></script>-->
 </head>
 <body>
 
@@ -59,7 +59,7 @@
                         <div class="data-panel">
                             <div class="panel-heading">
                                 <p class="total"><span class="label">总数：</span><span class="cont">16238653</span></p>
-                                <img class="icon" src="./images/data_icon_1.png"><span class="title">人口</span>
+                                <span class="icon icon-rk"></span><span class="title">人口</span>
                             </div>
                             <div class="panel-body">
                                 <div class="data-item line-first"><span class="label">女性：</span><span class="cont">9238653</span></div>
@@ -69,7 +69,7 @@
                         <div class="data-panel">
                             <div class="panel-heading">
                                 <p class="total"><span class="label">总数：</span><span class="cont">16238653</span></p>
-                                <img class="icon" src="./images/data_icon_2.png"><span class="title">户</span>
+                                <span class="icon icon-hj"></span><span class="title">户</span>
                             </div>
                             <div class="panel-body">
                                 <div class="data-item line-first"><span class="label">家庭户：</span><span class="cont">9238653</span></div>
@@ -81,7 +81,7 @@
                         <div class="data-panel">
                             <div class="panel-heading">
                                 <p class="total"><span class="label">总数：</span><span class="cont">16238653</span></p>
-                                <img class="icon" src="./images/data_icon_3.png"><span class="title">地址</span>
+                                <span class="icon icon-dz"></span><span class="title">地址</span>
                             </div>
                             <div class="panel-body">
                                 <div class="data-item line-first"><span class="label">标准地址总数：</span><span class="cont">9238653</span></div>
@@ -715,7 +715,7 @@
                         <!-- 统计单位 -->
                         <div class="condition-tjdw">
                             <div class="input-group">
-                                <label class="label">统计单位：</label><input type="text" class="form-control" id="sjfw-tjdw-input">
+                                <label class="label">统计单位：</label><input type="text" class="form-control" id="sjfw-tjdw-input" data-dic-src="./DIC_CODE.xml">
                                 <span class="indicator"></span>
                             </div>
                         </div>
@@ -756,7 +756,6 @@
                 <div class="bottom-menu-item" data-id="qjsj"><span class="icon"></span>全区数据</div>
                 <div class="bottom-menu-item" data-id="ywjg"><span class="icon"></span>业务监管</div>
                 <div class="bottom-menu-item" data-id="ydbl"><span class="icon"></span>异地办理</div>
-
                 <div class="bottom-menu-item" data-id="sjzl"><span class="icon"></span>数据质量</div>
                 <div class="bottom-menu-item active" data-id="sjfw"><span class="icon"></span><!--数据服务-->统计分析</div>
                 <div class="bottom-menu-item disabled" data-id="rkcx"><span class="icon"></span>人口查询</div>
