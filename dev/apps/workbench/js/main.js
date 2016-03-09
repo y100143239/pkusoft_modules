@@ -181,109 +181,6 @@
         }
     };
 
-    Utils.dic = {
-        defaults: {
-            max: 9,    //列表里的条目数
-            minChars: 0,    //自动完成激活之前填入的最小字符
-            width: 400,     //提示的宽度，溢出隐藏
-            scrollHeight: 300,   //提示的高度，溢出显示滚动条
-            matchContains: true,    //包含匹配，就是data参数里的数据，是否只要包含文本框里的数据就显示
-            autoFill: false,    //自动填充
-            clickFire: true,
-            formatItem: function ( row, i ) {
-                return this._formatItem( i % this.max || this.max , row["text"] || "", row["spell"] || "" );
-            },
-            formatMatch: function ( row ) {
-                return row[ "spell" ] + row[ "aspell" ] + row[ "text" ];
-            },
-            formatResult: function ( row ) {
-                return row[ "text" ];
-            },
-            _formatItem: function ( num, text, spell ) {
-                return '<span class="ac_right">' + spell + '</span>\
-                        <span class="ac_num">' + num + '</span>\
-                        <span class="ac_cont">' + text + '</span>';
-            }
-
-        },
-        _getData: function _getData( $target, callback ) {
-            var url
-                ;
-            url = $target.attr("data-dic-src");
-
-            // 1. 获取xml
-            Utils.ajax({
-                dataType: "xml",
-                url: url,
-                success: successHandler
-            });
-
-            // 2. xml 转 json
-            function successHandler( responseData ) {
-                var data,
-                    rowNode,
-                    rowNodeList,
-                    code, text, spell, aspell,
-                    i, len
-                    ;
-
-                data = [ { "aspell": "neimengguzizhiqugonganting",  "spell": "nmgzzqgat", "text": "内蒙古自治区公安厅", "code":"150000000000" } ];
-
-                rowNodeList = responseData.getElementsByTagName( "row" );
-
-                for ( i = 0, len = rowNodeList.length; i < len; i++ ) {
-
-                    rowNode = rowNodeList[ i ];
-
-                    code = rowNode.getAttribute( "DIC_CODE" );
-                    text = rowNode.getAttribute( "DIC_TEXT" );
-                    spell = rowNode.getAttribute( "DIC_SPELL" );
-                    aspell = rowNode.getAttribute( "DIC_ASPELL" );
-
-                    data[ i ] = { code: code, text: text, spell: spell, aspell: aspell  };
-                }
-
-
-                callback( data );
-            }
-
-        },
-        render: function render( $target, options ) {
-
-            var _this,
-                defaults,
-                opts
-                ;
-            _this = this;
-            defaults = _this.defaults;
-            options = options || {};
-            opts = {};
-
-            _this._extend( opts, defaults );
-            _this._extend( opts, options );
-            opts[ "$target" ] = $target;
-
-            this._getData( $target, function ( data ) {
-                $target
-                    .autocomplete( data, opts )
-                    .result( function ( event, row ) {
-                        var code
-                            ;
-                        code = ( row && row[ "code" ] ) || "";
-                        $target.attr("data-code", code );
-                    });
-            } );
-        },
-        _extend: function (src, target) {
-            for ( var prop in target ) {
-                if ( target.hasOwnProperty( prop ) ) {
-                    src[ prop ] = target[ prop ];
-                }
-            }
-            return src;
-        }
-    };
-
     function Pagination ( setting ) {
 
         //this.updateData = ywjg.view.update;
@@ -2167,7 +2064,7 @@
             } });
 
             // dic
-            Utils.dic.render( this.$tjdw );
+            this.$tjdw.autocompleteDic();
 
             function dateHandler( datePointName, $target ) {
                 var returnObj,

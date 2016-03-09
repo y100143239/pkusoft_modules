@@ -123,7 +123,6 @@
             background-position: -42px -31px;
         }
         &.help {
-            position: relative;
             width: 18px;
             height: 18px;
             line-height: 18px;
@@ -145,7 +144,7 @@
                 position: absolute;
                 width: 412px;
                 height: 360px;
-                bottom: -66px;
+                top: -40px;
                 left: -10px;
                 background: url(../images/autocomplete_help.jpg) no-repeat center center #fff;
                 border: dashed 1px #ddd;
