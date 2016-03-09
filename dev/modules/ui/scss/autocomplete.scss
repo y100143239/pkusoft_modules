@@ -2,7 +2,7 @@
     padding: 0;
     border: 1px solid #c4defe;
     background-color: #f0f0f0;
-    overflow: hidden;
+    //overflow: hidden;
     z-index: 99999;
     box-shadow: 0 0 8px rgba(0,0,0,.2);
     ul {
@@ -64,7 +64,7 @@
     background-color: transparent;
     color: #b9b9b9;
     //padding: 0 0.5em 0 0.3em;
-    padding: 0 8px 0 3px;
+    padding: 0 8px 0 8px
 }
 .ac_right {
     float: right;
@@ -73,7 +73,7 @@
 }
 
 .ac_pagnation {
-    overflow: hidden;
+    //overflow: hidden;
     line-height: 21px;
     font-size: 12px;
     padding: 8px 8px 4px 8px;
@@ -81,6 +81,9 @@
     color: #888;
     border-top: solid 1px #c4defe;
     background-color: #fff;
+    .clear {
+        clear: both;
+    }
     .display {
         float: right;
     }
@@ -118,6 +121,34 @@
         }
         &.tips-next-page .icon{
             background-position: -42px -31px;
+        }
+        &.help {
+            width: 18px;
+            height: 18px;
+            line-height: 18px;
+            font-size: 14px;
+            text-align: center;
+            color: #fff;
+            border: solid 1px;
+            vertical-align: middle;
+            border-radius: 18px;
+            margin-right: 6px;
+            margin-left: -6px;
+            background-color: #345bbb;
+            cursor: pointer;
+            &:hover .help-detail {
+                display: block;
+            }
+            .help-detail {
+                display: none;
+                position: absolute;
+                width: 412px;
+                height: 360px;
+                top: -40px;
+                left: -10px;
+                background: url(../images/autocomplete_help.jpg) no-repeat center center #fff;
+                border: dashed 1px #ddd;
+            }
         }
     }
 }

@@ -3,17 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <title></title>
-    <script src="data.js" charset="utf-8"></script>
     <script data-main="../../dev/modules/" src="../../dev/modules/require.js"></script>
     <script>
-        var VERSION; // VERSION = "v2.0";
+        var VERSION;
+//         VERSION = "v2.0";
         require.config( {
             urlArgs: "VERSION=" + ( VERSION || (new Date()).getTime()),
+            map: {
+                '*': {
+                    'css': 'utils/css/css'
+                }
+            },
+            shim: {
+                'ui/autocomplete': ["css!ui/css/autocomplete.css", 'jquery/jquery-1.9.0']
+            },
             waitSeconds: 15
         } );
-        require(["jquery/jquery-1.9.0", "ui/autocomplete"]);
+        require(["ui/autocomplete"], function () {
+
+            $( "#testAC" ).autocompleteDic();
+
+        } );
     </script>
 </head>
 <body>
+
+<input type="text" id="testAC" data-dic-src="./DIC_CODE.xml"/>
+
 </body>
 </html>

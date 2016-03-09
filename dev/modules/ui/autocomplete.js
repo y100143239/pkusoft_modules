@@ -68,7 +68,16 @@
             COMMA: 188,
             PAGEUP: 33,
             PAGEDOWN: 34,
-            BACKSPACE: 8
+            BACKSPACE: 8,
+            NUM_1: 49,
+            NUM_2: 50,
+            NUM_3: 51,
+            NUM_4: 52,
+            NUM_5: 53,
+            NUM_6: 54,
+            NUM_7: 55,
+            NUM_8: 56,
+            NUM_9: 57
         };
 
         var globalFailure = null;
@@ -126,7 +135,7 @@
                     }
                     break;
 
-                case KEY.LEFT:;
+                case KEY.LEFT:
                 case KEY.PAGEUP:
                     if ( select.visible() ) {
                         event.preventDefault();
@@ -136,7 +145,7 @@
                     }
                     break;
 
-                case KEY.RIGHT:;
+                case KEY.RIGHT:
                 case KEY.PAGEDOWN:
                     if ( select.visible() ) {
                         event.preventDefault();
@@ -162,6 +171,36 @@
                     select.hide();
                     break;
 
+                // 按数字 0 ~ 9 选择条目
+                case KEY.NUM_1:
+                case KEY.NUM_2:
+                case KEY.NUM_3:
+                case KEY.NUM_4:
+                case KEY.NUM_5:
+                case KEY.NUM_6:
+                case KEY.NUM_7:
+                case KEY.NUM_8:
+                case KEY.NUM_9: {
+                    var num
+                        ;
+                    num = lastKeyPressCode - 49;
+                    if ( select.visible() ) {
+                        event.preventDefault();
+                        select.move( num );
+                    } else {
+                        onChange(0, true);
+                    }
+
+                    if( selectCurrent() ) {
+                        // stop default to prevent a form submit, Opera needs special handling
+                        event.preventDefault();
+                        blockSubmit = true;
+                        return false;
+                    }
+
+                    break;
+                }
+
                 default:
                     clearTimeout(timeout);
                     timeout = setTimeout(onChange, options.delay);
@@ -176,6 +215,9 @@
             if (!config.mouseDownOnSelect) {
                 hideResults();
             }
+
+            $input.trigger( "search" );
+
         }).click(function() {
             // show select when clicking in a focused field
             // but if clickFire is true, don't require field
@@ -281,7 +323,7 @@
                 stopLoading();
                 select.hide();
             }
-        };
+        }
 
         function trimWords(value) {
             if (!value)
@@ -320,12 +362,12 @@
                 // select the portion of the value not typed by the user (so the next character will erase)
                 $(input).selection(previousValue.length, previousValue.length + sValue.length);
             }
-        };
+        }
 
         function hideResults() {
             clearTimeout(timeout);
             timeout = setTimeout(hideResultsNow, 200);
-        };
+        }
 
         function hideResultsNow() {
             var wasVisible = select.visible();
@@ -350,7 +392,7 @@
                     }
                 );
             }
-        };
+        }
 
         function receiveData(q, data) {
             if ( data && data.length && hasFocus ) {
@@ -361,7 +403,7 @@
             } else {
                 hideResultsNow();
             }
-        };
+        }
 
         function request(term, success, failure) {
             if (!options.matchCase)
@@ -413,7 +455,7 @@
                     failure(term);
                 }
             }
-        };
+        }
 
         function parse(data) {
             var parsed = [];
@@ -430,11 +472,11 @@
                 }
             }
             return parsed;
-        };
+        }
 
         function stopLoading() {
             $input.removeClass(options.loadingClass);
-        };
+        }
 
     };
 
@@ -482,7 +524,7 @@
             }
             if (i == -1) return false;
             return i == 0 || options.matchContains;
-        };
+        }
 
         function add(q, value) {
             if (length > options.cacheLength){
@@ -535,7 +577,7 @@
                 if ( nullData++ < options.max ) {
                     stMatchSets[""].push(row);
                 }
-            };
+            }
 
             // add the data items to the cache
             $.each(stMatchSets, function(i, value) {
@@ -668,13 +710,16 @@
         <label>页数：</label><span class="current-page">99999</span> / <span class="total-page">99999</span>\
     </div>\
     <div class="tips">\
-        <div class="tips-item">选择记录：</div>\
+        <div class="tips-item help">?<div class="help-detail"></div></div>\
+        <div class="tips-item">选择：</div>\
         <div class="tips-item tips-prev-item"><span class="icon"></span></div>\
         <div class="tips-item tips-next-item"><span class="icon"></span></div>\
         <div class="tips-item">翻页：</div>\
         <div class="tips-item tips-prev-page"><span class="icon"></span></div>\
         <div class="tips-item tips-next-page"><span class="icon"></span></div>\
+        <div class="tips-item"><!--帮助--></div>\
     </div>\
+    <div class="clear"></div>\
 </div>\
 	';
 
@@ -711,7 +756,7 @@
                     list.scrollTop(offset);
                 }
             }
-        };
+        }
 
         function movePosition(step) {
             if (options.scrollJumpPosition || (!options.scrollJumpPosition && !((step < 0 && active == 0) || (step > 0 && active == listItems.size() - 1)) )) {
@@ -787,6 +832,9 @@
                 data = d;
                 term = q;
                 fillList();
+            },
+            move: function move( pos ) {
+                moveSelect( pos - active );
             },
             next: function() {
                 moveSelect(1);
@@ -928,6 +976,136 @@
                 start: field.selectionStart,
                 end: field.selectionEnd
             }
+        }
+    };
+
+    $.fn.autocompleteDic = autocompleteDic;
+
+    function autocompleteDic ( options ) {
+        autocompleteDic.dic.render( $( this ), options );
+    }
+
+    autocompleteDic.ajax = function ( options ) {
+        var setting = {
+            type: "POST", //请求方式 ("POST" 或 "GET")
+            url: "", // 请求的URL
+            data: null, // { name: "value" },
+            timeout: 30000, // 设置请求超时时间（毫秒）
+            contentType: "application/x-www-form-urlencoded; charset=utf-8",
+            cache: false, // 不缓存此页面
+            dataType: "xml", // 预期服务器返回的数据类型。
+            error: null, // 请求失败时调用此函数
+            success: null, // 请求成功后的回调函数。参数：由服务器返回，并根据 dataType 参数进行处理后的数据
+            complete: null // 当请求完成之后调用这个函数，无论成功或失败。
+        };
+        for ( var p in options ) {
+            if ( options.hasOwnProperty( p ) ) {
+                setting[ p ] = options[ p ];
+            }
+        }
+        $.ajax( setting );
+    };
+
+    autocompleteDic.dic = {
+        defaults: {
+            max: 9,    //列表里的条目数
+            minChars: 0,    //自动完成激活之前填入的最小字符
+            width: 400,     //提示的宽度，溢出隐藏
+            scrollHeight: 300,   //提示的高度，溢出显示滚动条
+            matchContains: true,    //包含匹配，就是data参数里的数据，是否只要包含文本框里的数据就显示
+            autoFill: false,    //自动填充
+            clickFire: true,
+            formatItem: function ( row, i ) {
+                return this._formatItem( i % this.max || this.max , row["text"] || "", row["spell"] || "" );
+            },
+            formatMatch: function ( row ) {
+                return row[ "spell" ] + row[ "aspell" ] + row[ "text" ];
+            },
+            formatResult: function ( row ) {
+                return row[ "text" ];
+            },
+            _formatItem: function ( num, text, spell ) {
+                return '<span class="ac_right">' + spell + '</span>\
+                        <span class="ac_num">' + num + '</span>\
+                        <span class="ac_cont">' + text + '</span>';
+            }
+
+        },
+        _getData: function _getData( $target, callback ) {
+            var url
+                ;
+            url = $target.attr("data-dic-src");
+
+            // 1. 获取xml
+            autocompleteDic.ajax({
+                dataType: "xml",
+                url: url,
+                success: successHandler
+            });
+
+            // 2. xml 转 json
+            function successHandler( responseData ) {
+                var data,
+                    rowNode,
+                    rowNodeList,
+                    code, text, spell, aspell,
+                    i, len
+                    ;
+
+                data = [ { "aspell": "neimengguzizhiqugonganting",  "spell": "nmgzzqgat", "text": "内蒙古自治区公安厅", "code":"150000000000" } ];
+
+                rowNodeList = responseData.getElementsByTagName( "row" );
+
+                for ( i = 0, len = rowNodeList.length; i < len; i++ ) {
+
+                    rowNode = rowNodeList[ i ];
+
+                    code = rowNode.getAttribute( "DIC_CODE" );
+                    text = rowNode.getAttribute( "DIC_TEXT" );
+                    spell = rowNode.getAttribute( "DIC_SPELL" );
+                    aspell = rowNode.getAttribute( "DIC_ASPELL" );
+
+                    data[ i ] = { code: code, text: text, spell: spell, aspell: aspell  };
+                }
+
+
+                callback( data );
+            }
+
+        },
+        render: function render( $target, options ) {
+
+            var _this,
+                defaults,
+                opts
+                ;
+            _this = this;
+            defaults = _this.defaults;
+            options = options || {};
+            opts = {};
+
+            _this._extend( opts, defaults );
+            _this._extend( opts, options );
+            opts[ "$target" ] = $target;
+
+            this._getData( $target, function ( data ) {
+                $target
+                    .autocomplete( data, opts )
+                    .result( function ( event, row ) {
+                        var code
+                            ;
+                        code = ( row && row[ "code" ] ) || "";
+                        $target.attr("data-code", code );
+                    });
+            } );
+        },
+        _extend: function (src, target) {
+            for ( var prop in target ) {
+                if ( target.hasOwnProperty( prop ) ) {
+                    src[ prop ] = target[ prop ];
+                }
+            }
+            return src;
         }
     };
 
