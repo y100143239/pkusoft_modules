@@ -1529,7 +1529,8 @@ a {
       border-left: 7px solid transparent;
       border-right: 7px solid transparent; }
   .wd-container .wd-sjfw .icon-list {
-    margin: 12px 0 0 18px; }
+    margin: 12px 0 0 18px;
+    overflow: hidden; }
     .wd-container .wd-sjfw .icon-list .icon-item {
       float: left;
       width: 173px;

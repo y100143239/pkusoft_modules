@@ -68,7 +68,16 @@
             COMMA: 188,
             PAGEUP: 33,
             PAGEDOWN: 34,
-            BACKSPACE: 8
+            BACKSPACE: 8,
+            NUM_1: 49,
+            NUM_2: 50,
+            NUM_3: 51,
+            NUM_4: 52,
+            NUM_5: 53,
+            NUM_6: 54,
+            NUM_7: 55,
+            NUM_8: 56,
+            NUM_9: 57
         };
 
         var globalFailure = null;
@@ -126,7 +135,7 @@
                     }
                     break;
 
-                case KEY.LEFT:;
+                case KEY.LEFT:
                 case KEY.PAGEUP:
                     if ( select.visible() ) {
                         event.preventDefault();
@@ -136,7 +145,7 @@
                     }
                     break;
 
-                case KEY.RIGHT:;
+                case KEY.RIGHT:
                 case KEY.PAGEDOWN:
                     if ( select.visible() ) {
                         event.preventDefault();
@@ -162,6 +171,36 @@
                     select.hide();
                     break;
 
+                // 按数字 0 ~ 9 选择条目
+                case KEY.NUM_1:
+                case KEY.NUM_2:
+                case KEY.NUM_3:
+                case KEY.NUM_4:
+                case KEY.NUM_5:
+                case KEY.NUM_6:
+                case KEY.NUM_7:
+                case KEY.NUM_8:
+                case KEY.NUM_9: {
+                    var num
+                        ;
+                    num = lastKeyPressCode - 49;
+                    if ( select.visible() ) {
+                        event.preventDefault();
+                        select.move( num );
+                    } else {
+                        onChange(0, true);
+                    }
+
+                    if( selectCurrent() ) {
+                        // stop default to prevent a form submit, Opera needs special handling
+                        event.preventDefault();
+                        blockSubmit = true;
+                        return false;
+                    }
+
+                    break;
+                }
+
                 default:
                     clearTimeout(timeout);
                     timeout = setTimeout(onChange, options.delay);
@@ -176,6 +215,9 @@
             if (!config.mouseDownOnSelect) {
                 hideResults();
             }
+
+            $input.trigger( "search" );
+
         }).click(function() {
             // show select when clicking in a focused field
             // but if clickFire is true, don't require field
@@ -281,7 +323,7 @@
                 stopLoading();
                 select.hide();
             }
-        };
+        }
 
         function trimWords(value) {
             if (!value)
@@ -320,12 +362,12 @@
                 // select the portion of the value not typed by the user (so the next character will erase)
                 $(input).selection(previousValue.length, previousValue.length + sValue.length);
             }
-        };
+        }
 
         function hideResults() {
             clearTimeout(timeout);
             timeout = setTimeout(hideResultsNow, 200);
-        };
+        }
 
         function hideResultsNow() {
             var wasVisible = select.visible();
@@ -350,7 +392,7 @@
                     }
                 );
             }
-        };
+        }
 
         function receiveData(q, data) {
             if ( data && data.length && hasFocus ) {
@@ -361,7 +403,7 @@
             } else {
                 hideResultsNow();
             }
-        };
+        }
 
         function request(term, success, failure) {
             if (!options.matchCase)
@@ -413,7 +455,7 @@
                     failure(term);
                 }
             }
-        };
+        }
 
         function parse(data) {
             var parsed = [];
@@ -430,11 +472,11 @@
                 }
             }
             return parsed;
-        };
+        }
 
         function stopLoading() {
             $input.removeClass(options.loadingClass);
-        };
+        }
 
     };
 
@@ -482,7 +524,7 @@
             }
             if (i == -1) return false;
             return i == 0 || options.matchContains;
-        };
+        }
 
         function add(q, value) {
             if (length > options.cacheLength){
@@ -535,7 +577,7 @@
                 if ( nullData++ < options.max ) {
                     stMatchSets[""].push(row);
                 }
-            };
+            }
 
             // add the data items to the cache
             $.each(stMatchSets, function(i, value) {
@@ -668,13 +710,16 @@
         <label>页数：</label><span class="current-page">99999</span> / <span class="total-page">99999</span>\
     </div>\
     <div class="tips">\
-        <div class="tips-item">选择记录：</div>\
+        <div class="tips-item help">?<div class="help-detail"></div></div>\
+        <div class="tips-item">选择：</div>\
         <div class="tips-item tips-prev-item"><span class="icon"></span></div>\
         <div class="tips-item tips-next-item"><span class="icon"></span></div>\
         <div class="tips-item">翻页：</div>\
         <div class="tips-item tips-prev-page"><span class="icon"></span></div>\
         <div class="tips-item tips-next-page"><span class="icon"></span></div>\
+        <div class="tips-item"><!--帮助--></div>\
     </div>\
+    <div class="clear"></div>\
 </div>\
 	';
 
@@ -711,7 +756,7 @@
                     list.scrollTop(offset);
                 }
             }
-        };
+        }
 
         function movePosition(step) {
             if (options.scrollJumpPosition || (!options.scrollJumpPosition && !((step < 0 && active == 0) || (step > 0 && active == listItems.size() - 1)) )) {
@@ -787,6 +832,9 @@
                 data = d;
                 term = q;
                 fillList();
+            },
+            move: function move( pos ) {
+                moveSelect( pos - active );
             },
             next: function() {
                 moveSelect(1);

@@ -183,7 +183,7 @@
 
     Utils.dic = {
         defaults: {
-            max: 10,    //列表里的条目数
+            max: 9,    //列表里的条目数
             minChars: 0,    //自动完成激活之前填入的最小字符
             width: 400,     //提示的宽度，溢出隐藏
             scrollHeight: 300,   //提示的高度，溢出显示滚动条
@@ -191,17 +191,16 @@
             autoFill: false,    //自动填充
             clickFire: true,
             formatItem: function ( row, i ) {
-                return this._formatItem( i, row["code"], row["text"], row["spell"] );
+                return this._formatItem( i % this.max || this.max , row["text"] || "", row["spell"] || "" );
             },
             formatMatch: function ( row ) {
-                return row[ "spell" ] + row[ "aspell" ] + row[ "text" ] + row[ "code" ];
+                return row[ "spell" ] + row[ "aspell" ] + row[ "text" ];
             },
             formatResult: function ( row ) {
                 return row[ "text" ];
             },
-            _formatItem: function ( num, code, text, spell ) {
-                return '<span class="ac_right">' + code + '</span>\
-                        <span class="ac_right">' + spell + '</span>\
+            _formatItem: function ( num, text, spell ) {
+                return '<span class="ac_right">' + spell + '</span>\
                         <span class="ac_num">' + num + '</span>\
                         <span class="ac_cont">' + text + '</span>';
             }
@@ -268,7 +267,10 @@
                 $target
                     .autocomplete( data, opts )
                     .result( function ( event, row ) {
-                        $target.attr("data-code", row[ "code" ]);
+                        var code
+                            ;
+                        code = ( row && row[ "code" ] ) || "";
+                        $target.attr("data-code", code );
                     });
             } );
         },
