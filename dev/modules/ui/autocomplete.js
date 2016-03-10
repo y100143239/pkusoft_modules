@@ -987,7 +987,7 @@
 
     autocompleteDic.ajax = function ( options ) {
         var setting = {
-            type: "POST", //请求方式 ("POST" 或 "GET")
+            type: "GET", //请求方式 ("POST" 或 "GET")
             url: "", // 请求的URL
             data: null, // { name: "value" },
             timeout: 30000, // 设置请求超时时间（毫秒）
