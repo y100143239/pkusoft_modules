@@ -1096,6 +1096,11 @@
                             ;
                         code = ( row && row[ "code" ] ) || "";
                         $target.attr("data-code", code );
+                        if ( code ) {
+                            $target.removeClass( "error" );
+                        } else {
+                            $target.addClass( "error" );
+                        }
                     });
             } );
         },

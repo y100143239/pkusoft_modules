@@ -1471,6 +1471,9 @@ a {
       float: left; }
     .wd-container .wd-sjfw .condition-tjdw .form-control {
       width: 240px; }
+      .wd-container .wd-sjfw .condition-tjdw .form-control.error {
+        background: #fed1d1;
+        border-color: #fc8585; }
   .wd-container .wd-sjfw .condition-tjsj {
     float: left;
     margin: 20px 0 0 40px; }

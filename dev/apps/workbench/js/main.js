@@ -2039,6 +2039,7 @@
         $startDate: "#sjfw-starttime-input",
         $endDate: "#sjfw-endtime-input",
         $dicSrc: "#sjfw-tjdw-input",
+        $icons: ".icon-list a",
         init: function init() {
             this.render();
             this.bind();
@@ -2049,22 +2050,74 @@
             this.$endDate = $( this.$endDate );
             this.$tjdw = $( this.$tjdw );
             this.$dicSrc = $( this.$dicSrc ).attr("data-dic-src");
+            this.$icons = $( this.$icons, this.$container );
         },
         bind: function bind() {
-            var _this
+            var _this,
+                $startDate,
+                $endDate,
+                $tjdw
                 ;
             _this = this;
+            $startDate = this.$startDate;
+            $endDate = this.$endDate;
+            $tjdw = this.$tjdw;
 
             // datepicker
-            this.$startDate.datepicker({ picker: this.$startDate, applyrule: function () {
+            $startDate.datepicker({ picker: $startDate, applyrule: function () {
                 return dateHandler( "enddate", _this.$endDate );
             } });
-            this.$endDate.datepicker({ picker: this.$endDate, applyrule: function () {
+            $endDate.datepicker({ picker: $endDate, applyrule: function () {
                 return dateHandler( "startdate", _this.$startDate );
             } });
 
             // dic
-            this.$tjdw.autocompleteDic();
+            $tjdw.autocompleteDic();
+
+
+            // 点击图标
+            this.$icons.on( "click", function clickIconHandler( event ) {
+                var $this,
+                    tjdw,
+                    startDate,
+                    endDate,
+                    url,
+                    queryObj,
+                    quertString,
+                    windowName
+                ;
+
+                event.preventDefault();
+
+                // 0. 校验
+                if ( $tjdw.hasClass( "error" ) || ! $tjdw.attr("data-code") ) {
+                    $tjdw.get( 0 ).focus();
+                    $tjdw.trigger( "search" );
+                    return;
+                }
+
+                $this = $( this );
+                windowName = "sjfw_" + $this.index();
+
+                url = $this.attr( "href" );
+                quertString = "?timestamp=" + ( new Date() ).getTime();
+
+                // 1. 请求参数
+                tjdw = $tjdw.attr( "data-code" ) || "";
+                startDate = $startDate.val() || "";
+                endDate = $endDate.val() || "";
+
+                queryObj = { tjdw: tjdw, startDate: startDate, endDate: endDate };
+                for ( var prop in queryObj ) {
+                    quertString += "&" + prop + "=" + encodeURIComponent( queryObj[ prop ] );
+                }
+
+                // 2. 打开新窗口
+                top.open( url + quertString, windowName);
+
+
+            } );
+
 
             function dateHandler( datePointName, $target ) {
                 var returnObj,
