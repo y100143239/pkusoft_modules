@@ -1515,6 +1515,10 @@ a {
             }
             .form-control {
                 width: 240px;
+                &.error {
+                    background: #fed1d1;
+                    border-color: #fc8585;
+                }
             }
         }
         .condition-tjsj {
