@@ -17,29 +17,29 @@
 		<table cellpadding="5">
 			<tr>
 				<td>User Name:</td>
-				<td><input class="easyui-validatebox textbox" data-options="required:true,validType:'length[3,10]',novalidate:true"></td>
+				<td><input class="textbox" data-options="required:true,validType:'length[3,10]',novalidate:true"></td>
 			</tr>
 			<tr>
 				<td>Email:</td>
-				<td><input class="easyui-validatebox textbox" data-options="required:true,validType:'email',novalidate:true"></td>
+				<td><input class="textbox" data-options="required:true,validType:'email',novalidate:true"></td>
 			</tr>
 			<tr>
 				<td>Birthday:</td>
-				<td><input class="easyui-datebox textbox" data-options="required:true,novalidate:true"></td>
+				<td><input class="textbox" data-options="required:true,novalidate:true"></td>
 			</tr>
 			<tr>
 				<td>URL:</td>
-				<td><input class="easyui-validatebox textbox" data-options="required:true,validType:'url',novalidate:true"></td>
+				<td><input class="textbox" data-options="required:true,validType:'url',novalidate:true"></td>
 			</tr>
 			<tr>
 				<td>Phone:</td>
-				<td><input class="easyui-validatebox textbox" data-options="required:true,novalidate:true"></td>
+				<td><input class="textbox" data-options="required:true,novalidate:true"></td>
 			</tr>
 		</table>
 	</div>
 	<script type="text/javascript">
 		$(function(){
-			$('.validatebox-text').bind('blur', function(){
+			$('input.textbox').validatebox().bind('blur', function(){
 				$(this).validatebox('enableValidation').validatebox('validate');
 			});
 		})
