@@ -1,3 +1,25 @@
+Version 1.4.5
+-------------
+* Bug
+ * datagrid: The 'getChanges' method does not return the updated rows after calling 'updateRow' method. fixed.
+ * treegrid: The 'onLoadSuccess' event fires when append or insert a row. fixed.
+ * tree: The 'onLoadSuccess' event fires when append or insert a node. fixed.
+* Improvement
+ * window: The displaying style can be customized.
+ * window: The 'border' property allows the user to set different border style.
+ * navpanel: The 'href' property is enabled to load content from remote server.
+ * combotree: The 'setValue' and 'setValues' methods accept the paremter values in 'id' and 'text' pairs
+ * combobox: Add 'showItemIcon' property.
+ * combobox: Set 'groupPosition' property to 'sticky' to stick the item group to the top of drop-down panel.
+ * messager: Pressing ENTER key on input box will trigger click event of the first button.
+ * validatebox: Add 'editable',disabled' and 'readonly' properties.
+ * validatebox: Add 'enable','disable','readonly' methods.
+ * validatebox: Allow the user to determine how to display the error message.
+ * filebox: Add 'accept' and 'multiple' properties.
+ * form: Add 'iframe' property and 'onProgress' event.
+ * treegrid: Add cascade checkbox selection.
+ * treegrid: Add 'getCheckedNodes','checkNode' and 'uncheckNode' methods.
+
 Version 1.4.4
 -------------
 * Bug

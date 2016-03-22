@@ -11,6 +11,9 @@ body {
     font-family: "Microsoft Yahei", sans-serif;
     color: #333;
 }
+a, a:hover, a:focus {
+    text-decoration: none;
+}
 .wrap {
     width: 1000px;
     @include center-block();
@@ -31,6 +34,7 @@ body {
         margin-top: 13px;
         padding-left: 48px;
         line-height: 1;
+        text-decoration: none;
     }
     .text-zh {
         display: block;
@@ -75,10 +79,10 @@ body {
                 height: 49px;
                 color: #999;
                 border-bottom: solid 2px transparent;
+                text-decoration: none;
                 &:hover {
                     color: #333;
-                    border-color: #333;
-                    text-decoration: none;
+                    //border-color: #333;
                 }
                 &.active {
                     color: $color-key;
@@ -138,11 +142,15 @@ body {
         }
     }
     .display {
+        position: relative;
         float: left;
         height: 388px;
         width: 628px;
         border: dashed 1px #ddd;
         margin-top: 72px;
+        .panel {
+            position: absolute;
+        }
     }
 }
 

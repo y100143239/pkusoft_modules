@@ -3808,6 +3808,9 @@ body {
   font-family: "Microsoft Yahei", sans-serif;
   color: #333; }
 
+a, a:hover, a:focus {
+  text-decoration: none; }
+
 .wrap {
   width: 1000px;
   display: block;
@@ -3830,7 +3833,8 @@ body {
     background: url(../images/sprit_login.png) no-repeat 0 0;
     margin-top: 13px;
     padding-left: 48px;
-    line-height: 1; }
+    line-height: 1;
+    text-decoration: none; }
   .header .text-zh {
     display: block;
     font-size: 18px;
@@ -3871,11 +3875,10 @@ body {
         width: 50%;
         height: 49px;
         color: #999;
-        border-bottom: solid 2px transparent; }
+        border-bottom: solid 2px transparent;
+        text-decoration: none; }
         .main .login .heading .title:hover {
-          color: #333;
-          border-color: #333;
-          text-decoration: none; }
+          color: #333; }
         .main .login .heading .title.active {
           color: #0795eb;
           border-color: #0795eb; }
@@ -3919,11 +3922,14 @@ body {
         color: #bfbfbf;
         margin: 0 5px; }
   .main .display {
+    position: relative;
     float: left;
     height: 388px;
     width: 628px;
     border: dashed 1px #ddd;
     margin-top: 72px; }
+    .main .display .panel {
+      position: absolute; }
 
 .footer {
   position: fixed;
