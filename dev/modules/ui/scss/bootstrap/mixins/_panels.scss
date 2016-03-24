@@ -22,3 +22,26 @@
     }
   }
 }
+
+@mixin bs-panel-variant($border, $heading-text-color, $heading-bg-color, $heading-border) {
+  border-color: $border;
+
+  & > .bs-panel-heading {
+    color: $heading-text-color;
+    background-color: $heading-bg-color;
+    border-color: $heading-border;
+
+    + .bs-panel-collapse > .bs-panel-body {
+      border-top-color: $border;
+    }
+    .badge {
+      color: $heading-bg-color;
+      background-color: $heading-text-color;
+    }
+  }
+  & > .bs-panel-footer {
+    + .bs-panel-collapse > .bs-panel-body {
+      border-bottom-color: $border;
+    }
+  }
+}

@@ -14,168 +14,214 @@ body {
 a, a:hover, a:focus {
     text-decoration: none;
 }
-.wrap {
-    width: 1000px;
-    @include center-block();
-}
 
-.header {
-    height: 60px;
-    background-color: #eef4fa;
-    border-bottom: solid 1px #dae2ed;
-    .wrap {
-        @include clearfix();
-    }
-    .header_logo {
-        float: left;
-        width: 300px;
-        height: 40px;
-        background: url(../images/sprit_login.png) no-repeat 0 0;
-        margin-top: 13px;
-        padding-left: 48px;
-        line-height: 1;
-        text-decoration: none;
-    }
-    .text-zh {
-        display: block;
-        font-size: 18px;
-        color: #0795eb;
-        margin-top: 3px;
-    }
-    .text-en {
-        display: block;
-        color: #55abee;
-        font-family: Arial, sans-serif;
-        font-size: 13px;
-        margin-top: 6px;
-    }
-}
+.page-login {
 
-.main {
-    min-height: 520px;
     .wrap {
         width: 1000px;
         @include center-block();
     }
-    .login {
-        position: relative;
-        float: right;
-        width: 332px;
-        height: 388px;
-        border: solid 1px #c9d3de;
-        background-color: #fff;
-        border-radius: 5px;
-        margin: 72px 20px 0 0;
-        overflow: hidden;
-        .heading {
-            height: 50px;
-            line-height: 50px;
-            text-align: center;
-            border-bottom: 1px solid #c0cdd9;
-            background-color: #f9fbfe;
-            .title {
-                float: left;
-                width: 50%;
-                height: 49px;
-                color: #999;
-                border-bottom: solid 2px transparent;
-                text-decoration: none;
-                &:hover {
-                    color: #333;
-                    //border-color: #333;
-                }
-                &.active {
-                    color: $color-key;
-                    border-color: $color-key;
-                }
-            }
+
+    .header {
+        height: 60px;
+        background-color: #eef4fa;
+        border-bottom: solid 1px #dae2ed;
+        .wrap {
+            @include clearfix();
         }
-        .body {
-            padding: 1px 24px 0 24px;
-            .form-group-username {
-                margin-top: 36px;
-            }
-            .checkbox {
-                color: #888;
-                margin-top: 20px;
-                margin-bottom: 20px;
-            }
-            .form-group {
-                position: relative;
-                margin-bottom: 10px;
-                .form-control {
-                    padding-left: 32px;
-                }
-                label {
-                    position: absolute;
-                    left: 10px;
-                    top: 50%;
-                    margin-top: -9px;
-                    &.fa {
-                        font-size: 18px;
-                        color: #888;
+        .header_logo {
+            float: left;
+            width: 300px;
+            height: 40px;
+            background: url(../images/sprit_login.png) no-repeat 0 0;
+            margin-top: 13px;
+            padding-left: 48px;
+            line-height: 1;
+            text-decoration: none;
+        }
+        .text-zh {
+            display: block;
+            font-size: 18px;
+            color: #0795eb;
+            margin-top: 3px;
+        }
+        .text-en {
+            display: block;
+            color: #55abee;
+            font-family: Arial, sans-serif;
+            font-size: 13px;
+            margin-top: 6px;
+        }
+    }
+
+    .main {
+        min-height: 520px;
+        .wrap {
+            width: 1000px;
+            @include center-block();
+        }
+        .login {
+            position: relative;
+            float: right;
+            width: 332px;
+            height: 388px;
+            border: solid 1px #c9d3de;
+            background-color: #fff;
+            border-radius: 5px;
+            margin: 72px 20px 0 0;
+            overflow: hidden;
+            .heading {
+                height: 50px;
+                line-height: 50px;
+                text-align: center;
+                border-bottom: 1px solid #c0cdd9;
+                background-color: #f9fbfe;
+                .title {
+                    float: left;
+                    width: 50%;
+                    height: 49px;
+                    color: #999;
+                    border-bottom: solid 2px transparent;
+                    text-decoration: none;
+                    &:hover {
+                        color: #333;
+                        //border-color: #333;
+                    }
+                    &.active {
+                        color: $color-key;
+                        border-color: $color-key;
                     }
                 }
             }
-            .btn-submit {
-                width: 100%;
-                height: 40px;
-                background-color: #5797e0;
-                border: none 0;
-                color: #fff;
-                font-size: 16px;
-                margin-top:0;
-                &:hover, &:focus {
-                    background-color: #4889d4;
+            .body {
+                padding: 1px 24px 0 24px;
+                .form-group-username {
+                    margin-top: 36px;
+                }
+                .checkbox {
+                    color: #888;
+                    margin-top: 20px;
+                    margin-bottom: 20px;
+                }
+                .form-group {
+                    position: relative;
+                    margin-bottom: 10px;
+                    .form-control {
+                        padding-left: 32px;
+                    }
+                    label {
+                        position: absolute;
+                        left: 10px;
+                        top: 50%;
+                        margin-top: -9px;
+                        &.fa {
+                            font-size: 18px;
+                            color: #888;
+                        }
+                    }
+                }
+                .btn-submit {
+                    width: 100%;
+                    height: 40px;
+                    background-color: #5797e0;
+                    border: none 0;
+                    color: #fff;
+                    font-size: 16px;
+                    margin-top:0;
+                    &:hover, &:focus {
+                        background-color: #4889d4;
+                    }
+                }
+            }
+            .foot {
+                position: absolute;
+                bottom: 12px;
+                right: 24px;
+                font-size: 12px;
+                .dotted {
+                    color: #bfbfbf;
+                    margin: 0 5px;
                 }
             }
         }
-        .foot {
-            position: absolute;
-            bottom: 12px;
-            right: 24px;
-            font-size: 12px;
-            .dotted {
-                color: #bfbfbf;
-                margin: 0 5px;
+        .display {
+            position: relative;
+            float: left;
+            height: 388px;
+            width: 628px;
+            border: dashed 1px #ddd;
+            margin-top: 72px;
+            .panel {
+                position: absolute;
             }
         }
     }
-    .display {
-        position: relative;
-        float: left;
-        height: 388px;
-        width: 628px;
-        border: dashed 1px #ddd;
-        margin-top: 72px;
-        .panel {
-            position: absolute;
-        }
-    }
-}
 
 
-.footer {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 36px;
-    font-size: 12px;
-    line-height: 36px;
-    text-align: center;
-    color: #b6b6b6;
-    background-color: #eef4fa;
-    border-top: solid 1px #dae2ed;
-    a {
-        color: #1d5494;
-        &:hover {
-            text-decoration: underline;
+    .footer {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 36px;
+        font-size: 12px;
+        line-height: 36px;
+        text-align: center;
+        color: #b6b6b6;
+        background-color: #eef4fa;
+        border-top: solid 1px #dae2ed;
+        a {
+            color: #1d5494;
+            &:hover {
+                text-decoration: underline;
+            }
         }
     }
 }
 @media screen and (max-height: 620px) {
-    .footer {
+    .page-login .footer {
         position: static;
+    }
+}
+
+.page-index {
+    .main {
+        min-height: 600px;
+        background-color: #fff;
+        padding: 20px;
+    }
+    .control-label {
+        white-space: nowrap;
+        .fa-star {
+            color: #d9534f;
+            font-size: 10px;
+            margin-right: 4px;
+            &:before {
+                vertical-align: 1px;
+                //vertical-align: middle\9;
+            }
+        }
+    }
+    .checkbox {
+        & > label {
+            margin: 0 1em 1em 0;
+            &:hover {
+                color: $color-key;
+            }
+        }
+    }
+    .bs-panel-title {
+        //float: left;
+    }
+    .bs-panel-heading {
+        //@include clearfix();
+        position: relative;
+        .btn {
+            position: absolute;
+            top: -1px;
+            right: -1px;
+            bottom: -1px;
+            border-radius: 0 2px 0 0;
+        }
     }
 }

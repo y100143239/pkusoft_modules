@@ -87,6 +87,8 @@
 
         // Create $ object for input element
         var $input = $(input).attr("autocomplete", "off").addClass(options.inputClass);
+        var $trigger = options.$trigger;
+        var $clean = options.$clean;
 
         var timeout;
         var previousValue = "";
@@ -107,6 +109,24 @@
                 return false;
             }
         });
+
+
+        // trigger
+        if ( $trigger ) {
+            $trigger.bind( "click", function(){
+                $input
+                    //.trigger("focus")
+                    .click();
+            } );
+        }
+        // clean
+        if ( $clean ) {
+            $clean.bind( "click", function() {
+                $input.val( "" )
+                      .attr( "data-code", "" );
+                select.hide();
+            } );
+        }
 
         // older versions of opera don't trigger keydown multiple times while pressed, others don't work with keypress at all
         $input.bind((navigator.userAgent.indexOf("Opera") != -1 && !'KeyboardEvent' in window ? "keypress" : "keydown") + ".autocomplete", function(event) {
@@ -395,7 +415,8 @@
         }
 
         function receiveData(q, data) {
-            if ( data && data.length && hasFocus ) {
+
+            if ( data && data.length && ( hasFocus || $trigger) ) {
                 stopLoading();
                 select.display(data, q);
                 autoFill(q, data[0].value);
@@ -982,7 +1003,10 @@
     $.fn.autocompleteDic = autocompleteDic;
 
     function autocompleteDic ( options ) {
-        autocompleteDic.dic.render( $( this ), options );
+        this.each(function() {
+            autocompleteDic.dic.render( $( this ), options );
+        });
+        // autocompleteDic.dic.render( $( this ), options );
     }
 
     autocompleteDic.ajax = function ( options ) {
@@ -1010,11 +1034,15 @@
         defaults: {
             max: 9,    //列表里的条目数
             minChars: 0,    //自动完成激活之前填入的最小字符
-            width: 400,     //提示的宽度，溢出隐藏
+            width: 420,     //提示的宽度，溢出隐藏
             scrollHeight: 300,   //提示的高度，溢出显示滚动条
             matchContains: true,    //包含匹配，就是data参数里的数据，是否只要包含文本框里的数据就显示
             autoFill: false,    //自动填充
             clickFire: true,
+            inputFocus: false,
+            // <input data-dic-src="DIC_CODE.xml" data-dic-trigger="#trigger-gsxz" data-dic-clean="#clean-gsxz">
+            $trigger: null,
+            $clean: null,
             formatItem: function ( row, i ) {
                 return this._formatItem( i % this.max || this.max , row["text"] || "", row["spell"] || "" );
             },
@@ -1077,7 +1105,9 @@
 
             var _this,
                 defaults,
-                opts
+                opts,
+                $trigger,
+                $clean
                 ;
             _this = this;
             defaults = _this.defaults;
@@ -1087,6 +1117,14 @@
             _this._extend( opts, defaults );
             _this._extend( opts, options );
             opts[ "$target" ] = $target;
+
+            // <input data-dic-src="DIC_CODE.xml" data-dic-trigger="#trigger-gsxz" data-dic-clean="#clean-gsxz">
+            $trigger = $target.attr( "data-dic-trigger" );
+            $clean = $target.attr( "data-dic-clean" );
+
+            $trigger && ( opts.$trigger = $( $trigger ) );
+            $clean && ( opts.$clean = $( $clean ) );
+
 
             this._getData( $target, function ( data ) {
                 $target
@@ -1101,6 +1139,9 @@
                         } else {
                             $target.addClass( "error" );
                         }
+                        if ( $target.validatebox ) {
+                            $target.validatebox("validate");
+                        }
                     });
             } );
         },
@@ -1113,5 +1154,13 @@
             return src;
         }
     };
+
+    //
+    $( document ).ready( function(){
+        var $target
+        ;
+        $target = $( "input[data-dic-src]" );
+        $target.autocompleteDic();
+    } );
 
 })(jQuery);

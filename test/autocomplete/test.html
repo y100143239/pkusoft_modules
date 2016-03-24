@@ -21,14 +21,20 @@
         } );
         require(["ui/autocomplete"], function () {
 
-            $( "#testAC" ).autocompleteDic();
+            //$( "#testAC" ).autocompleteDic();
 
         } );
     </script>
 </head>
 <body>
 
-<input type="text" id="testAC" data-dic-src="./DIC_CODE.xml"/>
+<input type="text" id="testAC"
+       data-dic-src="./DIC_CODE.xml"
+       data-dic-trigger="#btn-trigger"
+       data-dic-clean="#btn-clean"
+        />
+<button type="button" id="btn-trigger">触发</button>
+<button type="button" id="btn-clean">清空</button>
 
 </body>
 </html>
