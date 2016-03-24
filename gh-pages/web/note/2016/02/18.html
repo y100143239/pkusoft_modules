@@ -334,8 +334,10 @@ sup {
 <h3 id="toc_4">1.3 注意</h3>
 
 <ul>
-<li>&lt;input&gt;的 data-code属性 为字典值code</li>
-<li>&lt;input&gt;的 value属性 为显示的文本text</li>
+<li>&lt;input ... data-code=“字典值code”&gt;</li>
+<li>&lt;input ... value =“显示的文本text”&gt;</li>
+<li>&lt;input ... data-dic-trigger=&quot;#btn-trigger&quot;&gt; 额外的触发器</li>
+<li>&lt;input ... data-dic-clean=&quot;#btn-clean&quot;&gt; 指定清空按钮</li>
 <li>选定记录以及触发blur事件都会更新 data-code属性的值</li>
 <li>输入项校验可基于 data-code属性<br></li>
 </ul>
@@ -346,22 +348,26 @@ sup {
 <li>HTML</li>
 </ul>
 
-<pre><code class="language-none">&lt;input type=&quot;text&quot; id=&quot;testAC&quot; 
-       data-dic-src=&quot;./DIC_CODE.xml&quot;/&gt;</code></pre>
-
-<ul>
-<li>JavaScript</li>
-</ul>
-
-<pre><code class="language-none">$( &quot;#testAC&quot; ).autocompleteDic();</code></pre>
+<pre><code class="language-none">&lt;input type=&quot;text&quot; id=&quot;testAC&quot;
+       data-dic-src=&quot;./DIC_CODE.xml&quot;
+       data-dic-trigger=&quot;#btn-trigger&quot;
+       data-dic-clean=&quot;#btn-clean&quot;
+        /&gt;
+&lt;button type=&quot;button&quot; id=&quot;btn-trigger&quot;&gt;触发&lt;/button&gt;
+&lt;button type=&quot;button&quot; id=&quot;btn-clean&quot;&gt;清空&lt;/button&gt;</code></pre>
 
 <ul>
 <li>试试
 
 <ul>
 <li>点击这里：
-
-  <input type="text" id="testAC" data-dic-src="../../../../../test/autocomplete/DIC_CODE.xml"/>
+  <input type="text" id="testAC"
+       data-dic-src="../../../../../test/autocomplete/DIC_CODE.xml"
+       data-dic-trigger="#btn-trigger"
+       data-dic-clean="#btn-clean"
+        />
+<button type="button" id="btn-trigger">触发</button>
+<button type="button" id="btn-clean">清空</button>
   <script data-main="../../../../../dev/modules/" src="../../../../../dev/modules/require.js"></script>
   <script>
     var VERSION;
@@ -380,10 +386,11 @@ sup {
     } );
     require(["ui/autocomplete"], function () {
 
-      $( "#testAC" ).autocompleteDic();
+      //$( "#testAC" ).autocompleteDic();
 
     } );
   </script>
+
 </li>
 </ul></li>
 </ul>
@@ -407,11 +414,10 @@ sup {
         } );
         require([&quot;ui/autocomplete&quot;], function () {
 
-            $( &quot;#testAC&quot; ).autocompleteDic();
+            //$( &quot;#testAC&quot; ).autocompleteDic();
 
         } );
 &lt;/script&gt;</code></pre>
-
 
 
 </body>

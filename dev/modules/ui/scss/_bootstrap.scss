@@ -12,10 +12,17 @@
 @import "bootstrap/scaffolding";
 
 @import "bootstrap/grid";
-@import "bootstrap/forms";
+@import "bootstrap/forms_fix";
 @import "bootstrap/buttons";
 
+@import "bootstrap/button-groups";
+@import "bootstrap/input-groups";
+@import "bootstrap/panels_fix";
 
+// 文本
+@import "bootstrap/type";
+
+@import "bootstrap/labels";
 //
 //// Reset and dependencies
 ////@import "bootstrap/normalize";

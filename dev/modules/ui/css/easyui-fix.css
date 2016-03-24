@@ -2168,4 +2168,9 @@
   .filebox .textbox-button-right .l-btn-text:before {
     margin-right: 2px; }
 
+.validatebox-invalid {
+  border-color: #ffa8a8;
+  background-color: #fff3f3 !important;
+  color: #000; }
+
 /*# sourceMappingURL=easyui-fix.css.map */

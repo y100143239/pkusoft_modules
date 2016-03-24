@@ -1,5 +1,6 @@
 $( document ).ready( function () {
 
+
     // form
     $( '#ff' ).form( {
         //url: "http://www.baidu.com",
@@ -16,6 +17,9 @@ $( document ).ready( function () {
             if ( ! isValid ) {
                 return isValid;
             }
+        },
+        success: function () {
+            window.open("index.html", "_self");
         }
     } ).form("resetValidation");
 
@@ -85,5 +89,8 @@ $( document ).ready( function () {
         title:'register',
         collapsible: true
     });
+
+
+    $.parser.parse(); // 手动渲染
 
 } );

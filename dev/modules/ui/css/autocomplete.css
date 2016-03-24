@@ -74,7 +74,8 @@
   .ac_pagnation .display {
     float: right; }
   .ac_pagnation .display label {
-    color: #888; }
+    color: #888;
+    display: inline; }
   .ac_pagnation .current-page {
     color: #ffba8e;
     font-size: 14px; }

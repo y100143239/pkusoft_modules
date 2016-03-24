@@ -133,3 +133,10 @@ $border-radius-base: 2px;
         margin-right: 2px;
     }
 }
+
+// validatebox-invalid
+.validatebox-invalid {
+    border-color: #ffa8a8;
+    background-color: #fff3f3!important;
+    color: #000;
+}
