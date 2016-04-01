@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script data-main="../../dev/modules/" src="../../dev/modules/require.js"></script>
+    <script >
+        var VERSION;
+        require.config( {
+            urlArgs: "VERSION=" + (new Date()).getTime(),
+            paths: {
+                "jquery": "jquery/jquery-1.11.3",
+                "datepicker" : "ui/datepicker",
+                "datepicker-css": "ui/css/datepicker",
+                "bootstrap-css": "ui/css/bootstrap",
+                "font-awesome-css": "ui/css/font-awesome"
+            },
+            map: {
+                '*': {
+                    'css': 'utils/css/css',
+                    'text': 'utils/text'
+                }
+            },
+            // 非模块化的
+            "shim": {
+                "datepicker": ["jquery", "css!bootstrap-css", "css!font-awesome-css" , "css!datepicker-css" ]
+            },
+            // 超时
+            waitSeconds: 15
+        } );
+    </script>
+    <script>
+        require( [ "datepicker" ], function() {
+            $( "#dp" ).datepicker();
+        } );
+    </script>
+</head>
+<body>
+
+<input id="dp" style="margin: 4em;" value="2016-4-1" data-role="datepicker">
+
+<!--
+
+<div class="calendar-box">
+
+    <div class="calendar-select-box">
+        <div class="calendar-year-box">
+            <div class="dropdown">
+                <button class="btn btn-default dropdown-toggle" type="button" > 2016年 <span class="caret"></span> </button>
+                <ul class="dropdown-menu">
+                    <li><a href="#">2000年</a></li>
+                    <li><a href="#">2001年</a></li>
+                    <li><a href="#">2002年</a></li>
+                    <li><a href="#">2003年</a></li>
+                    <li><a href="#">2004年</a></li>
+                    <li><a href="#">2005年</a></li>
+                    <li><a href="#">2006年</a></li>
+                    <li><a href="#">2007年</a></li>
+                    <li><a href="#">2008年</a></li>
+                    <li><a href="#">2009年</a></li>
+                    <li><a href="#">2010年</a></li>
+                    <li><a href="#">2011年</a></li>
+                    <li><a href="#">2012年</a></li>
+                    <li><a href="#">2013年</a></li>
+                    <li><a href="#">2014年</a></li>
+                    <li><a href="#">2015年</a></li>
+                    <li><a href="#">2016年</a></li>
+                    <li><a href="#">2017年</a></li>
+                    <li><a href="#">2018年</a></li>
+                    <li><a href="#">2019年</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="calendar-month-box dropdown ">
+            <div class="btn-group">
+                <button type="button" class="btn btn-default" ><span class="fa fa-angle-left"></span></button>
+                <button type="button" class="btn btn-default  " > 3月 <span class="caret"></span></button>
+                <button type="button" class="btn btn-default" ><span class="fa fa-angle-right"></span></button>
+            </div>
+            <ul class="dropdown-menu">
+                <li><a href="#">1月</a></li>
+                <li><a href="#">2月</a></li>
+                <li><a href="#">3月</a></li>
+                <li><a href="#">4月</a></li>
+                <li><a href="#">5月</a></li>
+                <li><a href="#">6月</a></li>
+                <li><a href="#">7月</a></li>
+                <li><a href="#">8月</a></li>
+                <li><a href="#">9月</a></li>
+                <li><a href="#">10月</a></li>
+                <li><a href="#">11月</a></li>
+                <li><a href="#">12月</a></li>
+            </ul>
+        </div>
+        <button type="button" class="calendar-backtoday btn btn-info" >返回今天</button>
+    </div>
+
+    <div class="calendar-table-box">
+
+        <table class="calendar-table">
+            <tbody>
+            <tr>
+                <th>一</th>
+                <th>二</th>
+                <th>三</th>
+                <th>四</th>
+                <th>五</th>
+                <th class="calendar-table-weekend">六</th>
+                <th class="calendar-table-weekend">日</th>
+            </tr>
+            <tr>
+                <td> <div class="calendar-daynumber calendar-other-month"><a href="javascript: void(0);" data-date="2016-2-29">29</a> </div> </td>
+                <td> <div class="calendar-daynumber calendar-daynumber-selected"><a href="javascript: void(0);" data-date="2016-3-01">1</a></div> </td>
+                <td> <div class="calendar-daynumber"><a href="javascript: void(0);" data-date="2016-3-02">2</a></div> </td>
+                <td> <div class="calendar-daynumber"><a href="javascript: void(0);" data-date="2016-3-03">3</a></div> </td>
+                <td> <div class="calendar-daynumber"><a href="javascript: void(0);" data-date="2016-3-04">4</a></div> </td>
+                <td> <div class="calendar-daynumber calendar-table-weekend"><a href="javascript: void(0);" data-date="2016-3-05">5</a></div> </td>
+                <td> <div class="calendar-daynumber calendar-table-weekend"><a href="javascript: void(0);" data-date="2016-3-06">6</a></div> </td>
+            </tr>
+            <tr>
+                <td> <div class="calendar-daynumber"><a href="javascript: void(0);" data-date="2016-3-06">6</a></div> </td>
+                <td> <div class="calendar-daynumber"><a href="javascript: void(0);" data-date="2016-3-07">7</a></div> </td>
+                <td> <div class="calendar-daynumber"><a href="javascript: void(0);" data-date="2016-3-08">8</a></div> </td>
+                <td> <div class="calendar-daynumber"><a href="javascript: void(0);" data-date="2016-3-09">9</a></div> </td>
+                <td> <div class="calendar-daynumber"><a href="javascript: void(0);" data-date="2016-3-10">10</a></div> </td>
+                <td> <div class="calendar-daynumber calendar-table-weekend"><a href="javascript: void(0);" data-date="2016-3-11">11</a></div> </td>
+                <td> <div class="calendar-daynumber calendar-table-weekend"><a href="javascript: void(0);" data-date="2016-3-12">12</a></div> </td>
+            </tr>
+            <tr>
+                <td> <div class="calendar-daynumber"><a href="javascript: void(0);" data-date="2016-3-13">13</a></div> </td>
+                <td> <div class="calendar-daynumber"><a href="javascript: void(0);" data-date="2016-3-14">14</a></div> </td>
+                <td> <div class="calendar-daynumber"><a href="javascript: void(0);" data-date="2016-3-15">15</a></div> </td>
+                <td> <div class="calendar-daynumber"><a href="javascript: void(0);" data-date="2016-3-16">16</a></div> </td>
+                <td> <div class="calendar-daynumber"><a href="javascript: void(0);" data-date="2016-3-17">17</a></div> </td>
+                <td> <div class="calendar-daynumber calendar-table-weekend"><a href="javascript: void(0);" data-date="2016-3-18">18</a></div> </td>
+                <td> <div class="calendar-daynumber calendar-table-weekend"><a href="javascript: void(0);" data-date="2016-3-19">19</a></div> </td>
+            </tr>
+            <tr>
+                <td> <div class="calendar-daynumber"><a href="javascript: void(0);" data-date="2016-3-20">20</a></div> </td>
+                <td> <div class="calendar-daynumber"><a href="javascript: void(0);" data-date="2016-3-21">21</a></div> </td>
+                <td> <div class="calendar-daynumber"><a href="javascript: void(0);" data-date="2016-3-22">22</a></div> </td>
+                <td> <div class="calendar-daynumber"><a href="javascript: void(0);" data-date="2016-3-23">23</a></div> </td>
+                <td> <div class="calendar-daynumber"><a href="javascript: void(0);" data-date="2016-3-24">24</a></div> </td>
+                <td> <div class="calendar-daynumber calendar-table-weekend"><a href="javascript: void(0);" data-date="2016-3-25">25</a></div> </td>
+                <td> <div class="calendar-daynumber calendar-table-weekend"><a href="javascript: void(0);" data-date="2016-3-26">26</a></div> </td>
+            </tr>
+            <tr>
+                <td> <div class="calendar-daynumber"><a href="javascript: void(0);" data-date="2016-3-27">27</a></div> </td>
+                <td> <div class="calendar-daynumber calendar-daynumber-today"><a href="javascript: void(0);" data-date="2016-3-28">28</a></div> </td>
+                <td> <div class="calendar-daynumber"><a href="javascript: void(0);" data-date="2016-3-29">29</a></div> </td>
+                <td> <div class="calendar-daynumber"><a href="javascript: void(0);" data-date="2016-3-30">30</a></div> </td>
+                <td> <div class="calendar-daynumber"><a href="javascript: void(0);" data-date="2016-3-31">31</a></div> </td>
+                <td> <div class="calendar-daynumber calendar-other-month calendar-table-weekend"><a href="javascript: void(0);" data-date="2016-4-01">01</a></div> </td>
+                <td> <div class="calendar-daynumber calendar-other-month calendar-table-weekend"><a href="javascript: void(0);" data-date="2016-4-02">02</a></div> </td>
+            </tr>
+            </tbody>
+        </table>
+
+    </div>
+
+
+</div>
+-->
+
+</body>
+</html>
