@@ -1,0 +1,164 @@
+<script>
+    var data = {
+        isWhole: true,
+        date: {
+            year: 2016,
+            month: 3, // 从1开始
+            day: 30
+        },
+        days: [
+            [   "",
+                { year: 2016, month: 3, day: 1},
+                { year: 2016, month: 3, day: 2},
+                { year: 2016, month: 3, day: 3},
+                { year: 2016, month: 3, day: 4},
+                { year: 2016, month: 3, day: 5},
+                { year: 2016, month: 3, day: 6}
+            ],
+            [   { year: 2016, month: 3, day: 7},
+                { year: 2016, month: 3, day: 8},
+                { year: 2016, month: 3, day: 9},
+                { year: 2016, month: 3, day: 10},
+                { year: 2016, month: 3, day: 11},
+                { year: 2016, month: 3, day: 12},
+                { year: 2016, month: 3, day: 13}
+            ],
+            [   { year: 2016, month: 3, day: 14},
+                { year: 2016, month: 3, day: 15},
+                { year: 2016, month: 3, day: 16},
+                { year: 2016, month: 3, day: 17},
+                { year: 2016, month: 3, day: 18},
+                { year: 2016, month: 3, day: 19},
+                { year: 2016, month: 3, day: 20}
+            ],
+            [   { year: 2016, month: 3, day: 21},
+                { year: 2016, month: 3, day: 22},
+                { year: 2016, month: 3, day: 23},
+                { year: 2016, month: 3, day: 24},
+                { year: 2016, month: 3, day: 25},
+                { year: 2016, month: 3, day: 26},
+                { year: 2016, month: 3, day: 27}
+            ],
+            [   { year: 2016, month: 3, day: 28},
+                { year: 2016, month: 3, day: 29},
+                { year: 2016, month: 3, day: 30},
+                { year: 2016, month: 3, day: 31},
+                null,
+                null,
+                null
+            ]
+        ]
+    }
+</script>
+
+<!-- start --><body>
+
+
+{{? it.isWhole }}
+
+<div class="calendar-box">
+
+    <div class="calendar-select-box">
+        <div class="calendar-year-box dropdown">
+            <button class="btn btn-default dropdown-toggle" type="button" > <span class="dropdown-value">{{=it.date.year}}</span>年 <span class="caret"></span> </button>
+            <ul class="dropdown-menu">
+                {{ for(var i = 1950; i <= 2050; i++) { }}
+                <li><a href="#" data-value="{{=i }}">{{=i }}年</a></li>
+                {{ } }}
+            </ul>
+        </div>
+        <div class="calendar-month-box dropdown ">
+            <div class="btn-group">
+                <button type="button" class="btn btn-default btn-calendar-month-prev" ><span class="fa fa-angle-left"></span></button>
+                <button type="button" class="btn btn-default dropdown-toggle" > <span class="dropdown-value">{{=it.date.month + 1}}</span>月 <span class="caret"></span></button>
+                <button type="button" class="btn btn-default btn-calendar-month-next" ><span class="fa fa-angle-right"></span></button>
+            </div>
+            <ul class="dropdown-menu">
+                {{ for(var i = 1; i <= 12; i++) { }}
+                <li><a href="#" data-value="{{=i }}">{{=i }}月</a></li>
+                {{ } }}
+            </ul>
+        </div>
+        <button type="button" class="calendar-backtoday btn btn-info" >返回今天</button>
+    </div>
+
+    <div class="calendar-table-box">
+
+
+
+{{?}}
+
+
+
+{{? !it.isWhole }}
+        <!-- table -->
+        <table class="calendar-table">
+            <tbody>
+            <tr>
+                <th>一</th>
+                <th>二</th>
+                <th>三</th>
+                <th>四</th>
+                <th>五</th>
+                <th class="calendar-table-weekend">六</th>
+                <th class="calendar-table-weekend">日</th>
+            </tr>
+            {{ for(var week = 0, weekLen = it.days.length; week < weekLen; week++) { }}
+            <tr>
+                {{ for(var day = 0, dayLen = it.days[week].length; day < dayLen; day++) { }}
+                    {{
+                        var date,
+                            year,
+                            month,
+                            d,
+                            dy,
+                            dateString,
+                            isOtherMonth,
+                            isWeekend,
+                            isToday,
+                            isSelected
+                        ;
+
+                        date = it.days[week][day] || "";
+                        year = date.year;
+                        month = date.month;
+                        d = date.day;
+                        dateString = "";
+
+                        if ( d ) {
+                            dy = ( "0" + d ).slice( -2 );
+                        }
+                        if ( date ) {
+                            month = ( "0" + ( month + 1 ) ).slice( -2 );
+                            dateString = [year, month, dy].join("-");
+                        }
+                        isOtherMonth = ! date;
+                        isWeekend = ( day !== 0 ) && ( day % 5 == 0 || day % 6 == 0 );
+                    }}
+                <td>
+                    <div class="calendar-daynumber
+                                {{? isOtherMonth }} calendar-other-month {{?}}
+                                {{? isWeekend }} calendar-table-weekend {{?}}
+                                ">
+                        <a href="javascript: void(0);" data-date="{{=dateString}}">{{=d}}</a>
+                    </div>
+                </td>
+                {{ } }}
+            </tr>
+            {{ } }}
+            </tbody>
+        </table>
+        <!-- /table -->
+
+{{? }}
+
+
+
+{{? it.isWhole }}
+
+    </div>
+</div>
+
+{{?}}
+
+</body><!-- end -->

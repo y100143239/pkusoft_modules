@@ -1,0 +1,109 @@
+//@import "../css/bootstrap.css";
+@import "bootstrap/mixins";
+
+//$fa-font-path: "../../../modules/ui/fonts";
+//@import "../../../modules/ui/scss/font-awesome";
+
+.calendar-box {
+    //width: 360px;
+    position: absolute;
+    border: 2px solid #57abff;
+    padding: 10px;
+    @at-root .calendar-select-box {
+        @include clearfix();
+        padding-bottom: 10px;
+        @at-root .calendar-year-box {
+            float: left;
+            .dropdown-menu {
+                width: 100%;
+                height: 324px;
+                min-width: 100%;
+                overflow: auto;
+                & > li > a {
+                    padding-left: 12px;
+                }
+            }
+        }
+        @at-root .calendar-month-box {
+            float: left;
+            margin-left: 10px;
+            .dropdown-menu {
+                width: 100%;
+                min-width: 100%;
+                a {
+                    text-align: center;
+                }
+            }
+            .dropdown-value {
+                display: inline-block;
+                min-width: 1.2em;
+                text-align: right;
+            }
+        }
+    }
+    @at-root .calendar-backtoday {
+        float: right;
+        margin-left: 10px;
+        margin-top: -1px;
+    }
+    @at-root .calendar-table-box {
+        @at-root .calendar-table {
+            th {
+                height: 33px;
+                border-top: solid 1px #5af;
+                font-weight: 400;
+                font-size: 14px;
+            }
+            @at-root .calendar-daynumber {
+                display: block;
+                width: 49px + 6px;
+                height: 49px + 6px;
+                //height: 33px;
+                border-top: 1px solid #c8cacc;
+                border-right: solid 1px #fff;
+                text-align: center;
+                text-decoration: none;
+                line-height: 1;
+                white-space: nowrap;
+                overflow: hidden;
+                & > a {
+                    display: block;
+                    width: 48px + 6px;
+                    height: 48px + 6px;
+                    border: 3px solid #fff;
+                    font-size: 18px;
+                    //line-height: 42px;
+                    padding: 12px 0;
+                    color: #333;
+                    &:hover {
+                        border-color: #fb0;
+                        text-decoration: none;
+                    }
+                }
+            }
+            @at-root .calendar-table-weekend {
+                color: #e02d2d;
+                & > a {
+                    color: #e02d2d;
+                }
+            }
+            @at-root .calendar-other-month {
+                & > a {
+                    display: none;
+                }
+            }
+            @at-root .calendar-daynumber-selected {
+                & > a {
+                    border-color: #fb0;
+                }
+            }
+            @at-root .calendar-daynumber-today {
+                background-color: #fb0;
+                & > a {
+                    border-color: #fb0;
+                    color: #fff;
+                }
+            }
+        }
+    }
+}
