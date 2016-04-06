@@ -60,11 +60,28 @@
 
     <div class="calendar-select-box">
         <div class="calendar-year-box dropdown">
-            <button class="btn btn-default dropdown-toggle" type="button" > <span class="dropdown-value">{{=it.date.year}}</span>年 <span class="caret"></span> </button>
+
+            <!--<button class="btn btn-default dropdown-toggle" type="button" > <span class="dropdown-value">{{=it.date.year}}</span>年 <span class="caret"></span> </button>-->
+
+            <div class="btn-group">
+                <button type="button" class="btn btn-default btn-calendar-year-prev" ><span class="fa fa-angle-left"></span></button>
+                <button type="button" class="btn btn-default  dropdown-toggle" > <span class="dropdown-value">{{=it.date.year}}</span>年 <span class="caret"></span></button>
+                <button type="button" class="btn btn-default btn-calendar-year-next" ><span class="fa fa-angle-right"></span></button>
+            </div>
+
             <ul class="dropdown-menu">
-                {{ for(var i = 1950; i <= 2050; i++) { }}
-                <li><a href="#" data-value="{{=i }}">{{=i }}年</a></li>
+                {{ for(var i = 2000; i < 2050; i++) { }}
+                <li><a href="#" data-value="{{=i }}">{{=i }}</a></li>
                 {{ } }}
+                <li class="bottom-tool">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-default btn-year-page-prev" ><span class="fa fa-angle-double-left"></span></button>
+                            <span class="btn btn-default page-curr disabled" >
+                                <span data-value="2000">2000</span> - <span data-value="2049">2049</span>
+                            </span>
+                        <button type="button" class="btn btn-default btn-year-page-next" ><span class="fa fa-angle-double-right"></span></button>
+                    </div>
+                </li>
             </ul>
         </div>
         <div class="calendar-month-box dropdown ">
