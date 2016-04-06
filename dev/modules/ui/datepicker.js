@@ -81,42 +81,99 @@
             this.$calendarMonth = $( this.$calendarMonth, this.$container );
         },
         bind: function () {
-            var _this
+            var _this,
+                $yearItem,
+                $prevYearPageBtn,
+                $nextYearPageBtn
                 ;
 
             _this = this;
+            $yearItem = _this.$container.find( ".calendar-year-box .dropdown-menu [data-value]" );
+            $prevYearPageBtn = _this.$container.find( ".btn-year-page-prev" );
+            $nextYearPageBtn = _this.$container.find( ".btn-year-page-next" );
+
+            // 当点击别处是隐藏 calendar
+            $( document ).on( "click.calendar", function ( event ) {
+                var $target
+                    ;
+
+                $target = $( event.target );
+
+                if ( $target.is( ".calendar-box, .calendar-box *" ) ) {
+                    return false;
+                }
+                if ( $target.data( "isDatepicker") ) {
+                    return false;
+                }
+                //console.info( event.target );
+                _this.hide();
+                //event.stopPropagation();
+            } );
 
             this.$dropdown.on( "click.dropdown.toggle", ".dropdown-toggle", function () {
                 var $this,
-                    $activeItem,
                     $dropdown,
-                    value
+                    isOpened,
+                    currentValue,
+                    $activeItem,
+                    yearRange,
+                    firstYearValue,
+                    pageTimes,
+                    i,
+                    len,
+                    $yearPageBtn
                 ;
 
                 $this = $( this );
                 $dropdown = $this.closest( ".dropdown" );
 
-                // 切换 dropdown-menu
-                $dropdown.toggleClass( "open" );
+                isOpened = $dropdown.is( ".open" );
 
-                // 如果打开了菜单，则滚动到匹配的那个
-                if ( ! $dropdown.is( ".open" ) ) {
+
+                // 如果 dropdown 已展开，则关闭当前 dropdown 即可。
+                if ( isOpened ) {
+                    $dropdown.removeClass( "open" );
                     return false;
                 }
-                value = $this.find( ".dropdown-value" ).text();
 
-                $activeItem = $dropdown.find( "a[data-value='" + value + "']" ).closest( "li" );
+                // 如果 dropdown 未展开，则关闭所有 dropdown，最后打开当前的 dropdown。
+                _this.$dropdown.removeClass( "open" );
+                $dropdown.addClass( "open" );
 
+                currentValue = $this.find( ".dropdown-value" ).text();
+
+                // 如果 展开的是 year，则进行相应处理
+                if ( $dropdown.is( ".calendar-year-box" ) ) {
+
+                    // 1. 确定 currentValue 属于哪个区间 [a , b]
+                    yearRange = _this.findRangeForCurrentYear( currentValue );
+
+                    // 2. 将 $yearItem 的第一个值与 a 进行比较，触发翻页功能
+                    firstYearValue = parseInt( $yearItem.eq( 0 ).attr( "data-value" ) );
+
+                    pageTimes = ( firstYearValue - yearRange[ 0 ] ) / 50;
+
+                    $yearPageBtn = $nextYearPageBtn;
+
+                    if ( pageTimes > 0 ) { // 需要往左翻
+                        $yearPageBtn = $prevYearPageBtn;
+                    }
+                    for ( i = 0, len = Math.abs( pageTimes ) ; i < len; i++ ) {
+                        $yearPageBtn.trigger( "click.calendar.year.page" );
+                    }
+
+                }
+
+                // 给当前值添加 active 状态
+                $activeItem = $dropdown.find( "a[data-value='" + currentValue + "']" ).closest( "li" );
                 $activeItem.addClass( "active" ).siblings().removeClass( "active" );
-
-                $activeItem.get( 0 ).scrollIntoView();
 
                 return false;
             } )
                 .on( "click.dropdown.menu", ".dropdown-menu a", function () {
                     var $dropdown,
-                        $this;
-
+                        $this
+                        ;
                     $this = $( this );
                     $dropdown = $this.closest( ".dropdown" );
 
@@ -144,8 +201,7 @@
                 _this.hide();
                 return false;
             } )
-                .find( ".btn-calendar-month-prev, .btn-calendar-month-next" )
-                .on( "click.calendar.month", function () {
+                .find( ".btn-calendar-month-prev, .btn-calendar-month-next" ).on( "click.calendar.month", function () {
                     var $this
                     ;
 
@@ -161,16 +217,74 @@
 
                     return false;
                 } )
+                .end().find( ".btn-calendar-year-prev, .btn-calendar-year-next" ).on( "click.calendar.year", function() {
+                    var $this
+                        ;
+
+                    $this = $( this );
+
+                    if ( $this.is( ".btn-calendar-year-prev" ) ) {
+                        _this.prevYear();
+                    } else {
+                        _this.nextYear();
+                    }
+
+                    _this.$dropdown.removeClass( "open" );
+                    return false;
+                } )
+                .end().find( ".btn-year-page-prev, .btn-year-page-next" ).on( "click.calendar.year.page", function () {
+                    var $this,
+                        isNext,
+                        currentYear
+                        ;
+
+                    $this = $( this );
+                    isNext = 1;
+
+                    currentYear = parseInt( _this.$calendarYear.text() );
+
+                    if ( $this.is( ".btn-year-page-prev" ) ) {
+                        isNext = -1;
+                    }
+
+                    $yearItem.parent( "li" ).removeClass( "active" );
+
+                    $yearItem.text( function ( element, oldValue ) {
+                        var $this,
+                            newValue
+                            ;
+                        $this = $( this );
+                        newValue = parseInt( oldValue ) + isNext * 50;
+
+                        $this.attr( "data-value", newValue );
+
+                        if ( currentYear == newValue ) {
+                            $this.parent( "li" ).addClass( "active" );
+                        }
+
+                        return newValue;
+                    } );
+
+                    // 添加 active 状态
+
+                    return false;
+                } )
                 .end().find( ".calendar-backtoday" ).on( "click.calendar.backtoday", function () {
                     _this.update( _this.todayDate );
+                    // 关闭下拉
+                    _this.$dropdown.removeClass( "open" );
                 } );
         },
         update: function ( date ) {
             var html;
+
+            this.$dropdown.removeClass( "open" );
+
             date = date || this.getCalendar();
             this.setCalendar( date );
             html = this.getHtml( false, date );
             this.$calendarTable.html( html );
+
 
             // 后置处理
             this.postRender();
@@ -245,6 +359,24 @@
         },
         prevMonth: function () {
             this.nextMonth( -1 );
+        },
+        nextYear: function ( step ) {
+            var date,
+                year,
+                month
+                ;
+            date = this.getCalendar();
+            year = date.getFullYear();
+            month = date.getMonth();
+
+            // 计算
+            year = year + ( step || 1 );
+
+            this.setCalendar( new Date( year, month, 1 ) );
+            this.update();
+        },
+        prevYear: function () {
+            this.nextYear( -1 );
         },
         getHtml: function ( isWhole, d ) {
             var html,
@@ -325,7 +457,7 @@
                 month,
                 day
             ;
-            if (  ! date || ! ( date instanceof Date ) )  {
+            if ( ! date || ! ( date instanceof Date ) )  {
                 return null;
             }
             year = date.getFullYear();
@@ -356,6 +488,23 @@
             day = parseInt( date[ 3 ] );
 
             return new Date( year, month, day );
+        },
+        findRangeForCurrentYear: function ( value ) {
+            var minYear,
+                startPoint,
+                endPoint,
+                startDelta
+                ;
+            minYear = 1800;
+
+            // 确定起点
+            startDelta = value - minYear;
+            startPoint = Math.floor( startDelta / 50 ) * 50 + 1800;
+
+            // 确定起点
+            endPoint = startPoint + 49;
+
+            return [ startPoint, endPoint ];
         }
 
     } );
@@ -366,6 +515,7 @@
             this.render();
             this.bind();
             this.constructor.setTarget( this.$target );
+            this.$target.data( "isDatepicker", true );
         },
         render: function render () {
         },
@@ -374,8 +524,10 @@
             ;
             _this = this;
             this.$target.on( "click", function () {
-                _this.update();
-                _this.constructor.show();
+                if ( _this.isShowed() ) {
+                    return false;
+                }
+                _this.showCalendar();
             } );
 
         },
@@ -384,6 +536,30 @@
         },
         getDate: function () {
             return this.constructor.convertToDate( this.$target.val() ) || new Date();
+        },
+        showCalendar: function () {
+            this.constructor.setTarget( this.$target );
+            this.update();
+            this.constructor.show();
+        },
+        isShowed: function () {
+            var constructor,
+                $target
+                ;
+
+            constructor = this.constructor;
+
+            $target = constructor.getTarget();
+
+            if ( $target && $target != this.$target ) {
+                return false;
+            }
+
+            if ( constructor.$container.is( ".hidden" ) ) {
+                return false;
+            }
+            //
+            return true;
         }
     } );
 
