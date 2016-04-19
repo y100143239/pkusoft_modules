@@ -93,4 +93,8 @@ $( document ).ready( function () {
 
     $.parser.parse(); // 手动渲染
 
+    $( "input.easyui-datebox-fix" ).datepicker({
+        trigger: "data-datepicker-trigger"
+    });
+
 } );

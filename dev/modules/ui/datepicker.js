@@ -25,7 +25,7 @@
 +(function ( factory ) {
     if ( typeof define === "function" && define.amd ) {
         // AMD模式
-        define( [ "jquery", "utils/doT", "text!ui/tpl/datepicker.html!strip" ], factory );
+        define( [ "jquery", "utils/doT", "text!ui/tpl/datepicker.html!strip", "css!ui/css/datepicker.css" ], factory );
     } else {
         // 全局模式
         // factory( jQuery, doT );
@@ -44,7 +44,7 @@
         this.init();
     }
     $.fn.datepicker.defaults = {
-
+        trigger: "data-datepicker-trigger"
     };
 
     // 公共
@@ -102,13 +102,14 @@
                 if ( $target.is( ".calendar-box, .calendar-box *" ) ) {
                     return false;
                 }
-                if ( $target.data( "isDatepicker") ) {
+                if ( $target.data( "isDatepicker" ) ) {
                     return false;
                 }
                 //console.info( event.target );
                 _this.hide();
                 //event.stopPropagation();
             } );
+
 
             this.$dropdown.on( "click.dropdown.toggle", ".dropdown-toggle", function () {
                 var $this,
@@ -199,6 +200,7 @@
                 }
                 _this.getTarget().val( dateString );
                 _this.hide();
+                _this.getTarget().trigger( "focus" );
                 return false;
             } )
                 .find( ".btn-calendar-month-prev, .btn-calendar-month-next" ).on( "click.calendar.month", function () {
@@ -451,6 +453,9 @@
             this.move();
         },
         hide: function () {
+            if ( this.$container.is( ".hidden" ) ) {
+                return;
+            }
             this.$container.addClass( "hidden" );
         },
         move: function () { // 移动到合适位置
@@ -626,17 +631,36 @@
             this.$target.data( "isDatepicker", true );
         },
         render: function render () {
+            var triggerSelector
+            ;
+            triggerSelector = this.$target.attr( this.opts.trigger );
+            this.$trigger = $( triggerSelector );
         },
         bind: function bind() {
             var _this
+
             ;
             _this = this;
+
             this.$target.on( "click", function () {
                 if ( _this.isShowed() ) {
                     return false;
                 }
                 _this.showCalendar();
             } );
+
+            this.$trigger.on( "click", function () {
+                _this.$target.trigger( "click" );
+                // 阻止冒泡
+                return false;
+            } );
+
+            // 当失去焦点时隐藏
+            /*
+            this.$target.on( "blur", function () {
+                _this.constructor.hide();
+            } );
+            */
 
         },
         update: function () {
