@@ -448,9 +448,117 @@
         },
         show: function () {
             this.$container.removeClass( "hidden" );
+            this.move();
         },
         hide: function () {
             this.$container.addClass( "hidden" );
+        },
+        move: function () { // 移动到合适位置
+            var $target,
+                targetDocPos,
+                topPos,
+                leftPos
+            ;
+            $target = this.getTarget();
+
+            targetDocPos = $target.offset();
+
+            topPos = targetDocPos.top + $target.outerHeight() + 2;
+            leftPos = targetDocPos.left;
+
+            this.$container.offset( {
+                top: topPos,
+                left: leftPos
+            } );
+
+            this._moveToView();
+        },
+        _moveToView: function () { // 移动，使其完全显示
+
+            var $window,
+                windowViewHeight,
+                windowViewWidth,
+                $calendar,
+                calendarHeight,
+                calendarWidth,
+                $doc,
+                scrollTop,
+                scrollLeft,
+                calendarDocPos,
+                calendarViewLeft,
+                calendarViewTop,
+                deltaX,
+                deltaY,
+                animateOpts,
+                $target,
+                targetViewPos,
+                targetWidth,
+                targetHeight
+                ;
+
+            $window = $( window );
+            $calendar = this.$container;
+            $doc = $( window.document );
+            animateOpts = {};
+            $target = this.getTarget();
+
+            // 获取窗口可显示区域的宽高 windowViewHeight windowViewWidth
+            windowViewHeight = $window.height();
+            windowViewWidth = $window.width();
+
+            // 获取calendar的宽高 calendarHeight calendarWidth
+            calendarHeight = $calendar.outerHeight();
+            calendarWidth = $calendar.outerWidth();
+
+            // 滚动条 scrollTop scrollLeft
+            scrollTop = $doc.scrollTop();
+            scrollLeft = $doc.scrollLeft();
+
+            // 获取calendar的视口坐标 calendarViewLeft calendarViewTop
+            calendarDocPos = $calendar.offset();
+            calendarViewTop = calendarDocPos.top - scrollTop;
+            calendarViewLeft = calendarDocPos.left - scrollLeft;
+
+            // calendar 是否溢出视口
+
+                // 宽度
+            deltaX = windowViewWidth - calendarViewLeft - calendarWidth;
+
+                // 高度
+            deltaY = windowViewHeight - calendarViewTop - calendarHeight;
+
+                // 判断
+
+            // target
+
+            if ( deltaX < 0 || deltaY < 0 ) {
+                targetViewPos = {
+                    left: $target.offset().left - scrollLeft,
+                    top: $target.offset().top - scrollTop
+                };
+                targetWidth = $target.outerWidth();
+                targetHeight = $target.outerHeight();
+
+                $calendar.css( { opacity: 0.1 } );
+                animateOpts.opacity = 1;
+            }
+
+            if ( deltaX < 0 ) {
+                // 右对齐
+                deltaX = - ( calendarWidth - targetWidth );
+                animateOpts.left = "+=" + ( deltaX );
+            }
+            if ( deltaY < 0 ) {
+                // calendar下边缘与target顶部对齐
+                if ( targetViewPos.top - calendarHeight >= 0 ) {
+                    deltaY = - ( calendarHeight + targetHeight + 2 );
+                }
+                animateOpts.top = "+=" + ( deltaY );
+            }
+
+
+            $calendar.animate( animateOpts );
+
         },
         formatDate: function ( date ) {
             var year,
