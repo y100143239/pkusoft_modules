@@ -1,5 +1,7 @@
 +function ( $ ) {
+    "use strict";
     var isIE = false,
+        timeout,
         Utils = {},
         main = {},
         qjsj = {},  // 区级数据
@@ -10,10 +12,16 @@
         rkcx = {}   // 人口查询
         ;
 
-    //window.Utils = Utils;
+    window.Utils = Utils;
+
+    timeout = 30 * 1000;
 
     if ( window.attachEvent ) {
         isIE = true;
+    }
+
+    if ( window.TIMEOUT ) {
+        timeout = parseInt( window.TIMEOUT );
     }
 
     Utils.ajax = function ( options ) {
@@ -21,7 +29,7 @@
             type: "POST", //请求方式 ("POST" 或 "GET")
             url: "", // 请求的URL
             data: null, // { name: "value" },
-            timeout: 30000, // 设置请求超时时间（毫秒）
+            timeout: timeout, // 设置请求超时时间（毫秒）
             contentType: "application/x-www-form-urlencoded; charset=utf-8",
             cache: false, // 不缓存此页面
             dataType: "json", // 预期服务器返回的数据类型。
@@ -38,10 +46,28 @@
     };
     Utils.wait = {
         show: function show( $target ) {
+            var $timer;
+
             if ( !this._isAdded( $target ) ) {
                 this._add( $target );
             }
+            if ( $target.data( "isWaiting" ) == true) {
+                return;
+            }
             $target.find( ".wait-overlay" ).show();
+            $timer = $target.find( ".wait-overlay-timer" );
+            $timer.text( timeout / 1000 );
+
+            // 启动计时器
+            clearInterval( $target.data( "timerId") );
+
+            $target.data( "timerId", +function( timeout ){
+                return setInterval( function () {
+                    $timer.text( --timeout );
+                }, 1000 )
+            }( timeout / 1000 ) );
+
+            $target.data( "isWaiting", true );
             return this;
         },
         hide: function hide( $target, delay ) {
@@ -51,13 +77,14 @@
             } else {
                 $target.find( ".wait-overlay" ).hide();
             }
+            $target.data( "isWaiting", false );
             return this;
         },
         _add: function ( $target ) {
             $target.css( "position", function ( index, val ) {
                 return val === "static" ? "relative" : val;
             } );
-            $target.append( "<div class='wait-overlay'></div>" );
+            $target.append( "<div class='wait-overlay'><span class='wait-overlay-timer'>" + ( timeout / 1000 ) + "</span></div>" );
             return this;
         },
         _isAdded: function ( $target ) {
@@ -297,27 +324,76 @@
             return this;
         },
         bind: function () {
-            var _this = this;
+            var _this = this
+                //curPageUrl
+                ;
             this.$bottomMenu.find( ".bottom-menu-item" ).not(".disabled").on( "click", function bottomMenuItemClickHandler() {
                 var $this = $( this ),
                     targetId = $this.attr( "data-id" ),
                     _module = _this[ targetId ];
 
-                $this.addClass( "active" ).siblings().removeClass( "active" );
 
                 if ( !targetId ) {
                     return;
                 }
+                if ( $this.attr( "data-is-loaded" ) == "0" ) {
+                    return;
+                }
+
+                $this.addClass( "active" ).siblings().removeClass( "active" );
 
                 $( "#" + targetId ).show().siblings().hide();
 
-                if ( _module._isInited  === true ) {
-                    return;
+                if ( ! _module._isInited  ) {
+                    _module.init();
+                    _module._isInited = true;
                 }
-                _module._isInited = true;
-                _module.init();
 
             } ).filter(".active" ).trigger("click");
+
+
+            // 当页面载入完毕后，每个模块进行异步载入
+
+            /*
+             qjsj = {},  // 区级数据
+             ywjg = {},  // 业务监管
+             ydbl = {},  // 异地办理
+             sjzl = {},  // 数据质量
+             sjfw = {},   // 数据服务、统计分析
+             rkcx = {}   // 人口查询
+             */
+
+            $( document ).ready( function () {
+
+                $.each( [  "ywjg", "ydbl", "sjzl", "sjfw" ], function ( index, elt ) {
+
+                    Utils.ajax( {
+                        url: "",
+                        data: "module=" + elt,
+                        dataType: "text",
+                        success: function ( data ) {
+                            var selector,
+                                html
+                                ;
+                            selector = "#" + elt;
+
+                            html = $( $.parseHTML( data ) ).find( selector ).html();
+
+                            // 插入
+                            $( selector ).html( html );
+
+                            // isloaded = true
+                            $( ".bottom-menu-item" ).filter( "[data-id=" + elt + "]" ).attr( "data-is-loaded", "1" );
+
+                        }
+                    } );
+
+                } );
+
+
+            } );
+
+
             return this;
         }
     };

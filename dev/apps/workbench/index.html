@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title></title>
     <link rel="stylesheet" href="./css/style.css?version=2.0"/>
-    <script>var IS_DEV = true;</script>
+    <script>var IS_DEV = true; var TIMEOUT = 300000; </script>
     <script src="../../../dev/modules/jquery/jquery-1.9.0.js"></script>
     <script src="../../../dev/modules/utils/doT.js"></script>
     <script src="./js/main.js?version=1.0" charset="utf-8"></script>
@@ -752,12 +752,12 @@
 
             <div class="wd-bottom bottom-menu">
                 <!-- “data-id”被样式表使用： &[data-id="qjsj"] { background-position: 18px 21px; } -->
-                <div class="bottom-menu-item" data-id="qjsj"><span class="icon"></span>全区数据</div>
-                <div class="bottom-menu-item" data-id="ywjg"><span class="icon"></span>业务监管</div>
-                <div class="bottom-menu-item" data-id="ydbl"><span class="icon"></span>异地办理</div>
-                <div class="bottom-menu-item" data-id="sjzl"><span class="icon"></span>数据质量</div>
-                <div class="bottom-menu-item active" data-id="sjfw"><span class="icon"></span><!--数据服务-->统计分析</div>
-                <div class="bottom-menu-item disabled" data-id="rkcx"><span class="icon"></span>人口查询</div>
+                <div class="bottom-menu-item active" data-id="qjsj" data-is-loaded="1"><span class="icon"></span>全区数据</div>
+                <div class="bottom-menu-item" data-id="ywjg" data-is-loaded="0"><span class="icon"></span>业务监管</div>
+                <div class="bottom-menu-item" data-id="ydbl" data-is-loaded="0"><span class="icon"></span>异地办理</div>
+                <div class="bottom-menu-item" data-id="sjzl" data-is-loaded="0"><span class="icon"></span>数据质量</div>
+                <div class="bottom-menu-item" data-id="sjfw" data-is-loaded="0"><span class="icon"></span><!--数据服务-->统计分析</div>
+                <div class="bottom-menu-item disabled" data-id="rkcx" data-is-loaded="0"><span class="icon"></span>人口查询</div>
             </div>
         </div>
     </div>
