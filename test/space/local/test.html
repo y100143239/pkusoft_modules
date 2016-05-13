@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="js/jquery-1.8.3.js"></script>
+    <script src="js/doT.js"></script>
+    <script src="js/space.js"></script>
+    <link rel="stylesheet" href="css/space.css"/>
+    <script >
+        $( document ).ready( function () {
+
+            $( "#test" ).space({
+                data: data,
+                spaceClickHandler: function () {
+                    console.info( this.getAttribute( "data-id" ) );
+                },
+                hasIcon: true, // 是否有图标
+                hasProgressBar: false , // 是否有进度条
+                hasBrief: false, // 是否有说明,
+                spaceNumInOneLine: 6,
+                iconRelativePath: "./images", // 图片文件路径，如 http://localhost:63342/pkusoft_modules  （不要以“/”结尾）
+                iconFileSuffix: ".png"
+            });
+
+        });
+        var data =
+
+        {
+
+            "centerList": [
+
+                {
+                    "centerId": "002",
+                    "center": "青山分局涉案财物仓库2",  // 存放场所
+                    "areaList": [          // 区域
+                        {
+                            "area": "收纳箱B",
+                            "spaceAmount": "3",
+                            "spaceList": [ // 空间
+                                {
+                                    "spaceId": "1",
+                                    "space": "A001",
+                                    "quantity": 0,
+                                    "capacity": 100
+                                },
+                                {
+                                    "spaceId": "2",
+                                    "space": "A002",
+                                    "quantity": 12,
+                                    "capacity": 100,
+                                    "icon": "default"
+                                },
+                                {
+                                    "spaceId": "3",
+                                    "space": "A003",
+                                    "quantity": 22,
+                                    "capacity": 100,
+                                    "icon": "warning"
+                                },
+                                {
+                                    "space": "A001",
+                                    "quantity": 0,
+                                    "capacity": 100
+                                },
+                                {
+                                    "space": "A002",
+                                    "quantity": 12,
+                                    "capacity": 100,
+                                    "icon": "default"
+                                },
+                                {
+                                    "space": "A003",
+                                    "quantity": 22,
+                                    "capacity": 100,
+                                    "icon": "warning"
+                                },
+                                {
+                                    "space": "A001",
+                                    "quantity": 0,
+                                    "capacity": 100
+                                },
+                                {
+                                    "space": "A002",
+                                    "quantity": 12,
+                                    "capacity": 100,
+                                    "icon": "default"
+                                },
+                                {
+                                    "space": "A003",
+                                    "quantity": 22,
+                                    "capacity": 100,
+                                    "icon": "danger"
+                                }
+                            ]
+                        },
+
+                        {
+                            "area": "收纳箱C",
+                            "spaceAmount": "2",
+                            "spaceList": [ // 空间
+                                {
+                                    "space": "A001",
+                                    "quantity": 0,
+                                    "capacity": 100
+                                },
+                                {
+                                    "space": "A002",
+                                    "quantity": 12,
+                                    "capacity": 100,
+                                    "icon": "default"
+                                }
+
+                            ]
+                        }
+                    ]
+                }
+            ]
+        };
+    </script>
+
+    <script>
+        var data2 = {
+            "centerList": [
+                {
+                    "centerId": "0012",
+                    "center": "青山分局涉案财物仓库12",  // 存放场所
+                    "areaList": [          // 区域
+                        {
+                            "area": "收纳箱A",
+                            "spaceAmount": "5",
+                            "spaceList": [ // 空间
+                                {
+                                    "spaceId": "IDA001",
+                                    "space": "A001",
+                                    "quantity": 0,
+                                    "capacity": 100,
+                                    "icon": "warning"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    </script>
+</head>
+<body>
+<button type="button" onclick='$( "#test" ).space("setData", [ data2 ] )'>
+
+    $( "#test" ).space("setData", [ data2 ] )
+
+</button>
+
+<!--
+
+<div class="property-panel" >
+    <div class="property-center"><h1 class="center-heading">青山分局涉案财物仓库2</h1>
+
+        <div class="center-body">
+            <div class="property-area "><h2 class="area-heading">收纳箱B<span class="badge">3</span></h2>
+                <ul class="space-list">
+                    <li class="space-item">
+                        <table>
+                            <tbody>
+                            <tr>
+                                <td class="space-icon"><img src="/modules/space/images/icon_default.png" alt=""></td>
+                                <td class="space-info"><h3 class="name">A001</h3>
+
+                                    <div class="progress">
+                                        <div class="progress-inner" style="width: 12%">12%</div>
+                                    </div>
+                                    <div class="brief">已存 0，最大存 100</div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+-->
+
+<div id="test"></div>
+
+</body>
+</html>

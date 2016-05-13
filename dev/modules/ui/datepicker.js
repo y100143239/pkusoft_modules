@@ -25,7 +25,7 @@
 +(function ( factory ) {
     if ( typeof define === "function" && define.amd ) {
         // AMD模式
-        define( [ "jquery", "utils/doT", "text!ui/tpl/datepicker.html!strip", "css!ui/css/datepicker.css" ], factory );
+        define( [ "jquery", "utils/doT", "text!ui/tpl/datepicker.html!strip"/*, "css!ui/css/datepicker.css"*/ ], factory );
     } else {
         // 全局模式
         // factory( jQuery, doT );

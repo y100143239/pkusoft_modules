@@ -1,3 +1,5 @@
+$autocomplete-path: ".." !default;
+
 .ac_results {
     padding: 0;
     border: 1px solid #c4defe;
@@ -12,7 +14,7 @@
         margin: 0;
     }
     li {
-        margin: 0px;
+        margin: 0;
         padding: 2px 0;
         cursor: default;
         display: block;
@@ -105,7 +107,7 @@
             width: 32px;
             height: 21px;
             margin-right: 6px;
-            background: url(../images/icons_direction.png) no-repeat 9999px 9999px;
+            background: url(#{$autocomplete-path}/images/icons_direction.png) no-repeat 9999px 9999px;
             vertical-align: middle;
         }
         &.tips-next-item {
@@ -147,7 +149,7 @@
                 height: 360px;
                 top: -40px;
                 left: -10px;
-                background: url(../images/autocomplete_help.jpg) no-repeat center center #fff;
+                background: url(#{$autocomplete-path}/images/autocomplete_help.jpg) no-repeat center center #fff;
                 border: dashed 1px #ddd;
             }
         }

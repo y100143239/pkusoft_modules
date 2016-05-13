@@ -115,8 +115,11 @@
         if ( $trigger ) {
             $trigger.bind( "click", function(){
                 $input
-                    //.trigger("focus")
-                    .click();
+                      .trigger( "focus" )
+                      .trigger( "click" )
+
+                ;
+                return false;
             } );
         }
         // clean
@@ -385,8 +388,11 @@
         }
 
         function hideResults() {
+            /*
             clearTimeout(timeout);
             timeout = setTimeout(hideResultsNow, 200);
+            */
+            hideResultsNow();
         }
 
         function hideResultsNow() {
@@ -1016,7 +1022,7 @@
             data: null, // { name: "value" },
             timeout: 30000, // 设置请求超时时间（毫秒）
             contentType: "application/x-www-form-urlencoded; charset=utf-8",
-            cache: false, // 不缓存此页面
+            //cache: false, // 不缓存此页面
             dataType: "xml", // 预期服务器返回的数据类型。
             error: null, // 请求失败时调用此函数
             success: null, // 请求成功后的回调函数。参数：由服务器返回，并根据 dataType 参数进行处理后的数据
@@ -1107,7 +1113,8 @@
                 defaults,
                 opts,
                 $trigger,
-                $clean
+                $clean,
+                $replacedTarget
                 ;
             _this = this;
             defaults = _this.defaults;
@@ -1125,6 +1132,14 @@
             $trigger && ( opts.$trigger = $( $trigger ) );
             $clean && ( opts.$clean = $( $clean ) );
 
+            $replacedTarget = $target.next( "input[type=hidden]" );
+
+            if ( ! $replacedTarget[ 0 ] ) {
+                $replacedTarget = $( "<input type='hidden'>" ).insertAfter( $target );
+                $replacedTarget.attr( "name", $target.attr( "name" ) )
+                               .attr( "value", $target.attr( "data-code" ) );
+                $target.attr( "name", "" );
+            }
 
             this._getData( $target, function ( data ) {
                 $target
@@ -1132,8 +1147,13 @@
                     .result( function ( event, row ) {
                         var code
                             ;
+
                         code = ( row && row[ "code" ] ) || "";
+
+
                         $target.attr("data-code", code );
+                        $replacedTarget.val( code );
+
                         if ( code ) {
                             $target.removeClass( "error" );
                         } else {
