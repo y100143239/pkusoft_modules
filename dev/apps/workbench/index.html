@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title></title>
     <link rel="stylesheet" href="./css/style.css?version=2.0"/>
-    <script>var IS_DEV = true; var TIMEOUT = 300000; </script>
+    <script>var IS_DEV = true; var TIMEOUT = 10000; </script>
     <script src="../../../dev/modules/jquery/jquery-1.9.0.js"></script>
     <script src="../../../dev/modules/utils/doT.js"></script>
     <script src="./js/main.js?version=1.0" charset="utf-8"></script>
@@ -228,12 +228,13 @@
                                 <colgroup>
                                     <col width="30"/> <!--#-->
                                     <col width="100"/> <!--办理时间-->
-                                    <col width="120"/> <!--业务类型-->
+                                    <col width="110"/> <!--业务类型-->
                                     <col width=""/> <!--业务名称-->
-                                    <col width="120"/> <!-- 所属盟市”更换为 受理单位-->
+                                    <col width="110"/> <!-- 所属盟市”更换为 受理单位-->
                                     <col width="60"/> <!--受理人-->
                                     <col width="60"/> <!--审批人-->
-                                    <col width="80"/> <!--业务状态-->
+                                    <col width="70"/> <!--业务状态-->
+                                    <col width="40"/> <!--详情-->
                                 </colgroup>
                                 <tbody class="tbody-heading">
                                     <tr>
@@ -245,6 +246,7 @@
                                         <th>受理人</th>
                                         <th>审批人</th>
                                         <th>业务状态</th>
+                                        <th></th>
                                     </tr>
                                 </tbody>
                                 <tbody class="tbody-main">
@@ -255,7 +257,7 @@
                                 </tbody>
                                 <tbody class="tbody-operation">
                                     <tr>
-                                        <td colspan="8">
+                                        <td colspan="9">
                                             <div class="pagination">
                                                 <a href="#" class="pagination-btn page-first" title="第1页"></a>
                                                 <a href="#" class="pagination-btn page-pre" title="前一页"></a>

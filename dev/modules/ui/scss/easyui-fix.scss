@@ -1,4 +1,4 @@
-@import "font-awesome";
+//@import "font-awesome";
 
 $border-radius-base: 2px;
 
@@ -118,7 +118,7 @@ $border-radius-base: 2px;
 }
 
 // tooltip
-.tooltip-invalid {
+.tooltip.tooltip-invalid {
     color: #8a6d3b;
     background-color: #fcf8e3;
     border-color: #faebcc;

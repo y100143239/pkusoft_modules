@@ -2301,10 +2301,10 @@
         // 业务监管
         ywjg: {
             data: [
-                { num: 1, blsj: "2017-01-14 17:01", ywlx: "出生登记", ywmc: "张三办理出生登记业务", sldw: "呼和浩特分局", "slr": "李四", "spr": "王五", "ywzt": "已通过" },
-                { num: 2, blsj: "2017-01-13 17:01", ywlx: "出生登记2", ywmc: "张三办理出生登记业务2", sldw: "呼和浩特派出所呼和浩特派出所", "slr": "李四2", "spr": "王五2", "ywzt": "已通过2" },
-                { num: 3, blsj: "2017-01-12 17:01", ywlx: "出生登记3", ywmc: "张三办理出生登记业务3", sldw: "呼和浩特派出所3呼和浩特派出所3", "slr": "李四3", "spr": "王五3", "ywzt": "已通过3" },
-                { num: 4, blsj: "2017-01-11 17:01", ywlx: "出生登记4", ywmc: "张三办理出生登记业务4", sldw: "呼和浩特派出所4呼和浩特派出所4", "slr": "李四4", "spr": "王五4", "ywzt": "已通过4" }
+                { num: 1, blsj: "2017-01-14 17:01", ywlx: "出生登记", ywmc: "张三办理出生登记业务", sldw: "呼和浩特分局", "slr": "李四", "spr": "王五", "ywzt": "已通过",link: "http://www.baidu.com/?id=1" },
+                { num: 2, blsj: "2017-01-13 17:01", ywlx: "出生登记2", ywmc: "张三办理出生登记业务2", sldw: "呼和浩特派出所呼和浩特派出所", "slr": "李四2", "spr": "王五2", "ywzt": "已通过2",link: "http://www.baidu.com/?id=1" },
+                { num: 3, blsj: "2017-01-12 17:01", ywlx: "出生登记3", ywmc: "张三办理出生登记业务3", sldw: "呼和浩特派出所3呼和浩特派出所3", "slr": "李四3", "spr": "王五3", "ywzt": "已通过3",link: "http://www.baidu.com/?id=1" },
+                { num: 4, blsj: "2017-01-11 17:01", ywlx: "出生登记4", ywmc: "张三办理出生登记业务4", sldw: "呼和浩特派出所4呼和浩特派出所4", "slr": "李四4", "spr": "王五4", "ywzt": "已通过4",link: "http://www.baidu.com/?id=1" }
             ],
             template: '{{~it:value:index}}\
                     <tr> \
@@ -2316,6 +2316,7 @@
                         <td><p title="{{= value.slr }}">{{= value.slr }}</p></td> \
                         <td><p title="{{= value.spr }}">{{= value.spr }}</p></td> \
                         <td><p title="{{= value.ywzt }}">{{= value.ywzt }}</p></td> \
+                        <td><p>{{? value.link  }} <a href="javascript:businessViewDetail(\'{{= value.link }}\'),void(0);">详情</a> {{?}}</p></td> \
                     </tr> \
                 {{~}}    \
                 {{  for ( var i = 0, len = 4 - it.length; i < len; i++ ) {  }}\

@@ -1,8 +1,8 @@
-@import "../../../modules/ui/scss/reset";
-@import "../../../modules/ui/scss/bootstrap";
-
 $fa-font-path: "../../../modules/ui/fonts";
-@import "../../../modules/ui/scss/font-awesome";
+$autocomplete-path: "../../../modules/ui";
+
+@import "../../../modules/ui/scss/style_easyui";
+
 
 $color-key: #0795eb;
 
@@ -212,6 +212,9 @@ a, a:hover, a:focus {
     }
     .bs-panel-title {
         //float: left;
+        .fa {
+            color: #2B90BA;
+        }
     }
     .bs-panel-heading {
         //@include clearfix();
@@ -222,6 +225,10 @@ a, a:hover, a:focus {
             right: -1px;
             bottom: -1px;
             border-radius: 0 2px 0 0;
+        }
+        .btn-info {
+            right: 69px;
+            border-right: 0;
         }
     }
 }
