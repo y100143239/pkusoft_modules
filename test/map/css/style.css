@@ -1,0 +1,25 @@
+/*
+area:focus { outline: none 0; }
+*/
+#map-areas, #getPos {
+  float: left; }
+
+h1 {
+  clear: both; }
+
+#getPos {
+  position: relative;
+  margin-left: 100px; }
+  #getPos .axis {
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: rgba(255, 0, 0, 0.1); }
+  #getPos .axis-x {
+    height: 1px;
+    width: 100%; }
+  #getPos .axis-y {
+    height: 100%;
+    width: 1px; }
+
+/*# sourceMappingURL=style.css.map */

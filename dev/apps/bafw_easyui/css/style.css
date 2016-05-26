@@ -3575,6 +3575,9 @@ select[multiple].input-lg,
 .form-horizontal .control-label {
   text-align: right;
   padding-top: 7px; }
+.form-horizontal .control-text {
+  padding-top: 7px;
+  border-bottom: solid 1px #E7E7E7; }
 @media (min-width: 768px) {
   .form-horizontal .control-label {
     text-align: right;
