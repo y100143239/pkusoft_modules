@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script data-main="../../dev/modules/" src="../../dev/modules/require.js"></script>
+    <script>
+        var VERSION;
+        require.config( {
+            //urlArgs: "VERSION=" + (new Date()).getTime(),
+            paths: {
+                "jquery": "jquery/jquery-1.11.3"
+            },
+            map: {
+                '*': {
+                    'css': 'utils/css/css'
+                }
+            },
+            // 超时
+            waitSeconds: 15
+        } );
+        require( [ "jquery", "ui/loading", "css!ui/css/pku.css" ], function( $ ) {
+            $( ".test" ).loading( {
+                timer: 0,
+                text: "请稍等..."
+            } );
+            $( "body" ).loading( "timer", { timer: 3 } );
+
+        } );
+    </script>
+    <style>
+        .test {
+            //position: relative;
+
+        }
+    </style>
+</head>
+<body>
+
+    <div class="test pku-loading" style="width: 600px; height: 300px;">
+        兰州晨报讯 5月16日，兰州市城关区检察院以故意杀人罪将嫌疑人常某批捕。30岁的女子常某因无法忍受酗酒丈夫的殴打和恐吓，投毒将丈夫杀死，令人吃惊的是，在警方侦查中，常某又供出了13年前的一桩投毒案。目前，该案正在进一步侦查中。
+
+        经查，2014年，嫌疑人常某带着两岁的女儿嫁给了来兰务工人员赵某，婚后二人时因家庭琐事争吵，特别是酗酒后的赵某曾多次打骂、恐吓常某及其女儿。2016年3月，常某在与赵某争吵和打架后，起了投毒杀人之心，购买了灭蟑药并投入赵某水杯中，但赵某喝下并无反应；几日后，常某又购买了灭鼠药再次投毒，赵某喝下被投毒的水后死亡。经法医病理学检验：赵某系溴敌隆及大隆类毒物中毒后引起的多脏器出血、多脏器实质细胞凝固性坏死而死亡。
+        <!--
+        <div class="pku-loading-container">
+            <div class="pku-loading-overlay"></div>
+            <div class="pku-loading-gif"></div>
+            <div class="pku-loading-counter">3</div>
+            <div class="pku-loading-text">请稍等...</div>
+        </div>
+        -->
+    </div>
+    <br/>
+    <div class="test" style="width: 800px; height: 400px; background: red">
+    2
+    </div>
+    <br/>
+    <div class="test" style="width: 800px; height: 500px; background: green">
+    3
+    </div>
+
+</body>
+</html>

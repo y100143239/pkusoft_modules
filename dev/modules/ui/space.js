@@ -126,7 +126,8 @@
                     }
 
                     if ( typeof handler == "function" ) {
-                        handler.apply( this, null );
+                        // handler.apply( this, null ); // apply 第二个参数为 null 时，IE8- 会报错“缺少对象”
+                        handler.apply( this, [] );
                     }
                 } )
                 .on( "mouseover", ".space-item", function () {
