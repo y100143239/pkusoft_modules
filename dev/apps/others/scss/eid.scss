@@ -1,0 +1,119 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+.card-container {
+    float: left;
+    margin: 2em;
+    width: 400px;
+    height: 450px;
+    border: solid 1px #e1e1e1;
+    font-size: 12px;
+    font-family: "Microsoft Yahei", Arial, sans-serif;
+    line-height: 1.5;
+    color: #666666;
+    table {
+        border-collapse: collapse;
+        table-layout: fixed;
+        width: 100%;
+        td {
+            //border: solid 1px #e1e1e1;
+        }
+    }
+    .label {
+        height: 28px;
+        text-align: right;
+        vertical-align: middle;
+    }
+    .label-addr {
+        vertical-align: top;
+    }
+    .cont {
+        padding-left: 6px;
+    }
+    .cont-photo {
+        vertical-align: top;
+        padding-left: 10px;
+        text-align: center;
+        .text {
+            //text-align: center;
+        }
+    }
+    .photo {
+        width: 76px;
+        height: 94px;
+        border: solid 1px #d2d6d7;
+        overflow: hidden;
+        margin: 0 auto;
+        img {
+            width: 76px;
+            //height: 94px;
+        }
+    }
+    .cont-addr {
+        p {
+            height: 36px;
+            overflow: hidden;
+        }
+    }
+}
+.card-person {
+    border-bottom: dashed 1px #e1e1e1;
+    padding: 6px 0;
+    .cont {
+        color: #216415;
+    }
+}
+.card-unit {
+    border-bottom: dashed 1px #e1e1e1;
+    padding: 6px 0;
+    .label {
+        height: 34px;
+        line-height: 1.2;
+    }
+    .cont {
+        color: #05428c;
+    }
+}
+.card-qty {
+    padding: 6px 0 12px 0;
+    border-bottom: dashed 1px #e1e1e1;
+    table {
+        td {
+            height: 22px;
+            padding-top: 6px;
+            padding-left: 16px;
+        }
+    }
+    .qty-item {
+        width: 160px - 22;
+        height: 22px;
+        line-height: 22px;
+        color: #fff;
+        padding-left: 22px;
+        background: url(../images/eid_label_qty.png) no-repeat 0 0;
+    }
+    .qty-error {
+        background-position: 0 -23px;
+    }
+
+}
+.card-audit {
+    table {
+        td {
+            height: 32px;
+        }
+    }
+    label {
+        margin-left: 16px;
+        input {
+            margin-right: 6px;
+        }
+    }
+    .label-ok {
+        color: #5cb85c;
+    }
+    .label-error {
+        color: #d9534f;
+    }
+}
