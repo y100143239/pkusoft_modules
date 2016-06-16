@@ -1,0 +1,238 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+.card-container {
+    position: relative;
+    float: left;
+    margin: 2em;
+    width: 400px;
+    height: 450px;
+    border: solid 1px #e1e1e1;
+    font-size: 12px;
+    font-family: "Microsoft Yahei", Arial, sans-serif;
+    line-height: 1.5;
+    color: #666666;
+    &.on {
+        clear: both;
+    }
+    table {
+        border-collapse: collapse;
+        table-layout: fixed;
+        width: 100%;
+        td {
+            //border: solid 1px #e1e1e1;
+        }
+    }
+    .label {
+        height: 28px;
+        text-align: right;
+        vertical-align: middle;
+        line-height: 1.2;
+    }
+    .cont {
+        padding-left: 6px;
+    }
+    .cont-photo {
+        vertical-align: top;
+        padding: 0 0 0 6px;
+    }
+    .photo-item {
+        float: left;
+        border: solid 1px #d2d6d7;
+        &:first-child {
+            margin-right: 6px;
+        }
+    }
+    .photo-wrap {
+        width: 76px;
+        height: 94px;
+        overflow: hidden;
+        img {
+            width: 76px;
+        }
+    }
+    .photo-text {
+         text-align: center;
+    }
+}
+.qty-icon {
+    display:inline-block;
+    *display:inline;
+    *zoom:1;
+    width: 18px;
+    height: 18px;
+    line-height: 18px;
+    color: #fff;
+    font-size: 10px;
+    text-align: center;
+    background: url(../images/eid-icons.png) no-repeat;
+    &.qty-h {
+        background-position: -20px * 0 0;
+    }
+    &.qty-m {
+        background-position: -20px * 1 0;
+    }
+    &.qty-l {
+        background-position: -20px * 2 0;
+    }
+    &.qty-e {
+        background-position: -20px * 3 0;
+    }
+    &.qty-success {
+        background-position: -20px * 4 0;
+    }
+    &.qty-error {
+        background-position: -20px * 5 0;
+    }
+}
+.card-person {
+    border-bottom: dashed 1px #e1e1e1;
+    padding: 6px 0;
+    height: 120px;
+    .cont {
+        color: #216415;
+    }
+}
+.card-qty {
+    overflow: hidden;
+    padding: 6px 0 6px 6px;
+    border-bottom: dashed 1px #e1e1e1;
+    table {
+        table-layout: auto;
+    }
+    .qty-item {
+        float: left;
+        width: 88px;
+        height: 104px;
+        background-color: #fdfff9;
+        border: solid 1px #76cc66;
+        margin-right: 8px;
+    }
+    .qty-item-error {
+        background-color : #fff9f8;
+        border-color: #ff8659;
+        .qty-heading {
+            background-color : #ff8659;
+        }
+    }
+    .qty-heading {
+        background-color: #76cc66;
+        color: #fff;
+        height: 24px;
+        line-height: 24px;
+        text-align: center;
+    }
+    .qty-body {
+
+    }
+    .label {
+        width: 30px;
+        height: 26px;
+        padding-left: 2px;
+    }
+    .cont {
+        height: 26px;
+        color: #333;
+    }
+
+}
+.card-signature {
+    position: relative;
+    border-bottom: dashed 1px #e1e1e1;
+    .label {
+        height: 40px;
+    }
+    .cont {
+        height: 40px;
+    }
+    .signature-wrap {
+        height: 40px;
+        width: 100%;
+        overflow: hidden;
+        img {
+            height: 40px;
+        }
+    }
+    .switch-more-info {
+        position: absolute;
+        top: 9px;
+        right: 10px;
+        width: 82px - 24;
+        height: 24px;
+        line-height: 24px;
+        background: url(../images/eid-icons.png) no-repeat 0 -19px;
+        padding: 0 0 0 24px;
+        cursor: pointer;
+        font-size: 11px;
+        &.on {
+            color: #fff;
+            background-position: 0 ( -19px - 24);
+            padding: 0 24px 0 0;
+            text-align: right;
+        }
+    }
+}
+.card-accept {
+    padding: 6px 0 6px 0;
+    border-bottom: dashed 1px #e1e1e1;
+    .label {
+        padding: 2px 0;
+    }
+    .cont {
+        color: #05428c;
+    }
+}
+.card-audit {
+    table {
+        td {
+            height: 46px;
+        }
+    }
+    label {
+        margin-left: 16px;
+        input {
+            margin-right: 6px;
+        }
+    }
+    .label-ok {
+        color: #5cb85c;
+    }
+    .label-error {
+        color: #d9534f;
+    }
+}
+
+.card-other-info {
+    display: none;
+    position: absolute;
+    left: 100%;
+    top: -2px;
+    z-index: 99;
+    width: 400px;
+    background-color: #fff;
+    border: solid 1px #e0edfd;
+    table {
+        table-layout: auto;
+    }
+    .heading {
+        height: 32px;
+        color: #fff;
+        text-align: center;
+        font-size: 14px;
+        background-color: #569df6;
+    }
+    .label {
+        width: 112px;
+        border-right: solid 1px #e0edfd;
+        padding-right: 4px;
+    }
+    .cont {
+    }
+    .row-odd {
+
+    }
+    .row-even {
+        background-color: #f5f9fe;
+    }
+}

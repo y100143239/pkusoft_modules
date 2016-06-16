@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="css/eid2.css"/>
+    <script src="../../modules/jquery/jquery-1.9.0.js"></script>
+    <script>
+        $( document ).ready( function () {
+            $( ".switch-more-info" ).on( "click", function () {
+                var $this,
+                    $container,
+                    $otherInfo;
+                $this = $( this );
+                $container = $this.closest( ".card-container" );
+                $otherInfo = $container.find( ".card-other-info" );
+                if ( $this.is( ".on" ) ) {
+                    $otherInfo.hide();
+                } else {
+                    $otherInfo.show();
+                }
+                $this.toggleClass("on");
+                $container.toggleClass("on");
+                return false;
+            } );
+        } );
+    </script>
+</head>
+<body>
+
+    <div class="card-container on">
+
+        <div class="card-person">
+
+            <table>
+                <colgroup>
+                    <col width="172"/>
+                    <col width="76"/>
+                    <col width="84"/>
+                </colgroup>
+
+                <tr>
+                    <td class="cont-photo" rowspan="4">
+                        <div class="photo-item">
+                            <div class="photo-wrap">
+                                <img src="./images/eid_photo.png" alt="" />
+                            </div>
+                            <p class="photo-text">相片</p>
+                        </div>
+                        <div class="photo-item">
+                            <div class="photo-wrap">
+                                <img src="./images/eid_photo.png" alt="" />
+                            </div>
+                            <p class="photo-text">历史相片</p>
+                        </div>
+                    </td>
+                    <td class="label">名</td> <td class="cont" colspan="3">小凡</td>
+                </tr>
+                <tr>
+                    <td class="label">姓</td> <td class="cont" colspan="3">张</td>
+                </tr>
+                <tr>
+                    <td class="label">出生日期</td> <td class="cont">2010-01-02</td>
+                    <td class="label">性别</td> <td class="cont">男</td>
+                </tr>
+                <tr>
+                    <td class="label">身份号码</td> <td class="cont" colspan="3">421122201001020019</td>
+                </tr>
+            </table>
+
+        </div>
+        <div class="card-qty">
+
+            <div class="qty-item">
+                <div class="qty-heading">相片</div>
+                <div class="qty-body">
+                    <table>
+                        <tr>
+                            <td class="label">数量</td> <td class="cont">-</td>
+                        </tr>
+                        <tr>
+                            <td class="label">质量</td> <td class="cont"><span class="qty-icon qty-h">高</span></td>
+                        </tr>
+                        <tr>
+                            <td class="label">认证</td> <td class="cont"><span class="qty-icon qty-success">&nbsp;</span></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="qty-item">
+                <div class="qty-heading">指纹</div>
+                <div class="qty-body">
+                    <table>
+                        <tr>
+                            <td class="label">数量</td> <td class="cont">2</td>
+                        </tr>
+                        <tr>
+                            <td class="label">质量</td> <td class="cont"><span class="qty-icon qty-m">中</span></td>
+                        </tr>
+                        <tr>
+                            <td class="label">认证</td> <td class="cont"><span class="qty-icon qty-success">&nbsp;</span></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="qty-item qty-item-error">
+                <div class="qty-heading">虹膜</div>
+                <div class="qty-body">
+                    <table>
+                        <tr>
+                            <td class="label">数量</td> <td class="cont">0</td>
+                        </tr>
+                        <tr>
+                            <td class="label">质量</td> <td class="cont"><span class="qty-icon qty-e">无</span></td>
+                        </tr>
+                        <tr>
+                            <td class="label">认证</td> <td class="cont"><span class="qty-icon qty-error">&nbsp;</span></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="qty-item">
+                <div class="qty-heading">人像比对</div>
+                <div class="qty-body">
+                    <table>
+                        <tr>
+                            <td class="label">比对</td> <td class="cont"><span class="qty-icon qty-success">&nbsp;</span></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="card-signature">
+            <table>
+                <colgroup>
+                    <col width="86"/>
+                </colgroup>
+                <tr>
+                    <td class="label">签名</td>
+                    <td class="cont">
+                        <p class="signature-wrap"><img src="images/eid_signature_demo.png" alt=""/></p>
+                    </td>
+                </tr>
+            </table>
+            <div class="switch-more-info">其他信息</div>
+        </div>
+
+
+        <div class="card-accept">
+            <table>
+                <colgroup>
+                    <col width="86"/>
+                    <col width="80"/>
+                    <col width="86"/>
+                </colgroup>
+                <tr>
+                    <td class="label">受理日期</td> <td class="cont">2016-06-01</td>
+                    <td class="label">受理人</td> <td class="cont">张警官</td>
+                </tr>
+                <tr>
+                    <td class="label">受理单位</td> <td class="cont" colspan="3">振兴派出所</td>
+                </tr>
+                <tr>
+                    <td class="label">申领原因</td> <td class="cont" colspan="3">证件损坏换领</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="card-audit">
+            <table>
+                <colgroup>
+                    <col width="224"/>
+                </colgroup>
+                <tr>
+                    <td>
+                        <label class="label-ok"><input type="radio" name="audit"/>审核通过</label>
+                        <label class="label-error"><input type="radio" name="audit"/>审核不通过</label>
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+            </table>
+
+        </div>
+
+        <div class="card-other-info">
+            <table>
+                <tr class="row-odd">
+                    <td colspan="2" class="heading">其他信息</td>
+                </tr>
+                <tr class="row-even">
+                    <td class="label">民族</td> <td class="cont">&nbsp;</td>
+                </tr>
+                <tr class="row-odd">
+                    <td class="label">血型</td> <td class="cont">&nbsp;</td>
+                </tr>
+                <tr class="row-even">
+                    <td class="label">出生地国家</td> <td class="cont">&nbsp;</td>
+                </tr>
+                <tr class="row-odd">
+                    <td class="label">出生地省市</td> <td class="cont">&nbsp;</td>
+                </tr>
+                <tr class="row-even">
+                    <td class="label">出生地详细地址</td> <td class="cont">&nbsp;</td>
+                </tr>
+                <tr class="row-odd">
+                    <td class="label">住址</td> <td class="cont">&nbsp;</td>
+                </tr>
+                <tr class="row-even">
+                    <td class="label">其他住址</td> <td class="cont">&nbsp;</td>
+                </tr>
+                <tr class="row-odd">
+                    <td class="label">通讯方式</td> <td class="cont">&nbsp;</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+
+
+    <div class="card-container">
+
+        <div class="card-person">
+
+            <table>
+                <colgroup>
+                    <col width="172"/>
+                    <col width="76"/>
+                    <col width="84"/>
+                </colgroup>
+
+                <tr>
+                    <td class="cont-photo" rowspan="4">
+                        <div class="photo-item">
+                            <div class="photo-wrap">
+                                <img src="./images/eid_photo.png" alt="" />
+                            </div>
+                            <p class="photo-text">Portrait</p>
+                        </div>
+                        <div class="photo-item">
+                            <div class="photo-wrap">
+                                <img src="./images/eid_photo.png" alt="" />
+                            </div>
+                            <p class="photo-text">Last portrait</p>
+                        </div>
+                    </td>
+                    <td class="label">First name</td> <td class="cont" colspan="3">Xiaofan</td>
+                </tr>
+                <tr>
+                    <td class="label">Last name</td> <td class="cont" colspan="3">Zhang</td>
+                </tr>
+                <tr>
+                    <td class="label">Date of birth</td> <td class="cont">01/02/2010</td>
+                    <td class="label">Sex</td> <td class="cont">M</td>
+                </tr>
+                <tr>
+                    <td class="label">ID number</td> <td class="cont" colspan="3">421122201001020019</td>
+                </tr>
+            </table>
+
+        </div>
+
+        <div class="card-qty">
+
+            <div class="qty-item">
+                <div class="qty-heading">Portrait</div>
+                <div class="qty-body">
+                    <table>
+                        <tr>
+                            <td class="label">Count</td> <td class="cont">N/A</td>
+                        </tr>
+                        <tr>
+                            <td class="label">Qty.</td> <td class="cont"><span class="qty-icon qty-h">H</span></td>
+                        </tr>
+                        <tr>
+                            <td class="label">Auth</td> <td class="cont"><span class="qty-icon qty-success">&nbsp;</span></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="qty-item">
+                <div class="qty-heading">Fingerprint</div>
+                <div class="qty-body">
+                    <table>
+                        <tr>
+                            <td class="label">Count</td> <td class="cont">2</td>
+                        </tr>
+                        <tr>
+                            <td class="label">Qty.</td> <td class="cont"><span class="qty-icon qty-m">M</span></td>
+                        </tr>
+                        <tr>
+                            <td class="label">Auth</td> <td class="cont"><span class="qty-icon qty-success">&nbsp;</span></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="qty-item qty-item-error">
+                <div class="qty-heading">Iris</div>
+                <div class="qty-body">
+                    <table>
+                        <tr>
+                            <td class="label">Count</td> <td class="cont">0</td>
+                        </tr>
+                        <tr>
+                            <td class="label">Qty.</td> <td class="cont"><span class="qty-icon qty-e">E</span></td>
+                        </tr>
+                        <tr>
+                            <td class="label">Auth</td> <td class="cont"><span class="qty-icon qty-error">&nbsp;</span></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="qty-item">
+                <div class="qty-heading">Portrait match</div>
+                <div class="qty-body">
+                    <table>
+                        <tr>
+                            <td class="label">Match</td> <td class="cont"><span class="qty-icon qty-success">&nbsp;</span></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="card-signature">
+            <table>
+                <colgroup>
+                    <col width="86"/>
+                </colgroup>
+                <tr>
+                    <td class="label">Signature</td>
+                    <td class="cont">
+                        <p class="signature-wrap"><img src="images/eid_signature_demo.png" alt=""/></p>
+                    </td>
+                </tr>
+            </table>
+            <div class="switch-more-info">Other info</div>
+        </div>
+
+
+        <div class="card-accept">
+            <table>
+                <colgroup>
+                    <col width="86"/>
+                    <col width="80"/>
+                    <col width="86"/>
+                </colgroup>
+                <tr>
+                    <td class="label">Date of accepting</td> <td class="cont">06/01/2016</td>
+                    <td class="label">Assignee</td> <td class="cont">Zhang Sir</td>
+                </tr>
+                <tr>
+                    <td class="label">Unit of accepting</td> <td class="cont" colspan="3">Zhenxin pai chu suo</td>
+                </tr>
+                <tr>
+                    <td class="label">Receiving reasons</td> <td class="cont" colspan="3">Zheng jian sun hun ren ling</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="card-audit">
+            <table>
+                <colgroup>
+                    <col width="224"/>
+                </colgroup>
+                <tr>
+                    <td>
+                        <label class="label-ok"><input type="radio" name="audit"/>Approved</label>
+                        <label class="label-error"><input type="radio" name="audit"/>Not approved</label>
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+            </table>
+
+        </div>
+
+
+        <div class="card-other-info">
+            <table>
+                <tr class="row-odd">
+                    <td colspan="2" class="heading">Other information</td>
+                </tr>
+                <tr class="row-even">
+                    <td class="label">Ethnicity</td> <td class="cont">&nbsp;</td>
+                </tr>
+                <tr class="row-odd">
+                    <td class="label">Blood type</td> <td class="cont">&nbsp;</td>
+                </tr>
+                <tr class="row-even">
+                    <td class="label">Country of birth</td> <td class="cont">&nbsp;</td>
+                </tr>
+                <tr class="row-odd">
+                    <td class="label">State of birth</td> <td class="cont">&nbsp;</td>
+                </tr>
+                <tr class="row-even">
+                    <td class="label">Address of birth</td> <td class="cont">&nbsp;</td>
+                </tr>
+                <tr class="row-odd">
+                    <td class="label">Residential address</td> <td class="cont">&nbsp;</td>
+                </tr>
+                <tr class="row-even">
+                    <td class="label">Other address</td> <td class="cont">&nbsp;</td>
+                </tr>
+                <tr class="row-odd">
+                    <td class="label">Contacts</td> <td class="cont">&nbsp;</td>
+                </tr>
+            </table>
+        </div>
+
+    </div>
+
+
+
+
+</body>
+</html>

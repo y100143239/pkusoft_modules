@@ -1,0 +1,86 @@
+* {
+  margin: 0;
+  padding: 0; }
+
+.card-container {
+  float: left;
+  margin: 2em;
+  width: 400px;
+  height: 450px;
+  border: solid 1px #e1e1e1;
+  font-size: 12px;
+  font-family: "Microsoft Yahei", Arial, sans-serif;
+  line-height: 1.5;
+  color: #666666; }
+  .card-container table {
+    border-collapse: collapse;
+    table-layout: fixed;
+    width: 100%; }
+  .card-container .label {
+    height: 28px;
+    text-align: right;
+    vertical-align: middle; }
+  .card-container .label-addr {
+    vertical-align: top; }
+  .card-container .cont {
+    padding-left: 6px; }
+  .card-container .cont-photo {
+    vertical-align: top;
+    padding-left: 10px;
+    text-align: center; }
+  .card-container .photo {
+    width: 76px;
+    height: 94px;
+    border: solid 1px #d2d6d7;
+    overflow: hidden;
+    margin: 0 auto; }
+    .card-container .photo img {
+      width: 76px; }
+  .card-container .cont-addr p {
+    height: 36px;
+    overflow: hidden; }
+
+.card-person {
+  border-bottom: dashed 1px #e1e1e1;
+  padding: 6px 0; }
+  .card-person .cont {
+    color: #216415; }
+
+.card-unit {
+  border-bottom: dashed 1px #e1e1e1;
+  padding: 6px 0; }
+  .card-unit .label {
+    height: 34px;
+    line-height: 1.2; }
+  .card-unit .cont {
+    color: #05428c; }
+
+.card-qty {
+  padding: 6px 0 12px 0;
+  border-bottom: dashed 1px #e1e1e1; }
+  .card-qty table td {
+    height: 22px;
+    padding-top: 6px;
+    padding-left: 16px; }
+  .card-qty .qty-item {
+    width: 138px;
+    height: 22px;
+    line-height: 22px;
+    color: #fff;
+    padding-left: 22px;
+    background: url(../images/eid_label_qty.png) no-repeat 0 0; }
+  .card-qty .qty-error {
+    background-position: 0 -23px; }
+
+.card-audit table td {
+  height: 32px; }
+.card-audit label {
+  margin-left: 16px; }
+  .card-audit label input {
+    margin-right: 6px; }
+.card-audit .label-ok {
+  color: #5cb85c; }
+.card-audit .label-error {
+  color: #d9534f; }
+
+/*# sourceMappingURL=eid.css.map */
