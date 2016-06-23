@@ -21,22 +21,34 @@
                 }
                 $this.toggleClass("on");
                 $container.toggleClass("on");
+
+                if ( $( ".card-container.on" ).size() > 0 ) {
+                    $container.parent().addClass( "on" );
+                } else {
+                    $container.parent().removeClass( "on" );
+                }
+
                 return false;
             } );
         } );
+
     </script>
 </head>
 <body>
 
-    <div class="card-container on">
+    <div class="card-container ">
 
         <div class="card-person">
 
             <table>
                 <colgroup>
-                    <col width="172"/>
-                    <col width="76"/>
-                    <col width="84"/>
+                    <col width="170"/>
+                    <col width="60"/>
+                    <col width="100"/>
+
+                    <!--<col width="160"/>-->
+                    <!--<col width="70"/>-->
+                    <!--<col width="72"/>-->
                 </colgroup>
 
                 <tr>
@@ -60,7 +72,7 @@
                     <td class="label">姓</td> <td class="cont" colspan="3">张</td>
                 </tr>
                 <tr>
-                    <td class="label">出生日期</td> <td class="cont">2010-01-02</td>
+                    <td class="label">出生日期</td> <td class="cont">2010年01月02日</td>
                     <td class="label">性别</td> <td class="cont">男</td>
                 </tr>
                 <tr>
@@ -152,11 +164,11 @@
             <table>
                 <colgroup>
                     <col width="86"/>
-                    <col width="80"/>
-                    <col width="86"/>
+                    <col width="100"/>
+                    <col width="60"/>
                 </colgroup>
                 <tr>
-                    <td class="label">受理日期</td> <td class="cont">2016-06-01</td>
+                    <td class="label">受理日期</td> <td class="cont">2016年06月01日</td>
                     <td class="label">受理人</td> <td class="cont">张警官</td>
                 </tr>
                 <tr>
@@ -225,9 +237,10 @@
 
             <table>
                 <colgroup>
-                    <col width="172"/>
-                    <col width="76"/>
-                    <col width="84"/>
+                    <col width="168"/>
+                    <col width="70"/>
+                    <col width="72"/>
+                    <col width="28"/>
                 </colgroup>
 
                 <tr>
@@ -252,7 +265,7 @@
                 </tr>
                 <tr>
                     <td class="label">Date of birth</td> <td class="cont">01/02/2010</td>
-                    <td class="label">Sex</td> <td class="cont">M</td>
+                    <td class="label">Sex</td> <td class="cont">Female</td>
                 </tr>
                 <tr>
                     <td class="label">ID number</td> <td class="cont" colspan="3">421122201001020019</td>
@@ -344,15 +357,15 @@
             <table>
                 <colgroup>
                     <col width="86"/>
-                    <col width="80"/>
-                    <col width="86"/>
+                    <col width="100"/>
+                    <col width="60"/>
                 </colgroup>
                 <tr>
-                    <td class="label">Date of accepting</td> <td class="cont">06/01/2016</td>
+                    <td class="label">Date of accepting</td> <td class="cont">06/01/2016</td>
                     <td class="label">Assignee</td> <td class="cont">Zhang Sir</td>
                 </tr>
                 <tr>
-                    <td class="label">Unit of accepting</td> <td class="cont" colspan="3">Zhenxin pai chu suo</td>
+                    <td class="label">Unit of accepting</td> <td class="cont" colspan="3">Zhenxin pai chu suo</td>
                 </tr>
                 <tr>
                     <td class="label">Receiving reasons</td> <td class="cont" colspan="3">Zheng jian sun hun ren ling</td>

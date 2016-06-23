@@ -2,15 +2,85 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <title></title>
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lte IE 8]>
     <script src="../../../dev/modules/lib/ie/respond.js"></script>
+    <script src="../../../dev/modules/lib/ie/html5shiv.js"></script>
     <![endif]-->
     <link rel="stylesheet" href="../../../dev/modules/ui/css/pku.css"/>
     <link rel="stylesheet" href="css/main.css"/>
+    <script data-main="../../modules/" src="../../modules/require.js"></script>
+    <script >
+        var VERSION,
+            DEV_MODE
+            ;
+        VERSION = DEV_MODE ? (new Date()).getTime() : "v1.0";
+        require.config( {
+            urlArgs: "VERSION=" + VERSION,
+            paths: {
+                "jquery": "jquery/jquery-1.11.3"
+            },
+            map: {
+                '*': {
+                    'css': 'utils/css/css',
+                    'text': 'utils/text'
+                }
+            },
+            // 超时
+            waitSeconds: 15
+        } );
+        require(["./js/main.js"]);
+    </script>
 </head>
-<body>
-<input type="radio"/>
-<input type="radio"/>
+<body class="skin-blue">
+
+    <header class="header">
+        <a href="index.html" class="logo">
+            Pku
+        </a>
+        <nav class="navbar navbar-static-top ">
+        </nav>
+    </header>
+
+    <aside class="left-side">
+        <section class="sidebar">
+            <ul class="sidebar-menu">
+                <li class="treeview active">
+                    <a href="#">
+                        <i class="fa fa-laptop"></i> <span>UI Elements</span>
+                        <i class="fa pull-right fa-angle-left fa-angle-down"></i>
+                    </a>
+                    <ul class="treeview-menu" >
+                        <li class="active"><a href="icons.html" ><i class="fa fa-angle-double-right"></i> Icons</a></li>
+                        <li><a href="general.html" ><i class="fa fa-angle-double-right"></i> General</a></li>
+                        <li><a href="buttons.html" ><i class="fa fa-angle-double-right"></i> Buttons</a></li>
+                        <li><a href="sliders.html" ><i class="fa fa-angle-double-right"></i> Sliders</a></li>
+                        <li><a href="timeline.html" ><i class="fa fa-angle-double-right"></i> Timeline</a></li>
+                    </ul>
+                </li>
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-edit"></i> <span>Forms</span>
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="pages/forms/general.html" ><i class="fa fa-angle-double-right"></i> General Elements</a></li>
+                        <li><a href="pages/forms/advanced.html" ><i class="fa fa-angle-double-right"></i> Advanced Elements</a></li>
+                        <li><a href="pages/forms/editors.html" ><i class="fa fa-angle-double-right"></i> Editors</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </section>
+    </aside>
+    <main class="main">
+    </main>
+    <footer>
+
+    </footer>
+
 </body>
 </html>
