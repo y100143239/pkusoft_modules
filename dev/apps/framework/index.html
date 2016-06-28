@@ -22,7 +22,8 @@
         require.config( {
             urlArgs: "VERSION=" + VERSION,
             paths: {
-                "jquery": "jquery/jquery-1.11.3"
+                "jquery": "jquery/jquery-1.11.3",
+                "doT": "utils/doT"
             },
             map: {
                 '*': {
@@ -37,6 +38,9 @@
     </script>
 </head>
 <body class="skin-blue">
+
+<div class="wrap">
+
 
     <header class="header">
         <a href="index.html" class="logo">
@@ -55,32 +59,112 @@
                         <i class="fa pull-right fa-angle-left fa-angle-down"></i>
                     </a>
                     <ul class="treeview-menu" >
-                        <li class="active"><a href="icons.html" ><i class="fa fa-angle-double-right"></i> Icons</a></li>
-                        <li><a href="general.html" ><i class="fa fa-angle-double-right"></i> General</a></li>
-                        <li><a href="buttons.html" ><i class="fa fa-angle-double-right"></i> Buttons</a></li>
-                        <li><a href="sliders.html" ><i class="fa fa-angle-double-right"></i> Sliders</a></li>
-                        <li><a href="timeline.html" ><i class="fa fa-angle-double-right"></i> Timeline</a></li>
-                    </ul>
-                </li>
-                <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-edit"></i> <span>Forms</span>
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li><a href="pages/forms/general.html" ><i class="fa fa-angle-double-right"></i> General Elements</a></li>
-                        <li><a href="pages/forms/advanced.html" ><i class="fa fa-angle-double-right"></i> Advanced Elements</a></li>
-                        <li><a href="pages/forms/editors.html" ><i class="fa fa-angle-double-right"></i> Editors</a></li>
+                        <li class="active"><a href="pages/icons.html" ><i class="fa fa-angle-double-right"></i> icons</a></li>
+                        <li><a href="pages/panels.html" ><i class="fa fa-angle-double-right"></i> panels</a></li>
+                        <li><a href="pages/tables.html" ><i class="fa fa-angle-double-right"></i> tables</a></li>
+                        <li><a href="pages/buttons.html" ><i class="fa fa-angle-double-right"></i> buttons</a></li>
                     </ul>
                 </li>
             </ul>
         </section>
     </aside>
     <main class="main">
+
+        <div class="page-btns">
+            <div class="row">
+
+                <div class="col-xs-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading"><i class="fa fa-square-o"></i> 按钮样式</div>
+                        <div class="panel-body">
+                            <table class="table table-bordered table-hover">
+                                <tr>
+                                    <td> <button type="button" class="btn btn-default">（默认）Default</button> </td>
+                                    <td> <code>&lt;button type="button" class="btn btn-default"&gt;（默认样式）Default&lt;/button&gt;</code> </td>
+                                </tr>
+                                <tr>
+                                    <td> <button type="button" class="btn btn-primary">（首选项）Primary</button> </td>
+                                    <td> <code>&lt;button type="button" class="btn btn-primary"&gt;（首选项）Primary&lt;/button&gt;</code> </td>
+                                </tr>
+                                <tr>
+                                    <td> <button type="button" class="btn btn-success">（成功）Success</button> </td>
+                                    <td> <code>&lt;button type="button" class="btn btn-success"&gt;（成功）Success&lt;/button&gt;</code> </td>
+                                </tr>
+                                <tr>
+                                    <td> <button type="button" class="btn btn-info">（一般信息）Info</button> </td>
+                                    <td> <code>&lt;button type="button" class="btn btn-default"&gt;（一般信息）Info&lt;/button&gt;</code> </td>
+                                </tr>
+                                <tr>
+                                    <td> <button type="button" class="btn btn-warning">（警告）Warning</button> </td>
+                                    <td> <code>&lt;button type="button" class="btn btn-warning"&gt;（警告）Warning&lt;/button&gt;</code> </td>
+                                </tr>
+                                <tr>
+                                    <td> <button type="button" class="btn btn-danger">（危险）Danger</button> </td>
+                                    <td> <code>&lt;button type="button" class="btn btn-danger"&gt;（危险）Danger&lt;/button&gt;</code> </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="col-xs-12">
+                    <div class="panel panel-info">
+                        <div class="panel-heading"><i class="fa fa-square-o"></i> 按钮尺寸</div>
+                        <div class="panel-body">
+                            <table class="table table-bordered table-hover">
+                                <tr>
+                                    <td><button type="button" class="btn btn-default btn-xs">（超小尺寸）Extra small button</button></td>
+                                    <td> <code>&lt;button type="button" class="btn btn-default btn-xs"&gt;（超小尺寸）Extra small button&lt;/button&gt;</code> </td>
+                                </tr>
+                                <tr>
+                                    <td><button type="button" class="btn btn-default btn-sm">（小按钮）Small button</button> </td>
+                                    <td> <code>&lt;button type="button" class="btn btn-default btn-sm"&gt;（小按钮）Small button&lt;/button&gt;</code> </td>
+                                </tr>
+                                <tr>
+                                    <td><button type="button" class="btn btn-default">（默认尺寸）Default button</button> </td>
+                                    <td> <code>&lt;button type="button" class="btn btn-default"&gt;（默认尺寸）Default button&lt;/button&gt;</code> </td>
+                                </tr>
+                                <tr>
+                                    <td><button type="button" class="btn btn-default btn-lg">（大按钮）Large button</button> </td>
+                                    <td> <code>&lt;button type="button" class="btn btn-default btn-lg"&gt;（大按钮）Large button&lt;/button&gt;</code> </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="col-xs-12">
+                    <div class="panel panel-success">
+                        <div class="panel-heading"><i class="fa fa-square-o"></i> 按钮状态</div>
+                        <div class="panel-body">
+                            <table class="table table-bordered table-hover">
+                                <tr>
+                                    <td><button type="button" class="btn btn-info">（默认）</button></td>
+                                    <td> <code>&lt;button type="button" class="btn btn-info"&gt;（默认）&lt;/button&gt;</code> </td>
+                                </tr>
+                                <tr>
+                                    <td><button type="button" class="btn btn-info active">（激活）active</button></td>
+                                    <td> <code>&lt;button type="button" class="btn btn-info active"&gt;（激活）active&lt;/button&gt;</code> </td>
+                                </tr>
+                                <tr>
+                                    <td><button type="button" class="btn btn-info disabled">（禁用）disabled</button> </td>
+                                    <td> <code>&lt;button type="button" class="btn btn-info disabled"&gt;（禁用）disabled&lt;/button&gt;</code> </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+
     </main>
-    <footer>
-
-    </footer>
-
+</div>
 </body>
 </html>
