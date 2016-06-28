@@ -3,7 +3,16 @@ a:hover, a:active, a:focus {
     text-decoration: none;
     color: #72afd2;
 }
-body {
+html, body {
+    height: 100%;
+}
+.wrap {
+    // 不能直接设置 height， 否则溢出部分会被截断
+    min-height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+.wrap {
     > .header {
         .logo {
             float: left;
@@ -25,9 +34,11 @@ body {
     }
     .left-side {
         position: absolute;
-        width: 220px;
         top: 50px;
-        bottom: 0;
+        left: 0;
+        width: 220px;
+        height: 100%;
+        border-right: 1px solid #dbdbdb;
     }
     .sidebar .sidebar-menu > li {
         margin: 0;
@@ -35,14 +46,14 @@ body {
     }
     > .main {
         background-color: #f9f9f9;
-        min-height: 400px;
-        padding-left: 220px;
+        min-height: 100%;
+        padding: 20px 20px 20px 240px;
     }
 }
 
 .skin-blue {
     .logo {
-        background-color: #367fa9;
+        background-color: #3c8dbc;
         color: #f9f9f9;
     }
     .navbar {
@@ -157,6 +168,56 @@ body {
                     width: auto;
                 }
             }
+        }
+    }
+}
+
+.page-icons {
+
+
+    .nav-cont {
+        border:solid #ddd;
+        border-width: 0 1px 1px 1px;
+        background-color: #fff;
+        padding-top: 1px;
+        .list-item {
+            list-style: none;
+        }
+        .font-title {
+            margin: 20px;
+            border-bottom: solid 2px #eee;
+            padding-bottom: 12px;
+        }
+    }
+
+    .font-list {
+        .list-item {
+            padding: 3px 0;
+        }
+
+        .font-icon {
+            display: inline-block;
+            width: 20px;
+            .fa {
+                font-size: 16px;
+            }
+        }
+        .font-class {
+            display: inline-block;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            vertical-align: middle;
+        }
+    }
+}
+.pre {
+    white-space: pre;
+}
+.page-btns {
+    .panel-style {
+        .row {
+            padding-bottom: 1em;
         }
     }
 }

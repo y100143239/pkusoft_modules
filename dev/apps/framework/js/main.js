@@ -1,9 +1,12 @@
 
-define( ["jquery"], function ( $ ) {
+define( ["jquery"], function ( $) {
 
     $( document ).ready( function () {
+        var $main
+            ;
+        $main = $( "main.main" );
 
-        $( ".sidebar-menu" ).on( "click", ".treeview > a", function () {
+        $( ".sidebar-menu" ).on( "click.title", ".treeview > a", function () {
             var $this,
                 $arrow,
                 $menu
@@ -19,9 +22,13 @@ define( ["jquery"], function ( $ ) {
             } else {
                 $menu.hide();
             }
-
+            return false;
+        } ).on( "click.page", ".treeview-menu a", function () {
+            $main.load( $( this ).attr( "href" ) );
             return false;
         } );
+
+        //$( ".treeview-menu .active a" ).trigger( "click" );
 
     } );
 
