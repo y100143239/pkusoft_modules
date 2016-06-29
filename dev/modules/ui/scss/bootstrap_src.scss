@@ -4,8 +4,8 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
 
-// custom
-@import "bootstrap/custom-plat";
+
+
 
 // Core variables and mixins
 @import "bootstrap/variables";
@@ -57,3 +57,9 @@
 // Utility classes
 @import "bootstrap/utilities";
 @import "bootstrap/responsive-utilities";
+
+
+
+// custom
+@import "bootstrap/custom-plat"; // 直角
+@import "bootstrap/custom-buttons"; // 按钮
