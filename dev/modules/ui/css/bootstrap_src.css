@@ -4,12 +4,6 @@
  * Copyright 2011-2015 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
-.btn.btn-flat {
-  border-radius: 0;
-  -webkit-box-shadow: none;
-  -moz-box-shadow: none;
-  box-shadow: none; }
-
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
 html {
   font-family: sans-serif;
@@ -5815,5 +5809,27 @@ button.close {
 @media print {
   .hidden-print {
     display: none !important; } }
+.btn.btn-flat {
+  border-radius: 0;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none; }
+
+.btn-app {
+  position: relative;
+  padding: 12px 3px;
+  min-width: 60px;
+  height: 60px;
+  font-size: 12px; }
+  .btn-app > .fa, .btn-app > .glyphicon, .btn-app > .ion {
+    font-size: 20px;
+    display: block;
+    margin-bottom: 2px; }
+  .btn-app > .badge {
+    position: absolute;
+    top: -3px;
+    right: -10px;
+    font-size: 10px;
+    font-weight: 400; }
 
 /*# sourceMappingURL=bootstrap_src.css.map */

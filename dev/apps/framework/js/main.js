@@ -1,5 +1,5 @@
 
-define( ["jquery"], function ( $) {
+define( ["jquery", "bootstrap"], function ( $) {
 
     $( document ).ready( function () {
         var $main
@@ -24,11 +24,15 @@ define( ["jquery"], function ( $) {
             }
             return false;
         } ).on( "click.page", ".treeview-menu a", function () {
+            var $this;
+            $this = $( this );
             $main.load( $( this ).attr( "href" ) );
+            $this.parent().addClass( "active" ).siblings().removeClass( "active" );
+            $this.closest( ".treeview-menu" ).addClass( "active" ).siblings().removeClass( "active" );;
             return false;
         } );
 
-        //$( ".treeview-menu .active a" ).trigger( "click" );
+        $( ".treeview-menu .active a" ).trigger( "click" );
 
     } );
 
