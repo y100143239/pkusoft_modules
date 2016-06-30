@@ -1,62 +1,10 @@
-@import url(../css/bootstrap_src.css);
-.pku-loading-container {
-  z-index: 99;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%; }
-
-.pku-loading-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: #000;
-  opacity: 0.35;
-  filter: alpha(opacity=35); }
-
-.pku-loading-gif {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: url(../images/loading_60x60.gif) no-repeat center center; }
-
-.pku-loading-counter {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 48px;
-  height: 12px;
-  color: #fff;
-  text-align: center;
-  font-size: 12px;
-  line-height: 12px;
-  font-family: "Microsoft Yahei",sans-serif;
-  margin: -6px 0 0 -24px; }
-
-.pku-loading-text {
-  position: absolute;
-  top: 30%;
-  left: 0;
-  color: #fff;
-  width: 100%;
-  text-align: center;
-  font-size: 16px;
-  font-family: "Microsoft Yahei",sans-serif; }
-
-body {
-  font-family: Helvetica, "Microsoft Yahei", Arial, sans-serif; }
-
 /*!
  *  Font Awesome 4.5.0 by @davegandy - http://fontawesome.io - @fontawesome
  *  License - http://fontawesome.io/license (Font: SIL OFL 1.1, CSS: MIT License)
  */
 /* FONT PATH
  * -------------------------- */
+@import url(../css/bootstrap_src.css);
 @font-face {
   font-family: 'FontAwesome';
   src: url("../fonts/fontawesome-webfont.eot?v=4.6.3");
@@ -2242,5 +2190,54 @@ body {
   margin: 0;
   overflow: visible;
   clip: auto; }
+
+.pku-loading-container {
+  z-index: 99;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%; }
+
+.pku-loading-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+  opacity: 0.35;
+  filter: alpha(opacity=35); }
+
+.pku-loading-gif {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url(../images/loading_60x60.gif) no-repeat center center; }
+
+.pku-loading-counter {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 48px;
+  height: 12px;
+  color: #fff;
+  text-align: center;
+  font-size: 12px;
+  line-height: 12px;
+  font-family: "Microsoft Yahei",sans-serif;
+  margin: -6px 0 0 -24px; }
+
+.pku-loading-text {
+  position: absolute;
+  top: 30%;
+  left: 0;
+  color: #fff;
+  width: 100%;
+  text-align: center;
+  font-size: 16px;
+  font-family: "Microsoft Yahei",sans-serif; }
 
 /*# sourceMappingURL=pku.css.map */

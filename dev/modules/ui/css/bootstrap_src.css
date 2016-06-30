@@ -5832,4 +5832,19 @@ button.close {
     font-size: 10px;
     font-weight: 400; }
 
+.panel.panel-simple .panel-heading {
+  border-bottom: 1px solid #f4f4f4; }
+.panel.panel-simple .panel-footer {
+  border-top: 1px solid #f4f4f4;
+  background-color: #fff; }
+
+.panel-footer:before, .panel-footer:after {
+  content: " ";
+  display: table; }
+.panel-footer:after {
+  clear: both; }
+
+.fa.form-control-feedback {
+  line-height: 34px; }
+
 /*# sourceMappingURL=bootstrap_src.css.map */
