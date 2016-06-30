@@ -1,0 +1,15 @@
+
+.panel {
+    &.panel-simple {
+        .panel-heading {
+            border-bottom: 1px solid #f4f4f4;
+        }
+        .panel-footer {
+            border-top: 1px solid #f4f4f4;
+            background-color: #fff;
+        }
+    }
+}
+.panel-footer {
+    @include clearfix();
+}

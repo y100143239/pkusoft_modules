@@ -61,5 +61,8 @@
 
 
 // custom
-@import "bootstrap/custom-plat"; // 直角
-@import "bootstrap/custom-buttons"; // 按钮
+@import "bootstrap/custom/plat"; // 直角
+@import "bootstrap/custom/buttons"; // 按钮
+@import "bootstrap/custom/panel"; // 面板
+@import "bootstrap/custom/input-group";
+@import "bootstrap/custom/form";

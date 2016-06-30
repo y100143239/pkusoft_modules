@@ -27,8 +27,9 @@ define( ["jquery", "bootstrap"], function ( $) {
             var $this;
             $this = $( this );
             $main.load( $( this ).attr( "href" ) );
-            $this.parent().addClass( "active" ).siblings().removeClass( "active" );
-            $this.closest( ".treeview-menu" ).addClass( "active" ).siblings().removeClass( "active" );;
+            $this.closest( ".sidebar-menu" ).find( ".active" ).removeClass( "active" );
+            $this.parent().addClass( "active" );
+            $this.closest( ".treeview" ).addClass( "active" );
             return false;
         } );
 

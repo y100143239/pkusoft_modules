@@ -5,6 +5,7 @@
 //}
 html, body {
     height: 100%;
+    font-family: "Helvetica Neue", Helvetica, Microsoft Yahei, Hiragino Sans GB, WenQuanYi Micro Hei, sans-serif;;
 }
 .wrap {
     // 不能直接设置 height， 否则溢出部分会被截断
@@ -21,7 +22,7 @@ html, body {
             text-align: center;
             padding: 0 10px;
             width: 220px;
-            font-family: 'Microsoft Yahei', sans-serif;
+            font-family: "Helvetica Neue", Helvetica, Microsoft Yahei, Hiragino Sans GB, WenQuanYi Micro Hei, sans-serif;;
             font-weight: 500;
             height: 50px;
             display: block;
@@ -43,6 +44,11 @@ html, body {
     .sidebar .sidebar-menu > li {
         margin: 0;
         padding: 0;
+    }
+    .sidebar {
+        a:focus {
+            text-decoration: none;
+        }
     }
     > .main {
         background-color: #f9f9f9;
