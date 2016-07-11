@@ -145,4 +145,7 @@ html, body {
 .page-btns .panel-style .row {
   padding-bottom: 1em; }
 
+.page-overlay .panel-body {
+  position: relative; }
+
 /*# sourceMappingURL=main.css.map */
