@@ -1,16 +1,17 @@
-
-define( ["jquery", "bootstrap"], function ( $) {
+define( [ "jquery", "bootstrap" ], function ( $ ) {
 
     $( document ).ready( function () {
-        var $main
+        var $main,
+            $wrap
             ;
         $main = $( "main.main" );
+        $wrap = $( ".wrap" );
 
         $( ".sidebar-menu" ).on( "click.title", ".treeview > a", function () {
             var $this,
                 $arrow,
                 $menu
-            ;
+                ;
             $this = $( this );
             $arrow = $this.find( ".fa-angle-left" );
             $menu = $this.next();
@@ -26,7 +27,14 @@ define( ["jquery", "bootstrap"], function ( $) {
         } ).on( "click.page", ".treeview-menu a", function () {
             var $this;
             $this = $( this );
-            $main.load( $( this ).attr( "href" ) );
+
+            $wrap.append( '<div class="overlay overlay-black"><i class="fa fa-spinner fa-spin"></i></div>' );
+
+            $main.load( $( this ).attr( "href" ), function successCallback() {
+                //alert( "loaded" );
+                $wrap.children( ".overlay" ).remove();
+                window["PR"] && window["PR"].prettyPrint();
+            } );
             $this.closest( ".sidebar-menu" ).find( ".active" ).removeClass( "active" );
             $this.parent().addClass( "active" );
             $this.closest( ".treeview" ).addClass( "active" );

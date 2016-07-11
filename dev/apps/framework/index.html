@@ -24,7 +24,8 @@
             paths: {
                 "jquery": "jquery/jquery-1.11.3",
                 "doT": "utils/doT",
-                "bootstrap": "lib/bootstrap/js/bootstrap"
+                "bootstrap": "lib/bootstrap/js/bootstrap",
+                "code-pretty": "lib/pretty/prettify.min"
             },
             map: {
                 '*': {
@@ -33,22 +34,22 @@
                 }
             },
             shim : {
-                "bootstrap": [ "jquery" ]
+                "bootstrap": [ "jquery" ],
+                "code-pretty": [ "css!lib/pretty/prettify.css" ]
             },
             // 超时
             waitSeconds: 15
         } );
-        require(["./js/main.js"]);
+        require( [ "code-pretty", "./js/main.js" ] );
     </script>
 </head>
 <body class="skin-blue">
 
 <div class="wrap">
 
-
     <header class="header">
         <a href="index.html" class="logo">
-            Pku
+            Pku Framework
         </a>
         <nav class="navbar navbar-static-top ">
         </nav>
@@ -68,16 +69,17 @@
                         <li><a href="pages/ui/tables.html" ><i class="fa fa-angle-double-right"></i> tables</a></li>
                         <li><a href="pages/ui/buttons.html" ><i class="fa fa-angle-double-right"></i> buttons</a></li>
                         <li><a href="pages/ui/alerts.html" ><i class="fa fa-angle-double-right"></i> alerts</a></li>
+                        <li class="active"><a href="pages/ui/overlay.html" ><i class="fa fa-angle-double-right"></i> overlay</a></li>
                     </ul>
                 </li>
-                <li class="treeview active">
+                <li class="treeview">
                     <a href="#">
                         <i class="fa fa-edit"></i> <span>Form Controls</span>
-                        <i class="fa pull-right fa-angle-left fa-angle-down"></i>
+                        <i class="fa pull-right fa-angle-left "></i>
                     </a>
                     <ul class="treeview-menu" >
                         <li><a href="pages/form/general.html" ><i class="fa fa-angle-double-right"></i> general</a></li>
-                        <li class="active"><a href="pages/form/advance.html" ><i class="fa fa-angle-double-right"></i> advance</a></li>
+                        <li><a href="pages/form/advance.html" ><i class="fa fa-angle-double-right"></i> advance</a></li>
                     </ul>
                 </li>
             </ul>

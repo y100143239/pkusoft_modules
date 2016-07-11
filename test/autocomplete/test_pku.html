@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script data-main="../../dev/modules/" src="../../dev/modules/require.js"></script>
+    <script>
+        var VERSION;
+//         VERSION = "v2.0";
+        require.config( {
+            urlArgs: "VERSION=" + ( VERSION || (new Date()).getTime()),
+            map: {
+                '*': {
+                    'css': 'utils/css/css'
+                }
+            },
+            shim: {
+                'ui/autocomplete': ["css!ui/css/autocomplete.css", 'jquery/jquery-1.9.0']
+            },
+            waitSeconds: 15
+        } );
+        require(["ui/autocomplete"], function () {
+
+            //$( "#testAC" ).autocompleteDic();
+
+        } );
+    </script>
+</head>
+<body>
+
+<input type="text" id="testAC" name="test"
+       data-dic-src="./DIC_CODE.xml"
+       data-dic-trigger="#btn-trigger"
+       data-dic-clean="#btn-clean"
+        />
+<button type="button" id="btn-trigger">触发</button>
+<button type="button" id="btn-clean">清空</button>
+
+</body>
+</html>
