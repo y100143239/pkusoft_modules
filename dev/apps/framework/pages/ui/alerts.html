@@ -1,11 +1,28 @@
 <div class="page-alerts">
+            <div class="row">
 
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <i class="fa fa-warning"></i> 警告框
-        </div>
-        <div class="panel-body">
+                <div class="col-xs-5">
 
+                    <div class="alert alert-info alert-dismissible">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        <h4><i class="fa fa-info-circle"></i> 说明</h4>
+                        <div class="pre">1. .alert 指定为警告框
+2. .alert-info 指定样式
+3. .alert-dismissible 设置为可关闭
+4. data-dismiss="alert" 指定关闭按钮 </div>
+                    </div>
+
+                </div>
+                <div class="col-xs-7">
+<pre class="prettyprint linenums">&lt;div class="alert alert-info alert-dismissible"&gt;
+    &lt;button type="button" class="close" data-dismiss="alert"&gt;×&lt;/button&gt;
+    &lt;h4&gt;&lt;i class="fa fa-info-circle"&gt;&lt;/i&gt; RequireJS&lt;/h4&gt;
+    content...
+&lt;/div&gt;
+</pre>
+                </div>
+
+            </div>
             <div class="row">
 
                 <div class="col-xs-5">
@@ -28,27 +45,6 @@
 
             </div>
 
-            <div class="row">
-
-                <div class="col-xs-5">
-
-                    <div class="alert alert-info alert-dismissible">
-                        <button type="button" class="close" data-dismiss="alert">×</button>
-                        <h4><i class="fa fa-info-circle"></i> RequireJS</h4>
-                        RequireJS是一个非常小巧的JavaScript模块载入框架,是AMD规范最好的实现者之一。最新版本的RequireJS压缩后只有14K,堪称非常轻量。
-                    </div>
-
-                </div>
-                <div class="col-xs-7">
-<pre class="prettyprint linenums">&lt;div class="alert alert-info alert-dismissible"&gt;
-    &lt;button type="button" class="close" data-dismiss="alert"&gt;×&lt;/button&gt;
-    &lt;h4&gt;&lt;i class="fa fa-info-circle"&gt;&lt;/i&gt; RequireJS&lt;/h4&gt;
-    content...
-&lt;/div&gt;
-</pre>
-                </div>
-
-            </div>
 
             <div class="row">
 
@@ -97,6 +93,5 @@
 
 
         </div>
-    </div>
 
 </div>
