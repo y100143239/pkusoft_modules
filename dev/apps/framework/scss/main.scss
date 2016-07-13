@@ -248,3 +248,16 @@ html, body {
     display: block;
     z-index: 1;
 }
+
+.page-tooltip {
+    .tooltip-example {
+        padding: 20px;
+        background-color: #fff;
+        .tooltip {
+            position : relative;
+            display  : inline-block;
+            margin   : 10px 20px;
+            opacity  : 1;
+        }
+    }
+}
