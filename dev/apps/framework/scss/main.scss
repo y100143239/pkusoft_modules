@@ -238,3 +238,13 @@ html, body {
         padding: 8px;
     }
 }
+
+.modal.modal-static-example {
+    position: relative;
+    top: auto;
+    bottom: auto;
+    right: auto;
+    left: auto;
+    display: block;
+    z-index: 1;
+}
