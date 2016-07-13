@@ -151,4 +151,13 @@ html, body {
 .page-utilities .children-padding p {
   padding: 8px; }
 
+.modal.modal-static-example {
+  position: relative;
+  top: auto;
+  bottom: auto;
+  right: auto;
+  left: auto;
+  display: block;
+  z-index: 1; }
+
 /*# sourceMappingURL=main.css.map */
