@@ -1669,7 +1669,7 @@ if (typeof jQuery === 'undefined') {
     while (document.getElementById(prefix))
     return prefix
   }
-
+/*
   Tooltip.prototype.tip = function () {
     if (!this.$tip) {
       this.$tip = $(this.options.template)
@@ -1679,7 +1679,27 @@ if (typeof jQuery === 'undefined') {
     }
     return this.$tip
   }
+*/
+  Tooltip.prototype.tip = function () {
+    var theme,
+        template
+        ;
+    theme = this.options.theme;
+    template = this.options.template;
 
+    if (!this.$tip) {
+
+      if ( theme ) {
+        template = template.replace( "tooltip", "tooltip " + theme );
+      }
+
+      this.$tip = $( template )
+      if (this.$tip.length != 1) {
+        throw new Error(this.type + ' `template` option must consist of exactly 1 top-level element!')
+      }
+    }
+    return this.$tip
+  }
   Tooltip.prototype.arrow = function () {
     return (this.$arrow = this.$arrow || this.tip().find('.tooltip-arrow'))
   }

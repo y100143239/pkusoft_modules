@@ -1,0 +1,96 @@
+<div class="page-tooltip">
+
+    <article>
+        <header>
+            <h3 class="text-muted">1. 静态示例</h3>
+            <hr/>
+        </header>
+        <main>
+
+            <div class="tooltip-example">
+
+                <div class="tooltip left" role="tooltip">
+                    <div class="tooltip-arrow"></div>
+                    <div class="tooltip-inner"> tooltip </div>
+                </div>
+
+                <div class="tooltip tooltip-normal top" role="tooltip">
+                    <div class="tooltip-arrow"></div>
+                    <div class="tooltip-inner"> tooltip tooltip-normal </div>
+                </div>
+
+                <div class="tooltip tooltip-info bottom" role="tooltip">
+                    <div class="tooltip-arrow"></div>
+                    <div class="tooltip-inner"> tooltip tooltip-info</div>
+                </div>
+
+                <div class="tooltip tooltip-success bottom" role="tooltip">
+                    <div class="tooltip-arrow"></div>
+                    <div class="tooltip-inner"> tooltip tooltip-success</div>
+                </div>
+
+                <div class="tooltip tooltip-warning right" role="tooltip">
+                    <div class="tooltip-arrow"></div>
+                    <div class="tooltip-inner"> tooltip tooltip-warning</div>
+                </div>
+
+                <div class="tooltip tooltip-danger top" role="tooltip">
+                    <div class="tooltip-arrow"></div>
+                    <div class="tooltip-inner"> tooltip tooltip-danger</div>
+                </div>
+
+
+                <div class="tooltip tooltip-info-dark bottom" role="tooltip">
+                    <div class="tooltip-arrow"></div>
+                    <div class="tooltip-inner"> tooltip tooltip-info-dark</div>
+                </div>
+
+                <div class="tooltip tooltip-success-dark bottom" role="tooltip">
+                    <div class="tooltip-arrow"></div>
+                    <div class="tooltip-inner"> tooltip tooltip-success-dark</div>
+                </div>
+
+                <div class="tooltip tooltip-warning-dark right" role="tooltip">
+                    <div class="tooltip-arrow"></div>
+                    <div class="tooltip-inner"> tooltip tooltip-warning-dark</div>
+                </div>
+
+                <div class="tooltip tooltip-danger-dark top" role="tooltip">
+                    <div class="tooltip-arrow"></div>
+                    <div class="tooltip-inner"> tooltip tooltip-danger-dark</div>
+                </div>
+
+            </div>
+            <br/>
+        </main>
+    </article>
+
+
+    <article>
+        <header>
+            <h3 class="text-muted">2. 动态示例</h3>
+            <hr/>
+        </header>
+        <main>
+
+            <button type="button" class="btn btn-default"
+                    data-toggle="tooltip"
+                    data-placement="left"
+                    title="Tooltip on left">Tooltip on left</button>
+
+            <button type="button" class="btn btn-default"
+                    data-toggle="tooltip"
+                    data-placement="top"
+                    data-theme="tooltip-danger-dark"
+                    title="Tooltip on left">Tooltip on top</button>
+
+
+            <br/>
+        </main>
+    </article>
+
+</div>
+
+<script>
+    $('[data-toggle="tooltip"]').tooltip()
+</script>

@@ -1,0 +1,319 @@
+$tooltip-color-normal: #000;
+$tooltip-bg-normal: #f0eff0;
+$tooltip-arrow-color-normal: $tooltip-bg-normal;
+
+$tooltip-color-info: #31708F;
+$tooltip-bg-info: #D9EDF7;
+$tooltip-arrow-color-info: $tooltip-bg-info;
+
+$tooltip-color-success: #3c763d;
+$tooltip-bg-success: #dff0d8;
+$tooltip-arrow-color-success: $tooltip-bg-success;
+
+$tooltip-color-warning: #8a6d3b;
+$tooltip-bg-warning: #fcf8e3;
+$tooltip-arrow-color-warning: $tooltip-bg-warning;
+
+$tooltip-color-danger: #a94442;
+$tooltip-bg-danger: #f2dede;
+$tooltip-arrow-color-danger: $tooltip-bg-danger;
+
+$tooltip-color-info-dark: #fff;
+$tooltip-bg-info-dark: #00a7d0;
+$tooltip-arrow-color-info-dark: $tooltip-bg-info-dark;
+
+$tooltip-color-warning-dark: #fff;
+$tooltip-bg-warning-dark: #db8b0b;
+$tooltip-arrow-color-warning-dark: $tooltip-bg-warning-dark;
+
+$tooltip-color-success-dark: #fff;
+$tooltip-bg-success-dark: #008d4c;
+$tooltip-arrow-color-success-dark: $tooltip-bg-success-dark;
+
+$tooltip-color-danger-dark: #fff;
+$tooltip-bg-danger-dark: #d33724;
+$tooltip-arrow-color-danger-dark: $tooltip-bg-danger-dark;
+
+
+.tooltip-inner {
+    text-align: left;
+}
+
+.tooltip-normal {
+    .tooltip-inner {
+        color: $tooltip-color-normal;
+        background-color: $tooltip-bg-normal;
+    }
+    &.top .tooltip-arrow {
+        border-top-color: $tooltip-arrow-color-normal;
+    }
+    &.top-left .tooltip-arrow {
+        border-top-color: $tooltip-arrow-color-normal;
+    }
+    &.top-right .tooltip-arrow {
+        border-top-color: $tooltip-arrow-color-normal;
+    }
+    &.right .tooltip-arrow {
+        border-right-color: $tooltip-arrow-color-normal;
+    }
+    &.left .tooltip-arrow {
+        border-left-color: $tooltip-arrow-color-normal;
+    }
+    &.bottom .tooltip-arrow {
+        border-bottom-color: $tooltip-arrow-color-normal;
+    }
+    &.bottom-left .tooltip-arrow {
+        border-bottom-color: $tooltip-arrow-color-normal;
+    }
+    &.bottom-right .tooltip-arrow {
+        border-bottom-color: $tooltip-arrow-color-normal;
+    }
+}
+
+.tooltip-info {
+    .tooltip-inner {
+        color: $tooltip-color-info;
+        background-color: $tooltip-bg-info;
+    }
+    &.top .tooltip-arrow {
+        border-top-color: $tooltip-arrow-color-info;
+    }
+    &.top-left .tooltip-arrow {
+        border-top-color: $tooltip-arrow-color-info;
+    }
+    &.top-right .tooltip-arrow {
+        border-top-color: $tooltip-arrow-color-info;
+    }
+    &.right .tooltip-arrow {
+        border-right-color: $tooltip-arrow-color-info;
+    }
+    &.left .tooltip-arrow {
+        border-left-color: $tooltip-arrow-color-info;
+    }
+    &.bottom .tooltip-arrow {
+        border-bottom-color: $tooltip-arrow-color-info;
+    }
+    &.bottom-left .tooltip-arrow {
+        border-bottom-color: $tooltip-arrow-color-info;
+    }
+    &.bottom-right .tooltip-arrow {
+        border-bottom-color: $tooltip-arrow-color-info;
+    }
+}
+
+.tooltip-success {
+    .tooltip-inner {
+        color: $tooltip-color-success;
+        background-color: $tooltip-bg-success;
+    }
+    &.top .tooltip-arrow {
+        border-top-color: $tooltip-arrow-color-success;
+    }
+    &.top-left .tooltip-arrow {
+        border-top-color: $tooltip-arrow-color-success;
+    }
+    &.top-right .tooltip-arrow {
+        border-top-color: $tooltip-arrow-color-success;
+    }
+    &.right .tooltip-arrow {
+        border-right-color: $tooltip-arrow-color-success;
+    }
+    &.left .tooltip-arrow {
+        border-left-color: $tooltip-arrow-color-success;
+    }
+    &.bottom .tooltip-arrow {
+        border-bottom-color: $tooltip-arrow-color-success;
+    }
+    &.bottom-left .tooltip-arrow {
+        border-bottom-color: $tooltip-arrow-color-success;
+    }
+    &.bottom-right .tooltip-arrow {
+        border-bottom-color: $tooltip-arrow-color-success;
+    }
+}
+
+.tooltip-warning {
+    .tooltip-inner {
+        color: $tooltip-color-warning;
+        background-color: $tooltip-bg-warning;
+    }
+    &.top .tooltip-arrow {
+        border-top-color: $tooltip-arrow-color-warning;
+    }
+    &.top-left .tooltip-arrow {
+        border-top-color: $tooltip-arrow-color-warning;
+    }
+    &.top-right .tooltip-arrow {
+        border-top-color: $tooltip-arrow-color-warning;
+    }
+    &.right .tooltip-arrow {
+        border-right-color: $tooltip-arrow-color-warning;
+    }
+    &.left .tooltip-arrow {
+        border-left-color: $tooltip-arrow-color-warning;
+    }
+    &.bottom .tooltip-arrow {
+        border-bottom-color: $tooltip-arrow-color-warning;
+    }
+    &.bottom-left .tooltip-arrow {
+        border-bottom-color: $tooltip-arrow-color-warning;
+    }
+    &.bottom-right .tooltip-arrow {
+        border-bottom-color: $tooltip-arrow-color-warning;
+    }
+}
+
+.tooltip-danger {
+    .tooltip-inner {
+        color: $tooltip-color-danger;
+        background-color: $tooltip-bg-danger;
+    }
+    &.top .tooltip-arrow {
+        border-top-color: $tooltip-arrow-color-danger;
+    }
+    &.top-left .tooltip-arrow {
+        border-top-color: $tooltip-arrow-color-danger;
+    }
+    &.top-right .tooltip-arrow {
+        border-top-color: $tooltip-arrow-color-danger;
+    }
+    &.right .tooltip-arrow {
+        border-right-color: $tooltip-arrow-color-danger;
+    }
+    &.left .tooltip-arrow {
+        border-left-color: $tooltip-arrow-color-danger;
+    }
+    &.bottom .tooltip-arrow {
+        border-bottom-color: $tooltip-arrow-color-danger;
+    }
+    &.bottom-left .tooltip-arrow {
+        border-bottom-color: $tooltip-arrow-color-danger;
+    }
+    &.bottom-right .tooltip-arrow {
+        border-bottom-color: $tooltip-arrow-color-danger;
+    }
+}
+
+.tooltip-info-dark {
+    .tooltip-inner {
+        color: $tooltip-color-info-dark;
+        background-color: $tooltip-bg-info-dark;
+    }
+    &.top .tooltip-arrow {
+        border-top-color: $tooltip-arrow-color-info-dark;
+    }
+    &.top-left .tooltip-arrow {
+        border-top-color: $tooltip-arrow-color-info-dark;
+    }
+    &.top-right .tooltip-arrow {
+        border-top-color: $tooltip-arrow-color-info-dark;
+    }
+    &.right .tooltip-arrow {
+        border-right-color: $tooltip-arrow-color-info-dark;
+    }
+    &.left .tooltip-arrow {
+        border-left-color: $tooltip-arrow-color-info-dark;
+    }
+    &.bottom .tooltip-arrow {
+        border-bottom-color: $tooltip-arrow-color-info-dark;
+    }
+    &.bottom-left .tooltip-arrow {
+        border-bottom-color: $tooltip-arrow-color-info-dark;
+    }
+    &.bottom-right .tooltip-arrow {
+        border-bottom-color: $tooltip-arrow-color-info-dark;
+    }
+}
+
+.tooltip-warning-dark {
+    .tooltip-inner {
+        color: $tooltip-color-warning-dark;
+        background-color: $tooltip-bg-warning-dark;
+    }
+    &.top .tooltip-arrow {
+        border-top-color: $tooltip-arrow-color-warning-dark;
+    }
+    &.top-left .tooltip-arrow {
+        border-top-color: $tooltip-arrow-color-warning-dark;
+    }
+    &.top-right .tooltip-arrow {
+        border-top-color: $tooltip-arrow-color-warning-dark;
+    }
+    &.right .tooltip-arrow {
+        border-right-color: $tooltip-arrow-color-warning-dark;
+    }
+    &.left .tooltip-arrow {
+        border-left-color: $tooltip-arrow-color-warning-dark;
+    }
+    &.bottom .tooltip-arrow {
+        border-bottom-color: $tooltip-arrow-color-warning-dark;
+    }
+    &.bottom-left .tooltip-arrow {
+        border-bottom-color: $tooltip-arrow-color-warning-dark;
+    }
+    &.bottom-right .tooltip-arrow {
+        border-bottom-color: $tooltip-arrow-color-warning-dark;
+    }
+}
+
+.tooltip-success-dark {
+    .tooltip-inner {
+        color: $tooltip-color-success-dark;
+        background-color: $tooltip-bg-success-dark;
+    }
+    &.top .tooltip-arrow {
+        border-top-color: $tooltip-arrow-color-success-dark;
+    }
+    &.top-left .tooltip-arrow {
+        border-top-color: $tooltip-arrow-color-success-dark;
+    }
+    &.top-right .tooltip-arrow {
+        border-top-color: $tooltip-arrow-color-success-dark;
+    }
+    &.right .tooltip-arrow {
+        border-right-color: $tooltip-arrow-color-success-dark;
+    }
+    &.left .tooltip-arrow {
+        border-left-color: $tooltip-arrow-color-success-dark;
+    }
+    &.bottom .tooltip-arrow {
+        border-bottom-color: $tooltip-arrow-color-success-dark;
+    }
+    &.bottom-left .tooltip-arrow {
+        border-bottom-color: $tooltip-arrow-color-success-dark;
+    }
+    &.bottom-right .tooltip-arrow {
+        border-bottom-color: $tooltip-arrow-color-success-dark;
+    }
+}
+
+.tooltip-danger-dark {
+    .tooltip-inner {
+        color: $tooltip-color-danger-dark;
+        background-color: $tooltip-bg-danger-dark;
+    }
+    &.top .tooltip-arrow {
+        border-top-color: $tooltip-arrow-color-danger-dark;
+    }
+    &.top-left .tooltip-arrow {
+        border-top-color: $tooltip-arrow-color-danger-dark;
+    }
+    &.top-right .tooltip-arrow {
+        border-top-color: $tooltip-arrow-color-danger-dark;
+    }
+    &.right .tooltip-arrow {
+        border-right-color: $tooltip-arrow-color-danger-dark;
+    }
+    &.left .tooltip-arrow {
+        border-left-color: $tooltip-arrow-color-danger-dark;
+    }
+    &.bottom .tooltip-arrow {
+        border-bottom-color: $tooltip-arrow-color-danger-dark;
+    }
+    &.bottom-left .tooltip-arrow {
+        border-bottom-color: $tooltip-arrow-color-danger-dark;
+    }
+    &.bottom-right .tooltip-arrow {
+        border-bottom-color: $tooltip-arrow-color-danger-dark;
+    }
+}
