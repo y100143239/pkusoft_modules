@@ -2,36 +2,36 @@ $tooltip-color-normal: #000;
 $tooltip-bg-normal: #f0eff0;
 $tooltip-arrow-color-normal: $tooltip-bg-normal;
 
-$tooltip-color-info: #31708F;
-$tooltip-bg-info: #D9EDF7;
+$tooltip-color-info: $state-info-text;
+$tooltip-bg-info: $state-info-bg;
 $tooltip-arrow-color-info: $tooltip-bg-info;
 
-$tooltip-color-success: #3c763d;
-$tooltip-bg-success: #dff0d8;
+$tooltip-color-success: $state-success-text;
+$tooltip-bg-success: $state-success-bg;
 $tooltip-arrow-color-success: $tooltip-bg-success;
 
-$tooltip-color-warning: #8a6d3b;
-$tooltip-bg-warning: #fcf8e3;
+$tooltip-color-warning: $state-warning-text;
+$tooltip-bg-warning: $state-warning-bg;
 $tooltip-arrow-color-warning: $tooltip-bg-warning;
 
-$tooltip-color-danger: #a94442;
-$tooltip-bg-danger: #f2dede;
+$tooltip-color-danger: $state-danger-text;
+$tooltip-bg-danger: $state-danger-bg;
 $tooltip-arrow-color-danger: $tooltip-bg-danger;
 
 $tooltip-color-info-dark: #fff;
-$tooltip-bg-info-dark: #00a7d0;
+$tooltip-bg-info-dark: $state-info-bg-dark;
 $tooltip-arrow-color-info-dark: $tooltip-bg-info-dark;
 
 $tooltip-color-warning-dark: #fff;
-$tooltip-bg-warning-dark: #db8b0b;
+$tooltip-bg-warning-dark: $state-warning-bg-dark;
 $tooltip-arrow-color-warning-dark: $tooltip-bg-warning-dark;
 
 $tooltip-color-success-dark: #fff;
-$tooltip-bg-success-dark: #008d4c;
+$tooltip-bg-success-dark: $state-success-bg-dark;
 $tooltip-arrow-color-success-dark: $tooltip-bg-success-dark;
 
 $tooltip-color-danger-dark: #fff;
-$tooltip-bg-danger-dark: #d33724;
+$tooltip-bg-danger-dark: $state-danger-bg-dark;
 $tooltip-arrow-color-danger-dark: $tooltip-bg-danger-dark;
 
 

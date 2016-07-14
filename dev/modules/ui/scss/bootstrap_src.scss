@@ -61,6 +61,7 @@
 
 
 // custom
+@import "bootstrap/custom/variables";
 @import "bootstrap/custom/plat"; // 直角
 @import "bootstrap/custom/buttons"; // 按钮
 @import "bootstrap/custom/panel"; // 面板
@@ -68,3 +69,5 @@
 @import "bootstrap/custom/form";
 @import "bootstrap/custom/modals";
 @import "bootstrap/custom/tooltip";
+@import "bootstrap/custom/callout";
+@import "bootstrap/custom/alert";

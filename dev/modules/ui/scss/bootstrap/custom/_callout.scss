@@ -1,0 +1,53 @@
+
+.callout {
+    border-radius: $border-radius-base;
+    margin: 0 0 20px 0;
+    padding: 15px 30px 15px 15px;
+    border-left: 5px solid #eee;
+}
+.callout-info {
+    color: $state-info-text;
+    background-color: $state-info-bg;
+    border-left-color: $state-info-border;
+}
+
+.callout-warning {
+    color: $state-warning-text;
+    background-color: $state-warning-bg;
+    border-left-color: $state-warning-border;
+}
+
+.callout-success {
+    color: $state-success-text;
+    background-color: $state-success-bg;
+    border-left-color: $state-success-border;
+}
+
+.callout-danger {
+    color: $state-danger-text;
+    background-color: $state-danger-bg;
+    border-left-color: $state-danger-border;
+}
+.callout-info-dark {
+    color: $state-info-text-dark;
+    background-color: $state-info-bg-dark;
+    border-left-color: $state-info-border-dark;
+}
+
+.callout-warning-dark {
+    color: $state-warning-text-dark;
+    background-color: $state-warning-bg-dark;
+    border-left-color: $state-warning-border-dark;
+}
+
+.callout-success-dark {
+    color: $state-success-text-dark;
+    background-color: $state-success-bg-dark;
+    border-left-color: $state-success-border-dark;
+}
+
+.callout-danger-dark {
+    color: $state-danger-text-dark;
+    background-color: $state-danger-bg-dark;
+    border-left-color: $state-danger-border-dark;
+}
