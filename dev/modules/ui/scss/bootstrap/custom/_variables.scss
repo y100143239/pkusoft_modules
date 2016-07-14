@@ -1,0 +1,38 @@
+$state-success-text-dark:             #fff !default;
+$state-success-bg-dark:               #00a65a !default;
+$state-success-border-dark:           darken($state-success-bg-dark, 10%) !default;
+
+$state-info-text-dark:                #fff !default;
+$state-info-bg-dark:                  #00c0ef !default;
+$state-info-border-dark:              darken($state-info-bg-dark, 10%) !default;
+
+$state-warning-text-dark:             #fff !default;
+$state-warning-bg-dark:               #f39c12 !default;
+$state-warning-border-dark:           darken($state-warning-bg-dark, 10%) !default;
+
+$state-danger-text-dark:              #fff !default;
+$state-danger-bg-dark:                #dd4b39 !default;
+$state-danger-border-dark:            darken($state-danger-bg-dark, 10%) !default;
+
+
+//Primary
+$light-blue: #3c8dbc;
+//Danger
+$red: #dd4b39;
+//Success
+$green: #00a65a;
+//Info
+$aqua: #00c0ef;
+//Warning
+$yellow: #f39c12;
+$blue: #0073b7;
+$navy: #001F3F;
+$teal: #39CCCC;
+$olive: #3D9970;
+$lime: #01FF70;
+$orange: #FF851B;
+$fuchsia: #F012BE;
+$purple: #605ca8;
+$maroon: #D81B60;
+$black: #111;
+$gray: #d2d6de;

@@ -4,8 +4,7 @@ html, body {
 
 .wrap {
   min-height: 100%;
-  position: relative;
-  overflow: hidden; }
+  position: relative; }
 
 .wrap > .header .logo {
   float: left;
@@ -140,7 +139,8 @@ html, body {
   vertical-align: middle; }
 
 .pre {
-  white-space: pre; }
+  white-space: pre;
+  font-family: Menlo, Monaco, Consolas, "Courier New", monospace; }
 
 .page-btns .panel-style .row {
   padding-bottom: 1em; }
@@ -160,13 +160,17 @@ html, body {
   display: block;
   z-index: 1; }
 
+.article {
+  background-color: #fff;
+  padding: 8px 20px;
+  margin-bottom: 20px; }
+
 .page-tooltip .tooltip-example {
-  padding: 20px;
   background-color: #fff; }
   .page-tooltip .tooltip-example .tooltip {
     position: relative;
     display: inline-block;
-    margin: 10px 20px;
+    margin: 10px 0;
     opacity: 1; }
 
 /*# sourceMappingURL=main.css.map */

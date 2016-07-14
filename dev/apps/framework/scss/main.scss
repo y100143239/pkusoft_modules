@@ -11,7 +11,7 @@ html, body {
     // 不能直接设置 height， 否则溢出部分会被截断
     min-height: 100%;
     position: relative;
-    overflow: hidden;
+    //overflow: hidden;
 }
 .wrap {
     > .header {
@@ -219,6 +219,7 @@ html, body {
 }
 .pre {
     white-space: pre;
+    font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 .page-btns {
     .panel-style {
@@ -249,14 +250,20 @@ html, body {
     z-index: 1;
 }
 
+.article {
+    background-color: #fff;
+    padding: 8px 20px;
+    margin-bottom: 20px;
+}
 .page-tooltip {
+
+
     .tooltip-example {
-        padding: 20px;
         background-color: #fff;
         .tooltip {
             position : relative;
             display  : inline-block;
-            margin   : 10px 20px;
+            margin   : 10px 0;
             opacity  : 1;
         }
     }
