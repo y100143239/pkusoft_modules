@@ -27,6 +27,10 @@
                 "jquery": "jquery/jquery-1.11.3",
                 "doT": "utils/doT",
                 "bootstrap": "lib/bootstrap/js/bootstrap",
+
+                "datepicker": "lib/datepicker/js/bootstrap-datepicker-zh",
+
+                // 代码美化
                 "code-pretty": "lib/pretty/prettify.min"
             },
             map: {
@@ -42,7 +46,7 @@
             // 超时
             waitSeconds: 15
         } );
-        require( [ "code-pretty", "./js/main.js" ] );
+        require( [ "code-pretty", "datepicker", "./js/main.js" ] );
     </script>
 </head>
 <body class="skin-blue">
@@ -102,7 +106,8 @@
                     </a>
                     <ul class="treeview-menu" >
                         <li><a href="pages/widget/modal.html" ><i class="fa fa-angle-double-right"></i> modal（模态框）</a></li>
-                        <li class="active"><a href="pages/widget/tooltip.html" ><i class="fa fa-angle-double-right"></i> tooltip（提示）</a></li>
+                        <li><a href="pages/widget/tooltip.html" ><i class="fa fa-angle-double-right"></i> tooltip（提示）</a></li>
+                        <li class="active"><a href="pages/widget/datepicker.html" ><i class="fa fa-angle-double-right"></i> datepicker（日期选择）</a></li>
                     </ul>
                 </li>
                 <li class="treeview">
