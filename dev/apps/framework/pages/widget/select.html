@@ -1,0 +1,42 @@
+<div class="page-select">
+    <article class="article">
+        <header>
+            <h3 class="text-muted">1. 示例</h3>
+            <hr/>
+        </header>
+        <main>
+            <div class="row">
+                <div class="col-xs-6">
+                    <select class="form-control" id="select2_1"> </select>
+                </div>
+                <div class="col-xs-6">
+<pre class="prettyprint linenums">
+&lt;select class="form-control" id="select2_1"> </select>
+&lt;script>
+    jQuery("#select2_1").select2({
+        data:[
+            { id: 0, text: '张三', spell: "zs" },
+            { id: 1, text: '李四', spell: "ls" },
+            { id: 2, text: '王五', spell: "ww" },
+            { id: 3, text: '赵六', spell: "zl" },
+            { id: 4, text: '钱七', spell: "qq" }
+        ]
+    });
+&lt;/script>
+</pre>                    
+                </div>
+            </div>
+            <script type="text/javascript">
+                jQuery("#select2_1").select2({
+                    data:[
+                        { id: 0, text: '张三', spell: "zs" },
+                        { id: 1, text: '李四', spell: "ls" },
+                        { id: 2, text: '王五', spell: "ww" },
+                        { id: 3, text: '赵六', spell: "zl" },
+                        { id: 4, text: '钱七', spell: "qq" }
+                    ]
+                });
+            </script>
+        </main>
+    </article>
+</div>
