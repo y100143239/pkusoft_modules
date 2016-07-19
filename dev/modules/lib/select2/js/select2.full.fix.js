@@ -1813,7 +1813,6 @@ S2.define('select2/selection/allowClear',[
         data.length === 0) {
       return;
     }
-
     var $remove = $(
       '<span class="select2-selection__clear">' +
         '&times;' +
@@ -5355,6 +5354,20 @@ S2.define('select2/core',[
 
     this.on('close', function () {
       self.$container.removeClass('select2-container--open');
+        //FIX 添加验证
+        var validateErrorClass,
+            value;
+        validateErrorClass = self.options.options.required;
+
+        if ( ! validateErrorClass ) {
+            return;
+        }
+        value =  self.$element.val();
+        if ( value ) {
+            self.$selection.removeClass( validateErrorClass );
+        } else {
+            self.$selection.addClass( validateErrorClass );
+        }
     });
 
     this.on('enable', function () {
@@ -6404,6 +6417,33 @@ S2.define('select2/selection/stopPropagation',[
 
 }));
 
+//FIX
+function xmlDocToJson( responseData ) {
+    var data,
+        rowNode,
+        rowNodeList,
+        id, text, spell,
+        i, len
+        ;
+
+    data = [ { "id":"150000000000", "text": "内蒙古自治区公安厅", "spell": "nmgzzqgat" } ];
+
+    rowNodeList = responseData.getElementsByTagName( "row" );
+
+    for ( i = 0, len = rowNodeList.length; i < len; i++ ) {
+
+        rowNode = rowNodeList[ i ];
+
+        id = rowNode.getAttribute( "DIC_CODE" );
+        text = rowNode.getAttribute( "DIC_TEXT" );
+        spell = rowNode.getAttribute( "DIC_SPELL" );
+
+        data[ i ] = { id: id, text: text, spell: spell  };
+    }
+
+    return data;
+}
+
 S2.define('jquery.select2',[
   'jquery',
   'jquery-mousewheel',
@@ -6411,6 +6451,7 @@ S2.define('jquery.select2',[
   './select2/core',
   './select2/defaults'
 ], function ($, _, Select2, Defaults) {
+
   if ($.fn.select2 == null) {
     // All methods that should return the element
     var thisMethods = ['open', 'close', 'destroy'];
@@ -6424,7 +6465,26 @@ S2.define('jquery.select2',[
             //FIX i18n
             var instanceOptions = $.extend(true, { language: "zh-CN" }, options);
 
-          var instance = new Select2($(this), instanceOptions);
+            //FIX 添加xml字典支持
+            var _this = this;
+            var xmlurl = options[ "xmlurl" ] || $( _this ).data( "xmlurl" );
+            if ( xmlurl ) {
+                $.ajax( {
+                    type: "GET",
+                    url: xmlurl,
+                    timeout: 30000, // 设置请求超时时间（毫秒）
+                    contentType: "application/x-www-form-urlencoded; charset=utf-8",
+                    cache: true, // 缓存此页面
+                    dataType: "xml", // 预期服务器返回的数据类型。
+                    success: function ( data ) {
+                        instanceOptions.data = xmlDocToJson( data );
+                        new Select2( $( _this ), instanceOptions );
+                    }
+                } )
+            } else {
+                new Select2( $( this ), instanceOptions );
+            }
+
         });
 
         return this;
@@ -6479,9 +6539,6 @@ S2.define('jquery.select2',[
   // This allows Select2 to use the internal loader outside of this file, such
   // as in the language files.
   jQuery.fn.select2.amd = S2;
-
-  //FIX 语言 i18n
-  //jQuery.fn.select2.defaults.set("language", "zh-CN");
 
   // Return the Select2 instance for anyone who is importing it.
   return select2;

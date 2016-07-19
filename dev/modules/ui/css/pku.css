@@ -3094,7 +3094,7 @@ fieldset[disabled] .datepicker table tr td span.active.disabled:hover.focus {
 
 .select2-container--default.select2-container--open .select2-selection--single .select2-selection__arrow b {
   border-color: transparent transparent #888 transparent;
-  border-width: 0 4px 5px 4px; }
+  border-width: 0 5px 6px 5px; }
 
 .select2-container--default .select2-selection--multiple {
   background-color: white;
@@ -3432,5 +3432,20 @@ fieldset[disabled] .datepicker table tr td span.active.disabled:hover.focus {
 
 .select2-container--classic.select2-container--open .select2-dropdown {
   border-color: #5897fb; }
+
+.select2-selection__clear {
+  font-size: 20px;
+  font-family: Arial, sans-serif;
+  color: #888; }
+  .select2-selection__clear:hover {
+    color: #444; }
+
+.select2-container--default .select2-selection--single .select2-selection__clear {
+  padding-left: 4px;
+  padding-right: 4px; }
+
+.validate-invalid {
+  border-color: #ffa8a8 !important;
+  background-color: #fff3f3 !important; }
 
 /*# sourceMappingURL=pku.css.map */

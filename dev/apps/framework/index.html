@@ -33,8 +33,11 @@
                 "doT": "utils/doT",
                 "bootstrap": "lib/bootstrap/js/bootstrap",
 
-                "datepicker": "lib/datepicker/js/bootstrap-datepicker-zh",
+                "datepicker": "lib/datepicker/js/bootstrap-datepicker-zh.fix",
                 "select2": "lib/select2/js/select2.full.fix",
+                "echarts": "lib/echart/echarts.min",
+                "echartsTheme": "lib/echart/theme/macarons",
+                "echartsChinaMap": "lib/echart/map/china",
 
                 // 代码美化
                 "code-pretty": "lib/pretty/prettify.min"
@@ -53,6 +56,10 @@
             waitSeconds: 15
         } );
         require( [ "code-pretty", "datepicker", "select2", "./js/main.js" ] );
+        // echarts
+        require( [ "echarts", "echartsTheme", "echartsChinaMap" ], function ( echarts ) {
+            window.echarts = echarts;
+        });
     </script>
 </head>
 <body class="skin-blue">
@@ -117,7 +124,8 @@
                         <li><a href="pages/widget/modal.html" ><i class="fa fa-angle-double-right"></i> modal（模态框）</a></li>
                         <li><a href="pages/widget/tooltip.html" ><i class="fa fa-angle-double-right"></i> tooltip（提示）</a></li>
                         <li><a href="pages/widget/datepicker.html" ><i class="fa fa-angle-double-right"></i> datepicker（日期选择）</a></li>
-                        <li class="active"><a href="pages/widget/select.html" ><i class="fa fa-angle-double-right"></i> select（选择）</a></li>
+                        <li><a href="pages/widget/select.html" ><i class="fa fa-angle-double-right"></i> select（选择、字典）</a></li>
+                        <li class="active"><a href="pages/widget/chart.html" ><i class="fa fa-angle-double-right"></i> chart（图表）</a></li>
                     </ul>
                 </li>
                 <li class="treeview">
