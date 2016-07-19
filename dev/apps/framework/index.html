@@ -35,6 +35,9 @@
 
                 "datepicker": "lib/datepicker/js/bootstrap-datepicker-zh.fix",
                 "select2": "lib/select2/js/select2.full.fix",
+                "echarts": "lib/echart/echarts.min",
+                "echartsTheme": "lib/echart/theme/macarons",
+                "echartsChinaMap": "lib/echart/map/china",
 
                 // 代码美化
                 "code-pretty": "lib/pretty/prettify.min"
@@ -53,6 +56,10 @@
             waitSeconds: 15
         } );
         require( [ "code-pretty", "datepicker", "select2", "./js/main.js" ] );
+        // echarts
+        require( [ "echarts", "echartsTheme", "echartsChinaMap" ], function ( echarts ) {
+            window.echarts = echarts;
+        });
     </script>
 </head>
 <body class="skin-blue">
