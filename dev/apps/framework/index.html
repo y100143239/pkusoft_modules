@@ -34,10 +34,16 @@
                 "bootstrap": "lib/bootstrap/js/bootstrap",
 
                 "datepicker": "lib/datepicker/js/bootstrap-datepicker-zh.fix",
+
                 "select2": "lib/select2/js/select2.full.fix",
+
                 "echarts": "lib/echart/echarts.min",
                 "echartsTheme": "lib/echart/theme/macarons",
                 "echartsChinaMap": "lib/echart/map/china",
+
+                "formvalidation": "lib/formvalidation/js/formValidation.fix",
+                "formvalidationBs": "lib/formvalidation/js/framework/bootstrap.fix",
+                "formvalidationI18N": "lib/formvalidation/js/language/zh_CN",
 
                 // 代码美化
                 "code-pretty": "lib/pretty/prettify.min"
@@ -49,17 +55,26 @@
                 }
             },
             shim : {
-                "bootstrap": [ "jquery" ],
+                "bootstrap": [ "jquery"],
+                "formvalidation": [ "jquery", "bootstrap" ],
+                "formvalidationBs": [ "formvalidation" ],
+                "formvalidationI18N": [ "formvalidation", "formvalidationBs" ],
                 "code-pretty": [ "css!lib/pretty/prettify.css" ]
             },
             // 超时
             waitSeconds: 15
         } );
-        require( [ "code-pretty", "datepicker", "select2", "./js/main.js" ] );
+        require( ["./js/main.js"] );
+
+        require( [ "code-pretty" ] );
+        require( [ "datepicker" ] );
+        require( [ "select2" ] );
         // echarts
         require( [ "echarts", "echartsTheme", "echartsChinaMap" ], function ( echarts ) {
             window.echarts = echarts;
         });
+        require( ["formvalidationI18N"] );
+
     </script>
 </head>
 <body class="skin-blue">
@@ -106,7 +121,7 @@
                         <i class="fa pull-right fa-angle-left"></i>
                     </a>
                     <ul class="treeview-menu" >
-                        <li><a href="pages/ui/icons.html" ><i class="fa fa-angle-double-right"></i> icons（图标）</a></li>
+                        <li class="active"><a href="pages/ui/icons.html" ><i class="fa fa-angle-double-right"></i> icons（图标）</a></li>
                         <li><a href="pages/ui/panels.html" ><i class="fa fa-angle-double-right"></i> panels（面板）</a></li>
                         <li><a href="pages/ui/tables.html" ><i class="fa fa-angle-double-right"></i> tables（表格）</a></li>
                         <li><a href="pages/ui/buttons.html" ><i class="fa fa-angle-double-right"></i> buttons（按钮）</a></li>
@@ -125,7 +140,8 @@
                         <li><a href="pages/widget/tooltip.html" ><i class="fa fa-angle-double-right"></i> tooltip（提示）</a></li>
                         <li><a href="pages/widget/datepicker.html" ><i class="fa fa-angle-double-right"></i> datepicker（日期选择）</a></li>
                         <li><a href="pages/widget/select.html" ><i class="fa fa-angle-double-right"></i> select（选择、字典）</a></li>
-                        <li class="active"><a href="pages/widget/chart.html" ><i class="fa fa-angle-double-right"></i> chart（图表）</a></li>
+                        <li><a href="pages/widget/chart.html" ><i class="fa fa-angle-double-right"></i> chart（图表）</a></li>
+                        <li><a href="pages/widget/validate.html" ><i class="fa fa-angle-double-right"></i> validate（输入校验）</a></li>
                     </ul>
                 </li>
                 <li class="treeview">

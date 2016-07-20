@@ -1,0 +1,479 @@
+<div class="page-validate">
+    <article class="article">
+        <header>
+            <h3 class="text-muted">1. 基本示例</h3>
+            <hr/>
+        </header>
+        <main>
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active"><a href="#example_1" aria-controls="home" role="tab" data-toggle="tab">示例</a></li>
+                <li role="presentation"><a href="#code_1" aria-controls="profile" role="tab" data-toggle="tab">代码</a></li>
+            </ul>
+
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active" id="example_1">
+
+                    <form id="registrationForm" class="form-horizontal" style="padding-top: 20px">
+
+                        <div class="form-group">
+                            <label class="col-xs-3 control-label">姓名</label>
+                            <div class="col-xs-5">
+                                <input type="text" class="form-control" name="name" placeholder="姓名"
+                                       data-fv-row=".col-xs-5"
+                                       data-fv-notempty="true"
+                                       data-fv-notempty-message="" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-xs-3 control-label">用户名</label>
+                            <div class="col-xs-5">
+                                <input type="text" class="form-control" name="username"
+                                       data-fv-row=".col-xs-5"
+                                       data-fv-notempty="true"
+                                       data-fv-notempty-message=""
+
+                                       data-fv-stringlength="true"
+                                       data-fv-stringlength-min="6"
+                                       data-fv-stringlength-max="30"
+                                       data-fv-stringlength-message=""
+
+                                       data-fv-regexp="true"
+                                       data-fv-regexp-regexp="^[a-zA-Z0-9_\.]+$"
+                                       data-fv-regexp-message="请输入字母、数字、下划线" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-xs-3 control-label">邮箱</label>
+                            <div class="col-xs-5">
+                                <input type="text" class="form-control" name="email"
+                                       data-fv-notempty="true"
+                                       data-fv-notempty-message=""
+
+                                       data-fv-emailaddress="true"
+                                       data-fv-emailaddress-message="" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-xs-3 control-label">密码</label>
+                            <div class="col-xs-5">
+                                <input type="password" class="form-control" name="password"
+                                       data-fv-notempty="true"
+                                       data-fv-notempty-message=""
+
+                                       data-fv-different="true"
+                                       data-fv-different-field="username"
+                                       data-fv-different-message="密码不一致" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-xs-3 control-label">性别</label>
+                            <div class="col-xs-5">
+                                <label class="radio radio-inline">
+                                    <input type="radio" name="gender" value="male"
+                                           data-fv-row=".col-xs-5"
+                                           data-fv-notempty="true"
+                                           data-fv-notempty-message="" /> 男
+                                </label>
+                                <label class="radio radio-inline">
+                                    <input type="radio" name="gender" value="female" /> 女
+                                </label>
+                                <label class="radio radio-inline">
+                                    <input type="radio" name="gender" value="other" /> 其他
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-xs-3 control-label">Gender</label>
+                            <div class="col-xs-5">
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="gender2" value="male"
+                                               data-fv-notempty="true"
+                                               data-fv-notempty-message="The gender is required" /> Male
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="gender2" value="female" /> Female
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="gender2" value="other" /> Other
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-xs-3 control-label">出生日期</label>
+                            <div class="col-xs-5">
+                                <input type="text" class="form-control" name="birthday" placeholder="年年年年-月月-日日"
+                                       data-fv-notempty="true"
+                                       data-fv-notempty-message=""
+
+                                       data-fv-date="true"
+                                       data-fv-date-format="YYYY-MM-DD"
+                                       data-fv-date-message="日期格式“年年年年-月月-日日”，如 2012-12-29" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-xs-9 col-xs-offset-3">
+                                <button type="submit" class="btn btn-primary" >提交</button>
+                            </div>
+                        </div>
+                    </form>
+
+                    <script>
+                        jQuery(document).ready(function($) {
+                            $('#registrationForm').formValidation();
+                        });
+                    </script>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="code_1">
+                    <pre class="prettyprint linenums">
+&lt;form id="registrationForm" class="form-horizontal">
+
+    &lt;div class="form-group">
+        &lt;label class="col-xs-3 control-label">姓名&lt;/label>
+        &lt;div class="col-xs-5">
+            &lt;input type="text" class="form-control" name="name" placeholder="姓名"
+                   data-fv-row=".col-xs-5"
+                   data-fv-notempty="true"
+                   data-fv-notempty-message="" />
+        &lt;/div>
+    &lt;/div>
+
+    &lt;div class="form-group">
+        &lt;label class="col-xs-3 control-label">用户名&lt;/label>
+        &lt;div class="col-xs-5">
+            &lt;input type="text" class="form-control" name="username"
+                   data-fv-row=".col-xs-5"
+                   data-fv-notempty="true"
+                   data-fv-notempty-message=""
+
+                   data-fv-stringlength="true"
+                   data-fv-stringlength-min="6"
+                   data-fv-stringlength-max="30"
+                   data-fv-stringlength-message=""
+
+                   data-fv-regexp="true"
+                   data-fv-regexp-regexp="^[a-zA-Z0-9_\.]+$"
+                   data-fv-regexp-message="请输入字母、数字、下划线" />
+        &lt;/div>
+    &lt;/div>
+
+    &lt;div class="form-group">
+        &lt;label class="col-xs-3 control-label">邮箱&lt;/label>
+        &lt;div class="col-xs-5">
+            &lt;input type="text" class="form-control" name="email"
+                   data-fv-notempty="true"
+                   data-fv-notempty-message=""
+
+                   data-fv-emailaddress="true"
+                   data-fv-emailaddress-message="" />
+        &lt;/div>
+    &lt;/div>
+
+    &lt;div class="form-group">
+        &lt;label class="col-xs-3 control-label">密码&lt;/label>
+        &lt;div class="col-xs-5">
+            &lt;input type="password" class="form-control" name="password"
+                   data-fv-notempty="true"
+                   data-fv-notempty-message=""
+
+                   data-fv-different="true"
+                   data-fv-different-field="username"
+                   data-fv-different-message="密码不一致" />
+        &lt;/div>
+    &lt;/div>
+
+    &lt;div class="form-group">
+        &lt;label class="col-xs-3 control-label">性别&lt;/label>
+        &lt;div class="col-xs-5">
+            &lt;label class="radio radio-inline">
+                &lt;input type="radio" name="gender" value="male"
+                       data-fv-row=".col-xs-5"
+                       data-fv-notempty="true"
+                       data-fv-notempty-message="" /> 男
+            &lt;/label>
+            &lt;label class="radio radio-inline">
+                &lt;input type="radio" name="gender" value="female" /> 女
+            &lt;/label>
+            &lt;label class="radio radio-inline">
+                &lt;input type="radio" name="gender" value="other" /> 其他
+            &lt;/label>
+        &lt;/div>
+    &lt;/div>
+    &lt;div class="form-group">
+        &lt;label class="col-xs-3 control-label">Gender&lt;/label>
+        &lt;div class="col-xs-5">
+            &lt;div class="radio">
+                &lt;label>
+                    &lt;input type="radio" name="gender2" value="male"
+                           data-fv-notempty="true"
+                           data-fv-notempty-message="The gender is required" /> Male
+                &lt;/label>
+            &lt;/div>
+            &lt;div class="radio">
+                &lt;label>
+                    &lt;input type="radio" name="gender2" value="female" /> Female
+                &lt;/label>
+            &lt;/div>
+            &lt;div class="radio">
+                &lt;label>
+                    &lt;input type="radio" name="gender2" value="other" /> Other
+                &lt;/label>
+            &lt;/div>
+        &lt;/div>
+    &lt;/div>
+
+    &lt;div class="form-group">
+        &lt;label class="col-xs-3 control-label">出生日期&lt;/label>
+        &lt;div class="col-xs-5">
+            &lt;input type="text" class="form-control" name="birthday" placeholder="年年年年-月月-日日"
+                   data-fv-notempty="true"
+                   data-fv-notempty-message=""
+
+                   data-fv-date="true"
+                   data-fv-date-format="YYYY-MM-DD"
+                   data-fv-date-message="日期格式“年年年年-月月-日日”，如 2012-12-29" />
+        &lt;/div>
+    &lt;/div>
+
+    &lt;div class="form-group">
+        &lt;div class="col-xs-9 col-xs-offset-3">
+            &lt;button type="submit" class="btn btn-primary" >提交&lt;/button>
+        &lt;/div>
+    &lt;/div>
+&lt;/form>
+
+&lt;script>
+    jQuery(document).ready(function($) {
+        $('#registrationForm').formValidation();
+    });
+&lt;/script>
+</pre>                        
+                </div>
+            </div>
+        </main>
+    </article>
+
+    <article class="article">
+        <header>
+            <h3 class="text-muted">2. 属性设置方式</h3>
+            <hr/>
+        </header>
+        <main>
+            <div class="callout callout-warning">
+                不要给 提交按钮设置 name="submit" 或 id="submit"，这会造成验证后无法提交。
+            </div>
+            <div class="callout callout-warning">
+                大多数设置可以通过HTML5属性前缀 “data-fv” 设置，如下
+            </div>
+            <div class="row">
+                <div class="col-xs-6">
+<pre class="prettyprint">
+$(formSelector).formValidation({
+    framework: 'bootstrap',
+    excluded: [':disabled', ':hidden', ':not(:visible)'],
+    icon: {
+        valid: 'glyphicon glyphicon-ok',
+        invalid: 'glyphicon glyphicon-remove',
+        validating: 'glyphicon glyphicon-refresh'
+    },
+    live: 'enabled',
+    message: 'This value is not valid',
+    trigger: null,
+    fields: ...
+});
+</pre>
+                </div>
+                <div class="col-xs-6">
+<pre class="prettyprint">
+&lt;form
+    data-fv-framework="bootstrap"
+    data-fv-message="This value is not valid"
+    data-fv-icon-valid="glyphicon glyphicon-ok"
+    data-fv-icon-invalid="glyphicon glyphicon-remove"
+    data-fv-icon-validating="glyphicon glyphicon-refresh"
+    data-fv-live="enabled">
+    ...
+&lt;/form>
+
+&lt;script>
+$(document).ready(function() {
+    $(formSelector).formValidation({
+            fields: ...
+    });
+});
+&lt;/script>
+</pre>
+                </div>
+            </div>
+        </main>
+    </article>
+
+    <article class="article">
+        <header>
+            <h3 class="text-muted">3. 表单属性设置</h3>
+            <hr/>
+        </header>
+        <main>
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>属性名</th>
+                    <th>类型 及默认值</th>
+                    <th>描述</th>
+                </tr>
+                </thead>
+                <tr>
+                    <td>
+                        autoFocus
+                        <p class="text-danger">data-fv-autofocus</p>
+                    </td>
+                    <td>Boolean: true</td>
+                    <td>第一个校验不通过的输入域是否会获取焦点。</td>
+                </tr>
+                <tr>
+                    <td>
+                        button
+                        <p class="text-danger">
+                            data-fv-button-selector <br/>
+                            data-fv-button-disabled
+                        </p>
+                    </td>
+                    <td>
+<pre>
+button: {
+    selector: '[type="submit"]',
+    disabled: 'disabled'
+}
+</pre>
+                    </td>
+                    <td>
+                        对提交按钮的设置：<br/>
+                        selector，（String）提交按钮的CSS选择器；<br/>
+                        disabled，（String）按钮不可以时的样式，Bootstrap为"disabled"
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        err
+                        <p class="text-danger">
+                            data-fv-err-clazz <br/>
+                            data-fv-err-container
+                        </p>
+                    </td>
+                    <td>
+<pre>
+err: {
+    clazz: 'help-block',
+    container: null
+}
+</pre>
+                    </td>
+                    <td>
+                        对错误消息的样式设置：<br/>
+                        clazz，（String）消息元素的样式类；<br/>
+                        container，（String | Function）设置消息元素显示在哪里 <br/><br/>
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <th>container的值</th>
+                                <th>描述</th>
+                            </tr>
+                            </thead>
+                            <tr>
+                                <td>CSS选择器</td>
+                                <td>所有消息将会显示在CSS选择器指定的位置</td>
+                            </tr>
+                            <tr>
+                                <td>回调函数</td>
+                                <td>返回放置消息元素的元素
+<pre>
+function($field, validator) {
+    // $field is the field element
+    // validator is the plugin instance
+};
+</pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>tooltip</td>
+                                <td>每个输入域的错误消息将会以tooltip方式显示</td>
+                            </tr>
+                            <tr>
+                                <td>popover</td>
+                                <td>每个输入域的错误消息将会以popover方式显示</td>
+                            </tr>
+                        </table>
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li role="presentation" class="active"><a href="#example_2" role="tab" data-toggle="tab">示例</a></li>
+                            <li role="presentation"><a href="#code_2"  role="tab" data-toggle="tab">代码</a></li>
+                        </ul>
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane active" id="example_2">
+                                <form id="containerForm" class="form-horizontal"
+                                      data-fv-err-container="tooltip">
+                                    <div class="form-group" style="padding-top: 10px">
+                                        <label class="col-xs-3 control-label">姓名</label>
+                                        <div class="col-xs-9">
+                                            <input type="text" class="form-control" name="name"
+                                                   data-fv-notempty="true"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-xs-3 col-xs-offset-3">
+                                            <button type="submit" class="btn btn-default">提交</button>
+                                        </div>
+                                    </div>
+                                </form>
+                                <script>
+                                    $( "#containerForm" ).formValidation();
+                                </script>
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="code_2">
+<pre class="prettyprint">
+&lt;form id="containerForm" class="form-horizontal"
+      data-fv-err-container="tooltip">
+    &lt;div class="form-group" style="padding-top: 10px">
+        &lt;label class="col-xs-3 control-label">姓名&lt;/label>
+        &lt;div class="col-xs-9">
+            &lt;input type="text" class="form-control" name="name"
+                   data-fv-notempty="true"/>
+        &lt;/div>
+    &lt;/div>
+    &lt;div class="form-group">
+        &lt;div class="col-xs-3 col-xs-offset-3">
+            &lt;button type="submit" class="btn btn-default">提交&lt;/button>
+        &lt;/div>
+    &lt;/div>
+&lt;/form>
+&lt;script>
+    $( "#containerForm" ).formValidation();
+&lt;/script>    
+</pre>                                
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>excluded <p class="text-danger">data-fv-excluded</p></td>
+                    <td>String | String[] | Function <br/>[':disabled', ':hidden', ':not(:visible)']</td>
+                    <td>指定哪些输入域不会被校验</td>
+                </tr>
+            </table>
+        </main>
+    </article>
+
+</div>
