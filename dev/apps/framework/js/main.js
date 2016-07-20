@@ -1,4 +1,4 @@
-define( [ "jquery", "bootstrap" ], function ( $ ) {
+define( [ "jquery", "bootstrap", "formvalidationI18N" ], function ( $ ) {
 
     $( document ).ready( function () {
         var $main,
@@ -42,7 +42,7 @@ define( [ "jquery", "bootstrap" ], function ( $ ) {
             return false;
         } );
 
-        $( ".treeview-menu .active a" ).trigger( "click" );
+        //$( ".treeview-menu .active a" ).trigger( "click" );
 
     } );
 
