@@ -272,7 +272,8 @@
         </header>
         <main>
             <div class="callout callout-warning">
-                不要给 提交按钮设置 name="submit" 或 id="submit"，这会造成验证后无法提交。
+                不要给 提交按钮设置 name="submit" 或 id="submit"，这会造成验证后无法提交。<br/>
+                输入域要有“name”属性，否则要指定 “selector”属性。
             </div>
             <div class="callout callout-warning">
                 大多数设置可以通过HTML5属性前缀 “data-fv” 设置，如下
@@ -329,6 +330,7 @@ $(document).ready(function() {
 
             <div class="callout callout-warning">
                 针对表单&lt;form>的设置 <br/>
+                参考：<a href="http://formvalidation.io/settings/" target="_blank">设置</a><br/>
 <div class="pre">
 &lt;form id="containerForm" class="form-horizontal"
   data-fv-live="disabled" ...>
@@ -651,11 +653,8 @@ row: {
                 <tr>
                     <td>fields <p class="text-danger">N/A</p>
                     </td>
-                    <td>null</td>
-                    <td>当设置校验器且同时发生错误时，是否显示全部的错误信息，<br/>
-                        还是只显示第一个错误信息。<br/>
-                        可对表单域单独设置。
-                    </td>
+                    <td></td>
+                    <td>针对输入域分别进行设置</td>
                 </tr>
             </table>
         </main>
@@ -670,8 +669,284 @@ row: {
             <div class="callout callout-warning">
                 针对输入域的设置 <br/>
                 <div class="pre">
+&lt;input type="text" name="birth" data-fv-autofocus="false" ...>
+
+$( "#form_3" ).formValidation({
+    fields:{
+        birth: {
+            autoFocus: false
+        }
+    }
+});
+
                 </div>
             </div>
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>属性名</th>
+                    <th>类型 及默认值</th>
+                    <th>描述</th>
+                </tr>
+                </thead>
+                <tr>
+                    <td>autoFocus
+                        <p class="text-danger">data-fv-autofocus</p>
+                    </td>
+                    <td>Boolean：true</td>
+                    <td>当输入域不合法时，是否自动获取焦点；<br/>
+                        当使用日历控件时，推荐设置为 false。
+                    </td>
+                </tr>
+                <tr>
+                    <td>enabled
+                        <p class="text-danger">data-fv-enabled</p>
+                    </td>
+                    <td>Boolean：true</td>
+                    <td>是否启用验证。</td>
+                </tr>
+                <tr>
+                    <td>err
+                        <p class="text-danger">data-fv-err</p>
+                    </td>
+                    <td>String | Function</td>
+                    <td>指定错误消息元素显示的位置。<br/>
+                        参数设置同表单err设置
+                    </td>
+                </tr>
+                <tr>
+                    <td>excluded
+                        <p class="text-danger">data-fv-excluded</p>
+                    </td>
+                    <td>Boolean | Function</td>
+                    <td>
+                        是否不包含该输入域的校验。
+                    </td>
+                </tr>
+                <tr>
+                    <td>icon
+                        <p class="text-danger">data-fv-icon</p>
+                    </td>
+                    <td>Boolean：true</td>
+                    <td>是否显示图标。</td>
+                </tr>
+                <tr>
+                    <td>message
+                        <p class="text-danger">data-fv-message</p>
+                    </td>
+                    <td>String</td>
+                    <td>默认消息设置</td>
+                </tr>
+                <tr>
+                    <td>row
+                        <p class="text-danger">data-fv-row</p>
+                    </td>
+                    <td>String：".form-group"</td>
+                    <td>输入域的“父元素”</td>
+                </tr>
+                <tr>
+                    <td>selector
+                        <p class="text-danger">data-fv-selector</p>
+                    </td>
+                    <td>String：""</td>
+                    <td>当输入域没有name属性时，用于指定输入域的CSS选择器。</td>
+                </tr>
+                <tr>
+                    <td>threshold
+                        <p class="text-danger">data-fv-threshold</p>
+                    </td>
+                    <td>Number</td>
+                    <td>当输入的字符数达到指定个数后才会校验。</td>
+                </tr>
+                <tr>
+                    <td>trigger
+                        <p class="text-danger">data-fv-trigger</p>
+                    </td>
+                    <td>String</td>
+                    <td>当实时校验开启时，设置触发校验的事件类型；<br/>
+                    如，trigger="focus blur"，trigger="keyup"</td>
+                </tr>
+                <tr>
+                    <td>verbose
+                        <p class="text-danger">data-fv-verbose</p>
+                    </td>
+                    <td>Boolean：true</td>
+                    <td>同 form 设置</td>
+                </tr>
+            </table>
+        </main>
+    </article>
+
+    <article class="article">
+        <header>
+            <h3 class="text-muted">5. 校验器属性设置</h3>
+            <hr/>
+        </header>
+        <main>
+            <div class="callout callout-warning">
+                针对校验器的设置 <br/>
+            </div>
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>属性名</th>
+                    <th>类型 及默认值</th>
+                    <th>描述</th>
+                </tr>
+                </thead>
+                <tr>
+                    <td>enabled
+                        <p class="text-danger">data-fv-{validatorname}</p>
+                    </td>
+                    <td>Boolean：true</td>
+                    <td>是否启用校验器。
+                        <table class="table table-bordered table-condensed">
+                            <tbody>
+                            <tr>
+                                <td>HTML</td>
+                                <td>
+                                    <pre class="prettyprint">
+&lt;!-- Enable validator -->
+&lt;input name="fullName" data-fv-notempty />
+&lt;input name="fullName" data-fv-notempty="true" />
+
+&lt;!-- Disable validator -->
+&lt;input name="fullName" data-fv-notempty="false" />
+                                    </pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>options</td>
+                                <td>
+                                    <pre class="prettyprint">
+$(document).ready(function() {
+    $(form).formValidation({
+        fields: {
+            fullName: {
+                validators: {
+                    notEmpty: {
+                        enabled: true   // or false
+                    }
+                }
+            }
+        }
+    });
+});
+                                    </pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>enableFieldValidators()</td>
+                                <td>
+                                    <pre class="prettyprint">
+// Enable validator
+$(form) .formValidation('enableFieldValidators',
+                    fullName, true, 'notEmpty');
+
+// Disable validator
+$(form) .formValidation('enableFieldValidators',
+                    fullName, false, 'notEmpty');
+                                    </pre>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td>message
+                        <p class="text-danger">data-fv-{validatorname}-message</p>
+                    </td>
+                    <td>String</td>
+                    <td>指定校验器的消息设置
+                        <table class="table table-bordered table-condensed">
+                            <tbody>
+                            <tr>
+                                <td>HTML</td>
+                                <td>
+                                    <pre class="prettyprint">
+&lt;input name="fullName" data-fv-notempty="true"
+    data-fv-notempty-message="不能为空！！！"/>
+                                    </pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>options</td>
+                                <td>
+                                    <pre class="prettyprint">
+ $('#validatorEnabledForm').formValidation({
+    fields: {
+        fullName: {
+            validators: {
+                notEmpty: {
+                    message: '...is required'
+                }
+            }
+        }
+    }
+});
+                                    </pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>updateMessage()</td>
+                                <td>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td>transformer
+                        <p class="text-danger">N/A</p>
+                    </td>
+                    <td>Function </td>
+                    <td>对输入域的值进行修改后再校验；<br/>原始值不变，只是校验的值做修改。
+                        <pre class="prettyprint">
+transformer: function($field, validatorName, validator) {
+    // $field is the jQuery object presenting the field element
+    // validatorName is the name of current validator
+    // validator is the instance of plugin
+
+    // You can get the field value
+    var value = $field.val();
+
+    // Modify it
+    // ...
+
+    // ... and return
+    return value;
+}
+
+// 对网址进行校验，可以不输入协议头。
+fields: {
+    website: {
+        validators: {
+            uri: {
+                message: 'The website address is not valid',
+                transformer: function($field, validatorName, validator) {
+                    // Get the field value
+                    var value = $field.val();
+
+                    // Check if it doesn't start with http:// or https://
+                    if (value && value.substr(0, 7) !== 'http://'
+                            && value.substr(0, 8) !== 'https://') {
+                    // then prefix with http://
+                    value = 'http://' + value;
+                    }
+
+                    // Return new value
+                    return value;
+                }
+            }
+        }
+    }
+}
+                        </pre>
+                    </td>
+                </tr>
+            </table>
         </main>
     </article>
 
