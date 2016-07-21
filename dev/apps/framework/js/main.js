@@ -27,7 +27,9 @@ define( [ "jquery", "bootstrap", "formvalidationI18N" ], function ( $ ) {
         } ).on( "click.page", ".treeview-menu a", function () {
             var $this;
             $this = $( this );
-
+            if ( $this.is( "._outerlink" ) ) {
+                return;
+            }
             $body.append( '<div class="overlay overlay-black"><i class="fa fa-spinner fa-spin"></i></div>' );
 
             $main.load( $( this ).attr( "href" ), function successCallback() {

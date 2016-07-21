@@ -6438,7 +6438,7 @@ function xmlDocToJson( responseData ) {
         text = rowNode.getAttribute( "DIC_TEXT" );
         spell = rowNode.getAttribute( "DIC_SPELL" );
 
-        data[ i ] = { id: id, text: text, spell: spell  };
+        data[ i ] = { id: id, text: text, spell: spell + id  };
     }
 
     return data;
