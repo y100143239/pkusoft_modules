@@ -326,6 +326,20 @@ $(document).ready(function() {
             <hr/>
         </header>
         <main>
+
+            <div class="callout callout-warning">
+                针对表单&lt;form>的设置 <br/>
+<div class="pre">
+&lt;form id="containerForm" class="form-horizontal"
+  data-fv-live="disabled" ...>
+
+$( "#containerForm_2" ).formValidation({
+    live: "disabled"
+    ...
+})
+</div>
+            </div>
+
             <table class="table table-bordered">
                 <thead>
                 <tr>
@@ -361,7 +375,7 @@ button: {
                     <td>
                         对提交按钮的设置：<br/>
                         selector，（String）提交按钮的CSS选择器；<br/>
-                        disabled，（String）按钮不可以时的样式，Bootstrap为"disabled"
+                        disabled，（String）按钮不用时的样式，Bootstrap为"disabled"
                     </td>
                 </tr>
                 <tr>
@@ -472,7 +486,192 @@ function($field, validator) {
                     <td>String | String[] | Function <br/>[':disabled', ':hidden', ':not(:visible)']</td>
                     <td>指定哪些输入域不会被校验</td>
                 </tr>
+                <tr>
+                    <td>framework <p class="text-danger">data-fv-framework</p></td>
+                    <td>String："bootstrap"</td>
+                    <td>指定你正在使用的框架</td>
+                </tr>
+                <tr>
+                    <td>icon
+                        <p class="text-danger">
+                            data-fv-icon-valid <br/>
+                            data-fv-icon-invalid <br/>
+                            data-fv-icon-validating <br/>
+                        </p>
+                    </td>
+                    <td>
+<pre>
+{   // 已修改过
+    valid: 'fa fa-check',
+    invalid: 'fa fa-close',
+    validating: 'fa fa-refresh'
+}
+</pre>
+                    </td>
+                    <td>设置 合法、不合法、正在验证 的图标CSS类</td>
+                </tr>
+                <tr>
+                    <td>live <p class="text-danger"> data-fv-live </p></td>
+                    <td>String：'enabled'</td>
+                    <td>设置验证的时机 <br/>
+                        <table class="table table-bordered table-condensed">
+                            <thead>
+                            <tr>
+                                <th>值</th> <th>描述</th>
+                            </tr>
+                            </thead>
+                            <tr>
+                                <td>enabled</td>
+                                <td>当输入域的值发生变化则立刻开始验证</td>
+                            </tr>
+                            <tr>
+                                <td>disabled</td>
+                                <td>当点击提交时才校验</td>
+                            </tr>
+                            <tr>
+                                <td>submitted</td>
+                                <td>The live validating is enabled after the form is submitted. <br/>与“enabled”没多大区别</td>
+                            </tr>
+                        </table>
+
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li role="presentation" class="active"><a href="#example_3" role="tab" data-toggle="tab">示例</a></li>
+                            <li role="presentation"><a href="#code_3"  role="tab" data-toggle="tab">代码</a></li>
+                        </ul>
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane active" id="example_3">
+                                <form id="containerForm_2" class="form-horizontal"
+                                      data-fv-live="disabled">
+                                    <div class="form-group" style="padding-top: 10px">
+                                        <label class="col-xs-3 control-label">姓名</label>
+                                        <div class="col-xs-9">
+                                            <input type="text" class="form-control" name="name"
+                                                   placeholder='data-fv-live="disabled"'
+                                                   data-fv-notempty="true"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-xs-3 col-xs-offset-3">
+                                            <button type="submit" class="btn btn-default">提交</button>
+                                        </div>
+                                    </div>
+                                </form>
+                                <script>
+                                    $( "#containerForm_2" ).formValidation();
+                                </script>
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="code_3">
+<pre class="prettyprint">
+&lt;form id="containerForm_2" class="form-horizontal"
+      data-fv-live="disabled">
+    &lt;div class="form-group" style="padding-top: 10px">
+        &lt;label class="col-xs-3 control-label">姓名&lt;/label>
+        &lt;div class="col-xs-9">
+            &lt;input type="text" class="form-control" name="name"
+                   placeholder='data-fv-live="disabled"'
+                   data-fv-notempty="true"/>
+        &lt;/div>
+    &lt;/div>
+    &lt;div class="form-group">
+        &lt;div class="col-xs-3 col-xs-offset-3">
+            &lt;button type="submit" class="btn btn-default">提交&lt;/button>
+        &lt;/div>
+    &lt;/div>
+&lt;/form>
+&lt;script>
+    $( "#containerForm_2" ).formValidation();
+&lt;/script>
+</pre>
+                            </div>
+                        </div>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td>message <p class="text-danger"> data-fv-message </p></td>
+                    <td>String：'This value is not valid'</td>
+                    <td>在输入域元素上设置时，优先级比默认消息要高</td>
+                </tr>
+                <tr>
+                    <td>row <p class="text-danger">
+                        data-row-selector <br/>
+                        data-row-valid <br/>
+                        data-row-invalid
+                        </p>
+                    </td>
+                    <td>
+<pre>
+row: {
+    selector: '.form-group',
+    valid: 'has-success',
+    invalid: 'has-error'
+}
+</pre>
+                    </td>
+                    <td>对所有的输入域的“父元素”（.from-group）进行设置。
+<pre class="prettyprint">
+// 一般的输入域结构
+.form-group
+    |-- col-*-*
+        |-- &lt;label>
+    |-- col-*-*
+        |-- &lt;input>
+</pre>
+                    </td>
+                </tr>
+                <tr>
+                    <td>threshold <p class="text-danger">data-fv-threshold</p>
+                    </td>
+                    <td>Number：null</td>
+                    <td>当输入字符少于指定数时，将不会实时验证。<br/>
+                        此属性可对表单域单独设置。
+                    </td>
+                </tr>
+                <tr>
+                    <td>trigger <p class="text-danger">data-fv-trigger</p>
+                    </td>
+                    <td>String：null</td>
+                    <td>当实时校验（live）开启时，设置校验所有表单域的触发事件；<br/>
+                        多个事件用空格隔开。<br/>
+                        <!--trigger="keyup"，当输入任何字符时开始校验； <br/>
+                        trigger="focus blur"，当失去或获取焦点时开始校验。<br/>-->
+                    </td>
+                </tr>
+                <tr>
+                    <td>verbose <p class="text-danger">data-fv-verbose</p>
+                    </td>
+                    <td>Boolean：true</td>
+                    <td>当设置校验器且同时发生错误时，是否显示全部的错误信息，<br/>
+                        还是只显示第一个错误信息。<br/>
+                        可对表单域单独设置。
+                    </td>
+                </tr>
+                <tr>
+                    <td>fields <p class="text-danger">N/A</p>
+                    </td>
+                    <td>null</td>
+                    <td>当设置校验器且同时发生错误时，是否显示全部的错误信息，<br/>
+                        还是只显示第一个错误信息。<br/>
+                        可对表单域单独设置。
+                    </td>
+                </tr>
             </table>
+        </main>
+    </article>
+
+    <article class="article">
+        <header>
+            <h3 class="text-muted">4. 输入域属性设置</h3>
+            <hr/>
+        </header>
+        <main>
+            <div class="callout callout-warning">
+                针对输入域的设置 <br/>
+                <div class="pre">
+                </div>
+            </div>
         </main>
     </article>
 
