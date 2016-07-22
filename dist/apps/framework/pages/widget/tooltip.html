@@ -1,0 +1,417 @@
+<div class="page-tooltip">
+
+    <article class="article">
+        <header>
+            <h3 class="text-muted">1. 静态示例</h3>
+            <hr/>
+        </header>
+        <main>
+
+            <div class="tooltip-example">
+
+                <div class="row">
+                    <div class="col-xs-3">
+                        <div class="tooltip top" role="tooltip">
+                            <div class="tooltip-arrow"></div>
+                            <div class="tooltip-inner"> tooltip </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3">
+                        <div class="tooltip tooltip-normal top" role="tooltip">
+                            <div class="tooltip-arrow"></div>
+                            <div class="tooltip-inner"> tooltip tooltip-normal </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3">
+                        <div class="tooltip tooltip-info top" role="tooltip">
+                            <div class="tooltip-arrow"></div>
+                            <div class="tooltip-inner"> tooltip tooltip-info </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-3">
+                        <div class="tooltip tooltip-success right" role="tooltip">
+                            <div class="tooltip-arrow"></div>
+                            <div class="tooltip-inner"> tooltip tooltip-success </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-3">
+                        <div class="tooltip tooltip-warning bottom" role="tooltip">
+                            <div class="tooltip-arrow"></div>
+                            <div class="tooltip-inner"> tooltip tooltip-warning </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-3">
+                        <div class="tooltip tooltip-danger left" role="tooltip">
+                            <div class="tooltip-arrow"></div>
+                            <div class="tooltip-inner"> tooltip tooltip-danger </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-3">
+                        <div class="tooltip tooltip-info-dark top" role="tooltip">
+                            <div class="tooltip-arrow"></div>
+                            <div class="tooltip-inner"> tooltip tooltip-info-dark</div>
+                        </div>
+                    </div>
+                    <div class="col-xs-3">
+                        <div class="tooltip tooltip-success-dark right" role="tooltip">
+                            <div class="tooltip-arrow"></div>
+                            <div class="tooltip-inner"> tooltip tooltip-success-dark</div>
+                        </div>
+                    </div>
+                    <div class="col-xs-3">
+                        <div class="tooltip tooltip-warning-dark bottom" role="tooltip">
+                            <div class="tooltip-arrow"></div>
+                            <div class="tooltip-inner"> tooltip tooltip-warning-dark</div>
+                        </div>
+                    </div>
+                    <div class="col-xs-3">
+                        <div class="tooltip tooltip-danger-dark left" role="tooltip">
+                            <div class="tooltip-arrow"></div>
+                            <div class="tooltip-inner"> tooltip tooltip-danger-dark</div>
+                        </div>
+                    </div>
+                </div>
+                <br/>
+
+                <div class="callout callout-danger">
+                .tooltip-inner {
+                    max-width: 200px;
+                }
+                </div>
+            </div>
+        </main>
+    </article>
+
+    <article class="article">
+        <header>
+            <h3 class="text-muted">2. 动态示例</h3>
+            <hr/>
+        </header>
+        <main>
+            <div class="row">
+                <div class="col-xs-2">
+                    <button type="button" class="btn btn-default"
+                            data-toggle="tooltip"
+                            data-placement="left"
+                            data-container="body"
+                            title="Tooltip on left">1. Tooltip on left</button>
+                </div>
+                <div class="col-xs-2">
+                    <button type="button" class="btn btn-default"
+                            data-toggle="tooltip"
+                            data-placement="top"
+                            data-container="body"
+                            data-theme="tooltip-danger-dark"
+                            title="Tooltip on left">2. Tooltip on top</button>
+                </div>
+                <div class="col-xs-2">
+                    <button type="button" class="btn btn-default"
+                            data-toggle="tooltip"
+                            data-placement="right"
+                            data-container=""
+                            data-theme="tooltip-info-dark"
+                            title="Tooltip on left">3. Tooltip on right</button>
+                </div>
+                <div class="col-xs-2">
+                    <button type="button" class="btn btn-default"
+                            data-toggle="tooltip"
+                            data-placement="right"
+                            data-container="body"
+                            data-theme="tooltip-info-dark"
+                            title="Tooltip on left">4. Tooltip on right</button>
+                </div>
+                <div class="col-xs-2">
+                    <button type="button" class="btn btn-default"
+                            data-toggle="tooltip"
+                            data-placement="bottom"
+                            data-container="body"
+                            data-theme="tooltip-warning-dark"
+                            title="Tooltip on left">5. Tooltip on bottom</button>
+                </div>
+            </div>
+            <br/><br/>
+            <pre class="prettyprint linenums">
+&lt;button type="button" class="btn btn-default"
+        data-toggle="tooltip"
+        data-placement="left"
+        data-container="body"
+        title="Tooltip on left">1. Tooltip on left&lt;/button>
+
+&lt;button type="button" class="btn btn-default"
+        data-toggle="tooltip"
+        data-placement="top"
+        data-container="body"
+        data-theme="tooltip-danger-dark"
+        title="Tooltip on left">2. Tooltip on top&lt;/button>
+
+&lt;button type="button" class="btn btn-default"
+        data-toggle="tooltip"
+        data-placement="right"
+        data-container=""
+        data-theme="tooltip-info-dark"
+        title="Tooltip on left">3. Tooltip on right&lt;/button>
+
+&lt;button type="button" class="btn btn-default"
+        data-toggle="tooltip"
+        data-placement="right"
+        data-container="body"
+        data-theme="tooltip-info-dark"
+        title="Tooltip on left">4. Tooltip on right&lt;/button>
+
+&lt;button type="button" class="btn btn-default"
+        data-toggle="tooltip"
+        data-placement="bottom"
+        data-container="body"
+        data-theme="tooltip-warning-dark"
+        title="Tooltip on left">5. Tooltip on bottom&lt;/button>
+            </pre>
+
+            <div class="callout callout-danger">
+                出于性能考虑，Tooltip 和 Popover 必须手动初始化。
+                <div class="pre">
+1) 让指定的元素拥有Tooltip功能
+    $('[data-toggle="tooltip"]').tooltip()
+2) 让指定的元素拥有Tooltip功能（包括动态添加的元素）
+    $( document.body ).tooltip( {
+        selector : '[data-toggle="tooltip"]'
+    } )</div>
+            </div>
+
+            <div class="callout callout-danger">
+                data-container="body"，<br/>
+                用于指定 &lt;div class="tooltip top" role="tooltip">...&lt;/div> 所在的容器，默认容器为 目标元素的父级
+            </div>
+
+        </main>
+    </article>
+
+    <article class="article">
+        <header>
+            <h3 class="text-muted">3. 参数</h3>
+            <hr/>
+        </header>
+        <main>
+
+            <div class="callout callout-info">
+                <div class="pre">// 1. 通过 “data-” 设置
+&lt;button data-参数名="参数值">
+
+// 2. 通过方法设置
+$( target ).tooltip( {
+    参数名1: 参数值1,
+    参数名2: 参数值2
+} ) </div>
+            </div>
+            <table class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                    <th>参数名</th>
+                    <th>参数类型</th>
+                    <th>默认值</th>
+                    <th>描述</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td class="danger">theme</td>
+                    <td>string</td>
+                    <td>''</td>
+                    <td>
+                        此属性为扩展属性；（即自定义的属性）<br/>
+                        指定Tooltip的样式；<br/>
+                        值，tooltip-normal | tooltip-info | tooltip-success | tooltip-warning | tooltip-danger | tooltip-info-dark | tooltip-success-dark | tooltip-warning-dark | tooltip-danger-dark
+                    </td>
+                </tr>
+                <tr>
+                    <td>animation</td>
+                    <td>boolean</td>
+                    <td>true</td>
+                    <td>应用CSS3的过渡效果（淡入淡出）</td>
+                </tr>
+                <tr>
+                    <td>container</td>
+                    <td>string | false</td>
+                    <td>false</td>
+                    <td>
+                        指定将 Tooltip append到哪个元素内；<br/>
+                        false，触发元素的父级；<br/>
+                        string，CSS选择器</td>
+                </tr>
+                <tr>
+                    <td>delay</td>
+                    <td>number | object</td>
+                    <td>0</td>
+                    <td>
+                        延迟显示 Tooltip，单位 ms；<br/>
+                        number，同时应用于 hide和show；<br/>
+                        object，{ "show": 毫秒数, "hide": 毫秒数 }
+                    </td>
+                </tr>
+                <tr>
+                    <td>placement</td>
+                    <td>string | function</td>
+                    <td>'top'</td>
+                    <td>
+                        定位Tooltip；<br/>
+                        string，top | bottom | left | right | auto ；<br/>
+                        function，function( toolTipNode, triggerNode ) { /* do something */ }
+                    </td>
+                </tr>
+                <tr>
+                    <td>selector</td>
+                    <td>string</td>
+                    <td>false</td>
+                    <td>让符合选择器的元素拥有Tooltip功能，包括动态添加的元素。</td>
+                </tr>
+                <tr>
+                    <td>template</td>
+                    <td>string</td>
+                    <td>见右侧</td>
+                    <td>
+                        创建Tooltip时用的模板。
+<pre class="prettyprint">
+'&lt;div class="tooltip" role="tooltip">\
+    &lt;div class="tooltip-arrow">&lt;/div>\
+    &lt;div class="tooltip-inner">&lt;/div>\
+&lt;/div>'
+</pre>
+                    </td>
+                </tr>
+                <tr>
+                    <td>title</td>
+                    <td>string | function</td>
+                    <td>''</td>
+                    <td>
+                        Tooltip显示的内容；<br/>
+                        string，如果没有“data-title”属性，则使用 title 属性的值；<br/>
+                        function， function () { /* this = toolTipNode */ }
+                    </td>
+                </tr>
+                <tr>
+                    <td>trigger</td>
+                    <td>string</td>
+                    <td>'hover focus'</td>
+                    <td>
+                        在目标元素上触发Tooltip的事件；<br/>
+                        值，click | hover | focus | manual，多个事件类型可用空格隔开。
+                    </td>
+                </tr>
+                <tr>
+                    <td>viewport</td>
+                    <td>string | object | function</td>
+                    <td>{ selector: 'body', padding: 0 }</td>
+                    <td>指定Tooltip显示的范围</td>
+                </tr>
+                </tbody>
+            </table>
+        </main>
+    </article>
+
+
+    <article class="article">
+        <header>
+            <h3 class="text-muted">4. 方法</h3>
+            <hr/>
+        </header>
+        <main>
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>方法</th>
+                    <th>描述</th>
+                </tr>
+                </thead>
+                <tr>
+                    <td> <pre class="prettyprint">$( targets ).tooltip( [ options ] )</pre> </td>
+                    <td>初始化：让指定元素拥有Tooltip功能。</td>
+                </tr>
+                <tr>
+                    <td> <pre class="prettyprint">$( targets ).tooltip( 'show' )</pre> </td>
+                    <td>
+                        手动显示Tooltip，没内容则不显示；<br/>
+                        在 shown.bs.tooltip 事件之前。
+                    </td>
+                </tr>
+                <tr>
+                    <td> <pre class="prettyprint">$( targets ).tooltip( 'hide' )</pre> </td>
+                    <td>
+                        手动隐藏Tooltip；<br/>
+                        在 hidden.bs.tooltip 事件之前。
+                    </td>
+                </tr>
+                <tr>
+                    <td> <pre class="prettyprint">$( targets ).tooltip( 'toggle' )</pre> </td>
+                    <td>
+                        手动切换Tooltip的状态（显示和隐藏）
+                    </td>
+                </tr>
+                <tr>
+                    <td> <pre class="prettyprint">$( targets ).tooltip( 'destroy' )</pre> </td>
+                    <td>
+                        隐藏及销毁元素的Tooltip。
+                    </td>
+                </tr>
+            </table>
+        </main>
+    </article>
+    <article class="article">
+        <header>
+            <h3 class="text-muted">5. 事件</h3>
+            <hr/>
+        </header>
+        <main>
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>事件</th>
+                    <th>描述</th>
+                </tr>
+                </thead>
+                <tr>
+                    <td> <pre class="prettyprint">
+$( targets ).on('show.bs.tooltip', function () {
+    // do something…
+})</pre> </td>
+                    <td>当“show”方法被调用后 发生</td>
+                </tr>
+                <tr>
+                    <td> <pre class="prettyprint">
+$( targets ).on('shown.bs.tooltip', function () {
+    // do something…
+})</pre> </td>
+                    <td>当Tooltip完全显示完毕后 发生</td>
+                </tr>
+                <tr>
+                    <td> <pre class="prettyprint">
+$( targets ).on('hide.bs.tooltip', function () {
+    // do something…
+})</pre> </td>
+                    <td>当“hide”方法被调用后 发生</td>
+                </tr>
+                <tr>
+                    <td> <pre class="prettyprint">
+$( targets ).on('hidden.bs.tooltip', function () {
+    // do something…
+})</pre> </td>
+                    <td>当Tooltip完全隐藏完毕后 发生</td>
+                </tr>
+            </table>
+        </main>
+    </article>
+
+</div>
+
+
+
+<script>
+    $( document.body ).tooltip( {
+        selector : '[data-toggle="tooltip"]'
+    } )
+</script>

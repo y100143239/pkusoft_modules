@@ -950,4 +950,876 @@ fields: {
         </main>
     </article>
 
+    <article class="article">
+        <header>
+            <h3 class="text-muted">6. 校验器属性-动态参数</h3>
+            <hr/>
+        </header>
+        <main>
+
+            <div class="callout callout-warning">
+                应用场景：不同国家的校验规则不同（比如身份证号的验证）。<br/>
+                使用方式：指定国家就可以应用正确的校验器版本。<br/>
+                参考：<a href="http://formvalidation.io/settings/#dynamic-option" target="_blank">动态参数</a><br/>
+            </div>
+        </main>
+    </article>
+    <article class="article">
+        <header>
+            <h3 class="text-muted">7. 校验器属性-动态消息</h3>
+            <hr/>
+        </header>
+        <main>
+            <div class="callout callout-warning">
+                同动态参数差不多。<br/>
+                参考：<a href="http://formvalidation.io/settings/#dynamic-message" target="_blank">动态消息</a><br/>
+            </div>
+        </main>
+    </article>
+    <article class="article">
+        <header>
+            <h3 class="text-muted">8. 事件-表单</h3>
+            <hr/>
+        </header>
+        <main>
+
+            <div class="callout callout-warning">
+                参考：<a href="http://formvalidation.io/settings/#events" target="_blank">事件</a><br/>
+            </div>
+
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>事件类型</th>
+                    <th>描述</th>
+                </tr>
+                </thead>
+                <tr>
+                    <td>init.form.fv</td>
+                    <td>Triggered after the form is initialized by the plugin. <br/>
+                        当表单元素被插件初始化后发生。
+                    </td>
+                </tr>
+                <tr>
+                    <td>prevalidate.form.fv</td>
+                    <td>Triggered before validating the form. <br/>
+                        校验表单之前。
+                    </td>
+                </tr>
+                <tr>
+                    <td>err.form.fv </td>
+                    <td>Triggered when the form is invalid. <br/>
+                        当表单不合法时。
+                    </td>
+                </tr>
+                <tr>
+                    <td>success.form.fv </td>
+                    <td>Triggered when the form is valid. <br/>
+                        当表单合法时。
+                    </td>
+                </tr>
+                <tr>
+                    <td>added.field.fv </td>
+                    <td>Triggered after adding dynamic field. <br/>
+                        当添加动态输入域后。
+                    </td>
+                </tr>
+                <tr>
+                    <td>removed.field.fv </td>
+                    <td>Triggered after removing given field. <br/>
+                        当删除输入域后。
+                    </td>
+                </tr>
+            </table>
+
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>使用方式</th>
+                    <th>描述</th>
+                </tr>
+                </thead>
+                <tr>
+                    <td>事件监听</td>
+                    <td>
+<pre class="prettyprint linenums">
+$(form)
+    // on('init.form.fv') must be declared
+    // before calling .formValidation(options)
+    .on('init.form.fv', function(e, data) {
+        // $(e.target)  --> The form instance
+        // data.fv      --> The FormValidation instance
+        // data.options --> The form options
+
+        // Do something ...
+    })
+
+    .formValidation(options)
+
+    .on('prevalidate.form.fv', function(e) {
+        // $(e.target) --> The form instance
+        // $(e.target).data('formValidation')
+        //             --> The FormValidation instance
+
+        // Do something ...
+    })
+
+    .on('err.form.fv', function(e) {
+        // The e parameter is same as one
+        // in the prevalidate.form.fv event above
+
+        // Do something ...
+    })
+
+    .on('success.form.fv', function(e) {
+        // The e parameter is same as one
+        // in the prevalidate.form.fv event above
+
+        // Do something ...
+    })
+
+    .on('added.field.fv', function(e, data) {
+        // $(e.target)  --> The form instance
+        // $(e.target).data('formValidation')
+        //              --> The FormValidation instance
+
+        // data.field   --> The field name
+        // data.element --> The new field element
+        // data.options --> The new field options
+
+        // Do something ...
+    })
+
+    .on('removed.field.fv', function(e, data) {
+        // The e and data parameters are same as one
+        // in the added.field.fv event above
+
+        // Do something ...
+    });
+</pre>
+                    </td>
+                </tr>
+                <tr>
+                    <td>初始化参数</td>
+                    <td>
+<pre class="prettyprint linenums">
+$(form).formValidation({
+    onPreValidate: function(e) {
+        // Do something ...
+    },
+    onError: function(e) {
+        // Do something ...
+    },
+    onSuccess: function(e) {
+        // Do something ...
+    }
+});
+</pre>
+                    </td>
+                </tr>
+                <tr>
+                    <td>HTML属性</td>
+                    <td>
+<pre class="prettyprint linenums">
+&lt;form data-fv-onprevalidate="onPreValidateForm"
+      data-fv-onerror="onFormError"
+      data-fv-onsuccess="onFormSuccess">&lt;/form>
+&lt;script>
+    function onPreValidateForm(e) {
+        // Do something ...
+    };
+
+    function onFormError(e) {
+        // Do something ...
+    };
+
+    function onFormSuccess(e) {
+        // Do something ...
+    };
+
+    $(document).ready(function() {
+        $(form).formValidation(options);
+    });    
+&lt;/script>    
+</pre>
+                    </td>
+                </tr>
+            </table>
+
+        </main>
+    </article>
+    <article class="article">
+        <header>
+            <h3 class="text-muted">9. 事件-输入域</h3>
+            <hr/>
+        </header>
+        <main>
+            <div class="callout callout-warning">
+                参考：<a href="http://formvalidation.io/settings/#events" target="_blank">事件</a><br/>
+            </div>
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>事件类型</th>
+                    <th>描述</th>
+                </tr>
+                </thead>
+                <tr>
+                    <td>init.field.fv </td>
+                    <td>Triggered after the field is initialized by the plugin </td>
+                </tr>
+                <tr>
+                    <td>err.field.fv </td>
+                    <td>Triggered when any field is invalid </td>
+                </tr>
+                <tr>
+                    <td>success.field.fv </td>
+                    <td>Triggered when any field is valid </td>
+                </tr>
+                <tr>
+                    <td>status.field.fv </td>
+                    <td>Triggered when field changes status.
+                        Each field has four possible status: <br/>
+                        <kbd>NOT_VALIDATED</kbd>: The field is not validated yet <br/>
+                        <kbd>VALIDATING</kbd>: The field is being validated<br/>
+                        <kbd>INVALID</kbd>: The field is invalid<br/>
+                        <kbd>VALID</kbd>: The field is valid<br/>
+                    </td>
+                </tr>
+            </table>
+
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>使用方式</th>
+                    <th>描述</th>
+                </tr>
+                </thead>
+                <tr>
+                    <td>事件监听（针对所有）</td>
+                    <td>
+<pre class="prettyprint linenums">
+$(form)
+    // on('init.field.fv') must be declared
+    // before calling .formValidation(options)
+    .on('init.field.fv', function(e, data) {
+        // $(e.target)  --> The field element
+        // data.fv      --> The FormValidation instance
+        // data.field   --> The field name
+        // data.element --> The field element
+    })
+
+    .formValidation(options)
+
+    .on('err.field.fv', function(e, data) {
+        // The e and data parameters are the same
+        // as one in the init.field.fv event above
+
+        // Do something ...
+    })
+
+    .on('success.field.fv', function(e, data) {
+        // The e and data parameters are the same
+        // as one in the init.field.fv event above
+
+        // Do something ...
+    })
+
+    .on('status.field.fv', function(e, data) {
+        // The e and data parameters are the same
+        // as one in the init.field.fv event above
+
+        // data.status --> New field status
+        // data.validator --> The name of current validator
+
+        // Do something ...
+    });
+</pre>
+                    </td>
+                </tr>
+            </table>
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>使用方式</th>
+                    <th>描述</th>
+                </tr>
+                </thead>
+                <tr>
+                    <td>事件监听（针对所有）</td>
+                    <td>
+<pre class="prettyprint linenums">
+$(form)
+    // on('init.field.fv') must be declared
+    // before calling .formValidation(options)
+    .on('init.field.fv', '[name="email"]', function(e, data) {
+        // Do something ...
+    })
+
+    .formValidation(options)
+
+    .on('err.field.fv', '[name="email"]', function(e, data) {
+        // Do something ...
+    })
+
+    .on('success.field.fv', '[name="email"]', function(e, data) {
+        // Do something ...
+    })
+
+    .on('status.field.fv', '[name="email"]', function(e, data) {
+        // Do something ...
+    });
+</pre>
+                    </td>
+                </tr>
+                <tr>
+                    <td>初始化参数</td>
+                    <td>
+<pre class="prettyprint linenums">
+$(form).formValidation({
+    fields: {
+        email: {
+            onError: function(e, data) {
+                // Do something ...
+            },
+            onSuccess: function(e, data) {
+                // Do something ...
+            },
+            onStatus: function(e, data) {
+                // Do something ...
+            },
+            validators: {
+                ...
+            }
+        }
+    }
+});
+</pre>
+                    </td>
+                </tr>
+                <tr>
+                    <td>HTML属性</td>
+                    <td>
+<pre class="prettyprint linenums">
+&lt;form>
+    ...
+    &lt;input type="text" name="email" class="form-control"
+           data-fv-emailaddress="true"
+           data-fv-onerror="onFieldError"
+           data-fv-onsuccess="onFieldSuccess"
+           data-fv-onstatus="onFieldStatus" />
+    ...
+&lt;/form>
+&lt;script>
+    function onFieldError(e, data) {
+        // Do something ...
+    };
+    
+    function onFieldSuccess(e, data) {
+        // Do something ...
+    };
+    
+    function onFieldStatus(e, data) {
+        // Do something ...
+    };
+    
+    $(document).ready(function() {
+        $(form).formValidation(options);
+    });
+&lt;/script>
+</pre>
+                    </td>
+                </tr>
+            </table>
+        </main>
+    </article>
+    <article class="article">
+        <header>
+            <h3 class="text-muted">10. 事件-校验器</h3>
+            <hr/>
+        </header>
+        <main>
+            <div class="callout callout-warning">
+                参考：<a href="http://formvalidation.io/settings/#events" target="_blank">事件</a><br/>
+            </div>
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>事件类型</th>
+                    <th>描述</th>
+                </tr>
+                </thead>
+                <tr>
+                    <td>err.validator.fv </td>
+                    <td>Triggered when field doesn't pass given validator </td>
+                </tr>
+                <tr>
+                    <td>success.validator.fv </td>
+                    <td>Triggered when field passes given validator </td>
+                </tr>
+            </table>
+
+
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>使用方式</th>
+                    <th>描述</th>
+                </tr>
+                </thead>
+                <tr>
+                    <td>事件监听（针对所有）</td>
+                    <td>
+<pre class="prettyprint linenums">
+$(document).ready(function() {
+    $(form)
+        .formValidation(options)
+
+        .on('err.validator.fv', function(e, data) {
+            // $(e.target)    --> The form instance
+            // data.field     --> The field name
+            // data.element   --> The field element
+            // data.validator --> The validator name
+
+            // Do something ...
+        })
+
+        .on('success.validator.fv', function(e, data) {
+            // The e parameter is the same as one
+            // in the err.validator.fv event above
+
+            // Do something ...
+        });
+});
+</pre>
+                    </td>
+                </tr>
+                <tr>
+                    <td>初始化参数</td>
+                    <td>
+<pre class="prettyprint linenums">
+$(document).ready(function() {
+    $(form)
+        .formValidation({
+            fields: {
+                email: {
+                    validators: {
+                        emailAddress: {
+                            onError: function(e, data) {
+                                // Do something ...
+                            },
+                            onSuccess: function(e, data) {
+                                // Do something ...
+                            },
+                            // ... other validator options ...
+                        }
+                    }
+                }
+            }
+        });
+});
+</pre>
+                    </td>
+                </tr>
+                <tr>
+                    <td>HTML属性</td>
+                    <td>
+<pre class="prettyprint linenums">
+&lt;form>
+    ...
+    &lt;input type="text" name="email" class="form-control"
+           data-fv-emailaddress="true"
+           data-fv-emailaddress-onerror="onEmailAddressError"
+           data-fv-emailaddress-onsuccess="onEmailAddressSuccess" />
+    ...
+&lt;/form>
+&lt;script>
+    function onEmailAddressError(e, data) {
+        // Do something ...
+    };
+
+    function onEmailAddressSuccess(e, data) {
+        // Do something ...
+    };
+
+    $(document).ready(function() {
+        $(form).formValidation(options);
+    });
+&lt;/script>
+</pre>
+                    </td>
+                </tr>
+            </table>
+        </main>
+    </article>
+    <article class="article">
+        <header>
+            <h3 class="text-muted">11. API（方法）</h3>
+            <hr/>
+        </header>
+        <main>
+            <div class="callout callout-warning">
+                参考：<a href="http://formvalidation.io/api/" target="_blank">方法</a><br/>
+            </div>
+
+            <h4>Usage</h4>
+            <p>
+                After initializing the form with the plugin using $(form).formValidation(options), there are two ways to call the plugin method:
+            </p>
+            <pre class="prettyprint">
+// Get plugin instance
+var formValidation = $(form).data('formValidation');
+
+// and then call method
+formValidation.methodName(parameters)
+            </pre>
+            <p>
+                or:
+            </p>
+            <pre class="prettyprint"> $(form).formValidation(methodName, parameters); </pre>
+            <p>
+                The first way mostly returns the FormValidation instance, meanwhile the second one always returns the jQuery object representing the form.
+            </p>
+            <p>
+                So, it's possible to chain methods as below:
+            </p>
+            <pre class="prettyprint">
+// The first way
+$(form)
+    .data('formValidation')
+    .updateStatus('birthday', 'NOT_VALIDATED')
+    .validateField('birthday');
+
+// The second one
+$(form)
+    .formValidation('updateStatus', 'birthday', 'NOT_VALIDATED')
+    .formValidation('validateField', 'birthday');
+            </pre>
+            <p>Below is the list of public methods provided by the plugin.</p>
+            <h5>The methods use the same format as following:
+               <p><span class="text-danger">methodName(requiredParameter*, optionalParameter, ...): Type of return value</span> — The purpose of method</p>
+            </h5>
+
+
+            <section>
+                <h3>addField</h3>
+                <p><span class="text-danger">addField(field*, options): FormValidation</span> — Add a new field.</p>
+                <table class="table table-bordered table-striped">
+                    <thead>
+                    <tr>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td><code>field</code></td>
+                        <td>String|jQuery</td>
+                        <td>The field name or field element</td>
+                    </tr>
+                    <tr>
+                        <td><code>options</code></td>
+                        <td>Object</td>
+                        <td> The field options.<br>If it is not defined, the options are merged by:<br>
+                            <ul class="doc-list">
+                                <li>Options which are parsed from HTML attributes of field</li>
+                                <li>The current options which are set when calling the plugin</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <p>If you want to do additional task after adding new field, then trigger the added.field.fv event:</p>
+                <pre class="prettyprint">
+$(document).ready(function() {
+    $(form)
+        .formValidation(options)
+        .on('added.field.fv', function(e, data) {
+            // $(e.target)  --> The form instance
+            // $(e.target).data('formValidation')
+            //              --> The FormValidation instance
+
+            // data.field   --> The field name
+            // data.element --> The new field element
+            // data.options --> The new field options
+
+            // Do something ...
+        });
+});
+                </pre>
+                <h5>Example</h5>
+                <ol>
+                    <li><a href="http://formvalidation.io/examples/adding-dynamic-field/" target="_blank">Adding dynamic field </a> </li>
+                </ol>
+            </section>
+
+            <section>
+                <h3>defaultSubmit</h3>
+                <p><span class="text-danger">defaultSubmit(): FormValidation</span> — Submit the form using default submission.</p>
+                <p>It also does not perform any validations when submitting the form. It might be used when you want to submit the form right inside the custom submit handler.</p>
+            </section>
+            <section>
+                <h3>destroy</h3>
+                <p><span class="text-danger">destroy()</span> — Destroy the plugin.</p>
+                <p>It will remove all error messages, feedback icons as well as turning off the events created by the plugin.</p>
+            </section>
+            <section>
+                <h3>disableSubmitButtons</h3>
+                <p><span class="text-danger">disableSubmitButtons(disabled): FormValidation</span> — Disable or enable the submit buttons.</p>
+                <table class="table table-bordered table-striped">
+                    <thead>
+                    <tr>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td><code>disabled</code></td>
+                        <td>Boolean</td>
+                        <td>Can be <code>true</code> or <code>false</code></td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <h5>Example</h5>
+                <ol>
+                    <li><a href="http://formvalidation.io/examples/enabling-submit-button/" target="_blank">Enabling the submit button all the time </a> </li>
+                </ol>
+            </section>
+            <section>
+                <h3>enableFieldValidators</h3>
+                <p><span class="text-danger">enableFieldValidators(field*, enabled*, validator): FormValidation</span> — Enable, disable validators to given field.</p>
+                <table class="table table-bordered table-striped">
+                    <thead>
+                    <tr>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td><code>field</code></td>
+                        <td>String</td>
+                        <td>The field name</td>
+                    </tr>
+                    <tr>
+                        <td><code>enabled</code></td>
+                        <td>Boolean</td>
+                        <td>If <code>true</code>, enable field validators. If <code>false</code>, disable field
+                            validators
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code>validator</code></td>
+                        <td>String</td>
+                        <td>The validator name. If it is not set, all field validators will be enabled or disabled</td>
+                    </tr>
+                    </tbody>
+                </table>
+                <h5>Example</h5>
+                <ol>
+                    <li><a href="http://formvalidation.io/examples/conditional-validation/" target="_blank">Conditional validation </a> </li>
+                    <li><a href="http://formvalidation.io/examples/enable-validator/" target="_blank">Enable, disable validators</a> </li>
+                    <li><a href="http://formvalidation.io/examples/switching-validators-same-field/" target="_blank">Switching validators on the same field</a> </li>
+                    <li><a href="http://formvalidation.io/examples/toggling-validators-master-page/" target="_blank">Toggling validators in a master page</a> </li>
+                </ol>
+            </section>
+            <section>
+                <h3>getDynamicOption</h3>
+                <p><span class="text-danger">getDynamicOption(field*, option*): String</span> — Returns the option value which can be set dynamically.</p>
+                <p>For example, the zipCode validator has country option that can be changed dynamically a select element.</p>
+                <table class="table table-bordered table-striped">
+                    <thead>
+                    <tr>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td><code>field</code></td>
+                        <td>String|jQuery</td>
+                        <td>The field name or element</td>
+                    </tr>
+                    <tr>
+                        <td><code>option</code></td>
+                        <td>String</td>
+                        <td>The <a href="/settings/#dynamic-option">dynamic option</a></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </section>
+            <section>
+                <h3>getFieldElements</h3>
+                <p><span class="text-danger">getFieldElements(field): jQuery[]</span> — Retrieve the field elements by given name.</p>
+                <p>Returns array of jQuery element representing the field, or null if the fields are not found.</p>
+                <table class="table table-bordered table-striped"> <thead> <tr> <th>Parameter</th> <th>Type</th> <th>Description</th> </tr> </thead> <tbody> <tr> <td><code>field</code></td> <td>String</td> <td>The field name</td> </tr> </tbody> </table>
+            </section>
+            <section>
+                <h3>getInvalidFields</h3>
+                <p><span class="text-danger">getInvalidFields(): jQuery[]</span> — Returns the list of invalid fields.</p>
+            </section>
+            <section>
+                <h3>getMessages</h3>
+                <p><span class="text-danger">getMessages(field, validator): String[]</span> — Get the error messages.</p>
+                <table class="table table-bordered table-striped"> <thead> <tr> <th>Parameter</th> <th>Type</th> <th>Description</th> </tr> </thead> <tbody> <tr> <td><code>field</code></td> <td>String|jQuery</td> <td>The field name or field element<br>If the field is not defined, the method returns all error messages of all fields</td> </tr> <tr> <td><code>validator</code></td> <td>String</td> <td>The name of validator<br>If the validator is not defined, the method returns error messages of all validators.</td> </tr> </tbody> </table>
+            </section>
+            <section>
+                <h3>getOptions</h3>
+                <p><span class="text-danger">getOptions(field, validator, option): String|Object</span> — Get the field options.</p>
+                <table class="table table-bordered table-striped"> <thead> <tr> <th>Parameter</th> <th>Type</th> <th>Description</th> </tr> </thead> <tbody> <tr> <td><code>field</code></td> <td>String|jQuery</td> <td>The field name or field element<br>If the field is not defined, the method returns the form options.</td> </tr> <tr> <td><code>validator</code></td> <td>String</td> <td>The name of validator<br>If the validator is not defined, the method returns all field options.</td> </tr> <tr> <td><code>option</code></td> <td>String</td> <td>The option name<br>If it is not defined, the method returns options of given validator</td> </tr> </tbody> </table>
+            </section>
+            <section>
+                <h3>getSubmitButton</h3>
+                <p><span class="text-danger">getSubmitButton(): jQuery</span> — Get the field options.</p>
+                <p>Returns a jQuery element presenting the clicked submit button. Returns null if the submit button isn't clicked.</p>
+            </section>
+            <section>
+                <h3>isValid</h3>
+                <p><span class="text-danger">isValid(): Boolean</span> — Check the form validity. It can take one of three values:</p>
+                <ul class="doc-list">
+                    <li><code>true</code> if all fields are valid</li>
+                    <li><code>false</code> if there is one invalid field</li>
+                    <li><code>null</code> if there is at least one field which is not validated yet or being validated </li>
+                </ul>
+                <p>Ensure that the validate() method is already called before calling this one.</p>
+            </section>
+            <section>
+                <h3>isValidContainer</h3>
+                <p><span class="text-danger">isValidContainer(container*): Boolean</span> — It can take one of three values:</p>
+                <ul class="doc-list"> <li><code>true</code> if all fields belonging to the container are valid</li> <li><code>false</code> if all fields belonging to the container are already validated and there is at least one invalid field</li> <li><code>null</code> if the container consists of at least one field that isn't validated yet</li> </ul>
+                <table class="table table-bordered table-striped"> <thead> <tr> <th>Parameter</th> <th>Type</th> <th>Description</th> </tr> </thead> <tbody> <tr> <td><code>container</code></td> <td>String|jQuery</td> <td>The container selector or container element</td> </tr> </tbody> </table>
+                <p>Using with the validateContainer(container) method, these methods are useful when working with a wizard-like such as tabs, collapsible panels.</p>
+            </section>
+            <section>
+                <h3>isValidField</h3>
+                <p><span class="text-danger">isValidField(field*): Boolean</span> — Check whether the field is valid or not. It can take one of three values:</p>
+                <ul class="doc-list"> <li><code>true</code> if the field passes all validators</li> <li><code>false</code> if the field doesn't pass any validator</li> <li><code>null</code> if there is at least one validator which isn't validated yet or being validated</li> </ul>
+                <table class="table table-bordered table-striped"> <thead> <tr> <th>Parameter</th> <th>Type</th> <th>Description</th> </tr> </thead> <tbody> <tr> <td><code>field</code></td> <td>String|jQuery</td> <td>The field name or field element</td> </tr> </tbody> </table>
+            </section>
+            <section>
+                <h3>removeField</h3>
+                <p><span class="text-danger">removeField(field*): FormValidation</span> — Remove given field</p>
+                <table class="table table-bordered table-striped"> <thead> <tr> <th>Parameter</th> <th>Type</th> <th>Description</th> </tr> </thead> <tbody> <tr> <td><code>field</code></td> <td>String|jQuery</td> <td>The field name or field element</td> </tr> </tbody> </table>
+                <pre class="prettyprint">
+$(document).ready(function() {
+    $(form)
+        .formValidation(options)
+        .on('removed.field.fv', function(e, data) {
+            // $(e.target)  --> The form instance
+            // $(e.target).data('formValidation')
+            //              --> The FormValidation instance
+
+            // data.field   --> The field name
+            // data.element --> The new field element
+
+            // Do something ...
+        });
+});
+                </pre>
+            </section>
+            <section>
+                <h3>resetField</h3>
+                <p><span class="text-danger">resetField(field*, resetValue): FormValidation</span> — Reset given field. It hides the error messages and feedback icons.</p>
+                <table class="table table-bordered table-striped"> <thead> <tr> <th>Parameter</th> <th>Type</th> <th>Description</th> </tr> </thead> <tbody> <tr> <td><code>field</code></td> <td>String|jQuery</td> <td>The field name or field element</td> </tr> <tr> <td><code>resetValue</code></td> <td>Boolean</td> <td>If <code>true</code>, the method resets field value to empty or remove checked/selected attribute (for radio and checkbox).</td> </tr> </tbody> </table>
+            </section>
+            <section>
+                <h3>resetForm</h3>
+                <p><span class="text-danger">resetForm(resetFormData): FormValidation</span> — Reset form. It hides all error elements and feedback icons. All the fields are marked as not validated yet.</p>
+                <table class="table table-bordered table-striped"> <thead> <tr> <th>Parameter</th> <th>Type</th> <th>Description</th> </tr> </thead> <tbody> <tr> <td><code>resetFormData</code></td> <td>Boolean</td> <td>If <code>true</code>, the method resets the fields which have validator rules.</td> </tr> </tbody> </table>
+                <pre class="prettyprint">
+$(form).formValidation(options);
+$(form).data('formValidation').resetForm();
+                </pre>
+            </section>
+            <section>
+                <h3>revalidateField</h3>
+                <p><span class="text-danger">revalidateField(field*): FormValidation</span> —  Revalidate given field.</p>
+                <p>It's used when you need to revalidate the field which its value is updated by other plugin.</p>
+                <p>By default, the plugin doesn't re-validate a field once it is already validated and marked as a valid one. When using with other plugins, the field value is changed and therefore need to be re-validated.</p>
+                <p>Behind the scenes, the method is equivalent to:</p>
+                <pre class="prettyprint">
+$(form).data('formValidation')
+    .updateStatus(field, 'NOT_VALIDATED')
+    .validateField(field);
+
+// Or
+$(form).formValidation('updateStatus', field, 'NOT_VALIDATED')
+       .formValidation('validateField', field);
+                </pre>
+                <table class="table table-bordered table-striped"> <thead> <tr> <th>Parameter</th> <th>Type</th> <th>Description</th> </tr> </thead> <tbody> <tr> <td><code>field</code></td> <td>String|jQuery</td> <td>The field name or field element</td> </tr> </tbody> </table>
+            </section>
+            <section>
+                <h3>revalidateField</h3>
+                <p><span class="text-danger">revalidateField(field*): FormValidation</span> —  Revalidate given field.</p>
+                <p>It's used when you need to revalidate the field which its value is updated by other plugin.</p>
+                <p>By default, the plugin doesn't re-validate a field once it is already validated and marked as a valid one. When using with other plugins, the field value is changed and therefore need to be re-validated.</p>
+                <p>Behind the scenes, the method is equivalent to:</p>
+                <pre class="prettyprint">
+$(form).data('formValidation')
+    .updateStatus(field, 'NOT_VALIDATED')
+    .validateField(field);
+
+// Or
+$(form).formValidation('updateStatus', field, 'NOT_VALIDATED')
+       .formValidation('validateField', field);
+                </pre>
+            </section>
+            <section>
+                <h3>updateMessage</h3>
+                <p><span class="text-danger">updateMessage(field*, validator*, message*): FormValidation</span> —  Update the error message.</p>
+                <table class="table table-bordered table-striped"> <thead> <tr> <th>Parameter</th> <th>Type</th> <th>Description</th> </tr> </thead> <tbody> <tr> <td><code>field</code></td> <td>String|jQuery</td> <td>The field name or field element</td> </tr> <tr> <td><code>validator</code></td> <td>String</td> <td>The validator name</td> </tr> <tr> <td><code>message</code></td> <td>String</td> <td>The error message</td> </tr> </tbody> </table>
+            </section>
+            <section>
+                <h3>updateOption</h3>
+                <p><span class="text-danger">updateOption(field*, validator*, option*, value*): FormValidation</span> —  Update the option of a specific validator.</p>
+                <table class="table table-bordered table-striped"> <thead> <tr> <th>Parameter</th> <th>Type</th> <th>Description</th> </tr> </thead> <tbody> <tr> <td><code>field</code></td> <td>String|jQuery</td> <td>The field name or field element</td> </tr> <tr> <td><code>validator</code></td> <td>String</td> <td>The validator name</td> </tr> <tr> <td><code>option</code></td> <td>String</td> <td>The option name</td> </tr> <tr> <td><code>value</code></td> <td>String</td> <td>The option value</td> </tr> </tbody> </table>
+            </section>
+            <section>
+                <h3>updateStatus</h3>
+                <p><span class="text-danger">updateStatus(field*, status*, validator): FormValidation</span> —  Update validator result for given field.</p>
+                <table class="table table-bordered table-striped"> <thead> <tr> <th>Parameter</th> <th>Type</th> <th>Description</th> </tr> </thead> <tbody> <tr> <td><code>field</code></td> <td>String|jQuery</td> <td>The field name or field element</td> </tr> <tr> <td><code>status</code></td> <td>String</td> <td>Can be <code>NOT_VALIDATED</code>, <code>VALIDATING</code>, <code>INVALID</code> or <code>VALID</code></td> </tr> <tr> <td><code>validator</code></td> <td>String</td> <td>The validator name. If <code>null</code>, the method updates validity result for all validators</td> </tr> </tbody> </table>
+            </section>
+            <section>
+                <h3>validate</h3>
+                <p><span class="text-danger">validate(): FormValidation</span> —  Validate form manually. It is useful when you want to validate form by clicking a button or a link instead of a submit buttons.</p>
+                <pre class="prettyprint">
+$(form).formValidation(options).formValidation('validate');
+
+// or
+$(form).formValidation(options);
+$(form).data('formValidation').validate();
+                </pre>
+            </section>
+            <section>
+                <h3>validateContainer</h3>
+                <p><span class="text-danger">validateContainer(container*): FormValidation</span> —  Validate given container.</p>
+                <p>Using with the isValidContainer(container) method, these methods are useful when working with a wizard-like such as tabs, collapsible panels</p>
+                <table class="table table-bordered table-striped"> <thead> <tr> <th>Parameter</th> <th>Type</th> <th>Description</th> </tr> </thead> <tbody> <tr> <td><code>container</code></td> <td>String|jQuery</td> <td>The container selector or element</td> </tr> </tbody> </table>
+            </section>
+            <section>
+                <h3>validateField</h3>
+                <p><span class="text-danger">validateField(field*): FormValidation</span> —  Validate given field.</p>
+                <table class="table table-bordered table-striped"> <thead> <tr> <th>Parameter</th> <th>Type</th> <th>Description</th> </tr> </thead> <tbody> <tr> <td><code>field</code></td> <td>String|jQuery</td> <td>The field name or field element</td> </tr> </tbody> </table>
+            </section>
+        </main>
+    </article>
+    <article class="article">
+        <header>
+            <h3 class="text-muted">12. 内置校验器</h3>
+            <hr/>
+        </header>
+        <main>
+            <div class="callout callout-warning">
+                参考：<a href="http://formvalidation.io/validators/" target="_blank">校验器</a><br/>
+            </div>
+            <p>FormValidation comes with various built-in validators listed in the alphabetical order as following:</p>
+            <table class="table table-bordered table-striped"> <thead> <tr> <th>No.</th> <th>Name</th> <th>Description</th> </tr> </thead> <tbody> <tr> <td>1</td> <td><a href="/validators/base64/">base64</a></td> <td>Validate a base64 encoded string</td> </tr> <tr> <td>2</td> <td><a href="/validators/between/">between</a></td> <td>Check if the input value is between (strictly or not) two given numbers</td> </tr> <tr> <td>3</td> <td><a href="/validators/bic/">bic</a></td> <td>Validate a BIC (Business Identifier Codes)</td> </tr> <tr> <td>4</td> <td><a href="/validators/callback/">callback</a></td> <td>Return the validity from a callback method</td> </tr> <tr> <td>5</td> <td><a href="/validators/choice/">choice</a></td> <td>Check if the number of checked boxes are less or more than a given number</td> </tr> <tr> <td>6</td> <td><a href="/validators/color/">color</a></td> <td>Validate a color in different formats</td> </tr> <tr> <td>7</td> <td><a href="/validators/creditCard/">creditCard</a></td> <td>Validate a credit card number</td> </tr> <tr> <td>8</td> <td><a href="/validators/cusip/">cusip</a></td> <td>Validate a CUSIP</td> </tr> <tr> <td>9</td> <td><a href="/validators/cvv/">cvv</a></td> <td>Validate a CVV number</td> </tr> <tr> <td>10</td> <td><a href="/validators/date/">date</a></td> <td>Validate date</td> </tr> <tr> <td>11</td> <td><a href="/validators/different/">different</a></td> <td>Return true if the input value is different with given field's value</td> </tr> <tr> <td>12</td> <td><a href="/validators/digits/">digits</a></td> <td>Return true if the value contains only digits</td> </tr> <tr> <td>13</td> <td><a href="/validators/ean/">ean</a></td> <td>Validate an EAN (International Article Number)</td> </tr> <tr> <td>14</td> <td><a href="/validators/ein/">ein</a></td> <td>Validate an EIN (Employer Identification Number)</td> </tr> <tr> <td>15</td> <td><a href="/validators/emailAddress/">emailAddress</a></td> <td>Validate an email address</td> </tr> <tr> <td>16</td> <td><a href="/validators/file/">file</a></td> <td>Validate file</td> </tr> <tr> <td>17</td> <td><a href="/validators/greaterThan/">greaterThan</a></td> <td>Return true if the value is greater than or equals to given number</td> </tr> <tr> <td>18</td> <td><a href="/validators/grid/">grid</a></td> <td>Validate a GRId (Global Release Identifier)</td> </tr> <tr> <td>19</td> <td><a href="/validators/hex/">hex</a></td> <td>Validate a hexadecimal number</td> </tr> <tr> <td>20</td> <td><a href="/validators/iban/">iban</a></td> <td>Validate an International Bank Account Number (IBAN)</td> </tr> <tr> <td>21</td> <td><a href="/validators/id/">id</a></td> <td>Validate identification number</td> </tr> <tr> <td>22</td> <td><a href="/validators/identical/">identical</a></td> <td>Check if the value is the same as one of particular field</td> </tr> <tr> <td>23</td> <td><a href="/validators/imei/">imei</a></td> <td>Validate an IMEI (International Mobile Station Equipment Identity)</td> </tr> <tr> <td>24</td> <td><a href="/validators/imo/">imo</a></td> <td>Validate an IMO (International Maritime Organization)</td> </tr> <tr> <td>25</td> <td><a href="/validators/integer/">integer</a></td> <td>Validate an integer number</td> </tr> <tr> <td>26</td> <td><a href="/validators/ip/">ip</a></td> <td>Validate an IP address. Support both IPv4 and IPv6</td> </tr> <tr> <td>27</td> <td><a href="/validators/isbn/">isbn</a></td> <td>Validate an ISBN (International Standard Book Number). Support both ISBN 10 and ISBN 13</td> </tr> <tr> <td>28</td> <td><a href="/validators/isin/">isin</a></td> <td>Validate an ISIN (International Securities Identification Number)</td> </tr> <tr> <td>29</td> <td><a href="/validators/ismn/">ismn</a></td> <td>Validate an ISMN (International Standard Music Number)</td> </tr> <tr> <td>30</td> <td><a href="/validators/issn/">issn</a></td> <td>Validate an ISSN (International Standard Serial Number)</td> </tr> <tr> <td>31</td> <td><a href="/validators/lessThan/">lessThan</a></td> <td>Return true if the value is less than or equals to given number</td> </tr> <tr> <td>32</td> <td><a href="/validators/mac/">mac</a></td> <td>Validate a MAC address</td> </tr> <tr> <td>33</td> <td><a href="/validators/meid/">meid</a></td> <td>Validate a MEID (mobile equipment identifier)</td> </tr> <tr> <td>34</td> <td><a href="/validators/notEmpty/">notEmpty</a></td> <td>Check if the value is empty</td> </tr> <tr> <td>35</td> <td><a href="/validators/numeric/">numeric</a></td> <td>Check if the value is numeric</td> </tr> <tr> <td>36</td> <td><a href="/validators/phone/">phone</a></td> <td>Validate a phone number</td> </tr> <tr> <td>37</td> <td><a href="/validators/promise/">promise</a></td> <td>Use jQuery's Deferred to validate field's value</td> </tr> <tr> <td>38</td> <td><a href="/validators/regexp/">regexp</a></td> <td>Check if the value matches given Javascript regular expression</td> </tr> <tr> <td>39</td> <td><a href="/validators/remote/">remote</a></td> <td>Perform remote checking via Ajax request</td> </tr> <tr> <td>40</td> <td><a href="/validators/rtn/">rtn</a></td> <td>Validate a RTN (Routing transit number)</td> </tr> <tr> <td>41</td> <td><a href="/validators/sedol/">sedol</a></td> <td>Validate a SEDOL (Stock Exchange Daily Official List)</td> </tr> <tr> <td>42</td> <td><a href="/validators/siren/">siren</a></td> <td>Validate a Siren number</td> </tr> <tr> <td>43</td> <td><a href="/validators/siret/">siret</a></td> <td>Validate a Siret number</td> </tr> <tr> <td>44</td> <td><a href="/validators/step/">step</a></td> <td>Check if the value is valid step one</td> </tr> <tr> <td>45</td> <td><a href="/validators/stringCase/">stringCase</a></td> <td>Check if a string is a lower or upper case one</td> </tr> <tr> <td>46</td> <td><a href="/validators/stringLength/">stringLength</a></td> <td>Validate the length of a string</td> </tr> <tr> <td>47</td> <td><a href="/validators/uri/">uri</a></td> <td>Validate an URL address</td> </tr> <tr> <td>48</td> <td><a href="/validators/uuid/">uuid</a></td> <td>Validate an UUID, support v3, v4, v5</td> </tr> <tr> <td>49</td> <td><a href="/validators/vat/">vat</a></td> <td>Validate VAT number</td> </tr> <tr> <td>50</td> <td><a href="/validators/vin/">vin</a></td> <td>Validate an US VIN (Vehicle Identification Number)</td> </tr> <tr> <td>51</td> <td><a href="/validators/zipCode/">zipCode</a></td> <td>Validate a zip code</td> </tr> </tbody> </table>
+        </main>
+    </article>
 </div>

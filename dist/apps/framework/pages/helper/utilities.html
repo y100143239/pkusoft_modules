@@ -1,0 +1,133 @@
+<div class="page-utilities">
+
+
+    <div class="panel panel-simple">
+        <div class="panel-heading"><i class="fa fa-align-left"></i> 文本对齐</div>
+        <div class="panel-body">
+<pre class="prettyprint linenums">
+.text-left { text-align: left; }
+
+.text-center { text-align: center; }
+
+.text-right { text-align: right; }
+
+.text-nowrap { white-space: nowrap; } /* 单行排列，不折行 */
+</pre>
+
+        </div>
+    </div>
+
+
+
+
+    <div class="panel panel-simple">
+        <div class="panel-heading"><i class="fa"></i> 文本颜色</div>
+        <div class="panel-body">
+            <p class="text-muted">.text-muted { color: #777777; }</p>
+            <p class="text-primary">.text-primary { color: #337ab7; }</p>
+            <p class="text-success">.text-success { color: #3c763d; }</p>
+            <p class="text-info">.text-info { color: #31708f; }</p>
+            <p class="text-warning">.text-warning { color: #8a6d3b; }</p>
+            <p class="text-danger">.text-danger { color: #a94442; }</p>
+            <pre class="prettyprint linenums">
+&lt;p class="text-muted">.text-muted { color: #777777; }&lt;/p>
+&lt;p class="text-primary">.text-primary { color: #337ab7; }&lt;/p>
+&lt;p class="text-success">.text-success { color: #3c763d; }&lt;/p>
+&lt;p class="text-info">.text-info { color: #31708f; }&lt;/p>
+&lt;p class="text-warning">.text-warning { color: #8a6d3b; }&lt;/p>
+&lt;p class="text-danger">.text-danger { color: #a94442; }&lt;/p>
+</pre>
+        </div>
+    </div>
+
+    <div class="panel panel-simple">
+        <div class="panel-heading"><i class="fa"></i> 背景色</div>
+        <div class="panel-body children-padding">
+            <p class="bg-primary">.bg-primary { color: #337ab7; }</p>
+            <p class="bg-success">.bg-success { color: #3c763d; }</p>
+            <p class="bg-info">.bg-info { color: #31708f; }</p>
+            <p class="bg-warning">.bg-warning { color: #8a6d3b; }</p>
+            <p class="bg-danger">.bg-danger { color: #a94442; }</p>
+            <pre class="prettyprint linenums">
+&lt;p class="bg-primary">.bg-primary { color: #337ab7; }&lt;/p>
+&lt;p class="bg-success">.bg-success { color: #3c763d; }&lt;/p>
+&lt;p class="bg-info">.bg-info { color: #31708f; }&lt;/p>
+&lt;p class="bg-warning">.bg-warning { color: #8a6d3b; }&lt;/p>
+&lt;p class="bg-danger">.bg-danger { color: #a94442; }&lt;/p>
+</pre>
+        </div>
+    </div>
+
+    <div class="panel panel-simple">
+        <div class="panel-heading"><i class="fa"></i> 浮动</div>
+        <div class="panel-body">
+            <pre class="prettyprint linenums">
+/* Classes */
+.pull-left {
+    float: left !important;
+}
+.pull-right {
+    float: right !important;
+}
+
+</pre>
+        </div>
+    </div>
+
+
+    <div class="panel panel-simple">
+        <div class="panel-heading"><i class="fa"></i> 块级元素居中</div>
+        <div class="panel-body">
+            <pre class="prettyprint linenums">
+/* Class */
+.center-block {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Usage as a mixin */
+.element {
+    .center-block();
+}
+</pre>
+        </div>
+    </div>
+
+    <div class="panel panel-simple">
+        <div class="panel-heading"><i class="fa"></i> 清除浮动</div>
+        <div class="panel-body">
+            <!-- Usage as a class -->
+            <pre class="prettyprint linenums"> &lt;div class="clearfix">...&lt;/div> </pre>
+            <pre class="prettyprint linenums">
+.clearfix:before,
+.clearfix:after {
+    content: " ";
+    display: table;
+}
+.clearfix:after {
+    clear: both;
+}
+</pre>
+        </div>
+    </div>
+
+    <div class="panel panel-simple">
+        <div class="panel-heading"><i class="fa"></i> 显示与隐藏</div>
+        <div class="panel-body">
+            <pre class="prettyprint linenums">
+.show {
+    display: block !important;
+}
+.hidden {
+    display: none !important;
+}
+.invisible {
+    visibility: hidden;
+}
+</pre>
+        </div>
+    </div>
+
+
+</div>

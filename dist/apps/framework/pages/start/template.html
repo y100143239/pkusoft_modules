@@ -1,0 +1,151 @@
+<article>
+    <h3>1. 基本模板</h3>
+    <hr/>
+<pre class="prettyprint linenums">
+&lt;!DOCTYPE html>
+&lt;html lang="en">
+&lt;head>
+    &lt;meta charset="UTF-8">
+    &lt;meta name="renderer" content="webkit">
+    &lt;meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1">
+    &lt;title>&lt;/title>
+    &lt;!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    &lt;!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    &lt;!--[if lte IE 8]>
+    &lt;script src="../../../dev/modules/lib/ie/respond.js">&lt;/script>
+    &lt;script src="../../../dev/modules/lib/ie/html5shiv.js">&lt;/script>
+    &lt;![endif]-->
+
+    &lt;link rel="stylesheet" href="../../../dev/modules/ui/css/pku.css"/>
+    &lt;link rel="stylesheet" href="css/main.css"/>&lt;!-- custom stylesheet -->
+
+    &lt;script data-main="../../modules/" src="../../modules/require.js">&lt;/script>
+    &lt;script >
+        var VERSION,
+            DEV_MODE
+            ;
+        DEV_MODE = true;
+        VERSION = DEV_MODE ? (new Date()).getTime() : "v1.0";
+        require.config( {
+            urlArgs: "VERSION=" + VERSION,
+            paths: {
+                "jquery": "jquery/jquery-1.11.3",
+                "doT": "utils/doT",
+                "bootstrap": "lib/bootstrap/js/bootstrap",
+                "code-pretty": "lib/pretty/prettify.min"
+            },
+            map: {
+                '*': {
+                    'css': 'utils/css/css',
+                    'text': 'utils/text'
+                }
+            },
+            shim : {
+                "bootstrap": [ "jquery" ],
+                "code-pretty": [ "css!lib/pretty/prettify.css" ]
+            },
+            // 超时
+            waitSeconds: 15
+        } );
+        require( [ "code-pretty", "./js/main.js" ] );
+    &lt;/script>
+&lt;/head>
+&lt;body>
+
+&lt;/body>
+&lt;/html>
+</pre>
+</article>
+<br/>
+
+
+<article>
+    <h3>2. 文件结构</h3>
+    <hr/>
+<pre>
+modules
+    |-- require.js
+    |-- ui
+        |-- css
+            |-- pku.css
+            |-- bootstrap_src.css
+        |-- fonts
+            |-- FontAwesome.otf
+            |-- fontawesome-webfont.eot
+            |-- fontawesome-webfont.svg
+            |-- fontawesome-webfont.ttf
+            |-- fontawesome-webfont.woff
+            |-- fontawesome-webfont.woff2
+    |-- jquery
+        |-- jquery
+            |-- jquery-1.11.3.js
+    |-- utils
+        |-- doT.js
+    |-- lib
+        |-- bootstrap
+            |-- js
+                |-- bootstrap.js
+        |- ie
+            |-- respond.js
+            |-- html5shiv.js
+</pre>
+</article>
+<br/>
+
+<article>
+    <h3>3. &lt;meta></h3>
+    <hr/>
+<pre>
+1）&lt;meta charset="UTF-8">
+
+    设置浏览器解析html文件时使用的字符集
+
+2）&lt;meta name="renderer" content="webkit">
+
+    国内浏览器厂商一般都支持兼容模式（即 IE 内核）和高速模式（即 webkit 内核），
+    不幸的是，所有国产浏览器都是默认使用兼容模式，
+    可使用上面的meta标签可以让部分国产浏览器默认采用高速模式渲染页面。
+
+3）&lt;meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    让 IE 浏览器运行最新的渲染模式下
+
+4）&lt;meta name="viewport" content="width=device-width, initial-scale=1">
+
+    禁止缩放，且不让浏览器假装自己是960px的宽度
+
+</pre>
+</article>
+<br/>
+
+<article>
+    <h3>4. IE8 兼容</h3>
+    <hr/>
+<pre>
+&lt;!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+&lt;!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+&lt;!--[if lte IE 8]>
+&lt;script src="../../../dev/modules/lib/ie/respond.js">&lt;/script>
+&lt;script src="../../../dev/modules/lib/ie/html5shiv.js">&lt;/script>
+&lt;![endif]-->
+
+1）respond.js
+
+    让IE8支持媒介查询，进而支持响应式
+
+2）html5shiv.js
+
+    让IE8识别HTML5中新增的标签，如 &lt;main>、&lt;section>
+</pre>
+</article>
+<br/>
+
+<article>
+    <h3>5. JavaScript文件引入</h3>
+    <hr/>
+<pre>
+使用 RequireJS
+</pre>
+</article>
+<br/>
