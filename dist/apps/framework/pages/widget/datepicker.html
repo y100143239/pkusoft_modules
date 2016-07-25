@@ -1,0 +1,670 @@
+<div class="page-datepicker">
+
+    <article class="article">
+        <header>
+            <h3 class="text-muted">1. 示例</h3>
+            <hr/>
+        </header>
+        <main>
+
+            <table class="table table-bordered">
+                <tr>
+                    <td>初始化（通过“data-”属性）</td>
+                    <td>
+                        <input id="_1" type="text" class="form-control" data-provide="datepicker" placeholder="选择日期" style="margin-bottom: 8px"/>
+<pre class="prettyprint">
+&lt;input ... data-provide="datepicker" />
+</pre>
+                    </td>
+                    <td>
+                        给HTML元素设置“ data-provide="datepicker" ”，<br/>
+                        即可将其变为 datepicker。<br/>
+                        对于动态添加的HTML元素同样有效。
+                    </td>
+                </tr>
+                <tr>
+                    <td>初始化（通过JavaScript）</td>
+                    <td>
+                        <input id="_2" type="text" class="form-control" placeholder="选择日期" style="margin-bottom: 8px"/>
+<pre class="prettyprint">
+jQuery( "#_2" ).datepicker();
+</pre>
+                    </td>
+                    <td>
+                        使用 jQuery( targets ).datepicker()
+                    </td>
+                </tr>
+                <tr>
+                    <td>带图标</td>
+                    <td colspan="2">
+                        <div class="input-group date" data-provide="datepicker" style="margin-bottom: 8px">
+                            <input type="text" class="form-control" placeholder="选择日期"/>
+                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        </div>
+<pre class="prettyprint" >
+&lt;div class="input-group date" data-provide="datepicker" >
+    &lt;input type="text" class="form-control" placeholder="选择日期"/>
+    &lt;span class="input-group-addon">&lt;i class="fa fa-calendar">&lt;/i>&lt;/span>
+&lt;/div>
+</pre>
+<pre>
+结构：
+&lt;div class="input-group date" data-provide="datepicker" >
+    &lt;input type="text" class="form-control"/>
+    &lt;span class="input-group-addon">&lt;i class="fa fa-calendar">&lt;/i>&lt;/span>
+&lt;/div>
+</pre>
+                    </td>
+                </tr>
+                <tr>
+                    <td>日期区间（通过“data-”属性）</td>
+                    <td colspan="2">
+                        <div class="input-group input-daterange" data-provide="datepicker" style="margin-bottom: 8px">
+                            <input type="text" class="form-control" value="2016-01-05">
+                            <span class="input-group-addon">to</span>
+                            <input type="text" class="form-control" value="2016-01-29">
+                        </div>
+<pre class="prettyprint" >
+&lt;div class="input-group input-daterange" data-provide="datepicker" >
+    &lt;input type="text" class="form-control" value="2016-01-05">
+    &lt;span class="input-group-addon">to&lt;/span>
+    &lt;input type="text" class="form-control" value="2016-01-29">
+&lt;/div>
+</pre>
+<pre>
+结构：
+&lt;div class="input-daterange"
+        data-provide="datepicker" >
+    &lt;input type="text" >
+    &lt;input type="text" >
+&lt;/div>
+</pre>
+                    </td>
+                </tr>
+                <tr>
+                    <td>日期区间（通过JavaScript）</td>
+                    <td colspan="2">
+                        <div id="_3" class="input-group" style="margin-bottom: 8px">
+                            <input type="text" class="form-control" value="2016-01-05">
+                            <span class="input-group-addon">to</span>
+                            <input type="text" class="form-control" value="2016-01-29">
+                        </div>
+                        <script>jQuery( "#_3" ).datepicker( { inputs: jQuery( "#_3 input" ) } )</script>
+<pre class="prettyprint">
+&lt;div id="_3" class="input-group" >
+    &lt;input type="text" class="form-control" value="2016-01-05">
+    &lt;span class="input-group-addon">to&lt;/span>
+    &lt;input type="text" class="form-control" value="2016-01-29">
+&lt;/div>
+jQuery( "#_3" ).datepicker( {
+    inputs: jQuery( "#_3 input" )
+} )
+</pre>
+<pre>
+说明：
+    1. datepicker不会直接作用于 “#_3”，而是 “inputs”属性 指定的元素
+    2. 通过 “inputs”属性 可指定任意位置的两个input框作为区间选择的两端。
+</pre>
+                    </td>
+                </tr>
+            </table>
+        </main>
+    </article>
+
+    <article class="article">
+        <header>
+            <h3 class="text-muted">2. 参数</h3>
+            <hr/>
+        </header>
+        <main>
+
+            <div class="callout callout-danger">
+                <div class="pre">
+1. 参考
+
+    <a href="https://bootstrap-datepicker.readthedocs.io/en/stable/options.html" target="_blank">https://bootstrap-datepicker.readthedocs.io/en/stable/options.html</a>
+
+2. 设置方式
+
+    1）通过HTML属性
+
+        * 前缀“data-date-”
+        * 驼峰分词 转 减号分词，如 startDate -> start-date
+        * 示例
+            * format    ==> data-date-format
+            * startDate ==> data-date-start-date
+
+    2）通过JavaScript
+
+        jQuery( targets ).datepicker( {
+            参数1: 参数值1,
+            参数2: 参数值2,
+            ...
+        } )
+
+3. 全局设置
+
+    直接更改默认值 $.fn.datepicker.defaults
+    如，更改语言类型：
+        $.fn.datepicker.defaults.language = "zh-CN";
+
+                </div>
+            </div>
+
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>参数名</th>
+                    <th>参数值类型 及默认值</th>
+                    <th>描述</th>
+                </tr>
+                </thead>
+                <tr>
+                    <td>format</td>
+                    <td> String："yyyy-mm-dd"</td>
+                    <td>
+                        <p>说明：<br/>
+                        显示在输入框的日期格式；<br/>
+                        默认值已修改过。<br/>
+                        </p>
+                        <p> 示例：<br/>
+                            <input type="text" class="form-control"
+                               data-provide="datepicker"
+                               data-date-format="yyyy年mm月dd日"/>
+                        </p>
+                        <pre class="prettyprint linenums">
+&lt;input data-date-format="yyyy年mm月dd日"
+    type="text" data-provide="datepicker"/></pre>
+                    </td>
+                </tr>
+                <tr>
+                    <td>autoclose</td>
+                    <td> Boolean：true（已修改）</td>
+                    <td>
+
+                        <p>说明：<br/>
+                        当选择完日期后，是否立即关闭日历控件面板；<br/>
+                        默认情况下，只有在输入框失去焦点时才会关闭控件面板；<br/>
+                        </p>
+                        <p> 示例：<br/>
+                            <input type="text" class="form-control"
+                               data-provide="datepicker"
+                               data-date-autoclose="true"/>
+                        </p>
+                        <pre class="prettyprint linenums">
+&lt;input data-date-autoclose="true"
+    type="text" data-provide="datepicker"/></pre>
+                    </td>
+                </tr>
+                <tr>
+                    <td>calendarWeeks</td>
+                    <td> Boolean：false</td>
+                    <td>
+
+                        <p>说明：<br/>
+                        是否在面板上显示周数<br/>
+                        </p>
+                        <p> 示例：<br/>
+                            <input type="text" class="form-control"
+                               data-provide="datepicker"
+                               data-date-calendar-weeks="true"/>
+                        </p>
+                        <pre class="prettyprint linenums">
+&lt;input data-date-calendar-weeks="true"
+    type="text" data-provide="datepicker"/></pre>
+                    </td>
+                </tr>
+                <tr>
+                    <td>clearBtn</td>
+                    <td> Boolean：false</td>
+                    <td>
+
+                        <p>说明：<br/>
+                            是否在面板上显示清空输入框的按钮；<br/>
+                            如果autoclose设置为true，在点击按钮后会关闭面板。
+                        </p>
+                        <p> 示例：<br/>
+                            <input type="text" class="form-control"
+                               data-provide="datepicker"
+                                   data-date-clear-btn="true"/>
+                        </p>
+                        <pre class="prettyprint linenums">
+&lt;input data-date-clear-btn="true"
+    type="text" data-provide="datepicker"/></pre>
+                    </td>
+                </tr>
+                <tr>
+                    <td>todayBtn</td>
+                    <td> Boolean：false <br/>
+                        "linked"
+                    </td>
+                    <td>
+
+                        <p>说明：<br/>
+                            当为true或"linked"时，底部会出现选择今天的按钮。<br/>
+                            true，只会回到包含今天的那个月；<br/>
+                            "linked"，不仅会回到今天的那个月，还会选中今天的日期。
+                        </p>
+                        <p> 示例：<br/>
+                            <input type="text" class="form-control"
+                               data-provide="datepicker"
+                                data-date-clear-btn="true"
+                                data-date-today-btn="linked"/>
+                        </p>
+                        <pre class="prettyprint linenums">
+&lt;input data-date-clear-btn="true"
+    type="text" data-provide="datepicker"/></pre>
+                    </td>
+                </tr>
+                <tr>
+                    <td>container</td>
+                    <td> String："body"</td>
+                    <td>
+
+                        <p>说明：<br/>
+                            指定面板的容器。<br/>
+                            请勿更改默认值。
+                        </p>
+                        <p> 示例：<br/>
+                            <input type="text" class="form-control"
+                               data-provide="datepicker"
+                                   data-date-container="body"/>
+                        </p>
+                        <pre class="prettyprint linenums">
+&lt;input data-date-container="body"
+    type="text" data-provide="datepicker"/></pre>
+                    </td>
+                </tr>
+                <tr>
+                    <td>datesDisabled</td>
+                    <td>
+                        String："" <br/>
+                        Array：[]
+                    </td>
+                    <td>
+
+                        <p>说明：<br/>
+                            禁用某些日期。<br/>
+                            单个符合格式的字符串或，字符串数组。
+                        </p>
+                        <p> 示例：<br/>
+                            <input type="text" class="form-control"
+                               data-provide="datepicker"
+                                   data-date-dates-disabled="2016-7-15"/>
+                        </p>
+                        <pre class="prettyprint linenums">
+&lt;input data-date-dates-disabled="2016-7-15"
+    type="text" data-provide="datepicker"/></pre>
+                    </td>
+                </tr>
+                <tr>
+                    <td>daysOfWeekDisabled</td>
+                    <td>
+                        String："" <br/>
+                        Array：[]
+                    </td>
+                    <td>
+
+                        <p>说明：<br/>
+                            禁用每周中的某几天；<br/>
+                            从星期天(值为0)到星期六(值为6)；<br/>
+                            禁用双休日，"06" 或 "0,6" 或 [0, 6]
+                        </p>
+                        <p> 示例：<br/>
+                            <input type="text" class="form-control"
+                               data-provide="datepicker"
+                                   data-date-days-of-week-disabled="1,2,3"/>
+                        </p>
+                        <pre class="prettyprint linenums">
+&lt;input data-date-days-of-week-disabled="1,2,3"
+    type="text" data-provide="datepicker"/></pre>
+                    </td>
+                </tr>
+                <tr>
+                    <td>daysOfWeekHighlighted</td>
+                    <td>
+                        String："" <br/>
+                        Array：[]
+                    </td>
+                    <td>
+
+                        <p>说明：<br/>
+                            高亮每周中的某几天；<br/>
+                            从星期天(值为0)到星期六(值为6)；<br/>
+                            高亮双休日，"06" 或 "0,6" 或 [0, 6]
+                        </p>
+                        <p> 示例：<br/>
+                            <input type="text" class="form-control"
+                               data-provide="datepicker"
+                                   data-date-days-of-week-highlighted="0,6"/>
+                        </p>
+                        <pre class="prettyprint linenums">
+&lt;input data-date-days-of-week-highlighted="0,6"
+    type="text" data-provide="datepicker"/></pre>
+                    </td>
+                </tr>
+                <tr>
+                    <td>defaultViewDate</td>
+                    <td>
+                        Object：<br/>
+                        <div class="pre">{
+    "year": 今年,
+    "month": 今月,
+    "day": 今日
+} </div>
+                    </td>
+                    <td>
+
+                        <p>说明：<br/>
+                            第一次打开日期控件时显示的日期；<br/>
+                            默认为今天<br/>
+                        </p>
+                        <p> 示例：<br/>
+                            <input type="text" class="form-control" placeholder="2013-01-24"
+                               data-provide="datepicker"
+                                   data-date-default-view-date='{ "year": 2012, "month": 12, "day": 24 }'/>
+                        </p>
+                        <pre class="prettyprint linenums">
+&lt;input data-date-default-view-date=
+            '{ "year": 2012, "month": 12, "day": 24 }'
+    type="text" data-provide="datepicker"/></pre>
+                    </td>
+                </tr>
+                <tr>
+                    <td>disableTouchKeyboard</td>
+                    <td>
+                        Boolean：false
+                    </td>
+                    <td>
+
+                        <p>说明：<br/>
+                            如果设置为 true，在移动设备上将不会显示键盘
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>enableOnReadonly</td>
+                    <td>
+                        Boolean：true
+                    </td>
+                    <td>
+                        <p>说明：<br/>
+                            在 只读输入框 里，日历控件是否可用。
+                        </p>
+                        <p> 示例：<br/>
+                            <input type="text" class="form-control"
+                                   data-provide="datepicker" readonly
+                                   data-date-enable-on-readonly="false"/>
+                        </p>
+                        <pre class="prettyprint linenums">
+&lt;input data-date-enable-on-readonly="false" readonly
+    type="text" data-provide="datepicker"/></pre>
+                    </td>
+                </tr>
+                <tr>
+                    <td>endDate</td>
+                    <td>
+                        Date： End of time <br/>
+                        String：End of time
+                    </td>
+                    <td>
+                        <p>说明：<br/>
+                            设置最后一天，后面的日期将不可用。<br/>
+                            data-date-end-date="0d" 设置为今天。
+                        </p>
+                        <p> 示例：<br/>
+                            <input type="text" class="form-control"
+                                   data-provide="datepicker"
+                                   data-date-end-date="2016-7-20"/>
+                        </p>
+                        <pre class="prettyprint linenums">
+&lt;input data-date-end-date="2016-7-20"
+    type="text" data-provide="datepicker"/></pre>
+                    </td>
+                </tr>
+                <tr>
+                    <td>startDate</td>
+                    <td>
+                        Date： Beginning of time <br/>
+                        String：Beginning of time
+                    </td>
+                    <td>
+                        <p>说明：<br/>
+                            设置第一天，前面的日期将不可用。<br/>
+                            data-date-start-date="0d" 设置为今天。
+                        </p>
+                        <p> 示例：<br/>
+                            <input type="text" class="form-control"
+                                   data-provide="datepicker"
+                                   data-date-start-date="2016-7-20"/>
+                        </p>
+                        <pre class="prettyprint linenums">
+&lt;input data-date-start-date="2016-7-20"
+    type="text" data-provide="datepicker"/></pre>
+                    </td>
+                </tr>
+                <tr>
+                    <td>forceParse</td>
+                    <td>
+                        Boolean：true
+                    </td>
+                    <td>
+                        <p>说明：<br/>
+                            当日期面板关闭后，强制解析输入域的值，让其符合指定的日期格式。
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>inputs</td>
+                    <td>
+                        Array：None <br/>
+                        jQuery：None
+                    </td>
+                    <td>
+                        <p>说明：<br/>
+                            用于创建 时间段 的日期选择。
+                        </p>
+                        <div class="p"> 示例：<br/>
+                            <div id="rangeDateContainer">
+                                <input type="text" class="range-date-input" placeholder="开始日期">
+                                <input type="text" class="range-date-input" placeholder="结束日期">
+                            </div>
+                        </div>
+                        <pre class="prettyprint linenums">
+// 只可用于JavaScript
+jQuery( "#rangeDateContainer" ).datepicker( {
+    inputs: $( ".range-date-input" )
+} );</pre>
+                    </td>
+                </tr>
+                <tr>
+                    <td>language</td>
+                    <td>
+                        String："zh-CN"
+                    </td>
+                    <td>
+                        <p>说明：<br/>
+                            语言选择，已修改过。
+                        </p>
+                    </td>
+                </tr>
+                <tr class="warning">
+                    <td>maxViewMode <br/><span class="text-danger">不可用</span></td>
+                    <td>
+                        String："centuries" <br/>
+                        Number： 4
+                    </td>
+                    <td>
+                        <p>说明：<br/>
+                            日期控件总共显示：日，月，年，十年，百年。<br/>
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>showOnFocus </td>
+                    <td> Boolean：true </td>
+                    <td>
+                        <p>说明：<br/>
+                            当input输入框获取焦点时打开datepicker。
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>templates</td>
+                    <td> Object：<pre>{
+    leftArrow: '&amp;laquo;',
+    rightArrow: '&amp;raquo;'
+}</pre> </td>
+                    <td>
+                        <p>说明：<br/>
+                            设置左右箭头的图标
+                        </p>
+                        <p> 示例：<br/>
+                            <input type="text" class="form-control" id="_4"/>
+                            <script>
+                                jQuery( "#_4" ).datepicker( {
+                                    templates: {
+                                        leftArrow: '<i class="fa fa-arrow-left"></i>',
+                                        rightArrow: '<i class="fa fa-arrow-right"></i>'
+                                    }
+                                } );
+                            </script>
+                        </p>
+                        <pre class="prettyprint linenums">
+jQuery( "#_4" ).datepicker( {
+    templates: {
+        leftArrow: '&lt;i class="fa fa-arrow-left">&lt;/i>',
+        rightArrow: '&lt;i class="fa fa-arrow-right">&lt;/i>'
+    }
+} );</pre>
+                    </td>
+                </tr>
+                <tr>
+                    <td>title</td>
+                    <td> String："" </td>
+                    <td>
+                        <p>说明：<br/>
+                            datepicker 顶部的标题。不推荐设置（不是很好看，且占位置）。
+                        </p>
+                        <p> 示例：<br/>
+                            <input type="text" class="form-control" data-provide="datepicker" data-date-title="日期选择"/>
+                        </p>
+                        <pre class="prettyprint linenums">
+&lt;input data-date-title="日期选择"
+    type="text" data-provide="datepicker"/></pre>
+                    </td>
+                </tr>
+                <tr>
+                    <td>todayHighlight</td>
+                    <td> Boolean：true（已修改） </td>
+                    <td>
+                        <p>说明：<br/>
+                            高亮今天的日期。
+                        </p>
+                        <p> 示例：<br/>
+                            <input type="text" class="form-control" data-provide="datepicker" data-date-today-highlight="true"/>
+                        </p>
+                        <pre class="prettyprint linenums">
+&lt;input data-date-today-highlight="true"
+    type="text" data-provide="datepicker"/></pre>
+                    </td>
+                </tr>
+                <tr>
+                    <td>weekStart</td>
+                    <td> Integer：1（已修改过） </td>
+                    <td>
+                        <p>说明：<br/>
+                            设置每周的第一天，从星期日（值为0）到星期六（值为6）。
+                        </p>
+                        <p> 示例：<br/>
+                            <input type="text" class="form-control" data-provide="datepicker" data-date-week-start="0"/>
+                        </p>
+                        <pre class="prettyprint linenums">
+&lt;input data-date-week-start="0"
+    type="text" data-provide="datepicker"/></pre>
+                    </td>
+                </tr>
+                <tr>
+                    <td>zIndexOffset</td>
+                    <td> Integer：10 </td>
+                    <td>
+                        <p>说明：<br/>
+                            设置datepickerDOM元素的 “z-index” 值。
+                        </p>
+                    </td>
+                </tr>
+            </table>
+        </main>
+    </article>
+
+    <article class="article">
+        <header>
+            <h3 class="text-muted">3. 方法</h3>
+            <hr/>
+        </header>
+        <main>
+            <div class="callout callout-danger">
+                <div class="pre">
+1. 参考
+
+    <a href="https://bootstrap-datepicker.readthedocs.io/en/stable/methods.html" target="_blank">https://bootstrap-datepicker.readthedocs.io/en/stable/methods.html</a>
+
+2. 格式
+
+    $( targets ).datepicker('方法名', 参数1, 参数2);
+
+                </div>
+            </div>
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>方法名</th>
+                    <th>参数</th>
+                    <th>描述</th>
+                </tr>
+                </thead>
+                <tr>
+                    <td>show</td>
+                    <td>None</td>
+                    <td>显示 datepicker</td>
+                </tr>
+                <tr>
+                    <td>hide</td>
+                    <td>None</td>
+                    <td>隐藏 datepicker</td>
+                </tr>
+                <tr>
+                    <td>update</td>
+                    <td>String | Date</td>
+                    <td>
+                        <p>说明：<br/>
+                        用指定的日期更新datepicker，输入域及日期目标都会变化。
+                    </p>
+                        示例：<br/>
+                        <pre class="prettyprint linenums">
+// String
+jQuery( "#_2" ).datepicker( "update", "2010-1-1" );
+// Date
+jQuery( "#_2" ).datepicker( "update", new Date() );
+// 清空输入框，datepicker初始化
+jQuery( "#_2" ).datepicker( "update", "" ); </pre>
+                    </td>
+                </tr>
+                <tr>
+                    <td>...</td>
+                    <td>...</td>
+                    <td>...</td>
+                </tr>
+            </table>
+        </main>
+    </article>
+
+</div>
+
+<script>
+    jQuery( "#_2" ).datepicker();
+    jQuery( "#rangeDateContainer" ).datepicker( {
+        inputs: $( ".range-date-input" )
+    } );
+
+</script>

@@ -3615,4 +3615,44 @@ fieldset[disabled] .datepicker table tr td span.active.disabled:hover.focus {
 .fv-form-uikit .fv-icon-no-label {
   top: 0; }
 
+.btn-startup {
+  margin-left: 20px; }
+
+.uploader-container .webuploader-container {
+  display: inline-block; }
+
+.uploader-filelist {
+  min-height: 200px;
+  border: 3px dashed #e6e6e6;
+  padding: 10px; }
+
+.uploader-btns {
+  margin-top: 12px; }
+
+.uploader-fileitem {
+  float: left;
+  width: 400px;
+  list-style: none;
+  font-size: 12px;
+  background-color: #F5F5F5;
+  padding: 10px;
+  margin: 0 10px 10px 0;
+  border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px; }
+  .uploader-fileitem .uploader-progress {
+    background-color: #fff;
+    margin-top: 10px;
+    width: 100%; }
+  .uploader-fileitem .uploader-progress-bar {
+    background-color: #0099FF;
+    height: 3px;
+    width: 1px; }
+  .uploader-fileitem .close {
+    margin-top: -8px; }
+  .uploader-fileitem.error {
+    background-color: #f2dede; }
+  .uploader-fileitem.success {
+    background-color: #dff0d8; }
+
 /*# sourceMappingURL=pku.css.map */

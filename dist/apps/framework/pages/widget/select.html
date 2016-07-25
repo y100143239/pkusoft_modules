@@ -1,0 +1,229 @@
+<div class="page-select">
+    <article class="article">
+        <header>
+            <h3 class="text-muted">1. 基本示例</h3>
+            <hr/>
+        </header>
+        <main >
+            <div class="row">
+                <div class="col-xs-6">
+                    <div class="callout callout-info">
+                        <h4>简单</h4>
+                        1. 单选（默认值为第一项） <br/>
+                        2. <kbd>data</kbd>：数据集<br/>
+                        3. <kbd>id</kbd>：&lt;option>的“value”属性值 <br/>
+                        4. <kbd>text</kbd>：&lt;option>的文本内容（显示的值） <br/>
+                        5. <kbd>spell</kbd>：搜索的关键字（text和spell都是关键字） <br/>
+                    </div>
+                    <select class="form-control" id="select2_1">
+                    </select>
+                    <script type="text/javascript">
+                        jQuery("#select2_1").select2({
+                            data:[
+                                { id: 0, text: '张三', spell: "zs" },
+                                { id: 1, text: '李四', spell: "ls" },
+                                { id: 2, text: '王五', spell: "ww" },
+                                { id: 3, text: '赵六', spell: "zl" },
+                                { id: 4, text: '钱七', spell: "qq" }
+                            ]
+                        });
+                    </script>
+                </div>
+                <div class="col-xs-6">
+<pre class="prettyprint linenums">
+&lt;select class="form-control" id="select2_1"> </select>
+&lt;script>
+jQuery("#select2_1").select2({
+    data:[
+        { id: 0, text: '张三', spell: "zs" },
+        { id: 1, text: '李四', spell: "ls" },
+        { id: 2, text: '王五', spell: "ww" },
+        { id: 3, text: '赵六', spell: "zl" },
+        { id: 4, text: '钱七', spell: "qq" }
+    ]
+});
+&lt;/script>
+</pre>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6">
+                    <div class="callout callout-info">
+                        <h4>占位符</h4>
+                        1. 单选（默认值为占位符） <br/>
+                        2. 添加&lt;option value="">&lt;/option>，才会在初始化时显示占位符 <br/>
+                        3. <kbd>placeholder</kbd>：占位符的内容 <br/>
+                        4. <kbd>allowClear</kbd>：允许删除选中的条目，删除后显示占位符 <br/>
+                    </div>
+                    <select class="form-control" id="select2_2">
+                        <option value=""></option>
+                    </select>
+                    <script type="text/javascript">
+                        jQuery("#select2_2").select2({
+                            data:[
+                                { id: 10, text: '张三', spell: "zs" },
+                                { id: 1, text: '李四', spell: "ls" },
+                                { id: 2, text: '王五', spell: "ww" },
+                                { id: 3, text: '赵六', spell: "zl" },
+                                { id: 4, text: '钱七', spell: "qq" }
+                            ],
+                            placeholder: "请选择",
+                            allowClear: true
+                        });
+                    </script>
+                </div>
+                <div class="col-xs-6">
+<pre class="prettyprint linenums">
+&lt;select class="form-control" id="select2_2">
+    &lt;option>&lt;!-- 显示占位符的内容 -->&lt;/option>
+&lt;/select>
+&lt;script type="text/javascript">
+jQuery("#select2_2").select2({
+    data:[
+        { id: 10, text: '张三', spell: "zs" },
+        { id: 1, text: '李四', spell: "ls" },
+        { id: 2, text: '王五', spell: "ww" },
+        { id: 3, text: '赵六', spell: "zl" },
+        { id: 4, text: '钱七', spell: "qq" }
+    ],
+    placeholder: "请选择",
+    allowClear: true
+});
+&lt;/script>    
+</pre>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6">
+                    <div class="callout callout-info">
+                        <h4>“data-*” 的方式设置初始化参数</h4>
+                        初始化时的参数设置，可通过 “data-*” 的方式
+                    </div>
+                    <select class="form-control" id="select2_3"
+                            data-placeholder="select"
+                            data-allow-clear="true">
+                        <option value=""></option>
+                        <option value="1">壹</option>
+                    </select>
+                    <script> jQuery( "#select2_3" ).select2(); </script>
+                </div>
+                <div class="col-xs-6">
+                    <pre class="prettyprint linenums" >
+&lt;select class="form-control" id="select2_3"
+        data-placeholder="select"
+        data-allow-clear="true">
+    &lt;option value="">&lt;/option>
+    &lt;option value="1">壹&lt;/option>
+&lt;/select>
+&lt;script> jQuery( "#select2_3" ).select2(); &lt;/script>
+</pre>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6">
+                    <div class="callout callout-info">
+                        <h4>必选（自定义参数）</h4>
+                        1. 必选（required） <br/>
+                        2. <kbd>required</kbd>：扩展属性，指定没有选中时的CSS类 <br/>
+                        3. 下拉框关闭后执行校验
+                    </div>
+                    <select class="form-control" id="select2_4"
+                            data-placeholder="select"
+                            data-allow-clear="true"
+                            data-required="validate-invalid">
+                        <option value=""></option>
+                        <option value="1">壹</option>
+                        <option value="2">贰</option>
+                    </select>
+                    <script>jQuery( "#select2_4" ).select2();</script>
+                </div>
+                <div class="col-xs-6">
+<pre class="prettyprint linenums">
+&lt;select class="form-control" id="select2_4"
+        data-placeholder="select"
+        data-allow-clear="true"
+        data-required="validate-invalid">
+    &lt;option value="">&lt;/option>
+    &lt;option value="1">壹&lt;/option>
+    &lt;option value="2">贰&lt;/option>
+&lt;/select>
+&lt;script>jQuery( "#select2_4" ).select2();&lt;/script>
+</pre>
+                </div>
+            </div>
+
+        </main>
+    </article>
+
+    <article class="article">
+        <header>
+            <h3 class="text-muted">2. 字典</h3>
+            <hr/>
+        </header>
+        <main >
+            <div class="row">
+
+                <div class="col-xs-6">
+                    <div class="callout callout-info">
+                        <h4>字典（自定义参数）</h4>
+                        <kbd>xmlurl</kbd>：扩展属性，指定XML字典文件的URL <br/>
+                        <br/>
+                        <dl>
+                            <dt>搜索关键字</dt>
+                            <dd>
+                                <ul>
+                                    <li>编码（code），如 “140822”</li>
+                                    <li>内容（text），如 “呼和浩特”</li>
+                                    <li>拼音头（spell），如 “hbspqx”</li>
+                                </ul>
+                            </dd>
+                        </dl>
+                    </div>
+                    <select class="form-control" id="select2_5"
+                            data-placeholder="请选择"
+                            data-allow-clear="true"
+                            data-required="validate-invalid"
+                            data-xmlurl="./pages/widget/DIC_CODE.xml">
+                        <option value=""></option>
+                    </select>
+                    <script>
+                        jQuery( "#select2_5" ).select2();
+                    </script>
+                </div>
+                <div class="col-xs-6">
+<pre class="prettyprint linenums">
+&lt;select class="form-control" id="select2_5"
+        data-placeholder="请选择"
+        data-allow-clear="true"
+        data-required="validate-invalid"
+        data-xmlurl="./pages/widget/DIC_CODE.xml">
+    &lt;option value="">&lt;/option>
+&lt;/select>
+&lt;script>
+    jQuery( "#select2_5" ).select2();
+&lt;/script>
+</pre>
+                </div>
+            </div>
+        </main>
+    </article>
+    <article class="article">
+        <header>
+            <h3 class="text-muted">3. 其他</h3>
+            <hr/>
+        </header>
+        <main >
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="callout callout-info">
+                        <h4>参考</h4>
+                        <kbd>示例</kbd>：<a href="https://select2.github.io/examples.html" target="_blank">examples</a> <br/>
+                        <kbd>参数</kbd>：<a href="https://select2.github.io/options.html" target="_blank">options</a> <br/>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </article>
+
+</div>

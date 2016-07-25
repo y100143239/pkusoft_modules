@@ -1,0 +1,55 @@
+<div class="panel panel-simple">
+    <div class="panel-heading">1. box-sizing 属性</div>
+    <div class="panel-body">
+        <pre>
+_scaffolding.scss
+
+    // Reset the box-sizing
+
+    * {
+        @include box-sizing(border-box);
+    }
+    *:before,
+    *:after {
+        @include box-sizing(border-box);
+    }
+        </pre>
+        Bootstrap 默认使所有元素都采用 border盒模型，即border-width、padding不会再额外增加盒模型的大小。
+    </div>
+</div>
+
+<div class="panel panel-simple">
+    <div class="panel-heading">2. Normalize.css 与 CSS Reset</div>
+    <div class="panel-body">
+        <pre>
+Normalize.css
+
+    1. 来源：https://github.com/necolas/normalize.css
+    2. 说明：Normalize.css是保留浏览器的原来样式并且做到每个浏览显示一致
+
+CSS Reset
+
+    CSS Reset把浏览器的默认样式都重置（清零）了
+
+应用
+
+    一般都采用 reset 将浏览器默认样式全部清零，
+    但Bootstrap采用了 normalize
+        </pre>
+    </div>
+</div>
+
+<div class="panel panel-simple">
+    <div class="panel-heading">3. 关于第三方插件的修改</div>
+    <div class="panel-body">
+        <pre>
+文件名
+
+    添加“.fix”后缀
+
+修改标记
+
+    以“//FIX”注释，作为修改标记
+        </pre>
+    </div>
+</div>
