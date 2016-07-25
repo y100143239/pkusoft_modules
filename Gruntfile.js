@@ -52,8 +52,9 @@ module.exports = function(grunt) {
                                 'lib/echart/**',
                                 'lib/formvalidate/**',
                                 'lib/ie/**',
-                                'lib/pretty/**',
-                                'lib/select2/**'
+                                'lib/select2/**',
+                                'lib/webuploader/**',
+                                'lib/pretty/**'
                         ],
                         dest: 'dist/modules',
                         expand: true

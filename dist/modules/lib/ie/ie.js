@@ -1,0 +1,1 @@
+define(function(){var a=document.createElement("b");return a.innerHTML="<!--[if lt IE 9]><i></i><![endif]-->",1===a.getElementsByTagName("i").length}()?["lib/ie/html5shiv","lib/ie/respond"]:["require"]);

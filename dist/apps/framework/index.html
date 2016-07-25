@@ -45,6 +45,8 @@
                 "formvalidationBs": "lib/formvalidate/js/framework/bootstrap.fix",
                 "formvalidationI18N": "lib/formvalidate/js/language/zh_CN",
 
+                "webuploader": "lib/webuploader/js/webuploader",
+
                 // 代码美化
                 "code-pretty": "lib/pretty/prettify.min"
             },
@@ -59,6 +61,7 @@
                 "formvalidation": [ "jquery", "bootstrap" ],
                 "formvalidationBs": [ "formvalidation" ],
                 "formvalidationI18N": [ "formvalidation", "formvalidationBs" ],
+                "webuploader": [ "css!lib/webuploader/css/webuploader.css" ],
                 "code-pretty": [ "css!lib/pretty/prettify.css" ]
             },
             // 超时
@@ -74,6 +77,10 @@
             window.echarts = echarts;
         });
         require( ["formvalidationI18N"] );
+        require( ["webuploader"], function (WebUploader) {
+            window.WebUploader = WebUploader;
+        } );
+
 
     </script>
 </head>
@@ -142,6 +149,7 @@
                         <li><a href="pages/widget/select.html" ><i class="fa fa-angle-double-right"></i> select（选择、字典）</a></li>
                         <li><a href="pages/widget/chart.html" ><i class="fa fa-angle-double-right"></i> chart（图表）</a></li>
                         <li><a href="pages/widget/validate.html" ><i class="fa fa-angle-double-right"></i> validate（输入校验）</a></li>
+                        <li><a href="pages/widget/upload.html" ><i class="fa fa-angle-double-right"></i> upload（上传）</a></li>
                     </ul>
                 </li>
                 <li class="treeview">
