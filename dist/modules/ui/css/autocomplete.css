@@ -1,1 +1,129 @@
-.ac_results{padding:0;border:1px solid #c4defe;background-color:#f0f0f0;z-index:99999;box-shadow:0 0 8px rgba(0,0,0,.2)}.ac_results ul{width:100%;list-style:none;padding:0;margin:0}.ac_results li{margin:0;padding:2px 0;cursor:default;display:block;font:menu;font-size:12px;line-height:20px;overflow:hidden}.ac_results li strong{font-weight:400;color:#fe6c0f}.ac_over,.ac_over .ac_cont,.ac_over .ac_num,.ac_over .ac_right{color:#fff}.ac_loading{background:#fff}.ac_odd{background-color:#fcfdfe}.ac_even{background-color:#f3f8ff}.ac_over{background-color:#388ffa}.ac_num{float:left;background-color:transparent;color:#b9b9b9;padding:0 8px}.ac_pagnation .display,.ac_right{float:right}.ac_right{margin-right:1em;color:#888}.ac_pagnation{line-height:21px;font-size:12px;padding:8px 8px 4px;font-family:"Microsoft Yahei",sans-serif;color:#888;border-top:solid 1px #c4defe;background-color:#fff}.ac_pagnation .clear{clear:both}.ac_pagnation .display label{color:#888;display:inline}.ac_pagnation .current-page{color:#ffba8e;font-size:14px}.ac_pagnation .tips,.ac_pagnation .tips-item{float:left}.ac_pagnation .tips-item .icon{display:block;width:32px;height:21px;margin-right:6px;background:url(../images/icons_direction.png) 9999px 9999px no-repeat;vertical-align:middle}.ac_pagnation .tips-item.tips-next-item{margin-right:10px}.ac_pagnation .tips-item.tips-prev-item .icon{background-position:0 0}.ac_pagnation .tips-item.tips-next-item .icon{background-position:-42px 0}.ac_pagnation .tips-item.tips-prev-page .icon{background-position:0 -31px}.ac_pagnation .tips-item.tips-next-page .icon{background-position:-42px -31px}.ac_pagnation .tips-item.help{width:18px;height:18px;line-height:18px;font-size:14px;text-align:center;color:#fff;border:1px solid;vertical-align:middle;border-radius:18px;margin-right:6px;margin-left:-6px;background-color:#345bbb;cursor:pointer}.ac_pagnation .tips-item.help:hover .help-detail{display:block}.ac_pagnation .tips-item.help .help-detail{display:none;position:absolute;width:412px;height:360px;top:-40px;left:-10px;background:url(../images/autocomplete_help.jpg) center center no-repeat #fff;border:1px dashed #ddd}
+.ac_results {
+  padding: 0;
+  border: 1px solid #c4defe;
+  background-color: #f0f0f0;
+  z-index: 99999;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.2); }
+  .ac_results ul {
+    width: 100%;
+    list-style: none;
+    padding: 0;
+    margin: 0; }
+  .ac_results li {
+    margin: 0px;
+    padding: 2px 0;
+    cursor: default;
+    display: block;
+    /*
+    if width will be 100% horizontal scrollbar will apear
+    when scroll mode will be used
+    */
+    /*width: 100%;*/
+    font: menu;
+    font-size: 12px;
+    /*
+    it is very important, if line-height not setted or setted
+    in relative units scroll will be broken in firefox
+    */
+    line-height: 20px;
+    overflow: hidden; }
+    .ac_results li strong {
+      font-weight: normal;
+      color: #fe6c0f; }
+
+.ac_loading {
+  background: white; }
+
+.ac_odd {
+  background-color: #fcfdfe; }
+
+.ac_even {
+  background-color: #f3f8ff; }
+
+.ac_over
+ {
+  background-color: #388ffa;
+  color: #fff; }
+  .ac_over
+  .ac_num, .ac_over
+  .ac_right, .ac_over
+  .ac_cont {
+    color: #fff; }
+
+.ac_num {
+  float: left;
+  background-color: transparent;
+  color: #b9b9b9;
+  padding: 0 8px 0 8px; }
+
+.ac_right {
+  float: right;
+  margin-right: 1em;
+  color: #888; }
+
+.ac_pagnation {
+  line-height: 21px;
+  font-size: 12px;
+  padding: 8px 8px 4px 8px;
+  font-family: "Microsoft Yahei", sans-serif;
+  color: #888;
+  border-top: solid 1px #c4defe;
+  background-color: #fff; }
+  .ac_pagnation .clear {
+    clear: both; }
+  .ac_pagnation .display {
+    float: right; }
+  .ac_pagnation .display label {
+    color: #888;
+    display: inline; }
+  .ac_pagnation .current-page {
+    color: #ffba8e;
+    font-size: 14px; }
+  .ac_pagnation .tips {
+    float: left; }
+  .ac_pagnation .tips-item {
+    float: left; }
+    .ac_pagnation .tips-item .icon {
+      display: block;
+      width: 32px;
+      height: 21px;
+      margin-right: 6px;
+      background: url(../images/icons_direction.png) no-repeat 9999px 9999px;
+      vertical-align: middle; }
+    .ac_pagnation .tips-item.tips-next-item {
+      margin-right: 10px; }
+    .ac_pagnation .tips-item.tips-prev-item .icon {
+      background-position: 0 0; }
+    .ac_pagnation .tips-item.tips-next-item .icon {
+      background-position: -42px 0; }
+    .ac_pagnation .tips-item.tips-prev-page .icon {
+      background-position: 0 -31px; }
+    .ac_pagnation .tips-item.tips-next-page .icon {
+      background-position: -42px -31px; }
+    .ac_pagnation .tips-item.help {
+      width: 18px;
+      height: 18px;
+      line-height: 18px;
+      font-size: 14px;
+      text-align: center;
+      color: #fff;
+      border: solid 1px;
+      vertical-align: middle;
+      border-radius: 18px;
+      margin-right: 6px;
+      margin-left: -6px;
+      background-color: #345bbb;
+      cursor: pointer; }
+      .ac_pagnation .tips-item.help:hover .help-detail {
+        display: block; }
+      .ac_pagnation .tips-item.help .help-detail {
+        display: none;
+        position: absolute;
+        width: 412px;
+        height: 360px;
+        top: -40px;
+        left: -10px;
+        background: url(../images/autocomplete_help.jpg) no-repeat center center #fff;
+        border: dashed 1px #ddd; }
+
+/*# sourceMappingURL=autocomplete.css.map */

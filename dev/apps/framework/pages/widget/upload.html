@@ -1,6 +1,160 @@
 <script>
     var BASE_URL = "";
 </script>
+
+<script>
+
+    WebUploader.pku = {
+        fileUpload: null,// 文件上传
+        imageUpload: null,
+        template: {}
+    };
+
+    WebUploader.pku.template.fileUpload =
+            '<ul class="uploader-filelist clearfix"></ul>\
+            <div class="uploader-controls">\
+                <div class="uploader-picker"><i class="fa fa-file-o"></i> 选择文件</div>\
+                <button type="button" class="btn btn-success uploader-startup" ><i class="fa fa-upload"></i>  开始上传</button>\
+                <span class="text-warning uploader-info">已上传成功文件数：0。 上传失败文件数：0。</span>\
+            </div>';
+
+    WebUploader.pku.fileUpload = function ( containerId, options ) {
+
+        var $,
+            defaults,
+            $container, // 容器
+            $fileList, // 文件列表容器
+            $startBtn, // “开始上传”按钮
+            $info, // 上传信息
+            state, // 上传状态
+            uploader // 实例
+            ;
+
+        $ = jQuery;
+        $container = $( "#" + containerId ).html( WebUploader.pku.template.fileUpload );
+        $fileList = $( ".uploader-filelist", $container );
+        $startBtn = $( ".uploader-startup", $container );
+        $info = $( ".uploader-info", $container );
+
+        defaults = {
+            // 不压缩image
+            resize: false,
+            // 选择文件的按钮。可选。
+            // 内部根据当前运行是创建，可能是input元素，也可能是flash.
+            pick: "#" + containerId + " .uploader-picker"
+        };
+
+        options = $.extend( defaults, options || {} );
+
+        // 初始化
+        uploader = WebUploader.create( options );
+
+        // 上传状态
+        uploader.on('all', function(type) {
+            if (type === 'startUpload') {
+                state = 'uploading';
+            } else if (type === 'stopUpload') {
+                state = 'paused';
+            } else if (type === 'uploadFinished') {
+                state = 'done';
+            }
+
+            if (state === 'uploading') {
+                $startBtn.html('<i class="fa fa-upload"></i> 暂停上传' ).addClass( "btn-warning" );
+            } else {
+                $startBtn.html('<i class="fa fa-upload"></i> 开始上传').removeClass( "btn-warning" );
+            }
+        });
+        // 点击开始按钮
+        $startBtn.on('click', function() {
+            if (state === 'uploading') {
+                uploader.stop( true ); // 正在上传的文件以及等待上传的文件都暂停
+            } else {
+                uploader.upload();
+            }
+        });
+
+        // （当文件被加入队列以后触发。）添加文件条目
+        uploader.on( 'fileQueued', function( file ) {
+            var fileId,
+                    fileName,
+                    fileSize
+                    ;
+            fileId = file.id;
+            fileName = file.name;
+            fileSize = WebUploader.formatSize( file.size );
+
+            $fileList.append('<li class="uploader-fileitem" id=' + fileId + '>\
+                                <button type="button" class="close">&times;</button>\
+                                <span class="filename">' + fileName + ' (' + fileSize + ') - </span>\
+                                <span class="state">等待上传</span>\
+                                <div class="uploader-progress">\
+                                   <div class="uploader-progress-bar" style="width: 1%;"></div>\
+                                </div>\
+                             </li>')
+
+        });
+
+        // 当点击关闭按钮时，标记文件状态为已取消, 同时将中断文件传输。并且删除LI节点
+        $fileList.on("click", "button.close", function() {
+            var $this,
+                    $fileitem,
+                    fileId
+                    ;
+            $this = $(this);
+            $fileitem = $this.parent( ".uploader-fileitem" );
+            fileId = $fileitem.attr("id");
+            uploader.cancelFile(fileId);
+            $fileitem.fadeOut();
+        }).on("click", ".state > a", function() { // 点击“上传失败”
+            var $this,
+                    $fileitem,
+                    fileId
+                    ;
+            $this = $(this);
+            $fileitem = $this.closest( ".uploader-fileitem" );
+            fileId = $fileitem.attr("id");
+
+            uploader.retry( uploader.getFile( fileId ) );
+            return false;
+        });
+
+        // 文件上传过程中创建进度条实时显示。（上传过程中触发，携带上传进度。）
+        uploader.on('uploadProgress', function(file, percentage) {
+            var $fileItem,
+                    $percent
+                    ;
+            $fileItem = $('#' + file.id);
+            $percent = $fileItem.find( '.uploader-progress-bar');
+
+            $fileItem.addClass("uploading").find('.state').text('上传中');
+            $percent.css('width', percentage * 100 + '%');
+        });
+
+        // （当文件上传成功时触发。）
+        uploader.on('uploadSuccess', function(file) {
+            $('#' + file.id).addClass("success").find('.state').text('已上传')
+                    .end().find('.close').hide();
+        });
+        // （当文件上传出错时触发。）
+        uploader.on('uploadError', function(file) {
+            $('#' + file.id).addClass("error").find('.state').html('上传出错 <a href="#">重新上传</a>');
+        });
+        // （不管成功或者失败，文件上传完成时触发。）
+        uploader.on('uploadComplete', function(file) {
+            var stats,
+                    successNum,
+                    uploadFailNum
+                    ;
+            stats = uploader.getStats();
+            successNum = stats.successNum;
+            uploadFailNum = stats.uploadFailNum;
+            $info.text("已上传成功文件数：" + successNum + "。 上传失败文件数：" + uploadFailNum + "。");
+        });
+
+    };
+
+</script>
 <div class="page-upload">
 
     <div class="callout callout-danger">
@@ -17,45 +171,56 @@
             <hr>
         </header>
         <main>
-            <div class="callout callout-warning">
+
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active"><a href="#example" data-toggle="tab">示例</a></li>
+                <li role="presentation"><a href="#code" data-toggle="tab">代码</a></li>
+            </ul>
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active" id="example" style="padding: 10px;">
+                    <div class="uploader-container uploader-theme-file" id="uploaderContainer">
+                    </div>
+                    <script>
+                        var uploaderContainerId,
+                            uploaderOptions
+                            ;
+                        uploaderContainerId = "uploaderContainer";
+                        uploaderOptions = {
+                            // swf文件路径
+                            swf: BASE_URL + '/Uploader.swf',
+
+                            // 文件接收服务端。
+                            server: BASE_URL + '/Upload'
+                        };
+                        WebUploader.pku.fileUpload( uploaderContainerId, uploaderOptions );
+                    </script>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="code">
+<pre class="prettyprint">
+&lt;div class="uploader-container uploader-theme-file" id="uploaderContainer">
+&lt;/div>
+&lt;script>
+    jQuery(function(){
+        var uploaderContainerId,
+            uploaderOptions
+            ;
+        uploaderContainerId = "uploaderContainer";
+        uploaderOptions = {
+            // swf文件路径
+            swf: BASE_URL + '/Uploader.swf',
+
+            // 文件接收服务端。
+            server: BASE_URL + '/Upload'
+        };
+        WebUploader.pku.fileUpload( uploaderContainerId, uploaderOptions );
+    });
+&lt;/script>
+</pre>
+                </div>
             </div>
 
-            <div class="uploader-container">
-                <div class="uploader-queuelist">
-
-                    <ul class="uploader-filelist clearfix" id="filelist"><!--
-                    <li class="uploader-fileitem">
-                        <button type="button" class="close">&times;</button>
-                        <span class="filename">app.css (178KB)</span>
-                        <span class="data"> - HTTP Error (404)</span>
-                        <div class="uploader-progress">
-                            <div class="uploader-progress-bar" style="width: 1%;">&lt;!&ndash;Progress Bar&ndash;&gt;</div>
-                        </div>
-                    </li>
-                    <li class="uploader-fileitem error">
-                        <button type="button" class="close">&times;</button>
-                        <span class="filename">app.css (178KB)</span>
-                        <span class="data"> - HTTP Error (404)</span>
-                        <div class="uploader-progress">
-                            <div class="uploader-progress-bar" style="width: 20%;">&lt;!&ndash;Progress Bar&ndash;&gt;</div>
-                        </div>
-                    </li>
-                    <li class="uploader-fileitem success">
-                        <button type="button" class="close">&times;</button>
-                        <span class="filename">app.css (178KB)</span>
-                        <span class="data"> - HTTP Error (404)</span>
-                        <div class="uploader-progress">
-                            <div class="uploader-progress-bar" style="width: 100%;">&lt;!&ndash;Progress Bar&ndash;&gt;</div>
-                        </div>
-                    </li>-->
-                </ul>
-
-            </div>
-            <div class="uploader-btns">
-                <div id="picker" style="display: inline-block;"><i class="fa fa-file-o"></i> 选择文件</div>
-                <button id="ctlBtn" type="button" class="btn btn-success btn-startup" ><i class="fa fa-upload"></i> 开始上传</button>
-            </div>
-        </div>
 
 
 
@@ -63,105 +228,5 @@
     </article>
 
 </div>
-<script>
-    // 文件上传
-    jQuery(function() {
-        var $ = jQuery,
-                $list = $('#filelist'),
-                $btn = $('#ctlBtn'),
-                state = 'pending',
-                uploader;
-
-        uploader = WebUploader.create({
-
-            // 不压缩image
-            resize: false,
-
-            // swf文件路径
-            swf: BASE_URL + '../../../dev/modules/lib/webuploader/Uploader.swf',
-
-            // 文件接收服务端。
-            server: BASE_URL + '/Upload',
-
-            // 选择文件的按钮。可选。
-            // 内部根据当前运行是创建，可能是input元素，也可能是flash.
-            pick: '#picker'
-        });
-
-        // 当有文件添加进来的时候
-        uploader.on( 'fileQueued', function( file ) {
-            var fileId,
-                    fileName,
-                    fileSize
-                    ;
-            fileId = file.id;
-            fileName = file.name;
-            fileSize = WebUploader.formatSize( file.size );
-
-            $list.append('<li class="uploader-fileitem" id=' + fileId + '>\
-	    				   <button type="button" class="close">&times;</button>\
-	    				   <span class="filename">' + fileName + ' (' + fileSize + ') - </span>\
-	    				   <span class="state">等待上传</span>\
-	    				   <div class="uploader-progress">\
-	    				       <div class="uploader-progress-bar" style="width: 1%;"></div>\
-	    				   </div>\
-    					 </li>');
-
-            /*
-             $list.append( '<div id="' + file.id + '" class="item">' +
-             '<h4 class="info">' + file.name + '</h4>' +
-             '<p class="state">等待上传...</p>' +
-             '</div>' ); */
-        });
-
-        // 文件上传过程中创建进度条实时显示。
-        uploader.on( 'uploadProgress', function( file, percentage ) {
-            var $li = $( '#'+file.id ),
-                    $percent = $li.find('.uploader-progress-bar');
 
 
-            $li.find('.state').text('上传中');
-
-            $percent.css( 'width', percentage * 100 + '%' );
-        });
-
-        uploader.on( 'uploadSuccess', function( file ) {
-            $( '#'+file.id ).addClass("success").find('.state').text('已上传');
-        });
-
-        uploader.on( 'uploadError', function( file ) {
-            $( '#'+file.id ).addClass("error").find('.state').text('上传出错');
-        });
-
-        uploader.on( 'uploadComplete', function( file ) {
-            //$( '#'+file.id ).find('.progress').fadeOut();
-            $( '#'+file.id ).find('.close').hide();
-        });
-
-        uploader.on( 'all', function( type ) {
-            if ( type === 'startUpload' ) {
-                state = 'uploading';
-            } else if ( type === 'stopUpload' ) {
-                state = 'paused';
-            } else if ( type === 'uploadFinished' ) {
-                state = 'done';
-            }
-
-            if ( state === 'uploading' ) {
-                $btn.html('<i class="fa fa-pause-circle-o"></i> 暂停上传');
-            } else {
-                $btn.html('<i class="fa fa-upload"></i> 开始上传');
-            }
-        });
-
-        $btn.on( 'click', function() {
-            if ( state === 'uploading' ) {
-                uploader.stop();
-            } else {
-                uploader.upload();
-            }
-        });
-    });
-
-
-</script>

@@ -164,9 +164,9 @@ module.exports = function(grunt) {
         'clean:dist', // 清理
         'copy:app', // 拷贝app
         'copy:modules', // 拷贝工具包
-        'uglify:buildall', // 压缩js到临时目录
-        'cssmin:buildall', // 压缩css到临时目录
-        'copy:minfile', // 拷贝压缩文件到dis目录覆盖掉原始文件
+        //'uglify:buildall', // 压缩js到临时目录
+        //'cssmin:buildall', // 压缩css到临时目录
+        //'copy:minfile', // 拷贝压缩文件到dis目录覆盖掉原始文件
         'clean:temp', // 清理temp目录
         'shell:multiple' // 执行shell命令，发布到bae
     ] );
