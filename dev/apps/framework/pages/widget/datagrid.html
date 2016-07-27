@@ -1,0 +1,94 @@
+<div class="page-datagrid">
+    <div class="callout callout-danger">
+        <h4>jQuery Bootgrid </h4>
+        <p>1. 参考 <a href="http://www.jquery-bootgrid.com/" target="_blank">jQuery Bootgrid</a></p>
+    </div>
+    <article class="article">
+        <header>
+            <h3 class="text-muted">1. 格式化已存在的表格</h3>
+            <hr>
+        </header>
+        <main>
+            <div class="callout callout-danger">
+                1. 如果要让行可选择（有checkbox），则必须在某个 header(&lt;th>)上设置“data-identifier="true"”
+            </div>
+
+            <form class="form-inline" style="margin-bottom: 15px;">
+                <div class="form-group" style="margin-right: 2em;">
+                    <label for="exampleInputName2">姓名：</label>
+                    <input type="text" class="form-control" id="exampleInputName2" >
+                </div>
+                <div class="form-group" style="margin-right: 2em;">
+                    <label for="exampleInputEmail2">电话：</label>
+                    <input type="email" class="form-control" id="exampleInputEmail2" >
+                </div>
+                <button type="submit" class="btn btn-info"><i class="fa fa-search"></i> 搜索</button>
+            </form>
+
+            <table id="datagrid_1" class="table table-hover table-striped table-bordered">
+                <thead>
+                <tr>
+                    <th data-column-id="name" data-identifier="true">姓名</th>
+                    <!-- data-type="numeric"：数据类型为数字，用于排序，默认为字符串 -->
+                    <th data-column-id="tel" data-type="numeric">电话</th>
+                    <th data-column-id="addr" data-order="desc">地址</th>
+                </tr>
+                </thead>
+
+            </table>
+            <script>
+                    jQuery( "#datagrid_1" ).bootgrid({
+                        ajax: true,
+                        url: "./pages/widget/DIC_CODE.xml",
+                        post: function () {
+                            /* To accumulate custom parameter with the request object */
+                            return {
+                                id: "001"
+                            };
+                        },
+                        navigation: 2,
+                        // 让列可选取（生成checkbox）
+                        selection: true,
+                        // 点击该列时，被选取（该行的checkbox 被选中）
+                        rowSelect: true,
+                        // 每页多少条记录
+                        rowCount: 20,
+                        responseHandler: function ( response ) {
+
+                            // 将服务器返回的数据进行格式转换
+                            var _response = {
+                                "current": 1,
+                                "rowCount": 10,
+                                "rows": [
+                                    { "id": "001", "name": "张三01", "tel": "0000001", "addr": "某个地方01" },
+                                    { "id": "002", "name": "张三02", "tel": "0000002", "addr": "某个地方02" },
+                                    { "id": "003", "name": "张三03", "tel": "0000003", "addr": "某个地方03" },
+                                    { "id": "004", "name": "张三04", "tel": "0000004", "addr": "某个地方04" },
+                                    { "id": "005", "name": "张三05", "tel": "0000005", "addr": "某个地方05" },
+                                    { "id": "006", "name": "张三06", "tel": "0000006", "addr": "某个地方06" },
+                                    { "id": "007", "name": "张三07", "tel": "0000007", "addr": "某个地方07" },
+                                    { "id": "008", "name": "张三08", "tel": "0000008", "addr": "某个地方08" },
+                                    { "id": "009", "name": "张三09", "tel": "0000009", "addr": "某个地方09" },
+                                    { "id": "010", "name": "张三10", "tel": "0000010", "addr": "某个地方10" }
+                                ],
+                                "total": 1123
+                            };
+                            return _response;
+                        }
+                    }).on("selected.rs.jquery.bootgrid", function(e, rows) {
+                        var rowIds = [];
+                        for (var i = 0; i < rows.length; i++) {
+                            rowIds.push(rows[i].id);
+                        }
+                        alert("选择: " + rowIds.join(","));
+                    }).on("deselected.rs.jquery.bootgrid", function(e, rows) {
+                        var rowIds = [];
+                        for (var i = 0; i < rows.length; i++) {
+                            rowIds.push(rows[i].id);
+                        }
+                        alert("取消选择: " + rowIds.join(","));
+                    });
+            </script>
+        </main>
+    </article>
+</div>

@@ -47,6 +47,8 @@
 
                 "webuploader": "lib/webuploader/js/webuploader.fix",
 
+                "bootgrid": "lib/bootgrid/js/jquery.bootgrid.fix",
+
                 // 代码美化
                 "code-pretty": "lib/pretty/prettify.min"
             },
@@ -62,6 +64,7 @@
                 "formvalidationBs": [ "formvalidation" ],
                 "formvalidationI18N": [ "formvalidation", "formvalidationBs" ],
                 "webuploader": [ "css!lib/webuploader/css/webuploader.css" ],
+                "bootgrid": [ "css!lib/bootgrid/css/jquery.bootgrid.css" , "bootstrap"],
                 "code-pretty": [ "css!lib/pretty/prettify.css" ]
             },
             // 超时
@@ -80,6 +83,8 @@
         require( ["webuploader"], function (WebUploader) {
             window.WebUploader = WebUploader;
         } );
+
+        require( ["bootgrid"] );
 
 
     </script>
@@ -150,6 +155,7 @@
                         <li><a href="pages/widget/chart.html" ><i class="fa fa-angle-double-right"></i> chart（图表）</a></li>
                         <li><a href="pages/widget/validate.html" ><i class="fa fa-angle-double-right"></i> validate（输入校验）</a></li>
                         <li><a href="pages/widget/upload.html" ><i class="fa fa-angle-double-right"></i> upload（上传）</a></li>
+                        <li class="active"><a href="pages/widget/datagrid.html" ><i class="fa fa-angle-double-right"></i> datagrid（列表）</a></li>
                     </ul>
                 </li>
                 <li class="treeview">
