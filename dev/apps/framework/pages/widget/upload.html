@@ -1,159 +1,5 @@
 <script>
-    var BASE_URL = "";
-</script>
-
-<script>
-
-    WebUploader.pku = {
-        fileUpload: null,// 文件上传
-        imageUpload: null,
-        template: {}
-    };
-
-    WebUploader.pku.template.fileUpload =
-            '<ul class="uploader-filelist clearfix"></ul>\
-            <div class="uploader-controls">\
-                <div class="uploader-picker"><i class="fa fa-file-o"></i> 选择文件</div>\
-                <button type="button" class="btn btn-success uploader-startup" ><i class="fa fa-upload"></i>  开始上传</button>\
-                <span class="text-warning uploader-info">已上传成功文件数：0。 上传失败文件数：0。</span>\
-            </div>';
-
-    WebUploader.pku.fileUpload = function ( containerId, options ) {
-
-        var $,
-            defaults,
-            $container, // 容器
-            $fileList, // 文件列表容器
-            $startBtn, // “开始上传”按钮
-            $info, // 上传信息
-            state, // 上传状态
-            uploader // 实例
-            ;
-
-        $ = jQuery;
-        $container = $( "#" + containerId ).html( WebUploader.pku.template.fileUpload );
-        $fileList = $( ".uploader-filelist", $container );
-        $startBtn = $( ".uploader-startup", $container );
-        $info = $( ".uploader-info", $container );
-
-        defaults = {
-            // 不压缩image
-            resize: false,
-            // 选择文件的按钮。可选。
-            // 内部根据当前运行是创建，可能是input元素，也可能是flash.
-            pick: "#" + containerId + " .uploader-picker"
-        };
-
-        options = $.extend( defaults, options || {} );
-
-        // 初始化
-        uploader = WebUploader.create( options );
-
-        // 上传状态
-        uploader.on('all', function(type) {
-            if (type === 'startUpload') {
-                state = 'uploading';
-            } else if (type === 'stopUpload') {
-                state = 'paused';
-            } else if (type === 'uploadFinished') {
-                state = 'done';
-            }
-
-            if (state === 'uploading') {
-                $startBtn.html('<i class="fa fa-upload"></i> 暂停上传' ).addClass( "btn-warning" );
-            } else {
-                $startBtn.html('<i class="fa fa-upload"></i> 开始上传').removeClass( "btn-warning" );
-            }
-        });
-        // 点击开始按钮
-        $startBtn.on('click', function() {
-            if (state === 'uploading') {
-                uploader.stop( true ); // 正在上传的文件以及等待上传的文件都暂停
-            } else {
-                uploader.upload();
-            }
-        });
-
-        // （当文件被加入队列以后触发。）添加文件条目
-        uploader.on( 'fileQueued', function( file ) {
-            var fileId,
-                    fileName,
-                    fileSize
-                    ;
-            fileId = file.id;
-            fileName = file.name;
-            fileSize = WebUploader.formatSize( file.size );
-
-            $fileList.append('<li class="uploader-fileitem" id=' + fileId + '>\
-                                <button type="button" class="close">&times;</button>\
-                                <span class="filename">' + fileName + ' (' + fileSize + ') - </span>\
-                                <span class="state">等待上传</span>\
-                                <div class="uploader-progress">\
-                                   <div class="uploader-progress-bar" style="width: 1%;"></div>\
-                                </div>\
-                             </li>')
-
-        });
-
-        // 当点击关闭按钮时，标记文件状态为已取消, 同时将中断文件传输。并且删除LI节点
-        $fileList.on("click", "button.close", function() {
-            var $this,
-                    $fileitem,
-                    fileId
-                    ;
-            $this = $(this);
-            $fileitem = $this.parent( ".uploader-fileitem" );
-            fileId = $fileitem.attr("id");
-            uploader.cancelFile(fileId);
-            $fileitem.fadeOut();
-        }).on("click", ".state > a", function() { // 点击“上传失败”
-            var $this,
-                    $fileitem,
-                    fileId
-                    ;
-            $this = $(this);
-            $fileitem = $this.closest( ".uploader-fileitem" );
-            fileId = $fileitem.attr("id");
-
-            uploader.retry( uploader.getFile( fileId ) );
-            return false;
-        });
-
-        // 文件上传过程中创建进度条实时显示。（上传过程中触发，携带上传进度。）
-        uploader.on('uploadProgress', function(file, percentage) {
-            var $fileItem,
-                    $percent
-                    ;
-            $fileItem = $('#' + file.id);
-            $percent = $fileItem.find( '.uploader-progress-bar');
-
-            $fileItem.addClass("uploading").find('.state').text('上传中');
-            $percent.css('width', percentage * 100 + '%');
-        });
-
-        // （当文件上传成功时触发。）
-        uploader.on('uploadSuccess', function(file) {
-            $('#' + file.id).addClass("success").find('.state').text('已上传')
-                    .end().find('.close').hide();
-        });
-        // （当文件上传出错时触发。）
-        uploader.on('uploadError', function(file) {
-            $('#' + file.id).addClass("error").find('.state').html('上传出错 <a href="#">重新上传</a>');
-        });
-        // （不管成功或者失败，文件上传完成时触发。）
-        uploader.on('uploadComplete', function(file) {
-            var stats,
-                    successNum,
-                    uploadFailNum
-                    ;
-            stats = uploader.getStats();
-            successNum = stats.successNum;
-            uploadFailNum = stats.uploadFailNum;
-            $info.text("已上传成功文件数：" + successNum + "。 上传失败文件数：" + uploadFailNum + "。");
-        });
-
-    };
-
+    var BASE_URL = "../../../dev/modules/lib/webuploader/";
 </script>
 <div class="page-upload">
 
@@ -172,6 +18,13 @@
         </header>
         <main>
 
+            <div class="callout callout-info">
+                <h5>文件上传</h5>
+                1. 多文件、带进度条 <br/>
+                2. 可取消 “待上传文件”、“正在上传文件”、“上传失败的文件” <br/>
+                3. 可暂停 “正在上传文件”
+            </div>
+
             <!-- Nav tabs -->
             <ul class="nav nav-tabs" role="tablist">
                 <li role="presentation" class="active"><a href="#example" data-toggle="tab">示例</a></li>
@@ -180,49 +33,207 @@
             <!-- Tab panes -->
             <div class="tab-content">
                 <div role="tabpanel" class="tab-pane active" id="example" style="padding: 10px;">
-                    <div class="uploader-container uploader-theme-file" id="uploaderContainer">
-                    </div>
+                    <div id="uploaderContainer"></div>
                     <script>
-                        var uploaderContainerId,
-                            uploaderOptions
-                            ;
-                        uploaderContainerId = "uploaderContainer";
-                        uploaderOptions = {
-                            // swf文件路径
-                            swf: BASE_URL + '/Uploader.swf',
+                        +function () {
+                            var uploaderContainerId,
+                                uploaderOptions
+                                ;
+                            uploaderContainerId = "uploaderContainer";
+                            uploaderOptions = {
+                                // swf文件路径
+                                swf: BASE_URL + '/Uploader.swf',
 
-                            // 文件接收服务端。
-                            server: BASE_URL + '/Upload'
-                        };
-                        WebUploader.pku.fileUpload( uploaderContainerId, uploaderOptions );
+                                // 文件接收服务端。
+                                server: '/Upload'
+                            };
+                            WebUploader.pku.fileUpload( uploaderContainerId, uploaderOptions );
+                        } ();
                     </script>
                 </div>
                 <div role="tabpanel" class="tab-pane" id="code">
 <pre class="prettyprint">
-&lt;div class="uploader-container uploader-theme-file" id="uploaderContainer">
-&lt;/div>
+&lt;div id="uploaderContainer">&lt;/div>
 &lt;script>
-    jQuery(function(){
-        var uploaderContainerId,
+    var uploaderContainerId,
             uploaderOptions
             ;
-        uploaderContainerId = "uploaderContainer";
-        uploaderOptions = {
-            // swf文件路径
-            swf: BASE_URL + '/Uploader.swf',
+    uploaderContainerId = "uploaderContainer";
+    uploaderOptions = {
+        // swf文件路径
+        swf: BASE_URL + '/Uploader.swf',
 
-            // 文件接收服务端。
-            server: BASE_URL + '/Upload'
-        };
-        WebUploader.pku.fileUpload( uploaderContainerId, uploaderOptions );
-    });
-&lt;/script>
+        // 文件接收服务端。
+        server: '/Upload'
+    };
+    WebUploader.pku.fileUpload( uploaderContainerId, uploaderOptions );
+&lt;/script>    
+</pre>
+                </div>
+            </div>
+
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+
+            <div class="callout callout-info">
+                <h5>图片上传</h5>
+                1. 多文件、带进度条、带缩略图 <br/>
+                2. 可取消 “待上传文件”、“正在上传文件”、“上传失败的文件” <br/>
+                3. 可暂停 “正在上传文件” <br/>
+                4. 可通过拖拽添加图片 <br/>
+                5. 可通过粘贴来添加截屏的图片
+            </div>
+
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active"><a href="#example2" data-toggle="tab">示例</a></li>
+                <li role="presentation"><a href="#code2" data-toggle="tab">代码</a></li>
+            </ul>
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active" id="example2" style="padding: 10px;">
+                    <div id="imageUploaderContainer"></div>
+                    <script>
+                        +function () {
+
+                            var uploaderContainerId,
+                                    uploaderOptions
+                                    ;
+                            uploaderContainerId = "imageUploaderContainer";
+                            uploaderOptions = {
+                                // swf文件路径
+                                swf: BASE_URL + '/Uploader.swf',
+
+                                // 文件接收服务端。
+                                server: '/Upload',
+                                // 自动上传。
+                                auto: false,
+                                // 只允许选择文件，可选。
+                                accept: {
+                                    title: 'Images',
+                                    extensions: 'gif,jpg,jpeg,bmp,png',
+                                    mimeTypes: 'image/*'
+                                },
+                                // 指定Drag And Drop拖拽的容器
+                                dnd: '#' + uploaderContainerId + ' .uploader-filelist',
+                                // 通过粘贴来添加截屏的图片
+                                paste: document.body
+                            };
+                            WebUploader.pku.imageUpload( uploaderContainerId, uploaderOptions );
+                        } ();
+                    </script>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="code2">
+<pre class="prettyprint">
+&lt;div id="imageUploaderContainer">&lt;/div>
+&lt;script>
+    var uploaderContainerId,
+            uploaderOptions
+            ;
+    uploaderContainerId = "imageUploaderContainer";
+    uploaderOptions = {
+        // swf文件路径
+        swf: BASE_URL + '/Uploader.swf',
+
+        // 文件接收服务端。
+        server: '/Upload',
+        // 自动上传。
+        auto: false,
+        // 只允许选择文件，可选。
+        accept: {
+            title: 'Images',
+            extensions: 'gif,jpg,jpeg,bmp,png',
+            mimeTypes: 'image/*'
+        },
+        // 指定Drag And Drop拖拽的容器
+        dnd: '#' + uploaderContainerId + ' .uploader-filelist',
+        // 通过粘贴来添加截屏的图片
+        paste: document.body
+    };
+    WebUploader.pku.imageUpload( uploaderContainerId, uploaderOptions );
+&lt;/script>    
 </pre>
                 </div>
             </div>
 
 
 
+
+
+        </main>
+    </article>
+
+
+    <article class="article">
+        <header>
+            <h3 class="text-muted">1. 文档</h3>
+            <hr>
+        </header>
+        <main>
+
+            <div class="callout callout-warning">
+                参考：<a href="http://fex.baidu.com/webuploader/doc/index.html" target="_blank">官方文档</a>
+            </div>
+
+            <table class="table table-bordered table-condensed">
+                <caption>new Uploader( opts ) ⇒ Uploader</caption>
+                <thead>
+                <tr>
+                    <th>参数名</th>
+                    <th>类型 及默认值</th>
+                    <th>描述</th>
+                </tr>
+                </thead>
+                <tr>
+                    <td>dnd</td>
+                    <td>Selector: undefined</td>
+                    <td>指定Drag And Drop拖拽的容器；<br/>如果不指定，则不启动。</td>
+                </tr>
+                <tr>
+                    <td>disableGlobalDnd</td>
+                    <td>Boolean: false</td>
+                    <td>是否禁掉整个页面的拖拽功能，<br/>如果不禁用，图片拖进来的时候会默认被浏览器打开</td>
+                </tr>
+                <tr>
+                    <td>paste</td>
+                    <td>Selector: undefined</td>
+                    <td>指定监听paste事件的容器，如果不指定，不启用此功能。<br/>
+                        此功能为通过粘贴来添加截屏的图片。<br/>
+                        建议设置为document.body.</td>
+                </tr>
+                <tr>
+                    <td>pick</td>
+                    <td>Selector: undefined <br/>
+                        Object{ id，label，innerHTML，multiple }</td>
+                    <td>指定选择文件的按钮容器，不指定则不创建按钮。<br/>
+                        <kbd>id</kbd>: Seletor | dom，指定选择文件的按钮容器，不指定则不创建按钮。<br/>
+                        <kbd>label</kbd>: String，指定按钮文字。（请用 “innerHTML” 代替此属性的设置）<br/>
+                        <kbd>innerHTML</kbd>: String，指定按钮文字。不指定时优先从指定的容器中看是否自带文字。<br/>
+                        <kbd>multiple</kbd>: multiple，是否开起同时选择多个文件能力。<br/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>accept</td>
+                    <td>Object{title,extensions,mimeTypes}: null</td>
+                    <td>指定接受哪些类型的文件。 <br/>
+                        <kbd>title</kbd>: String，文字描述。<br/>
+                        <kbd>extensions</kbd>: String，允许的文件后缀，不带点，多个用逗号分割<br/>
+                        <kbd>mimeTypes</kbd>: String，多个用逗号分割。<br/>
+                        <pre class="prettyprint">
+{
+    title: 'Images',
+    extensions: 'gif,jpg,jpeg,bmp,png',
+    mimeTypes: 'image/*'
+}
+                        </pre>
+                    </td>
+                </tr>
+                <tr>
+                    <td>...</td>
+                    <td>...</td>
+                    <td>...</td>
+                </tr>
+            </table>
 
         </main>
     </article>
