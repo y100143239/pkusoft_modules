@@ -1,0 +1,78 @@
+<div class="page-bdc">
+
+
+    <article class="article">
+        <header>
+            <h3 class="text-muted">1. 相关</h3>
+            <hr>
+        </header>
+        <main>
+            <div class="callout callout-info">
+                BAE基础版，扩展服务里可创建免费的日志服务（2G存储）
+            </div>
+            <ul>
+                <li>参考
+                    <ul>
+                        <li><a href="https://bce.baidu.com/doc/BAE/ExtensionService.html#Log" target="_blank">Log</a></li>
+                    </ul>
+                </li>
+            </ul>
+
+        </main>
+    </article>
+    <article class="article">
+        <header>
+            <h3 class="text-muted">2. 步骤</h3>
+            <hr>
+        </header>
+        <main>
+
+            <div class="callout callout-info">
+                <h5>1. 依赖</h5>
+                <a href="https://bj.bcebos.com/bae3-sdk/java-runtime/baev3-sdk-1.0.1.zip" target="_blank">BAE Java SDK</a>
+            </div>
+            <div class="callout callout-info">
+                <h5>2. log4j.properties</h5>
+                <p>位置：src/log4j.properties</p>
+                <p>内容</p>
+                <pre class="prettypint linenum">
+log4j.rootLogger=TRACE,BAE
+log4j.appender.BAE=com.baidu.bae.api.log.BaeLogAppender
+# AK，参考RSD的用户名和密码
+log4j.appender.BAE.ak=b69CDLAYLGhcZ7ALWi1ZXo2C
+# SK，参考RSD的用户名和密码
+log4j.appender.BAE.sk=nBA0BrMVMWtsLknhqvA5hbV5dnoj2Oty
+log4j.appender.BAE.layout=org.apache.log4j.SimpleLayout </pre>
+
+            </div>
+            <div class="callout callout-info">
+                <h5>3. 使用</h5>
+                <pre class="prettypint linenum">
+Logger logger = Logger.getLogger( DBUtils.class );
+BasicConfigurator.configure ();
+
+logger.trace("this is trace message from java");
+logger.debug("this is debug message from java");
+logger.info("this is info message from java");
+logger.fatal("this is fatal message from java");
+logger.error("this is error message from java");
+
+try {
+    int a = 1/0;
+} catch (Exception e) {
+    logger.warn("exception occurred", e);
+}
+                </pre>
+            </div>
+            <div class="callout callout-info">
+                <h5>4. 查看日志（扩展服务里查看日志）</h5>
+                <dl>
+                    <dt>日志类型</dt>
+                    <dd>user，可查看程序里的日志</dd>
+                    <dd>lighttpd，可查看http服务器的日志</dd>
+                </dl>
+
+            </div>
+        </main>
+    </article>
+</div>
