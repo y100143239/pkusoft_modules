@@ -361,7 +361,13 @@ if (!('indexOf' in Array.prototype)) {
                     //each browser. In the beginning i had a big switch for each browser, but since the code
                     //was extremely ugly now I use a different approach with several re-flows. This works 
                     //pretty well but it's a bit slower. For now, lets keep things simple...   
-                    for(i=0; i<t.ln; i++) t.c[i].css("width", M.round(1000*t.c[i].w/mw)/10 + "%").l=true; 
+					for ( i = 0; i < t.ln; i++ ) {
+						//FIX 加上 padding 来计算百分比宽度
+						var col = t.c[ i ];
+						var cWidth = t.c[ i ].w;
+						cWidth += ( parseInt( col.css( "padding-left" ) ) || 0 ) +  ( parseInt( col.css( "padding-right" ) ) || 0 );
+						t.c[ i ].css( "width", M.round( 1000 * cWidth / mw ) / 10 + "%" ).l = true;
+					}
                     //c.l locks the column, telling us that its c.w is outdated									
                 }else{     //in non fixed-sized tables
                     applyBounds(t);         //apply the new bounds 

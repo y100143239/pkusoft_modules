@@ -50,6 +50,7 @@
                     navigation: 3,
                     // 让列可选取（生成checkbox）
                     selection: true,
+                    multiSelect: true,
                     // 点击该列时，被选取（该行的checkbox 被选中）
                     rowSelect: true,
                     // 每页多少条记录
@@ -102,7 +103,9 @@
                     alert("取消选择: " + rowIds.join(","));
                 });
 
-                $grid.colResizable( {partialRefresh: true} );
+                $grid.colResizable( {
+                    partialRefresh: true
+                } );
             </script>
         </main>
     </article>
