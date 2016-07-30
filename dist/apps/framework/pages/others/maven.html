@@ -1,0 +1,173 @@
+<div class="page-bdc">
+
+
+    <article class="article">
+        <header>
+            <h3 class="text-muted">1. 特点</h3>
+            <hr>
+        </header>
+        <main>
+            <ul>
+                <li>项目构建工具（参考Ant）</li>
+                <li>管理jar文件</li>
+            </ul>
+
+        </main>
+    </article>
+
+    <article class="article">
+        <header>
+            <h3 class="text-muted">2. 安装maven</h3>
+            <hr>
+        </header>
+        <main>
+            <div class="callout callout-info">
+                参考：<a href="https://maven.apache.org/" target="_blank">官网</a>
+            </div>
+            <ol>
+                <li>要求
+                    <ul>
+                        <li>JDK1.7 及以上（最好使用 jdk-7u79-macosx-x64.dmg ）</li>
+                    </ul>
+                </li>
+                <li>下载
+                    <ul>
+                        <li><a href="https://maven.apache.org/download.cgi" target="_blank">地址</a></li>
+                        <li>文件：apache-maven-3.3.9-bin.zip</li>
+                    </ul>
+                </li>
+                <li>环境变量
+                   <pre class="prettyprint linenums">
+// 1. 创建 ~/.bash_profile 文件
+
+// 2. 编辑
+
+    M3_HOME=/usr/local/maven/apache-maven-3.3.9
+
+    PATH=$M3_HOME/bin:$PATH
+
+    # 不设置 JAVA_HOME，会报错 “Unsupported major.minor version 51.0”
+    export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.7.0_79.jdk/Contents/Home
+
+    export M3_HOME
+    export PATH
+
+// 3. 编译
+
+    $ source ~/.bash_profile
+                   </pre>
+                </li>
+                <li>修改本地仓库位置
+                    <ul>
+                        <li>文件：/usr/local/maven/apache-maven-3.3.9/conf/settings.xml</li>
+                        <li>第55行添加 <code>&lt;localRepository>/Users/forwardNow/develop/mvnrep&lt;/localRepository></code></li>
+                    </ul>
+                </li>
+            </ol>
+
+        </main>
+    </article>
+
+    <article class="article">
+        <header>
+            <h3 class="text-muted">3. 安装Eclipse插件</h3>
+            <hr>
+        </header>
+        <main>
+            <div class="callout callout-info">
+                参考：<a href="http://jingyan.baidu.com/article/9f63fb91b5c5d7c8400f0e29.html" target="_blank">Maven 实战系列之Eclipse插件与web项目</a>
+            </div>
+            <ol>
+                <li>在线安装（行不通）
+                    <ul>
+                        <li>m2e</li>
+                        <li>http://m2eclipse.sonatype.org/sites/m2e</li>
+                    </ul>
+                </li>
+                <li>离线安装
+                    <ul>
+                        <li>下载： <a href="http://xz.downcc.com/bckf/bctool/eclipse-maven3-plugin.zip" target="_blank">地址</a></li>
+                        <li>解压后目录结构
+                            <pre>
+maven3
+    |-- eclipse
+        |-- features
+        |-- plugins </pre>
+                        </li>
+                        <li>配置到Eclipse
+<pre>
+1. 在eclipse目录下的dropins目录下新建一个maven.link文件
+2. 编辑 maven.link：（指向插件maven3）
+    path=../soft/maven3
+3. 重启Eclipse
+</pre>
+                        </li>
+                        <li>设置maven安装目录(Eclipse: Preferences -> Maven -> Installations)</li>
+                        <li>设置settings.xml(Eclipse: Preferences -> Maven -> User Settings)</li>
+                    </ul>
+                </li>
+            </ol>
+
+        </main>
+    </article>
+
+    <article class="article">
+        <header>
+            <h3 class="text-muted">4. 创建maven项目</h3>
+            <hr>
+        </header>
+        <main>
+            <div class="callout callout-info">
+                参考：<a href="http://jingyan.baidu.com/article/9f63fb91b5c5d7c8400f0e29.html" target="_blank">Maven 实战系列之Eclipse插件与web项目</a>
+            </div>
+            <ol>
+                <li>New Maven Project - Select project name and location
+                    <ul>
+                        <li>勾选：Use default Workspace location</li>
+                    </ul>
+                </li>
+                <li>New Maven Project - Select an Archetype
+                    <ul>
+                        <li>选：maven-archetype-webapp</li>
+                    </ul>
+                </li>
+                <li>New Maven Project - Enter a group id for the artifact
+                    <ul>
+                        <li>Group Id: net.pkusoft</li>
+                        <li>Artifact Id: framework</li>
+                    </ul>
+                </li>
+            </ol>
+
+        </main>
+    </article>
+
+    <article class="article">
+        <header>
+            <h3 class="text-muted">5. 使用体验</h3>
+            <hr>
+        </header>
+        <main>
+            <ol>
+                <li>有学习成本
+                    <ul>
+                        <li>环境变量的设置</li>
+                        <li>构建命令的用法</li>
+                    </ul>
+                </li>
+                <li>网络问题
+                    <ul>
+                        <li>Eclipse插件不能在线安装</li>
+                        <li>使用官方仓库，下载依赖非常慢</li>
+                    </ul>
+                </li>
+                <li>应用场景
+                    <ul>
+                        <li>编写 build.xml 文件，构建自己的本地仓库。(太慢不推荐。)</li>
+                    </ul>
+                </li>
+            </ol>
+        </main>
+    </article>
+
+</div>

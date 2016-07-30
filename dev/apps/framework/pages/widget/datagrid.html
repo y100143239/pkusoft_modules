@@ -28,9 +28,9 @@
             <table id="datagrid_1" class="table table-hover table-striped table-bordered">
                 <thead>
                 <tr>
-                    <th data-column-id="xm" data-identifier="true">姓名</th>
+                    <th data-column-id="xm" data-identifier="true" >姓名</th>
                     <!-- data-type="numeric"：数据类型为数字，用于排序，默认为字符串 -->
-                    <th data-column-id="gmsfhm" data-type="numeric">公民身份证号码</th>
+                    <th data-column-id="gmsfhm"  data-width="200">公民身份证号码</th>
                     <th data-column-id="xb" data-order="desc">性别</th>
                     <th data-column-id="mz" >民族</th>
                     <th data-column-id="csrq" >出生日期</th>
@@ -103,10 +103,234 @@
                     alert("取消选择: " + rowIds.join(","));
                 });
 
-                $grid.colResizable( {
-                    partialRefresh: true
-                } );
+                $grid.colResizable( { partialRefresh: true } );
             </script>
         </main>
     </article>
+
+
+    <article class="article">
+        <header>
+            <h3 class="text-muted">2. 一般属性设置</h3>
+            <hr>
+        </header>
+        <main>
+            <div class="callout callout-info">
+                在初始化时设置。
+            </div>
+            <table class="table table-striped table-hover table-bordered">
+                <thead>
+                <tr>
+                    <th style="width: 15%;">Name</th>
+                    <th style="width: 70%;">Description</th>
+                    <th style="width: 15%;">Type</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>navigation</td>
+                    <td>Enables or disables header and/or footer. Default value is <code>3</code>.<br><code>0</code> for none, <code>1</code> for header, <code>2</code> for footer and <code>3</code> for both.</td>
+                    <td><code><a href="http://api.jquery.com/Types/#Integer">Integer</a></code></td>
+                </tr>
+                <tr>
+                    <td>padding</td>
+                    <td>Defines the padding of the pagination on both sides (right &amp; left). Default value is <code>2</code>.</td>
+                    <td><code><a href="http://api.jquery.com/Types/#Integer">Integer</a></code></td>
+                </tr>
+                <tr>
+                    <td>columnSelection</td>
+                    <td>Enables or disables the dropdown box to hide/show columns. Default value is <code>true</code>.</td>
+                    <td><code><a href="http://api.jquery.com/Types/#Boolean">Boolean</a></code></td>
+                </tr>
+                <tr>
+                    <td>rowCount</td>
+                    <td>An <code><a href="http://api.jquery.com/Types/#Array">Array</a></code> of <code><a href="http://api.jquery.com/Types/#Integer">Integer</a></code> which will be shown in the dropdown box to choose the row count. Default value is <code>[10, 25, 50, -1]</code>. <code>-1</code> means all. When passing an <code><a href="http://api.jquery.com/Types/#Integer">Integer</a></code> value the dropdown box will disapear.</td>
+                    <td><code><a href="http://api.jquery.com/Types/#Array">Array</a></code> or <code><a href="http://api.jquery.com/Types/#Integer">Integer</a></code></td>
+                </tr>
+                <tr>
+                    <td>selection</td>
+                    <td>Enables row selection (to enable multi selection see also <code>multiSelect</code>). Default value is <code>false</code>.</td>
+                    <td><code><a href="http://api.jquery.com/Types/#Boolean">Boolean</a></code></td>
+                </tr>
+                <tr>
+                    <td>multiSelect</td>
+                    <td>Enables multi selection (<code>selection</code> must be set to <code>true</code> as well). Default value is <code>false</code>.</td>
+                    <td><code><a href="http://api.jquery.com/Types/#Boolean">Boolean</a></code></td>
+                </tr>
+                <tr>
+                    <td>sorting</td>
+                    <td>Enables sorting (to enable multi sorting see also <code>multiSort</code>). Default value is <code>true</code>.</td>
+                    <td><code><a href="http://api.jquery.com/Types/#Boolean">Boolean</a></code></td>
+                </tr>
+                <tr>
+                    <td>multiSort</td>
+                    <td>Enables multi sorting (<code>sorting</code> must be set to <code>true</code> as well). Default value is <code>false</code>.</td>
+                    <td><code><a href="http://api.jquery.com/Types/#Boolean">Boolean</a></code></td>
+                </tr>
+                <tr>
+                    <td>rowSelect</td>
+                    <td>Enables entire row click selection (<code>sorting</code> must be set to <code>true</code> as well). Default value is <code>false</code>. <span class="label label-info">1.1.0</span></td>
+                    <td><code><a href="http://api.jquery.com/Types/#Boolean">Boolean</a></code></td>
+                </tr>
+                <tr>
+                    <td>keepSelection</td>
+                    <td>Defines whether the row selection is saved internally on filtering, paging and sorting (even if the selected rows are not visible). <span class="label label-info">1.1.0</span></td>
+                    <td><code><a href="http://api.jquery.com/Types/#Boolean">Boolean</a></code></td>
+                </tr>
+                <tr>
+                    <td>ajax</td>
+                    <td>
+                        Enables <em>server-side</em> population (by setting this option to <code>true</code> you also have to pass an
+                        <abbr title="Uniform Resource Locator" class="initialism">URL</abbr> to <code>url</code> for your data service). Default value is <code>false</code>.
+                    </td>
+                    <td><code><a href="http://api.jquery.com/Types/#Boolean">Boolean</a></code></td>
+                </tr>
+                <tr>
+                    <td>post</td>
+                    <td>
+                        Enriches the request object with additional properties. Either a <code><a href="http://api.jquery.com/Types/#PlainObject">PlainObject</a></code> or a
+                        <code><a href="http://api.jquery.com/Types/#Function">Function</a></code> that returns a <code><a href="http://api.jquery.com/Types/#PlainObject">PlainObject</a></code> can be passed. Default value is <code>{}</code>. <span class="label label-warning">Obsolete</span> Use instead <code>requestHandler</code>!
+                    </td>
+                    <td><code><a href="http://api.jquery.com/Types/#PlainObject">PlainObject</a></code> or <code><a href="http://api.jquery.com/Types/#Function">Function</a></code></td>
+                </tr>
+                <tr>
+                    <td>url</td>
+                    <td>
+                        Sets the data <abbr title="Uniform Resource Locator" class="initialism">URL</abbr> to a data service (e.g. a <abbr title="Representational State Transfer" class=" initialism">REST</abbr> service). Either a <code><a href="http://api.jquery.com/Types/#String">String</a></code> or a
+                        <code><a href="http://api.jquery.com/Types/#Function">Function</a></code> that returns a <code><a href="http://api.jquery.com/Types/#String">String</a></code> can be passed. Default value is <code>""</code>.
+                    </td>
+                    <td><code><a href="http://api.jquery.com/Types/#String">String</a></code> or <code><a href="http://api.jquery.com/Types/#Function">Function</a></code></td>
+                </tr>
+                <tr>
+                    <td>caseSensitive</td>
+                    <td>Defines whether the search is case sensitive or insensitive. Default value is <code>true</code>. <span class="label label-info">1.1.0</span></td>
+                    <td><code><a href="http://api.jquery.com/Types/#Boolean">Boolean</a></code></td>
+                </tr>
+                <tr>
+                    <td>requestHandler</td>
+                    <td>Transforms the JSON request object in what ever is needed on the server-side implementation. Default value is <code>function (request) { return request; }</code>. <span class="label label-info">1.1.0</span></td>
+                    <td><code><a href="http://api.jquery.com/Types/#Function">Function</a></code></td>
+                </tr>
+                <tr>
+                    <td>responseHandler</td>
+                    <td>Transforms the response object into the expected JSON response object. Default value is <code>function (response) { return response; }</code>. <span class="label label-info">1.1.0</span></td>
+                    <td><code><a href="http://api.jquery.com/Types/#Function">Function</a></code></td>
+                </tr>
+                </tbody>
+            </table>
+        </main>
+    </article>
+
+
+    <article class="article">
+        <header>
+            <h3 class="text-muted">3. 单元格属性设置</h3>
+            <hr>
+        </header>
+        <main>
+            <div class="callout callout-info">
+                通过 data-* 的方式设置
+            </div>
+            <table class="table table-striped table-hover table-bordered">
+                <thead>
+                <tr>
+                    <th style="width: 15%;">Name</th>
+                    <th style="width: 70%;">Description</th>
+                    <th style="width: 15%;">Type</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr class="warning">
+                    <td>width</td>
+                    <td>设置宽度，如 &lt;th data-column-id="gmsfhm" data-width="200">公民身份证号码&lt;/th></td>
+                    <td><code><a href="http://api.jquery.com/Types/#String">Integer</a></code></td>
+                </tr>
+                <tr class="warning">
+                    <td>columnId</td>
+                    <td>对应bean的属性名，如 &lt;th data-column-id="gmsfhm" >公民身份证号码&lt;/th></td>
+                    <td><code><a href="http://api.jquery.com/Types/#String">String</a></code></td>
+                </tr>
+                <tr class="warning">
+                    <td>identifier</td>
+                    <td>让 checkbox 出现的前提，设置在任意的&lt;th>都可以，
+                    如 &lt;th data-column-id="xm" data-identifier="true" >姓名&lt;/th>
+                    </td>
+                    <td><code><a href="http://api.jquery.com/Types/#Boolean">Boolean</a></code></td>
+                </tr>
+                <tr>
+                    <td>sortable</td>
+                    <td>Enables sorting. Default value is <code>true</code>.</td>
+                    <td><code><a href="http://api.jquery.com/Types/#Boolean">Boolean</a></code></td>
+                </tr>
+                <tr>
+                    <td>order</td>
+                    <td>Specifies the sort order. Default value is <code>""</code>. Possible values are <code>""</code>, <code>asc</code> and <code>desc</code>.</td>
+                    <td><code><a href="http://api.jquery.com/Types/#String">String</a></code></td>
+                </tr>
+                <tr>
+                    <td colspan="3"></td>
+                </tr>
+                <tr>
+                    <td>align</td>
+                    <td>Sets the text alignment of table body cells. Default value is <code>left</code>. Possible values are <code>left</code>, <code>center</code> and <code>right</code>.</td>
+                    <td><code><a href="http://api.jquery.com/Types/#String">String</a></code></td>
+                </tr>
+                <tr>
+                    <td>converter</td>
+                    <td>Specifies a converter by using the name of the desired converter. The default value is <code>string</code>.</td>
+                    <td><code><a href="http://api.jquery.com/Types/#String">String</a></code></td>
+                </tr>
+                <tr>
+                    <td>cssClass</td>
+                    <td>Sets the CSS class of table body cells. The default value is <code>""</code>. <span class="label label-info">1.1.0</span></td>
+                    <td><code><a href="http://api.jquery.com/Types/#String">String</a></code></td>
+                </tr>
+                <tr>
+                    <td>formatter</td>
+                    <td>Specifies a formatter by using the name of the desired formatter. Formats the table body cell content. Default value is <code>null</code>.</td>
+                    <td><code><a href="http://api.jquery.com/Types/#String">String</a></code></td>
+                </tr>
+                <tr>
+                    <td>headerAlign</td>
+                    <td>Sets the text alignment of table header cells. Default value is <code>left</code>. Possible values are <code>left</code>, <code>center</code> and <code>right</code>.</td>
+                    <td><code><a href="http://api.jquery.com/Types/#String">String</a></code></td>
+                </tr>
+                <tr>
+                    <td>headerCssClass</td>
+                    <td>Sets the CSS class of table header cell. The default value is <code>""</code>. <span class="label label-info">1.1.0</span></td>
+                    <td><code><a href="http://api.jquery.com/Types/#String">String</a></code></td>
+                </tr>
+                <tr>
+                    <td>id</td>
+                    <td>Sets the column id. <span class="label label-info">Required</span></td>
+                    <td><code><a href="http://api.jquery.com/Types/#String">String</a></code></td>
+                </tr>
+
+
+                <tr>
+                    <td>searchable</td>
+                    <td>Enables searching. The default value is <code>true</code>. <span class="label label-info">1.1.0</span></td>
+                    <td><code><a href="http://api.jquery.com/Types/#Boolean">Boolean</a></code></td>
+                </tr>
+
+                <tr>
+                    <td>type</td>
+                    <td>For description see <code>converter</code>. <span class="label label-warning">Obsolete</span> Use instead <code>converter</code>!</td>
+                    <td><code><a href="http://api.jquery.com/Types/#String">String</a></code></td>
+                </tr>
+                <tr>
+                    <td>visible</td>
+                    <td>Sets the visibility of a column. Default value is <code>true</code>.</td>
+                    <td><code><a href="http://api.jquery.com/Types/#Boolean">Boolean</a></code></td>
+                </tr>
+                <tr>
+                    <td>visibleInSelection</td>
+                    <td>Sets the visibility of the column selection box item for a specific column. Default value is <code>true</code>. <span class="label label-info">1.3.0</span> <span class="label label-danger">NEW</span></td>
+                    <td><code><a href="http://api.jquery.com/Types/#Boolean">Boolean</a></code></td>
+                </tr>
+                </tbody>
+            </table>
+        </main>
+    </article>
+
 </div>

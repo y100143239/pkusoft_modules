@@ -149,6 +149,10 @@ module.exports = function(grunt) {
                     'cp -R ../tomcat/webapps/_bae/WEB-INF/classes ./WEB-INF/',
                     'cp -R ../tomcat/webapps/_bae/WEB-INF/lib ./WEB-INF/',
 
+                    // 6. mybatis 配置
+                    'rm /Users/forwardNow/develop/work/_bae/WEB-INF/classes/sqlMapConfig.xml',
+                    'cp /Users/forwardNow/develop/work/_bae/sqlMapConfig.xml /Users/forwardNow/develop/work/_bae/WEB-INF/classes/',
+
                     // 删除 bae 里的war包
                     'rm ../bae/ROOT.war',
                     'jar -cvf ../bae/ROOT.war ./*',
