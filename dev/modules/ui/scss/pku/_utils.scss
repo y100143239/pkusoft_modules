@@ -1,0 +1,9 @@
+.border-radius-none {
+    border-radius: 0!important;
+}
+.border-radius-none-all {
+    border-radius: 0!important;
+    * {
+        border-radius: 0!important;
+    }
+}

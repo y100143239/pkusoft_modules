@@ -598,9 +598,9 @@ function($field, validator) {
                 </tr>
                 <tr>
                     <td>row <p class="text-danger">
-                        data-row-selector <br/>
-                        data-row-valid <br/>
-                        data-row-invalid
+                        data-fv-row-selector <br/>
+                        data-fv-row-valid <br/>
+                        data-fv-row-invalid
                         </p>
                     </td>
                     <td>
@@ -612,7 +612,9 @@ row: {
 }
 </pre>
                     </td>
-                    <td>对所有的输入域的“父元素”（.from-group）进行设置。
+                    <td>对所有的输入域的“父元素”（.from-group）进行设置。<br/>
+                        <p class="text-danger">应用场景：当 .form-group 内包含多个 input 时，<br/>需要另行制定容器</p>
+
 <pre class="prettyprint">
 // 一般的输入域结构
 .form-group
@@ -620,6 +622,17 @@ row: {
         |-- &lt;label>
     |-- col-*-*
         |-- &lt;input>
+
+// 另行制定容器
+.form-group
+    |-- ._fv-container
+        |-- col-*-*
+            |-- &lt;input
+                data-fv-row-selector="._fv-container">
+    |-- ._fv-container
+        |-- col-*-*
+            |-- &lt;input
+                data-fv-row-selector="._fv-container">
 </pre>
                     </td>
                 </tr>

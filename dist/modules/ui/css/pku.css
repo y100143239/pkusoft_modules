@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /*!
  *  Font Awesome 4.5.0 by @davegandy - http://fontawesome.io - @fontawesome
  *  License - http://fontawesome.io/license (Font: SIL OFL 1.1, CSS: MIT License)
@@ -2191,6 +2192,12 @@
   overflow: visible;
   clip: auto; }
 
+body {
+  font-family: "PingHei", "Lucida Grande", "Lucida Sans Unicode", "Helvetica", "Arial", "Verdana", "sans-serif", "Microsoft Yahei", "微软雅黑"; }
+
+.text-required {
+  color: #d9534f; }
+
 .overlay {
   z-index: 500;
   position: absolute;
@@ -3709,5 +3716,13 @@ fieldset[disabled] .datepicker table tr td span.active.disabled:hover.focus {
   .uploader-theme-image .uploader-fileitem.success {
     background-color: #dff0d8;
     color: #3c763d; }
+
+.border-radius-none {
+  border-radius: 0 !important; }
+
+.border-radius-none-all {
+  border-radius: 0 !important; }
+  .border-radius-none-all * {
+    border-radius: 0 !important; }
 
 /*# sourceMappingURL=pku.css.map */

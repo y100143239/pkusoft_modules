@@ -138,20 +138,22 @@ module.exports = function(grunt) {
                     // 1. 切换到 _bae 目录
                     'cd /Users/forwardNow/develop/work/_bae',
                     // 2. 删除 dev目录
-                    'rm  -R ./dev/*',
-                    // 3. 将webstorm的/dist目录拷贝到 _bae/dev
+                    'rm  -Rf ./dev/*',
+                    //'rm  -R /Users/forwardNow/develop/workspace/_bae/WebContent/dev/*',
+                    // 3.1 将webstorm的/dist目录拷贝到 _bae/dev
                     'cp -R /Users/forwardNow/develop/work/pkusoft/pkusoft_modules/dist/* ./dev/',
+                    // 3.2 将webstorm的/dist目录拷贝到 Eclipse
+                    //'cp -R /Users/forwardNow/develop/work/pkusoft/pkusoft_modules/dist/* /Users/forwardNow/develop/workspace/_bae/WebContent/dev/',
 
                     // 4. 删除  _bae/WEB-INF 下的 classes和lib
-                    'rm -R ./WEB-INF/classes ./WEB-INF/lib',
+                    'rm -Rf ./WEB-INF/classes ./WEB-INF/lib',
 
-                    // 5. 将 tomcat/webapps/_bae/WEB-INF/ 下的 classes和lib 拷贝到 _bae/WEB-INF
-                    'cp -R ../tomcat/webapps/_bae/WEB-INF/classes ./WEB-INF/',
-                    'cp -R ../tomcat/webapps/_bae/WEB-INF/lib ./WEB-INF/',
+                    // 5. 将 tomcat/webapps/_bae/WEB-INF/ 文件 拷贝到 _bae/WEB-INF
+                    'cp -R ../tomcat/webapps/_bae/WEB-INF/ ./WEB-INF/',
 
-                    // 6. mybatis 配置
-                    'rm /Users/forwardNow/develop/work/_bae/WEB-INF/classes/sqlMapConfig.xml',
-                    'cp /Users/forwardNow/develop/work/_bae/sqlMapConfig.xml /Users/forwardNow/develop/work/_bae/WEB-INF/classes/',
+                    // 6. 数据库 配置
+                    'rm /Users/forwardNow/develop/work/_bae/WEB-INF/classes/config/spring-common.xml',
+                    'cp /Users/forwardNow/develop/work/_bae/spring-common.xml /Users/forwardNow/develop/work/_bae/WEB-INF/classes/config/',
 
                     // 删除 bae 里的war包
                     'rm ../bae/ROOT.war',
@@ -160,6 +162,7 @@ module.exports = function(grunt) {
                     'git commit --all -m "auto"',
                     'git push origin master',
                     'git status'
+
                 ].join('&&')
             }
         }
