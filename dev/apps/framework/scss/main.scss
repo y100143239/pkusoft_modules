@@ -13,6 +13,20 @@ html, body {
     position: relative;
     //overflow: hidden;
 }
+.placeholder-wait {
+    height: 100%;
+    width: 100%;
+    padding: 150px 0 250px 0;
+    color: #3CBCB2;
+    .fa {
+        font-size: 40px;
+    }
+    > .txt {
+        //color: #fff;
+        font-size: 18px;
+        text-align: center;
+    }
+}
 .fix-record {
     border-left: solid 3px #DBDBDB;
     padding: 20px 0;
@@ -23,7 +37,8 @@ html, body {
     > .fix-record-item {
         margin-bottom: 80px;
         .fa {
-            //color: #dddddd;
+            color: #DBDBDB;
+            background-color: #F9F9F9;
         }
         > .header {
             position: relative;
@@ -32,6 +47,7 @@ html, body {
             > .fa {
                 position: absolute;
                 left: -12px;
+                //color: #ADADAD;
             }
         }
         > .item-detail {
@@ -42,6 +58,7 @@ html, body {
             > .fa {
                 position: absolute;
                 left: -7px;
+                //color: #ADADAD;
             }
         }
     }
@@ -85,8 +102,8 @@ html, body {
     }
     > .main {
         background-color: #f9f9f9;
-        min-height: 100%;
         padding: 20px 20px 20px 240px;
+        min-height: 800px;
     }
 }
 
