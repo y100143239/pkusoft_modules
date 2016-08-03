@@ -837,7 +837,17 @@ S2.define('select2/results',[
 
     data.results = this.sort(data.results);
 
-    for (var d = 0; d < data.results.length; d++) {
+    //FIX 限制添加的条目数 showMaxItemNum
+    var len,
+        showMaxItemNum
+        ;
+    len = data.results.length;
+    showMaxItemNum = ( this.options.options["showMaxItemNum"] || 100);
+    if ( len > showMaxItemNum ) {
+        len = showMaxItemNum;
+    }
+
+    for (var d = 0; d < len; d++) {
       var item = data.results[d];
 
       var $option = this.option(item);

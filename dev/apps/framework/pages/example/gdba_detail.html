@@ -67,10 +67,7 @@
         } );
     </script>
     <script>
-        require(["jquery", "formvalidationI18N", "select2"], function ( $ ) {
-            $( '[data-pku-widget="fv"]' ).formValidation();
-
-            $( '[data-pku-widget="select2"]' ).select2();
+        require(["jquery"], function ( $ ) {
 
         })
     </script>
@@ -105,129 +102,52 @@
 <!-- 中间内容部分-->
 <div class="wrap clearfix main border-radius-none-all" >
 
-    <div class="panel panel-default" id="_1_edit">
+    <div class="panel panel-default" id="_panel-1">
         <div class="panel-heading text-info"> <i class="fa fa-sticky-note-o"></i> 保安服务公司基本信息
-            <button type="submit" class="btn btn-warning pull-right btn-xs" ><i class="fa fa-edit"></i> 修改</button>
+            <button type="button" class="btn btn-warning pull-right btn-xs" ><i class="fa fa-edit"></i> 修改</button>
         </div>
         <div class="panel-body">
 
-            <form id="_form-1" class="form-horizontal" data-pku-widget="fv" >
+            <form class="form-horizontal form-detail" >
                 <div class="form-group">
-                    <label class="col-xs-2 control-label col-xs-2"><span class="fa fa-star text-required"></span> 公司名称</label>
-
-                    <div class="col-xs-10">
-                        <input type="text" class="form-control" name="gsmc" data-fv-notempty="true">
-                    </div>
+                    <label class="col-xs-2 control-label">公司名称</label> <div class="col-xs-10">${??.gsmc}</div>
                 </div>
                 <div class="form-group">
-                    <div class="_fv-container">
-                        <label class="col-xs-2 control-label"><span class="fa fa-star text-required"></span> 公司性质</label>
-                        <div class="col-xs-4">
-                            <select class="form-control" data-pku-widget="select2" name="gsxz"
-                                    data-placeholder="请选择"
-                                    data-allow-clear="true"
-                                    data-required="validate-invalid"
-                                    data-xmlurl="../widget/DIC_CODE.xml"
-                                    data-fv-row="._fv-container">
-                                <option value=""></option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="_fv-container">
-                        <label class="col-xs-2 control-label">管理人数</label>
-                        <div class="col-xs-4">
-                            <input type="text" class="form-control" name="glrs" data-fv-integer="true" data-fv-row="._fv-container" >
-                        </div>
-                    </div>
+                    <label class="col-xs-2 control-label">公司性质</label> <div class="col-xs-4">${??.gsxz}</div>
+                    <label class="col-xs-2 control-label">管理人数</label> <div class="col-xs-4">${??.glrs}</div>
                 </div>
                 <div class="form-group">
-                    <div class="_fv-container">
-                        <label class="col-xs-2 control-label"><span class="fa fa-star text-required"></span> 注册资金</label>
-                        <div class="col-xs-4">
-                            <div class="input-group">
-                                <span class="input-group-addon">￥</span>
-                                <input name="zczj" type="text" class="form-control text-right"
-                                       data-fv-row="._fv-container"
-                                       data-fv-notempty="true"
-                                       data-fv-numeric="true"
-                                       data-fv-greaterthan="true"
-                                       data-fv-greaterthan-value="0" >
-                                <span class="input-group-addon">万</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="_fv-container">
-                        <label class="col-xs-2 control-label"><span class="fa fa-star text-required"></span> 营业执照注册号</label>
-                        <div class="col-xs-4">
-                            <input name="yyzz" type="text" class="form-control"
-                                   data-fv-row="._fv-container"
-                                   data-fv-notempty="true">
-                        </div>
-                    </div>
+                    <label class="col-xs-2 control-label">注册资金</label> <div class="col-xs-4"> ￥ ${??.zczj} 万</div>
+                    <label class="col-xs-2 control-label">营业执照注册号</label> <div class="col-xs-4">${??.yyzz}</div>
                 </div>
 
                 <div class="form-group">
-                    <label class="col-xs-2 control-label "><span class="fa fa-star text-required"></span> 公司地址省市县(区)</label>
-
-                    <div class="col-xs-10">
-                        <select class="form-control" data-pku-widget="select2" name="gsdzssxq"
-                                data-placeholder="请选择"
-                                data-allow-clear="true"
-                                data-required="validate-invalid"
-                                data-xmlurl="../widget/DIC_CODE.xml">
-                            <option value=""></option>
-                        </select>
-                    </div>
+                    <label class="col-xs-2 control-label ">公司地址省市县(区)</label> <div class="col-xs-10">${??.gsdzssxq}</div>
                 </div>
 
                 <div class="form-group">
-                    <label class="col-xs-2 control-label"><span class="fa fa-star text-required"></span> 公司详细地址</label>
-
-                    <div class="col-xs-10">
-                        <input type="text" name="gsxz" class="form-control" data-fv-notempty="true" >
-                    </div>
+                    <label class="col-xs-2 control-label">公司详细地址</label> <div class="col-xs-10">${??.gsxz}</div>
                 </div>
 
                 <div class="form-group">
-                    <label class="col-xs-2 control-label"><span class="fa fa-star text-required"></span> 辖区派出所</label>
-
-                    <div class="col-xs-10">
-                        <select class="form-control" data-pku-widget="select2" name="gsxqpcs"
-                                data-placeholder="请选择"
-                                data-allow-clear="true"
-                                data-required="validate-invalid"
-                                data-xmlurl="../widget/DIC_CODE.xml">
-                            <option value=""></option>
-                        </select>
-                    </div>
+                    <label class="col-xs-2 control-label">辖区派出所</label> <div class="col-xs-10">${??.gsxqpcs}</div>
                 </div>
 
-
                 <div class="form-group">
-                    <label class="col-xs-2 control-label"><span class="fa fa-star text-required"></span> 经营范围</label>
-
-                    <div class="col-xs-10">
-                        <label class="checkbox-inline"> <input type="checkbox" name="jyfw" value="01"
-                                                               data-fv-notempty="true">门卫</label>
-                        <label class="checkbox-inline"> <input type="checkbox" name="jyfw" value="02">巡逻</label>
-                        <label class="checkbox-inline"> <input type="checkbox" name="jyfw" value="03">守护</label>
-                        <label class="checkbox-inline"> <input type="checkbox" name="jyfw" value="04">押运</label>
-                        <label class="checkbox-inline"> <input type="checkbox" name="jyfw" value="05">随身护卫</label>
-                        <label class="checkbox-inline"> <input type="checkbox" name="jyfw" value="06">安全检查</label>
-                        <label class="checkbox-inline"> <input type="checkbox" name="jyfw" value="07">安全技术防范</label>
-                        <label class="checkbox-inline"> <input type="checkbox" name="jyfw" value="08">安全风险评估</label>
-                        <label class="checkbox-inline"> <input type="checkbox" name="jyfw" value="09">秩序维护</label>
-                        <label class="checkbox-inline"> <input type="checkbox" name="jyfw" value="10">其他</label>
-                    </div>
+                    <label class="col-xs-2 control-label">经营范围</label> <div class="col-xs-10">${??.jyfw}</div>
                 </div>
             </form>
 
 
         </div>
+        <!--
         <div class="panel-footer clearfix text-center">
             <button type="submit" class="btn btn-info" form="_form-1"><i class="fa fa-save"></i> 保存</button>
         </div>
+        -->
     </div>
+
+
 
 
 </div>

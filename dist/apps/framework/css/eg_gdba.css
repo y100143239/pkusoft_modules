@@ -129,14 +129,32 @@ a:hover {
   border: none; }
 
 /* end footer*/
+#resolution {
+  z-index: 200;
+  position: fixed;
+  right: 0;
+  top: 20%; }
+  #resolution .panel {
+    display: none;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.3); }
+  #resolution button:hover + .panel, #resolution button:focus + .panel {
+    display: block; }
+
+.nav-leftside {
+  z-index: 200;
+  position: fixed;
+  left: 0;
+  top: 30%; }
+
 .main {
   background-color: #fff;
   min-height: 600px; }
   .main > .panel {
-    margin: 20px 20px; }
-  .main .control-label {
+    margin: 20px 20px 60px 20px; }
+  .main label.control-label {
     font-weight: normal;
-    white-space: nowrap; }
+    white-space: nowrap;
+    color: #666; }
   .main .control-label .text-required {
     font-size: 10px; }
     .main .control-label .text-required:before {
@@ -145,5 +163,8 @@ a:hover {
 i.form-control-feedback.fa {
   opacity: 0.2;
   filter: alpha(opacity=20); }
+
+.form-detail label.control-label + div[class*="col-"] {
+  padding-top: 7px; }
 
 /*# sourceMappingURL=eg_gdba.css.map */

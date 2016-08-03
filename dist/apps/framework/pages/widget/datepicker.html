@@ -1,5 +1,29 @@
 <div class="page-datepicker">
 
+    <div class="callout callout-warning">
+        <h4>注意</h4>
+        <ol>
+            <li>修正与formValidation结合使用时，日期改变后不校验的问题
+                <pre class="prettyprint linenums">
+// 在 bootstrap-datepicker-zh.fix.js 文件的 156行 处，添加以下代码
+// FIX 添加formValidate验证
+var _this = this;
+this.element.on('show hide changeDate', function (e) {
+    // Revalidate the date when user change it
+    var $form,
+        field
+        ;
+    $form = $( this ).closest( "form.fv-form" );
+    field = _this.inputField;
+    if ( $form.length == 0  ) { return; }
+    if ( ! $form.formValidation ) { return; }
+    $form.formValidation('revalidateField', field);
+});
+                </pre>
+            </li>
+        </ol>
+    </div>
+
     <article class="article">
         <header>
             <h3 class="text-muted">1. 示例</h3>

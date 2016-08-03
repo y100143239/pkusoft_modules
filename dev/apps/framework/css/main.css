@@ -5,6 +5,30 @@ html, body {
   min-height: 100%;
   position: relative; }
 
+.fix-record {
+  border-left: solid 3px #DBDBDB;
+  padding: 20px 0; }
+  .fix-record .label {
+    font-size: 100%;
+    font-weight: normal; }
+  .fix-record > .fix-record-item {
+    margin-bottom: 80px; }
+    .fix-record > .fix-record-item > .header {
+      position: relative;
+      margin-bottom: 32px;
+      padding-left: 20px; }
+      .fix-record > .fix-record-item > .header > .fa {
+        position: absolute;
+        left: -12px; }
+    .fix-record > .fix-record-item > .item-detail {
+      position: relative;
+      border-bottom: 1px dashed #ccc;
+      padding: 20px 0 10px 20px;
+      color: #666; }
+      .fix-record > .fix-record-item > .item-detail > .fa {
+        position: absolute;
+        left: -7px; }
+
 .wrap > .header .logo {
   float: left;
   font-size: 20px;

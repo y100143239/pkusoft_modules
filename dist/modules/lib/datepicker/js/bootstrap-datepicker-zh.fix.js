@@ -153,6 +153,18 @@
 		if (this.isInline){
 			this.show();
 		}
+		// FIX 添加formValidate验证
+        var inputField,
+            $form
+            ;
+        inputField = this.inputField;
+        $form = this.element.closest( "form.fv-form" );
+        if ( $form.length == 0  ) { return; }
+        if ( ! $form.formValidation ) { return; }
+		this.element.on('show hide changeDate', function (e) {
+			// Revalidate the date when user change it
+            $form.formValidation('revalidateField', inputField);
+		});
 	};
 
 	Datepicker.prototype = {

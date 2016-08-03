@@ -51,15 +51,38 @@ a:hover{ color:#BD0A01; }
 // --------- origin ---------->
 
 
+#resolution {
+    z-index: 200;
+    position: fixed;
+    right: 0;
+    top: 20%;
+    .panel {
+        display: none;
+        box-shadow: 0 0 3px rgba(0,0,0,.3);
+    }
+    button:hover + .panel, button:focus + .panel {
+        display: block;
+    }
+}
+.nav-leftside {
+    z-index: 200;
+    position: fixed;
+    left: 0;
+    top: 30%;
+    .panel-anchor {
+        //display: block;
+    }
+}
 .main {
     background-color: #fff;
     min-height: 600px;
     > .panel {
-        margin: 20px 20px;
+        margin: 20px 20px 60px 20px;
     }
-    .control-label {
+    label.control-label {
         font-weight: normal;
         white-space: nowrap;
+        color: #666;
     }
     .control-label .text-required {
         font-size: 10px;
@@ -67,8 +90,14 @@ a:hover{ color:#BD0A01; }
             vertical-align: 1px;
         }
     }
+
 }
 i.form-control-feedback.fa {
     opacity: 0.2;
     filter: alpha(opacity=20);
+}
+.form-detail {
+    label.control-label + div[class*="col-"] {
+        padding-top: 7px;
+    }
 }
