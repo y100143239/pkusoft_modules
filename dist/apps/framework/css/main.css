@@ -5,6 +5,17 @@ html, body {
   min-height: 100%;
   position: relative; }
 
+.placeholder-wait {
+  height: 100%;
+  width: 100%;
+  padding: 150px 0 250px 0;
+  color: #3CBCB2; }
+  .placeholder-wait .fa {
+    font-size: 40px; }
+  .placeholder-wait > .txt {
+    font-size: 18px;
+    text-align: center; }
+
 .fix-record {
   border-left: solid 3px #DBDBDB;
   padding: 20px 0; }
@@ -13,6 +24,9 @@ html, body {
     font-weight: normal; }
   .fix-record > .fix-record-item {
     margin-bottom: 80px; }
+    .fix-record > .fix-record-item .fa {
+      color: #DBDBDB;
+      background-color: #F9F9F9; }
     .fix-record > .fix-record-item > .header {
       position: relative;
       margin-bottom: 32px;
@@ -57,8 +71,8 @@ html, body {
   text-decoration: none; }
 .wrap > .main {
   background-color: #f9f9f9;
-  min-height: 100%;
-  padding: 20px 20px 20px 240px; }
+  padding: 20px 20px 20px 240px;
+  min-height: 800px; }
 
 .skin-blue .logo {
   background-color: #3c8dbc;

@@ -6472,11 +6472,16 @@ S2.define('jquery.select2',[
       if (typeof options === 'object') {
         this.each(function () {
           //var instanceOptions = $.extend(true, {}, options);
+            var _this = this;
+            var $this = $(_this);
+
+            //FIX 1 扩展参数 selectedValue
+            var selectedValue = options[ "selectedValue" ] || $( this ).data( "selectedValue" );
+
             //FIX i18n
             var instanceOptions = $.extend(true, { language: "zh-CN" }, options);
 
             //FIX 添加xml字典支持
-            var _this = this;
             var xmlurl = options[ "xmlurl" ] || $( _this ).data( "xmlurl" );
             if ( xmlurl ) {
                 $.ajax( {
@@ -6489,11 +6494,23 @@ S2.define('jquery.select2',[
                     success: function ( data ) {
                         instanceOptions.data = xmlDocToJson( data );
                         new Select2( $( _this ), instanceOptions );
+                        //FIX 2 扩展参数 selectedValue
+                        if ( selectedValue ) {
+                            $this.val( selectedValue ); // Select the option with a value of 'US'
+                            $this.trigger('change');
+                        }
                     }
                 } )
             } else {
                 new Select2( $( this ), instanceOptions );
+                //FIX 3 扩展参数 selectedValue
+                if ( selectedValue ) {
+                    $this.val( selectedValue ); // Select the option with a value of 'US'
+                    $this.trigger('change');
+                }
             }
+
+
 
         });
 
@@ -6524,6 +6541,7 @@ S2.define('jquery.select2',[
       } else {
         throw new Error('Invalid arguments for Select2: ' + options);
       }
+
     };
   }
 

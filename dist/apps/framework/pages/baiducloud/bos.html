@@ -8,7 +8,14 @@
         </header>
         <main>
 
-            <ul>
+            <ol>
+                <li>应用场景
+                    <ul>
+                        <li>BAE 不允许在本地写文件</li>
+                        <li>文件上传（及下载）：可以在BOS上读写文件</li>
+                        <li>BOS上的文件都有外链，设置跨域访问即可访问</li>
+                    </ul>
+                </li>
                 <li>费用
                     <ul>
                         <li>￥0.91 / 月</li>
@@ -18,6 +25,72 @@
                 <li>文档
                     <ul>
                         <li><a href="https://bce.baidu.com/doc/BOS/index.html" target="_blank">BOS</a></li>
+                    </ul>
+                </li>
+
+            </ol>
+
+        </main>
+    </article>
+    <article class="article">
+        <header>
+            <h3 class="text-muted">2. 使用</h3>
+            <hr>
+        </header>
+        <main>
+
+            <ul>
+                <li>JAVA SDK
+                    <ul>
+                        <li>地址：<a href="http://sdk.bce.baidu.com/console-sdk/bce-java-sdk-0.10.8.zip?responseContentDiposition=attachment">Java SDK 0.10.8</a></li>
+                        <li>导入</li>
+                    </ul>
+                </li>
+                <li>Bucket、Object 简介
+                    <ul>
+                        <li>文档：<a href="https://cloud.baidu.com/doc/BOS/GettingStarted-new.html" target="_blank">对象存储BOS</a></li>
+                        <li>Bucket 可类比 磁盘（C盘，D盘，F盘...）</li>
+                        <li>Object 可类比 文件/目录</li>
+                    </ul>
+                </li>
+                <li>客户端（BosClient）
+                    <ul>
+                        <li>通过 BosClient 来操作 Bucket、Object</li>
+                        <li>创建
+                        <pre class="prettyprint linenums">
+public static final String ACCESS_KEY_ID = "b69CDLAYLGhcZ7ALWi。。。。";
+public static final String SECRET_ACCESS_KEY = "nB。。。。";
+// 必须指定，否则获取Object会报404，如果不是北京地区的
+public static final String ENDPOINT = "http://gz.bcebos.com";
+public static final String DEFAULT_BUCKET_NAME = "pkusoft";
+
+public static BosClient client;
+
+static {
+    // 初始化一个BosClient
+    BosClientConfiguration config = new BosClientConfiguration();
+    config.setCredentials( new DefaultBceCredentials( ACCESS_KEY_ID, SECRET_ACCESS_KEY ) );
+    config.setEndpoint( ENDPOINT );
+    client = new BosClient( config );
+}
+                        </pre>
+                        </li>
+                    </ul>
+                </li>
+                <li>操作
+                    <ul>
+                        <li>创建 Bucket：<a href="https://cloud.baidu.com/doc/BOS/GettingStarted-new.html" target="_blank">参考文档</a></li>
+                        <li>读写Object：<a href="https://cloud.baidu.com/doc/BOS/GettingStarted-new.html" target="_blank">参考文档</a></li>
+                    </ul>
+                </li>
+                <li>将Object生成外链，及跨域访问
+                    <ul>
+                        <li>位置：百度 “管理控制台” -> 对象存储BOS -> Bucket管理(选择条目) -> Bucket设置 - CORS设置</li>
+                        <li>编辑CORS规则：Origins
+                            <pre>http://27.17.3.62/
+http://localhost:8080
+http://pkuframework.duapp.com</pre>
+                        </li>
                     </ul>
                 </li>
 

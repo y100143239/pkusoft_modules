@@ -1,4 +1,9 @@
 <div class="page-select">
+
+    <div class="callout callout-info">
+        文档：<a href="http://select2.github.io/" target="_blank">http://select2.github.io/</a>
+    </div>
+
     <article class="article">
         <header>
             <h3 class="text-muted">1. 基本示例</h3>
@@ -183,6 +188,7 @@ jQuery("#select2_2").select2({
                             data-placeholder="请选择"
                             data-allow-clear="true"
                             data-required="validate-invalid"
+                            data-selected-value="140822"
                             data-xmlurl="./pages/widget/DIC_CODE.xml">
                         <option value=""></option>
                     </select>
@@ -196,6 +202,7 @@ jQuery("#select2_2").select2({
         data-placeholder="请选择"
         data-allow-clear="true"
         data-required="validate-invalid"
+        data-selected-value="140822"
         data-xmlurl="./pages/widget/DIC_CODE.xml">
     &lt;option value="">&lt;/option>
 &lt;/select>
@@ -215,6 +222,9 @@ jQuery("#select2_2").select2({
         <main >
             <div class="callout callout-warning">
                 扩展参数 <code>showMaxItemNum</code> 用于设置下拉框显示的做多记录数（不超过100）
+            </div>
+            <div class="callout callout-warning">
+                扩展参数 <code>selectedValue</code> 用于设置初始被选中的值（在仅有value的情况下）
             </div>
             <div class="row">
                 <div class="col-xs-12">

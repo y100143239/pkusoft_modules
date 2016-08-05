@@ -5,6 +5,7 @@
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="./images/favicon.ico">
     <script>
         window.onload = function () {
             document.getElementById( "bodyLoadingOverlay" ).style.display = "none";
@@ -17,15 +18,15 @@
     <script src="../../../dev/modules/lib/ie/respond.js"></script>
     <script src="../../../dev/modules/lib/ie/html5shiv.js"></script>
     <![endif]-->
-    <link rel="stylesheet" href="../../../dev/modules/ui/css/pku.css"/>
-    <link rel="stylesheet" href="css/main.css"/>
+    <link rel="stylesheet" href="../../../dev/modules/ui/css/pku.css?VERSION=v0.20160805"/>
+    <link rel="stylesheet" href="css/main.css?VERSION=v0.20160805"/>
     <script data-main="../../modules/" src="../../modules/require.js"></script>
     <script >
         var VERSION,
             DEV_MODE
             ;
         DEV_MODE = false;
-        VERSION = DEV_MODE ? (new Date()).getTime() : "v1.0";
+        VERSION = DEV_MODE ? (new Date()).getTime() : "v0.20160805";
         require.config( {
             urlArgs: "VERSION=" + VERSION,
             paths: {
@@ -135,7 +136,7 @@
                         <i class="fa fa-laptop"></i> <span>UI Elements</span>
                         <i class="fa pull-right fa-angle-left"></i>
                     </a>
-                    <ul class="treeview-menu" >
+                    <ul class="treeview-menu">
                         <li class="active"><a href="pages/ui/icons.html" ><i class="fa fa-angle-double-right"></i> icons（图标）</a></li>
                         <li><a href="pages/ui/panels.html" ><i class="fa fa-angle-double-right"></i> panels（面板）</a></li>
                         <li><a href="pages/ui/tables.html" ><i class="fa fa-angle-double-right"></i> tables（表格）</a></li>
@@ -147,7 +148,7 @@
                 </li>
                 <li class="treeview">
                     <a href="#">
-                        <i class="fa fa-cogs"></i> <span>Widget</span>
+                        <i class="fa fa-puzzle-piece"></i> <span>Widget</span>
                         <i class="fa pull-right fa-angle-left "></i>
                     </a>
                     <ul class="treeview-menu" >
@@ -178,7 +179,8 @@
                     </a>
                     <ul class="treeview-menu" >
                         <li><a class="_outerlink" target="_blank" href="pages/example/login1.html" ><i class="fa fa-angle-double-right"></i> login（响应式）</a></li>
-                        <li><a class="_outerlink" target="_blank" href="pages/example/gdba_edit.html" ><i class="fa fa-angle-double-right"></i> 广东保安</a></li>
+                        <!--<li><a class="_outerlink" target="_blank" href="pages/example/gdba_edit.html" ><i class="fa fa-angle-double-right"></i> 广东保安</a></li>-->
+                        <li><a class="_outerlink" target="_blank" href="/gdba/reg/index" ><i class="fa fa-angle-double-right"></i> 广东保安</a></li>
                     </ul>
                 </li>
                 <li class="treeview">
@@ -200,6 +202,7 @@
                         <i class="fa pull-right fa-angle-left "></i>
                     </a>
                     <ul class="treeview-menu" >
+                        <li><a href="pages/others/sitemesh.html" ><i class="fa fa-angle-double-right"></i> Sitemesh（页面装饰）</a></li>
                         <li><a href="pages/others/maven.html" ><i class="fa fa-angle-double-right"></i> Maven</a></li>
                         <li><a href="pages/others/nodejs.html" ><i class="fa fa-angle-double-right"></i> Node.js <i class="fa fa-hourglass-1 text-danger"></i></a></li>
                     </ul>
@@ -212,20 +215,51 @@
         <div class="fix-record">
 
             <div class="fix-record-item">
+                <h3 class="header"><i class="fa fa-clock-o"></i> 2016-08-05</h3>
+                <p class="item-detail"><i class="fa fa-check-square-o"></i><span class="label label-info">字典相关</span>
+                    建表、录入字典、生成xml，将字典文件上传到BOS，生成外链
+                </p>
+                <p class="item-detail"><i class="fa fa-check-square-o"></i><span class="label label-info">相关技术</span>
+                    BOS，百度云对象存储，使用及简单教程的撰写
+                </p>
+                <p class="item-detail"><i class="fa fa-bug"></i><span class="label label-info">问题修复</span>
+                    字典控件无法初始化值：扩展参数 “selectedValue”（data-selected-value）
+                </p>
+            </div>
+            <div class="fix-record-item">
+                <h3 class="header"><i class="fa fa-clock-o"></i> 2016-08-04</h3>
+                <p class="item-detail"><i class="fa fa-bullseye"></i><span class="label label-default">字典相关</span>
+                    建表、录入字典、生成xml
+                </p>
+                <p class="item-detail"><i class="fa fa-bullseye"></i><span class="label label-default">广东保安</span>
+                    相对完整的示例
+                </p>
+                <p class="item-detail"><i class="fa fa-bullseye"></i><span class="label label-default">书籍阅读</span>
+                    《十亿消费者》
+                </p>
+                <p class="item-detail"><i class="fa fa-bug"></i><span class="label label-danger">等待修复</span>
+                    字典控件无法初始化值：无法对给定的code值，进行初始化！！！！
+                </p>
+                <p class="item-detail"><i class="fa fa-check-square-o"></i><span class="label label-info">相关技术</span>
+                    sitemesh 页面装饰，撰写使用教程，位于 Others/Sitemesh（页面装饰）
+                </p>
+            </div>
+
+            <div class="fix-record-item">
                 <h3 class="header"><i class="fa fa-clock-o"></i> 2016-08-03</h3>
-                <p class="item-detail"><i class="fa fa-tag"></i><span class="label label-info">字典控件</span>
+                <p class="item-detail"><i class="fa fa-check-square-o"></i><span class="label label-info">字典控件</span>
                     select2，扩展参数“showMaxItemNum”，设置下拉框显示最多纪录数
                 </p>
-                <p class="item-detail"><i class="fa fa-tag"></i><span class="label label-info">日历控件</span>
+                <p class="item-detail"><i class="fa fa-check-square-o"></i><span class="label label-info">日历控件</span>
                     datapicker，解决 在formValidation中使用时 输入域值改变后不发生校验的问题
                 </p>
-                <p class="item-detail"><i class="fa fa-tag"></i><span class="label label-info">广东保安</span>
+                <p class="item-detail"><i class="fa fa-check-square-o"></i><span class="label label-info">广东保安</span>
                     初步完成静态页
                 </p>
-                <p class="item-detail"><i class="fa fa-tag"></i><span class="label label-info">域名备案</span>
+                <p class="item-detail"><i class="fa fa-check-square-o"></i><span class="label label-info">域名备案</span>
                     撰写注意事项及简单流程
                 </p>
-                <p class="item-detail"><i class="fa fa-tag"></i><span class="label label-default">其他计划</span>
+                <p class="item-detail"><i class="fa fa-bullseye"></i><span class="label label-default">其他计划</span>
                     Node.js 的学习计划
                 </p>
             </div>

@@ -1,0 +1,90 @@
+
+<article class="article">
+    <header>
+        <h3 class="text-muted">1. 相关</h3>
+        <hr>
+    </header>
+    <main>
+        <div class="callout callout-info">
+            SiteMesh框架是OpenSymphony团队开发的一个非常优秀的页面装饰器框架，它通过对用户请求进行过滤，并对服务器向客户端响应也进行过滤，然后给原始页面加入一定的装饰(header,footer等)，然后把结果返回给客户端。通过SiteMesh的页面装饰，可以提供更好的代码复用，所有的页面装饰效果耦合在目标页面中，无需再使用include指令来包含装饰效果，目标页与装饰页完全分离，如果所有页面使用相同的装饰器，可以是整个Web应用具有统一的风格。
+        </div>
+        <div class="callout callout-info">
+            <h4>应用场景</h4>
+            <ol>
+                <li>针对每个页面（符合过滤规则）</li>
+                <li>每个页面都要引入的 css文件、js文件</li>
+                <li>JSP中定义的变量，如 ${ctx}</li>
+            </ol>
+        </div>
+        <ul>
+            <li>版本：2.4.2</li>
+            <li>地址：<a href="http://download.csdn.net/download/ydlccm/4206357">sitemesh-2.4.2.jar </a></li>
+            <li>导入项目</li>
+        </ul>
+    </main>
+</article>
+
+<article class="article">
+    <header>
+        <h3 class="text-muted">2. 配置</h3>
+        <hr>
+    </header>
+    <main>
+        <div class="callout callout-info">
+            参考：<a href="http://www.iteye.com/topic/251521" target="_blank">配置</a>
+        </div>
+        <ol>
+            <li>/WEB-INF/web.xml （添加 &lt;filter>）
+            <pre class="prettyprint linenums" style="margin: 10px 0 20px 0;">
+&lt;filter>
+    &lt;filter-name>sitemesh&lt;/filter-name>
+    &lt;filter-class>com.opensymphony.module.sitemesh.filter.PageFilter&lt;/filter-class>
+&lt;/filter>
+&lt;filter-mapping>
+    &lt;filter-name>sitemesh&lt;/filter-name>
+    &lt;url-pattern>/*&lt;/url-pattern>
+&lt;/filter-mapping>
+            </pre>
+            </li>
+            <li>/WEB-INF/decorators.xml （创建sitemesh配置文件）
+            <pre class="prettyprint linenums" style="margin: 10px 0 20px 0;">
+&lt;?xml version="1.0" encoding="utf-8"?>
+&lt;decorators defaultdir="/WEB-INF/layouts/"> &lt;!-- 指定 装饰器模板（pkuframework.jsp）的目录  -->
+    &lt;!-- 此处用来定义不需要过滤的页面（不需要装饰的页面） -->
+    &lt;excludes>
+        &lt;pattern>/dev/*&lt;/pattern>
+    &lt;/excludes>
+
+    &lt;!-- 用来定义装饰器要过滤的页面（需要装饰的页面） -->
+    &lt;decorator name="pkuframework" page="pkuframework.jsp">
+        &lt;pattern>/*&lt;/pattern>
+    &lt;/decorator>
+&lt;/decorators>  
+            </pre>
+            </li>
+            <li>/WEB-INF/layouts/pkuframework.jsp （创建sitemesh模板文件）
+            <pre class="prettyprint linenums" style="margin: 10px 0 20px 0;">
+&lt;!DOCTYPE html>
+&lt;html>
+&lt;head>
+
+    &lt;!-- 从被装饰页面获取title标签内容,并设置默认值-->
+    &lt;title>&lt;decorator:title default="此页面被sitemesh装饰" />&lt;/title>
+
+    &lt;!-- 从被装饰页面获取head标签内容 -->
+    &lt;decorator:head />
+
+&lt;/head>
+
+&lt;body>
+
+&lt;!-- 从被装饰页面获取body标签内容 -->
+&lt;decorator:body />
+
+&lt;/body>
+&lt;/html>
+            </pre>
+            </li>
+        </ol>
+    </main>
+</article>
