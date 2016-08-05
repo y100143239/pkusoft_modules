@@ -1,0 +1,42 @@
+<div class="page-bdc">
+
+
+    <article class="article">
+        <header>
+            <h3 class="text-muted">1. insert 后返回主键（MySQL）</h3>
+            <hr>
+        </header>
+        <main>
+            <div class="callout callout-info">
+1. 调用 userService.update( user ) 返回的是影响的记录数；<br/>
+2. userService.update( user ) 执行完毕后，可以通过 user 来获取 userId；<br/>
+3. Mybatis 会将自动生成的主键ID注入到 bean中
+            </div>
+            <ol>
+                <li>bean
+                    <pre class="prettyprint linenums">
+class User {
+    private int userId;
+    private String userName;                        
+}
+                    </pre>
+                </li>
+                <li>mapper
+                    <pre class="prettyprint linenums">
+&lt;insert id="insert"  parameterType="net.pkusoft.model.User" useGeneratedKeys="true" keyProperty="userId">
+    ...
+&lt;/insert>    
+                    </pre>
+                </li>
+                <li>获取主键
+                    <pre class="prettyprint linenums">
+userService.update( user );
+user.getUserId();
+                    </pre>
+                </li>
+            </ol>
+
+        </main>
+    </article>
+
+</div>
