@@ -18,15 +18,15 @@
     <script src="../../../dev/modules/lib/ie/respond.js"></script>
     <script src="../../../dev/modules/lib/ie/html5shiv.js"></script>
     <![endif]-->
-    <link rel="stylesheet" href="../../../dev/modules/ui/css/pku.css?VERSION=v0.20160805"/>
-    <link rel="stylesheet" href="css/main.css?VERSION=v0.20160805"/>
+    <link rel="stylesheet" href="../../../dev/modules/ui/css/pku.css?VERSION=v0.20160806"/>
+    <link rel="stylesheet" href="css/main.css?VERSION=v0.20160806"/>
     <script data-main="../../modules/" src="../../modules/require.js"></script>
     <script >
         var VERSION,
             DEV_MODE
             ;
         DEV_MODE = false;
-        VERSION = DEV_MODE ? (new Date()).getTime() : "v0.20160805";
+        VERSION = DEV_MODE ? (new Date()).getTime() : "v0.20160806";
         require.config( {
             urlArgs: "VERSION=" + VERSION,
             paths: {
@@ -99,175 +99,185 @@
     <i class="fa fa-spin fa-spinner"></i>
 </div>
 
-<div class="wrap">
-
-    <header class="header">
-        <a href="index.html" class="logo">
-            Pku Framework
-        </a>
-        <nav class="navbar navbar-static-top ">
-        </nav>
-    </header>
-    <aside class="left-side">
-        <section class="sidebar">
-            <ul class="sidebar-menu">
-                <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-hand-o-right"></i> <span>Quick Start</span>
-                        <i class="fa pull-right fa-angle-left"></i>
-                    </a>
-                    <ul class="treeview-menu" >
-                        <li><a href="pages/start/template.html" ><i class="fa fa-angle-double-right"></i> template（模板）</a></li>
-                        <li><a href="pages/start/notice.html" ><i class="fa fa-angle-double-right"></i> notice（注意）</a></li>
+<div class="navbar navbar-default navbar-static-top navbar-blue">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" >
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="index.html"><img style="width: 20px;" src="./images/logo.png" alt="Brand"/></a>
+            <p class="navbar-text">More clear, more readable.</p>
+        </div>
+        <div class="collapse navbar-collapse pull-right" id="navbar">
+            <ul class="nav navbar-nav ">
+                <li><a class="top-link" href="pages/ui/icons.html" ><i class="fa fa-sun-o"></i> icons</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" ><i class="fa fa-folder-open"></i> Examples <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a class="top-link _outerlink" target="_blank" href="pages/example/login1.html"><i class="fa fa fa-external-link"></i> 登陆</a></li>
+                        <li><a class="top-link _outerlink" target="_blank" href="/gdba/reg/index"><i class="fa fa fa-external-link"></i> 广东保安</a></li>
                     </ul>
                 </li>
-                <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-gear"></i> <span>Helper Classes</span>
-                        <i class="fa pull-right fa-angle-left"></i>
-                    </a>
-                    <ul class="treeview-menu" >
-                        <li><a href="pages/helper/grid.html" ><i class="fa fa-angle-double-right"></i> grid（栅格系统）</a></li>
-                        <li><a href="pages/helper/utilities.html" ><i class="fa fa-angle-double-right"></i> utilities（工具类）</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" ><i class="fa fa-cloud"></i> Baidu Cloud <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a class="top-link" href="pages/baiducloud/bae.html" ><i class="fa fa-angle-double-right"></i> BAE（应用引擎）</a></li>
+                        <li><a class="top-link" href="pages/baiducloud/bos.html" ><i class="fa fa-angle-double-right"></i> BOS（对象存储）</a></li>
+                        <li><a class="top-link" href="pages/baiducloud/rds.html" ><i class="fa fa-angle-double-right"></i> RDS（关系数据库）</a></li>
+                        <li><a class="top-link" href="pages/baiducloud/log.html" ><i class="fa fa-angle-double-right"></i> Log（日志）</a></li>
+                        <li><a class="top-link" href="pages/baiducloud/icp.html" ><i class="fa fa-angle-double-right"></i> ICP（域名备案）</a></li>
                     </ul>
                 </li>
-                <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-laptop"></i> <span>UI Elements</span>
-                        <i class="fa pull-right fa-angle-left"></i>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li class="active"><a href="pages/ui/icons.html" ><i class="fa fa-angle-double-right"></i> icons（图标）</a></li>
-                        <li><a href="pages/ui/panels.html" ><i class="fa fa-angle-double-right"></i> panels（面板）</a></li>
-                        <li><a href="pages/ui/tables.html" ><i class="fa fa-angle-double-right"></i> tables（表格）</a></li>
-                        <li><a href="pages/ui/buttons.html" ><i class="fa fa-angle-double-right"></i> buttons（按钮）</a></li>
-                        <li><a href="pages/ui/alerts.html" ><i class="fa fa-angle-double-right"></i> alerts（警告框）</a></li>
-                        <li><a href="pages/ui/callout.html" ><i class="fa fa-angle-double-right"></i> callout（标注）</a></li>
-                        <li><a href="pages/ui/overlay.html" ><i class="fa fa-angle-double-right"></i> overlay（遮罩）</a></li>
-                    </ul>
-                </li>
-                <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-puzzle-piece"></i> <span>Widget</span>
-                        <i class="fa pull-right fa-angle-left "></i>
-                    </a>
-                    <ul class="treeview-menu" >
-                        <li><a href="pages/widget/modal.html" ><i class="fa fa-angle-double-right"></i> modal（模态框）</a></li>
-                        <li><a href="pages/widget/tooltip.html" ><i class="fa fa-angle-double-right"></i> tooltip（提示）</a></li>
-                        <li><a href="pages/widget/datepicker.html" ><i class="fa fa-angle-double-right"></i> datepicker（日期）</a></li>
-                        <li><a href="pages/widget/select.html" ><i class="fa fa-angle-double-right"></i> select（选择、字典）</a></li>
-                        <li><a href="pages/widget/chart.html" ><i class="fa fa-angle-double-right"></i> chart（图表）</a></li>
-                        <li><a href="pages/widget/validate.html" ><i class="fa fa-angle-double-right"></i> validate（输入校验）</a></li>
-                        <li><a href="pages/widget/upload.html" ><i class="fa fa-angle-double-right"></i> upload（上传）</a></li>
-                        <li><a href="pages/widget/datagrid.html" ><i class="fa fa-angle-double-right"></i> datagrid（列表）</a></li>
-                    </ul>
-                </li>
-                <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-edit"></i> <span>Form Controls</span>
-                        <i class="fa pull-right fa-angle-left "></i>
-                    </a>
-                    <ul class="treeview-menu" >
-                        <li><a href="pages/form/general.html" ><i class="fa fa-angle-double-right"></i> general（一般）</a></li>
-                        <li><a href="pages/form/advance.html" ><i class="fa fa-angle-double-right"></i> <del>advance（高级）</del></a></li>
-                    </ul>
-                </li>
-                <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-folder-open"></i> <span>Examples</span>
-                        <i class="fa pull-right fa-angle-left "></i>
-                    </a>
-                    <ul class="treeview-menu" >
-                        <li><a class="_outerlink" target="_blank" href="pages/example/login1.html" ><i class="fa fa-angle-double-right"></i> login（响应式）</a></li>
-                        <!--<li><a class="_outerlink" target="_blank" href="pages/example/gdba_edit.html" ><i class="fa fa-angle-double-right"></i> 广东保安</a></li>-->
-                        <li><a class="_outerlink" target="_blank" href="/gdba/reg/index" ><i class="fa fa-angle-double-right"></i> 广东保安</a></li>
-                    </ul>
-                </li>
-                <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-cloud"></i> <span>Baidu Cloud</span>
-                        <i class="fa pull-right fa-angle-left "></i>
-                    </a>
-                    <ul class="treeview-menu" >
-                        <li><a href="pages/baiducloud/bae.html" ><i class="fa fa-angle-double-right"></i> BAE（应用引擎）</a></li>
-                        <li><a href="pages/baiducloud/bos.html" ><i class="fa fa-angle-double-right"></i> BOS（对象存储）</a></li>
-                        <li><a href="pages/baiducloud/rds.html" ><i class="fa fa-angle-double-right"></i> RDS（关系数据库）</a></li>
-                        <li><a href="pages/baiducloud/log.html" ><i class="fa fa-angle-double-right"></i> Log（日志）</a></li>
-                        <li><a href="pages/baiducloud/icp.html" ><i class="fa fa-angle-double-right"></i> ICP（域名备案）</a></li>
-                    </ul>
-                </li>
-                <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-question-circle-o"></i> <span>Others</span>
-                        <i class="fa pull-right fa-angle-left "></i>
-                    </a>
-                    <ul class="treeview-menu" >
-                        <li><a href="pages/others/sitemesh.html" ><i class="fa fa-angle-double-right"></i> Sitemesh（页面装饰）</a></li>
-                        <li><a href="pages/others/mybatis.html" ><i class="fa fa-angle-double-right"></i> Mybatis</a></li>
-                        <li><a href="pages/others/maven.html" ><i class="fa fa-angle-double-right"></i> Maven</a></li>
-                        <li><a href="pages/others/nodejs.html" ><i class="fa fa-angle-double-right"></i> Node.js <i class="fa fa-hourglass-1 text-danger"></i></a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" ><i class="fa fa-plane"></i> Others <span class="caret"></span></a>
+                    <ul class="dropdown-menu dropdown-menu-right">
+                        <li><a class="top-link" href="pages/others/sitemesh.html" ><i class="fa fa-angle-double-right"></i> Sitemesh（页面装饰）</a></li>
+                        <li><a class="top-link" href="pages/others/mybatis.html" ><i class="fa fa-angle-double-right"></i> Mybatis</a></li>
+                        <li><a class="top-link" href="pages/others/maven.html" ><i class="fa fa-angle-double-right"></i> Maven</a></li>
+                        <li class="disabled"><a href="pages/others/nodejs.html" ><i class="fa fa-angle-double-right"></i> <del>Node.js</del></a></li>
                     </ul>
                 </li>
             </ul>
-        </section>
-    </aside>
-    <main class="main">
+        </div>
+    </div>
+</div>
+<aside class="left-side">
+    <section class="sidebar">
+        <ul class="sidebar-menu">
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-hand-o-right"></i> <span>Quick Start</span>
+                    <i class="fa pull-right fa-angle-left"></i>
+                </a>
+                <ul class="treeview-menu" >
+                    <li><a href="pages/start/template.html" ><i class="fa fa-angle-double-right"></i> template（模板）</a></li>
+                    <li><a href="pages/start/notice.html" ><i class="fa fa-angle-double-right"></i> notice（注意）</a></li>
+                </ul>
+            </li>
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-gear"></i> <span>Helper Classes</span>
+                    <i class="fa pull-right fa-angle-left"></i>
+                </a>
+                <ul class="treeview-menu" >
+                    <li><a href="pages/helper/grid.html" ><i class="fa fa-angle-double-right"></i> grid（栅格系统）</a></li>
+                    <li><a href="pages/helper/utilities.html" ><i class="fa fa-angle-double-right"></i> utilities（工具类）</a></li>
+                </ul>
+            </li>
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-laptop"></i> <span>UI Elements</span>
+                    <i class="fa pull-right fa-angle-left"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li class="active"><a href="pages/ui/icons.html" ><i class="fa fa-angle-double-right"></i> icons（图标）</a></li>
+                    <li><a href="pages/ui/panels.html" ><i class="fa fa-angle-double-right"></i> panels（面板）</a></li>
+                    <li><a href="pages/ui/tables.html" ><i class="fa fa-angle-double-right"></i> tables（表格）</a></li>
+                    <li><a href="pages/ui/buttons.html" ><i class="fa fa-angle-double-right"></i> buttons（按钮）</a></li>
+                    <li><a href="pages/ui/alerts.html" ><i class="fa fa-angle-double-right"></i> alerts（警告框）</a></li>
+                    <li><a href="pages/ui/callout.html" ><i class="fa fa-angle-double-right"></i> callout（标注）</a></li>
+                    <li><a href="pages/ui/overlay.html" ><i class="fa fa-angle-double-right"></i> overlay（遮罩）</a></li>
+                </ul>
+            </li>
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-puzzle-piece"></i> <span>Widget</span>
+                    <i class="fa pull-right fa-angle-left "></i>
+                </a>
+                <ul class="treeview-menu" >
+                    <li><a href="pages/widget/modal.html" ><i class="fa fa-angle-double-right"></i> modal（模态框）</a></li>
+                    <li><a href="pages/widget/tooltip.html" ><i class="fa fa-angle-double-right"></i> tooltip（提示）</a></li>
+                    <li><a href="pages/widget/datepicker.html" ><i class="fa fa-angle-double-right"></i> datepicker（日期）</a></li>
+                    <li><a href="pages/widget/select.html" ><i class="fa fa-angle-double-right"></i> select（选择、字典）</a></li>
+                    <li><a href="pages/widget/chart.html" ><i class="fa fa-angle-double-right"></i> chart（图表）</a></li>
+                    <li><a href="pages/widget/validate.html" ><i class="fa fa-angle-double-right"></i> validate（输入校验）</a></li>
+                    <li><a href="pages/widget/upload.html" ><i class="fa fa-angle-double-right"></i> upload（上传）</a></li>
+                    <li><a href="pages/widget/datagrid.html" ><i class="fa fa-angle-double-right"></i> datagrid（列表）</a></li>
+                </ul>
+            </li>
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-edit"></i> <span>Form Controls</span>
+                    <i class="fa pull-right fa-angle-left "></i>
+                </a>
+                <ul class="treeview-menu" >
+                    <li><a href="pages/form/general.html" ><i class="fa fa-angle-double-right"></i> general（一般）</a></li>
+                    <li><a href="pages/form/advance.html" ><i class="fa fa-angle-double-right"></i> <del>advance（高级）</del></a></li>
+                </ul>
+            </li>
+        </ul>
+    </section>
+</aside>
+<main class="main">
 
-        <div class="fix-record">
+    <div class="fix-record">
 
-            <div class="fix-record-item">
-                <h3 class="header"><i class="fa fa-clock-o"></i> 2016-08-05</h3>
-                <p class="item-detail"><i class="fa fa-check-square-o"></i><span class="label label-info">字典相关</span>
-                    建表、录入字典、生成xml，将字典文件上传到BOS，生成外链
-                </p>
-                <p class="item-detail"><i class="fa fa-check-square-o"></i><span class="label label-info">相关技术</span>
-                    BOS，百度云对象存储，使用及简单教程的撰写
-                </p>
-                <p class="item-detail"><i class="fa fa-bug"></i><span class="label label-info">问题修复</span>
-                    字典控件无法初始化值：扩展参数 “selectedValue”（data-selected-value）
-                </p>
-            </div>
-            <div class="fix-record-item">
-                <h3 class="header"><i class="fa fa-clock-o"></i> 2016-08-04</h3>
-                <p class="item-detail"><i class="fa fa-bullseye"></i><span class="label label-default">字典相关</span>
-                    建表、录入字典、生成xml
-                </p>
-                <p class="item-detail"><i class="fa fa-bullseye"></i><span class="label label-default">广东保安</span>
-                    相对完整的示例
-                </p>
-                <p class="item-detail"><i class="fa fa-bullseye"></i><span class="label label-default">书籍阅读</span>
-                    《十亿消费者》
-                </p>
-                <p class="item-detail"><i class="fa fa-bug"></i><span class="label label-danger">等待修复</span>
-                    字典控件无法初始化值：无法对给定的code值，进行初始化！！！！
-                </p>
-                <p class="item-detail"><i class="fa fa-check-square-o"></i><span class="label label-info">相关技术</span>
-                    sitemesh 页面装饰，撰写使用教程，位于 Others/Sitemesh（页面装饰）
-                </p>
-            </div>
-
-            <div class="fix-record-item">
-                <h3 class="header"><i class="fa fa-clock-o"></i> 2016-08-03</h3>
-                <p class="item-detail"><i class="fa fa-check-square-o"></i><span class="label label-info">字典控件</span>
-                    select2，扩展参数“showMaxItemNum”，设置下拉框显示最多纪录数
-                </p>
-                <p class="item-detail"><i class="fa fa-check-square-o"></i><span class="label label-info">日历控件</span>
-                    datapicker，解决 在formValidation中使用时 输入域值改变后不发生校验的问题
-                </p>
-                <p class="item-detail"><i class="fa fa-check-square-o"></i><span class="label label-info">广东保安</span>
-                    初步完成静态页
-                </p>
-                <p class="item-detail"><i class="fa fa-check-square-o"></i><span class="label label-info">域名备案</span>
-                    撰写注意事项及简单流程
-                </p>
-                <p class="item-detail"><i class="fa fa-bullseye"></i><span class="label label-default">其他计划</span>
-                    Node.js 的学习计划
-                </p>
-            </div>
-
+        <div class="fix-record-item">
+            <h3 class="header"><i class="fa fa-clock-o"></i> 2016-08-06（星期六）</h3>
+            <p class="item-detail"><i class="fa fa-check-square-o"></i><span class="label label-info">外网框架</span>
+                首页重构
+            </p>
+            <p class="item-detail"><i class="fa fa-check-square-o"></i><span class="label label-info">数据库</span>
+                编写数据库表结构说明文档，将数据库迁移到百度云。
+            </p>
+            <p class="item-detail"><i class="fa fa-check-square-o"></i><span class="label label-info">外网框架</span>
+                完成简单登陆功能。
+            </p>
+        </div>
+        <div class="fix-record-item">
+            <h3 class="header"><i class="fa fa-clock-o"></i> 2016-08-05（星期五）</h3>
+            <p class="item-detail"><i class="fa fa-check-square-o"></i><span class="label label-info">字典相关</span>
+                建表、录入字典、生成xml，将字典文件上传到BOS，生成外链
+            </p>
+            <p class="item-detail"><i class="fa fa-check-square-o"></i><span class="label label-info">相关技术</span>
+                BOS，百度云对象存储，使用及简单教程的撰写
+            </p>
+            <p class="item-detail"><i class="fa fa-bug"></i><span class="label label-info">问题修复</span>
+                字典控件无法初始化值：扩展参数 “selectedValue”（data-selected-value）
+            </p>
+        </div>
+        <div class="fix-record-item">
+            <h3 class="header"><i class="fa fa-clock-o"></i> 2016-08-04（星期四）</h3>
+            <p class="item-detail"><i class="fa fa-bullseye"></i><span class="label label-default">字典相关</span>
+                建表、录入字典、生成xml
+            </p>
+            <p class="item-detail"><i class="fa fa-bullseye"></i><span class="label label-default">广东保安</span>
+                相对完整的示例
+            </p>
+            <p class="item-detail"><i class="fa fa-bullseye"></i><span class="label label-default">书籍阅读</span>
+                《十亿消费者》
+            </p>
+            <p class="item-detail"><i class="fa fa-bug"></i><span class="label label-danger">等待修复</span>
+                字典控件无法初始化值：无法对给定的code值，进行初始化！！！！
+            </p>
+            <p class="item-detail"><i class="fa fa-check-square-o"></i><span class="label label-info">相关技术</span>
+                sitemesh 页面装饰，撰写使用教程，位于 Others/Sitemesh（页面装饰）
+            </p>
         </div>
 
-    </main>
-</div>
+        <div class="fix-record-item">
+            <h3 class="header"><i class="fa fa-clock-o"></i> 2016-08-03（星期三）</h3>
+            <p class="item-detail"><i class="fa fa-check-square-o"></i><span class="label label-info">字典控件</span>
+                select2，扩展参数“showMaxItemNum”，设置下拉框显示最多纪录数
+            </p>
+            <p class="item-detail"><i class="fa fa-check-square-o"></i><span class="label label-info">日历控件</span>
+                datapicker，解决 在formValidation中使用时 输入域值改变后不发生校验的问题
+            </p>
+            <p class="item-detail"><i class="fa fa-check-square-o"></i><span class="label label-info">广东保安</span>
+                初步完成静态页
+            </p>
+            <p class="item-detail"><i class="fa fa-check-square-o"></i><span class="label label-info">域名备案</span>
+                撰写注意事项及简单流程
+            </p>
+            <p class="item-detail"><i class="fa fa-bullseye"></i><span class="label label-default">其他计划</span>
+                Node.js 的学习计划
+            </p>
+        </div>
+
+    </div>
+
+</main>
 </body>
 </html>

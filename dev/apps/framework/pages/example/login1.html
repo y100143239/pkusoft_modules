@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="../../../../../dev/modules/ui/css/pku.css"/>
     <link rel="stylesheet" href="../../css/eg_login.css"/>
     <script data-main="../../../../../dev/modules/" src="../../../../../dev/modules/require.js"></script>
-    <script >
+    <script>
         var VERSION,
                 DEV_MODE
                 ;
@@ -55,8 +55,8 @@
                     'text': 'utils/text'
                 }
             },
-            shim : {
-                "bootstrap": [ "jquery"],
+            shim: {
+                "bootstrap": [ "jquery" ],
                 "formvalidation": [ "jquery", "bootstrap" ],
                 "formvalidationBs": [ "formvalidation" ],
                 "formvalidationI18N": [ "formvalidation", "formvalidationBs" ],
@@ -66,22 +66,92 @@
             waitSeconds: 150
         } );
 
-        require( ["jquery", "formvalidationI18N"], function ( $ ) {
+        require( [ "jquery", "formvalidationI18N" ], function ( $ ) {
             $( document ).ready( function () {
+                // 初始化模态框
+                $( "#modal" ).modal({
+                    backdrop: "static",
+                    show: false
+                });
                 _validation( $ );
                 _tooltip( $ );
-                // 正在登录
-                // 登录成功
-                // 跳转
+                _formSubmit( $ );
             } );
         } );
+
+        function _formSubmit( $ ) {
+
+            $( ".js--btn-save" ).on( "click", function () {
+                var $this,
+                        $form,
+                        $fvInstance,
+                        url,
+                        data,
+                        isValid
+                        ;
+                $this = $( this );
+                $form = $this.closest( "form" );
+                url = $form.attr( "action" );
+                data = $form.serialize();
+                $fvInstance = $form.data('formValidation');
+                // 校验
+                $fvInstance.validate();
+                // 判断
+                isValid = $fvInstance.isValid();
+                if ( ! isValid ) {
+                    return false;
+                }
+                $this.attr( "disabled", true );
+
+                _postForm( {
+                    url: url,
+                    data: data,
+                    success: function ( responseData ) {
+                        var success,
+                                data,
+                                text
+                                ;
+                        success = responseData[ "success" ];
+                        data = responseData[ "data" ] || "";
+                        if ( data ) {
+                            data = " : " + data;
+                        }
+                        text = success ? "成功" : "失败";
+                        $( "#modal" ).modal( "show" ).find( ".modal-text" ).text( text + data + "。" );
+                    },
+                    error: function () {
+                        $( "#modal" ).modal( "show" ).find( ".modal-text" ).text( "服务器未响应！" );
+                    },
+                    complete: function () {
+                        $this.removeAttr( "disabled" );
+                    }
+                } );
+                return false;
+            } );
+        }
+
+        function _postForm(opts) {
+            opts = $.extend( {
+                type: "POST",
+                url: null,
+                data: null,
+                timeout: 60000, // 设置请求超时时间（毫秒）
+                contentType: "application/x-www-form-urlencoded; charset=utf-8",
+                dataType: "json", // 预期服务器返回的数据类型。
+                success: null,
+                error: null,
+                complete: null
+            }, opts );
+
+            $.ajax(opts );
+        }
 
         function _validation( $ ) {
             $( "form" ).formValidation();
         }
         function _tooltip( $ ) {
             var $help = $( "a[title]" );
-            $help.tooltip({
+            $help.tooltip( {
                 theme: "tooltip-info-dark",
                 container: "body"
             } ).tooltip( "show" );
@@ -98,60 +168,137 @@
 <div class="container">
 
     <div class="row">
-<!--
-    超小屏幕 手机 (<768px)，100%，col-xs-
+        <!--
+            超小屏幕 手机 (<768px)，100%，col-xs-
 
-    小屏幕 平板 (≥768px)，750px，62px * 12，col-sm-
+            小屏幕 平板 (≥768px)，750px，62px * 12，col-sm-
 
-    中等屏幕 桌面显示器 (≥992px)，970px，81px * 12，col-md-
+            中等屏幕 桌面显示器 (≥992px)，970px，81px * 12，col-md-
 
-    大屏幕 大桌面显示器 (≥1200px)，1170px，97px * 12，col-lg-
--->
+            大屏幕 大桌面显示器 (≥1200px)，1170px，97px * 12，col-lg-
+        -->
+
         <div class="login-container
                     col-xs-10 col-xs-push-1
                     col-sm-6  col-sm-push-3
                     col-md-4  col-md-push-4
                     col-lg-4  col-lg-push-4
                     ">
-            <div class="panel panel-simple">
-                <div class="panel-heading">用户登录
-                    <a href="javascript: void(0)" class="pull-right" title="适应各种屏幕尺寸"><i class="fa fa-question-circle"></i></a>
-                </div>
-                <form class="form-horizontal">
-                    <div class="panel-body">
-                        <div class="form-group">
-                            <div class="col-sm-12">
-                                <div class="input-group">
-                                    <span class="input-group-addon"><i class="fa fa-user "></i></span>
-                                    <input type="text" class="form-control" placeholder="用户名"
-                                           name="username"
-                                           data-fv-notempty="true">
+            <div class="nav-tabs-custom tab-info">
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs" role="tablist">
+                    <li class="active"><a href="#login" data-toggle="tab">登陆</a></li>
+                    <li><a href="#reg" data-toggle="tab">注册</a></li>
+                </ul>
+
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div class="tab-pane active" id="login">
+                        <form class="form-horizontal" action="/user/login">
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <div class="col-sm-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-user "></i></span>
+                                            <input type="text" class="form-control" placeholder="用户名"
+                                                   name="loginName"
+                                                   data-fv-notempty="true">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon" style="padding: 6px 11px 6px 10px;"><i
+                                                    class="fa fa-key "></i></span>
+                                            <input type="password" class="form-control" placeholder="密码"
+                                                   name="password"
+                                                   data-fv-notempty="true">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-xs-12">
+                                        <button type="button" class="btn btn-info btn-block js--btn-save">登陆 <i class="fa fa-sign-in"></i></button>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-sm-12">
-                                <div class="input-group">
-                                    <span class="input-group-addon" style="padding: 6px 11px 6px 10px;"><i class="fa fa-key "></i></span>
-                                    <input type="password" class="form-control" placeholder="密码"
-                                           name="password"
-                                           data-fv-notempty="true">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-xs-12">
-                                <button type="submit" class="btn btn-info btn-block">登陆 <i class="fa fa-sign-in"></i></button>
-                            </div>
-                        </div>
+                        </form>
+
                     </div>
-                </form>
+                    <div class="tab-pane" id="reg">
+                        <form class="form-horizontal" action="/user/save">
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <div class="col-sm-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-user "></i></span>
+                                            <input type="text" class="form-control" placeholder="用户名"
+                                                   name="loginName"
+                                                   data-fv-notempty="true">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon" style="padding: 6px 11px 6px 10px;"><i
+                                                    class="fa fa-key "></i></span>
+                                            <input type="password" class="form-control" placeholder="密码"
+                                                   name="password"
+                                                   data-fv-notempty="true">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon" style="padding: 6px 11px 6px 10px;"><i
+                                                    class="fa fa-key "></i></span>
+                                            <input type="password" class="form-control" placeholder="确认密码"
+                                                   name="repeat"
+                                                   data-fv-notempty="true"
+                                                   data-fv-identical="true"
+                                                   data-fv-identical-field="password"
+                                                   data-fv-identical-message="两次密码输入不一致">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-xs-12">
+                                        <button type="button" class="btn btn-warning btn-block js--btn-save"><i class="fa fa-save"></i> 确定 </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
 
     </div>
 
 </div>
+
+<div id="modal" class="modal">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                <h4 class="modal-title">信息</h4>
+            </div>
+            <div class="modal-body">
+                <p class="text-center">
+                    <span class="modal-text">操作成功。</span>
+                </p>
+            </div>
+            <div class="modal-footer" style="text-align: center;">
+                <button type="button" class="btn btn-info" data-dismiss="modal">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 </body>
 </html>

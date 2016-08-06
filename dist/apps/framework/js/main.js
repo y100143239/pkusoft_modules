@@ -24,7 +24,8 @@ define( [ "jquery", "bootstrap", "formvalidationI18N" ], function ( $ ) {
                 $menu.hide();
             }
             return false;
-        } ).on( "click.page", ".treeview-menu a", function () {
+        } );
+        $( document ).on( "click.page", ".sidebar-menu .treeview-menu a, .top-link", function () {
             var $this;
             $this = $( this );
             if ( $this.is( "._outerlink" ) ) {
@@ -37,10 +38,13 @@ define( [ "jquery", "bootstrap", "formvalidationI18N" ], function ( $ ) {
                 $body.children( ".overlay" ).remove();
                 window["PR"] && window["PR"].prettyPrint();
             } );
+            window["PR"] && window["PR"].prettyPrint();
+            if ( $this.is( ".top-link" ) ) {
+                return false;
+            }
             $this.closest( ".sidebar-menu" ).find( ".active" ).removeClass( "active" );
             $this.parent().addClass( "active" );
             $this.closest( ".treeview" ).addClass( "active" );
-            window["PR"] && window["PR"].prettyPrint();
             return false;
         } );
 

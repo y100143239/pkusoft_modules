@@ -7,12 +7,6 @@ html, body {
     height: 100%;
     //font-family: "Helvetica Neue", Helvetica, Microsoft Yahei, Hiragino Sans GB, WenQuanYi Micro Hei, sans-serif;;
 }
-.wrap {
-    // 不能直接设置 height， 否则溢出部分会被截断
-    min-height: 100%;
-    position: relative;
-    //overflow: hidden;
-}
 .placeholder-wait {
     height: 100%;
     width: 100%;
@@ -63,88 +57,158 @@ html, body {
         }
     }
 }
-.wrap {
-    > .header {
-        .logo {
-            float: left;
-            font-size: 20px;
-            line-height: 50px;
-            text-align: center;
-            padding: 0 10px;
-            width: 220px;
-            font-family: "Helvetica Neue", Helvetica, Microsoft Yahei, Hiragino Sans GB, WenQuanYi Micro Hei, sans-serif;;
-            font-weight: 500;
-            height: 50px;
-            display: block;
-        }
-        .navbar {
-            height: 50px;
-            margin-bottom: 0;
-            margin-left: 220px;
-        }
-    }
-    .left-side {
-        position: absolute;
-        top: 50px;
-        left: 0;
-        width: 220px;
-        //height: 100%;
-        border-right: 1px solid #dbdbdb;
-    }
-    .sidebar .sidebar-menu > li {
-        margin: 0;
-        padding: 0;
-    }
-    .sidebar {
-        a:focus {
-            text-decoration: none;
-        }
-    }
-    > .main {
-        background-color: #f9f9f9;
-        padding: 20px 20px 20px 240px;
-        min-height: 800px;
-    }
-}
 
-.skin-blue {
-    .logo {
-        background-color: #3c8dbc;
-        color: #f9f9f9;
+.navbar-blue {
+    margin-bottom: 0;
+    background-color: #3c8dbc;
+    color: #fff;
+    .navbar-brand {
+        color: #fff;
+        &.active,
+        &:hover,
+        &:focus {
+            color: #fff;
+            opacity: 0.6;
+        }
     }
-    .navbar {
-        background-color: #3c8dbc;
+    .navbar-text {
+        color: #ABD2E8;
     }
-    .left-side {
-        background: #f4f4f4;
-    }
-    .sidebar {
-        > .sidebar-menu {
-            > li {
-                border-top: 1px solid #fff;
-                border-bottom: 1px solid #dbdbdb;
-                &:first-of-type {
-                    border-top: 1px solid #dbdbdb;
-                }
-                &.active, &:hover {
-                    > a {
-                        color: #3c8dbc;
-                        background: #f9f9f9;
-                    }
-                    .treeview-menu {
-                        background: #f9f9f9;
-                    }
+    .navbar-nav  {
+        > li {
+            > a {
+                color: #C3E2F4;
+                background-color: transparent;
+                &:hover,
+                &:focus {
+                    color: #fff;
                 }
             }
         }
-        a {
-            color: #555555;
+
+    }
+    .dropdown {
+        .dropdown-menu {
+            .fa {
+                color: #3C8DBC;
+            }
+        }
+    }
+    .dropdown-menu {
+        background-color: #fff;
+        border-top: none 0;
+        box-shadow: none;
+        -webkit-box-shadow: none;
+        margin-left: -1px;
+        &.dropdown-menu-right {
+            margin-left: 0;
+            margin-right: -1px;
+        }
+        > li > a {
+            &:hover, &:focus {
+                color: #3C8DBC;
+                background-color: #eee;
+            }
+        }
+    }
+    .navbar-nav > .open > a,
+    .navbar-nav > .open > a:hover,
+    .navbar-nav > .open > a:focus {
+        background-color: #fff;
+        color: #555;
+    }
+
+}
+
+.main {
+    background-color: #f9f9f9;
+    padding: 20px 20px 20px 240px;
+    min-height: 800px;
+}
+
+
+.left-side {
+    position: absolute;
+    top: 50px;
+    left: 0;
+    width: 220px;
+    border-right: 1px solid #dbdbdb;
+    background: #f4f4f4;
+}
+.sidebar {
+    .sidebar-menu {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        li.header {
+            padding: 10px 25px 10px 15px;
+            font-size: 12px;
+        }
+        li > a > .fa-angle-left {
+            width: auto;
+            height: auto;
+            padding: 0;
+            margin-right: 10px;
+            margin-top: 3px;
+        }
+        li.active {
+            > a > .fa-angle-left {
+            }
+            > .treeview-menu {
+                display: block;
+            }
+        }
+        > li {
+            position: relative;
+            margin: 0;
+            padding: 0;
+            border-top: 1px solid #fff;
+            border-bottom: 1px solid #dbdbdb;
+            .label,
+            .badge {
+                margin-top: 3px;
+                margin-right: 5px;
+            }
+            > a {
+                padding: 12px 5px 12px 15px;
+                display: block;
+                > .fa {
+                    width: 20px;
+                }
+            }
+            &:first-of-type {
+                border-top: 1px solid #dbdbdb;
+            }
+            &.active, &:hover {
+                > a {
+                    color: #3c8dbc;
+                    background: #fff;
+                }
+                .treeview-menu {
+                    background: #fff;
+                }
+            }
         }
     }
     .treeview-menu {
+        display: none;
+        list-style: none;
+        margin: 0;
+        padding: 0 0 0 14px;
         > li {
+            margin: 0 0 0 10px;
             > a {
+                display: block;
                 color: #777;
+                font-size: 14px;
+                padding: 5px 5px 5px 15px;
+                > .fa {
+                    width: 20px;
+                }
+                > .fa-angle-left,
+                > .fa-angle-down {
+                    width: auto;
+                }
             }
             &.active, &:hover {
                 > a {
@@ -153,83 +217,16 @@ html, body {
             }
         }
     }
-}
-
-// Sidebar menu
-.sidebar-menu {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    //First Level
-    > li {
-        position: relative;
-        margin: 0;
-        padding: 0;
-        > a {
-            padding: 12px 5px 12px 15px;
-            display: block;
-            > .fa,
-            > .glyphicon,
-            > .ion {
-                width: 20px;
-            }
-        }
-        .label,
-        .badge {
-            margin-top: 3px;
-            margin-right: 5px;
-        }
-    }
-    li.header {
-        padding: 10px 25px 10px 15px;
-        font-size: 12px;
-    }
-    li > a > .fa-angle-left {
-        width: auto;
-        height: auto;
-        padding: 0;
-        margin-right: 10px;
-        margin-top: 3px;
-    }
-    li.active {
-        > a > .fa-angle-left {
-        }
-        > .treeview-menu {
-            display: block;
-        }
-    }
-
-    // Tree view menu
-    .treeview-menu {
-        display: none;
-        list-style: none;
-        margin: 0;
-        padding: 0 0 0 14px;
-        .treeview-menu {
-            padding-left: 20px;
-        }
-        > li {
-            margin: 0 0 0 10px;
-            > a {
-                padding: 5px 5px 5px 15px;
-                display: block;
-                font-size: 14px;
-                > .fa,
-                > .glyphicon,
-                > .ion {
-                    width: 20px;
-                }
-                > .fa-angle-left,
-                > .fa-angle-down {
-                    width: auto;
-                }
-            }
+    a {
+        color: #555555;
+        &:focus {
+            text-decoration: none;
         }
     }
 }
+
 
 .page-icons {
-
 
     .nav-cont {
         border:solid #ddd;
