@@ -40,7 +40,11 @@ module.exports = function(grunt) {
                     },
                     { // modules - jquery
                         cwd: 'dev/modules',
-                        src: ['jquery/jquery-1.11.3.js'],
+                        src: [
+                            'jquery/jquery-1.11.3.js',
+                            'jquery/jQuery.XDomainRequest.js',
+                            'jquery/jQuery.ajaxQueue.js',
+                        ],
                         dest: 'dist/modules',
                         expand: true
                     },
@@ -56,6 +60,8 @@ module.exports = function(grunt) {
                                 'lib/webuploader/**',
                                 'lib/colresizable/**',
                                 'lib/bootgrid/**',
+                                'lib/select-area/**',
+                                'lib/custom/**',
                                 'lib/pretty/**'
                         ],
                         dest: 'dist/modules',
@@ -65,7 +71,7 @@ module.exports = function(grunt) {
                         cwd: 'dev/modules',
                         src: [
                             'ui/css/*.css',
-                            'ui/fonts/**',
+                            'ui/fonts/**'
                         ],
                         dest: 'dist/modules',
                         expand: true
@@ -75,7 +81,7 @@ module.exports = function(grunt) {
                         src: [
                             'utils/css/**',
                             'utils/doT.js',
-                            'utils/text.js',
+                            'utils/text.js'
                         ],
                         dest: 'dist/modules',
                         expand: true

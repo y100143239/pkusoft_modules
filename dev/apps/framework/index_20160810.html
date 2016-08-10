@@ -233,7 +233,167 @@
 </aside>
 <main class="main">
 
+    <div class="fix-record">
 
+        <button type="button" class="btn btn-success btn-add-record"><i class="fa fa-plus"></i> 新增</button>
+
+        <div class="fix-record-item-add border-radius-none-all" data-list-id="">
+            <form action="/record/list/save" class="form-horizontal">
+                <div class="form-group">
+                    <div class="col-xs-2 text-right">
+                        <label class="control-label">标题图标</label>
+                    </div>
+                    <div class="col-xs-4">
+                        <input type="text" class="form-control" name="icon">
+                    </div>
+                    <div class="col-xs-2 text-right">
+                        <label class="control-label">标题内容</label>
+                    </div>
+                    <div class="col-xs-4">
+                        <input type="text" class="form-control" name="text" >
+                    </div>
+                </div>
+            </form>
+
+            <form action="/record/item/save" class="form-horizontal">
+                <div class="form-group">
+                    <div class="col-xs-4">
+                        <button type="button" class="btn btn-default btn-sm js--new-item"><i class="fa fa-plus"></i> 条目</button>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-2 text-right">
+                        <label class="control-label">条目图标</label>
+                    </div>
+                    <div class="col-xs-4">
+                        <input type="text" class="form-control" name="icon">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-2 text-right">
+                        <label class="control-label">标签图标</label>
+                    </div>
+                    <div class="col-xs-4">
+                        <input type="text" class="form-control" name="labelIcon" >
+                    </div>
+                    <div class="col-xs-2 text-right">
+                        <label class="control-label">标签内容</label>
+                    </div>
+                    <div class="col-xs-4">
+                        <input type="text" class="form-control" name="labelText" >
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-2 text-right">
+                        <label class="control-label">条目内容</label>
+                    </div>
+                    <div class="col-xs-10">
+                        <input type="text" class="form-control" name="text" />
+                    </div>
+                </div>
+
+            </form>
+
+            <div class="row">
+                <div class="col-xs-6 col-xs-push-2">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-info js--save"><i class="fa fa-save"></i> 保存</button>
+                        <button type="button" class="btn btn-default js--preview"><i class="fa fa-eye"></i> 预览</button>
+                        <button type="button" class="btn btn-default js--cancel"><i class="fa fa-trash-o"></i> 取消</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="fix-record-item">
+            <h3 class="header"><i class="fa fa-clock-o"></i> 2016-08-09（星期二）</h3>
+            <p class="item-detail"><i class="fa fa-check-square-o"></i><span class="label label-info">外网框架</span>
+                省市县三级联动组件：完成行政区划代码的解析，基本功能的实现（未完善）。
+            </p>
+        </div>
+        <div class="fix-record-item">
+            <h3 class="header"><i class="fa fa-clock-o"></i> 2016-08-09（星期二）</h3>
+            <p class="item-detail"><i class="fa fa-check-square-o"></i><span class="label label-info">外网框架</span>
+                省市县三级联动组件：完成行政区划代码的解析，基本功能的实现（未完善）。
+            </p>
+        </div>
+
+        <div class="fix-record-item">
+            <h3 class="header"><i class="fa fa-clock-o"></i> 2016-08-08（星期一）</h3>
+            <p class="item-detail"><i class="fa fa-bullseye"></i><span class="label label-default">外网框架</span>
+                <del>完成“记录”的动态编辑功能。</del>
+            </p>
+            <p class="item-detail"><i class="fa fa-check-square-o"></i><span class="label label-info">外网框架</span>
+                省市县三级联动组件（静态页）。（仿 淘宝“收货地址-所在地区” 省市县区的选择。）
+            </p>
+            <p class="item-detail"><i class="fa fa-bug"></i><span class="label label-danger">问题修复</span>
+                解决IE8、IE9对 CORS 的不支持问题。编写 CORS 相关的文档。
+            </p>
+        </div>
+
+        <div class="fix-record-item">
+            <h3 class="header"><i class="fa fa-clock-o"></i> 2016-08-06（星期六）</h3>
+            <p class="item-detail"><i class="fa fa-check-square-o"></i><span class="label label-info">外网框架</span>
+                首页重构
+            </p>
+            <p class="item-detail"><i class="fa fa-check-square-o"></i><span class="label label-info">数据库</span>
+                编写数据库表结构说明文档，将数据库迁移到百度云。
+            </p>
+            <p class="item-detail"><i class="fa fa-check-square-o"></i><span class="label label-info">外网框架</span>
+                完成简单登陆功能。
+            </p>
+        </div>
+        <div class="fix-record-item">
+            <h3 class="header"><i class="fa fa-clock-o"></i> 2016-08-05（星期五）</h3>
+            <p class="item-detail"><i class="fa fa-check-square-o"></i><span class="label label-info">字典相关</span>
+                建表、录入字典、生成xml，将字典文件上传到BOS，生成外链
+            </p>
+            <p class="item-detail"><i class="fa fa-check-square-o"></i><span class="label label-info">相关技术</span>
+                BOS，百度云对象存储，使用及简单教程的撰写
+            </p>
+            <p class="item-detail"><i class="fa fa-bug"></i><span class="label label-info">问题修复</span>
+                字典控件无法初始化值：扩展参数 “selectedValue”（data-selected-value）
+            </p>
+        </div>
+        <div class="fix-record-item">
+            <h3 class="header"><i class="fa fa-clock-o"></i> 2016-08-04（星期四）</h3>
+            <p class="item-detail"><i class="fa fa-bullseye"></i><span class="label label-default">字典相关</span>
+                建表、录入字典、生成xml
+            </p>
+            <p class="item-detail"><i class="fa fa-bullseye"></i><span class="label label-default">广东保安</span>
+                相对完整的示例
+            </p>
+            <p class="item-detail"><i class="fa fa-bullseye"></i><span class="label label-default">书籍阅读</span>
+                《十亿消费者》
+            </p>
+            <p class="item-detail"><i class="fa fa-bug"></i><span class="label label-danger">等待修复</span>
+                字典控件无法初始化值：无法对给定的code值，进行初始化！！！！
+            </p>
+            <p class="item-detail"><i class="fa fa-check-square-o"></i><span class="label label-info">相关技术</span>
+                sitemesh 页面装饰，撰写使用教程，位于 Others/Sitemesh（页面装饰）
+            </p>
+        </div>
+
+        <div class="fix-record-item">
+            <h3 class="header"><i class="fa fa-clock-o"></i> 2016-08-03（星期三）</h3>
+            <p class="item-detail"><i class="fa fa-check-square-o"></i><span class="label label-info">字典控件</span>
+                select2，扩展参数“showMaxItemNum”，设置下拉框显示最多纪录数
+            </p>
+            <p class="item-detail"><i class="fa fa-check-square-o"></i><span class="label label-info">日历控件</span>
+                datapicker，解决 在formValidation中使用时 输入域值改变后不发生校验的问题
+            </p>
+            <p class="item-detail"><i class="fa fa-check-square-o"></i><span class="label label-info">广东保安</span>
+                初步完成静态页
+            </p>
+            <p class="item-detail"><i class="fa fa-check-square-o"></i><span class="label label-info">域名备案</span>
+                撰写注意事项及简单流程
+            </p>
+            <p class="item-detail"><i class="fa fa-bullseye"></i><span class="label label-default">其他计划</span>
+                Node.js 的学习计划
+            </p>
+        </div>
+
+    </div>
 </main>
 </body>
 </html>

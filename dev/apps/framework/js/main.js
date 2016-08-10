@@ -1,4 +1,4 @@
-define( [ "jquery", "bootstrap", "formvalidationI18N" ], function ( $ ) {
+define( [ "jquery", "bootstrap", "formvalidationI18N"], function ( $ ) {
 
     $( document ).ready( function () {
         var $main,

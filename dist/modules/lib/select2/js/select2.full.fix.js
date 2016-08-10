@@ -6499,6 +6499,9 @@ S2.define('jquery.select2',[
                             $this.val( selectedValue ); // Select the option with a value of 'US'
                             $this.trigger('change');
                         }
+                    },
+                    error: function () {
+                        throw new Error( "字典获取失败！！" );
                     }
                 } )
             } else {

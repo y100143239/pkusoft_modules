@@ -1,0 +1,99 @@
+
+<div class="city-select-warp">
+
+    <div class="city-select-tab">
+        <a class="active" href="javascript:void(0)" data-cont=".city-province">省份</a>
+        <a href="javascript:void(0)" data-cont=".city-city">城市</a>
+        <a href="javascript:void(0)" data-cont=".city-district">县区</a>
+    </div>
+
+    <div class="city-select-content">
+        <div class="city-select city-province clearfix">
+            <dl>
+                <dd>
+                </dd>
+            </dl>
+        </div>
+        <div class="city-select city-city clearfix" style="display: none;">
+            <dl class="city-select-city">
+                <dd>
+                </dd>
+            </dl>
+        </div>
+        <div class="city-select city-district clearfix" style="display: none;">
+            <dl class="city-select-district">
+                <dd>
+                </dd>
+            </dl>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    jQuery( ".city-select-warp" ).selectArea();
+</script>
+
+<article class="article article-theme-1">
+    <header>
+        <h3>1. 相关</h3>
+        <hr>
+    </header>
+    <main>
+        <ol>
+            <li>数据源，及结构
+                <ul>
+                    <li>原始数据源：DIC_CODE.xml 文件</li>
+                    <li>新的数据源：解析 xml 文件，生成新的数据源 DIC_CODE.js（此操作最好在服务端进行）</li>
+                    <li>
+                        <pre class="prettyprint linenums">
+// code: 条目编码。text: 条目值。 aspell: 条目值的全拼，用于排序。
+[
+    [ code, text, aspell ],
+    [ code, text, aspell ],
+    ...
+]
+// 额外的索引数组
+[
+    code1,
+    code2,
+    ...
+]
+</pre>
+                    </li>
+                </ul>
+            </li>
+            <li>行政区划
+                <ul>
+                    <li>相关网站A：
+                        <a href="http://www.stats.gov.cn/tjsj/tjbz/xzqhdm/201608/t20160809_1386477.html" target="_blank">中华人民共和国国家统计局-最新县及县以上行政区划代码（截止2015年9月30日）</a>
+                    </li>
+                    <li>相关网站B：
+                        <a href="http://www.xzqh.org/" target="_blank">行政区划网(区划地名网) www.xzqh.org</a>
+                    </li>
+                    <li>有些代码及区县不一致，A网站跟我们的数据库里的代码是一致的</li>
+                </ul>
+            </li>
+            <li>省份
+                <ul>
+                    <li>省份初始化时显示</li>
+                    <li>[00]0000 ~ [99]0000</li>
+                </ul>
+            </li>
+            <li>城市
+                <ul>
+                    <li>通过选取 省份code 遍历数据源获取</li>
+                    <li>34[01]00 ~ 34[99]00</li>
+                </ul>
+            </li>
+            <li>县区
+                <ul>
+                    <li>通过选取 城市code 遍历数据源获取</li>
+                    <li>3401[00] ~ 3401[99]</li>
+                </ul>
+            </li>
+        </ol>
+
+    </main>
+</article>
+

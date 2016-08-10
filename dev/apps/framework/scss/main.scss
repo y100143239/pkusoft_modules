@@ -22,18 +22,20 @@ html, body {
     }
 }
 .fix-record {
+    position: relative;
     border-left: solid 3px #DBDBDB;
-    padding: 20px 0;
+    padding: 40px 0;
+    .btn-add-record {
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
     .label {
         font-size: 100%;
         font-weight: normal;
     }
     > .fix-record-item {
         margin-bottom: 80px;
-        .fa {
-            color: #DBDBDB;
-            background-color: #F9F9F9;
-        }
         > .header {
             position: relative;
             margin-bottom: 32px;
@@ -42,6 +44,8 @@ html, body {
                 position: absolute;
                 left: -12px;
                 //color: #ADADAD;
+                color: #DBDBDB;
+                background-color: #F9F9F9;
             }
         }
         > .item-detail {
@@ -53,7 +57,27 @@ html, body {
                 position: absolute;
                 left: -7px;
                 //color: #ADADAD;
+                color: #DBDBDB;
+                background-color: #F9F9F9;
             }
+        }
+    }
+    .fix-record-item-add {
+        padding: 10px;
+        background-color: #fff;
+        border: 1px dashed #e6e6e6;
+        margin: 10px 0 10px 1px;
+        .control-label {
+            color: #888;
+        }
+        .form-inline .form-group {
+            vertical-align: top;
+            textarea {
+                height: 80px;
+            }
+        }
+        form {
+            //margin: 10px 0;
         }
     }
 }
@@ -301,6 +325,14 @@ html, body {
     background-color: #fff;
     padding: 8px 20px;
     margin-bottom: 20px;
+    &.article-theme-1 {
+        li {
+            line-height: 2;
+        }
+        pre li {
+            line-height: 1.5;
+        }
+    }
 }
 .page-tooltip {
 

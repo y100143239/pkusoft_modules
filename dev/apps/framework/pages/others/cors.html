@@ -1,0 +1,45 @@
+<article class="article">
+    <header>
+        <h3 >1. 相关</h3>
+        <hr>
+    </header>
+    <main>
+        <ol>
+            <li>描述
+                <ul>
+                    <li>使用其他网站的资源，如当前网站是 http://1.cn，但你要Ajax请求 http://2.cn/json/zipcode</li>
+                    <li>报错：XmlHttpRequest error: Origin null is not allowed by Access-Control-Allow-Origin</li>
+                </ul>
+            </li>
+            <li>CORS
+                <ul>
+                    <li>使用CORS,可以使普通的ajax实现跨域</li>
+                    <li>服务器端对于CORS的支持，是通过设置Access-Control-Allow-Origin响应头来进行的</li>
+                </ul>
+            </li>
+        </ol>
+
+    </main>
+</article>
+<article class="article">
+    <header>
+        <h3 >2. 步骤</h3>
+        <hr>
+    </header>
+    <main>
+        <ol>
+            <li>设置
+                <ul>
+                    <li>Access-Control-Allow-Origin 中设置允许访问的网站（“*”为所有）</li>
+                </ul>
+            </li>
+            <li>IE8、IE9
+                <ul>
+                    <li>对于跨域访问，IE8、IE9默认是关闭的，即使服务器端设置了 Access-Control-Allow-Origin</li>
+                    <li>可以引入jQuery插件来解决这个问题，<a href="https://github.com/MoonScript/jQuery-ajaxTransport-XDomainRequest">下载</a></li>
+                </ul>
+            </li>
+        </ol>
+
+    </main>
+</article>

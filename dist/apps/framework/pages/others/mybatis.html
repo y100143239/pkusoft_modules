@@ -8,8 +8,8 @@
         </header>
         <main>
             <div class="callout callout-info">
-1. 调用 userService.update( user ) 返回的是影响的记录数；<br/>
-2. userService.update( user ) 执行完毕后，可以通过 user 来获取 userId；<br/>
+1. 调用 userService.insert( user ) 返回的是影响的记录数；<br/>
+2. userService.insert( user ) 执行完毕后，可以通过 user 来获取 userId；<br/>
 3. Mybatis 会将自动生成的主键ID注入到 bean中
             </div>
             <ol>
@@ -30,7 +30,7 @@ class User {
                 </li>
                 <li>获取主键
                     <pre class="prettyprint linenums">
-userService.update( user );
+userService.insert( user );
 user.getUserId();
                     </pre>
                 </li>
