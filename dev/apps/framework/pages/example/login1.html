@@ -81,6 +81,7 @@
 
         function _formSubmit( $ ) {
 
+
             $( ".js--btn-save" ).on( "click", function () {
                 var $this,
                         $form,
@@ -113,11 +114,15 @@
                                 ;
                         success = responseData[ "success" ];
                         data = responseData[ "data" ] || "";
-                        if ( data ) {
-                            data = " : " + data;
+                        if ( success && data ) {
+                            $( "#modalBtn" ).data( "url", data ).off("click.url").on( "click.url", function () {
+                                location = $( this ).data( "url" );
+                            });;
+                            $( "#modal" ).modal( "show" ).find( ".modal-text" ).text( "登陆成功。" );
+                        } else {
+                            $( "#modalBtn" ).off("click.url");
+                            $( "#modal" ).modal( "show" ).find( ".modal-text" ).text( "登陆失败：" + data );
                         }
-                        text = success ? "成功" : "失败";
-                        $( "#modal" ).modal( "show" ).find( ".modal-text" ).text( text + data + "。" );
                     },
                     error: function () {
                         $( "#modal" ).modal( "show" ).find( ".modal-text" ).text( "服务器未响应！" );
@@ -200,7 +205,7 @@
                                     <div class="col-sm-12">
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-user "></i></span>
-                                            <input type="text" class="form-control" placeholder="用户名"
+                                            <input type="text" class="form-control" placeholder="用户名" value="admin"
                                                    name="loginName"
                                                    data-fv-notempty="true">
                                         </div>
@@ -211,7 +216,7 @@
                                         <div class="input-group">
                                             <span class="input-group-addon" style="padding: 6px 11px 6px 10px;"><i
                                                     class="fa fa-key "></i></span>
-                                            <input type="password" class="form-control" placeholder="密码"
+                                            <input type="text" class="form-control" placeholder="密码" value="a"
                                                    name="password"
                                                    data-fv-notempty="true">
                                         </div>
@@ -293,7 +298,7 @@
                 </p>
             </div>
             <div class="modal-footer" style="text-align: center;">
-                <button type="button" class="btn btn-info" data-dismiss="modal">确定</button>
+                <button type="button" class="btn btn-info" id="modalBtn" data-url="" data-dismiss="modal">确定</button>
             </div>
         </div>
     </div>

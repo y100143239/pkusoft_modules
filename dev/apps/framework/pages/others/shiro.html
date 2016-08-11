@@ -1,0 +1,300 @@
+
+<article class="article">
+    <header>
+        <h3 class="text-muted">1. 相关</h3>
+        <hr>
+    </header>
+    <main>
+        <div class="callout callout-info">
+            安全框架
+        </div>
+        <ol>
+            <li>版本：1.3.0</li>
+            <li>地址：<a href="http://shiro.apache.org/download.html">shiro.apache.org </a></li>
+            <li>jar包
+                <ul>
+                    <li>shiro-core-1.3.0.jar</li>
+                    <li>shiro-spring-1.3.0.jar</li>
+                    <li>shiro-web-1.3.0.jar</li>
+                </ul>
+            </li>
+            <li>依赖：slf4j-api</li>
+        </ol>
+    </main>
+</article>
+
+<article class="article">
+    <header>
+        <h3 class="text-muted">2. 配置</h3>
+        <hr>
+    </header>
+    <main>
+        <div class="callout callout-info">
+            参考：<a href="http://my.oschina.net/u/2334022/blog/409004" target="_blank">http://my.oschina.net/u/2334022/blog/409004</a>
+        </div>
+        <ol>
+            <li>/WEB-INFO/web.xml (通常将这段代码中的filter-mapping放在所有filter-mapping之前，以达到shiro是第一个对web请求进行拦截过滤之目的)
+                <pre class="prettyprint linenums">
+&lt;!-- Shiro Filter -->  
+&lt;filter>
+    &lt;filter-name>shiroFilter&lt;/filter-name>
+    &lt;filter-class>org.springframework.web.filter.DelegatingFilterProxy&lt;/filter-class>
+    &lt;init-param>
+        &lt;param-name>targetFilterLifecycle&lt;/param-name>
+        &lt;param-value>true&lt;/param-value>
+    &lt;/init-param>
+&lt;/filter>  
+&lt;filter-mapping>
+    &lt;filter-name>shiroFilter&lt;/filter-name>
+    &lt;url-pattern>/*&lt;/url-pattern>
+&lt;/filter-mapping>  
+                </pre>
+            </li>
+            <li>spring 配置
+                <pre class="prettyprint linenums">
+&lt;!-- 继承自AuthorizingRealm的自定义Realm,即指定Shiro验证用户登录的类为自定义的ShiroDbRealm.java -->  
+&lt;bean id="myRealm" class="net.pkusoft.secure.MyRealm"/>  
+  
+&lt;!-- Shiro默认会使用Servlet容器的Session,可通过sessionMode属性来指定使用Shiro原生Session -->  
+&lt;!-- 即&lt;property name="sessionMode" value="native"/>,详细说明见官方文档 -->  
+&lt;!-- 这里主要是设置自定义的单Realm应用,若有多个Realm,可使用'realms'属性代替 -->  
+&lt;bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+    &lt;property name="realm" ref="myRealm"/>
+&lt;/bean>  
+  
+&lt;!-- Shiro主过滤器本身功能十分强大,其强大之处就在于它支持任何基于URL路径表达式的、自定义的过滤器的执行 -->  
+&lt;!-- Web应用中,Shiro可控制的Web请求必须经过Shiro主过滤器的拦截,Shiro对基于Spring的Web应用提供了完美的支持 -->  
+&lt;bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+    &lt;!-- Shiro的核心安全接口,这个属性是必须的 -->
+    &lt;property name="securityManager" ref="securityManager"/>
+    &lt;!-- 要求登录时的链接(可根据项目的URL进行替换),非必须的属性,默认会自动寻找Web工程根目录下的"/login.jsp"页面 -->
+    &lt;property name="loginUrl" value="/user/login/index"/>
+    &lt;!-- 登录成功后要跳转的连接(本例中此属性用不到,因为登录成功后的处理逻辑在LoginController里硬编码为main.jsp了) -->
+    &lt;property name="successUrl" value="/"/>
+    &lt;!-- 用户访问未对其授权的资源时,所显示的连接 -->
+    &lt;!-- 若想更明显的测试此属性可以修改它的值,如unauthor.jsp,然后用[玄玉]登录后访问/admin/listUser.jsp就看见浏览器会显示unauthor.jsp -->
+    &lt;property name="unauthorizedUrl" value="/"/>
+    &lt;!-- Shiro连接约束配置,即过滤链的定义 -->
+    &lt;!-- 此处可配合我的这篇文章来理解各个过滤连的作用http://blog.csdn.net/jadyer/article/details/12172839 -->
+    &lt;!-- 下面value值的第一个'/'代表的路径是相对于HttpServletRequest.getContextPath()的值来的 -->
+    &lt;!-- anon：它对应的过滤器里面是空的,什么都没做,这里.do和.jsp后面的*表示参数,比方说login.jsp?main这种 -->
+    &lt;!-- authc：该过滤器下的页面必须验证后才能访问,它是Shiro内置的一个拦截器org.apache.shiro.web.filter.authc.FormAuthenticationFilter -->
+    &lt;property name="filterChainDefinitions">
+        &lt;value>
+            /gdba/**=authc
+            /record/list/save=authc,perms[admin:manage]
+            /record/item/save=authc,perms[admin:manage]
+        &lt;/value>
+    &lt;/property>
+&lt;/bean>  
+  
+&lt;!-- 保证实现了Shiro内部lifecycle函数的bean执行 -->  
+&lt;bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>  
+                </pre>
+            </li>
+            <li>MyRealm.java
+            <pre class="prettyprint linenums">
+import net.pkusoft.model.SysUser;
+import net.pkusoft.service.SysUserService;
+import org.apache.commons.lang.builder.ReflectionToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.AuthenticationInfo;
+import org.apache.shiro.authc.AuthenticationToken;
+import org.apache.shiro.authc.SimpleAuthenticationInfo;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.authz.AuthorizationInfo;
+import org.apache.shiro.authz.SimpleAuthorizationInfo;
+import org.apache.shiro.realm.AuthorizingRealm;
+import org.apache.shiro.session.Session;
+import org.apache.shiro.subject.PrincipalCollection;
+import org.apache.shiro.subject.Subject;
+import org.springframework.beans.factory.annotation.Autowired;
+
+public class MyRealm extends AuthorizingRealm {  
+    
+    @Autowired
+    private SysUserService sysUserService;
+    
+    /** 
+     * 为当前登录的Subject授予角色和权限 
+     * @see  经测试:本例中该方法的调用时机为需授权资源被访问时 
+     * @see  经测试:并且每次访问需授权资源时都会执行该方法中的逻辑,这表明本例中默认并未启用AuthorizationCache 
+     * @see  个人感觉若使用了Spring3.1开始提供的ConcurrentMapCache支持,则可灵活决定是否启用AuthorizationCache 
+     * @see  比如说这里从数据库获取权限信息时,先去访问Spring3.1提供的缓存,而不使用Shior提供的AuthorizationCache 
+     */  
+    @Override  
+    protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals){  
+        //获取当前登录的用户名,等价于(String)principals.fromRealm(this.getName()).iterator().next()  
+        String currentUsername = (String)super.getAvailablePrincipal(principals);  
+//      List&lt;String> roleList = new ArrayList&lt;String>();  
+//      List&lt;String> permissionList = new ArrayList&lt;String>();  
+//      //从数据库中获取当前登录用户的详细信息  
+//      User user = userService.getByUsername(currentUsername);  
+//      if(null != user){  
+//          //实体类User中包含有用户角色的实体类信息  
+//          if(null!=user.getRoles() && user.getRoles().size()>0){  
+//              //获取当前登录用户的角色  
+//              for(Role role : user.getRoles()){  
+//                  roleList.add(role.getName());  
+//                  //实体类Role中包含有角色权限的实体类信息  
+//                  if(null!=role.getPermissions() && role.getPermissions().size()>0){  
+//                      //获取权限  
+//                      for(Permission pmss : role.getPermissions()){  
+//                          if(!StringUtils.isEmpty(pmss.getPermission())){  
+//                              permissionList.add(pmss.getPermission());  
+//                          }  
+//                      }  
+//                  }  
+//              }  
+//          }  
+//      }else{  
+//          throw new AuthorizationException();  
+//      }  
+//      //为当前用户设置角色和权限  
+//      SimpleAuthorizationInfo simpleAuthorInfo = new SimpleAuthorizationInfo();  
+//      simpleAuthorInfo.addRoles(roleList);  
+//      simpleAuthorInfo.addStringPermissions(permissionList);  
+        SimpleAuthorizationInfo simpleAuthorInfo = new SimpleAuthorizationInfo();  
+        //实际中可能会像上面注释的那样从数据库取得  
+        if ( "wuqinfei".equals( currentUsername ) ) {
+            // 添加一个角色,不是配置意义上的添加,而是证明该用户拥有admin角色
+            simpleAuthorInfo.addRole( "admin" );
+            // 添加权限
+            simpleAuthorInfo.addStringPermission( "admin:manage" );
+            System.out.println( "已为用户[mike]赋予了[admin]角色和[admin:manage]权限" );
+            return simpleAuthorInfo;
+        }
+        //若该方法什么都不做直接返回null的话,就会导致任何用户访问/admin/listUser.jsp时都会自动跳转到unauthorizedUrl指定的地址  
+        //详见applicationContext.xml中的&lt;bean id="shiroFilter">的配置  
+        return null;  
+    }  
+  
+      
+    /** 
+     * 验证当前登录的Subject 
+     * @see  经测试:本例中该方法的调用时机为LoginController.login()方法中执行Subject.login()时 
+     */  
+    @Override  
+    protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authcToken) throws AuthenticationException {  
+        //获取基于用户名和密码的令牌  
+        //实际上这个authcToken是从LoginController里面currentUser.login(token)传过来的  
+        //两个token的引用都是一样的
+        UsernamePasswordToken token = ( UsernamePasswordToken ) authcToken;
+        System.out.println( "验证当前Subject时获取到token为" + ReflectionToStringBuilder.toString( token, ToStringStyle.MULTI_LINE_STYLE ) );
+        SysUser user = sysUserService.getSysUserByLoginName( token.getUsername() );
+        if ( null != user ) {
+            AuthenticationInfo authcInfo = new SimpleAuthenticationInfo( user.getLoginName(), user.getPassword(), user.getUserName() );
+            this.setSession( "currentUser", user );
+            return authcInfo;
+        } else {
+            return null;
+        }
+        //此处无需比对,比对的逻辑Shiro会做,我们只需返回一个和令牌相关的正确的验证信息  
+        //说白了就是第一个参数填登录用户名,第二个参数填合法的登录密码(可以是从数据库中取到的,本例中为了演示就硬编码了)  
+        //这样一来,在随后的登录页面上就只有这里指定的用户和密码才能通过验证  
+//        if("mike".equals(token.getUsername())){  
+//            AuthenticationInfo authcInfo = new SimpleAuthenticationInfo("mike", "mike", this.getName());  
+//            this.setSession("currentUser", "mike");  
+//            return authcInfo;  
+//        }
+        //没有返回登录用户名对应的SimpleAuthenticationInfo对象时,就会在LoginController中抛出UnknownAccountException异常  
+    }  
+      
+      
+    /** 
+     * 将一些数据放到ShiroSession中,以便于其它地方使用 
+     * @see  比如Controller,使用时直接用HttpSession.getAttribute(key)就可以取到 
+     */  
+    private void setSession(Object key, Object value){  
+        Subject currentUser = SecurityUtils.getSubject();  
+        if(null != currentUser){  
+            Session session = currentUser.getSession();  
+            System.out.println("Session默认超时时间为[" + session.getTimeout() + "]毫秒");  
+            if(null != session){  
+                session.setAttribute(key, value);  
+            }  
+        }  
+    }  
+}
+            </pre>
+            </li>
+            <li>处理登陆
+            <pre class="prettyprint linenums">
+Body
+@RequestMapping("/user/login")
+public JsonResult login(SysUser sysUser) {
+    JsonResult jsonResult = new JsonResult();
+    try {
+        Assert.notNull( sysUser );
+        SysUser realSysUser = sysUserService.validateLogin( sysUser );
+        if ( realSysUser.getUserId() == null ) {
+            throw new RuntimeException();
+        }
+        
+        this.processToken( sysUser );
+        
+        jsonResult.setSuccess( true );
+        jsonResult.setData( "/" );
+        return jsonResult;
+    } catch ( Exception e ) {
+        logger.error( "登陆失败" );
+        e.printStackTrace();
+        jsonResult.setSuccess( false );
+        jsonResult.setData( "用户名/密码 错误" );
+        return jsonResult;
+    }
+}
+
+private void processToken( SysUser sysUser ) {
+    
+    String loginName = sysUser.getLoginName();
+    String password = sysUser.getPassword();
+    UsernamePasswordToken token = new UsernamePasswordToken(loginName, password);  
+    token.setRememberMe(true);
+    
+    System.out.println("为了验证登录用户而封装的token为" + ReflectionToStringBuilder.toString(token, ToStringStyle.MULTI_LINE_STYLE));
+    
+    //获取当前的Subject  
+    Subject currentUser = SecurityUtils.getSubject();  
+    
+    try {  
+        //在调用了login方法后,SecurityManager会收到AuthenticationToken,并将其发送给已配置的Realm执行必须的认证检查  
+        //每个Realm都能在必要时对提交的AuthenticationTokens作出反应  
+        //所以这一步在调用login(token)方法时,它会走到MyRealm.doGetAuthenticationInfo()方法中,具体验证方式详见此方法  
+        System.out.println("对用户[" + loginName + "]进行登录验证..验证开始");  
+        currentUser.login(token);  
+        System.out.println("对用户[" + loginName + "]进行登录验证..验证通过");  
+        //resultPageURL = "main";  
+    }catch(UnknownAccountException uae){  
+        System.out.println("对用户[" + loginName + "]进行登录验证..验证未通过,未知账户");  
+//            request.setAttribute("message_login", "未知账户");  
+    }catch(IncorrectCredentialsException ice){  
+        System.out.println("对用户[" + loginName + "]进行登录验证..验证未通过,错误的凭证");  
+//            request.setAttribute("message_login", "密码不正确");  
+    }catch(LockedAccountException lae){  
+        System.out.println("对用户[" + loginName + "]进行登录验证..验证未通过,账户已锁定");  
+//            request.setAttribute("message_login", "账户已锁定");  
+    }catch(ExcessiveAttemptsException eae){  
+        System.out.println("对用户[" + loginName + "]进行登录验证..验证未通过,错误次数过多");  
+//            request.setAttribute("message_login", "用户名或密码错误次数过多");  
+    }catch(AuthenticationException ae){  
+        //通过处理Shiro的运行时AuthenticationException就可以控制用户登录失败或密码错误时的情景  
+        System.out.println("对用户[" + loginName + "]进行登录验证..验证未通过,堆栈轨迹如下");  
+        ae.printStackTrace();  
+//            request.setAttribute("message_login", "用户名或密码不正确");  
+    }  
+    //验证是否登录成功  
+    if(currentUser.isAuthenticated()){  
+        System.out.println("用户[" + loginName + "]登录认证通过(这里可以进行一些认证通过后的一些系统参数初始化操作)");
+    }else{  
+        token.clear();  
+        throw new RuntimeException( "登陆失败" );
+    }  
+}                
+            </pre>
+            </li>
+        </ol>
+    </main>
+</article>
