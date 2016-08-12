@@ -1,8 +1,21 @@
 .city-select-warp {
+    display: none;
+    position: absolute;
+    z-index: 300;
     font-size: 12px;
     a, a:hover, a:focus {
         text-decoration: none;
     }
+}
+.city-select-hidden-accessible {
+    border: 0 !important;
+    clip: rect(0 0 0 0) !important;
+    height: 1px !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    padding: 0 !important;
+    position: absolute !important;
+    width: 1px !important;
 }
 .city-select-tab {
     border-bottom: 1px solid #ccc;
@@ -77,15 +90,15 @@
             text-decoration: none;
             white-space: nowrap;
             margin-right: 2px;
-            &.active {
-                background-color: #f60;
-                color: #fff;
-                border-radius: 2px;
-            }
             &:hover, &:focus {
                 background-color: #fff8f3;
                 border-radius: 2px;
                 color: #f60;
+            }
+            &.active {
+                background-color: #f60;
+                color: #fff;
+                border-radius: 2px;
             }
         }
     }

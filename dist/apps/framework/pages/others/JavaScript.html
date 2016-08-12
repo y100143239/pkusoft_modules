@@ -1,0 +1,85 @@
+<article class="article">
+    <header>
+        <h3 class="text-muted">1. 点击其他区域，隐藏容器（$container）</h3>
+        <hr>
+    </header>
+    <main>
+        <div class="callout callout-info">
+            <h5>原理</h5>
+            <ol>
+                <li>在点击 $container 后，停止click事件的冒泡，则不会冒泡到 document 上</li>
+                <li>点击页面上的其他任何元素，都会冒泡到根元素 document，在 document 上注册事件处理程序，隐藏 $container 即可</li>
+            </ol>
+        </div>
+        <pre class="prettyprint linenums">
+// 1. 取消 $container 的冒泡
+$container.on( "click.selectarea", function() {
+    return false;
+} );
+
+// 2. 最终冒泡到 document 的点击事件，肯定不是点击在$container上的，此时hide即可
+$( document ).on( "click.selectarea", function ( e ) {
+    var $target;
+
+    // 3. 点击 target 时，也不能隐藏
+    $target = getTarget();
+    if ( e.target == $target.get(0) ) {
+        return;
+    }
+    $container.hide( $target );
+} );
+function getTarget() {
+    // do something
+    return $target;
+}
+        </pre>
+    </main>
+</article>
+<article class="article">
+    <header>
+        <h3 class="text-muted">2. jQuery定位（ position()、offsetParent()、offset() ）</h3>
+        <hr>
+    </header>
+    <main>
+        <div class="callout callout-info">
+            <h5>区别</h5>
+            <ol>
+                <li>position()：相对位置坐标（相对最近的那个非static元素）</li>
+                <li>offsetParent()：获取相对元素（那个最近的非static元素）</li>
+                <li>offset()：获取文档坐标；最好不用这个方法设置文档坐标，会产生莫名其妙的偏移量。</li>
+                <li>element.getBoundingClientRect()：可以获取 视口坐标 </li>
+            </ol>
+        </div>
+        <pre class="prettyprint linenums">
+// {/*文档坐标*/top,left,right,bottom, /*尺寸*/width,height, /该元素的scrollTop/ scroll}
+function getPosition ($element) {
+    var el,
+        isBody,
+        elRect, // 尺寸
+        elOffset, // 文档坐标
+        scroll, // scrollTop
+        outerDims // 如果是 body元素 则计算 window的尺寸
+    ;
+    $element   = $element || this.$element;
+
+    el     = $element[0];
+    isBody = el.tagName == 'BODY';
+
+    elRect    = el.getBoundingClientRect();
+    if (elRect.width == null) {
+        // width and height are missing in IE8, so compute them manually;
+        // see https://github.com/twbs/bootstrap/issues/14093
+        elRect = $.extend({}, elRect, { width: elRect.right - elRect.left, height: elRect.bottom - elRect.top });
+    }
+    elOffset  = isBody ? { top: 0, left: 0 } : $element.offset();
+    scroll    = { scroll: isBody ?
+                                 document.documentElement.scrollTop
+                                 ||
+                                 document.body.scrollTop : $element.scrollTop() };
+    outerDims = isBody ? { width: $(window).width(), height: $(window).height() } : null;
+
+    return $.extend({}, elRect, scroll, outerDims, elOffset)
+}
+        </pre>
+    </main>
+</article>

@@ -1,7 +1,20 @@
 .city-select-warp {
+  display: none;
+  position: absolute;
+  z-index: 300;
   font-size: 12px; }
   .city-select-warp a, .city-select-warp a:hover, .city-select-warp a:focus {
     text-decoration: none; }
+
+.city-select-hidden-accessible {
+  border: 0 !important;
+  clip: rect(0 0 0 0) !important;
+  height: 1px !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  padding: 0 !important;
+  position: absolute !important;
+  width: 1px !important; }
 
 .city-select-tab {
   border-bottom: 1px solid #ccc;
@@ -64,13 +77,13 @@
     text-decoration: none;
     white-space: nowrap;
     margin-right: 2px; }
-    .city-select-content dd > a.active {
-      background-color: #f60;
-      color: #fff;
-      border-radius: 2px; }
     .city-select-content dd > a:hover, .city-select-content dd > a:focus {
       background-color: #fff8f3;
       border-radius: 2px;
       color: #f60; }
+    .city-select-content dd > a.active {
+      background-color: #f60;
+      color: #fff;
+      border-radius: 2px; }
 
 /*# sourceMappingURL=select-area.css.map */

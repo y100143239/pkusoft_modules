@@ -3,7 +3,7 @@
 
     <article class="article">
         <header>
-            <h3 class="text-muted">1. insert 后返回主键（MySQL）</h3>
+            <h3 class="text-muted">1. 使用 Mybatis3 在 MySQL数据库 insert 后获取主键</h3>
             <hr>
         </header>
         <main>
@@ -32,6 +32,146 @@ class User {
                     <pre class="prettyprint linenums">
 userService.insert( user );
 user.getUserId();
+                    </pre>
+                </li>
+            </ol>
+
+        </main>
+    </article>
+
+
+
+    <article class="article">
+        <header>
+            <h3 class="text-muted">2. 数据源 DBCP 的使用问题</h3>
+            <hr>
+        </header>
+        <main>
+            <div class="callout callout-info">
+                <ol>
+                    <li>使用MySQL数据库，过一段时间后，连接池（DBCP）里的连接都失效了</li>
+                    <li>原因：对于那些不使用的数据库连接，当超过某个时间（wait_timeout），MySQL会将其断掉；所以连接池里的空闲连接会失效</li>
+                    <li>解决方案
+                        <ul>
+                            <li>方案一：将 wait_timeout 设置得很大（最大365天）</li>
+                            <li>方案二：周期性的使用那些连接池（DBCP）里的空闲连接，让其永远不达到阈值</li>
+                        </ul>
+                    </li>
+                    <li>参考
+                        <ul>
+                            <li>问题描述：<a href="http://blog.csdn.net/zmzsoftware/article/details/6835604" target="_blank">mysql 数据库问题com.mysql.jdbc.exceptions.jdbc4.CommunicationsException</a></li>
+                            <li>解决方案：<a href="http://agapple.iteye.com/blog/791943"  target="_blank">解读dbcp自动重连那些事</a>
+                                <a href="http://blog.csdn.net/fairyhawk/article/details/7565391"  target="_blank">DBCP连接池配置参数说明</a> </li>
+                        </ul>
+                    </li>
+                </ol>
+            </div>
+            <ol>
+                <li>在 spring 中设置 dataSource，详情请参考 <a href="http://agapple.iteye.com/blog/791943">解读dbcp自动重连那些事</a>
+                    <pre class="prettyprint linenums">
+&lt;!-- 1. 数据源 : DriverManagerDataSource -->
+&lt;bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+    &lt;property name="driverClassName" value="com.mysql.jdbc.Driver" />
+    &lt;property name="url" value="jdbc:mysql://mysql.rdsmr4gvgm5y7lk.rds.bj.baidubce.com:3306/pku?useUnicode=true&amp;characterEncoding=utf8" />
+    &lt;property name="username" value="xxx" />
+    &lt;property name="password" value="xxx" />
+    &lt;!-- 初始化连接大小 -->
+    &lt;property name="initialSize" value="3">&lt;/property>
+    &lt;!-- 连接池最大数量 -->
+    &lt;property name="maxActive" value="20">&lt;/property>
+    &lt;!-- 连接池最大空闲 -->
+    &lt;property name="maxIdle" value="20">&lt;/property>
+    &lt;!-- 连接池最小空闲 -->
+    &lt;property name="minIdle" value="3">&lt;/property>
+    &lt;!-- 获取连接最大等待时间 -->
+    &lt;property name="maxWait" value="60000">&lt;/property>
+
+    &lt;!-- 自动重连  -->
+    &lt;!-- 适当建立链接保证最小的minIdle连接数 -->
+    &lt;property name= "testWhileIdle" >&lt;value> true &lt;/value>&lt;/property>
+    &lt;!-- 就是在进行borrowObject进行处理时，对拿到的connection进行validateObject校验 -->
+    &lt;property name= "testOnBorrow" >&lt;value>false&lt;/value>&lt;/property>
+    &lt;!-- 进行returnObject对返回的connection进行validateObject校验 -->
+    &lt;property name= "testOnReturn" >&lt;value>false&lt;/value>&lt;/property>
+    &lt;!-- 代表检查的sql -->
+    &lt;property name= "validationQuery" >&lt;value>select count(list_id) from record_list&lt;/value>&lt;/property>
+    &lt;property name= "validationQueryTimeout" >&lt;value>100&lt;/value>&lt;/property>
+    &lt;property name= "timeBetweenEvictionRunsMillis" >&lt;value>30000&lt;/value>&lt;/property>
+    &lt;!-- 代表每次检查链接的数量，建议设置和maxActive一样大 -->
+    &lt;property name= "numTestsPerEvictionRun" >&lt;value>20&lt;/value>&lt;/property>
+
+&lt;/bean>
+                    </pre>
+                </li>
+            </ol>
+
+        </main>
+    </article>
+
+    <article class="article">
+        <header>
+            <h3 class="text-muted">3. ehcache</h3>
+            <hr>
+        </header>
+        <main>
+            <div class="callout callout-info">
+                <ol>
+                    <li>使用MySQL数据库，过一段时间后，连接池（DBCP）里的连接都失效了</li>
+                    <li>原因：对于那些不使用的数据库连接，当超过某个时间（wait_timeout），MySQL会将其断掉；所以连接池里的空闲连接会失效</li>
+                    <li>解决方案
+                        <ul>
+                            <li>方案一：将 wait_timeout 设置得很大（最大365天）</li>
+                            <li>方案二：周期性的使用那些连接池（DBCP）里的空闲连接，让其永远不达到阈值</li>
+                        </ul>
+                    </li>
+                    <li>参考
+                        <ul>
+                            <li>问题描述：<a href="http://blog.csdn.net/zmzsoftware/article/details/6835604" target="_blank">mysql 数据库问题com.mysql.jdbc.exceptions.jdbc4.CommunicationsException</a></li>
+                            <li>解决方案：<a href="http://agapple.iteye.com/blog/791943"  target="_blank">解读dbcp自动重连那些事</a>
+                                <a href="http://blog.csdn.net/fairyhawk/article/details/7565391"  target="_blank">DBCP连接池配置参数说明</a> </li>
+                        </ul>
+                    </li>
+                </ol>
+            </div>
+            <div class="callout callout-danger">
+                无论如何优化，使用 数据库连接池 都是很耗资源（内存）的，会额外使用一两百M的内存。如果使用默认的256M内存，那么很快就内存溢出了。
+                作为个人版应用，使用 &lt;bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"> 即可。
+            </div>
+            <ol>
+                <li>在 spring 中设置 dataSource，详情请参考 <a href="http://agapple.iteye.com/blog/791943">解读dbcp自动重连那些事</a>
+                    <pre class="prettyprint linenums">
+&lt;!-- 1. 数据源 : DriverManagerDataSource -->
+&lt;bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+    &lt;property name="driverClassName" value="com.mysql.jdbc.Driver" />
+    &lt;property name="url" value="jdbc:mysql://mysql.rdsmr4gvgm5y7lk.rds.bj.baidubce.com:3306/pku?useUnicode=true&amp;characterEncoding=utf8" />
+    &lt;property name="username" value="xxx" />
+    &lt;property name="password" value="xxx" />
+    &lt;!-- 初始化连接大小 -->
+    &lt;property name="initialSize" value="3">&lt;/property>
+    &lt;!-- 连接池最大数量 -->
+    &lt;property name="maxActive" value="20">&lt;/property>
+    &lt;!-- 连接池最大空闲 -->
+    &lt;property name="maxIdle" value="20">&lt;/property>
+    &lt;!-- 连接池最小空闲 -->
+    &lt;property name="minIdle" value="3">&lt;/property>
+    &lt;!-- 获取连接最大等待时间 -->
+    &lt;property name="maxWait" value="60000">&lt;/property>
+
+    &lt;!-- 自动重连  -->
+    &lt;!-- 适当建立链接保证最小的minIdle连接数 -->
+    &lt;property name= "testWhileIdle" >&lt;value> true &lt;/value>&lt;/property>
+    &lt;!-- 就是在进行borrowObject进行处理时，对拿到的connection进行validateObject校验 -->
+    &lt;property name= "testOnBorrow" >&lt;value>false&lt;/value>&lt;/property>
+    &lt;!-- 进行returnObject对返回的connection进行validateObject校验 -->
+    &lt;property name= "testOnReturn" >&lt;value>false&lt;/value>&lt;/property>
+    &lt;!-- 代表检查的sql -->
+    &lt;property name= "validationQuery" >&lt;value>select count(list_id) from record_list&lt;/value>&lt;/property>
+    &lt;property name= "validationQueryTimeout" >&lt;value>100&lt;/value>&lt;/property>
+    &lt;property name= "timeBetweenEvictionRunsMillis" >&lt;value>30000&lt;/value>&lt;/property>
+    &lt;!-- 代表每次检查链接的数量，建议设置和maxActive一样大 -->
+    &lt;property name= "numTestsPerEvictionRun" >&lt;value>20&lt;/value>&lt;/property>
+
+&lt;/bean>
                     </pre>
                 </li>
             </ol>

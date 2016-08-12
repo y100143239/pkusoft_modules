@@ -1,37 +1,45 @@
 
-<div class="city-select-warp">
 
-    <div class="city-select-tab">
-        <a class="active" href="javascript:void(0)" data-cont=".city-province">省份</a>
-        <a href="javascript:void(0)" data-cont=".city-city">城市</a>
-        <a href="javascript:void(0)" data-cont=".city-district">县区</a>
+
+<div class="panel panel-simple">
+    <div class="panel-heading">示例</div>
+    <div class="panel-body">
+        <form action="" class="form-horizontal" id="f">
+            <div class="form-group">
+                <div class="col-xs-3">
+                    <div class="input-group">
+                        <input type="text" class="form-control" data-pku-widget="select-area" name="a1" data-select-trigger="#selectBtn"/>
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button" id="selectBtn"><i class="fa fa-caret-down"></i></button>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-xs-4">
+                    <input type="text" class="form-control" data-pku-widget="select-area" name="a2"/>
+                </div>
+                <div class="col-xs-5">
+                    <input type="text" class="form-control" data-pku-widget="select-area" name="a3"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-3">
+                    <input type="text" class="form-control" data-pku-widget="select-area" name="b1"/>
+                </div>
+                <div class="col-xs-4">
+                    <input type="text" class="form-control" data-pku-widget="select-area" name="b2"/>
+                </div>
+                <div class="col-xs-5">
+                    <input type="text" class="form-control" data-pku-widget="select-area" name="b3"/>
+                </div>
+            </div>
+        </form>
     </div>
-
-    <div class="city-select-content">
-        <div class="city-select city-province clearfix">
-            <dl>
-                <dd>
-                </dd>
-            </dl>
-        </div>
-        <div class="city-select city-city clearfix" style="display: none;">
-            <dl class="city-select-city">
-                <dd>
-                </dd>
-            </dl>
-        </div>
-        <div class="city-select city-district clearfix" style="display: none;">
-            <dl class="city-select-district">
-                <dd>
-                </dd>
-            </dl>
-        </div>
-    </div>
-
 </div>
 
 <script>
-    jQuery( ".city-select-warp" ).selectArea();
+    var $s = jQuery( '[data-pku-widget="select-area"]' );
+    var $f = jQuery( "#f" );
+    $s.selectArea();
 </script>
 
 <article class="article article-theme-1">
@@ -47,19 +55,7 @@
                     <li>新的数据源：解析 xml 文件，生成新的数据源 DIC_CODE.js（此操作最好在服务端进行）</li>
                     <li>
                         <pre class="prettyprint linenums">
-// code: 条目编码。text: 条目值。 aspell: 条目值的全拼，用于排序。
-[
-    [ code, text, aspell ],
-    [ code, text, aspell ],
-    ...
-]
-// 额外的索引数组
-[
-    code1,
-    code2,
-    ...
-]
-</pre>
+                        </pre>
                     </li>
                 </ul>
             </li>
@@ -72,24 +68,6 @@
                         <a href="http://www.xzqh.org/" target="_blank">行政区划网(区划地名网) www.xzqh.org</a>
                     </li>
                     <li>有些代码及区县不一致，A网站跟我们的数据库里的代码是一致的</li>
-                </ul>
-            </li>
-            <li>省份
-                <ul>
-                    <li>省份初始化时显示</li>
-                    <li>[00]0000 ~ [99]0000</li>
-                </ul>
-            </li>
-            <li>城市
-                <ul>
-                    <li>通过选取 省份code 遍历数据源获取</li>
-                    <li>34[01]00 ~ 34[99]00</li>
-                </ul>
-            </li>
-            <li>县区
-                <ul>
-                    <li>通过选取 城市code 遍历数据源获取</li>
-                    <li>3401[00] ~ 3401[99]</li>
                 </ul>
             </li>
         </ol>
