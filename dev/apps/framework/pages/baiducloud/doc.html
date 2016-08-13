@@ -1,0 +1,84 @@
+<div class="page-bdc">
+
+    <article class="article">
+        <header>
+            <h3 class="text-muted">1. 相关</h3>
+            <hr>
+        </header>
+        <main>
+            <div class="callout callout-info">
+                百度开放云文档服务DOC（Document Service）
+            </div>
+            <ol>
+                <li>特点
+                    <ul>
+                        <li>文档处理技术: 基于百度文库强大的文档转码、渲染技术，将源文档转换成HTML5，在线浏览时最大程度保留源文档样式</li>
+                        <li>文档处理功能: 文档元信息提取、缩略图生成、转码成功回调、离线浏览</li>
+                        <li>多端支持: 支持PC/WAP浏览器、Android、iOS主流平台，文档内容根据不同终端，自适应流式重排。</li>
+                        <li>文件存储在百度服务器</li>
+                    </ul>
+                </li>
+                <li>格式
+                    <ul>
+                        <li>源文档支持doc、docx、ppt、pptx、xls、xlsx、vsd、pot、pps、rtf、wps、et、dps、pdf、txt、epub多种格式</li>
+                    </ul>
+                </li>
+            </ol>
+
+        </main>
+    </article>
+    <article class="article">
+        <header>
+            <h3 class="text-muted">2. 开始</h3>
+            <hr>
+        </header>
+        <main>
+            <ol>
+                <li>准备
+                    <ul>
+                        <li>下载: <a href="https://cloud.baidu.com/doc/Downloadcenter/Java.html#SDK.E4.B8.8B.E8.BD.BD" target="_blank">Java SDK</a></li>
+                        <li>Access Key (AK): <a href="https://console.bce.baidu.com/iam/#/iam/accesslist" target="_blank">点击查看</a></li>
+                        <li>jdk1.6及更高版本</li>
+                    </ul>
+                </li>
+            </ol>
+
+        </main>
+    </article>
+
+    <div class="panel panel-simple">
+        <div class="panel-heading"> 示例</div>
+        <div class="panel-body">
+            <div id="reader"></div>
+            <script>
+                (function () {
+                    var option = {
+                        docId: 'doc-ghnm3tys9tzf6ft',
+                        token: 'TOKEN',
+                        host: 'BCEDOC',
+                        width: "800", //文档容器宽度
+                        pn: 1,  //定位到第几页，可选
+                        ready: function (handler) {  // 设置字体大小和颜色, 背景颜色（可设置白天黑夜模式）
+                            handler.setFontSize(1);
+                            handler.setBackgroundColor('#000');
+                            handler.setFontColor('#fff');
+                        },
+                        flip: function (data) {    // 翻页时回调函数, 可供客户进行统计等
+                            //console.log(data.pn);
+                        },
+                        fontSize:'big',
+                        toolbarConf: {
+                            page: true, //上下翻页箭头图标
+                            pagenum: true, //几分之几页
+                            full: true, //是否显示全屏图标,点击后全屏
+                            copy: true, //是否可以复制文档内容
+                            position: 'center'// 设置 toolbar中翻页和放大图标的位置(值有left/center)
+                        } //文档顶部工具条配置对象,必选
+                    };
+                    new Document('reader', option);
+                })();
+            </script>
+        </div>
+    </div>
+
+</div>

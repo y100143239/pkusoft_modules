@@ -1,0 +1,30 @@
+body {
+  background-color: #EFEFEF; }
+
+.tab-info {
+  width: 1000px;
+  margin: 80px auto 0 auto;
+  min-height: 400px; }
+
+.photo-list .photo-item {
+  float: left;
+  width: 180px;
+  height: 180px;
+  border: solid 1px #eee; }
+.photo-list .photo-wrap {
+  height: 150px;
+  overflow: hidden;
+  vertical-align: middle;
+  text-align: center; }
+  .photo-list .photo-wrap img {
+    height: 100%; }
+.photo-list .photo-name {
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; }
+
+/*# sourceMappingURL=eg_photo.css.map */

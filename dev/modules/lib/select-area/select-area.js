@@ -271,7 +271,7 @@
                 type,
                 newCode
             ;
-            code = $target.data( "code" );
+            code = $target.val();
             if ( ! code ) {
                 return;
             }

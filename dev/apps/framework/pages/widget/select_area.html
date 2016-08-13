@@ -52,9 +52,30 @@
             <li>数据源，及结构
                 <ul>
                     <li>原始数据源：DIC_CODE.xml 文件</li>
-                    <li>新的数据源：解析 xml 文件，生成新的数据源 DIC_CODE.js（此操作最好在服务端进行）</li>
+                    <li>新的数据源：拷贝 <a href="http://www.stats.gov.cn/tjsj/tjbz/xzqhdm/201608/t20160809_1386477.html" target="_blank">最新县及县以上行政区划代码（截止2015年9月30日）</a> 区划代码，将其转换为JavaScript模块(select-area-data.js)，直接引入</li>
                     <li>
                         <pre class="prettyprint linenums">
+// 此格式，参考 百度云域名备案 资料填写页面的数据格式
+[
+    {
+        "code": 110000,
+        "name": "北京市",
+        "cities": [
+            {
+                "code": 110100,
+                "name": "市辖区",
+                "districtList": [
+                    {
+                        "code": 110101,
+                        "name": "东城区"
+                    },
+                    ... ...
+                ]
+            }
+        ]
+    },
+    ... ...
+]
                         </pre>
                     </li>
                 </ul>
