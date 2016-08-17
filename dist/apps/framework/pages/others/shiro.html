@@ -222,7 +222,7 @@ public class MyRealm extends AuthorizingRealm {
             </li>
             <li>处理登陆
             <pre class="prettyprint linenums">
-Body
+@ResponseBody
 @RequestMapping("/user/login")
 public JsonResult login(SysUser sysUser) {
     JsonResult jsonResult = new JsonResult();

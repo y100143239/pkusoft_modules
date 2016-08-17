@@ -23,7 +23,7 @@
             </div>
             <div class="form-group">
                 <div class="col-xs-3">
-                    <input type="text" class="form-control" data-pku-widget="select-area" name="b1"/>
+                    <input type="text" class="form-control" data-pku-widget="select-area" name="b1" value="210711"/>
                 </div>
                 <div class="col-xs-4">
                     <input type="text" class="form-control" data-pku-widget="select-area" name="b2"/>
@@ -93,6 +93,35 @@
             </li>
         </ol>
 
+    </main>
+</article>
+
+<article class="article article-theme-1">
+    <header>
+        <h3>2. 原理</h3>
+        <hr>
+    </header>
+    <main>
+        <ol>
+            <li>以加载JavaScript模块的方式载入 数据源select-area-data.js </li>
+            <li>如果有使用该插件（ 如 $("input").selectArea() ），则进行插件的初始化工作</li>
+            <li>插件仅初始化“省”面板</li>
+            <li>使用该插件的 &lt;input> 元素，插件会对其进行克隆（删除掉了id和name属性），置于原始input之后；原始input会被“隐藏”</li>
+            <li>每次在插件上选择 省市县区，会用 “字典条目的text” 更新 克隆input 的value属性，“字典条目的code” 更新 原始input 的value属性</li>
+        </ol>
+
+    </main>
+</article>
+
+<article class="article article-theme-1">
+    <header>
+        <h3>3. 使用</h3>
+        <hr>
+    </header>
+    <main>
+        <pre class="prettyprint linenums">
+jQuery( '[data-pku-widget="select-area"]' ).selectArea();
+        </pre>
     </main>
 </article>
 

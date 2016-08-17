@@ -67,10 +67,23 @@ a:hover{ color:#BD0A01; }
 .nav-leftside {
     z-index: 200;
     position: fixed;
-    left: 0;
+    right: 0;
     top: 30%;
+    &.nav-leftside-min {
+        .text {
+            display: none;
+        }
+    }
     .panel-anchor {
         //display: block;
+        text-align: left;
+    }
+    button {
+        text-align: left;
+    }
+    .fa {
+        width: 20px;
+        text-align: center;
     }
 }
 .main {
@@ -78,6 +91,7 @@ a:hover{ color:#BD0A01; }
     min-height: 600px;
     > .panel {
         margin: 20px 20px 60px 20px;
+        position: relative;
     }
     label.control-label {
         font-weight: normal;

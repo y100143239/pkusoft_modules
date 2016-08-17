@@ -1,0 +1,131 @@
+<article class="article article-theme-1">
+    <header>
+        <h3 class="text-muted">1. JSP自定义标签</h3>
+        <hr>
+    </header>
+    <main>
+        <div class="callout callout-info">
+            参考：<a href="http://www.yiibai.com/jsp/jsp_custom_tags.html" target="_blank">JSP自定义标签</a>
+        </div>
+        <ol>
+            <li>应用场景
+                <ul>
+                    <li>避免在JSP页面写Java片段</li>
+                    <li>当已有的 JSTL（如c标签）不能满足要求时</li>
+                </ul>
+            </li>
+        </ol>
+        <hr/>
+        <ol>
+            <li>创建标签库文件（/WEB-INF/tld/pku.tld），包含 dicValue 标签
+                <pre class="prettyprint linenums">
+&lt;?xml version="1.0" encoding="UTF-8"?>
+&lt;taglib xmlns="http://java.sun.com/xml/ns/j2ee"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd"
+        version="2.0">
+    &lt;description>Pkusoft Tag library&lt;/description>
+    &lt;display-name>Pkusoft Tag&lt;/display-name>
+    &lt;tlib-version>1.1&lt;/tlib-version>
+    &lt;short-name>pku&lt;/short-name>
+    &lt;uri>/WEB-INF/tld/pku.tld&lt;/uri>
+
+    &lt;tag>
+        &lt;description>
+            字典翻译,字典翻译标签，
+            根据字典名称和字典条目编码获取字典条目值。dicName为字典名称，itemCode为字典条目编码。
+            如传入：dicName="DIC_GENDER" itemCode="1"，输出的值将为“男”；
+        &lt;/description>
+        &lt;name>dicValue&lt;/name>
+        &lt;tag-class>net.pkusoft.jstl.DicValueTag&lt;/tag-class>
+        &lt;body-content>empty&lt;/body-content>
+        &lt;attribute>
+            &lt;description>
+                字典名称，如：性别字典为DIC_GENDER，这里传入的值就应该为“DIC_GENDER”
+            &lt;/description>
+            &lt;name>dicName&lt;/name>
+            &lt;required>true&lt;/required>
+            &lt;rtexprvalue>true&lt;/rtexprvalue>
+        &lt;/attribute>
+        &lt;attribute>
+            &lt;description>
+                字典条目编码，如：性别字典DIC_GENDER中的“男”的条目编码为1，这里传入的值就为“1”.可以使用El表达式传入动态值。
+            &lt;/description>
+            &lt;name>itemCode&lt;/name>
+            &lt;required>false&lt;/required>
+            &lt;rtexprvalue>true&lt;/rtexprvalue>
+        &lt;/attribute>
+        &lt;attribute>
+            &lt;description>
+                字典条目值，如：性别字典DIC_GENDER中存在“男”条目值，这里传入的值就为“男”.可以使用El表达式传入动态值。
+            &lt;/description>
+            &lt;name>itemValue&lt;/name>
+            &lt;required>false&lt;/required>
+            &lt;rtexprvalue>true&lt;/rtexprvalue>
+        &lt;/attribute>
+    &lt;/tag>
+
+&lt;/taglib>
+                </pre>
+            </li>
+            <li>编写 dicValue 标签对于的Java类
+                <pre class="prettyprint linenums">
+import java.io.IOException;
+import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.tagext.BodyTagSupport;
+import org.springframework.util.StringUtils;
+
+public class DicValueTag extends BodyTagSupport {
+	private static final long serialVersionUID = 1L;
+	private String dicName;
+	private String itemCode;
+	private String itemValue;
+	public String getDicName() {
+		return dicName;
+	}
+	public void setDicName(String dicName) {
+		this.dicName = dicName;
+	}
+	public String getItemCode() {
+		return itemCode;
+	}
+	public void setItemCode(String itemCode) {
+		this.itemCode = itemCode;
+	}
+	public String getItemValue() {
+		return itemValue;
+	}
+	public void setItemValue(String itemValue) {
+		this.itemValue = itemValue;
+	}
+
+	public int doStartTag() throws JspException {
+		String outValue = "";
+
+		if ( ! StringUtils.hasText( dicName ) ) {
+			return SKIP_BODY;
+		}
+		if ( ! StringUtils.hasText( itemCode ) ) {
+			return SKIP_BODY;
+		}
+		try {
+			outValue = TagUtils.getDicValue( dicName, itemCode );
+			pageContext.getOut().write(outValue);
+		} catch ( IOException e ) {
+			e.printStackTrace();
+		}
+
+		return SKIP_BODY;
+	}
+}
+                </pre>
+            </li>
+            <li>JSP页面使用
+                <ul>
+                    <li>引入标签库：<%@ taglib prefix="pku" uri="/WEB-INF/tld/pku.tld" %></li>
+                    <li>使用标签：&lt;pku:dicValue dicName="DIC_PCS" itemCode="${gdbaCompany.gsxqpcs}" /></li>
+                </ul>
+            </li>
+        </ol>
+    </main>
+</article>

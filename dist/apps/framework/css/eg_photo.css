@@ -10,7 +10,8 @@ body {
   float: left;
   width: 180px;
   height: 180px;
-  border: solid 1px #eee; }
+  border: solid 1px #eee;
+  margin: 0 10px 10px 0; }
 .photo-list .photo-wrap {
   height: 150px;
   overflow: hidden;

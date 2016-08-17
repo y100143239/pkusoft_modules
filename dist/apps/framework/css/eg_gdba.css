@@ -143,14 +143,24 @@ a:hover {
 .nav-leftside {
   z-index: 200;
   position: fixed;
-  left: 0;
+  right: 0;
   top: 30%; }
+  .nav-leftside.nav-leftside-min .text {
+    display: none; }
+  .nav-leftside .panel-anchor {
+    text-align: left; }
+  .nav-leftside button {
+    text-align: left; }
+  .nav-leftside .fa {
+    width: 20px;
+    text-align: center; }
 
 .main {
   background-color: #fff;
   min-height: 600px; }
   .main > .panel {
-    margin: 20px 20px 60px 20px; }
+    margin: 20px 20px 60px 20px;
+    position: relative; }
   .main label.control-label {
     font-weight: normal;
     white-space: nowrap;

@@ -10,8 +10,7 @@
 }( function ( $, _data ) {
     "use strict";
 
-    var Utils,
-        AreaPanel,
+    var AreaPanel,
         DATA
         ;
 
@@ -97,6 +96,8 @@
     function settingSelectArea( target, opts ) {
         var $target,
             $targetCopy,
+            data, // 根据code获取的相关省市县区数据
+            formatValue,
             selectTrigger, $trigger
             ;
         $target = $( target );
@@ -109,6 +110,13 @@
         }
 
         $targetCopy = renderTarget( $target, opts );
+
+        // 如果有数据，则设置
+        if ( $target.val() ) {
+            data = AreaPanel.utils.getAllDataByCode( $target.val() + "" );
+            formatValue = AreaPanel.utils.formatCopyTargetValue( data ) ;
+            $targetCopy.val( formatValue );
+        }
 
         $targetCopy.on( "click.selectarea", function () {
             var $target
@@ -136,10 +144,9 @@
     function renderTarget( $target, opts ) {
         var $targetCopy
         ;
-        // 克隆$target, 将其插入到 $target 后面
-        $targetCopy = $target.clone().insertAfter( $target )
-            .removeAttr( "id" )
-            .removeAttr( "name" );
+        //  将其插入到 $target 后面
+        $targetCopy = $( "<input>" ).addClass( $target.attr( "class" ) ).insertAfter( $target );
+
         // “隐藏” $target
         $target.addClass( "city-select-hidden-accessible" );
 
@@ -170,29 +177,26 @@
         afterChooseCallback: function ( code, text ) {
             var $target,
                 value,
-                chooseData,
-                province,
-                city,
-                district
+                chooseData
                 ;
             chooseData = this.chooseData;
-            province = chooseData.province;
-            city = chooseData.city;
-            district = chooseData.district;
+
+            value = AreaPanel.utils.formatCopyTargetValue( chooseData );
 
             $target = this.$target;
-
-            value = province.text;
-
-            if ( city.text ) {
-                value += " / " + city.text;
-            }
-            if ( district.text ) {
-                value += " / " + district.text;
-            }
-
             $target.val( code );
-            $target.data("$copy" ).val( value )
+            $target.data("$copy" ).val( value );
+
+            // FIX 添加formValidate验证
+            var inputField,
+                $form
+                ;
+            inputField = $target;
+            $form = $target.closest( "form.fv-form" );
+            if ( $form.length == 0  ) { return; }
+            if ( ! $form.formValidation ) { return; }
+            // Revalidate the date when user change it
+            $form.formValidation('revalidateField', inputField);
         },
         init: function () {
             this._create();
@@ -579,34 +583,35 @@
             return html;
         },
         getProvinceByCode: function ( code ) {
+            var provinceCode
+            ;
+            provinceCode = code.substring( 0, 2 ) + "0000";
             for ( var i = 0, len = DATA.length; i < len; i++  ) {
-                if ( DATA[ i ].code == code ) {
+                if ( DATA[ i ].code == provinceCode ) {
                     return DATA[ i ];
                 }
             }
         },
         getCityByCode: function ( code ) {
-            var provinceCode,
-                province,
+            var province,
+                cityCode,
                 cityList
                 ;
-            provinceCode = code.substring( 0, 2 ) + "0000";
-            province = this.getProvinceByCode( provinceCode );
+            cityCode = code.replace( /[0-9]{2}$/, "00" );
+            province = this.getProvinceByCode( code );
             cityList = province.cityList;
 
             for ( var i = 0, len = cityList.length; i < len; i++  ) {
-                if ( cityList[ i ].code == code ) {
+                if ( cityList[ i ].code == cityCode ) {
                     return cityList[ i ];
                 }
             }
         },
         getDistrictByCode: function ( code ) {
-            var cityCode,
-                city,
+            var city,
                 districtList
                 ;
-            cityCode = code.substring( 0, 2 ) + "0000";
-            city = this.getCityByCode( cityCode );
+            city = this.getCityByCode( code );
             districtList = city.districtList;
 
             for ( var i = 0, len = districtList.length; i < len; i++  ) {
@@ -614,6 +619,71 @@
                     return districtList[ i ];
                 }
             }
+        },
+        /* 根据code获取省、市、县区数据 */
+        getAllDataByCode: function ( code ) {
+            var data,
+                type,
+                province,
+                city,
+                district
+                ;
+            data = {
+                //province: { code: null, text: null },
+                //city: { code: null, text: null },
+                //district: { code: null, text: null }
+            };
+            type = this.getCodeType( code );
+            if ( ! type ) {
+                return null;
+            }
+            province = this.getProvinceByCode( code.replace( /[0-9]{4}$/, "0000" ) );
+            data.province = { code: province.code, text: province.text };
+
+            if ( type == "province" ) {
+                return data;
+            }
+
+            city = this.getCityByCode( code.replace( /[0-9]{2}$/, "00" ) );
+            data.city = { code: city.code, text: city.text };
+
+            if ( type == "city" ) {
+                return data;
+            }
+
+            district = this.getDistrictByCode( code );
+            data.district = { code: district.code, text: district.text };
+
+            return data;
+        },
+        formatCopyTargetValue: function ( data ) {
+            var province,
+                city,
+                district,
+                value
+            ;
+
+            value = "";
+
+            if ( ! data ) {
+                return value;
+            }
+
+            province = data.province;
+            city = data.city;
+            district = data.district;
+
+            if ( province && province.text ) {
+                value = province.text;
+            }
+            if ( city && city.text ) {
+                value += " / " + city.text;
+            }
+            if ( district && district.text ) {
+                value += " / " + district.text;
+            }
+
+            return value;
         }
     };
 
