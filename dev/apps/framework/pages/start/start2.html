@@ -1,0 +1,111 @@
+<div class="callout callout-warning">
+    <h4>RequestJS</h4>
+    <ol>
+        <li>参考：<a href="http://www.requirejs.cn/" target="_blank">RequireJS 中文网</a></li>
+        <li>应用
+            <ul>
+                <li>通过 RequestJS 管理所有的JS文件（以及之间的依赖）</li>
+                <li>将JS文件的路径定义为模块ID，定义各个JS文件之间的依赖关系</li>
+                <li>通过模块ID按需载入需要的JS文件，无序额外手动引入依赖的JS文件</li>
+            </ul>
+        </li>
+    </ol>
+</div>
+
+
+<article class="article article-theme-1">
+    <header>
+        <h3>1. 通过sitemesh配置RequestJS —— /WEB-INF/layouts/pkuframework.jsp</h3>
+        <hr>
+    </header>
+    <main>
+        <div class="callout callout-info">
+            关于 sitemesh 的使用，请参考 顶部导航“Others”菜单中关于 sitemesh 的简单使用。<br/>
+            引入到其他的项目里时，需要更改URL过滤规则。
+        </div>
+        <div class="callout callout-danger">
+            也就是说，所有的 JSP 页面都会自动添加模板上的所有内容。
+        </div>
+        <img src="./images/start2_template.png" alt=""/>
+    </main>
+</article>
+<article class="article article-theme-1">
+    <header>
+        <h3>2. 使用JS模块</h3>
+        <hr>
+    </header>
+    <main>
+        <div class="callout callout-warning">
+            参考：/WEB-INF/views/photo/index.jsp
+        </div>
+        <img src="./images/start2_require.png" alt=""/>
+
+        <ol>
+            <li>modal的引入
+                <pre class="prettyprint linenums">
+                    require( [ "jquery", "bootstrap" ], function ( $ ) {
+                        // 当 jQuery、bootstrap及其依赖完全载入完毕之后，执行
+                    });
+                </pre>
+            </li>
+            <li>tooltip的引入
+                <pre class="prettyprint linenums">
+                    require( [ "jquery", "bootstrap" ], function ( $ ) {
+                        // 当 jQuery、bootstrap及其依赖完全载入完毕之后，执行
+                    });
+                </pre>
+            </li>
+            <li>datepicker的引入
+                <pre class="prettyprint linenums">
+                    require( [ "jquery", "datepicker" ], function ( $ ) {
+                        // 当 jQuery、datepicker及其依赖完全载入完毕之后，执行
+                    });
+                </pre>
+            </li>
+            <li>select2的引入
+                <pre class="prettyprint linenums">
+                   require( [ "select2" ] , function(){
+
+                   });
+                </pre>
+            </li>
+            <li>select-area的引入
+                <pre class="prettyprint linenums">
+                   require( ["select-area"] , function(){
+
+                   });
+                </pre>
+            </li>
+            <li>chart的引入
+                <pre class="prettyprint linenums">
+                   require( [ "echarts", "echartsTheme", "echartsChinaMap" ], function ( echarts ) {
+                        window.echarts = echarts;
+                   });
+                </pre>
+            </li>
+            <li>formvalidation的引入
+                <pre class="prettyprint linenums">
+                   require( [ "formvalidationI18N" ], function ( ) {
+
+                   });
+                </pre>
+            </li>
+            <li>webuploader的引入
+                <pre class="prettyprint linenums">
+                   require( ["webuploader"], function (WebUploader) {
+                        window.WebUploader = WebUploader;
+                   } );
+                </pre>
+            </li>
+            <li>bootgrid的引入
+                <pre class="prettyprint linenums">
+                   require( ["bootgrid"], function () {
+
+                   } );
+                </pre>
+            </li>
+
+        </ol>
+
+    </main>
+</article>

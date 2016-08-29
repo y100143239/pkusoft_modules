@@ -1507,8 +1507,8 @@ if (typeof jQuery === 'undefined') {
             for (var field in this.options.fields) {
                 this.validateField(field);
             }
-
-            this._submit();
+            //FIX 取消验证通过后直接提交表单。
+            //this._submit();
             this._submitIfValid = true;
 
             return this;

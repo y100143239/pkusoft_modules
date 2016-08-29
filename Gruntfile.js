@@ -144,12 +144,12 @@ module.exports = function(grunt) {
                     // 1. 切换到 _bae 目录
                     'cd /Users/forwardNow/develop/work/_bae',
                     // 2. 删除 dev目录
-                    'rm  -Rf ./dev/*',
+                    'rm  -Rf ./static/dev/*',
                     //'rm  -R /Users/forwardNow/develop/workspace/_bae/WebContent/dev/*',
-                    // 3.1 将webstorm的/dist目录拷贝到 _bae/dev
-                    'cp -R /Users/forwardNow/develop/work/pkusoft/pkusoft_modules/dist/* ./dev/',
+                    // 3.1 将webstorm的/dist目录拷贝到 _bae/static/dev
+                    'cp -R /Users/forwardNow/develop/work/pkusoft/pkusoft_modules/dist/* ./static/dev/',
                     // 3.2 将webstorm的/dist目录拷贝到 Eclipse
-                    'cp -R /Users/forwardNow/develop/work/pkusoft/pkusoft_modules/dist/* /Users/forwardNow/develop/workspace/_bae/WebContent/dev/',
+                    'cp -R /Users/forwardNow/develop/work/pkusoft/pkusoft_modules/dist/* /Users/forwardNow/develop/workspace/_bae/WebContent/static/dev/',
 
                     // 4. 删除  _bae/WEB-INF 下的 classes和lib
                     'rm -Rf ./WEB-INF/classes ./WEB-INF/lib',

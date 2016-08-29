@@ -115,3 +115,61 @@ i.form-control-feedback.fa {
         padding-top: 7px;
     }
 }
+.photoList {
+    position: relative;
+    padding: 15px;
+    margin: 20px -15px;
+    border-top: dashed 1px #ddd;
+    > .tab-content {
+        border: 1px solid #ddd;
+        border-top: none 0;
+        padding-top: 15px;
+    }
+    .title {
+        position: absolute;
+        left: 50%;
+        top: -20px;
+        width: 48px;
+        text-align: center;
+        color: #888;
+        background-color: #fff;
+        margin-left: -24px;
+    }
+}
+// eg-photo
+.tab-info {
+    min-height: 200px;
+    margin: 0 20px 20px 20px;
+    box-shadow: none;
+    > .tab-content {
+        //border: 1px solid #f4f4f4;
+        //border-top: none 0;
+    }
+}
+.photo-list {
+    .photo-item {
+        float: left;
+        width: 180px;
+        height: 180px;
+        border: solid 1px #eee;
+        margin: 0 10px 10px 0;
+    }
+    .photo-wrap {
+        height: 150px;
+        overflow: hidden;
+        vertical-align: middle;
+        text-align: center;
+        img {
+            height: 100%;
+        }
+    }
+    .photo-name {
+        height: 30px;
+        line-height: 30px;
+        text-align: center;
+        width: 100%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}

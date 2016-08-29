@@ -373,10 +373,11 @@
                 $this.addClass( "active" ).siblings().removeClass( "active" );
                 // 更新选中的数据
                 _this._setChooseData( code, text );
-
                 if ( afterChooseCallback && typeof afterChooseCallback == "function" ) {
                     afterChooseCallback.call( _this, code, text );
                 }
+                // 关闭面板
+                _this.$container.hide();
             });
         },
         _bindChooseEvent: function ( tabContentIndex, drawType, emptyType, afterChooseCallback ) {

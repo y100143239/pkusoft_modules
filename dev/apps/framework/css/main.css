@@ -221,6 +221,8 @@ html, body {
     line-height: 2; }
   .article.article-theme-1 pre li {
     line-height: 1.5; }
+  .article.article-theme-1 img {
+    max-width: 100%; }
 
 .page-tooltip .tooltip-example {
   background-color: #fff; }

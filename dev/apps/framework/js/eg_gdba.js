@@ -1,4 +1,4 @@
-require( [ "jquery", "gdbaUtils", "formvalidationI18N", "bootstrap", "select2", "datepicker", "select-area" ], function ( $, Utils ) {
+require( [ "jquery", "gdbaUtils", "webuploader", "formvalidationI18N", "bootstrap", "select2", "datepicker", "select-area" ], function ( $, Utils, webuploader ) {
 
     // Utils 在下面定义为模块
 
@@ -44,10 +44,8 @@ require( [ "jquery", "gdbaUtils", "formvalidationI18N", "bootstrap", "select2", 
                 Utils.loadDetailFragment( fragmentUrl, $panel );
             },
             error: function () {
-                // 在此处模拟 success
-                setTimeout( function() {
-                    Utils.loadDetailFragment( fragmentUrl, $panel );
-                }, 1500 );
+                alert( "网络错误" );
+                Utils.removeLoadingOverlay( $panel );
             }
         } );
 
@@ -65,6 +63,22 @@ require( [ "jquery", "gdbaUtils", "formvalidationI18N", "bootstrap", "select2", 
         Utils.addLoadingOverlay( $panel );
         // 载入 编辑页片段
         Utils.loadEditFragment( fragmentUrl, $panel );
+    });
+
+    // 点击“图片上传”时，进行webuploader的初始化
+    $( document ).on( "click", ".tab-info .tab-upload", function () {
+        var $this,
+            $target,
+            uploaderContainerId
+        ;
+        $this = $( this );
+        $target = $this.closest(".tab-info" ).find( ".imageUploaderContainer" );
+        if ( $target.get( 0 ).id ) {
+            return;
+        }
+        uploaderContainerId = "uploaderContainer_" + ( new Date() ).getTime();
+        $target.attr( "id", uploaderContainerId );
+        Utils.initWebuploader( $target );
     });
 
     $( document ).ready( function () {
@@ -89,7 +103,7 @@ require( [ "jquery", "gdbaUtils", "formvalidationI18N", "bootstrap", "select2", 
 
 } );
 
-define( "gdbaUtils", ["jquery"], function ($) {
+define( "gdbaUtils", ["jquery", "webuploader"], function ($, WebUploader) {
     return {
         renderPanel: function ( $target ) {
             $target = $target || $( document );
@@ -130,6 +144,60 @@ define( "gdbaUtils", ["jquery"], function ($) {
                 // 回调
                 if ( successCallback && ( typeof successCallback == "function" ) ) {
                     successCallback();
+                }
+            } );
+        },
+        initWebuploader: function ( $target ) {
+            var uploaderContainerId,
+                uploaderOptions,
+                webloaderInstance,
+                url
+                ;
+            uploaderContainerId = $target.attr( "id" );
+            url = $target.data( "uploadUrl" );
+
+            uploaderOptions = {
+                // swf文件路径
+                swf: '${ctx}/static/dev/modules/lib/webuploader/Uploader.swf',
+
+                // 文件接收服务端。
+                server: url,
+                // 自动上传。
+                auto: false,
+                fileSingleSizeLimit: 1024 * 800, // 单个问价大小限制，800 KB
+                // 只允许选择文件，可选。
+                accept: {
+                    title: 'Images',
+                    extensions: 'jpg', // 只接受 jpg 类型
+                    mimeTypes: 'image/*'
+                },
+                // 指定Drag And Drop拖拽的容器
+                dnd: '#' + uploaderContainerId + ' .uploader-filelist',
+                // 通过粘贴来添加截屏的图片
+                paste: document.body
+            };
+            webloaderInstance = WebUploader.pku.imageUpload( uploaderContainerId, uploaderOptions );
+
+            // 处理图片添加失败的处理
+            webloaderInstance.on( 'error', function ( type ) {
+                switch ( type ) {
+                    case "F_EXCEED_SIZE": { // 尝试给uploader添加的文件大小超出这个值时
+                        alert("单个文件大小不符合要求：不超过800KB。");
+                        break;
+                    }
+                    case "Q_TYPE_DENIED": { // 当文件类型不满足时触发
+                        alert( "文件类型不符合要求：仅限 jpg 类型。" );
+                        break;
+                    }
+                    case "Q_EXCEED_NUM_LIMIT": { // 在设置了fileNumLimit且尝试给uploader添加的文件数量超出这个值
+                        break;
+                    }
+                    case "Q_EXCEED_SIZE_LIMIT": { // 尝试给uploader添加的文件总大小超出这个值时
+                        break;
+                    }
+                    default: {
+                        alert( "错误类型：" + type );
+                    }
                 }
             } );
         }

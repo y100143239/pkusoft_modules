@@ -1,0 +1,181 @@
+<div class="callout callout-warning">
+    <ol>
+        <li>参考：<a href="http://v3.bootcss.com/" target="_blank">http://v3.bootcss.com/</a></li>
+        <li>说明
+            <ul>
+                <li>所有样式都是基于 Bootstrap3 ，需要对其有一定了解</li>
+            </ul>
+        </li>
+    </ol>
+</div>
+
+
+<article class="article article-theme-1">
+    <header>
+        <h3>1. 网格布局</h3>
+        <hr>
+    </header>
+    <main>
+        <ol>
+            <li>IE8中仅“col-xs-*”生效</li>
+            <li>每行被分割为12列</li>
+            <li>定宽容器布局（定宽: 100%(xs) / 750px(sm) / 970px(md) / 1170px(lg) ）
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <div style="background: #00BE9C; height: 30px;" >col-xs-3</div>
+                        </div>
+                        <div class="col-xs-9">
+                            <div style="background: #1FCF6D; height: 30px;" >col-xs-9</div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-7">
+                            <div style="background: #2C97DF; height: 30px;" >col-xs-7</div>
+                        </div>
+                        <div class="col-xs-5">
+                            <div style="background: #9C56B8; height: 30px;" >col-xs-5</div>
+                        </div>
+                    </div>
+                </div>
+                <pre class="prettyprint linenums">
+&lt;!-- 应用于整体页面的布局 -->
+&lt;div class="container">
+    &lt;div class="row">
+        &lt;div class="col-xs-3">
+            &lt;div style="background: #00BE9C; height: 30px;" >col-xs-3&lt;/div>
+        &lt;/div>
+        &lt;div class="col-xs-9">
+            &lt;div style="background: #1FCF6D; height: 30px;" >col-xs-9&lt;/div>
+        &lt;/div>
+    &lt;/div>
+    &lt;div class="row">
+        &lt;div class="col-xs-7">
+            &lt;div style="background: #2C97DF; height: 30px;" >col-xs-7&lt;/div>
+        &lt;/div>
+        &lt;div class="col-xs-5">
+            &lt;div style="background: #9C56B8; height: 30px;" >col-xs-5&lt;/div>
+        &lt;/div>
+    &lt;/div>
+&lt;/div>
+</pre>
+            </li>
+            <li>流式容器布局（100%宽度）
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <div style="background: #00BE9C; height: 30px;" >col-xs-3</div>
+                        </div>
+                        <div class="col-xs-9">
+                            <div style="background: #1FCF6D; height: 30px;" >col-xs-9</div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-7">
+                            <div style="background: #2C97DF; height: 30px;" >col-xs-7</div>
+                        </div>
+                        <div class="col-xs-5">
+                            <div style="background: #9C56B8; height: 30px;" >col-xs-5</div>
+                        </div>
+                    </div>
+                </div>
+                <pre class="prettyprint linenums">
+&lt;!-- 应用于局部页面的布局 -->
+&lt;div class="container-fluid">
+    &lt;div class="row">
+        &lt;div class="col-xs-3">
+            &lt;div style="background: #00BE9C; height: 30px;" >col-xs-3&lt;/div>
+        &lt;/div>
+        &lt;div class="col-xs-9">
+            &lt;div style="background: #1FCF6D; height: 30px;" >col-xs-9&lt;/div>
+        &lt;/div>
+    &lt;/div>
+    &lt;div class="row">
+        &lt;div class="col-xs-7">
+            &lt;div style="background: #2C97DF; height: 30px;" >col-xs-7&lt;/div>
+        &lt;/div>
+        &lt;div class="col-xs-5">
+            &lt;div style="background: #9C56B8; height: 30px;" >col-xs-5&lt;/div>
+        &lt;/div>
+    &lt;/div>
+&lt;/div>
+</pre>
+            </li>
+        </ol>
+    </main>
+</article>
+<article class="article article-theme-1">
+    <header>
+        <h3>3. 表单布局</h3>
+        <hr>
+    </header>
+    <main>
+        <form class="form-horizontal">
+            <div class="form-group">
+                <label class="col-xs-2 control-label">Email</label>
+                <div class="col-xs-4">
+                    <input type="email" class="form-control" placeholder="Email">
+                </div>
+                <label class="col-xs-2 control-label">Email</label>
+                <div class="col-xs-4">
+                    <input type="email" class="form-control" placeholder="Email">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-2 control-label">Password</label>
+                <div class="col-xs-10">
+                    <input type="password" class="form-control" placeholder="Password">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-offset-2 col-xs-10">
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox"> Remember me
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-offset-2 col-xs-10">
+                    <button type="submit" class="btn btn-default">Sign in</button>
+                </div>
+            </div>
+        </form>
+
+        <pre class="prettyprint linenums">
+&lt;form class="form-horizontal">
+    &lt;div class="form-group">
+        &lt;label class="col-xs-2 control-label">Email&lt;/label>
+        &lt;div class="col-xs-4">
+            &lt;input type="email" class="form-control" placeholder="Email">
+        &lt;/div>
+        &lt;label class="col-xs-2 control-label">Email&lt;/label>
+        &lt;div class="col-xs-4">
+            &lt;input type="email" class="form-control" placeholder="Email">
+        &lt;/div>
+    &lt;/div>
+    &lt;div class="form-group">
+        &lt;label class="col-xs-2 control-label">Password&lt;/label>
+        &lt;div class="col-xs-10">
+            &lt;input type="password" class="form-control" placeholder="Password">
+        &lt;/div>
+    &lt;/div>
+    &lt;div class="form-group">
+        &lt;div class="col-xs-offset-2 col-xs-10">
+            &lt;div class="checkbox">
+                &lt;label>
+                    &lt;input type="checkbox"> Remember me
+                &lt;/label>
+            &lt;/div>
+        &lt;/div>
+    &lt;/div>
+    &lt;div class="form-group">
+        &lt;div class="col-xs-offset-2 col-xs-10">
+            &lt;button type="submit" class="btn btn-default">Sign in&lt;/button>
+        &lt;/div>
+    &lt;/div>
+&lt;/form>
+</pre>
+    </main>
+</article>
