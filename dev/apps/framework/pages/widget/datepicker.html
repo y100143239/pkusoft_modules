@@ -1,9 +1,34 @@
+<article class="article article-theme-1">
+    <header>
+        <h3>在 JSP 中使用</h3>
+        <hr>
+    </header>
+    <main>
 <pre class="prettyprint">
-// 引入
-require( ["datepicker"], function () {
+&lt;%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+&lt;html>
+&lt;head>
+    &lt;title>datepicker的引入&lt;/title>
+    &lt;script>
 
-} );
+        /* 	
+         访问：http://localhost:8080/test/datepicker
+         位置：/WEB-INF/views/test/datepicker.jsp 
+         依赖：（shim）"datepicker": [ "jquery" ]
+         */
+        require( [ "datepicker" ], function () {
+            // "datepicker" 依赖 "jquery"，"jquery"会优先"datepicker"载入
+        } );
+
+    &lt;/script>
+&lt;/head>
+&lt;body>
+&lt;input  data-provide="datepicker" />
+&lt;/body>
+&lt;/html>
 </pre>
+    </main>
+</article>
 <div class="page-datepicker">
 
     <div class="callout callout-warning">

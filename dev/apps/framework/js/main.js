@@ -26,15 +26,17 @@ define( [ "jquery", "bootstrap", "formvalidationI18N"], function ( $ ) {
             return false;
         } );
         $( document ).on( "click.page", ".sidebar-menu .treeview-menu a, .top-link", function () {
-            var $this;
+            var $this,
+                url
+                ;
             $this = $( this );
             if ( $this.is( "._outerlink" ) ) {
                 return;
             }
+            url = $( this ).attr( "href" ) + "?VERSION=" + VERSION;
             $body.append( '<div class="overlay overlay-black"><i class="fa fa-spinner fa-spin"></i></div>' );
 
-            $main.load( $( this ).attr( "href" ), function successCallback() {
-                //alert( "loaded" );
+            $main.load( url, function successCallback() {
                 $body.children( ".overlay" ).remove();
                 window["PR"] && window["PR"].prettyPrint();
             } );

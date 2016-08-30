@@ -1,9 +1,48 @@
+<article class="article article-theme-1">
+    <header>
+        <h3>在 JSP 中使用</h3>
+        <hr>
+    </header>
+    <main>
 <pre class="prettyprint">
-// 引入
-require( [ "bootstrap" ], function () {
+&lt;%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+&lt;html>
+&lt;head>
+    &lt;title>modal的引入&lt;/title>
+    &lt;script>
 
-});
+        /* 	
+         访问：http://localhost:8080/test/modal
+         位置：/WEB-INF/views/test/modal.jsp 
+         依赖：（shim）"bootstrap": [ "jquery" ]
+         */
+        require( [ "bootstrap" ], function () {
+            // "bootstrap" 依赖 "jquery"，"jquery"会优先"bootstrap"载入
+            console.info( jQuery({}).jquery ) ;
+        } );
+
+    &lt;/script>
+&lt;/head>
+&lt;body>
+&lt;button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-1">触发&lt;/button>
+&lt;div class="modal fade" id="modal-1">
+    &lt;div class="modal-dialog modal-sm">
+        &lt;div class="modal-content">
+            &lt;div class="modal-header">
+                &lt;button type="button" class="close" data-dismiss="modal">×&lt;/button>
+                &lt;h4 class="modal-title">Modal title&lt;/h4>
+            &lt;/div>
+            &lt;div class="modal-body">
+                &lt;p>Modal body&lt;/p>
+            &lt;/div>
+        &lt;/div>
+    &lt;/div>
+&lt;/div>
+&lt;/body>
+&lt;/html>
 </pre>
+    </main>
+</article>
 <article>
     <header>
         <h3 class="text-muted">1. 静态示例</h3>

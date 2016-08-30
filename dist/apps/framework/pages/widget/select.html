@@ -1,9 +1,49 @@
+<article class="article article-theme-1">
+    <header>
+        <h3>在 JSP 中使用</h3>
+        <hr>
+    </header>
+    <main>
 <pre class="prettyprint">
-// 引入
-require( [ "select2" ], function () {
+&lt;%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+&lt;html>
+&lt;head>
+    &lt;title>select的引入&lt;/title>
+    &lt;script>
 
-});
+        /* 	
+         访问：http://localhost:8080/test/select
+         位置：/WEB-INF/views/test/select.jsp
+         依赖：（shim）"select2": [ "jquery", "xDomainRequest"]
+         */
+        require( [ "select2" ], function () {
+            // "select2" 依赖 "jquery"，"jquery"会优先"select2"载入
+            jQuery( document ).ready( function( $ ) {
+                jQuery("#select2_2").select2({
+                    data:[
+                        { id: 10, text: '张三', spell: "zs" },
+                        { id: 1, text: '李四', spell: "ls" },
+                        { id: 2, text: '王五', spell: "ww" },
+                        { id: 3, text: '赵六', spell: "zl" },
+                        { id: 4, text: '钱七', spell: "qq" }
+                    ],
+                    placeholder: "请选择",
+                    allowClear: true
+                });
+            } );
+        } );
+
+    &lt;/script>
+&lt;/head>
+&lt;body>
+&lt;select class="form-control" id="select2_2" style="width: 300px;">
+    &lt;option>&lt;!-- 显示占位符的内容 -->&lt;/option>
+&lt;/select>
+&lt;/body>
+&lt;/html>
 </pre>
+    </main>
+</article>
 <div class="page-select">
 
     <div class="callout callout-info">

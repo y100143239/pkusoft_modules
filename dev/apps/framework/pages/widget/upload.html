@@ -1,9 +1,49 @@
+<article class="article article-theme-1">
+    <header>
+        <h3>在 JSP 中使用</h3>
+        <hr>
+    </header>
+    <main>
 <pre class="prettyprint">
-// 引入
-require( ["webuploader"], function (WebUploader) {
-    window.WebUploader = WebUploader;
-} );
+&lt;%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+&lt;html>
+&lt;head>
+    &lt;title>upload的引入&lt;/title>
+    &lt;script>
+
+        /* 	
+         访问：http://localhost:8080/test/upload
+         位置：/WEB-INF/views/test/upload.jsp 
+         依赖：（shim）"webuploader": [ "css!lib/webuploader/css/webuploader.css" ]
+         */
+        require( [ "webuploader", "jquery" ], function ( webuploader, $ ) {
+
+            $( document ).ready( function() {
+
+                var uploaderContainerId,
+                        uploaderOptions
+                        ;
+                uploaderContainerId = "uploaderContainer";
+                uploaderOptions = {
+                    // swf文件路径
+                    swf: '/Uploader.swf',
+
+                    // 文件接收服务端。
+                    server: '/Upload'
+                };
+                webuploader.pku.fileUpload( uploaderContainerId, uploaderOptions );
+            } );
+        } );
+
+    &lt;/script>
+&lt;/head>
+&lt;body>
+&lt;div id="uploaderContainer">&lt;/div>
+&lt;/body>
+&lt;/html>
 </pre>
+    </main>
+</article>
 <script>
     //var BASE_URL = "../../../dev/modules/lib/webuploader/";
     var BASE_URL = "";

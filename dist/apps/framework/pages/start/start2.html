@@ -13,6 +13,41 @@
 </div>
 
 
+
+<article class="article article-theme-1">
+    <header>
+        <h3>模块的使用</h3>
+        <hr>
+    </header>
+    <main>
+        <ol>
+            <li>前提： 被 pkuframework.jsp 装饰</li>
+            <li>jQuery的使用
+                <pre class="prettyprint">
+&lt;%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+&lt;html>
+&lt;head>
+    &lt;title>jQuery的引入&lt;/title>
+    &lt;script>
+        /*
+            访问：http://localhost:8080/test/jquery
+            位置：/WEB-INF/views/test/jquery.jsp
+        */
+        require( [ "jquery" ], function ( jq ) {
+            console.info( "jQuery's version: ", jq( {} ).jquery ); //=> jQuery's version:  1.11.3
+            // jquery.js 引入完毕之后，会执行这个回调函数，同时全局变量jQuery也会传递给参数jq
+        } );
+
+    &lt;/script>
+&lt;/head>
+&lt;body> &lt;/body>
+&lt;/html>
+                </pre>
+            </li>
+        </ol>
+    </main>
+</article>
+
 <article class="article article-theme-1">
     <header>
         <h3>1. 通过sitemesh配置RequestJS —— /WEB-INF/layouts/pkuframework.jsp</h3>
