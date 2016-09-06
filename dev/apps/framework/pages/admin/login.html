@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/eg_admin.css"/>
+    <script>
+        window.onload = function () {
+            document.getElementById( "bodyLoadingOverlay" ).style.display = "none";
+        }
+    </script>
+    <title>登陆</title>
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lte IE 8]>
+    <script src="../../../../../dev/modules/lib/ie/respond.js"></script>
+    <script src="../../../../../dev/modules/lib/ie/html5shiv.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" href="../../../../../dev/modules/ui/css/pku.css?VERSION=v0.20160830"/>
+    <script data-main="../../../../modules/" src="../../../../modules/require.js"></script>
+    <script >
+        var VERSION,
+                DEV_MODE
+                ;
+        DEV_MODE = false;
+        VERSION = DEV_MODE ? (new Date()).getTime() : "v0.20160830";
+        require.config( {
+            urlArgs: "VERSION=" + VERSION,
+            paths: {
+                "jquery": "jquery/jquery-1.11.3",
+                "xDomainRequest": "jquery/jQuery.XDomainRequest",
+                "ajaxQueue": "jquery/jQuery.ajaxQueue",
+                "doT": "utils/doT",
+                "bootstrap": "lib/bootstrap/js/bootstrap",
+
+                "datepicker": "lib/datepicker/js/bootstrap-datepicker-zh.fix",
+
+                "select2": "lib/select2/js/select2.full.fix",
+
+                "echarts": "lib/echart/echarts.min",
+                "echartsTheme": "lib/echart/theme/macarons",
+                "echartsChinaMap": "lib/echart/map/china",
+
+                "formvalidation": "lib/formvalidate/js/formValidation.fix",
+                "formvalidationBs": "lib/formvalidate/js/framework/bootstrap.fix",
+                "formvalidationI18N": "lib/formvalidate/js/language/zh_CN",
+
+                "webuploader": "lib/webuploader/js/webuploader.fix",
+
+                "bootgrid": "lib/bootgrid/js/jquery.bootgrid.fix",
+                "colresizable": "lib/colresizable/colResizable-1.6",
+
+                "select-area": "lib/select-area/select-area",
+                "select-area-data": "lib/select-area/select-area-data",
+
+                "fixrecord": "lib/custom/fixrecord",
+
+                // 代码美化
+                "code-pretty": "lib/pretty/prettify.min"
+            },
+            map: {
+                '*': {
+                    'css': 'utils/css/css',
+                    'text': 'utils/text'
+                }
+            },
+            shim : {
+                "datepicker": [ "jquery"],
+                "select2": [ "jquery", "xDomainRequest"],
+                "bootstrap": [ "jquery"],
+                "formvalidation": [ "jquery", "bootstrap" ],
+                "formvalidationBs": [ "formvalidation" ],
+                "formvalidationI18N": [ "formvalidation", "formvalidationBs" ],
+                "webuploader": [ "css!lib/webuploader/css/webuploader.css" ],
+                "colresizable": [ "jquery" ],
+                "bootgrid": [ "css!lib/bootgrid/css/jquery.bootgrid.css" , "bootstrap", "colresizable"],
+                "select-area": ["css!lib/select-area/css/select-area.css", "select-area-data", "jquery" ],
+                "code-pretty": [ "css!lib/pretty/prettify.css" ]
+            },
+            // 超时
+            waitSeconds: 150
+        } );
+    </script>
+    <script src="../../js/eg_admin.js"></script>
+</head>
+<body>
+<div class="overlay" id="bodyLoadingOverlay">
+    <i class="fa fa-spin fa-spinner"></i>
+</div>
+
+<div class="page-login">
+
+    <div class="form-module">
+
+        <div class="toggle toggle-login" title="注册" data-toggle="tooltip">
+            <i class="fa fa-pencil"></i><!-- 注册-->
+            <i class="fa fa-times"></i><!-- 登陆-->
+        </div>
+
+        <div class="form-box form-login">
+            <!--<h2>登陆</h2>-->
+
+            <form class="form-horizontal" action="">
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-user "></i></span>
+                            <input type="text" class="form-control" placeholder="用户名" value="admin"
+                                   name="loginName"
+                                   data-fv-notempty="true">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <div class="input-group">
+                                            <span class="input-group-addon" style="padding: 6px 11px 6px 10px;"><i
+                                                    class="fa fa-key "></i></span>
+                            <input type="text" class="form-control" placeholder="密码" value="a"
+                                   name="password"
+                                   data-fv-notempty="true">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        <button type="submit" class="btn btn-info btn-block js--btn-save">登陆 <i class="fa fa-sign-in"></i></button>
+                    </div>
+                </div>
+            </form>
+            <div class="cta"><a href="http://andytran.me">忘记密码？</a></div>
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

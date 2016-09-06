@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script data-main="../../dev/modules/" src="../../dev/modules/require.js"></script>
+    <script >
+        var VERSION;
+        require.config( {
+            //urlArgs: "VERSION=" + (new Date()).getTime(),
+            paths: {
+                "jquery": "jquery/jquery-1.11.3",
+                "dataSource": "utils/dataSource"
+            },
+            // 超时
+            waitSeconds: 15
+        } );
+    </script>
+    <script>
+        require( [ "jquery", "dataSource" ], function( $, dataSource ) {
+
+            var urlArray = [
+                "DIC_DEPT_LEVEL.xml",
+                "DIC_GENDER.xml",
+                "DIC_USER_TYPE.xml",
+                "DIC_DEPT_LEVEL.xml",
+                "DIC_GENDER.xml",
+                "DIC_USER_TYPE.xml",
+                "soss"
+            ];
+
+            dataSource.cacheXmlDocument( urlArray, function( cache ){
+                console.info( cache );
+            } );
+
+        } );
+    </script>
+</head>
+<body>
+
+</body>
+</html>

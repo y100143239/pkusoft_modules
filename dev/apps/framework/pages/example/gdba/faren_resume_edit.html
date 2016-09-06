@@ -1,0 +1,45 @@
+<form class="form-horizontal form-edit" data-pku-widget="fv" action="${ctx}/gdba/reg/saveCompany"
+      data-detail-url="gdba/faren_resume_detail.html"
+      data-edit-url="gdba/faren_resume_edit.html">
+    <div class="form-group">
+        <label class="col-xs-2 control-label"><span class="fa fa-star text-required"></span> 起止时间</label>
+        <div class="col-xs-5">
+            <div class="input-group input-daterange" data-provide="datepicker" >
+                <input type="text" class="form-control" value="2016-01-05" name="starttime" data-fv-notempty="true">
+                <span class="input-group-addon">&nbsp; 到 &nbsp;</span>
+                <input type="text" class="form-control" value="2016-01-29" name="endtime" data-fv-notempty="true">
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-xs-2 control-label"><span class="fa fa-star text-required"></span> 公司名称</label>
+        <div class="col-xs-10">
+            <input type="text" class="form-control" name="gsmc" data-fv-notempty="true">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-xs-2 control-label"><span class="fa fa-star text-required" ></span> 职位类别</label>
+        <div class="col-xs-4">
+            <div class="_fv-container">
+                <select class="form-control" data-pku-widget="select2" name="frxb"
+                        data-placeholder="请选择"
+                        data-allow-clear="true" data-show-max-item-num="10"
+                        data-required="validate-invalid" data-fv-notempty="true"
+                        data-xmlurl="http://pkusoft.gz.bcebos.com/DIC_GENDER.xml"
+                        data-fv-row="._fv-container">
+                    <option value=""></option>
+                </select>
+            </div>
+        </div>
+        <label class="col-xs-2 control-label"><span class="fa fa-star text-required"></span> 职位名称</label>
+        <div class="col-xs-4">
+            <input type="text" class="form-control" data-fv-integer="true" name="gsmc" data-fv-notempty="true">
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-xs-4"></div>
+        <div class="col-xs-4">
+            <button type="submit" class="btn btn-info btn-block btn-lg"  style="margin-top: 20px;"><i class="fa fa-save"></i> 保存</button>
+        </div>
+    </div>
+</form>

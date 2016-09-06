@@ -1,0 +1,165 @@
+<form class="form-horizontal" data-pku-widget="fv"
+      action="xxx"
+      data-detail-url="gdba/faren_detail.html"
+      data-edit-url="gdba/faren_edit.html">
+
+    <button type="button" class="btn btn-sm btn-warning btn-edit" title="编辑" data-toggle="tooltip"><i class="fa fa-pencil"></i></button>
+
+    <div class="form-group">
+        <div class="_fv-container">
+            <label class="col-xs-2 control-label"><span class="fa fa-star text-required"></span> 姓名</label>
+            <div class="col-xs-4">
+                <input type="text" class="form-control" name="frxm" data-fv-notempty="true"  data-fv-row="._fv-container" >
+            </div>
+        </div>
+        <div class="_fv-container">
+            <label class="col-xs-2 control-label"><span class="fa fa-star text-required"></span> 性别</label>
+            <div class="col-xs-4">
+                <select class="form-control" data-pku-widget="select2" name="frxb"
+                        data-placeholder="请选择"
+                        data-allow-clear="true" data-show-max-item-num="10"
+                        data-required="validate-invalid" data-fv-notempty="true"
+                        data-xmlurl="http://pkusoft.gz.bcebos.com/DIC_GENDER.xml"
+                        data-fv-row="._fv-container">
+                    <option value=""></option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="_fv-container">
+            <label class="col-xs-2 control-label"><span class="fa fa-star text-required"></span> 出生日期</label>
+            <div class="col-xs-4">
+                <div class="input-group date" data-provide="datepicker" >
+                    <input type="text" class="form-control" placeholder="选择日期" name="frcsrq" data-fv-notempty="true"/>
+                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-xs-2 control-label"><span class="fa fa-star text-required"></span> 国籍</label>
+        <div class="col-xs-4">
+            <select class="form-control" data-pku-widget="select2" name="frgj"
+                    data-placeholder="请选择"
+                    data-allow-clear="true" data-show-max-item-num="10"
+                    data-required="validate-invalid" data-fv-notempty="true"
+                    data-xmlurl="http://pkusoft.gz.bcebos.com/DIC_NATIONALITY.xml"
+                    data-fv-row="._fv-container">
+                <option value=""></option>
+            </select>
+        </div>
+        <label class="col-xs-2 control-label"><span class="fa fa-star text-required"></span> 民族</label>
+        <div class="col-xs-4">
+            <select class="form-control" data-pku-widget="select2" name="frmz"
+                    data-placeholder="请选择"
+                    data-allow-clear="true" data-show-max-item-num="10"
+                    data-required="validate-invalid" data-fv-notempty="true"
+                    data-xmlurl="http://pkusoft.gz.bcebos.com/DIC_NATION.xml"
+                    data-fv-row="._fv-container">
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-xs-2 control-label"><span class="fa fa-star text-required"></span> 政治面貌</label>
+        <div class="col-xs-4">
+            <select class="form-control" data-pku-widget="select2" name="frzzmm"
+                    data-placeholder="请选择"
+                    data-allow-clear="true" data-show-max-item-num="10"
+                    data-required="validate-invalid" data-fv-notempty="true"
+                    data-xmlurl="http://pkusoft.gz.bcebos.com/DIC_CLAN.xml">
+                <option value=""></option>
+            </select>
+        </div>
+        <label class="col-xs-2 control-label"><span class="fa fa-star text-required"></span> 文化程度</label>
+        <div class="col-xs-4">
+            <select class="form-control" data-pku-widget="select2" name="frwhcd"
+                    data-placeholder="请选择"
+                    data-allow-clear="true" data-show-max-item-num="10"
+                    data-required="validate-invalid" data-fv-notempty="true"
+                    data-xmlurl="http://pkusoft.gz.bcebos.com/DIC_EDUCATION.xml">
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-xs-2 control-label"><span class="fa fa-star text-required"></span> 证件类型</label>
+        <div class="col-xs-4">
+            <select class="form-control" data-pku-widget="select2" name="frzjlx"
+                    data-placeholder="请选择"
+                    data-allow-clear="true" data-show-max-item-num="10"
+                    data-required="validate-invalid" data-fv-notempty="true"
+                    data-xmlurl="http://pkusoft.gz.bcebos.com/DIC_TRAVEL_DOCUMENTS.xml">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="_fv-container">
+            <label class="col-xs-2 control-label"><span class="fa fa-star text-required"></span> 证件号码</label>
+            <div class="col-xs-4">
+                <input type="text" class="form-control" name="frzjhm" data-fv-notempty="true" data-fv-row="._fv-container"/>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-xs-2 control-label"><span class="fa fa-star text-required"></span> 实际居住地市县(区)</label>
+        <div class="col-xs-10">
+            <div class="input-group">
+                <input type="text" class="form-control" data-pku-widget="select-area" name="frsjjzdssxq" data-select-trigger="#selectBtn_frsjjzdssxq"
+                       data-fv-notempty="true"
+                       data-fv-icon="false">
+	                        <span class="input-group-btn">
+	                            <button class="btn btn-default" type="button" id="selectBtn_frsjjzdssxq"><i class="fa fa-caret-down"></i></button>
+	                        </span>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-xs-2 control-label"><span class="fa fa-star text-required"></span> 实际居住地详址</label>
+        <div class="col-xs-10">
+            <input type="text" class="form-control" name="frsjjzdxz" data-fv-notempty="true"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-xs-2 control-label"><span class="fa fa-star text-required"></span> 户籍地省市县(区)</label>
+        <div class="col-xs-10">
+            <div class="input-group">
+                <input type="text" class="form-control" data-pku-widget="select-area" name="frhjdssxq" data-select-trigger="#selectBtn_frhjdssxq"
+                       data-fv-notempty="true"
+                       data-fv-icon="false">
+	                        <span class="input-group-btn">
+	                            <button class="btn btn-default" type="button" id="selectBtn_frhjdssxq"><i class="fa fa-caret-down"></i></button>
+	                        </span>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-xs-2 control-label"><span class="fa fa-star text-required"></span> 户籍地详址</label>
+        <div class="col-xs-10">
+            <input type="text" class="form-control" name="frhjdxz" data-fv-notempty="true"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="_fv-container">
+            <label class="col-xs-2 control-label"><span class="fa fa-star text-required"></span> 办公电话</label>
+            <div class="col-xs-4">
+                <input type="text" class="form-control" name="frbgdh" data-fv-notempty="true" data-fv-row="._fv-container"/>
+            </div>
+        </div>
+        <div class="_fv-container">
+            <label class="col-xs-2 control-label"><span class="fa fa-star text-required"></span> 手机号码</label>
+            <div class="col-xs-4">
+                <input type="text" class="form-control" name="frsjhm" data-fv-notempty="true" data-fv-row="._fv-container"/>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-xs-4"></div>
+        <div class="col-xs-4">
+            <button type="submit" class="btn btn-info btn-block btn-lg"  style="margin-top: 20px;"><i class="fa fa-save"></i> 保存</button>
+        </div>
+    </div>
+</form>

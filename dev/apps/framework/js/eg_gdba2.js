@@ -1,16 +1,13 @@
 require( [ "jquery", "gdbaUtils",
-                "formvalidationI18N", "bootstrap", "select2", "datepicker", "select-area" ], function ( $, Utils ) {
+                "formvalidationI18N", "bootstrap", "select2", "datepicker", "select-area" ], function ( $, /* 定义在下面 */Utils ) {
 
     var $document
     ;
     $document = $( document );
 
-    // Utils 在下面定义为模块
-
-    // 保存
-    $document.on( "click", ".js--panel .js--save", function ( e ) {
+    // 点击 保存（.btn[type='submit']）
+    $document.on( "click.gdba", ".btn[type='submit']", function () {
         var $this,
-            $panel,
             $form,
             $fvInstance,
             isValid,
@@ -18,8 +15,7 @@ require( [ "jquery", "gdbaUtils",
             fragmentUrl
             ;
         $this = $( this );
-        $panel = $this.closest( ".js--panel" );
-        $form = $panel.find( ".js--form" );
+        $form = $this.closest( "form" );
         $fvInstance = $form.data( 'formValidation' );
 
         // 校验
@@ -33,11 +29,11 @@ require( [ "jquery", "gdbaUtils",
         }
 
         // 添加loading遮罩层
-        Utils.addLoadingOverlay( $panel );
+        Utils.addLoadingOverlay( $form );
 
         // 发送Ajax，保存数据
         formUrl = $form.attr( "action" );
-        fragmentUrl = $panel.attr( "data-detail-panel-url" );
+        fragmentUrl = $form.attr( "data-detail-url" );
         $.ajax( {
             type: "POST",
             url: formUrl,
@@ -46,29 +42,33 @@ require( [ "jquery", "gdbaUtils",
             contentType: "application/x-www-form-urlencoded; charset=utf-8",
             dataType: "json", // 预期服务器返回的数据类型。
             success: function ( responseData ) {
-                Utils.loadDetailFragment( fragmentUrl, $panel );
+                Utils.removeLoadingOverlay( $form );
+                Utils.loadDetailFragment( fragmentUrl, $form );
             },
             error: function () {
                 alert( "网络错误" );
-                Utils.removeLoadingOverlay( $panel );
+                Utils.removeLoadingOverlay( $form );
+                Utils.loadDetailFragment( fragmentUrl, $form );
             }
         } );
 
+        return false; // 禁止提交表单
     } );
-    // 编辑
-    $document.on( "click", ".js--panel .js--edit", function ( e ) {
+    // 点击 编辑（.btn-edit）
+    $document.on ( "click.gdba", ".btn-edit", function () {
         var $this,
-            $panel,
+            $form,
             fragmentUrl
             ;
+
         $this = $( this );
-        $panel = $this.closest( ".js--panel" );
-        fragmentUrl = $panel.attr( "data-edit-panel-url" );
+        $form = $this.closest( "form" );
+        fragmentUrl = $form.attr( "data-edit-url" );
         // 添加 loading 遮罩层
-        Utils.addLoadingOverlay( $panel );
+        Utils.addLoadingOverlay( $form );
         // 载入 编辑页片段
-        Utils.loadEditFragment( fragmentUrl, $panel );
-    });
+        Utils.loadEditFragment( fragmentUrl, $form );
+    } );
 
     // 点击“图片上传”时，进行webuploader的初始化
     $document.on( "click", ".tab-info .tab-upload", function () {
@@ -91,38 +91,11 @@ require( [ "jquery", "gdbaUtils",
         $( "#_gsxqpcsmc" ).val( $( this ).find("option:selected").text() );
     });
 
-    // 附件的折叠和显示（带图标）
-    $document.on( "click.collapse", ".mode-collapse-heading", function () {
-        var $this
-        ;
-        $this = $( this );
-        // 隐藏元素
-        $this.siblings( ".mode-collapse-target" ).stop().slideToggle( function (){
-            $( this ).css( "height", "auto" );
-        } );
-        // 切换状态
-        $this.find( ".mode-collapse-icon" ).toggleClass( "fa-chevron-circle-down" );
-    } );
-
     $document.ready( function () {
-
-        var $leftsideNav
-        ;
-        $leftsideNav = $( ".nav-leftside" );
 
         Utils.renderPanel();
 
-        // 给导航添加提示
-        $( document.body ).tooltip( {
-            selector : '[data-toggle="tooltip"]',
-            theme: "tooltip-info-dark",
-            container: "body"
-        } );
 
-        // 给导航添加折叠按钮
-        $leftsideNav.on( "click", ".js--change", function () {
-            $leftsideNav.toggleClass( "nav-leftside-min" )
-        } );
     } );
 
 } );
@@ -132,8 +105,13 @@ define( "gdbaUtils", ["jquery", "webuploader"], function ($, WebUploader) {
         renderPanel: function ( $target ) {
             $target = $target || $( document );
             $( '[data-pku-widget="fv"]', $target ).formValidation();
+            $target.is( "form" ) && $target.formValidation();
             $( '[data-pku-widget="select2"]', $target ).select2();
             $( '[data-pku-widget="select-area"]', $target ).selectArea();
+            $( "[data-toggle='tooltip']", $target ).tooltip({
+                container: "body",
+                theme: "tooltip-info-dark"
+            });
         },
         addLoadingOverlay: function ( $target ) {
             this.removeLoadingOverlay( $target );
@@ -142,29 +120,32 @@ define( "gdbaUtils", ["jquery", "webuploader"], function ($, WebUploader) {
         removeLoadingOverlay: function ( $target ) {
             $target.find( ".overlay.overlay-black" ).remove();
         },
-        loadDetailFragment: function ( url, $panel, successCallback ) {
-            var panelId,
-                $temp
+        loadDetailFragment: function ( url, $form, successCallback ) {
+            var $temp
                 ;
-            panelId = "#" + $panel.attr( "id" );
             $temp = $( "<div>" );
             // 载入 详情页片段
-            $temp.load( url + panelId, function () {
-                $panel.html( $temp.find( panelId ).html() );
+            $temp.load( url, function ( response, status ) {
+                var $_form = $( $temp.html() );
+                if ( status != "success" ) {
+                    alert( "载入失败" );
+                }
+                $form.find( "[data-toggle='tooltip']" ).tooltip('destroy');
+                $form.replaceWith( $_form );
                 $temp = null;
                 // 回调
                 if ( successCallback && ( typeof successCallback == "function" ) ) {
-                    successCallback();
+                    successCallback( $_form );
                 }
             });
         },
-        loadEditFragment: function ( url, $panel, successCallback ) {
+        loadEditFragment: function ( url, $form, successCallback ) {
             var _this
                 ;
             _this = this;
-            this.loadDetailFragment( url, $panel, function () {
+            this.loadDetailFragment( url, $form, function ( $form ) {
                 // 渲染，注册插件
-                _this.renderPanel( $panel );
+                _this.renderPanel( $form );
                 // 回调
                 if ( successCallback && ( typeof successCallback == "function" ) ) {
                     successCallback();
@@ -225,5 +206,5 @@ define( "gdbaUtils", ["jquery", "webuploader"], function ($, WebUploader) {
                 }
             } );
         }
-    }
+    };
 }) ;

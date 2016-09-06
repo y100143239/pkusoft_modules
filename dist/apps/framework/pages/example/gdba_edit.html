@@ -84,20 +84,13 @@
             waitSeconds: 150
         } );
     </script>
+    <script src="../../js/eg_gdba2.js"></script>
 </head>
 <body>
 <div class="overlay" id="bodyLoadingOverlay">
     <i class="fa fa-spin fa-spinner"></i>
 </div>
 
-
-<div class="nav-leftside">
-    <div class="btn-group-vertical">
-        <a href="#_panel-1" data-toggle="tooltip" class="btn btn-success panel-anchor" title="保安服务公司基本信息"><i class="fa fa-sticky-note-o"></i></a>
-        <a href="#_panel-2" data-toggle="tooltip" class="btn btn-info panel-anchor" title="保安服务公司法定代表人信息"><i class="fa fa-legal"></i></a>
-        <a href="#_panel-3" data-toggle="tooltip" class="btn btn-warning panel-anchor" title="主要负责人信息"><i class="fa fa-user-secret"></i></a>
-    </div>
-</div>
 
 <!-- 头部 -->
 <div class="wrap header">
@@ -125,142 +118,976 @@
 <!-- 中间内容部分-->
 <div class="wrap clearfix main border-radius-none-all" >
 
+    <!--保安服务公司-->
+    <div class="module">
+        <!-- 保安服务公司 - 基本信息 -->
+        <div class="panel-plat">
+            <div class="panel-heading">
+                <div class="text"><i class="fa fa-legal"></i> 保安服务公司 - 基本信息</div>
+            </div>
+            <div class="panel-body">
+                <form class="form-horizontal" data-pku-widget="fv" action="/gdba/reg/saveCompany"
+                        data-detail-url="gdba/company_detail.html"
+                        data-edit-url="gdba/company_edit.html">
+                    <button type="button" class="btn btn-sm btn-warning btn-edit" title="编辑" data-toggle="tooltip"><i class="fa fa-pencil"></i></button>
+                    <input type="hidden" name="gsbm" />
 
-    <div class="panel panel-default js--panel" id="_panel-1" data-detail-panel-url="gdba_detail.html" data-edit-panel-url="gdba_edit.html">
-        <div class="panel-heading text-info"> <i class="fa fa-sticky-note-o"></i> 保安服务公司基本信息
-            <!--
-            <button type="button" class="btn btn-warning pull-right btn-xs" ><i class="fa fa-edit"></i> 修改</button>
-            -->
-        </div>
-        <div class="panel-body">
+                    <div class="form-group">
+                        <label class="col-xs-2 control-label col-xs-2"><span class="fa fa-star text-required"></span> 公司名称</label>
 
-            <form id="_form-edit-1" class="form-horizontal js--form" data-pku-widget="fv" action="${ctx}/gdba/reg/saveCompany">
-                <input type="hidden" name="gsbm" />
-
-                <div class="form-group">
-                    <label class="col-xs-2 control-label col-xs-2"><span class="fa fa-star text-required"></span> 公司名称</label>
-
-                    <div class="col-xs-10">
-                        <input type="text" class="form-control" name="gsmc" data-fv-notempty="true">
+                        <div class="col-xs-10">
+                            <input type="text" class="form-control" name="gsmc" data-fv-notempty="true">
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <div class="_fv-container">
-                        <label class="col-xs-2 control-label"><span class="fa fa-star text-required"></span> 公司性质</label>
-                        <div class="col-xs-4">
-                            <select class="form-control" data-pku-widget="select2" name="gsxz"
+                    <div class="form-group">
+                        <div class="_fv-container">
+                            <label class="col-xs-2 control-label"><span class="fa fa-star text-required"></span> 公司性质</label>
+                            <div class="col-xs-4">
+                                <select class="form-control" data-pku-widget="select2" name="gsxz"
+                                        data-placeholder="请选择"
+                                        data-allow-clear="true" data-show-max-item-num="10"
+                                        data-required="validate-invalid" data-fv-notempty="true"
+                                        data-xmlurl="http://pkusoft.gz.bcebos.com/DIC_COMPANY_TYPE.xml"
+                                        data-fv-row="._fv-container"
+                                        data-fv-icon="false">
+                                    <option value=""></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="_fv-container">
+                            <label class="col-xs-2 control-label">管理人数</label>
+                            <div class="col-xs-4">
+                                <input type="text" class="form-control" name="glrs" data-fv-integer="true" data-fv-row="._fv-container" >
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="_fv-container">
+                            <label class="col-xs-2 control-label"><span class="fa fa-star text-required"></span> 注册资金</label>
+                            <div class="col-xs-4">
+                                <div class="input-group">
+                                    <span class="input-group-addon">￥</span>
+                                    <input name="zczj" type="text" class="form-control text-right"
+                                           data-fv-row="._fv-container"
+                                           data-fv-notempty="true"
+                                           data-fv-numeric="true"
+                                           data-fv-greaterthan="true"
+                                           data-fv-greaterthan-value="0"
+                                           data-fv-icon="false">
+                                    <span class="input-group-addon">万</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="_fv-container">
+                            <label class="col-xs-2 control-label"><span class="fa fa-star text-required"></span> 营业执照注册号</label>
+                            <div class="col-xs-4">
+                                <input name="yyzz" type="text" class="form-control"
+                                       data-fv-row="._fv-container"
+                                       data-fv-notempty="true">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-xs-2 control-label "><span class="fa fa-star text-required"></span> 公司地址省市县(区)</label>
+
+                        <div class="col-xs-10">
+                            <div class="input-group">
+                                <input type="text" class="form-control" data-pku-widget="select-area" name="gsdzssxq" data-select-trigger="#selectBtn_gsdzssxq"
+                                       data-fv-notempty="true"
+                                       data-fv-icon="false">
+	                        <span class="input-group-btn">
+	                            <button class="btn btn-default" type="button" id="selectBtn_gsdzssxq"><i class="fa fa-caret-down"></i></button>
+	                        </span>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-xs-2 control-label"><span class="fa fa-star text-required"></span> 公司详细地址</label>
+
+                        <div class="col-xs-10">
+                            <input type="text" name="gsdzxz" class="form-control" data-fv-notempty="true" >
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-xs-2 control-label"><span class="fa fa-star text-required"></span> 辖区派出所</label>
+                        <input type="hidden" name="gsxqpcs_name" id="_gsxqpcsmc"/>
+                        <div class="col-xs-10">
+                            <select class="form-control"  name="gsxqpcs" data-pku-widget="select2" id="_gsxqpcs"
                                     data-placeholder="请选择"
                                     data-allow-clear="true" data-show-max-item-num="10"
                                     data-required="validate-invalid" data-fv-notempty="true"
-                                    data-xmlurl="http://pkusoft.gz.bcebos.com/DIC_COMPANY_TYPE.xml"
-                                    data-fv-row="._fv-container"
-                                    data-fv-icon="false">
+                                    data-xmlurl="http://pkusoft.gz.bcebos.com/DIC_PCS.xml"
+                                    data-fv-icon="false"
+                                    data-selected-value="440103440000">
                                 <option value=""></option>
                             </select>
                         </div>
                     </div>
-                    <div class="_fv-container">
-                        <label class="col-xs-2 control-label">管理人数</label>
-                        <div class="col-xs-4">
-                            <input type="text" class="form-control" name="glrs" data-fv-integer="true" data-fv-row="._fv-container" >
+
+
+                    <div class="form-group">
+                        <label class="col-xs-2 control-label"><span class="fa fa-star text-required"></span> 经营范围</label>
+
+                        <div class="col-xs-10">
+                            <label class="checkbox-inline"> <input type="checkbox" name="jyfw" value="01"
+                                                                   data-fv-notempty="true"
+                                                                   data-fv-icon="false">门卫</label>
+                            <label class="checkbox-inline"> <input type="checkbox" name="jyfw" value="02">巡逻</label>
+                            <label class="checkbox-inline"> <input type="checkbox" name="jyfw" value="03">守护</label>
+                            <label class="checkbox-inline"> <input type="checkbox" name="jyfw" value="04">押运</label>
+                            <label class="checkbox-inline"> <input type="checkbox" name="jyfw" value="05">随身护卫</label>
+                            <label class="checkbox-inline"> <input type="checkbox" name="jyfw" value="06">安全检查</label>
+                            <label class="checkbox-inline"> <input type="checkbox" name="jyfw" value="07">安全技术防范</label>
+                            <label class="checkbox-inline"> <input type="checkbox" name="jyfw" value="08">安全风险评估</label>
+                            <label class="checkbox-inline"> <input type="checkbox" name="jyfw" value="09">秩序维护</label>
+                            <label class="checkbox-inline"> <input type="checkbox" name="jyfw" value="10">其他</label>
                         </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <div class="_fv-container">
-                        <label class="col-xs-2 control-label"><span class="fa fa-star text-required"></span> 注册资金</label>
+                    <div class="form-group">
+                        <div class="col-xs-4"></div>
                         <div class="col-xs-4">
-                            <div class="input-group">
-                                <span class="input-group-addon">￥</span>
-                                <input name="zczj" type="text" class="form-control text-right"
-                                       data-fv-row="._fv-container"
-                                       data-fv-notempty="true"
-                                       data-fv-numeric="true"
-                                       data-fv-greaterthan="true"
-                                       data-fv-greaterthan-value="0"
-                                       data-fv-icon="false">
-                                <span class="input-group-addon">万</span>
+                            <button type="submit" class="btn btn-info btn-block btn-lg js--saveBtn"  style="margin-top: 20px;"><i class="fa fa-save"></i> 保存</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- /保安服务公司 - 基本信息 -->
+
+        <!-- 保安服务公司 - 附件 -->
+        <div class="panel-plat">
+            <div class="panel-heading">
+                <div class="text"><i class="fa fa-legal"></i> 保安服务公司 - 附件</div>
+            </div>
+            <div class="panel-body">
+                <div class="photoList">
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li role="presentation" class="active"><a href="#tab_1_1" data-toggle="tab">注册资本验资证明</a></li>
+                            <li role="presentation"><a href="#tab_1_2" data-toggle="tab">企业名称</a></li>
+                            <li role="presentation"><a href="#tab_1_3" data-toggle="tab">公司营业执照</a></li>
+                            <li role="presentation"><a href="#tab_1_4" data-toggle="tab">设立申请书</a></li>
+                        </ul>
+
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane active" id="tab_1_1">
+
+                                <div class="nav-tabs-custom tab-info">
+                                    <p class="text-muted"><i class="fa fa-info-circle"></i>（注册资本验资证明）图片要求：1. 图片格式仅限 jpg；2. 单张图片大小不能超过 800KB。</p>
+                                    <!-- Nav tabs -->
+                                    <ul class="nav nav-tabs" role="tablist">
+                                        <li class="active"><a href="#myPhoto_1_1" data-toggle="tab">我的图片</a></li>
+                                        <li><a class="tab-upload" href="#uploadPhoto_1_1" data-toggle="tab">图片上传</a></li>
+                                    </ul>
+
+                                    <!-- Tab panes -->
+                                    <div class="tab-content">
+                                        <div class="tab-pane active" id="myPhoto_1_1">
+                                            <div class="photo-list clearfix">
+                                                <div class="photo-item">
+                                                    <div class="photo-wrap">
+                                                        <img src="../../images/pic-none.png" alt=""/>
+                                                    </div>
+                                                    <div class="photo-name">图片名称图片名称图片名称图片名称</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane active" id="uploadPhoto_1_1">
+                                            <div class="imageUploaderContainer" data-upload-url="url_1_1"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="tab_1_2">
+                                <div class="nav-tabs-custom tab-info">
+                                    <p class="text-muted"><i class="fa fa-info-circle"></i>（企业名称）图片要求：1. 图片格式仅限 jpg；2. 单张图片大小不能超过 800KB。</p>
+                                    <!-- Nav tabs -->
+                                    <ul class="nav nav-tabs" role="tablist">
+                                        <li class="active"><a href="#myPhoto_1_2" data-toggle="tab">我的图片</a></li>
+                                        <li><a class="tab-upload" href="#uploadPhoto_1_2" data-toggle="tab">图片上传</a></li>
+                                    </ul>
+
+                                    <!-- Tab panes -->
+                                    <div class="tab-content">
+                                        <div class="tab-pane active" id="myPhoto_1_2">
+                                            <div class="photo-list clearfix">
+                                                <div class="photo-item">
+                                                    <div class="photo-wrap">
+                                                        <img src="../../images/pic-none.png" alt=""/>
+                                                    </div>
+                                                    <div class="photo-name">图片名称图片名称图片名称图片名称</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane active" id="uploadPhoto_1_2">
+                                            <div class="imageUploaderContainer" data-upload-url="url_1_2"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="tab_1_3">
+                                <div class="nav-tabs-custom tab-info">
+                                    <p class="text-muted"><i class="fa fa-info-circle"></i> （公司营业执照）图片要求：1. 图片格式仅限 jpg；2. 单张图片大小不能超过 800KB。</p>
+                                    <!-- Nav tabs -->
+                                    <ul class="nav nav-tabs" role="tablist">
+                                        <li class="active"><a href="#myPhoto_1_3" data-toggle="tab">我的图片</a></li>
+                                        <li><a class="tab-upload" href="#uploadPhoto_1_3" data-toggle="tab">图片上传</a></li>
+                                    </ul>
+
+                                    <!-- Tab panes -->
+                                    <div class="tab-content">
+                                        <div class="tab-pane active" id="myPhoto_1_3">
+                                            <div class="photo-list clearfix">
+                                                <div class="photo-item">
+                                                    <div class="photo-wrap">
+                                                        <img src="../../images/pic-none.png" alt=""/>
+                                                    </div>
+                                                    <div class="photo-name">图片名称图片名称图片名称图片名称</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane active" id="uploadPhoto_1_3">
+                                            <div class="imageUploaderContainer" data-upload-url="url_1_3"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="tab_1_4">
+                                <div class="nav-tabs-custom tab-info">
+                                    <p class="text-muted"><i class="fa fa-info-circle"></i>（设立申请书）图片要求：1. 图片格式仅限 jpg；2. 单张图片大小不能超过 800KB。</p>
+                                    <!-- Nav tabs -->
+                                    <ul class="nav nav-tabs" role="tablist">
+                                        <li class="active"><a href="#myPhoto_1_4" data-toggle="tab">我的图片</a></li>
+                                        <li><a class="tab-upload" href="#uploadPhoto_1_4" data-toggle="tab">图片上传</a></li>
+                                    </ul>
+
+                                    <!-- Tab panes -->
+                                    <div class="tab-content">
+                                        <div class="tab-pane active" id="myPhoto_1_4">
+                                            <div class="photo-list clearfix">
+                                                <div class="photo-item">
+                                                    <div class="photo-wrap">
+                                                        <img src="../../images/pic-none.png" alt=""/>
+                                                    </div>
+                                                    <div class="photo-name">图片名称图片名称图片名称图片名称</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane active" id="uploadPhoto_1_4">
+                                            <div class="imageUploaderContainer" data-upload-url="url_1_4"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!-- /保安服务公司 - 附件 -->
+    </div>
+    <!--/保安服务公司-->
+
+    <!-- 法定代表人 -->
+    <div class="module">
+
+        <!-- 法定代表人 - 基本信息 -->
+        <div class="panel-plat">
+            <div class="panel-heading">
+                <div class="text"><i class="fa fa-legal"></i> 法定代表人 - 基本信息</div>
+            </div>
+            <div class="panel-body">
+                <form class="form-horizontal" data-pku-widget="fv"
+                        action="xxx"
+                        data-detail-url="gdba/faren_detail.html"
+                        data-edit-url="gdba/faren_edit.html">
+
+                    <button type="button" class="btn btn-sm btn-warning btn-edit" title="编辑" data-toggle="tooltip"><i class="fa fa-pencil"></i></button>
+
+                    <div class="form-group">
+                        <div class="_fv-container">
+                            <label class="col-xs-2 control-label"><span class="fa fa-star text-required"></span> 姓名</label>
+                            <div class="col-xs-4">
+                                <input type="text" class="form-control" name="frxm" data-fv-notempty="true"  data-fv-row="._fv-container" >
+                            </div>
+                        </div>
+                        <div class="_fv-container">
+                            <label class="col-xs-2 control-label"><span class="fa fa-star text-required"></span> 性别</label>
+                            <div class="col-xs-4">
+                                <select class="form-control" data-pku-widget="select2" name="frxb"
+                                        data-placeholder="请选择"
+                                        data-allow-clear="true" data-show-max-item-num="10"
+                                        data-required="validate-invalid" data-fv-notempty="true"
+                                        data-xmlurl="http://pkusoft.gz.bcebos.com/DIC_GENDER.xml"
+                                        data-fv-row="._fv-container">
+                                    <option value=""></option>
+                                </select>
                             </div>
                         </div>
                     </div>
-                    <div class="_fv-container">
-                        <label class="col-xs-2 control-label"><span class="fa fa-star text-required"></span> 营业执照注册号</label>
+
+                    <div class="form-group">
+                        <div class="_fv-container">
+                            <label class="col-xs-2 control-label"><span class="fa fa-star text-required"></span> 出生日期</label>
+                            <div class="col-xs-4">
+                                <div class="input-group date" data-provide="datepicker" >
+                                    <input type="text" class="form-control" placeholder="选择日期" name="frcsrq" data-fv-notempty="true"/>
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-xs-2 control-label"><span class="fa fa-star text-required"></span> 国籍</label>
                         <div class="col-xs-4">
-                            <input name="yyzz" type="text" class="form-control"
-                                   data-fv-row="._fv-container"
-                                   data-fv-notempty="true">
+                            <select class="form-control" data-pku-widget="select2" name="frgj"
+                                    data-placeholder="请选择"
+                                    data-allow-clear="true" data-show-max-item-num="10"
+                                    data-required="validate-invalid" data-fv-notempty="true"
+                                    data-xmlurl="http://pkusoft.gz.bcebos.com/DIC_NATIONALITY.xml"
+                                    data-fv-row="._fv-container">
+                                <option value=""></option>
+                            </select>
+                        </div>
+                        <label class="col-xs-2 control-label"><span class="fa fa-star text-required"></span> 民族</label>
+                        <div class="col-xs-4">
+                            <select class="form-control" data-pku-widget="select2" name="frmz"
+                                    data-placeholder="请选择"
+                                    data-allow-clear="true" data-show-max-item-num="10"
+                                    data-required="validate-invalid" data-fv-notempty="true"
+                                    data-xmlurl="http://pkusoft.gz.bcebos.com/DIC_NATION.xml"
+                                    data-fv-row="._fv-container">
+                                <option value=""></option>
+                            </select>
                         </div>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    <label class="col-xs-2 control-label "><span class="fa fa-star text-required"></span> 公司地址省市县(区)</label>
-
-                    <div class="col-xs-10">
-                        <div class="input-group">
-                            <input type="text" class="form-control" data-pku-widget="select-area" name="gsdzssxq" data-select-trigger="#selectBtn_gsdzssxq"
-                                   data-fv-notempty="true"
-                                   data-fv-icon="false">
+                    <div class="form-group">
+                        <label class="col-xs-2 control-label"><span class="fa fa-star text-required"></span> 政治面貌</label>
+                        <div class="col-xs-4">
+                            <select class="form-control" data-pku-widget="select2" name="frzzmm"
+                                    data-placeholder="请选择"
+                                    data-allow-clear="true" data-show-max-item-num="10"
+                                    data-required="validate-invalid" data-fv-notempty="true"
+                                    data-xmlurl="http://pkusoft.gz.bcebos.com/DIC_CLAN.xml">
+                                <option value=""></option>
+                            </select>
+                        </div>
+                        <label class="col-xs-2 control-label"><span class="fa fa-star text-required"></span> 文化程度</label>
+                        <div class="col-xs-4">
+                            <select class="form-control" data-pku-widget="select2" name="frwhcd"
+                                    data-placeholder="请选择"
+                                    data-allow-clear="true" data-show-max-item-num="10"
+                                    data-required="validate-invalid" data-fv-notempty="true"
+                                    data-xmlurl="http://pkusoft.gz.bcebos.com/DIC_EDUCATION.xml">
+                                <option value=""></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-2 control-label"><span class="fa fa-star text-required"></span> 证件类型</label>
+                        <div class="col-xs-4">
+                            <select class="form-control" data-pku-widget="select2" name="frzjlx"
+                                    data-placeholder="请选择"
+                                    data-allow-clear="true" data-show-max-item-num="10"
+                                    data-required="validate-invalid" data-fv-notempty="true"
+                                    data-xmlurl="http://pkusoft.gz.bcebos.com/DIC_TRAVEL_DOCUMENTS.xml">
+                                <option value=""></option>
+                            </select>
+                        </div>
+                        <div class="_fv-container">
+                            <label class="col-xs-2 control-label"><span class="fa fa-star text-required"></span> 证件号码</label>
+                            <div class="col-xs-4">
+                                <input type="text" class="form-control" name="frzjhm" data-fv-notempty="true" data-fv-row="._fv-container"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-2 control-label"><span class="fa fa-star text-required"></span> 实际居住地市县(区)</label>
+                        <div class="col-xs-10">
+                            <div class="input-group">
+                                <input type="text" class="form-control" data-pku-widget="select-area" name="frsjjzdssxq" data-select-trigger="#selectBtn_frsjjzdssxq"
+                                       data-fv-notempty="true"
+                                       data-fv-icon="false">
 	                        <span class="input-group-btn">
-	                            <button class="btn btn-default" type="button" id="selectBtn_gsdzssxq"><i class="fa fa-caret-down"></i></button>
+	                            <button class="btn btn-default" type="button" id="selectBtn_frsjjzdssxq"><i class="fa fa-caret-down"></i></button>
 	                        </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-2 control-label"><span class="fa fa-star text-required"></span> 实际居住地详址</label>
+                        <div class="col-xs-10">
+                            <input type="text" class="form-control" name="frsjjzdxz" data-fv-notempty="true"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-2 control-label"><span class="fa fa-star text-required"></span> 户籍地省市县(区)</label>
+                        <div class="col-xs-10">
+                            <div class="input-group">
+                                <input type="text" class="form-control" data-pku-widget="select-area" name="frhjdssxq" data-select-trigger="#selectBtn_frhjdssxq"
+                                       data-fv-notempty="true"
+                                       data-fv-icon="false">
+	                        <span class="input-group-btn">
+	                            <button class="btn btn-default" type="button" id="selectBtn_frhjdssxq"><i class="fa fa-caret-down"></i></button>
+	                        </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-2 control-label"><span class="fa fa-star text-required"></span> 户籍地详址</label>
+                        <div class="col-xs-10">
+                            <input type="text" class="form-control" name="frhjdxz" data-fv-notempty="true"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="_fv-container">
+                            <label class="col-xs-2 control-label"><span class="fa fa-star text-required"></span> 办公电话</label>
+                            <div class="col-xs-4">
+                                <input type="text" class="form-control" name="frbgdh" data-fv-notempty="true" data-fv-row="._fv-container"/>
+                            </div>
+                        </div>
+                        <div class="_fv-container">
+                            <label class="col-xs-2 control-label"><span class="fa fa-star text-required"></span> 手机号码</label>
+                            <div class="col-xs-4">
+                                <input type="text" class="form-control" name="frsjhm" data-fv-notempty="true" data-fv-row="._fv-container"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-4"></div>
+                        <div class="col-xs-4">
+                            <button type="submit" class="btn btn-info btn-block btn-lg"  style="margin-top: 20px;"><i class="fa fa-save"></i> 保存</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- /法定代表人 - 基本信息 -->
+
+        <!-- 法定代表人 - 简历 -->
+        <div class="panel-plat">
+            <div class="panel-heading">
+                <div class="text"><i class="fa fa-legal"></i> 法定代表人 - 简历</div>
+            </div>
+            <div class="panel-body">
+
+                <div class="resume resume-detail">
+                    <form class="form-horizontal form-detail js--form" data-pku-widget="fv"
+                          action="${ctx}/gdba/reg/saveCompany"
+                          data-detail-url="gdba/faren_resume_detail.html"
+                          data-edit-url="gdba/faren_resume_edit.html">
+                        <button type="button" class="btn btn-sm btn-warning btn-edit js--eidtBtn" title="编辑" data-toggle="tooltip"><i class="fa fa-pencil"></i></button>
+
+                        <div class="form-group">
+                            <label class="col-xs-3 control-label">2009/1/1 - 2010/10/1</label>
+                            <div class="col-xs-9">武汉北大高科软件股份有限公司</div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-xs-3 control-label">职位名称</label>
+                            <div class="col-xs-3">Java实习工程师</div>
+                            <label class="col-xs-3 control-label">职位类型</label>
+                            <div class="col-xs-3">工程师</div>
+                        </div>
+
+                    </form>
+                </div>
+                <div class="resume resume-detail">
+                    <form class="form-horizontal form-detail" data-pku-widget="fv" action="${ctx}/gdba/reg/saveCompany"
+                          data-detail-url="gdba/faren_resume_detail.html"
+                          data-edit-url="gdba/faren_resume_edit.html">
+                        <button type="button" class="btn btn-sm btn-warning btn-edit js--eidtBtn" title="编辑" data-toggle="tooltip"><i class="fa fa-pencil"></i></button>
+
+                        <div class="form-group">
+                            <label class="col-xs-3 control-label">2009/1/1 - 2010/10/1</label>
+                            <div class="col-xs-9">武汉北大高科软件股份有限公司</div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-xs-3 control-label">职位名称</label>
+                            <div class="col-xs-3">Java实习工程师</div>
+                            <label class="col-xs-3 control-label">职位类型</label>
+                            <div class="col-xs-3">工程师</div>
+                        </div>
+
+                    </form>
+                </div>
+                <div class="resume resume-edit">
+                    <form class="form-horizontal form-edit" data-pku-widget="fv" action="${ctx}/gdba/reg/saveCompany"
+                          data-detail-url="gdba/faren_resume_detail.html"
+                          data-edit-url="gdba/faren_resume_edit.html">
+                        <div class="form-group">
+                            <label class="col-xs-2 control-label"><span class="fa fa-star text-required"></span> 起止时间</label>
+                            <div class="col-xs-5">
+                                <div class="input-group input-daterange" data-provide="datepicker" >
+                                    <input type="text" class="form-control" value="2016-01-05" name="starttime" data-fv-notempty="true">
+                                    <span class="input-group-addon">&nbsp; 到 &nbsp;</span>
+                                    <input type="text" class="form-control" value="2016-01-29" name="endtime" data-fv-notempty="true">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-xs-2 control-label"><span class="fa fa-star text-required"></span> 公司名称</label>
+                            <div class="col-xs-10">
+                                <input type="text" class="form-control" name="gsmc" data-fv-notempty="true">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-xs-2 control-label"><span class="fa fa-star text-required" ></span> 职位类别</label>
+                            <div class="col-xs-4">
+                                <div class="_fv-container">
+                                    <select class="form-control" data-pku-widget="select2" name="frxb"
+                                            data-placeholder="请选择"
+                                            data-allow-clear="true" data-show-max-item-num="10"
+                                            data-required="validate-invalid" data-fv-notempty="true"
+                                            data-xmlurl="http://pkusoft.gz.bcebos.com/DIC_GENDER.xml"
+                                            data-fv-row="._fv-container">
+                                        <option value=""></option>
+                                    </select>
+                                </div>
+                            </div>
+                            <label class="col-xs-2 control-label"><span class="fa fa-star text-required"></span> 职位名称</label>
+                            <div class="col-xs-4">
+                                <input type="text" class="form-control" data-fv-integer="true" name="gsmc" data-fv-notempty="true">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-4"></div>
+                            <div class="col-xs-4">
+                                <button type="submit" class="btn btn-info btn-block btn-lg"  style="margin-top: 20px;"><i class="fa fa-save"></i> 保存</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="resume-add clearfix">
+                    <button type="button" class="btn btn-success pull-right"><i class="fa fa-plus-circle"></i> 添加简历</button>
+                </div>
+
+            </div>
+        </div>
+        <!-- /法定代表人 - 简历 -->
+
+        <!-- 法定代表人 - 附件 -->
+        <div class="panel-plat">
+            <div class="panel-heading">
+                <div class="text"><i class="fa fa-legal"></i> 法定代表人 - 附件</div>
+            </div>
+            <div class="panel-body">
+                <div class="photoList ">
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li role="presentation" class="active"><a href="#tab_2_1" data-toggle="tab">注册资本验资证明</a></li>
+                            <li role="presentation"><a href="#tab_2_2" data-toggle="tab">企业名称</a></li>
+                            <li role="presentation"><a href="#tab_2_3" data-toggle="tab">公司营业执照</a></li>
+                            <li role="presentation"><a href="#tab_2_4" data-toggle="tab">设立申请书</a></li>
+                        </ul>
+
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane active" id="tab_2_1">
+
+                                <div class="nav-tabs-custom tab-info">
+                                    <p class="text-muted"><i class="fa fa-info-circle"></i>（注册资本验资证明）图片要求：1. 图片格式仅限 jpg；2. 单张图片大小不能超过 800KB。</p>
+                                    <!-- Nav tabs -->
+                                    <ul class="nav nav-tabs" role="tablist">
+                                        <li class="active"><a href="#myPhoto_2_1" data-toggle="tab">我的图片</a></li>
+                                        <li><a class="tab-upload" href="#uploadPhoto_2_1" data-toggle="tab">图片上传</a></li>
+                                    </ul>
+
+                                    <!-- Tab panes -->
+                                    <div class="tab-content">
+                                        <div class="tab-pane active" id="myPhoto_2_1">
+                                            <div class="photo-list clearfix">
+                                                <div class="photo-item">
+                                                    <div class="photo-wrap">
+                                                        <img src="../../images/pic-none.png" alt=""/>
+                                                    </div>
+                                                    <div class="photo-name">图片名称图片名称图片名称图片名称</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane active" id="uploadPhoto_2_1">
+                                            <div class="imageUploaderContainer" data-upload-url="url_1_1"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="tab_2_2">
+                                <div class="nav-tabs-custom tab-info">
+                                    <p class="text-muted"><i class="fa fa-info-circle"></i>（企业名称）图片要求：1. 图片格式仅限 jpg；2. 单张图片大小不能超过 800KB。</p>
+                                    <!-- Nav tabs -->
+                                    <ul class="nav nav-tabs" role="tablist">
+                                        <li class="active"><a href="#myPhoto_2_2" data-toggle="tab">我的图片</a></li>
+                                        <li><a class="tab-upload" href="#uploadPhoto_2_2" data-toggle="tab">图片上传</a></li>
+                                    </ul>
+
+                                    <!-- Tab panes -->
+                                    <div class="tab-content">
+                                        <div class="tab-pane active" id="myPhoto_2_2">
+                                            <div class="photo-list clearfix">
+                                                <div class="photo-item">
+                                                    <div class="photo-wrap">
+                                                        <img src="../../images/pic-none.png" alt=""/>
+                                                    </div>
+                                                    <div class="photo-name">图片名称图片名称图片名称图片名称</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane active" id="uploadPhoto_2_2">
+                                            <div class="imageUploaderContainer" data-upload-url="url_1_2"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="tab_2_3">
+                                <div class="nav-tabs-custom tab-info">
+                                    <p class="text-muted"><i class="fa fa-info-circle"></i> （公司营业执照）图片要求：1. 图片格式仅限 jpg；2. 单张图片大小不能超过 800KB。</p>
+                                    <!-- Nav tabs -->
+                                    <ul class="nav nav-tabs" role="tablist">
+                                        <li class="active"><a href="#myPhoto_2_3" data-toggle="tab">我的图片</a></li>
+                                        <li><a class="tab-upload" href="#uploadPhoto_2_3" data-toggle="tab">图片上传</a></li>
+                                    </ul>
+
+                                    <!-- Tab panes -->
+                                    <div class="tab-content">
+                                        <div class="tab-pane active" id="myPhoto_2_3">
+                                            <div class="photo-list clearfix">
+                                                <div class="photo-item">
+                                                    <div class="photo-wrap">
+                                                        <img src="../../images/pic-none.png" alt=""/>
+                                                    </div>
+                                                    <div class="photo-name">图片名称图片名称图片名称图片名称</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane active" id="uploadPhoto_2_3">
+                                            <div class="imageUploaderContainer" data-upload-url="url_1_3"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="tab_2_4">
+                                <div class="nav-tabs-custom tab-info">
+                                    <p class="text-muted"><i class="fa fa-info-circle"></i>（设立申请书）图片要求：1. 图片格式仅限 jpg；2. 单张图片大小不能超过 800KB。</p>
+                                    <!-- Nav tabs -->
+                                    <ul class="nav nav-tabs" role="tablist">
+                                        <li class="active"><a href="#myPhoto_2_4" data-toggle="tab">我的图片</a></li>
+                                        <li><a class="tab-upload" href="#uploadPhoto_2_4" data-toggle="tab">图片上传</a></li>
+                                    </ul>
+
+                                    <!-- Tab panes -->
+                                    <div class="tab-content">
+                                        <div class="tab-pane active" id="myPhoto_2_4">
+                                            <div class="photo-list clearfix">
+                                                <div class="photo-item">
+                                                    <div class="photo-wrap">
+                                                        <img src="../../images/pic-none.png" alt=""/>
+                                                    </div>
+                                                    <div class="photo-name">图片名称图片名称图片名称图片名称</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane active" id="uploadPhoto_2_4">
+                                            <div class="imageUploaderContainer" data-upload-url="url_1_4"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                </div>
+            </div>
+        </div>
+        <!-- /法定代表人 - 附件 -->
+    </div>
+    <!-- /法定代表人 -->
+
+    <!-- 主要负责人 -->
+    <div class="module">
+        <!-- 主要负责人 - 基本信息 -->
+        <div class="panel-plat">
+            <div class="panel-heading">
+                <div class="text"><i class="fa fa-legal"></i> 主要负责人 - 基本信息</div>
+            </div>
+            <div class="panel-body">
+                <form class="form-horizontal js--form" data-pku-widget="fv" action="${ctx}/gdba/reg/saveCompany">
+
+                    <button type="button" class="btn btn-sm btn-warning btn-edit" title="编辑" data-toggle="tooltip"><i class="fa fa-pencil"></i></button>
+
+                    <div class="form-group">
+                        <div class="_fv-container">
+                            <label class="col-xs-2 control-label"><span class="fa fa-star text-required"></span> 姓名</label>
+                            <div class="col-xs-4">
+                                <input type="text" class="form-control" name="fzrxm" data-fv-integer="true" data-fv-row="._fv-container" >
+                            </div>
+                        </div>
+                        <div class="_fv-container">
+                            <label class="col-xs-2 control-label"><span class="fa fa-star text-required"></span> 公民身份号码</label>
+                            <div class="col-xs-4">
+                                <input type="text" class="form-control" name="fzrgmsfzhm" data-fv-integer="true" data-fv-row="._fv-container" >
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="_fv-container">
+                            <label class="col-xs-2 control-label"><span class="fa fa-star text-required"></span> 性别</label>
+                            <div class="col-xs-4">
+                                <select class="form-control" data-pku-widget="select2" name="fzrxb"
+                                        data-placeholder="请选择"
+                                        data-allow-clear="true" data-show-max-item-num="10"
+                                        data-required="validate-invalid" data-fv-notempty="true"
+                                        data-xmlurl="http://pkusoft.gz.bcebos.com/DIC_GENDER.xml"
+                                        data-fv-row="._fv-container">
+                                    <option value=""></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="_fv-container">
+                            <label class="col-xs-2 control-label"><span class="fa fa-star text-required"></span> 民族</label>
+                            <div class="col-xs-4">
+                                <select class="form-control" data-pku-widget="select2" name="fzrmz"
+                                        data-placeholder="请选择"
+                                        data-allow-clear="true" data-show-max-item-num="10"
+                                        data-required="validate-invalid" data-fv-notempty="true"
+                                        data-xmlurl="http://pkusoft.gz.bcebos.com/DIC_NATION.xml"
+                                        data-fv-row="._fv-container">
+                                    <option value=""></option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="_fv-container">
+                            <label class="col-xs-2 control-label"><span class="fa fa-star text-required"></span> 出生日期</label>
+                            <div class="col-xs-4">
+                                <div class="input-group date" data-provide="datepicker" >
+                                    <input type="text" class="form-control" placeholder="选择日期" name="fzrcsrq" data-fv-notempty="true" data-fv-row="._fv-container"/>
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <label class="col-xs-2 control-label"><span class="fa fa-star text-required"></span> 文化程度</label>
+                        <div class="col-xs-4">
+                            <select class="form-control" data-pku-widget="select2" name="fzrwhcd"
+                                    data-placeholder="请选择"
+                                    data-allow-clear="true" data-show-max-item-num="10"
+                                    data-required="validate-invalid" data-fv-notempty="true"
+                                    data-xmlurl="http://pkusoft.gz.bcebos.com/DIC_EDUCATION.xml">
+                                <option value=""></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-2 control-label"><span class="fa fa-star text-required"></span> 职务</label>
+                        <div class="col-xs-4">
+                            <input type="text" class="form-control" name="fzrzw" data-fv-notempty="true" data-fv-row="._fv-container"/>
+                        </div>
+                        <div class="_fv-container">
+                            <label class="col-xs-2 control-label"><span class="fa fa-star text-required"></span> 联系电话</label>
+                            <div class="col-xs-4">
+                                <input type="text" class="form-control" name="fzrlxdh" data-fv-notempty="true" data-fv-row="._fv-container"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-2 control-label"><span class="fa fa-star text-required"></span> 实际居住地市县(区)</label>
+                        <div class="col-xs-10">
+                            <div class="input-group">
+                                <input type="text" class="form-control" data-pku-widget="select-area" name="fzrsjjzdssxq" data-select-trigger="#selectBtn_fzrsjjzdssxq"
+                                       data-fv-notempty="true"
+                                       data-fv-icon="false">
+	                        <span class="input-group-btn">
+	                            <button class="btn btn-default" type="button" id="selectBtn_fzrsjjzdssxq"><i class="fa fa-caret-down"></i></button>
+	                        </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-2 control-label"><span class="fa fa-star text-required"></span> 实际居住地详址</label>
+                        <div class="col-xs-10">
+                            <input type="text" class="form-control" name="fzrsjjzdxz" data-fv-notempty="true"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-2 control-label"><span class="fa fa-star text-required"></span> 户籍地省市县(区)</label>
+                        <div class="col-xs-10">
+                            <div class="input-group">
+                                <input type="text" class="form-control" data-pku-widget="select-area" name="fzrhjdssxq" data-select-trigger="#selectBtn_fzrhjdssxq"
+                                       data-fv-notempty="true"
+                                       data-fv-icon="false">
+	                        <span class="input-group-btn">
+	                            <button class="btn btn-default" type="button" id="selectBtn_fzrhjdssxq"><i class="fa fa-caret-down"></i></button>
+	                        </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-2 control-label"><span class="fa fa-star text-required"></span> 户籍地详址</label>
+                        <div class="col-xs-10">
+                            <input type="text" class="form-control" name="fzrhjdxz" data-fv-notempty="true"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-4"></div>
+                        <div class="col-xs-4">
+                            <button type="submit" class="btn btn-info btn-block btn-lg js--saveBtn"  style="margin-top: 20px;"><i class="fa fa-save"></i> 保存</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- /主要负责人 - 基本信息 -->
+
+        <!-- 主要负责人 - 附件 -->
+        <div class="panel-plat">
+            <div class="panel-heading">
+                <div class="text"><i class="fa fa-legal"></i> 主要负责人 - 附件</div>
+            </div>
+            <div class="panel-body">
+                <div class="photoList">
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active"><a href="#tab_1_1" data-toggle="tab">注册资本验资证明</a></li>
+                        <li role="presentation"><a href="#tab_1_2" data-toggle="tab">企业名称</a></li>
+                        <li role="presentation"><a href="#tab_1_3" data-toggle="tab">公司营业执照</a></li>
+                        <li role="presentation"><a href="#tab_1_4" data-toggle="tab">设立申请书</a></li>
+                    </ul>
+
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane active" id="tab_1_1">
+
+                            <div class="nav-tabs-custom tab-info">
+                                <p class="text-muted"><i class="fa fa-info-circle"></i>（注册资本验资证明）图片要求：1. 图片格式仅限 jpg；2. 单张图片大小不能超过 800KB。</p>
+                                <!-- Nav tabs -->
+                                <ul class="nav nav-tabs" role="tablist">
+                                    <li class="active"><a href="#myPhoto_1_1" data-toggle="tab">我的图片</a></li>
+                                    <li><a class="tab-upload" href="#uploadPhoto_1_1" data-toggle="tab">图片上传</a></li>
+                                </ul>
+
+                                <!-- Tab panes -->
+                                <div class="tab-content">
+                                    <div class="tab-pane active" id="myPhoto_1_1">
+                                        <div class="photo-list clearfix">
+                                            <div class="photo-item">
+                                                <div class="photo-wrap">
+                                                    <img src="../../images/pic-none.png" alt=""/>
+                                                </div>
+                                                <div class="photo-name">图片名称图片名称图片名称图片名称</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane active" id="uploadPhoto_1_1">
+                                        <div class="imageUploaderContainer" data-upload-url="url_1_1"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="tab_1_2">
+                            <div class="nav-tabs-custom tab-info">
+                                <p class="text-muted"><i class="fa fa-info-circle"></i>（企业名称）图片要求：1. 图片格式仅限 jpg；2. 单张图片大小不能超过 800KB。</p>
+                                <!-- Nav tabs -->
+                                <ul class="nav nav-tabs" role="tablist">
+                                    <li class="active"><a href="#myPhoto_1_2" data-toggle="tab">我的图片</a></li>
+                                    <li><a class="tab-upload" href="#uploadPhoto_1_2" data-toggle="tab">图片上传</a></li>
+                                </ul>
+
+                                <!-- Tab panes -->
+                                <div class="tab-content">
+                                    <div class="tab-pane active" id="myPhoto_1_2">
+                                        <div class="photo-list clearfix">
+                                            <div class="photo-item">
+                                                <div class="photo-wrap">
+                                                    <img src="../../images/pic-none.png" alt=""/>
+                                                </div>
+                                                <div class="photo-name">图片名称图片名称图片名称图片名称</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane active" id="uploadPhoto_1_2">
+                                        <div class="imageUploaderContainer" data-upload-url="url_1_2"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="tab_1_3">
+                            <div class="nav-tabs-custom tab-info">
+                                <p class="text-muted"><i class="fa fa-info-circle"></i> （公司营业执照）图片要求：1. 图片格式仅限 jpg；2. 单张图片大小不能超过 800KB。</p>
+                                <!-- Nav tabs -->
+                                <ul class="nav nav-tabs" role="tablist">
+                                    <li class="active"><a href="#myPhoto_1_3" data-toggle="tab">我的图片</a></li>
+                                    <li><a class="tab-upload" href="#uploadPhoto_1_3" data-toggle="tab">图片上传</a></li>
+                                </ul>
+
+                                <!-- Tab panes -->
+                                <div class="tab-content">
+                                    <div class="tab-pane active" id="myPhoto_1_3">
+                                        <div class="photo-list clearfix">
+                                            <div class="photo-item">
+                                                <div class="photo-wrap">
+                                                    <img src="../../images/pic-none.png" alt=""/>
+                                                </div>
+                                                <div class="photo-name">图片名称图片名称图片名称图片名称</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane active" id="uploadPhoto_1_3">
+                                        <div class="imageUploaderContainer" data-upload-url="url_1_3"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="tab_1_4">
+                            <div class="nav-tabs-custom tab-info">
+                                <p class="text-muted"><i class="fa fa-info-circle"></i>（设立申请书）图片要求：1. 图片格式仅限 jpg；2. 单张图片大小不能超过 800KB。</p>
+                                <!-- Nav tabs -->
+                                <ul class="nav nav-tabs" role="tablist">
+                                    <li class="active"><a href="#myPhoto_1_4" data-toggle="tab">我的图片</a></li>
+                                    <li><a class="tab-upload" href="#uploadPhoto_1_4" data-toggle="tab">图片上传</a></li>
+                                </ul>
+
+                                <!-- Tab panes -->
+                                <div class="tab-content">
+                                    <div class="tab-pane active" id="myPhoto_1_4">
+                                        <div class="photo-list clearfix">
+                                            <div class="photo-item">
+                                                <div class="photo-wrap">
+                                                    <img src="../../images/pic-none.png" alt=""/>
+                                                </div>
+                                                <div class="photo-name">图片名称图片名称图片名称图片名称</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane active" id="uploadPhoto_1_4">
+                                        <div class="imageUploaderContainer" data-upload-url="url_1_4"></div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
                     </div>
+
                 </div>
-
-                <div class="form-group">
-                    <label class="col-xs-2 control-label"><span class="fa fa-star text-required"></span> 公司详细地址</label>
-
-                    <div class="col-xs-10">
-                        <input type="text" name="gsdzxz" class="form-control" data-fv-notempty="true" >
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="col-xs-2 control-label"><span class="fa fa-star text-required"></span> 辖区派出所</label>
-
-                    <div class="col-xs-10">
-                        <select class="form-control"  name="gsxqpcs" data-pku-widget="select2"
-                                data-placeholder="请选择"
-                                data-allow-clear="true" data-show-max-item-num="10"
-                                data-required="validate-invalid" data-fv-notempty="true"
-                                data-xmlurl="http://pkusoft.gz.bcebos.com/DIC_PCS.xml"
-                                data-fv-icon="false">
-                            <option value=""></option>
-                        </select>
-                    </div>
-                </div>
-
-
-                <div class="form-group">
-                    <label class="col-xs-2 control-label"><span class="fa fa-star text-required"></span> 经营范围</label>
-
-                    <div class="col-xs-10">
-                        <label class="checkbox-inline"> <input type="checkbox" name="jyfw" value="01"
-                                                               data-fv-notempty="true"
-                                                               data-fv-icon="false">门卫</label>
-                        <label class="checkbox-inline"> <input type="checkbox" name="jyfw" value="02">巡逻</label>
-                        <label class="checkbox-inline"> <input type="checkbox" name="jyfw" value="03">守护</label>
-                        <label class="checkbox-inline"> <input type="checkbox" name="jyfw" value="04">押运</label>
-                        <label class="checkbox-inline"> <input type="checkbox" name="jyfw" value="05">随身护卫</label>
-                        <label class="checkbox-inline"> <input type="checkbox" name="jyfw" value="06">安全检查</label>
-                        <label class="checkbox-inline"> <input type="checkbox" name="jyfw" value="07">安全技术防范</label>
-                        <label class="checkbox-inline"> <input type="checkbox" name="jyfw" value="08">安全风险评估</label>
-                        <label class="checkbox-inline"> <input type="checkbox" name="jyfw" value="09">秩序维护</label>
-                        <label class="checkbox-inline"> <input type="checkbox" name="jyfw" value="10">其他</label>
-                    </div>
-                </div>
-            </form>
-
-
+            </div>
         </div>
-        <div class="panel-footer clearfix text-center">
-            <button type="button" class="btn btn-info js--save" data-form-id="_form-edit-1"><i class="fa fa-save"></i> 保存</button>
-        </div>
+        <!-- /主要负责人 - 附件 -->
 
+        <div class="resume-add clearfix">
+            <button type="button" class="btn btn-success pull-right"><i class="fa fa-plus-circle"></i> 添加主要负责人</button>
+        </div>
     </div>
-
+    <!-- /主要负责人 -->
 
 
 </div>

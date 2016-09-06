@@ -3336,7 +3336,7 @@ S2.define('select2/data/array',[
     var $option = this.$element.find('option').filter(function (i, elm) {
       return elm.value == data.id.toString();
     });
-
+//****
     if ($option.length === 0) {
       $option = this.option(data);
 
@@ -6453,6 +6453,8 @@ function xmlDocToJson( responseData ) {
 
     return data;
 }
+var xmlDataCache = {
+};
 
 S2.define('jquery.select2',[
   'jquery',
@@ -6484,6 +6486,7 @@ S2.define('jquery.select2',[
             //FIX 添加xml字典支持
             var xmlurl = options[ "xmlurl" ] || $( _this ).data( "xmlurl" );
             if ( xmlurl ) {
+
                 $.ajax( {
                     type: "GET",
                     url: xmlurl,
@@ -6492,18 +6495,23 @@ S2.define('jquery.select2',[
                     cache: true, // 缓存此页面
                     dataType: "xml", // 预期服务器返回的数据类型。
                     success: function ( data ) {
+                        //console.info( xmlurl, "xml-start\t\t", (new Date()).getTime() );
                         instanceOptions.data = xmlDocToJson( data );
+                        //console.info( xmlurl, "instance-start\t", (new Date()).getTime() );
+                        //xmlDataCache[ xmlurl ] = instanceOptions.data;
                         new Select2( $( _this ), instanceOptions );
                         //FIX 2 扩展参数 selectedValue
                         if ( selectedValue ) {
                             $this.val( selectedValue ); // Select the option with a value of 'US'
                             $this.trigger('change');
                         }
+                        //console.info( xmlurl, "instance-end\t", (new Date()).getTime() );
                     },
                     error: function () {
                         throw new Error( "字典获取失败！！" );
                     }
                 } )
+
             } else {
                 new Select2( $( this ), instanceOptions );
                 //FIX 3 扩展参数 selectedValue

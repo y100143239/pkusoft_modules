@@ -1,9 +1,14 @@
-require( [ "jquery", "gdbaUtils", "webuploader", "formvalidationI18N", "bootstrap", "select2", "datepicker", "select-area" ], function ( $, Utils, webuploader ) {
+require( [ "jquery", "gdbaUtils",
+                "formvalidationI18N", "bootstrap", "select2", "datepicker", "select-area" ], function ( $, Utils ) {
+
+    var $document
+    ;
+    $document = $( document );
 
     // Utils 在下面定义为模块
 
     // 保存
-    $( document ).on( "click", ".js--panel .js--save", function ( e ) {
+    $document.on( "click", ".js--panel .js--save", function ( e ) {
         var $this,
             $panel,
             $form,
@@ -51,7 +56,7 @@ require( [ "jquery", "gdbaUtils", "webuploader", "formvalidationI18N", "bootstra
 
     } );
     // 编辑
-    $( document ).on( "click", ".js--panel .js--edit", function ( e ) {
+    $document.on( "click", ".js--panel .js--edit", function ( e ) {
         var $this,
             $panel,
             fragmentUrl
@@ -66,7 +71,7 @@ require( [ "jquery", "gdbaUtils", "webuploader", "formvalidationI18N", "bootstra
     });
 
     // 点击“图片上传”时，进行webuploader的初始化
-    $( document ).on( "click", ".tab-info .tab-upload", function () {
+    $document.on( "click", ".tab-info .tab-upload", function () {
         var $this,
             $target,
             uploaderContainerId
@@ -81,7 +86,25 @@ require( [ "jquery", "gdbaUtils", "webuploader", "formvalidationI18N", "bootstra
         Utils.initWebuploader( $target );
     });
 
-    $( document ).ready( function () {
+    // 选择pcs后，给pcs_name进行赋值
+    $document.on("select2:select", "#_gsxqpcs", function( ){
+        $( "#_gsxqpcsmc" ).val( $( this ).find("option:selected").text() );
+    });
+
+    // 附件的折叠和显示（带图标）
+    $document.on( "click.collapse", ".mode-collapse-heading", function () {
+        var $this
+        ;
+        $this = $( this );
+        // 隐藏元素
+        $this.siblings( ".mode-collapse-target" ).stop().slideToggle( function (){
+            $( this ).css( "height", "auto" );
+        } );
+        // 切换状态
+        $this.find( ".mode-collapse-icon" ).toggleClass( "fa-chevron-circle-down" );
+    } );
+
+    $document.ready( function () {
 
         var $leftsideNav
         ;
@@ -90,11 +113,12 @@ require( [ "jquery", "gdbaUtils", "webuploader", "formvalidationI18N", "bootstra
         Utils.renderPanel();
 
         // 给导航添加提示
-        $( ".nav-leftside .panel-anchor" ).tooltip( {
+        $( document.body ).tooltip( {
+            selector : '[data-toggle="tooltip"]',
             theme: "tooltip-info-dark",
-            placement: "left",
             container: "body"
         } );
+
         // 给导航添加折叠按钮
         $leftsideNav.on( "click", ".js--change", function () {
             $leftsideNav.toggleClass( "nav-leftside-min" )

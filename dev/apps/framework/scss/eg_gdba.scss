@@ -1,3 +1,9 @@
+@mixin user-select($select) {
+    -webkit-user-select: $select;
+    -moz-user-select: $select;
+    -ms-user-select: $select; // IE10+
+    user-select: $select;
+}
 // <--------- origin ----------
 body {
     BACKGROUND : #f1f1f1;
@@ -115,25 +121,63 @@ i.form-control-feedback.fa {
         padding-top: 7px;
     }
 }
+
+.module {
+    border: 1px solid #e6f0fd;
+    background-color: #f4f9fe;
+    margin: 20px 20px 40px 20px;
+    padding: 10px 0;
+}
+
+.panel-plat {
+    position: relative;
+    padding: 10px;
+    border-bottom: dotted 1px darken( #e6f0fd, 10% );
+    &:last-of-type {
+        border-bottom: none 0;
+    }
+    .btn-edit {
+        position: absolute;
+        top: 0;
+        right: 10px;
+    }
+    .panel-heading {
+        padding-bottom: 0;
+        padding-left: 0;
+        border-bottom: 1px solid #ddd;
+        .text {
+            display: inline-block;
+            color: #5a9ff3;
+            padding-bottom: 10px;
+            border-bottom: solid 1px #5a9ff3;
+            margin-bottom: -1px;
+        }
+    }
+}
+
+.mode-panel {
+    margin-top: 20px;
+    background-color: #e9f7e7;
+}
+.mode-panel-title {
+    color: #287a19;
+    padding: 8px 16px;
+    cursor: pointer;
+    text-align: left;
+    background-color: #79ca6b;
+    @include user-select(none);
+}
+.mode-panel-body {
+    padding: 16px;
+    // border: solid 1px #5a9ff3;
+}
 .photoList {
     position: relative;
-    padding: 15px;
-    margin: 20px -15px;
-    border-top: dashed 1px #ddd;
-    > .tab-content {
+    .tab-content {
         border: 1px solid #ddd;
         border-top: none 0;
         padding-top: 15px;
-    }
-    .title {
-        position: absolute;
-        left: 50%;
-        top: -20px;
-        width: 48px;
-        text-align: center;
-        color: #888;
         background-color: #fff;
-        margin-left: -24px;
     }
 }
 // eg-photo
@@ -144,8 +188,10 @@ i.form-control-feedback.fa {
     > .tab-content {
         //border: 1px solid #f4f4f4;
         //border-top: none 0;
+        border: none 0;
     }
 }
+
 .photo-list {
     .photo-item {
         float: left;
@@ -172,4 +218,35 @@ i.form-control-feedback.fa {
         overflow: hidden;
         text-overflow: ellipsis;
     }
+}
+.resume {
+    position: relative;
+    padding: 20px 0;
+    &.resume-detail {
+        border-bottom: #CCC 1px dashed;
+        //background-color: #fff;
+        &:last-of-type {
+            border-bottom: none;
+        }
+        .btn-edit {
+            position: absolute;
+            z-index: 2;
+            top: 0;
+            right: 0;
+            visibility: hidden;
+        }
+        &:hover {
+            background-color: #fff;
+            .btn-edit {
+                visibility: visible;
+            }
+        }
+    }
+    &.resume-edit {
+        background-color: #fff9f3;
+    }
+}
+.resume-add {
+    margin-top: 20px;
+    border-top: #CCC 1px dashed;
 }

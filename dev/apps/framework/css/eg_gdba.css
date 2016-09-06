@@ -177,29 +177,65 @@ i.form-control-feedback.fa {
 .form-detail label.control-label + div[class*="col-"] {
   padding-top: 7px; }
 
-.photoList {
+.module {
+  border: 1px solid #e6f0fd;
+  background-color: #f4f9fe;
+  margin: 20px 20px 40px 20px;
+  padding: 10px 0; }
+
+.panel-plat {
   position: relative;
-  padding: 15px;
-  margin: 20px -15px;
-  border-top: dashed 1px #ddd; }
-  .photoList > .tab-content {
+  padding: 10px;
+  border-bottom: dotted 1px #b7d4f9; }
+  .panel-plat:last-of-type {
+    border-bottom: none 0; }
+  .panel-plat .btn-edit {
+    position: absolute;
+    top: 0;
+    right: 10px; }
+  .panel-plat .panel-heading {
+    padding-bottom: 0;
+    padding-left: 0;
+    border-bottom: 1px solid #ddd; }
+    .panel-plat .panel-heading .text {
+      display: inline-block;
+      color: #5a9ff3;
+      padding-bottom: 10px;
+      border-bottom: solid 1px #5a9ff3;
+      margin-bottom: -1px; }
+
+.mode-panel {
+  margin-top: 20px;
+  background-color: #e9f7e7; }
+
+.mode-panel-title {
+  color: #287a19;
+  padding: 8px 16px;
+  cursor: pointer;
+  text-align: left;
+  background-color: #79ca6b;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none; }
+
+.mode-panel-body {
+  padding: 16px; }
+
+.photoList {
+  position: relative; }
+  .photoList .tab-content {
     border: 1px solid #ddd;
     border-top: none 0;
-    padding-top: 15px; }
-  .photoList .title {
-    position: absolute;
-    left: 50%;
-    top: -20px;
-    width: 48px;
-    text-align: center;
-    color: #888;
-    background-color: #fff;
-    margin-left: -24px; }
+    padding-top: 15px;
+    background-color: #fff; }
 
 .tab-info {
   min-height: 200px;
   margin: 0 20px 20px 20px;
   box-shadow: none; }
+  .tab-info > .tab-content {
+    border: none 0; }
 
 .photo-list .photo-item {
   float: left;
@@ -222,5 +258,29 @@ i.form-control-feedback.fa {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis; }
+
+.resume {
+  position: relative;
+  padding: 20px 0; }
+  .resume.resume-detail {
+    border-bottom: #CCC 1px dashed; }
+    .resume.resume-detail:last-of-type {
+      border-bottom: none; }
+    .resume.resume-detail .btn-edit {
+      position: absolute;
+      z-index: 2;
+      top: 0;
+      right: 0;
+      visibility: hidden; }
+    .resume.resume-detail:hover {
+      background-color: #fff; }
+      .resume.resume-detail:hover .btn-edit {
+        visibility: visible; }
+  .resume.resume-edit {
+    background-color: #fff9f3; }
+
+.resume-add {
+  margin-top: 20px;
+  border-top: #CCC 1px dashed; }
 
 /*# sourceMappingURL=eg_gdba.css.map */
