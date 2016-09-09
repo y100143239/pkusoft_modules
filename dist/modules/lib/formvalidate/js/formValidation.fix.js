@@ -1576,6 +1576,51 @@ if (typeof jQuery === 'undefined') {
                     $field.data(ns + '.result.' + validatorName, this.STATUS_VALIDATING);
                     validateResult = FormValidation.Validator[validatorName].validate(this, $field, validators[validatorName]);
 
+                    // FIX: 如果是身份证号码（id-CN）的验证，则回填出生日期和性别
+                    if ( validatorName == "id" && validateResult == true && $field.val() ) {
+
+                        var $form,
+                            birthName,
+                            genderName,
+                            $birth,
+                            $gender,
+                            value
+                        ;
+                        $form = that.$form;
+                        genderName = $field.attr( "data-fv-ref-gender-field" );
+                        birthName = $field.attr( "data-fv-ref-birth-field" );
+                        value = $field.val() + "";
+
+                        if ( birthName ) {
+                            var dob
+                                ;
+                            $birth = $form.find( "[name='"+birthName+"']" );
+                            if (value.length === 18) {
+                                dob = value.substr(6, 8);
+                            } else /* length == 15 */ {
+                                dob = '19' + value.substr(6, 6);
+                            }
+                            var year  = parseInt(dob.substr(0, 4), 10),
+                                month = parseInt(dob.substr(4, 2), 10),
+                                day   = parseInt(dob.substr(6, 2), 10);
+                            $birth.val( year + "-" + month + "-" + day );
+                        }
+                        if ( genderName ) {
+                            var dox
+                                ;
+                            if (value.length === 18) {
+                                dox = value.substr(16, 17);
+                            } else /* length == 15 */ {
+                                dox = '19' + value.substr(14, 15);
+                            }
+                            $gender = $form.find( "[name='"+genderName+"']" );
+                            $gender.val( dox % 2 + "" );
+                            $gender.trigger('change');
+                        }
+                    }
+
+
+
                     // validateResult can be a $.Deferred object ...
                     if ('object' === typeof validateResult && validateResult.resolve) {
                         this.updateStatus(updateAll ? field : $field, this.STATUS_VALIDATING, validatorName);

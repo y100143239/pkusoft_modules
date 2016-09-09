@@ -1,0 +1,131 @@
+<form class="form-horizontal form-edit" data-pku-widget="fv" action="${ctx}/gdba/reg/saveCompany"
+      data-detail-url="gdba/fuzeren_detail.html"
+      data-edit-url="gdba/fuzeren_edit.html">
+    <div class="form-group">
+        <div class="_fv-container">
+            <label class="col-xs-2 control-label"><span class="fa fa-star text-required"></span> 姓名</label>
+            <div class="col-xs-4">
+                <input type="text" class="form-control" name="fzrxm" data-fv-integer="true" data-fv-row="._fv-container" >
+            </div>
+        </div>
+        <div class="_fv-container">
+            <label class="col-xs-2 control-label"><span class="fa fa-star text-required"></span> 公民身份号码</label>
+            <div class="col-xs-4">
+                <input type="text" class="form-control" name="fzrgmsfzhm" data-fv-integer="true" data-fv-row="._fv-container" >
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="_fv-container">
+            <label class="col-xs-2 control-label"><span class="fa fa-star text-required"></span> 性别</label>
+            <div class="col-xs-4">
+                <select class="form-control" data-pku-widget="select2" name="fzrxb"
+                        data-placeholder="请选择"
+                        data-allow-clear="true"
+                        data-required="validate-invalid" data-fv-notempty="true"
+                        data-xmlurl="http://pkusoft.gz.bcebos.com/DIC_GENDER.xml"
+                        data-fv-icon="false"
+                        data-fv-row="._fv-container">
+                    <option value=""></option>
+                </select>
+            </div>
+        </div>
+        <div class="_fv-container">
+            <label class="col-xs-2 control-label"><span class="fa fa-star text-required"></span> 民族</label>
+            <div class="col-xs-4">
+                <select class="form-control" data-pku-widget="select2" name="fzrmz"
+                        data-placeholder="请选择"
+                        data-allow-clear="true"
+                        data-required="validate-invalid" data-fv-notempty="true"
+                        data-xmlurl="http://pkusoft.gz.bcebos.com/DIC_NATION.xml"
+                        data-fv-icon="false"
+                        data-fv-row="._fv-container">
+                    <option value=""></option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="_fv-container">
+            <label class="col-xs-2 control-label"><span class="fa fa-star text-required"></span> 出生日期</label>
+            <div class="col-xs-4">
+                <div class="input-group date" data-provide="datepicker" >
+                    <input type="text" class="form-control" placeholder="选择日期" name="fzrcsrq" data-fv-notempty="true" data-fv-row="._fv-container"/>
+                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                </div>
+            </div>
+        </div>
+
+        <label class="col-xs-2 control-label"><span class="fa fa-star text-required"></span> 文化程度</label>
+        <div class="col-xs-4">
+            <select class="form-control" data-pku-widget="select2" name="fzrwhcd"
+                    data-placeholder="请选择"
+                    data-allow-clear="true"
+                    data-required="validate-invalid" data-fv-notempty="true"
+                    data-xmlurl="http://pkusoft.gz.bcebos.com/DIC_EDUCATION.xml">
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-xs-2 control-label"><span class="fa fa-star text-required"></span> 职务</label>
+        <div class="col-xs-4">
+            <input type="text" class="form-control" name="fzrzw" data-fv-notempty="true" data-fv-row="._fv-container"/>
+        </div>
+        <div class="_fv-container">
+            <label class="col-xs-2 control-label"><span class="fa fa-star text-required"></span> 联系电话</label>
+            <div class="col-xs-4">
+                <input type="text" class="form-control" name="fzrlxdh" data-fv-notempty="true" data-fv-row="._fv-container"/>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-xs-2 control-label"><span class="fa fa-star text-required"></span> 实际居住地市县(区)</label>
+        <div class="col-xs-10">
+            <div class="input-group">
+                <input type="text" class="form-control" data-pku-widget="select-area" name="fzrsjjzdssxq" data-select-trigger="#selectBtn_fzrsjjzdssxq"
+                       data-fv-notempty="true"
+                       data-fv-icon="false">
+	                        <span class="input-group-btn">
+	                            <button class="btn btn-default" type="button" id="selectBtn_fzrsjjzdssxq"><i class="fa fa-caret-down"></i></button>
+	                        </span>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-xs-2 control-label"><span class="fa fa-star text-required"></span> 实际居住地详址</label>
+        <div class="col-xs-10">
+            <input type="text" class="form-control" name="fzrsjjzdxz" data-fv-notempty="true"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-xs-2 control-label"><span class="fa fa-star text-required"></span> 户籍地省市县(区)</label>
+        <div class="col-xs-10">
+            <div class="input-group">
+                <input type="text" class="form-control" data-pku-widget="select-area" name="fzrhjdssxq" data-select-trigger="#selectBtn_fzrhjdssxq2"
+                       data-fv-notempty="true"
+                       data-fv-icon="false">
+	                        <span class="input-group-btn">
+	                            <button class="btn btn-default" type="button" id="selectBtn_fzrhjdssxq2"><i class="fa fa-caret-down"></i></button>
+	                        </span>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-xs-2 control-label"><span class="fa fa-star text-required"></span> 户籍地详址</label>
+        <div class="col-xs-10">
+            <input type="text" class="form-control" name="fzrhjdxz" data-fv-notempty="true"/>
+        </div>
+    </div>
+    <div class="form-group from-group-submit">
+        <div class="col-xs-4"></div>
+        <div class="col-xs-4">
+            <button type="submit" class="btn btn-info btn-block btn-lg"><i class="fa fa-save"></i> 保存</button>
+        </div>
+        <div class="col-xs-1">
+            <button type="button" class="btn btn-default btn-sm btn-cancel"><i class="fa fa-trash"></i> 取消</button>
+        </div>
+    </div>
+</form>

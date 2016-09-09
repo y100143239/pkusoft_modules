@@ -50,6 +50,43 @@
 </pre>
     </main>
 </article>
+
+<article class="article article-theme-1">
+    <header>
+        <h3>扩展</h3>
+        <hr>
+    </header>
+    <main>
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>扩展属性</th>
+                <th>描述</th>
+            </tr>
+            </thead>
+            <tr>
+                <td>
+                    data-fv-ref-birth-field="出生日期输入域的name属性值" <br/>
+                    data-fv-ref-gender-field="性别输入域的name属性值"
+                </td>
+                <td>
+                    <pre class="prettyprint">
+&lt;!--针对居民身份证校验，当输入完毕合法的身份证号，
+    将出生日期（yyyy-MM-dd）和性别("1"-男，"2"-女)填充到指定的输入域-->
+&lt;input type="text" class="form-control" name="frzjhm"
+       data-fv-notempty="true"
+       data-fv-id="true"
+       data-fv-id-country="CN"
+       data-fv-ref-birth-field="frcsrq"
+       data-fv-ref-gender-field="frxb"
+       />
+                    </pre>
+                </td>
+            </tr>
+        </table>
+    </main>
+</article>
+
 <div class="page-validate">
     <article class="article">
         <header>

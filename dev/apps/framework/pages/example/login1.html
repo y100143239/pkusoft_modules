@@ -83,7 +83,7 @@
         function _formSubmit( $ ) {
 
 
-            $( "form" ).on( "submit", function () {
+            $( "form" ).on( "submit", function ( e ) {
                 var $this,
                     $form,
                     $fvInstance,
@@ -132,6 +132,9 @@
                         $this.removeAttr( "disabled" );
                     }
                 } );
+
+                // 1. 取消事件的冒泡
+                // 2. 阻止事件的默认行为
                 return false;
             } );
         }

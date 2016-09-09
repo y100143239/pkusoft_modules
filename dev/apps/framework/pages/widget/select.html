@@ -266,12 +266,32 @@ jQuery("#select2_2").select2({
             <hr/>
         </header>
         <main >
-            <div class="callout callout-warning">
-                扩展参数 <code>showMaxItemNum</code> 用于设置下拉框显示的做多记录数（不超过100）
-            </div>
-            <div class="callout callout-warning">
-                扩展参数 <code>selectedValue</code> 用于设置初始被选中的值（在仅有value的情况下）
-            </div>
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>扩展参数</th>
+                    <th>描述</th>
+                </tr>
+                </thead>
+                <tr>
+                    <td>
+                        showMaxItemNum <br/>
+                        data-show-max-item-num
+                    </td>
+                    <td>
+                        用于设置下拉框显示的最多记录数（默认不超过100）
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        selectedValue <br/>
+                        data-selected-value
+                    </td>
+                    <td>
+                        用于设置初始被选中的值（在仅有value的情况下）
+                    </td>
+                </tr>
+            </table>
             <div class="row">
                 <div class="col-xs-12">
                     <div class="callout callout-info">

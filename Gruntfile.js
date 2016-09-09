@@ -81,7 +81,8 @@ module.exports = function(grunt) {
                         src: [
                             'utils/css/**',
                             'utils/doT.js',
-                            'utils/text.js'
+                            'utils/text.js',
+                            'utils/draggable.js'
                         ],
                         dest: 'dist/modules',
                         expand: true
