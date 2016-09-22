@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    <script>
+        window.onload = function () {
+            removeOverlay();
+        };
+        window.setTimeout( function () {
+            removeOverlay();
+        }, 8000 );
+        function removeOverlay() {
+            document.getElementById( "bodyLoadingOverlay" ).style.display = "none";
+            document.body.setAttribute( "class", "" );
+        }
+    </script>
+    <title></title>
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lte IE 8]>
+    <script src="../../../../../dev/modules/lib/ie/respond.js"></script>
+    <script src="../../../../../dev/modules/lib/ie/html5shiv.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" href="../../../../../dev/modules/ui/css/pku.css"/>
+    <link rel="stylesheet" href="../../css/eg_gdba.css?VERSION=v0.20160909"/>
+    <script data-main="../../../../../dev/modules/" src="../../../../../dev/modules/require.js"></script>
+    <script >
+        var VERSION,
+                DEV_MODE
+                ;
+        DEV_MODE = false;
+        VERSION = DEV_MODE ? (new Date()).getTime() : "v0.20160909";
+        require.config( {
+            urlArgs: "VERSION=" + VERSION,
+            paths: {
+                "jquery": "jquery/jquery-1.11.3",
+                "xDomainRequest": "jquery/jQuery.XDomainRequest",
+                "ajaxQueue": "jquery/jQuery.ajaxQueue",
+                "doT": "utils/doT",
+                "draggable": "utils/draggable",
+                "bootstrap": "lib/bootstrap/js/bootstrap",
+
+                "datepicker": "lib/datepicker/js/bootstrap-datepicker-zh.fix",
+
+                "select2": "lib/select2/js/select2.full.fix",
+
+                "echarts": "lib/echart/echarts.min",
+                "echartsTheme": "lib/echart/theme/macarons",
+                "echartsChinaMap": "lib/echart/map/china",
+
+                "formvalidation": "lib/formvalidate/js/formValidation.fix",
+                "formvalidationBs": "lib/formvalidate/js/framework/bootstrap.fix",
+                "formvalidationI18N": "lib/formvalidate/js/language/zh_CN",
+
+                "webuploader": "lib/webuploader/js/webuploader.fix",
+
+                "bootgrid": "lib/bootgrid/js/jquery.bootgrid.fix",
+                "colresizable": "lib/colresizable/colResizable-1.6",
+
+                "select-area": "lib/select-area/select-area",
+                "select-area-data": "lib/select-area/select-area-data",
+
+                "fixrecord": "lib/custom/fixrecord",
+
+                // 代码美化
+                "code-pretty": "lib/pretty/prettify.min"
+            },
+            map: {
+                '*': {
+                    'css': 'utils/css/css',
+                    'text': 'utils/text'
+                }
+            },
+            shim : {
+                "datepicker": [ "jquery"],
+                "select2": [ "jquery", "xDomainRequest"],
+                "bootstrap": [ "jquery"],
+                "formvalidation": [ "jquery", "bootstrap" ],
+                "formvalidationBs": [ "formvalidation" ],
+                "formvalidationI18N": [ "formvalidation", "formvalidationBs" ],
+                "webuploader": [ "css!lib/webuploader/css/webuploader.css" ],
+                "colresizable": [ "jquery" ],
+                "bootgrid": [ "css!lib/bootgrid/css/jquery.bootgrid.css" , "bootstrap", "colresizable"],
+                "select-area": ["css!lib/select-area/css/select-area.css" ],
+                "code-pretty": [ "css!lib/pretty/prettify.css" ]
+            },
+            // 超时
+            waitSeconds: 150
+        } );
+    </script>
+    <script src="../../js/eg_gdba2.js"></script>
+</head>
+<body class="modal-open">
+
+
+
+<div class="overlay" id="bodyLoadingOverlay">
+    <i class="fa fa-spin fa-spinner"></i>
+</div>
+
+
+<!-- 头部 -->
+<div class="wrap header">
+    <div class="top">
+        <span class="fhbsdt"><a href="http://www.gdbs.gov.cn" title="返回办事大厅">返回省办事大厅</a></span>
+<span class="navTop">
+<a href="http://www.gdga.gov.cn/" title="部门首页" target="_blank">部门首页</a><a href="http://www.gdga.gov.cn/wsbs/zwgk"
+                                                                          target="_blank" title="政务公开">政务公开</a><a
+        href="http://www.gdbs.gov.cn/portal/investApproval/qyInvestIndex.seam" target="_blank" title="投资审批">投资审批</a><a
+        href="javaScript:void(0)" class="on" title="网上办事">网上办事</a><a href="http://www.gdbs.gov.cn/portal/zmhd/zmhd.seam"
+                                                                     target="_blank" title="政民互动">政民互动</a><a
+        href="http://www.gdbs.gov.cn/portal/xnjc/dzjc_index.seam" title="效能监察" target="_blank" id="noBordR">效能监察</a>
+</span>
+        <span class="yhdl"><a href="" title="用户登录">用户登录</a></span>
+    </div>
+    <div class="banner">
+    </div>
+
+</div>
+<!-- 头部 end -->
+
+<!-- 中间内容部分-->
+<div class="wrap clearfix main page-bizcode" >
+
+    <!-- 说明 -->
+    <div class="alert alert-tip alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        <h4>保安服务公司设立许可申请</h4>
+        <!--<ul>
+            <li>如果您有未完成的业务，可输入业务流水号，点击“确定”，进行修改与保存。</li>
+            <li>如果您想创建新的申请，直接点击“<a href="#">创建新的申请</a>”。</li>
+        </ul>-->
+    </div>
+    <!-- /说明 -->
+
+    <div class="card-basic">
+        <div class="title">
+            <div class="arrow"></div>
+            <div class="head">创建新的申请</div>
+        </div>
+        <div class="desc text-center">
+            <a class="btn btn-success btn-app">
+                <i class="fa fa-play"></i> 开始
+            </a>
+        </div>
+    </div>
+    <div class="card-basic card-senior ">
+        <div class="title">
+            <div class="arrow"></div>
+            <div class="head">继续未提交的申请</div>
+        </div>
+        <div class="desc">
+            <form class="form-horizontal" data-pku-widget="fv" action="xxx" data-validate-bizcode-url="/gdba/user/login">
+                <input type="hidden" name="password" value="a"/>
+                <div class="form-group">
+                    <div class="col-xs-3 text-right">
+                        <label class="control-label ">业务流水号</label>
+                    </div>
+                    <div class="col-xs-9">
+                        <input type="text" class="form-control" name="loginName" data-fv-notempty="true">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-3">
+                    </div>
+                    <div class="col-xs-9">
+                        <button type="submit" class="btn btn-info btn-block">确定</button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+
+
+
+
+</div>
+<!-- 中间内容部分 end -->
+
+
+<!-- 底部内容部分-->
+<table width="996" height="64" border="0" align="center" cellpadding="0" cellspacing="0" class="bottomlink">
+    <tbody>
+    <tr>
+        <td><a href="http://www.gdga.gov.cn/jmlx/zxyw/" target="_blank" title="我要咨询"><img
+                src="../../images/bsdt/bottombutten1.png"></a></td>
+        <td><a href="http://www.gdga.gov.cn" title="我要查询" target="_blank"><img src="../../images/bsdt/bottombutten2.png"></a>
+        </td>
+        <td><a href="http://www.gdbs.gov.cn/portal/star/evaluate1.seam" title="我要评议" target="_blank"><img
+                src="../../images/bsdt/bottombutten3.png"></a></td>
+        <td><a href="http://www.gdga.gov.cn/wsbs/complaints/" title="我要投诉" target="_blank"><img
+                src="../../images/bsdt/bottombutten4.png"></a></td>
+    </tr>
+    </tbody>
+</table>
+<table width="996" height="64" border="0" align="center" cellpadding="0" cellspacing="0" class="bottomword">
+    <tbody>
+    <tr>
+        <td height="63" align="center" valign="middle" >
+            <table width="971" border="0" cellspacing="0" cellpadding="0">
+                <tbody>
+                <tr>
+                    <td width="758" height="37" align="left" valign="middle">
+                        <table width="700" border="0" cellspacing="0" cellpadding="0">
+                            <tbody>
+                            <tr>
+                                <td width="52" style="border-right:#ffffff 2px solid;"></td>
+                                <td width="20" height="25">&nbsp;</td>
+                                <td width="628" height="25"><a href="http://www.gdga.gov.cn" target="_blank"><font
+                                        color="#ffffff">建设单位:广东省公安厅</font></a><font color="#FFFFFF">&nbsp;&nbsp;&nbsp;&nbsp;备案/许可证号:粤ICP备05013198号</font>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                    <td width="213" align="center" valign="middle">
+                        <table width="210" border="0" cellspacing="0" cellpadding="0">
+                            <tbody>
+                            <tr>
+                                <td height="20" align="center" valign="middle" style="border-right:#6dd8ee solid 1px;">
+                                    <a href="http://www.gdga.gov.cn/wzxx/200910/t20091013_391968.html" title="网站地图"
+                                       target="_blank"><font color="#6dd8ee">网站地图</font></a></td>
+                                <td align="center" valign="middle"><a
+                                        href="http://www.gdga.gov.cn/wzxx/200910/t20091013_391962.html" title="联系我们"
+                                        target="_blank"><font color="#6dd8ee">联系我们</font></a></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<!-- 底部内容部分 end -->
+
+
+</body>
+</html>

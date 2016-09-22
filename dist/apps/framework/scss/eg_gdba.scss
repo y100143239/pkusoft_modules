@@ -20,7 +20,14 @@ a{ text-decoration:none; }
 .hidden{display:none;}
 
 /* 外围布局宽度 */
-.wrap{margin:0 auto; width:996px; border-bottom:#cbcbcb solid 1px; border-left:#cbcbcb solid 1px; border-right:#cbcbcb solid 1px; font-size:14px; clear:both; height:100%;}
+.wrap {
+    margin        : 0 auto;
+    width         : 996px;
+    border : #cbcbcb solid 1px;
+    font-size     : 14px;
+    clear         : both;
+    height        : 100%;
+}
 
 /* header*/
 .fhbsdt{background:url(../images/bsdt/home.png) no-repeat; padding:3px; }
@@ -277,6 +284,7 @@ i.form-control-feedback.fa {
         cursor: move;
         .icon {
             color: #e6f0fd;
+            padding: 0 4px;
         }
     }
     .body {
@@ -289,6 +297,9 @@ i.form-control-feedback.fa {
                 color: #5a9ff3;
                 background-color: #e6f0fd;
             }
+        }
+        .fa {
+            width: 20px;
         }
     }
     .foot {
@@ -309,9 +320,7 @@ i.form-control-feedback.fa {
 
     }
 
-    .fa {
-        width: 20px;
-    }
+
     ul {
         list-style: none;
         padding: 0;
@@ -365,4 +374,106 @@ i.form-control-feedback.fa {
 }
 .panel-collapse {
     margin-left: 1em;
+}
+
+// 业务流水号颜色加重
+.alert-tip small,
+.foot .biz-num span,
+.text-danger-light {
+    color: #d9534f!important;
+}
+
+.page-agreement {
+    padding: 2em;
+    .title-header {
+        margin-bottom: 2em;
+    }
+    .title-module {
+        margin: 2em 0 1em 0;
+    }
+    ul > li{
+        margin: 1em 0;
+    }
+    li {
+        line-height: 1.8;
+    }
+    p {
+        text-indent: 2em;
+        line-height: 1.8;
+    }
+    .agreement-container {
+        text-align: center;
+        margin-top: 4em;
+    }
+    .btn-agree {
+        width: 120px;
+        margin-right: 2em;
+    }
+}
+.page-bizcode {
+    .card-basic {
+        float: left;
+        margin: 50px 0 0 60px;
+        width: 400px;
+        border: 1px solid #D1D0D0;
+        .title {
+            height: 48px;
+            background: #79CA6B;
+            position: relative;
+            zoom: 1;
+            color: #fff;
+            text-align: center;
+        }
+        .arrow {
+            height: 0;
+            width: 0;
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-top: 9px solid #79CA6B;
+            border-bottom: 9px solid transparent;
+            border-left: 9px solid transparent;
+            border-right: 9px solid transparent;
+        }
+        .head {
+            font-size: 18px;
+            height: 22px;
+            line-height: 22px;
+            padding-top: 13px;
+        }
+        .desc {
+            background: #FDFFF9;
+            height: 150px;
+            padding: 20px;
+        }
+    }
+
+    .card-senior {
+        .title {
+            background: #5A9FF3;
+        }
+        .arrow {
+            border-top: 9px solid #5A9FF3;
+        }
+        .desc {
+            background: #F8FCFF;
+        }
+    }
+    .btn-app {
+        margin-top: 20px;
+    }
+}
+.page-receipt {
+    dl {
+        text-indent: 2em;
+        line-height: 2;
+        dt {
+            line-height: 2;
+        }
+        dd {
+            text-indent: 4em;
+            line-height: 2;
+        }
+    }
 }

@@ -121,19 +121,21 @@
 <!-- 头部 end -->
 
 <!-- 中间内容部分-->
-<div class="wrap clearfix main border-radius-none-all" >
+<div class="wrap clearfix main border-radius-none-all page-index" >
 
+    <!-- 说明 -->
     <div class="alert alert-tip alert-dismissible">
         <button type="button" class="close" data-dismiss="alert">×</button>
-        <h4>保安服务公司设立许可申请<small>（本次业务流水号：123456789012345）</small></h4>
+        <h4>保安服务公司设立许可申请<small class="text-danger">（本次业务流水号：123456789012345）</small></h4>
         <ul>
-            <li>对未提交的业务：进入<a href="#">页面</a>，可输入流水号对其进行修改。</li>
-            <li>对已提交的业务：进入<a href="#">页面</a>，可输入流水号查看审核进度。</li>
+            <li>对未提交的业务：可输入流水号对其进行<a href="#">修改</a>。</li>
+            <li>对已提交的业务：可输入流水号<a href="https://gdba.gdga.gov.cn:8090/web/qry.action">查看审核进度</a>。</li>
         </ul>
     </div>
+    <!-- /说明 -->
 
     <!-- 信息概况 -->
-    <div class="sidebar-info-container">
+    <div class="sidebar-info-container" data-url="/gdba/reg/info">
         <div class="sidebar-cont">
             <button type="button" class="btn btn-dark-info btn-max" title="显示信息概况" data-toggle="tooltip"><i class="fa fa-th-large"></i></button>
         </div>
@@ -147,31 +149,31 @@
                     <li class="treeview">
                         <a href="#tree_1"><i class="fa fa-sticky-note-o"></i> 保安服务公司</a>
                         <ul class="treeview-menu">
-                            <li><a href="#tree_1_1"><i class="fa fa-angle-double-right"></i> 基本信息 <i class="icon fa fa-check"></i></a></li>
-                            <li><a href="#tree_1_2"><i class="fa fa-angle-double-right"></i> 股东信息 <i class="icon fa fa-check"></i></a></li>
-                            <li><a href="#tree_1_3"><i class="fa fa-angle-double-right"></i> 附件 <i class="icon fa fa-check fa-close"></i></a></li>
+                            <li class="index-0"><a href="#tree_1_1"><i class="fa fa-angle-double-right"></i> 基本信息 <i class="icon fa fa-check fa-close"></i></a></li>
+                            <li class="index-1"><a href="#tree_1_2"><i class="fa fa-angle-double-right"></i> 股东信息 <i class="icon fa fa-check fa-close"></i></a></li>
+                            <li class="index-2"><a href="#tree_1_3"><i class="fa fa-angle-double-right"></i> 附件 <i class="icon fa fa-check fa-close"></i></a></li>
                         </ul>
                     </li>
                     <li class="treeview">
                         <a href="#tree_2"><i class="fa fa-legal"></i> 法定代表人</a>
                         <ul class="treeview-menu">
-                            <li><a href="#tree_2_1"><i class="fa fa-angle-double-right"></i> 基本信息<i class="icon fa fa-check fa-close"></i></a></li>
-                            <li><a href="#tree_2_2"><i class="fa fa-angle-double-right"></i> 简历<i class="icon fa fa-check fa-close"></i></a></li>
-                            <li><a href="#tree_2_3"><i class="fa fa-angle-double-right"></i> 附件<i class="icon fa fa-check fa-close"></i></a></li>
+                            <li class="index-3"><a href="#tree_2_1"><i class="fa fa-angle-double-right"></i> 基本信息<i class="icon fa fa-check fa-close"></i></a></li>
+                            <li class="index-4"><a href="#tree_2_2"><i class="fa fa-angle-double-right"></i> 简历<i class="icon fa fa-check fa-close"></i></a></li>
+                            <li class="index-5"><a href="#tree_2_3"><i class="fa fa-angle-double-right"></i> 附件<i class="icon fa fa-check fa-close"></i></a></li>
                         </ul>
                     </li>
                     <li class="treeview">
                         <a href="#tree_3"><i class="fa fa-user-secret"></i> 主要负责人</a>
                         <ul class="treeview-menu">
-                            <li><a href="#tree_3_1"><i class="fa fa-angle-double-right"></i> 基本信息<i class="icon fa fa-check fa-close"></i></a></li>
-                            <li><a href="#tree_3_3"><i class="fa fa-angle-double-right"></i> 附件<i class="icon fa fa-check fa-close"></i></a></li>
+                            <li class="index-6"><a href="#tree_3_1"><i class="fa fa-angle-double-right"></i> 基本信息<i class="icon fa fa-check fa-close"></i></a></li>
+                            <li class="index-7"><a href="#tree_3_2"><i class="fa fa-angle-double-right"></i> 附件<i class="icon fa fa-check fa-close"></i></a></li>
                         </ul>
                     </li>
                 </ul>
             </div>
             <div class="foot">
                 <div class="biz-num">流水号: <span>123456789012345</span> <a href="javascript:void(0)" title="流水号 可用于查询本次业务办理情况" data-toggle="tooltip"><i class="fa fa-question-circle"></i></a></div>
-                <button type="button" class="btn btn-warning btn-lg btn-block">提交审核</button>
+                <button type="button" class="btn btn-warning btn-lg btn-block btn-biz-submit" data-submit-url="xxx" data-success-url="yyy">提交审核</button>
             </div>
         </div>
     </div>
@@ -1051,7 +1053,7 @@
                 <a href="#" class="panel-collapse in"><i class="fa fa-chevron-circle-right fa-chevron-circle-down"></i> <span>折叠</span></a>
             </div>
             <div class="panel-body">
-
+<!--
                 <div class="resume resume-detail">
                     <form class="form-horizontal form-detail" data-pku-widget="fv"
                           action="${ctx}/gdba/reg/saveCompany"
@@ -1245,7 +1247,7 @@
                             </div>
                         </div>
                     </form>
-                </div>
+                </div>-->
 
                 <div class="resume-add clearfix">
                     <button type="button" class="btn btn-success pull-right btn-resume-add"><i class="fa fa-plus-circle"></i> 添加负责人</button>
@@ -1402,7 +1404,7 @@
     <div class="row row-biz-commit">
         <div class="col-xs-4"></div>
         <div class="col-xs-4">
-            <button type="button" class="btn btn-warning btn-lg btn-block">提交审核</button>
+            <button type="button" class="btn btn-warning btn-lg btn-block btn-biz-submit" data-submit-url="xxx" data-success-url="yyy">提交审核</button>
         </div>
     </div>
 

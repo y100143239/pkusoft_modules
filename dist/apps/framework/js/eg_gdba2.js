@@ -1,268 +1,377 @@
 require( [ "jquery", "gdbaUtils", "draggable",
                 "formvalidationI18N", "bootstrap", "select2", "datepicker", "select-area" ], function ( $, /* 定义在下面 */Utils, Draggable ) {
-
-    var $document
+    var $document,
+        $indexPage,
+        $bizcodePage
     ;
     $document = $( document );
 
-    // 点击 保存（.btn[type='submit']）
-    $document.on( "click.gdba", ".btn[type='submit']", function () {
-        var $this,
-            $form,
-            $fvInstance,
-            isValid,
-            formUrl,
-            fragmentUrl
-            ;
-        $this = $( this );
-        $form = $this.closest( "form" );
-        $fvInstance = $form.data( 'formValidation' );
-
-        // 校验
-        $fvInstance.validate();
-        // 判断
-        isValid = $fvInstance.isValid();
-
-        // 校验不通过 ， 退出
-        if ( !isValid ) {
-            return false;
-        }
-
-        // 添加loading遮罩层
-        Utils.addLoadingOverlay( $form );
-
-        // 发送Ajax，保存数据
-        formUrl = $form.attr( "action" );
-        fragmentUrl = $form.attr( "data-detail-url" );
-        $.ajax( {
-            type: "POST",
-            url: formUrl,
-            data: $form.serialize(),
-            timeout: 60000, // 设置请求超时时间（毫秒）
-            contentType: "application/x-www-form-urlencoded; charset=utf-8",
-            dataType: "json", // 预期服务器返回的数据类型。
-            success: function ( responseData ) {
-                Utils.loadDetailFragment( fragmentUrl, $form,
-                    function success( $form ) {
-                        // $form 被替换掉了
-                    },
-                    function error() {
-                        Utils.removeLoadingOverlay( $form );
-                    }
-                );
-            },
-            error: function () {
-                Utils.dialog( "提示", "网络错误。" );
-                //alert( "网络错误" );
-                Utils.removeLoadingOverlay( $form );
-                Utils.loadDetailFragment( fragmentUrl, $form );
-            }
-        } );
-
-        return false; // 禁止提交表单
-    } );
-
-    // 点击 取消（.btn-cancel）
-    $document.on( "click.gdba", ".btn-cancel", function () {
-        var $this,
-            $form,
-            fragmentUrl
-        ;
-        $this = $( this );
-        $form = $this.closest( "form" );
-        fragmentUrl = $form.attr( "data-detail-url" );
-
-        // 1. 提示“是否放弃编辑”
-        Utils.dialog(
-            "提示",
-            "是否放弃编辑",
-            function okCallback() {
-                // 2.1 如果无详情页（form.has-detail-page），直接删除节点
-                if ( ! $form.is( ".has-detail-page" ) ) {
-                    $form.closest( ".resume" ).remove();
-                }
-
-                // 2.2 如果有详情页（form.has-detail-page），切换到详情页
-                Utils.addLoadingOverlay( $form );
-
-                Utils.loadDetailFragment( fragmentUrl, $form,
-                    function success( $form ) {
-                        // $form 被替换掉了
-                    },
-                    function error() {
-                        Utils.removeLoadingOverlay( $form );
-                    }
-                );
-            },
-            function cancelCallback() {
-                // do nothings
-            }
-        );
-
-    } );
-
-    // 点击 删除简历（.btn-resume-delete）
-    $document.on( "click.gdba", ".btn-resume-delete", function () {
-        var $this,
-            $form,
-            deleteUrl
-            ;
-        $this = $( this );
-        $form = $this.closest( "form" );
-        deleteUrl = $form.attr( "data-delete-url" );
-
-        Utils.addLoadingOverlay( $form );
-
-        // 1. 发送请求
-        $.ajax( {
-            type: "POST",
-            url: deleteUrl,
-            timeout: 30000, // 设置请求超时时间（毫秒）
-            contentType: "application/x-www-form-urlencoded; charset=utf-8",
-            dataType: "json", // 预期服务器返回的数据类型。
-            success: function ( response ) {
-                var success
-                ;
-                success = response.success;
-                // 2. 服务器端删除成功后，删除节点
-                if ( success ) {
-                    $this.closest( ".resume" ).remove();
-                } else {
-                    // 3. 服务器端删除失败，则提示“删除失败，请联系管理员。”
-                    Utils.dialog( "提示", "删除失败，请联系管理员。" )
-                }
-            },
-            error: function () {
-                Utils.dialog( "提示", "网络错误。" );
-            },
-            complete: function () {
-                Utils.removeLoadingOverlay( $form );
-            }
-        } );
-
-
-
-    } );
-
-    // 点击 编辑（.btn-edit），给载入的form添加 类“.has-detail-page”标志其有详情页
-    $document.on ( "click.gdba", ".btn-edit", function () {
-        var $this,
-            $form,
-            fragmentUrl
-            ;
-
-        $this = $( this );
-        $form = $this.closest( "form" );
-        fragmentUrl = $form.attr( "data-edit-url" );
-        // 添加 loading 遮罩层
-        Utils.addLoadingOverlay( $form );
-        // 载入 编辑页片段
-        Utils.loadEditFragment( fragmentUrl, $form, function successCallback( $form ) {
-            $form.addClass( "has-detail-page" );
-        } );
-    } );
-
-    // 点击 添加简历（.btn-resume-add）
-    $document.on( "click.gdba", ".btn-resume-add", function ( e ) {
-        var $this,
-            $resumeAdd,
-            $template,
-            $resume,
-            $form,
-            fragmentUrl
-        ;
-        e.preventDefault();
-
-        $this = $( this );
-
-        $resumeAdd = $this.closest( ".resume-add" );
-        $template = $resumeAdd.find( ".template" );
-
-        // 1. 创建节点
-        $resume = $template.clone().removeClass( "hidden" );
-
-        // 2. 挂载节点
-        $resume.insertBefore( $resumeAdd );
-
-        // 3. 载入模板
-        $form = $resume.find( "form" );
-        fragmentUrl = $form.attr( "data-edit-url" );
-        if ( $this.is( "a" ) ) {
-            fragmentUrl = $this.attr( "href" );
-        }
-
-        // 添加 loading 遮罩层
-        Utils.addLoadingOverlay( $form );
-        // 载入 编辑页片段
-        Utils.loadEditFragment( fragmentUrl, $form );
-    });
-
-
-    // 点击“图片上传”时，进行webuploader的初始化
-    $document.on( "click", ".tab-info .tab-upload", function () {
-        var $this,
-            $target,
-            uploaderContainerId
-        ;
-        $this = $( this );
-        $target = $this.closest(".tab-info" ).find( ".imageUploaderContainer" );
-        if ( $target.get( 0 ).id ) {
-            return;
-        }
-        uploaderContainerId = "uploaderContainer_" + ( new Date() ).getTime();
-        $target.attr( "id", uploaderContainerId );
-        Utils.initWebuploader( $target );
-    });
-
-    // 选择pcs后，给pcs_name进行赋值
-    $document.on("select2:select", "#_gsxqpcs", function( ){
-        $( "#_gsxqpcsmc" ).val( $( this ).find("option:selected").text() );
-    });
-
-    // 更换“证件类型”时，如果是“身份证”则启用“id校验规则”，否则就禁用
-    $document.on("select2:change", "select[data-pku-certificate-type]", function( ){
-        var $this,
-            formValidation,
-            isId,
-            refFieldName
-
-        ;
-        $this = $( this );
-        formValidation = $( this.form ).data('formValidation');
-        refFieldName = $this.attr( "data-pku-certificate-type-ref" );
-        isId = ( $this.val() == "111" );
-
-        formValidation.enableFieldValidators( refFieldName, isId, "id" );
-    });
-
-    // 添加点击面板标题时进行 折叠和隐藏
-    $document.on( "click.gdba", ".panel-collapse", function ( e ) {
-        var $panelBody,
-            $this
-            ;
-        e.preventDefault();
-        $this = $( this );
-        $panelBody = $this.closest( ".panel-plat" ).find( ".panel-body" );
-
-        if ( $this.is( ".in" ) ) { // 显示，转隐藏
-            $this.removeClass( "in" );
-            $this.find( ".fa" ).removeClass( "fa-chevron-circle-down" );
-            $this.find( "span" ).text( "显示" );
-            $panelBody.hide();
-        } else {
-            $this.addClass( "in" );
-            $this.find( ".fa" ).addClass( "fa-chevron-circle-down" );
-            $this.find( "span" ).text( "折叠" );
-            $panelBody.show();
-        }
-
-    } );
-
     $document.ready( function () {
 
+        $indexPage = $( ".page-index" );
+        $bizcodePage = $( ".page-bizcode" );
+
+        // 点击 保存（.btn[type='submit']）
+        $indexPage.on( "click.gdba", ".btn[type='submit']", function () {
+            var $this,
+                $form,
+                $fvInstance,
+                isValid,
+                formUrl,
+                fragmentUrl
+                ;
+            $this = $( this );
+            $form = $this.closest( "form" );
+            $fvInstance = $form.data( 'formValidation' );
+
+            // 校验
+            $fvInstance.validate();
+            // 判断
+            isValid = $fvInstance.isValid();
+
+            // 校验不通过 ， 退出
+            if ( !isValid ) {
+                return false;
+            }
+
+            // 添加loading遮罩层
+            Utils.addLoadingOverlay( $form );
+
+            // 发送Ajax，保存数据
+            formUrl = $form.attr( "action" );
+            fragmentUrl = $form.attr( "data-detail-url" );
+            $.ajax( {
+                type: "POST",
+                url: formUrl,
+                data: $form.serialize(),
+                timeout: 60000, // 设置请求超时时间（毫秒）
+                contentType: "application/x-www-form-urlencoded; charset=utf-8",
+                dataType: "json", // 预期服务器返回的数据类型。
+                success: function ( responseData ) {
+                    if ( responseData.success == true ) {
+                        fragmentUrl = fragmentUrl.replace(/id=$/, "id=" + responseData.data);
+                    }
+                    Utils.loadDetailFragment( fragmentUrl, $form,
+                        function success( $form ) {
+                            // $form 被替换掉了
+                            // 刷新数据填写完整度面板
+                            $( ".btn-refresh" ).trigger( "click.sidebar.gdba" );
+                        },
+                        function error() {
+                            Utils.removeLoadingOverlay( $form );
+                        }
+                    );
+                },
+                error: function () {
+                    Utils.dialog( "提示", "网络错误。" );
+                    //alert( "网络错误" );
+                    Utils.removeLoadingOverlay( $form );
+                    Utils.loadDetailFragment( fragmentUrl, $form );
+                }
+            } );
+
+            return false; // 禁止提交表单
+        } );
+
+        // 点击 取消（.btn-cancel）
+        $indexPage.on( "click.gdba", ".btn-cancel", function () {
+            var $this,
+                $form,
+                fragmentUrl
+            ;
+            $this = $( this );
+            $form = $this.closest( "form" );
+            fragmentUrl = $form.attr( "data-detail-url" );
+
+            // 1. 提示“是否放弃编辑”
+            Utils.dialog(
+                "提示",
+                "是否放弃编辑",
+                function okCallback() {
+                    // 2.1 如果无详情页（form.has-detail-page），直接删除节点
+                    if ( ! $form.is( ".has-detail-page" ) ) {
+                        $form.closest( ".resume" ).remove();
+                        return;
+                    }
+
+                    // 2.2 如果有详情页（form.has-detail-page），切换到详情页
+                    Utils.addLoadingOverlay( $form );
+
+                    Utils.loadDetailFragment( fragmentUrl, $form,
+                        function success( $form ) {
+                            // $form 被替换掉了
+                        },
+                        function error() {
+                            Utils.removeLoadingOverlay( $form );
+                        }
+                    );
+                },
+                function cancelCallback() {
+                    // do nothings
+                }
+            );
+
+        } );
+
+        // 点击 删除简历（.btn-resume-delete）
+        $indexPage.on( "click.gdba", ".btn-resume-delete", function () {
+            var $this,
+                $form,
+                deleteUrl
+                ;
+            $this = $( this );
+            $form = $this.closest( "form" );
+            deleteUrl = $form.attr( "data-delete-url" );
+
+            Utils.dialog(
+                "提示",
+                "是否删除？",
+                function okCallback() {
+                    Utils.addLoadingOverlay( $form );
+
+                    // 1. 发送请求
+                    $.ajax( {
+                        type: "POST",
+                        url: deleteUrl,
+                        timeout: 30000, // 设置请求超时时间（毫秒）
+                        contentType: "application/x-www-form-urlencoded; charset=utf-8",
+                        dataType: "json", // 预期服务器返回的数据类型。
+                        success: function ( response ) {
+                            var success
+                                ;
+                            success = response.success;
+                            // 2. 服务器端删除成功后，删除节点
+                            if ( success ) {
+                                $this.closest( ".resume" ).find( "[data-toggle='tooltip']" ).tooltip('destroy' )
+                                    .end().remove();
+                                // 刷新数据填写完整度面板
+                                $( ".btn-refresh" ).trigger( "click.sidebar.gdba" );
+                            } else {
+                                // 3. 服务器端删除失败，则提示“删除失败，请联系管理员。”
+                                Utils.dialog( "提示", "删除失败，请联系管理员。" )
+                            }
+                        },
+                        error: function () {
+                            Utils.dialog( "提示", "网络错误。" );
+                        },
+                        complete: function () {
+                            Utils.removeLoadingOverlay( $form );
+                        }
+                    } );
+                },
+                function cancelCallback() {
+                    // do nothings
+                }
+            );
+
+        } );
+
+        // 点击 编辑（.btn-edit），给载入的form添加 类“.has-detail-page”标志其有详情页
+        $indexPage.on( "click.gdba", ".btn-edit", function () {
+            var $this,
+                $form,
+                fragmentUrl
+                ;
+
+            $this = $( this );
+            $form = $this.closest( "form" );
+            fragmentUrl = $form.attr( "data-edit-url" );
+            // 添加 loading 遮罩层
+            Utils.addLoadingOverlay( $form );
+            // 载入 编辑页片段
+            Utils.loadEditFragment( fragmentUrl, $form, function successCallback( $form ) {
+                $form.addClass( "has-detail-page" );
+            } );
+        } );
+
+        // 点击 添加简历（.btn-resume-add）
+        $indexPage.on( "click.gdba", ".btn-resume-add", function ( e ) {
+            var $this,
+                $resumeAdd,
+                $template,
+                $resume,
+                $form,
+                fragmentUrl
+            ;
+            e.preventDefault();
+
+            $this = $( this );
+
+            $resumeAdd = $this.closest( ".resume-add" );
+            $template = $resumeAdd.find( ".template" );
+
+            // 1. 创建节点
+            $resume = $template.clone().removeClass( "hidden" );
+
+            // 2. 挂载节点
+            $resume.insertBefore( $resumeAdd );
+
+            // 3. 载入模板
+            $form = $resume.find( "form" );
+            fragmentUrl = $form.attr( "data-edit-url" );
+            if ( $this.is( "a" ) ) {
+                fragmentUrl = $this.attr( "href" );
+            }
+
+            // 添加 loading 遮罩层
+            Utils.addLoadingOverlay( $form );
+            // 载入 编辑页片段
+            Utils.loadEditFragment( fragmentUrl, $form );
+        });
+
+
+        // 点击“图片上传”时，进行webuploader的初始化
+        $indexPage.on( "click", ".tab-info .tab-upload", function () {
+            var $this,
+                $target,
+                uploaderContainerId
+            ;
+            $this = $( this );
+            $target = $this.closest(".tab-info" ).find( ".imageUploaderContainer" );
+            if ( $target.get( 0 ).id ) {
+                return;
+            }
+            uploaderContainerId = "uploaderContainer_" + ( new Date() ).getTime();
+            $target.attr( "id", uploaderContainerId );
+            Utils.initWebuploader( $target );
+        });
+
+        // 选择pcs后，给pcs_name进行赋值
+        $indexPage.on( "select2:select", "#_gsxqpcs", function( ){
+            $( "#_gsxqpcsmc" ).val( $( this ).find("option:selected").text() );
+        });
+
+        // 更换“证件类型”时，如果是“身份证”则启用“id校验规则”，否则就禁用
+        $indexPage.on( "change", "select[data-pku-certificate-type]", function( ){
+            var $this,
+                formValidation,
+                isId,
+                refFieldName
+
+            ;
+            $this = $( this );
+            formValidation = $( this.form ).data('formValidation');
+            refFieldName = $this.attr( "data-pku-certificate-type-ref" );
+            isId = ( $this.val() == "111" );
+
+            formValidation.enableFieldValidators( refFieldName, isId, "id" );
+        });
+
+        // 添加点击面板标题时进行 折叠和隐藏
+        $indexPage.on( "click.gdba", ".panel-collapse", function ( e ) {
+            var $panelBody,
+                $this
+                ;
+            e.preventDefault();
+            $this = $( this );
+            $panelBody = $this.closest( ".panel-plat" ).find( ".panel-body" );
+
+            if ( $this.is( ".in" ) ) { // 显示，转隐藏
+                $this.removeClass( "in" );
+                $this.find( ".fa" ).removeClass( "fa-chevron-circle-down" );
+                $this.find( "span" ).text( "显示" );
+                $panelBody.hide();
+            } else {
+                $this.addClass( "in" );
+                $this.find( ".fa" ).addClass( "fa-chevron-circle-down" );
+                $this.find( "span" ).text( "折叠" );
+                $panelBody.show();
+            }
+
+        } );
+
+        // 提交业务
+        $indexPage.on( "click.gdba.biz.submit", ".btn-biz-submit", function () {
+            var isComplete,
+                submitUrl,
+                successUrl,
+                $this
+                ;
+            $this = $( this );
+            // 1. 判断面板上是否全部打钩（无 .fa-close ）
+            isComplete = $( ".sidebar-info-container .icon.fa-close" ).size() == 0;
+            if ( ! isComplete ) {
+                Utils.dialog( "提示", "信息未填写完毕！" );
+                return;
+            }
+
+            if ( $this.data( "isSubmitting") === true ) {
+                Utils.dialog( "提示", "正在提交，请耐心等待服务器处理结果！" );
+                return;
+            }
+            $this.data( "isSubmitting", true );
+
+            submitUrl = $this.attr( "data-submit-url" );
+            successUrl = $this.attr( "data-success-url" );
+            if ( ! submitUrl || ! successUrl ) {
+                return;
+            }
+
+            Utils.addLoadingOverlay( $( "body" ) );
+
+            // 2. 保存数据
+            $.getJSON( submitUrl, { timestamp: ( new Date() ).getTime() }, function success( data ) {
+                if ( ! ( data && data.success ) ) {
+                    Utils.dialog( "提示", "业务提交失败，请稍后重试！" );
+                    return;
+                }
+                Utils.dialog( "提示", "提交成功！",
+                    function () {
+                        window.location = successUrl;
+                    }, function () {
+                        window.location = successUrl;
+                    } );
+
+            } ).fail(function() {
+                Utils.dialog( "提示", "错误：请检查网络，或重新登录。" );
+            }).always(function() {
+                Utils.removeLoadingOverlay( $( "body" ) );
+                $this.data( "isSubmitting", false );
+            });
+        } );
+
+
+        //
+        $bizcodePage.on( "click", ".btn[type='submit']", function () {
+            var $this,
+                $form,
+                $fvInstance,
+                isValid
+                ;
+            $this = $( this );
+            $form = $this.closest("form");
+            $fvInstance = $form.data( 'formValidation' );
+            // 校验
+            $fvInstance.validate();
+            // 判断
+            isValid = $fvInstance.isValid();
+            // 校验不通过 ， 退出
+            if ( !isValid ) {
+                return false;
+            }
+            // 发送请求：判断是否是合法的 bizcode
+            $.getJSON( $form.attr( "data-validate-bizcode-url" ), $form.serialize(), function success( data ) {
+                if ( ! ( data && data.success ) ) {
+                    Utils.dialog( "提示", data.message );
+                    return;
+                }
+                window.location = $form.attr( "action" ) + "?" + $form.serialize();
+            } ).fail( function (){
+                Utils.dialog( "提示", "错误：网络异常。" );
+            } );
+        });
+
+
+        var $sidebarInfoContainr
+            ;
+
+        $sidebarInfoContainr = $( ".sidebar-info-container" );
+
+        // 渲染
         Utils.renderPanel();
 
-        $( ".btn-max,.btn-min" ).on( "click", function () {
+        // 信息概况-最小化
+        $( ".btn-max, .btn-min", $sidebarInfoContainr ).on( "click", function () {
             var $this;
             $this = $( this );
             $this.closest( ".sidebar-cont" ).removeClass( "active" ).siblings().addClass( "active" );
@@ -273,11 +382,61 @@ require( [ "jquery", "gdbaUtils", "draggable",
             return false;
         } );
 
-        new Draggable ( $( ".sidebar-info-container" ).get( 0 ), {
+        // 信息概况-刷新
+        $( ".btn-refresh", $sidebarInfoContainr ).on( "click.sidebar.gdba", function ( e ){
+            var url,
+                $faIcon;
+
+            e.preventDefault();
+            $faIcon = $( this ).find( ".fa" );
+
+            if ( $faIcon.is( ".fa-spin" ) ) {
+                return;
+            }
+            $faIcon.addClass( "fa-spin" );
+
+            url = $sidebarInfoContainr.attr( "data-url" );
+
+            // 1. 从服务器获取数据
+            $.getJSON( url, { timestamp: ( new Date() ).getTime() }, function success( data ) {
+                if ( ! ( data && data.success ) ) {
+                    Utils.dialog( "提示", "刷新失败，请稍后再刷新！" );
+                    return;
+                }
+                // 2. 根据获取的数据，刷新信息填写情况
+                refreshInfo( data.data );
+            } ).fail(function() {
+                Utils.dialog( "提示", "错误：请检查网络，或重新登录。" );
+            }).always(function() {
+                $faIcon.removeClass( "fa-spin" );
+            });
+
+        } ).trigger( "click.sidebar.gdba" );
+
+        // 设置面板的拖拽
+        $sidebarInfoContainr.get( 0 ) && new Draggable ( $sidebarInfoContainr.get( 0 ), {
             filterTarget: function ( target ) {
                 return $( target ).is( ".heading" );
             }
         } );
+
+        function refreshInfo( arr ) {
+            $sidebarInfoContainr.find( "li[class*='index']" ).each( function ( index ) {
+                var $icon,
+                    isComplete
+                ;
+                $icon = $( this ).find( ".icon" );
+                if ( arr[ index ] ) {
+                    isComplete = true;
+                }
+                if ( isComplete ) {
+                    $icon.removeClass( "fa-close" );
+                } else {
+                    $icon.addClass( "fa-close" );
+                }
+            } );
+        }
+
 
     } );
 
@@ -354,15 +513,21 @@ define( "gdbaUtils", ["jquery", "webuploader", "bootstrap"], function ($, WebUpl
                 trigger: "hover"
             });
             // 初始化时，触发一次“change”事件，以判断是否启用“id”校验规则
-            $( "select[data-pku-certificate-type]", $target ).trigger( "select2:change" );
+            $( "select[data-pku-certificate-type]", $target ).trigger( "change" );
 
         },
         addLoadingOverlay: function ( $target ) {
             this.removeLoadingOverlay( $target );
             $target.append( '<div class="overlay overlay-black"> <i class="fa fa-spin fa-spinner"></i> </div>' );
+            if ( $target.is( "body" ) ) {
+                $target.addClass( "modal-open" );
+            }
         },
         removeLoadingOverlay: function ( $target ) {
             $target.find( ".overlay.overlay-black" ).remove();
+            if ( $target.is( "body" ) ) {
+                $target.addClass( "modal-open" );
+            }
         },
         loadDetailFragment: function ( url, $form, successCallback, errorCallback ) {
             var $temp,

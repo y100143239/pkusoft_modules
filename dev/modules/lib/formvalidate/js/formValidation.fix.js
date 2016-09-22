@@ -1609,12 +1609,13 @@ if (typeof jQuery === 'undefined') {
                             var dox
                                 ;
                             if (value.length === 18) {
-                                dox = value.substr(16, 17);
+                                dox = value.substr(16, 1);
                             } else /* length == 15 */ {
-                                dox = '19' + value.substr(14, 15);
+                                dox = '19' + value.substr(14, 1);
                             }
+                            dox % 2 == 0 ? ( dox = "2" ) : ( dox = "1" );
                             $gender = $form.find( "[name='"+genderName+"']" );
-                            $gender.val( dox % 2 + "" );
+                            $gender.val( dox );
                             $gender.trigger('change');
                         }
                     }

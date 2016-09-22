@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    // 预加载所有字典
+    +function () {
+        var simpleDicName,
+                urlPrefix,
+                urlSuffix,
+                doc,
+                header,
+                link,
+                i, len
+                ;
+        doc = window.document;
+        header = doc.getElementsByTagName( "head" )[ 0 ];
+        urlPrefix = "http://pkusoft.gz.bcebos.com/";
+        urlSuffix = ".xml";
+        simpleDicName = [
+            "DIC_GENDER",
+            "DIC_NATION",
+            "DIC_CLAN"
+        ];
+
+        for ( i = 0, len = simpleDicName.length; i < len; i++ ) {
+            link = doc.createElement( "link" );
+            link.type = "text/xml";
+            link.rel = "stylesheet";
+            link.href = urlPrefix + simpleDicName[ i ] + urlSuffix;
+            header.appendChild( link );
+            console.info( link );
+        }
+
+    } ();
+</script>
+</body>
+</html>

@@ -25,9 +25,7 @@ a {
 .wrap {
   margin: 0 auto;
   width: 996px;
-  border-bottom: #cbcbcb solid 1px;
-  border-left: #cbcbcb solid 1px;
-  border-right: #cbcbcb solid 1px;
+  border: #cbcbcb solid 1px;
   font-size: 14px;
   clear: both;
   height: 100%; }
@@ -289,7 +287,8 @@ i.form-control-feedback.fa {
     color: #05428c;
     cursor: move; }
     .sidebar-info .heading .icon {
-      color: #e6f0fd; }
+      color: #e6f0fd;
+      padding: 0 4px; }
   .sidebar-info .body {
     padding: 10px; }
     .sidebar-info .body a {
@@ -299,6 +298,8 @@ i.form-control-feedback.fa {
       .sidebar-info .body a:hover {
         color: #5a9ff3;
         background-color: #e6f0fd; }
+    .sidebar-info .body .fa {
+      width: 20px; }
   .sidebar-info .foot {
     border-top: dashed 1px #cee2fb; }
   .sidebar-info .biz-num {
@@ -309,8 +310,6 @@ i.form-control-feedback.fa {
       color: #333; }
     .sidebar-info .biz-num a {
       color: inherit; }
-  .sidebar-info .fa {
-    width: 20px; }
   .sidebar-info ul {
     list-style: none;
     padding: 0; }
@@ -354,5 +353,80 @@ i.form-control-feedback.fa {
 
 .panel-collapse {
   margin-left: 1em; }
+
+.alert-tip small,
+.foot .biz-num span,
+.text-danger-light {
+  color: #d9534f !important; }
+
+.page-agreement {
+  padding: 2em; }
+  .page-agreement .title-header {
+    margin-bottom: 2em; }
+  .page-agreement .title-module {
+    margin: 2em 0 1em 0; }
+  .page-agreement ul > li {
+    margin: 1em 0; }
+  .page-agreement li {
+    line-height: 1.8; }
+  .page-agreement p {
+    text-indent: 2em;
+    line-height: 1.8; }
+  .page-agreement .agreement-container {
+    text-align: center;
+    margin-top: 4em; }
+  .page-agreement .btn-agree {
+    width: 120px;
+    margin-right: 2em; }
+
+.page-bizcode .card-basic {
+  float: left;
+  margin: 50px 0 0 60px;
+  width: 400px;
+  border: 1px solid #D1D0D0; }
+  .page-bizcode .card-basic .title {
+    height: 48px;
+    background: #79CA6B;
+    position: relative;
+    zoom: 1;
+    color: #fff;
+    text-align: center; }
+  .page-bizcode .card-basic .arrow {
+    height: 0;
+    width: 0;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-top: 9px solid #79CA6B;
+    border-bottom: 9px solid transparent;
+    border-left: 9px solid transparent;
+    border-right: 9px solid transparent; }
+  .page-bizcode .card-basic .head {
+    font-size: 18px;
+    height: 22px;
+    line-height: 22px;
+    padding-top: 13px; }
+  .page-bizcode .card-basic .desc {
+    background: #FDFFF9;
+    height: 150px;
+    padding: 20px; }
+.page-bizcode .card-senior .title {
+  background: #5A9FF3; }
+.page-bizcode .card-senior .arrow {
+  border-top: 9px solid #5A9FF3; }
+.page-bizcode .card-senior .desc {
+  background: #F8FCFF; }
+.page-bizcode .btn-app {
+  margin-top: 20px; }
+
+.page-receipt dl {
+  text-indent: 2em;
+  line-height: 2; }
+  .page-receipt dl dt {
+    line-height: 2; }
+  .page-receipt dl dd {
+    text-indent: 4em;
+    line-height: 2; }
 
 /*# sourceMappingURL=eg_gdba.css.map */
