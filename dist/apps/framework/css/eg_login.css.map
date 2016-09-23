@@ -1,7 +1,0 @@
-{
-"version": 3,
-"mappings": "AAAA,UAAW;EACP,MAAM,EAAE,IAAI;;AAEhB,IAAK;EACD,UAAU,EAAE,8CAA8C;;AAM9D,gBAAiB;EACb,UAAU,EAAE,KAAK;EACjB,UAAU,EAAE,KAAK",
-"sources": ["../scss/eg_login.scss"],
-"names": [],
-"file": "eg_login.css"
-}

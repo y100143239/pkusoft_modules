@@ -1,0 +1,57 @@
+.index-sprite, .index-logout, .index-password, .index-supervision, .index-top-bg, .index-user {
+  background-image: url('/dev/apps/framework/images/zfjd/spirit/index-s80ad79c449.png');
+  background-repeat: no-repeat;
+}
+
+.index-logout {
+  background-position: 0 0;
+}
+
+.index-password {
+  background-position: 0 -32px;
+}
+
+.index-supervision {
+  background-position: 0 -64px;
+}
+
+.index-top-bg {
+  background-position: 0 -96px;
+}
+
+.index-user {
+  background-position: 0 -233px;
+}
+
+.index-sprite, .index-logout, .index-password, .index-supervision, .index-top-bg, .index-user, .index-logout, .index-password, .index-supervision, .index-top_bg, .index-user {
+  background-image: url("../images/zfjd/index-s13979e8fa7.png");
+  background-repeat: no-repeat;
+}
+
+.index-logout {
+  background-position: 0 0;
+}
+
+.index-password {
+  background-position: 0 -32px;
+}
+
+.index-supervision {
+  background-position: 0 -64px;
+}
+
+.index-top_bg {
+  background-position: 0 -96px;
+}
+
+.index-user {
+  background-position: 0 -233px;
+}
+
+html, body {
+  height: 100%;
+}
+
+.page {
+  position: relative;
+}

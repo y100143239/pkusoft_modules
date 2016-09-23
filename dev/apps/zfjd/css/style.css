@@ -1,0 +1,185 @@
+.page-login {
+  height: 100%;
+  background: url(../images/login_bg.jpg) no-repeat center center #032548;
+  font-family: "Microsoft Yahei", sans-serif;
+}
+.page-login .page-content {
+  position: absolute;
+  top: 57.72%;
+  left: 50%;
+  width: 1000px;
+  margin-left: -500px;
+}
+.page-login .header {
+  font-size: 60px;
+  color: #fff;
+  font-weight: bold;
+  letter-spacing: 8px;
+}
+.page-login .body {
+  margin-top: 36px;
+}
+.page-login .mod-input {
+  position: relative;
+  float: left;
+  height: 42px;
+}
+.page-login .mod-input .left, .page-login .mod-input .right, .page-login .mod-input input {
+  float: left;
+  height: 100%;
+  background: url(../images/login_input.png) no-repeat -99px -99px;
+}
+.page-login .mod-input .left {
+  width: 7px;
+  background-position: 0 0;
+}
+.page-login .mod-input .right {
+  width: 7px;
+  background-position: 0 -84px;
+}
+.page-login .mod-input .line {
+  position: absolute;
+  left: 51px;
+  top: 10px;
+  width: 1px;
+  height: 23px;
+  background-color: #bbbbbb;
+}
+.page-login .mod-input .icon {
+  position: absolute;
+  left: 12px;
+  top: 4px;
+  width: 30px;
+  height: 30px;
+  background: url(../images/login_icon.png) no-repeat;
+}
+.page-login .mod-input input {
+  width: 235px;
+  background-position: 0 -42px;
+  background-repeat: repeat-x;
+  border: none 0;
+  padding-left: 52px;
+}
+.page-login .mod-input input:focus {
+  outline: none;
+}
+.page-login .mod-input.input-login-name {
+  margin-left: 186px;
+  margin-right: 8px;
+}
+.page-login .mod-input.input-password {
+  margin-right: 10px;
+}
+.page-login .mod-input.input-password .icon {
+  background-position: 0 -30px;
+}
+.page-login .button {
+  width: 125px;
+  height: 42px;
+  font-size: 20px;
+  color: #2f4a06;
+  border: none 0;
+  background: url(../images/login_btn.png) no-repeat 0 0;
+}
+.page-login .footer {
+  color: #0c6dce;
+  padding-top: 20px;
+  margin-top: 34px;
+  background: url(../images/login_line.png) no-repeat center top;
+}
+
+.index-sprite, .page-index > .top, .page-index .function-item .icon-user, .page-index .function-item .icon-supervision, .page-index .function-item .icon-password, .page-index .function-item .icon-logout, .page-index > .header, .page-index > .header .accept-case {
+  background-image: url('../images/index-sa727ca88ae.png');
+  background-repeat: no-repeat;
+}
+
+.page-index {
+  min-width: 1920px;
+  min-height: 1024px;
+}
+.page-index > .top {
+  background-position: 0 -374px;
+  position: relative;
+  height: 137px;
+  background-repeat: repeat-x;
+}
+.page-index > .top ul {
+  margin: 0;
+}
+.page-index > .top ul li {
+  list-style: none;
+}
+.page-index .logo-container {
+  padding: 40px 0 0 40px;
+}
+.page-index .logo-container .logo {
+  float: left;
+}
+.page-index .logo-container .title {
+  float: left;
+  font-size: 60px;
+  font-weight: bold;
+  color: #fff;
+  line-height: 1;
+  letter-spacing: 16px;
+  margin-left: 30px;
+}
+.page-index .function-list {
+  position: absolute;
+  top: 90px;
+  right: 0;
+  font-size: 18px;
+}
+.page-index .function-item {
+  float: left;
+  color: #fff;
+  line-height: 32px;
+  margin-right: 40px;
+}
+.page-index .function-item a {
+  color: #fff;
+}
+.page-index .function-item .icon {
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  vertical-align: middle;
+  margin-right: 16px;
+}
+.page-index .function-item .icon-user {
+  background-position: 0 -511px;
+}
+.page-index .function-item .icon-supervision {
+  background-position: 0 -342px;
+}
+.page-index .function-item .icon-password {
+  background-position: 0 -310px;
+}
+.page-index .function-item .icon-logout {
+  background-position: 0 -278px;
+  vertical-align: -8px;
+}
+.page-index > .header {
+  position: relative;
+  height: 139px;
+  background-position: 0 0;
+  background-repeat: repeat-x;
+}
+.page-index > .header .accept-case {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 877px;
+  height: 139px;
+  margin-left: -438px;
+  background-position: 0 -139px;
+}
+
+html, body {
+  height: 100%;
+}
+
+.page {
+  position: relative;
+  font-family: "Microsoft Yahei", sans-serif;
+}

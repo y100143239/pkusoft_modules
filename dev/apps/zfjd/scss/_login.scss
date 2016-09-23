@@ -1,0 +1,92 @@
+.page-login {
+    height: 100%;
+    background: url(../images/login_bg.jpg) no-repeat center center #032548;
+    font-family: "Microsoft Yahei", sans-serif;
+    .page-content {
+        position: absolute;
+        top: 57.72%;
+        left: 50%;
+        width: 1000px;
+        margin-left: -500px;
+    }
+    .header {
+        font-size: 60px;
+        color: #fff;
+        font-weight: bold;
+        letter-spacing: 8px;
+    }
+
+    .body {
+        margin-top: 36px;
+    }
+
+    .mod-input {
+        position: relative;
+        float: left;
+        height: 42px;
+        .left, .right, input {
+            float: left;
+            height: 100%;
+            background: url(../images/login_input.png) no-repeat -99px -99px;
+        }
+        .left {
+            width: 7px;
+            background-position: 0 0;
+        }
+        .right {
+            width: 7px;
+            background-position: 0 -42 * 2px;
+        }
+        .line {
+            position: absolute;
+            left: 51px;
+            top: 10px;
+            width: 1px;
+            height: 23px;
+            background-color: #bbbbbb;
+        }
+        .icon {
+            position: absolute;
+            left: 12px;
+            top: 4px;
+            width: 30px;
+            height: 30px;
+            background: url(../images/login_icon.png) no-repeat;
+        }
+        input {
+            width: 249 - 7 * 2px;
+            background-position: 0 -42 * 1px;
+            background-repeat: repeat-x;
+            border: none 0;
+            padding-left: 52px;
+            &:focus {
+                outline: none;
+            }
+        }
+        &.input-login-name {
+            margin-left: 186px;
+            margin-right: 8px;
+        }
+        &.input-password {
+            margin-right: 10px;
+            .icon {
+                background-position: 0 -30px;
+            }
+        }
+    }
+    .button {
+        width: 125px;
+        height: 42px;
+        font-size: 20px;
+        color: #2f4a06;
+        border: none 0;
+        background: url(../images/login_btn.png) no-repeat 0 0;
+    }
+
+    .footer {
+        color: #0c6dce;
+        padding-top: 20px;
+        margin-top: 34px;
+        background: url(../images/login_line.png) no-repeat center top;
+    }
+}
