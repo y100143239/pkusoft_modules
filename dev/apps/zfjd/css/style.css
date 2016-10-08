@@ -89,7 +89,7 @@
 }
 
 .index-sprite, .page-index > .top, .page-index .function-item .icon-user, .page-index .function-item .icon-supervision, .page-index .function-item .icon-password, .page-index .function-item .icon-logout, .page-index > .header, .page-index > .header .accept-case {
-  background-image: url('../images/index-sa727ca88ae.png');
+  background-image: url('../images/index-s4da9e617d6.png');
   background-repeat: no-repeat;
 }
 
@@ -98,7 +98,7 @@
   min-height: 1024px;
 }
 .page-index > .top {
-  background-position: 0 -374px;
+  background-position: 0 -485px;
   position: relative;
   height: 137px;
   background-repeat: repeat-x;
@@ -123,6 +123,7 @@
   line-height: 1;
   letter-spacing: 16px;
   margin-left: 30px;
+  margin-top: -4px;
 }
 .page-index .function-list {
   position: absolute;
@@ -147,22 +148,22 @@
   margin-right: 16px;
 }
 .page-index .function-item .icon-user {
-  background-position: 0 -511px;
+  background-position: 0 -622px;
 }
 .page-index .function-item .icon-supervision {
-  background-position: 0 -342px;
+  background-position: 0 -453px;
 }
 .page-index .function-item .icon-password {
-  background-position: 0 -310px;
+  background-position: 0 -421px;
 }
 .page-index .function-item .icon-logout {
-  background-position: 0 -278px;
+  background-position: 0 -389px;
   vertical-align: -8px;
 }
 .page-index > .header {
   position: relative;
   height: 139px;
-  background-position: 0 0;
+  background-position: 0 -111px;
   background-repeat: repeat-x;
 }
 .page-index > .header .accept-case {
@@ -172,9 +173,25 @@
   width: 877px;
   height: 139px;
   margin-left: -438px;
-  background-position: 0 -139px;
+  background-position: 0 -250px;
+}
+.page-index > .header .item-label {
+  color: #01ffff;
+  font-size: 24px;
+  font-weight: bold;
+}
+.page-index > .header .item-num {
+  font-family: "DS-DIGIB", sans-serif;
+  font-size: 36px;
+  color: #fafd4d;
 }
 
+@font-face {
+  font-family: 'DS-DIGIB';
+  src: url("../font/DS-DIGIB.TTF") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
 html, body {
   height: 100%;
 }

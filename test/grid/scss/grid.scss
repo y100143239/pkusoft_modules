@@ -1,0 +1,143 @@
+@import "bootgrid";
+@import "../../../dev/modules/ui/scss/bootstrap/variables";
+@import "../../../dev/modules/ui/scss/bootstrap/mixins";
+//@import "../../../dev/modules/ui/scss/bootstrap/normalize";
+//@import "../../../dev/modules/ui/scss/bootstrap/scaffolding";
+@import "../../../dev/modules/ui/scss/bootstrap/tables";
+@import "../../../dev/modules/ui/scss/bootstrap/buttons";
+@import "../../../dev/modules/ui/scss/bootstrap/pagination";
+@import "../../../dev/modules/ui/scss/bootstrap/button-groups";
+@import "../../../dev/modules/ui/scss/bootstrap/grid";
+@import "../../../dev/modules/ui/scss/font-awesome";
+
+
+body {
+    font-family: "Microsoft Yahei", sans-serif;
+    background: #01132b;
+}
+.table-pku,
+.bootgrid-footer {
+    * {
+        @include box-sizing(border-box);
+    }
+    *:before,
+    *:after {
+        @include box-sizing(border-box);
+    }
+
+}
+
+.table-pku {
+    // reset
+    border-collapse: collapse;
+    border-spacing: 0;
+    td,
+    th {
+        padding: 0;
+        border: none 0!important;
+    }
+
+    color: #fff;
+    background: #01132b;
+    border-radius: 5px;
+    overflow: hidden;
+
+    thead {
+        font-size: 22px;
+        font-weight: bold;
+        tr {
+            height      : 76px;
+            line-height : 76px;
+            background  : url("../images/bg16.png") repeat-x;
+        }
+        th {
+            vertical-align: middle!important;
+            &:hover, &:focus {
+                background : #052848;
+            }
+        }
+        a {
+            color: #fff;
+            &:hover, &:focus {
+                background: none;
+            }
+        }
+
+    }
+    tbody {
+        font-size: 18px;
+        tr:nth-child(odd){
+            background-color: #00407d;
+        }
+        tr:nth-child(even){
+            background-color: #0d5294;
+        }
+        tr:hover {
+            background-color: #2d7ac4;
+        }
+        td {
+            padding: 20px 10px!important;
+        }
+    }
+}
+.bootgrid-footer {
+    .infoBar {
+        color: #fff;
+        line-height: 2;
+    }
+    .pagination {
+        > li > a {
+            color: #C5C5C5;
+            background-color: #042041;
+            border: none 0;
+            &:focus, &:hover {
+                color: #fff;
+                background-color: darken(#0b6ac9, 10%);
+            }
+
+        }
+        > .first,
+        > .last {
+            > a {
+                background: -webkit-linear-gradient(top,#0b6ac9,#004280);
+                background: linear-gradient(top,#0b6ac9,#004280);
+                background: -moz-linear-gradient(top,#0b6ac9,#004280);
+                &:focus, &:hover {
+                    color: #fff;
+                }
+            }
+        }
+        .disabled {
+            a {
+                color: #777777;
+                &:focus, &:hover {
+                    color: #777777;
+                }
+            }
+        }
+        .active {
+            a {
+                color: #fff;
+                background-color: #0b6ac9;
+            }
+        }
+    }
+}
+.btn-view {
+    width: 109px;
+    height: 35px;
+    color: #515008;
+    font-size: 18px;
+    line-height: 35px;
+    border: none 0;
+    padding: 0;
+    text-align: center;
+    text-shadow: 0 2px 0 rgba(255,255,255,0.5);
+    -webkit-text-shadow: 0 2px 0 rgba(255,255,255,0.5);
+    background: url(../images/aj-table-btn.png) no-repeat 0 0;
+    cursor: pointer;
+    &:hover, &:focus {
+
+    }
+}
+

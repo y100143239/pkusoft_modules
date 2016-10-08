@@ -50,23 +50,25 @@ require( [ "jquery", "gdbaUtils", "draggable",
                 success: function ( responseData ) {
                     if ( responseData.success == true ) {
                         fragmentUrl = fragmentUrl.replace(/id=$/, "id=" + responseData.data);
+                        Utils.loadDetailFragment( fragmentUrl, $form,
+                            function success( $form ) {
+                                // $form 被替换掉了
+                                // 刷新数据填写完整度面板
+                                $( ".btn-refresh" ).trigger( "click.sidebar.gdba" );
+                            },
+                            function error() {
+                                Utils.removeLoadingOverlay( $form );
+                            }
+                        );
+                    } else {
+                        Utils.dialog( "提示", "保存失败。" );
                     }
-                    Utils.loadDetailFragment( fragmentUrl, $form,
-                        function success( $form ) {
-                            // $form 被替换掉了
-                            // 刷新数据填写完整度面板
-                            $( ".btn-refresh" ).trigger( "click.sidebar.gdba" );
-                        },
-                        function error() {
-                            Utils.removeLoadingOverlay( $form );
-                        }
-                    );
                 },
                 error: function () {
                     Utils.dialog( "提示", "网络错误。" );
                     //alert( "网络错误" );
                     Utils.removeLoadingOverlay( $form );
-                    Utils.loadDetailFragment( fragmentUrl, $form );
+                    //Utils.loadDetailFragment( fragmentUrl, $form );
                 }
             } );
 
@@ -288,6 +290,9 @@ require( [ "jquery", "gdbaUtils", "draggable",
                 $this
                 ;
             $this = $( this );
+            // 刷新一下（异步）
+            $( ".btn-refresh").trigger( "click.sidebar.gdba" );
+
             // 1. 判断面板上是否全部打钩（无 .fa-close ）
             isComplete = $( ".sidebar-info-container .icon.fa-close" ).size() == 0;
             if ( ! isComplete ) {

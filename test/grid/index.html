@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="css/grid.css"/>
+    <script src="js/jquery-1.11.3.js"></script>
+    <script src="js/jquery.bootgrid.fix.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        function commandsFormatter( column, row ) {
+            return "<button type='button' class='btn-view' title='阅卷'>阅卷</button>";
+        }
+        function genderFormatter( column, row ) {
+            // console.info( column, row );
+            return row.xb == "1" ? "男" : "女" ;
+        }
+        function birthFormatter( column, row ) {
+            var birth,
+                year, month, day
+                ;
+            birth = row.csrq;
+            year = birth.substring( 0, 4 );
+            month = birth.substring( 4, 6 );
+            day = birth.substring( 6 );
+            return year + "年" + month + "月" + day + "日";
+        }
+        function _dateFormatterWithMilliseconds( milliseconds ) {
+            var date,
+                year,
+                month,
+                day
+            ;
+            date = new Date( milliseconds );
+            year = date.getFullYear();
+            month = date.getMonth() + 1;
+            day = date.getDate();
+            return year + "年" + month + "月" + day + "日";
+        }
+        function dateFormatter( column, row ) {
+            return _dateFormatterWithMilliseconds( row.xx );
+        }
+    </script>
+</head>
+<body>
+
+<div style="padding: 20px;">
+    <!--
+    <table id="table_datagrid" class="table table-pku" data-url="http://www.20ui.cn/Datagrid.do">
+        <thead>
+        <tr>
+            <th data-column-id="xm" data-sortable="false">姓名</th>
+            &lt;!&ndash; data-type="numeric"：数据类型为数字，用于排序，默认为字符串 &ndash;&gt;
+            <th data-column-id="gmsfhm" data-width="240" data-sortable="true">公民身份证号码</th>
+            <th data-column-id="xb" data-width="80" data-sortable="true" data-order="desc" data-formatter="genderFormatter">性别</th>
+            <th data-column-id="mz" data-sortable="false">民族</th>
+            <th data-column-id="csrq" data-width="180" data-sortable="true" data-formatter="birthFormatter">出生日期</th>
+            <th data-column-id="csdgjdq" data-width="160" data-sortable="false">出生地国家</th>
+            <th data-column-id="csdssxq" data-width="240" data-sortable="false">出生地省市县（区）</th>
+            <th data-column-id="commands" data-width="140" data-formatter="commandsFormatter" data-sortable="false"></th>
+        </tr>
+        </thead>
+    </table>
+    -->
+    <table class="table table-pku" data-pku-widget="datagrid" data-url="http://localhost:8080/gdbaweb/admin/sysUserListData">
+        <thead>
+        <tr>
+            <th data-column-id="loginName" data-sortable="false">登录名</th>
+            <th data-column-id="userName" data-sortable="false">真实姓名</th>
+            <th data-column-id="policeCode" data-sortable="false">警号</th>
+            <th data-column-id="deptId" data-sortable="false">所属单位</th>
+            <th data-column-id="tel" data-sortable="false">联系电话</th>
+        </tr>
+        </thead>
+    </table>
+</div>
+</body>
+</html>

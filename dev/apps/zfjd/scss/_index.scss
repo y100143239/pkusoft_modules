@@ -36,6 +36,7 @@ $index-header_bg-repeat: repeat-x;
             line-height: 1;
             letter-spacing: 16px;
             margin-left: 30px;
+            margin-top: -4px;
         }
     }
     .function-list {
@@ -86,6 +87,18 @@ $index-header_bg-repeat: repeat-x;
             height: 139px;
             margin-left: -438px;
             @include index-sprite(header_center_module);
+        }
+        .statistics-item {
+        }
+        .item-label {
+            color: #01ffff;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .item-num {
+            font-family: "DS-DIGIB", sans-serif;
+            font-size: 36px;
+            color: #fafd4d;
         }
     }
 }
