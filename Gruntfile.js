@@ -26,6 +26,18 @@ module.exports = function(grunt) {
                         src: ['apps/framework/**'],
                         dest: 'dist',
                         expand: true
+                    },
+                    { // app - zfjd
+                        cwd: 'dev/',
+                        src: ['apps/zfjd/**'],
+                        dest: 'dist',
+                        expand: true
+                    },
+                    { // app - axure
+                        cwd: 'dev/',
+                        src: ['apps/axure/**'],
+                        dest: 'dist',
+                        expand: true
                     }
 
                 ]

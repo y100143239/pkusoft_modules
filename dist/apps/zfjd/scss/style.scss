@@ -1,0 +1,11 @@
+@import "login";
+@import "index";
+@import "font";
+
+html, body {
+    height: 100%;
+}
+.page {
+    position: relative;
+    font-family: "Microsoft Yahei", sans-serif;
+}

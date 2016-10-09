@@ -2,14 +2,19 @@ require( [ "jquery", "gdbaUtils", "draggable",
                 "formvalidationI18N", "bootstrap", "select2", "datepicker", "select-area" ], function ( $, /* 定义在下面 */Utils, Draggable ) {
     var $document,
         $indexPage,
-        $bizcodePage
+        $bizcodePage,
+        $sidebarInfoContainr,
+        $refreshInfoBtn
     ;
+
     $document = $( document );
 
     $document.ready( function () {
 
         $indexPage = $( ".page-index" );
         $bizcodePage = $( ".page-bizcode" );
+        $sidebarInfoContainr = $( ".sidebar-info-container" );
+        $refreshInfoBtn = $sidebarInfoContainr.find( ".btn-refresh" );
 
         // 点击 保存（.btn[type='submit']）
         $indexPage.on( "click.gdba", ".btn[type='submit']", function () {
@@ -54,7 +59,7 @@ require( [ "jquery", "gdbaUtils", "draggable",
                             function success( $form ) {
                                 // $form 被替换掉了
                                 // 刷新数据填写完整度面板
-                                $( ".btn-refresh" ).trigger( "click.sidebar.gdba" );
+                                $refreshInfoBtn.trigger( "click.sidebar.gdba" );
                             },
                             function error() {
                                 Utils.removeLoadingOverlay( $form );
@@ -147,7 +152,7 @@ require( [ "jquery", "gdbaUtils", "draggable",
                                 $this.closest( ".resume" ).find( "[data-toggle='tooltip']" ).tooltip('destroy' )
                                     .end().remove();
                                 // 刷新数据填写完整度面板
-                                $( ".btn-refresh" ).trigger( "click.sidebar.gdba" );
+                                $refreshInfoBtn.trigger( "click.sidebar.gdba" );
                             } else {
                                 // 3. 服务器端删除失败，则提示“删除失败，请联系管理员。”
                                 Utils.dialog( "提示", "删除失败，请联系管理员。" )
@@ -235,6 +240,10 @@ require( [ "jquery", "gdbaUtils", "draggable",
             }
             uploaderContainerId = "uploaderContainer_" + ( new Date() ).getTime();
             $target.attr( "id", uploaderContainerId );
+            $target.data("successCallback", function () {
+                // 刷新数据填写完整度面板
+                $refreshInfoBtn.trigger( "click.sidebar.gdba" );
+            });
             Utils.initWebuploader( $target );
         });
 
@@ -290,8 +299,6 @@ require( [ "jquery", "gdbaUtils", "draggable",
                 $this
                 ;
             $this = $( this );
-            // 刷新一下（异步）
-            $( ".btn-refresh").trigger( "click.sidebar.gdba" );
 
             // 1. 判断面板上是否全部打钩（无 .fa-close ）
             isComplete = $( ".sidebar-info-container .icon.fa-close" ).size() == 0;
@@ -367,10 +374,6 @@ require( [ "jquery", "gdbaUtils", "draggable",
         });
 
 
-        var $sidebarInfoContainr
-            ;
-
-        $sidebarInfoContainr = $( ".sidebar-info-container" );
 
         // 渲染
         Utils.renderPanel();
@@ -388,7 +391,7 @@ require( [ "jquery", "gdbaUtils", "draggable",
         } );
 
         // 信息概况-刷新
-        $( ".btn-refresh", $sidebarInfoContainr ).on( "click.sidebar.gdba", function ( e ){
+        $refreshInfoBtn.on( "click.sidebar.gdba", function ( e ){
             var url,
                 $faIcon;
 
@@ -581,10 +584,12 @@ define( "gdbaUtils", ["jquery", "webuploader", "bootstrap"], function ($, WebUpl
             var uploaderContainerId,
                 uploaderOptions,
                 webloaderInstance,
-                url
+                url,
+                successCallback
                 ;
             uploaderContainerId = $target.attr( "id" );
             url = $target.data( "uploadUrl" );
+            successCallback = $target.data( "successCallback" );
 
             uploaderOptions = {
                 // swf文件路径
@@ -630,6 +635,14 @@ define( "gdbaUtils", ["jquery", "webuploader", "bootstrap"], function ($, WebUpl
                     }
                 }
             } );
+
+            // （当文件上传成功时触发。）
+            webloaderInstance.on('uploadSuccess', function(file) {
+                // console.info( "上次成功。" );
+                if ( successCallback && ( typeof successCallback == "function" ) ) {
+                    successCallback();
+                }
+            });
         },
         dialog: function ( title, text, okCallback, cancelCallback ) {
             // 设置 title 和 text
