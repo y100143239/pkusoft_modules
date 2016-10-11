@@ -7,6 +7,16 @@ define( [ "jquery", "bootstrap", "formvalidationI18N"], function ( $ ) {
         $main = $( "main.main" );
         $body = $( document.body );
 
+        $('[data-toggle="tooltip"]').tooltip({
+            container: "body",
+            theme: "tooltip-info-dark"
+        });
+        $('[data-pku-widget="tooltip"]').tooltip({
+            container: "body",
+            theme: " tooltip-success-dark",
+            trigger: "hover"
+        });
+
         $( ".sidebar-menu" ).on( "click.title", ".treeview > a", function () {
             var $this,
                 $arrow,

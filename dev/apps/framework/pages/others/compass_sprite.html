@@ -1,0 +1,110 @@
+<article class="article">
+    <header>
+        <h3 >1. 相关</h3>
+        <hr>
+    </header>
+    <main>
+        <ol>
+            <li>参考
+                <ul>
+                    <li><a href="http://compass-style.org/help/tutorials/spriting/" target="_blank">Spriting with Compass</a></li>
+                </ul>
+            </li>
+            <li>用途
+                <ul>
+                    <li>css sprite（图片位置自动计算）</li>
+                </ul>
+            </li>
+        </ol>
+    </main>
+</article>
+
+<article class="article">
+    <header>
+        <h3 >2. 使用</h3>
+        <hr>
+    </header>
+    <main>
+        <ol>
+            <li>启用 Compass SCSS - &lt;zfjd></li>
+            <li>目录结构
+                <ul>
+                    <li>
+<pre class="prettyprint linenums">
+zfjd
+    |-- config.rb
+    |-- css
+    |-- scss
+        |-- style.scss
+        |-- _login.scss
+        |-- _index.scss
+    |-- js
+    |-- images
+        |-- index
+            |-- select_bg.png
+            |-- select_left.png
+            |-- select_right.png
+</pre>
+                    </li>
+                </ul>
+            </li>
+            <li>config.rb
+                <ul>
+                    <li>
+                        <pre class="prettyprint linenums">
+require 'compass/import-once/activate'
+http_path = "/"
+css_dir = "css"
+sass_dir = "scss"
+images_dir = "images"
+
+cache = false
+relative_assets = true
+line_comments = false
+                        </pre>
+                    </li>
+                </ul>
+            </li>
+            <li>_index.scss
+                <ul>
+                    <li>
+<pre class="prettyprint linenums">
+@import "compass/utilities/sprites";
+
+// $index-select_bg-repeat: repeat-x;    // select_bg.png 为 repeat-x
+
+@import "index/*.png";
+
+.select {
+    @include index-sprite(select_bg);
+}
+.select-left {
+    @include index-sprite(select_left);
+}
+.select-right {
+    @include index-sprite(select_right);
+}
+</pre>
+<pre class="prettyprint linenums">
+/* 编译后 */
+.select, .select-left, .select-right {
+    background-image: url('../images/index-s2ef6d54b90.png');
+    background-repeat: no-repeat;
+}
+.select {
+    background-position: 0 -48px;
+}
+.select-left {
+    background-position: 0 -96px;
+}
+.select-right {
+    background-position: 0 0;
+}
+</pre>
+                    </li>
+                </ul>
+            </li>
+        </ol>
+    </main>
+</article>
+

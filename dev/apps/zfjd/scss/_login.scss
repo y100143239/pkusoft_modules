@@ -1,3 +1,9 @@
+@import "compass/utilities/sprites";
+
+$login-input_center-repeat: repeat-x;
+
+@import "login/*.png";
+
 .page-login {
     height: 100%;
     background: url(../images/login_bg.jpg) no-repeat center center #032548;
@@ -27,15 +33,15 @@
         .left, .right, input {
             float: left;
             height: 100%;
-            background: url(../images/login_input.png) no-repeat -99px -99px;
+            //background: url(../images/login_input.png) no-repeat -99px -99px;
         }
         .left {
             width: 7px;
-            background-position: 0 0;
+            @include login-sprite(input_left);
         }
         .right {
             width: 7px;
-            background-position: 0 -42 * 2px;
+            @include login-sprite(input_right);
         }
         .line {
             position: absolute;
@@ -51,14 +57,12 @@
             top: 4px;
             width: 30px;
             height: 30px;
-            background: url(../images/login_icon.png) no-repeat;
         }
         input {
             width: 249 - 7 * 2px;
-            background-position: 0 -42 * 1px;
-            background-repeat: repeat-x;
             border: none 0;
             padding-left: 52px;
+            @include login-sprite(input_center);
             &:focus {
                 outline: none;
             }
@@ -66,11 +70,14 @@
         &.input-login-name {
             margin-left: 186px;
             margin-right: 8px;
+            .icon {
+                @include login-sprite(icon_user);
+            }
         }
         &.input-password {
             margin-right: 10px;
             .icon {
-                background-position: 0 -30px;
+                @include login-sprite(icon_lock);
             }
         }
     }
@@ -80,7 +87,8 @@
         font-size: 20px;
         color: #2f4a06;
         border: none 0;
-        background: url(../images/login_btn.png) no-repeat 0 0;
+        @include login-sprite(btn);
+        background-color: transparent;
     }
 
     .footer {
@@ -89,4 +97,9 @@
         margin-top: 34px;
         background: url(../images/login_line.png) no-repeat center top;
     }
+}
+._dummy {
+    height: 0;
+    line-height: 0;
+    @include login-sprite(line);
 }

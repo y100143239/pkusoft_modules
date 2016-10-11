@@ -8,7 +8,14 @@
     <link rel="shortcut icon" href="./images/favicon.ico">
     <script>
         window.onload = function () {
+            removeOverlay();
+        };
+        window.setTimeout( function () {
+            removeOverlay();
+        }, 8000 );
+        function removeOverlay() {
             document.getElementById( "bodyLoadingOverlay" ).style.display = "none";
+            document.body.setAttribute( "class", "skin-blue" );
         }
     </script>
     <title>Pku framwork</title>
@@ -114,7 +121,7 @@
     <script src="http://static.bcedocument.com/reader/v2/doc_reader_v2.js"></script>
 
 </head>
-<body class="skin-blue">
+<body class="skin-blue modal-open">
 
 <div class="overlay" id="bodyLoadingOverlay">
     <i class="fa fa-spin fa-spinner"></i>
@@ -133,24 +140,22 @@
         </div>
         <div class="collapse navbar-collapse pull-right" id="navbar">
             <ul class="nav navbar-nav ">
-                <li><a class="top-link" href="pages/ui/icons.html" ><i class="fa fa-sun-o"></i> Icons</a></li>
+                <li data-toggle="tooltip" data-placement="bottom" title="Font Awesome 字体图标"><a class="top-link" href="pages/ui/icons.html" ><i class="fa fa-sun-o"></i> Icons</a></li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" ><i class="fa fa-folder-open"></i> Examples <span class="caret"></span></a>
+                    <a data-pku-widget="tooltip" data-placement="bottom" title="使用此框架的一些示例" href="#" class="dropdown-toggle" data-toggle="dropdown" ><i class="fa fa-folder-open"></i> Examples <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a class="top-link _outerlink" target="_blank" href="pages/example/login1.html"><i class="fa fa-external-link"></i> 登陆（请先登录）</a></li>
+                        <li data-toggle="tooltip" data-placement="right" title="查看下面的“图片上传”需要登录"><a class="top-link _outerlink" target="_blank" href="pages/example/login1.html"><i class="fa fa-external-link"></i> 登陆</a></li>
                         <li><a class="top-link _outerlink" target="_blank" href="/photo/index"><i class="fa fa-external-link"></i> 图片上传</a></li>
                         <li class="divider"></li>
-                        <!--<li><a class="top-link _outerlink" target="_blank" href="pages/example/gdba.html"><i class="fa fa-external-link"></i> 广东保安 <span class="label label-default">静态</span> <span class="label label-default">Old</span></a></li>-->
-                        <!--<li><a class="top-link _outerlink" target="_blank" href="pages/example/gdba_edit.html"><i class="fa fa-external-link"></i> 广东保安 <span class="label label-default">静态</span> <span class="label label-success">New</span></a></li>-->
                         <li><a class="top-link _outerlink" target="_blank" href="/gdba/anno/reg/agreement"><i class="fa fa-external-link"></i> 广东保安 <span class="label label-warning">完整版</span></a></li>
                         <li class="divider"></li>
-                        <li><a class="top-link _outerlink" target="_blank" href="../zfjd/login.html"><i class="fa fa-external-link"></i> 执法监督 <span class="label label-info">开发中</span></a></li>
+                        <li data-toggle="tooltip" data-placement="right" title="2016年10月11日更新"><a class="top-link _outerlink" target="_blank" href="../zfjd/login.html"><i class="fa fa-external-link"></i> 执法监督 <span class="label label-info">开发中</span></a></li>
                         <li class="divider"></li>
-                        <li><a class="top-link _outerlink" target="_blank" href="pages/admin/login.html"><i class="fa fa-external-link"></i> 后台管理</a></li>
+                        <li data-toggle="tooltip" data-placement="right" title="刚开始，仅有登录页"><a class="top-link _outerlink" target="_blank" href="pages/admin/login.html"><i class="fa fa-external-link"></i> 后台管理</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" ><i class="fa fa-cloud"></i> Baidu Cloud <span class="caret"></span></a>
+                    <a data-pku-widget="tooltip" data-placement="bottom" title="百度云相关应用的使用文档" href="#" class="dropdown-toggle" data-toggle="dropdown" ><i class="fa fa-cloud"></i> Baidu Cloud <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a class="top-link" href="pages/baiducloud/bae.html" ><i class="fa fa-angle-double-right"></i> BAE（应用引擎）</a></li>
                         <li><a class="top-link" href="pages/baiducloud/bos.html" ><i class="fa fa-angle-double-right"></i> BOS（对象存储）</a></li>
@@ -161,9 +166,9 @@
                     </ul>
                 </li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" ><i class="fa fa-plane"></i> Others <span class="caret"></span></a>
+                    <a data-pku-widget="tooltip" data-placement="bottom" title="涉及到的一些技术" href="#" class="dropdown-toggle" data-toggle="dropdown" ><i class="fa fa-plane"></i> Tech <span class="caret"></span></a>
                     <ul class="dropdown-menu dropdown-menu-right">
-                        <li><a class="top-link" href="pages/others/sitemesh.html" ><i class="fa fa-angle-double-right"></i> Sitemesh（页面装饰）</a></li>cors.html
+                        <li><a class="top-link" href="pages/others/sitemesh.html" ><i class="fa fa-angle-double-right"></i> Sitemesh（页面装饰）</a></li>
                         <li><a class="top-link" href="pages/others/shiro.html" ><i class="fa fa-angle-double-right"></i> Shiro（安全框架）</a></li>
                         <li><a class="top-link" href="pages/others/SpringMVC.html" ><i class="fa fa-angle-double-right"></i> SpringMVC</a></li>
                         <li><a class="top-link" href="pages/others/JavaWeb.html" ><i class="fa fa-angle-double-right"></i> Java web（杂）</a></li>
@@ -173,7 +178,9 @@
                         <li><a class="top-link" href="pages/others/JavaScript.html" ><i class="fa fa-angle-double-right"></i> JavaScript</a></li>
                         <li><a class="top-link" href="pages/others/cors.html" ><i class="fa fa-angle-double-right"></i> CORS（跨域访问）</a></li>
                         <li><a class="top-link" href="pages/others/http.html" ><i class="fa fa-angle-double-right"></i> HTTP缓存机制</a></li>
-                        <li class="disabled "><a href="pages/others/nodejs.html"class="top-link" ><i class="fa fa-angle-double-right"></i> <del>Node.js</del></a></li>
+                        <li><a class="top-link" href="pages/others/preload.html" ><i class="fa fa-angle-double-right"></i> 资源预加载</a></li>
+                        <!--<li class="disabled "><a href="pages/others/nodejs.html"class="top-link" ><i class="fa fa-angle-double-right"></i> <del>Node.js</del></a></li>-->
+                        <li><a class="top-link" href="pages/others/compass_sprite.html" ><i class="fa fa-angle-double-right"></i> Compass sprite</a></li>
                         <li class="divider"></li>
                         <li><a class="top-link" href="pages/others/maven.html" ><i class="fa fa-angle-double-right"></i> Maven</a></li>
                         <li><a class="top-link" target="_blank" href="pages/others/db.html"><i class="fa fa-database"></i> 此网站数据库模型</a></li>
@@ -182,7 +189,7 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" ><i class="fa fa-cloud-download"></i> Download <span class="caret"></span></a>
                     <ul class="dropdown-menu dropdown-menu-right">
-                        <li><a class="top-link" href="../axure/index.html" ><i class="fa fa-angle-double-right"></i> Axure自定义组件库</a></li>
+                        <li data-toggle="tooltip" data-placement="left" title="将此框架的UI组件做成Axure组件库"><a class="top-link" href="../axure/index.html" ><i class="fa fa-angle-double-right"></i> Axure自定义组件库</a></li>
                     </ul>
                 </li>
 
