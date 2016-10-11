@@ -23,10 +23,29 @@ require( [ "jquery" ,"echarts", "echartsTheme" ], function ( $, echarts, _echart
         // 执法音视频 - 视频
         initVidew( [ "http://www.helloweba.com/demo/html5video/movie.mp4", "http://www.w3school.com.cn/example/html5/mov_bbb.mp4"  ] );
 
+        // 中心地图
+        initHotMap();
     } );
 
 
-
+    function initHotMap() {
+        $( ".map-area-list .map-hot" ).hover(
+            function () {
+                $( this ).parent().addClass( "hover animated pulse" );
+            },
+            function () {
+                $( this ).parent().removeClass( "hover animated pulse" );
+            }
+        ).click(
+            function ( e ) {
+                var $this
+                ;
+                $this = $( this );
+                e.preventDefault();
+                $this.parent().addClass( "active" ).siblings().removeClass( "active" );
+            }
+        );
+    }
 
 
     function initVidew( videoList ) {
@@ -176,6 +195,7 @@ require( [ "jquery" ,"echarts", "echartsTheme" ], function ( $, echarts, _echart
     function animateEles () {
         $( ".top" ).addClass( "animated bounceInDown" );
         $( ".header" ).addClass( "animated lightSpeedIn" );
+        $( ".map-center" ).addClass( "animated rotateIn" );
 
         $( ".module-1-1" ).addClass( "animated bounceInLeft" );
         $( ".module-1-2" ).addClass( "animated bounceInRight" );
@@ -184,6 +204,22 @@ require( [ "jquery" ,"echarts", "echartsTheme" ], function ( $, echarts, _echart
         $( ".module-3-1" ).addClass( "animated bounceInUp" );
         $( ".module-3-2" ).addClass( "animated bounceInUp" );
         $( ".module-3-3" ).addClass( "animated bounceInUp" );
+
+        $( ".map-area-item" ).each( function( index ) {
+            var animateClass
+                ;
+            switch ( index % 4 ) {
+                case 0: { animateClass = "hover animated fadeInUpBig"; break; }
+                case 1: { animateClass = "hover animated fadeInDownBig"; break; }
+                case 2: { animateClass = "hover animated fadeInLeftBig"; break; }
+                case 3: { animateClass = "hover animated fadeInRightBig"; break; }
+            }
+            $( this ).addClass( animateClass );
+        } );
+
+        setTimeout( function() {
+            $( ".map-area-item" ).removeClass( "hover" );
+        }, 1000 );
 
         // animate .function-list
         $( ".function-list" ).find( "a" ).hover(

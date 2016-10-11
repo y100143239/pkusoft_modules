@@ -161,6 +161,7 @@ $index-header_bg-repeat: repeat-x;
         }
     }
     >.content {
+        position: relative;
         .row-1 {
 
         }
@@ -552,6 +553,8 @@ $index-header_bg-repeat: repeat-x;
         }
         .module-3-2 {
             @include index-sprite(module_3_2);
+            position: relative;
+            z-index: 10;
             width: 784px;
             height: 229px;
             .module-max {
@@ -633,6 +636,197 @@ $index-header_bg-repeat: repeat-x;
 
         }
 
+        .map-center {
+            position: absolute;
+            top: -6px;
+            left: 565px;
+            width: 788px;
+            height: 788px;
+            @include index-sprite(map_bg);
+        }
+        .map-area-list {
+            position: absolute;
+            top: 114px;
+            left: 107px;
+            width: 573px;
+            height: 571px;
+        }
+        .map-area-item {
+            position: absolute;
+        }
+        .map_huangpo_x224y8_w196h166 {
+            left: 224px;
+            top: 8px;
+            width: 196px;
+            height: 166px;
+            &.hover { @include index-sprite(map_huangpo_hover_x224y8_w196h166); }
+            &.active { @include index-sprite(map_huangpo_active_x224y8_w196h166); }
+            .map-hot {
+                margin: 50-8px 0 0 78-8px;
+            }
+        }
+        .map_xinzhou_x397y38_w170h279 {
+            left: 397px;
+            top: 38px;
+            width: 170px;
+            height: 279px;
+            &.hover { @include index-sprite(map_xinzhou_hover_x397y38_w170h279); }
+            &.active { @include index-sprite(map_xinzhou_active_x397y38_w170h279); }
+            .map-hot {
+                margin: 111px 0 0 70px;
+            }
+        }
+        .map_dongxihu_x89y85_w213h234 {
+            left: 89px;
+            top: 85px;
+            width: 213px;
+            height: 234px;
+            &.hover { @include index-sprite(map_dongxihu_hover_x89y85_w213h234); }
+            &.active { @include index-sprite(map_dongxihu_active_x89y85_w213h234); }
+            .map-hot {
+                margin: 89px 0 0 31px;
+            }
+        }
+        .map_qiaokou_x141y208_w118h93 {
+            left: 141px;
+            top: 208px;
+            width: 118px;
+            height: 93px;
+            &.hover { @include index-sprite(map_qiaokou_hover_x141y208_w118h93); }
+            &.active { @include index-sprite(map_qiaokou_active_x141y208_w118h93); }
+            .map-hot {
+                margin: 35px 0 0 28px;
+            }
+        }
+        .map_qiaokou_x141y208_w118h93 {
+            left: 141px;
+            top: 208px;
+            width: 118px;
+            height: 93px;
+            &.hover { @include index-sprite(map_qiaokou_hover_x141y208_w118h93); }
+            &.active { @include index-sprite(map_qiaokou_active_x141y208_w118h93); }
+            .map-hot {
+                margin: 35px 0 0 28px;
+            }
+        }
+        .map_jianghan_x216y185_w107h101 {
+            left: 216px;
+            top: 185px;
+            width: 107px;
+            height: 101px;
+            &.hover { @include index-sprite(map_jianghan_hover_x216y185_w107h101); }
+            &.active { @include index-sprite(map_jianghan_active_x216y185_w107h101); }
+            .map-hot {
+                margin: 35px 0 0 28px;
+            }
+        }
+        .map_jiangan_x291y129_w91h110 {
+            left: 291px;
+            top: 129px;
+            width: 91px;
+            height: 110px;
+            &.hover { @include index-sprite(map_jiangan_hover_x291y129_w91h110); }
+            &.active { @include index-sprite(map_jiangan_active_x291y129_w91h110); }
+            .map-hot {
+                margin: 38px 0 0 25px;
+            }
+        }
+        .map_qingshan_x375y168_w102h79 {
+            left: 375px;
+            top: 168px;
+            width: 102px;
+            height: 79px;
+            &.hover { @include index-sprite(map_qingshan_hover_x375y168_w102h79); }
+            &.active { @include index-sprite(map_qingshan_active_x375y168_w102h79); }
+            .map-hot {
+                margin: 20px 0 0 18px;
+            }
+        }
+        .map_caidian_x21y312_w187h171 {
+            left: 21px;
+            top: 312px;
+            width: 187px;
+            height: 171px;
+            &.hover { @include index-sprite(map_caidian_hover_x21y312_w187h171); }
+            &.active { @include index-sprite(map_caidian_active_x21y312_w187h171); }
+            .map-hot {
+                margin: 49px 0 0 46px;
+            }
+        }
+        .map_zhuankou_x127y322_w116h185 {
+            left: 127px;
+            top: 322px;
+            width: 116px;
+            height: 185px;
+            &.hover { @include index-sprite(map_zhuankou_hover_x127y322_w116h185); }
+            &.active { @include index-sprite(map_zhuankou_active_x127y322_w116h185); }
+            .map-hot {
+                margin: 49px 0 0 46px;
+            }
+        }
+        .map_hanyang_x196y227_w153h219 {
+            left: 196px;
+            top: 227px;
+            width: 153px;
+            height: 219px;
+            &.hover { @include index-sprite(map_hanyang_hover_x196y227_w153h219); }
+            &.active { @include index-sprite(map_hanyang_active_x196y227_w153h219); }
+            .map-hot {
+                margin: 88px 0 0 48px;
+            }
+        }
+        .map_wuchang_x332y226_w65h86 {
+            left: 332px;
+            top: 226px;
+            width: 65px;
+            height: 86px;
+            &.hover { @include index-sprite(map_wuchang_hover_x332y226_w65h86); }
+            &.active { @include index-sprite(map_wuchang_active_x332y226_w65h86); }
+            .map-hot {
+                margin: 29px 0 0 -1px;
+            }
+        }
+        .map_hongshan_x311y228_w209h154 {
+            left: 311px;
+            top: 228px;
+            width: 209px;
+            height: 154px;
+            &.hover { @include index-sprite(map_hongshan_hover_x311y228_w209h154); }
+            &.active { @include index-sprite(map_hongshan_active_x311y228_w209h154); }
+            .map-hot {
+                margin: 41px 0 0 105px;
+            }
+        }
+        .map_dongxin_x341y326_w117h53 {
+            left: 341px;
+            top: 326px;
+            width: 117px;
+            height: 53px;
+            &.hover { @include index-sprite(map_dongxin_hover_x341y326_w117h53); }
+            &.active { @include index-sprite(map_dongxin_active_x341y326_w117h53); }
+            .map-hot {
+                margin: 12px 0 0 34px;
+            }
+        }
+        .map_jiangxia_x227y329_w236h238 {
+            left: 227px;
+            top: 329px;
+            width: 236px;
+            height: 238px;
+            &.hover { @include index-sprite(map_jiangxia_hover_x227y329_w236h238); }
+            &.active { @include index-sprite(map_jiangxia_active_x227y329_w236h238); }
+            .map-hot {
+                margin: 127px 0 0 63px;
+            }
+        }
+        .map-hot {
+            display: inline-block;
+            padding: 4px;
+            font-size: 22px;
+            color: #c6def7;
+            line-height: 1;
+            text-decoration: none;
+        }
     }
 }
 .progress-group {

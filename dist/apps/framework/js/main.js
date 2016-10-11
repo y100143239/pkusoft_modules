@@ -9,7 +9,8 @@ define( [ "jquery", "bootstrap", "formvalidationI18N"], function ( $ ) {
 
         $('[data-toggle="tooltip"]').tooltip({
             container: "body",
-            theme: "tooltip-info-dark"
+            theme: "tooltip-info-dark",
+            trigger: "hover"
         });
         $('[data-pku-widget="tooltip"]').tooltip({
             container: "body",
