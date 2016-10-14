@@ -13,7 +13,18 @@ module.exports = function(grunt) {
             },
             temp: {
                 files: [
-                    { src: 'dist/temp' },
+                    { src: 'dist/temp' }
+                ]
+            },
+            dist_zfjd_image: {
+                files: [
+                    { src: 'dist/apps/zfjd/images/index' },
+                    { src: 'dist/apps/zfjd/images/login' }
+                ]
+            },
+            dist_all_scss: {
+                files: [
+                    { src: 'dist/**/*.scss' }
                 ]
             }
         },
@@ -73,6 +84,7 @@ module.exports = function(grunt) {
                                 'lib/colresizable/**',
                                 'lib/bootgrid/**',
                                 'lib/select-area/**',
+                                'lib/sweetalert/**',
                                 'lib/custom/**',
                                 'lib/pretty/**'
                         ],
@@ -94,6 +106,7 @@ module.exports = function(grunt) {
                             'utils/css/**',
                             'utils/doT.js',
                             'utils/text.js',
+                            //'utils/jquery.sortable.js',
                             'utils/draggable.js'
                         ],
                         dest: 'dist/modules',
@@ -152,33 +165,74 @@ module.exports = function(grunt) {
 
         // 5. shell
         shell: {
-            multiple: {
+            copyDistTo_bae: {
                 command: [
                     // 1. 切换到 _bae 目录
                     'cd /Users/forwardNow/develop/work/_bae',
                     // 2. 删除 dev目录
                     'rm  -Rf ./static/dev/*',
-                    //'rm  -R /Users/forwardNow/develop/workspace/_bae/WebContent/dev/*',
                     // 3.1 将webstorm的/dist目录拷贝到 _bae/static/dev
-                    'cp -R /Users/forwardNow/develop/work/pkusoft/pkusoft_modules/dist/* ./static/dev/',
+                    'cp -R /Users/forwardNow/develop/work/pkusoft/pkusoft_modules/dist/* ./static/dev/'
+                ].join('&&')
+            },
+            copyDistToEclipse: {
+                command: [
+                    // 删除 dev目录 下的内容
+                    'rm  -Rf /Users/forwardNow/develop/workspace/_bae/WebContent/static/dev/*',
                     // 3.2 将webstorm的/dist目录拷贝到 Eclipse
-                    'cp -R /Users/forwardNow/develop/work/pkusoft/pkusoft_modules/dist/* /Users/forwardNow/develop/workspace/_bae/WebContent/static/dev/',
-
+                    'cp -R /Users/forwardNow/develop/work/pkusoft/pkusoft_modules/dist/* /Users/forwardNow/develop/workspace/_bae/WebContent/static/dev/'
+                ].join('&&')
+            },
+            copyWebInfoTo_bae: {
+                command: [
                     // 4. 删除  _bae/WEB-INF 下的 classes和lib
-                    'rm -Rf ./WEB-INF/classes ./WEB-INF/lib',
+                    //'rm -Rf ./WEB-INF/classes ./WEB-INF/lib',
+                    // 删除 临时_bae 的 WEB-INF
+                    'rm -Rf /Users/forwardNow/develop/work/_bae/WEB-INF',
 
                     // 5. 将 tomcat/webapps/_bae/WEB-INF/ 文件 拷贝到 _bae/WEB-INF
-                    'cp -R ../tomcat/webapps/_bae/WEB-INF/ ./WEB-INF/',
-
-
+                    'cp -R /Users/forwardNow/develop/work/tomcat/webapps/_bae/WEB-INF /Users/forwardNow/develop/work/_bae/'
+                ].join('&&')
+            },
+            makeWar: {
+                command: [
                     // 删除 bae 里的war包
-                    'rm ../bae/ROOT.war',
-                    'jar -cvf ../bae/ROOT.war ./*',
-                    'cd ../bae',
+                    'rm /Users/forwardNow/develop/work/bae/ROOT.war',
+                    // 将 临时_bae 打成war包
+                    'cd /Users/forwardNow/develop/work/_bae/',
+                    'jar -cf ../bae/ROOT.war ./*',
+                    // 切换到 bae 目录，push到 BAE
+                    'cd /Users/forwardNow/develop/work/bae',
                     'git commit --all -m "auto"',
                     'git push origin master',
                     'git status'
-
+                ].join('&&')
+            },
+            commitOweb: {
+                command: [
+                    // 6. 对于github
+                    // 6.1 删除 /Users/forwardNow/git/oweb/src
+                    'rm  -Rf /Users/forwardNow/git/oweb/src',
+                    // 6.2 删除 /Users/forwardNow/git/oweb/WebContent
+                    'rm  -Rf /Users/forwardNow/git/oweb/WebContent',
+                    // 6.3 拷贝 /Users/forwardNow/develop/workspace/_bae/src 到  /Users/forwardNow/git/oweb/
+                    'cp -R /Users/forwardNow/develop/workspace/_bae/src /Users/forwardNow/git/oweb/',
+                    // 6.4 拷贝 /Users/forwardNow/develop/workspace/_bae/WebContent 到  /Users/forwardNow/git/oweb/
+                    'cp -R /Users/forwardNow/develop/workspace/_bae/WebContent /Users/forwardNow/git/oweb/',
+                    // 6.5 切换目录，提交到github
+                    'cd /Users/forwardNow/git/oweb',
+                    'git add --all',
+                    'git commit --all -m "auto commit by grunt"',
+                    //'git push origin master',
+                    'git status'
+                ].join('&&')
+            },
+            pushOwebToGithub: {
+                command: [
+                    'cd /Users/forwardNow/git/oweb',
+                    'git status',
+                    'git push origin master',
+                    'git status'
                 ].join('&&')
             }
         }
@@ -200,14 +254,23 @@ module.exports = function(grunt) {
     grunt.registerTask('framework', [
         'clean:dist', // 清理
         'copy:app', // 拷贝app
+        'clean:dist_zfjd_image', // 删除zfjd的 css sprite 中间文件
         'copy:modules', // 拷贝工具包
+        'clean:dist_all_scss',
 
         //'uglify:buildall', // 压缩js到临时目录
         //'cssmin:buildall', // 压缩css到临时目录
         //'copy:minfile', // 拷贝压缩文件到dis目录覆盖掉原始文件
 
         'clean:temp', // 清理temp目录
-        'shell:multiple' // 执行shell命令，发布到bae
+
+        //'shell:multiple' // 执行shell命令，发布到bae
+        'shell:copyDistTo_bae',
+        'shell:copyDistToEclipse',
+        'shell:copyWebInfoTo_bae',
+        'shell:makeWar',
+        'shell:commitOweb'
+        //'shell:pushOwebToGithub'
     ] );
 
     // 默认被执行的任务列表。

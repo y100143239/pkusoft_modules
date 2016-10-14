@@ -1,0 +1,82 @@
+@import "compass/utilities/sprites";
+
+$index-repeat : no-repeat;
+$index-top_bg-repeat : repeat-x;
+$index-header_bg-repeat : repeat-x;
+@import "index/*.png";
+
+html, body {
+    height: 100%;
+    background-color: #01132b;
+}
+
+.page {
+    position: relative;
+    min-height: 100%;
+    font-family: "Microsoft Yahei", sans-serif;
+    > .top {
+        @include index-sprite(top_bg);
+        position          : relative;
+        height            : 137px;
+        background-repeat : repeat-x;
+        ul {
+            margin : 0;
+            li {
+                list-style : none;
+            }
+        }
+    }
+}
+
+.logo-container {
+    padding : 32px 0 0 40px;
+    .logo {
+        float : left;
+    }
+    .title {
+        float          : left;
+        font-size      : 48px;
+        font-weight    : bold;
+        color          : #ffffff;
+        line-height    : 1;
+        letter-spacing : 8px;
+        margin-left    : 30px;
+    }
+}
+
+.function-list {
+    position  : absolute;
+    top       : 90px;
+    right     : 0;
+    font-size : 18px;
+}
+
+.function-item {
+    float        : left;
+    color        : #ffffff;
+    line-height  : 32px;
+    margin-right : 24px;
+    a {
+        color : #ffffff;
+    }
+    .icon {
+        display        : inline-block;
+        width          : 32px;
+        height         : 32px;
+        vertical-align : middle;
+        margin-right   : 6px;
+    }
+    .icon-user {
+        @include index-sprite(user);
+    }
+    .icon-supervision {
+        @include index-sprite(supervision);
+    }
+    .icon-password {
+        @include index-sprite(password);
+    }
+    .icon-logout {
+        @include index-sprite(logout);
+        vertical-align : -8px;
+    }
+}

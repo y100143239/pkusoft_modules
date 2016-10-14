@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        .container {
+            position: absolute;
+            left: 200px;
+            top: 400px;
+            width: 600px;
+            height: 600px;
+            border: dashed 1px #05aeff;
+        }
+        .item {
+            z-index     : 4;
+            position    : absolute;
+            text-align  : center;
+            line-height : 200px;
+            font-size   : 32px;;
+            width       : 200px;
+            height      : 200px;
+            background  : #ff6600;
+            color: #fff;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+        .item:nth-child(1) { left : 50px; top : 50px; }
+        .item:nth-child(2) { left : 300px; top : 50px; }
+        .item:nth-child(3) { left : 50px; top : 300px; }
+        .item:nth-child(4) { left : 300px; top : 300px; }
+        .dragging {
+            opacity: 0.5;
+            cursor: move;
+            z-index: 10;
+        }
+        .collision {
+            opacity: 0.3;
+            background-color: #05aeff;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="item">1</div>
+    <div class="item">2</div>
+    <div class="item">3</div>
+    <div class="item">4</div>
+</div>
+
+<script src="../../dev/modules/jquery/jquery-1.11.3.js"></script>
+<script>
+    var $item,
+        $draggingTarget
+        ;
+    $item = $( ".item" );
+
+    $item.on( "mousedown.dnd", function ( event ) {
+        var $this,
+            cursorMouseDownDocPos,  // { x: 100, y: 200 }
+            cursorMouseMoveDocPos,  // { x: 100, y: 200 }
+            targetOriginDocPos, // { top: 0, left: 0 }
+            targetMouseMoveDocPos, // { top: 50, left: 60 }
+            targetRelativePos, // { top: 50, left: 60 }
+            delta // { x: 100 - 50, y: 200 - 60  }
+        ;
+        $this = $( this );
+
+
+
+        cursorMouseMoveDocPos = { x: 0, y: 0 };
+        cursorMouseDownDocPos = {
+            x: event.pageX,
+            y: event.pageY
+        };
+        targetMouseMoveDocPos = { top: 0, left: 0 };
+        targetOriginDocPos = {
+            left: $this.offset().left,
+            top: $this.offset().top
+        };
+
+        targetRelativePos = { top: 0, left: 0 };
+
+        if ( ( ! $draggingTarget ) || $draggingTarget.get(0) != this ) {
+            $draggingTarget = $this;
+            $this.data( "originRalativePos", $this.position() );
+        }
+
+        // 1. 使其半透明，改变光标样式
+        $this.addClass( "dragging" );
+
+        // 2. 计算 光标与target的相对位置
+        delta = {
+            x: cursorMouseDownDocPos.x - targetOriginDocPos.left,
+            y: cursorMouseDownDocPos.y - targetOriginDocPos.top
+        };
+
+        // 3. 注册 mousemove 事件，改变位置
+        $this.on( "mousemove.dnd", function ( event ) {
+            var $this,
+                docPos,
+                relativePos
+            ;
+
+            /*
+             event.pageX    : 文档坐标 x
+             event.pageY    : 文档坐标 y
+             event.clientX  : 视口坐标 x
+             event.clientY  : 视口坐标 y
+
+             position()     : 获取相对父元素的位置 {top: 50, left: 50}
+             offset()       : 获取文档坐标 {top: 451, left: 251}
+            */
+            $this = $( this );
+            docPos = $this.offset();
+            relativePos = $this.position();
+
+            cursorMouseMoveDocPos.x = event.pageX;
+            cursorMouseMoveDocPos.y = event.pageY;
+
+            targetMouseMoveDocPos.left = docPos.left;
+            targetMouseMoveDocPos.top = docPos.top;
+
+            targetRelativePos.left = relativePos.left;
+            targetRelativePos.top = relativePos.top;
+
+            $this.css( {
+                left: targetRelativePos.left + ( cursorMouseMoveDocPos.x - targetMouseMoveDocPos.left - delta.x ),
+                top : targetRelativePos.top + ( cursorMouseMoveDocPos.y - targetMouseMoveDocPos.top - delta.y )
+            } );
+
+            // 碰撞检测
+            var $collision = detectCollision( $this );
+
+            $this.data( "$collision", null );
+
+            if ( $collision ) {
+                $collision.addClass( "collision" );
+                $this.data( "$collision", $collision );
+            } else {
+                $item.removeClass( "collision" );
+            }
+
+        } ).on( "mouseup.dnd", function () {
+            var $this
+                    ;
+            $this = $( this );
+
+            // 1. 使其不透明
+            $this.removeClass( "dragging" );
+
+            // 2. 解绑 mousemove 事件
+            $this.off( "mousemove.dnd" );
+            $this.off( "mouseup.dnd" );
+            $item.removeClass( "collision" );
+            $draggingTarget = null;
+
+            // 交换位置
+            var $collision = $this.data( "$collision" );
+            var originRalativePos = $this.data( "originRalativePos" );
+            if ( ! $collision ) {
+                $this.css( {
+                    left: originRalativePos.left,
+                    top: originRalativePos.top
+                } );
+                return;
+            }
+
+            var collisionRalativePos = $collision.position();
+            $collision.css( {
+                left: originRalativePos.left,
+                top: originRalativePos.top
+            } );
+            $this.css( {
+                left: collisionRalativePos.left,
+                top: collisionRalativePos.top
+            } );
+        } );
+    } );
+
+    function detectCollision( $target ) {
+        var compareTop,
+            compareRight,
+            compareBottom,
+            compareLeft,
+            targetTop,
+            targetRight,
+            targetBottom,
+            targetLeft,
+            targetDocPos,
+
+            $collision,
+            compareDocPos
+
+            ;
+        $collision = null;
+        targetDocPos = $target.offset();
+        targetTop = targetDocPos.top;
+        targetLeft = targetDocPos.left;
+        targetRight = targetLeft + $target.width();
+        targetBottom = targetTop + $target.height();
+
+        $item.not( $target.get(0) ).each( function() {
+            var $compare
+            ;
+            $compare = $( this );
+            compareDocPos = $compare.offset();
+            compareTop = compareDocPos.top;
+            compareLeft = compareDocPos.left;
+            compareRight = compareLeft + $compare.width();
+            compareBottom = compareTop + $compare.height();
+            if (targetRight < compareLeft || targetLeft > compareRight || targetBottom < compareTop || targetTop > compareBottom) {
+                // 未发生碰撞
+                return true; // 检测下一个元素
+            }
+            // 发生碰撞的时候
+            $collision = $compare;
+            return false;
+        } );
+
+        return $collision;
+
+    }
+
+</script>
+
+</body>
+</html>

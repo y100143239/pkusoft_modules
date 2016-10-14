@@ -25,16 +25,15 @@
     <script src="../../../dev/modules/lib/ie/respond.js"></script>
     <script src="../../../dev/modules/lib/ie/html5shiv.js"></script>
     <![endif]-->
-    <link rel="stylesheet" href="../../../dev/modules/ui/css/pku.css"/>
-    <link rel="stylesheet" href="css/style.css?VERSION=v0.20160909"/>
-
+    <link rel="stylesheet" href="../../../dev/modules/ui/css/pku.css?VERSION=v0.20161013"/>
+    <link rel="stylesheet" href="css/style.css?VERSION=v0.20161013"/>
     <script data-main="../../../dev/modules/" src="../../../dev/modules/require.js"></script>
     <script >
         var VERSION,
                 DEV_MODE
                 ;
         DEV_MODE = false;
-        VERSION = DEV_MODE ? (new Date()).getTime() : "v0.20160909";
+        VERSION = DEV_MODE ? (new Date()).getTime() : "v0.20161013";
         require.config( {
             urlArgs: "VERSION=" + VERSION,
             paths: {
@@ -64,6 +63,7 @@
 
                 "select-area": "lib/select-area/select-area",
                 "select-area-data": "lib/select-area/select-area-data",
+                "sweet-alert": "lib/sweetalert/js/sweet-alert",
 
                 "fixrecord": "lib/custom/fixrecord",
 
@@ -87,6 +87,7 @@
                 "colresizable": [ "jquery" ],
                 "bootgrid": [ "css!lib/bootgrid/css/jquery.bootgrid.css" , "bootstrap", "colresizable"],
                 "select-area": ["css!lib/select-area/css/select-area.css" ],
+                "sweet-alert": ["jquery" ],
                 "code-pretty": [ "css!lib/pretty/prettify.css" ]
             },
             // 超时
@@ -106,22 +107,32 @@
     <div class="page-content">
         <div class="header text-center">武汉市公安局执法监督管理平台</div>
         <div class="body clearfix">
-            <form action="index.html" >
+            <form action="index.html" class="login-form">
                 <div class="input-login-name mod-input">
                     <b class="left"></b>
-                    <input type="text" class="input-control"/>
+                    <input type="text" class="input-control"
+                           data-toggle="tooltip"
+                           data-placement="top"
+                           data-container="body"
+                           data-theme="tooltip-info-dark"
+                           title="用户名：请输入任意字符。"/>
                     <b class="line"></b>
                     <b class="right"></b>
                     <b class="icon"></b>
                 </div>
                 <div class="input-password mod-input">
                     <b class="left"></b>
-                    <input type="password" class="input-control"/>
+                    <input type="password" class="input-control"
+                           data-toggle="tooltip"
+                           data-placement="top"
+                           data-container="body"
+                           data-theme="tooltip-info-dark"
+                           title="密码：请输入任意字符。"/>
                     <b class="line"></b>
                     <b class="right"></b>
                     <b class="icon"></b>
                 </div>
-                <button type="submit" class="button">登录</button>
+                <button type="submit" class="button btn-submit">登录</button>
             </form>
         </div>
         <div class="footer text-center">

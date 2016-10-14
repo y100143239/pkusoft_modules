@@ -1,11 +1,7 @@
+@import "public";
+@import "font";
 @import "login";
 @import "index";
-@import "font";
-@import "../../../modules/ui/css/animate.css";
-html, body {
-    height: 100%;
-}
-.page {
-    position: relative;
-    font-family: "Microsoft Yahei", sans-serif;
-}
+@import "list";
+@import "../../../modules/ui/scss/animate.scss";
+@import "../../../modules/lib/sweetalert/css/sweet-alert";

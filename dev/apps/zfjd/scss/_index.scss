@@ -11,68 +11,19 @@ $index-header_bg-repeat: repeat-x;
 .page-index {
     min-width: 1920px;
     min-height: 1024px;
-    background-color: #01132b;
-    > .top {
-        @include index-sprite(top_bg);
-        position: relative;
-        height: 137px;
-        background-repeat: repeat-x;
-        ul {
-            margin: 0;
-            li {
-                list-style: none;
-            }
-        }
-    }
+    //background-color: #01132b;
     .logo-container {
-        padding: 40px 0 0 40px;
-        .logo {
-            float: left;
-        }
+        padding-top: 40px;
         .title {
-            float: left;
             font-size: 60px;
-            font-weight: bold;
-            color: #fff;
-            line-height: 1;
             letter-spacing: 16px;
-            margin-left: 30px;
             margin-top: -4px;
         }
     }
-    .function-list {
-        position: absolute;
-        top: 90px;
-        right: 0;
-        font-size: 18px;
-    }
     .function-item {
-        float: left;
-        color: #fff;
-        line-height: 32px;
-        margin-right: 40px;
-        a {
-            color: #fff;
-        }
+        margin-right : 40px;
         .icon {
-            display: inline-block;
-            width: 32px;
-            height: 32px;
-            vertical-align: middle;
-            margin-right: 16px;
-        }
-        .icon-user {
-            @include index-sprite(user);
-        }
-        .icon-supervision {
-            @include index-sprite(supervision);
-        }
-        .icon-password {
-            @include index-sprite(password);
-        }
-        .icon-logout {
-            @include index-sprite(logout);
-            vertical-align: -8px;
+            margin-right   : 16px;
         }
     }
     > .header {
@@ -180,10 +131,11 @@ $index-header_bg-repeat: repeat-x;
         .module-heading {
             height: 54px;
             color: #02e4ff;
-            font-size: 30px;
+            font-size: 24px;
             font-weight: bold;
             line-height: 45px;
             padding: 5px 0 0 5px;
+            text-shadow: 0 2px 0 rgba(0,0,0,.5);
         }
         .module-heading-icon {
             display: inline-block;
@@ -643,6 +595,7 @@ $index-header_bg-repeat: repeat-x;
             width: 788px;
             height: 788px;
             @include index-sprite(map_bg);
+            border-radius: 370px;
         }
         .map-area-list {
             position: absolute;
@@ -650,9 +603,15 @@ $index-header_bg-repeat: repeat-x;
             left: 107px;
             width: 573px;
             height: 571px;
+            border-radius: 180px;
         }
         .map-area-item {
             position: absolute;
+            &.hover {
+                .map-hot {
+                    color: #fff;
+                }
+            }
         }
         .map_huangpo_x224y8_w196h166 {
             left: 224px;
@@ -826,6 +785,74 @@ $index-header_bg-repeat: repeat-x;
             color: #c6def7;
             line-height: 1;
             text-decoration: none;
+            text-shadow: 0 2px 1px rgba(0,0,0,0.5);
+        }
+        .map-sector-list {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-top-left-radius: 370px;
+            margin-left: 1px;
+            &:hover {
+                .map-sector-control {
+                    display: block;
+                }
+            }
+        }
+        .map-sector-item {
+            position: absolute;
+            left: 50%;
+            top: 5px;
+            width: 175px;
+            height: 46px;
+            margin-left: -87px;
+            cursor: pointer;
+            transform-origin: 87px 392px;
+            @include index-sprite(sector_15division_24degree);
+            &:hover {
+                .map-sector-text {
+                    color: #fff;
+                    //text-shadow: 0 0 1px rgba(0,0,0,0.5);
+                }
+                @include index-sprite(sector_hover_15division_24degree);
+            }
+            &.active {
+                @include index-sprite(sector_active_15division_24degree);
+            }
+            $base-offset: 12;
+            &:nth-child(1) { transform : rotate($base-offset+24*0deg); }
+            &:nth-child(2) { transform : rotate($base-offset+24*1deg); }
+            &:nth-child(3) { transform : rotate($base-offset+24*2deg); }
+            &:nth-child(4) { transform : rotate($base-offset+24*3deg); }
+            &:nth-child(5) { transform : rotate($base-offset+24*4deg); }
+            &:nth-child(6) { transform : rotate($base-offset+24*5deg); }
+            &:nth-child(7) { transform : rotate($base-offset+24*6deg); }
+            &:nth-child(8) { transform : rotate($base-offset+24*7deg); }
+            &:nth-child(9) { transform : rotate($base-offset+24*8deg); }
+            &:nth-child(10) { transform : rotate($base-offset+24*9deg); }
+            &:nth-child(11) { transform : rotate($base-offset+24*10deg); }
+            &:nth-child(12) { transform : rotate($base-offset+24*11deg); }
+            &:nth-child(13) { transform : rotate($base-offset+24*12deg); }
+            &:nth-child(14) { transform : rotate($base-offset+24*13deg); }
+            &:nth-child(15) { transform : rotate($base-offset+24*14deg); }
+        }
+        .map-sector-text {
+            display: block;
+            height: 100%;
+            font-size: 18px;
+            color: #c6def7;
+            line-height: 38px;
+            text-align: center;
+            transition: all 0.2s;
+            text-shadow: 0 2px 0 rgba(0,0,0,0.5);
+        }
+        .map-sector-control {
+            position: absolute;
+            right: 116px;
+            top: 11px;
+            display: none;
         }
     }
 }
@@ -897,7 +924,6 @@ $index-header_bg-repeat: repeat-x;
         font-size: 18px;
     }
 }
-
 
 ._dummy {
     @include index-sprite(icon_max);

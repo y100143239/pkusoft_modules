@@ -1,6 +1,7 @@
 @font-face {
     font-family: 'DS-DIGIB';
-    src: url('../font/DS-DIGIB.TTF') format('truetype');
+    src:url('../font/DS-DIGIB.eot?#iefix') format('embedded-opentype'),
+        url('../font/DS-DIGIB.TTF') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
