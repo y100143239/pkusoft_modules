@@ -26,7 +26,7 @@ $index-header_bg-repeat: repeat-x;
             margin-right   : 16px;
         }
     }
-    > .header {
+    > .page-header {
         position: relative;
         height: 139px;
         @include index-sprite(header_bg);
@@ -111,7 +111,7 @@ $index-header_bg-repeat: repeat-x;
             }
         }
     }
-    >.content {
+    >.page-content {
         position: relative;
         .row-1 {
 

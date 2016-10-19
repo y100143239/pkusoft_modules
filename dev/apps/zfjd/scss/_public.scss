@@ -4,6 +4,7 @@ $index-repeat : no-repeat;
 $index-top_bg-repeat : repeat-x;
 $index-header_bg-repeat : repeat-x;
 @import "index/*.png";
+@import "list/*.png";
 
 html, body {
     height: 100%;
@@ -14,7 +15,7 @@ html, body {
     position: relative;
     min-height: 100%;
     font-family: "Microsoft Yahei", sans-serif;
-    > .top {
+    > .page-top {
         @include index-sprite(top_bg);
         position          : relative;
         height            : 137px;
@@ -25,6 +26,11 @@ html, body {
                 list-style : none;
             }
         }
+    }
+    > .page-header {
+        padding: 0;
+        margin: 0;
+        border: none 0;
     }
 }
 
@@ -79,4 +85,160 @@ html, body {
         @include index-sprite(logout);
         vertical-align : -8px;
     }
+}
+
+.page-sidebar {
+    z-index: 100;
+    position: absolute;
+    top: 137px;
+    left: 0;
+    width: 266px;
+    min-height: 900px;
+    background: #21649c;
+    box-shadow: 1px 0 2px rgba(28,88,143,0.2);
+    /*&:before {
+        z-index: 1;
+        content: "";
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 265px;
+        height: 546px;
+        @include list-sprite(sidebar_bg_top);
+    }*/
+    &:after {
+        z-index: 3;
+        content: "";
+        display: block;
+        position: absolute;
+        top: 140px;
+        right: 0;
+        width: 2px;
+        height: 746px;
+        @include list-sprite(sidebar_bg_right);
+    }
+    .main-menu-list {
+        z-index: 2;
+    }
+}
+.main-menu-list {
+    font-size: 16px;
+    color: #c6def7;
+    line-height: 46px;
+    margin-right: 2px;
+}
+.main-menu-item {
+    &.has-sub-menu {
+        .icon-collapse {
+            display: block;
+        }
+    }
+}
+.main-menu-item {
+    border-top: solid 1px #44b0e7;
+    border-bottom: solid 1px #103f77;
+    &:first-child {
+        border-top: none 0;
+    }
+    &:last-child {
+        //border-bottom: none 0;
+    }
+    &:hover {
+        .main-menu-item-heading {
+            background-color: #3db1ff;
+            color: #fff;
+        }
+    }
+    &.active {
+        .main-menu-item-heading {
+            background-color: #3598db;
+        }
+        .main-menu-item-body {
+            display: block;
+        }
+        .icon-collapse:before {
+            display: none;
+        }
+    }
+}
+.main-menu-item-heading {
+    cursor: pointer;
+    transition: all 0.2s;
+    .icon-collapse {
+        display: none;
+        position: relative;
+        float: right;
+        width: 13px;
+        height: 13px;
+        margin: 17px 16px 0 0;
+        &:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 5px;
+            width: 2px;
+            height: 12px;
+            line-height: 1;
+            background-color: #fff;
+        }
+        &:after {
+            content: "";
+            position: absolute;
+            top: 5px;
+            left: 0;
+            width: 12px;
+            height: 2px;
+            line-height: 1;
+            background-color: #fff;
+        }
+
+    }
+    .icon {
+        display: inline-block;
+        width: 40px;
+        height: 40px;
+        margin: 0 8px 0 10px;
+        vertical-align: -13px;
+    }
+    .sidebar_icon_01_jdzx { @include list-sprite(sidebar_icon_01_jdzx); }
+    .sidebar_icon_02_jcj { @include list-sprite(sidebar_icon_02_jcj); }
+    .sidebar_icon_03_zfba { @include list-sprite(sidebar_icon_03_zfba); }
+    .sidebar_icon_04_sacw { @include list-sprite(sidebar_icon_04_sacw); }
+    .sidebar_icon_05_agzx { @include list-sprite(sidebar_icon_05_agzx); }
+    .sidebar_icon_06_bahj { @include list-sprite(sidebar_icon_06_bahj); }
+    .sidebar_icon_07_zfysp { @include list-sprite(sidebar_icon_07_zfysp); }
+    .sidebar_icon_08_gajd { @include list-sprite(sidebar_icon_08_gajd); }
+    .sidebar_icon_09_szxjs { @include list-sprite(sidebar_icon_09_szxjs); }
+    .sidebar_icon_10_xtjr { @include list-sprite(sidebar_icon_10_xtjr); }
+    .sidebar_icon_11_xtgl { @include list-sprite(sidebar_icon_11_xtgl); }
+}
+.main-menu-item-body {
+    display: none;
+}
+.sub-menu-list {
+    background-color: #104d80;
+}
+.sub-menu-item {
+    padding-left: 60px;
+    font-size: 14px;
+    color: #c6def7;
+    cursor: pointer;
+    transition: all 0.2s;
+    &:hover, &.active {
+        color: #3db1ff;
+    }
+    .icon {
+        display: inline-block;
+        width: 11px;
+        height: 1px;
+        background-color: #80a1bc;
+        margin: 0 12px 0 0;
+        vertical-align: middle;
+    }
+}
+.main-menu-item-other {
+    font-size: 14px;
+    color: #c6def7;
+    border-top: solid 1px #44b0e7;
 }

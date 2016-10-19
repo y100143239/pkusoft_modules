@@ -49,6 +49,12 @@ module.exports = function(grunt) {
                         src: ['apps/axure/**'],
                         dest: 'dist',
                         expand: true
+                    },
+                    { // app - admin
+                        cwd: 'dev/',
+                        src: ['apps/admin/**'],
+                        dest: 'dist',
+                        expand: true
                     }
 
                 ]

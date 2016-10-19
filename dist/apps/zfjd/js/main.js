@@ -551,13 +551,13 @@ require( [ "jquery" ,"echarts", "echartsTheme", "bootstrap", "sweet-alert" ],
                 var $this,
                     $parent
                 ;
-                $this = $( this )
+                $this = $( this );
                 $parent = $this.parent();
                 if ( $parent.is( ".active" ) ) {
                     $parent.removeClass( "active" );
                     return;
                 }
-                $parent.filter( ".has-sub-menu" ).addClass( "active" ).siblings().removeClass( "active" );
+                $parent.addClass( "active" ).siblings().removeClass( "active" );
             } );
         }
     };
