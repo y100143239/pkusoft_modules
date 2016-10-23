@@ -77,7 +77,7 @@
         loadData.call( this );
 
         //FIX 添加 tooltip
-        //this.header.find( "[title]" ).tooltip( { theme: "tooltip-normal", container: "body" } );
+        this.header.find( "[title]" ).tooltip( { theme: "tooltip-normal", container: "body" } );
 
         this.element.trigger( "initialized" + namespace );
     }
@@ -362,7 +362,7 @@
                 }
             } );
             //FIX 添加tooltip的title
-            //dropDown.find(".dropdown-toggle" ).attr( "title", "设置显示哪些列" );
+            dropDown.find(".dropdown-toggle" ).attr( "title", "设置显示哪些列" );
             actions.append( dropDown );
         }
     }
@@ -557,8 +557,8 @@
                         rowAttr += " aria-selected=\"true\"";
                     }
                 }
-                //FIX 修复status属性可能被 bean属性占用的问题
-                var status = row._status != null && that.options.statusMapping[ row._status ];
+
+                var status = row.status != null && that.options.statusMapping[ row.status ];
                 if ( status ) {
                     rowCss += status;
                 }
@@ -707,14 +707,11 @@
             if ( column.visible ) {
                 //FIX 添加 fa-sort
                 var sortOrder = that.sortDictionary[ column.id ],
-                    iconCss = ((sorting && sortOrder && sortOrder === "asc") ? css.iconUp :
-                        (sorting && sortOrder && sortOrder === "desc") ? css.iconDown : "");
-                if ( column.sortable == true && iconCss == "" ) {
-                    iconCss = "fa-sort";
-                }
-                var icon = tpl.icon.resolve( getParams.call( that, { iconCss: iconCss } ) );
-                var align = column.headerAlign;
-                var cssClass = (column.headerCssClass.length > 0) ? " " + column.headerCssClass : "";
+                    iconCss = ((sorting && sortOrder && sortOrder === "asc") ? css.iconUp + " fa-sort" :
+                        (sorting && sortOrder && sortOrder === "desc") ? css.iconDown + " fa-sort" : "" + " fa-sort"),
+                    icon = tpl.icon.resolve( getParams.call( that, { iconCss: iconCss } ) ),
+                    align = column.headerAlign,
+                    cssClass = (column.headerCssClass.length > 0) ? " " + column.headerCssClass : "";
                 html += tpl.headerCell.resolve( getParams.call( that, {
                     column: column, icon: icon, sortable: sorting && column.sortable && css.sortable || "",
                     css: ((align === "right") ? css.right : (align === "center") ?
@@ -1272,10 +1269,10 @@
             actionDropDownCheckboxItem: "<li><label class=\"{{css.dropDownItem}}\"><input name=\"{{ctx.name}}\" type=\"checkbox\" value=\"1\" class=\"{{css.dropDownItemCheckbox}}\" {{ctx.checked}} /> {{ctx.label}}</label></li>",
             actions: "<div class=\"{{css.actions}}\"></div>",
             body: "<tbody></tbody>",
-            cell: "<td class=\"{{ctx.css}}\" style=\"{{ctx.style}}\" title=\"{{ctx.content}}\">{{ctx.content}}</td>",
-            footer: "<div id=\"{{ctx.id}}\" class=\"{{css.footer}}\"><div class=\"row\"><div class=\"col-sm-9\"><p class=\"{{css.pagination}}\"></p></div><div class=\"col-sm-3 infoBar\"><p class=\"{{css.infos}}\"></p></div></div></div>",
+            cell: "<td class=\"{{ctx.css}}\" style=\"{{ctx.style}}\">{{ctx.content}}</td>",
+            footer: "<div id=\"{{ctx.id}}\" class=\"{{css.footer}}\"><div class=\"row\"><div class=\"col-sm-8\"><p class=\"{{css.pagination}}\"></p></div><div class=\"col-sm-4 infoBar\"><p class=\"{{css.infos}}\"></p></div></div></div>",
             header: "<div id=\"{{ctx.id}}\" class=\"{{css.header}}\"><div class=\"row\"><div class=\"col-sm-12 actionBar\"><p class=\"{{css.search}}\"></p><p class=\"{{css.actions}}\"></p></div></div></div>",
-            headerCell: "<th title='{{ctx.column.text}}' data-column-id=\"{{ctx.column.id}}\" class=\"{{ctx.css}}\" style=\"{{ctx.style}}\"><a href=\"javascript:void(0);\" class=\"{{css.columnHeaderAnchor}} {{ctx.sortable}}\"><span class=\"{{css.columnHeaderText}}\">{{ctx.column.text}}</span>{{ctx.icon}}</a></th>",
+            headerCell: "<th data-column-id=\"{{ctx.column.id}}\" class=\"{{ctx.css}}\" style=\"{{ctx.style}}\"><a href=\"javascript:void(0);\" class=\"{{css.columnHeaderAnchor}} {{ctx.sortable}}\"><span class=\"{{css.columnHeaderText}}\">{{ctx.column.text}}</span>{{ctx.icon}}</a></th>",
             icon: "<span class=\"{{css.icon}} {{ctx.iconCss}}\"></span>",
             infos: "<div class=\"{{css.infos}}\">{{lbl.infos}}</div>",
             loading: "<tr><td colspan=\"{{ctx.columns}}\" class=\"loading\">{{lbl.loading}}</td></tr>",
@@ -1819,33 +1816,6 @@
     var old = $.fn.bootgrid;
 
     $.fn.bootgrid = function ( option ) {
-
-        //FIX 获取所有在 <th data-formatter="">设置的 formatter，重构 formatters 参数
-        if ( typeof option === "object" ) {
-            var formatters,
-                $th
-                ;
-            formatters = {};
-            $th = this.find( "th[data-formatter]" );
-            $th.each( function () {
-                var $this,
-                    formatter
-                ;
-                $this = $( this );
-                formatter = $this.data( "formatter" );
-                if ( ! ( formatter && window[ formatter ] ) ) {
-                    return;
-                }
-                formatters[ formatter ] = window[ formatter ];
-            } );
-
-            option.formatters = $.extend( option.formatters, formatters );
-
-        }
-
-        // 设置 Ajax url
-        option.url = this.attr( "data-url" ) || option.url;
-
         var args = Array.prototype.slice.call( arguments, 1 ),
             returnValue = null,
             elements = this.each( function ( index ) {
@@ -1859,8 +1829,6 @@
                 if ( !instance ) {
                     $this.data( namespace, (instance = new Grid( this, options )) );
                     init.call( instance );
-                    // FIX
-                    $this.colResizable && $this.colResizable( { partialRefresh: true } )
                 }
                 if ( typeof option === "string" ) {
                     if ( option.indexOf( "get" ) === 0 && index === 0 ) {
@@ -1906,7 +1874,7 @@ jQuery.extend( _defaults.css, {
     iconUp: "fa-sort-asc",
     // 隐藏搜索
     search: "search form-group hidden", // must be a unique class name or constellation of class names within the header and footer
-    dropDownMenu: "dropdown btn-group btn-group-sm", // must be a unique class name or constellation of class names within the actionDropDown
+    dropDownMenu: "dropdown btn-group", // must be a unique class name or constellation of class names within the actionDropDown
     dummy: null
 } );
 
@@ -1920,116 +1888,23 @@ _defaults.labels = {
 };
 jQuery.extend( _defaults.templates, {
     //actionDropDown: "<div class=\"{{css.dropDownMenu}}\"><button class=\"btn btn-default dropdown-toggle\" type=\"button\" data-toggle=\"dropdown\"><span class=\"{{css.dropDownMenuText}}\">{{ctx.content}}</span></button><ul class=\"{{css.dropDownMenuItems}}\" role=\"menu\"></ul></div>",
-    actionButton: "<button class=\"btn btn-default btn-sm\" type=\"button\" title=\"{{ctx.text}}\">{{ctx.content}}</button>"
+    actionButton: "<button class=\"btn btn-default\" type=\"button\" title=\"{{ctx.text}}\">{{ctx.content}}</button>"
 } );
-
-jQuery.extend( _defaults, {
-    padding: 7,
-    navigation: 2,
-    ajax: true
-} );
-
-// FIX 将服务器返回的数据进行格式转换
+// TODO 将服务器返回的数据进行格式转换
 _defaults.responseHandler = function ( response ) {
+
     // 将服务器返回的数据进行格式转换
     var _response = {
         "current": 1,
         "rowCount": 10,
         "rows": [
-            //{ "id": "010", "name": "张三10", "tel": "0000010", "addr": "某个地方10" }
+            {
+                "id": 1122,
+                "sender": "simon@outlook.com",
+                "received": "2016-07-14T16:44:11"
+            }
         ],
         "total": 1123
     };
-
-    var $this,
-        requestPage
-    ;
-
-    //
-    if ( ! response.success ) {
-        alert( "获取数据失败!" );
-        console.info( "获取数据失败!" );
-    }
-
-    $this = $( this );
-    requestPage = $this.data( "requestPage" );
-
-    _response = {
-        "current": requestPage,
-        "rowCount": 10,
-        "rows": response.data,
-        "total": response.totalRecords
-    };
-
-    return _response;
-};
-
-// FIX
-_defaults.requestHandler = function ( request ) {
-    //console.info( request );
-    var txtQuery = {
-        "oredCriteria": [],
-        "orderByClause": "", // "USER_ID"
-        "pager": { "start": 0, "limit": 20, "pageSize": 20 }
-    };
-    var originRequest = {
-        current: 1, // 请求的页数
-        rowCount: 10, // 每页的记录数
-        sort: { // 排序
-            addr: "desc" // order by ADDR desc
-        }
-    };
-
-    var start,
-        pageSize,
-        limit,
-        current,
-        rowCount,
-        sort,
-        orderByClause,
-        $this
-        ;
-
-    $this = $( this );
-
-    current = request.current;
-    rowCount = request.rowCount;
-    sort = request.sort;
-
-    start = rowCount * ( current - 1 );
-    limit = current * rowCount;
-    pageSize = rowCount;
-
-    $this.data( "requestPage", current );
-
-    // replace(/([A-Z])/g,"_$1").toUpperCase();
-    orderByClause = "";
-    if ( sort ) {
-        for ( var prop in sort ) {
-            if ( !sort.hasOwnProperty( prop ) ) {
-                continue;
-            }
-            if ( orderByClause ) {
-                orderByClause += ","
-            }
-            orderByClause += prop.replace( /([A-Z])/g, "_$1" ).toUpperCase() + " " + sort[ prop ].toUpperCase();
-        }
-    }
-
-    txtQuery.orderByClause = orderByClause || "";
-
-    txtQuery.pager = {
-        "start": start,
-        "limit": limit,
-        "pageSize": pageSize
-    };
-
-    request = {
-        start: start,
-        limit: limit,
-        pageSize: pageSize,
-        txtQuery: JSON.stringify( txtQuery )
-    };
-
-    return request;
+    return response;
 };

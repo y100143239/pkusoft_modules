@@ -202,7 +202,55 @@
 
         <div class="content-wrap">
             <div class="content-breadcrumb"><span>系统管理</span><span class="divider">/</span><span class="active">单位管理</span></div>
-            <div class="content-list"></div>
+            <div class="content-list">
+                <div class="content-heading">单位管理列表</div>
+                <div class="list-query">
+                    <form class="form-inline" id="queryForm">
+                        <div class="form-group">
+                            <label>部门名称：</label>
+                            <input type="text" class="form-control" name="deptName" data-operator="like">
+                        </div>
+                        <div class="form-group" style="margin: 0 1em;">
+                            <label>部门级别：</label>
+                            <input type="email" class="form-control" name="deptLevel">
+                        </div>
+                        <button type="button" class="btn btn-info" onclick="doQuery()"><i class="fa fa-search"></i> 搜索</button>
+                    </form>
+                </div>
+                <div class="list-function">
+                    <button type="button" class="btn btn-success" onclick="addSysDept()"><i class="fa fa-plus"></i> 新增</button>
+                </div>
+                <table id="datagrid" data-pku-widget="datagrid" class="table table-hover table-bordered"
+                       data-url="http://www.20ui.cn/admin/sysDeptListData"
+                       data-query-form-id="queryForm">
+                       <!--
+                        data-url="http://localhost:8080/admin/sysDeptListData"
+                        data-url="http://www.20ui.cn/admin/sysDeptListData"
+                       -->
+                    <thead>
+                    <tr>
+                        <!--
+                            data-column-id：对应bean的属性名
+                            data-identifier： Boolean。data-row-id，行ID。（只对一个列使用）
+                            data-visible：Boolean。此列是否可见。（可用于标记 行ID 的列）
+                            data-sortable：Boolean。此列是否可排序（升序、降序），会拼接 order by 子句，发送请求
+                        -->
+                        <th data-column-id="deptId" data-identifier="true" data-visible="true" data-sortable="false" >部门标识号</th>
+                        <th data-column-id="deptName" data-sortable="false">部门名称</th>
+                        <th data-column-id="deptLevel" data-sortable="true">部门级别</th>
+                        <th data-column-id="addTime" data-sortable="false" data-formatter="dateFormatter">录入时间</th>
+
+                        <th data-sortable="false" data-column-id="_operation" data-formatter="_operation" data-column-title="操作">
+                            <a href="javascript:void(0);" onclick="viewSysDept(this)" data-row="deptId,deptName">详情</a>&nbsp;&nbsp;
+                            <a href="javascript:void(0);" onclick="editSysDept(this)" data-row="deptId,deptName">编辑</a>&nbsp;&nbsp;
+                            <a href="javascript:void(0);" onclick="deleteSysDept(this)" data-row="deptId">删除</a>
+                        </th>
+                    </tr>
+                    </thead>
+
+                </table>
+
+            </div>
         </div>
 
 
@@ -216,6 +264,204 @@
 </div>
 <!-- /page -->
 
+<script>
+    function doQuery() {
+        jQuery( "#datagrid" ).bootgrid( "reload" );
+    }
+    function dateFormatter( column, row ) {
+        var date,
+            year,
+            month,
+            day,
+            value
+        ;
+        value = row[ column.id ];
+        if ( ! value ) {
+            return "";
+        }
 
+        date = new Date( parseInt( value ) );
+
+        year = date.getFullYear();
+        month = date.getMonth() + 1;
+        day = date.getDate();
+
+        month = ( "0" + month ).slice( -2 );
+        day = ( "0" + day ).slice( -2 );
+
+        return year +  "年" + month + "月" + day + "日";
+    }
+
+    function deleteSysDept( target ) {
+        var $target
+        ;
+        $target = $( target );
+        // 标记
+        $target.closest( "tr" ).addClass( "warning" );
+        new Dialog( {
+            title: "提示",
+            content: "确认删除？",
+            confirmBtnText: "删除",
+            cancelBtnText: "不删除",
+            confirmCallback: function () {
+                var _this
+                ;
+                _this = this;
+                _this.hide();
+                $.post( "http://www.20ui.cn/admin/sysDeptDelete", { deptId: $target.data( "deptId" ) } )
+                        .done( function ( response ) {
+                            if ( ! response.success ) {
+                                new Dialog( { title: "错误", content: "删除失败！" } );
+                                return;
+                            }
+                            new Dialog( { title: "提示", content: "删除成功！" } );
+                            // 标记
+                            $target.closest( "tr" ).addClass( "danger" ).end().closest( "td" ).html("");
+                        } )
+                        .fail( function () {
+                            ( new Dialog ).show( { title: "错误", content: "网络异常。" } );
+                        } );
+            },
+            cancelCallback: function () {
+                this.hide();
+            }
+        } );
+
+    }
+
+    function viewSysDept ( target ) {
+        var $target
+                ;
+        $target = $( target );
+        // 标记
+        $target.closest( "tr" ).addClass( "warning" );
+        new Dialog( {
+            title: "详情 - " + $target.data( "deptName" ),
+            content: '<i class="fa fa-spin fa-spinner"></i> 加载...',
+            width: 800,
+            hasConfirmBtn: false,
+            cancelBtnText: "关闭",
+            remoteUrl: "http://www.20ui.cn/admin/sysDeptDetail",
+            requestData: { deptId: $target.data( "deptId" ) }
+        } );
+    }
+
+    function editSysDept( target ) {
+        var $target
+        ;
+        $target = $( target );
+        // 标记
+        $target.closest( "tr" ).addClass( "warning" );
+        new Dialog( {
+            title: "编辑 - " + $target.data( "deptName" ),
+            content: '<i class="fa fa-spin fa-spinner"></i> 加载...',
+            confirmBtnText: "保存",
+            cancelBtnText: "关闭",
+            width: 800,
+            remoteUrl: "http://www.20ui.cn/admin/sysDeptEdit",
+            requestData: { deptId: $target.data( "deptId" ) },
+            requestSuccessCallback: function () {
+                var $form
+                ;
+                $form = this.$container.find( '[data-pku-widget="fv"]' );
+                $form.formValidation();
+            },
+            confirmCallback: function () {
+                var $form,
+                    $fvInstance,
+                    isValid,
+                    actionUrl,
+                    _this
+                ;
+                _this = this;
+                $form = this.$container.find( '[data-pku-widget="fv"]' );
+                $fvInstance = $form.data( 'formValidation' );
+                actionUrl = $form.attr( "action" );
+                // 校验
+                $fvInstance.validate();
+                // 判断
+                isValid = $fvInstance.isValid();
+                // 校验不通过 ， 退出
+                if ( !isValid ) {
+                    return false;
+                }
+                _this.$confirmBtn.html( '<i class="fa fa-spin fa-spinner"></i> 保存中' ).attr( "disabled", true );
+                // 发送请求保存数据
+                $.post( actionUrl, $form.serialize(), null, "json" )
+                        .done( function ( data ) {
+                            if ( ! ( data && data.success ) ) {
+                                new Dialog ( { title: "提示", content: data.message || "保存失败。" } );
+                                return;
+                            }
+                            _this.hide();
+                            doQuery();
+                        }).fail( function (){
+                            new Dialog ( { title: "错误", content: "网络异常。" } );
+                            _this.$confirmBtn.html( '<i class="fa fa-spin fa-spinner"></i> 保存中' ).removeAttr( "disabled" );
+                        } );
+            },
+            cancelCallback: function () {
+                window.console && console.info( "cancelCallback" );
+                this.hide();
+            }
+        } );
+    }
+
+    function addSysDept( target ) {
+        new Dialog( {
+            title: "新增",
+            content: '<i class="fa fa-spin fa-spinner"></i> 加载...',
+            confirmBtnText: "保存",
+            cancelBtnText: "关闭",
+            width: 800,
+            remoteUrl: "http://www.20ui.cn/admin/sysDeptEdit",
+            requestSuccessCallback: function () {
+                var $form
+                ;
+                $form = this.$container.find( '[data-pku-widget="fv"]' );
+                $form.formValidation();
+            },
+            confirmCallback: function () {
+                var $form,
+                    $fvInstance,
+                    isValid,
+                    actionUrl,
+                    _this
+                ;
+                _this = this;
+                $form = this.$container.find( '[data-pku-widget="fv"]' );
+                $fvInstance = $form.data( 'formValidation' );
+                actionUrl = $form.attr( "action" );
+                // 校验
+                $fvInstance.validate();
+                // 判断
+                isValid = $fvInstance.isValid();
+                // 校验不通过 ， 退出
+                if ( !isValid ) {
+                    return false;
+                }
+                _this.$confirmBtn.html( '<i class="fa fa-spin fa-spinner"></i> 保存中' ).attr( "disabled", true );
+                // 发送请求保存数据
+                $.post( actionUrl, $form.serialize(), null, "json" )
+                        .done( function ( data ) {
+                            if ( ! ( data && data.success ) ) {
+                                new Dialog ( { title: "提示", content: data.message || "保存失败。" } );
+                                _this.$confirmBtn.html( '保存' ).removeAttr( "disabled" );
+                                return;
+                            }
+                            _this.hide();
+                            doQuery();
+                        }).fail( function (){
+                            new Dialog ( { title: "错误", content: "网络异常。" } );
+                            _this.$confirmBtn.html( '保存' ).removeAttr( "disabled" );
+                        } );
+            },
+            cancelCallback: function () {
+                window.console && console.info( "cancelCallback" );
+                this.hide();
+            }
+        } );
+    }
+</script>
 </body>
 </html>

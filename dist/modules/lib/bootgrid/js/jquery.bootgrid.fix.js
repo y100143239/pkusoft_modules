@@ -77,7 +77,7 @@
         loadData.call( this );
 
         //FIX 添加 tooltip
-        this.header.find( "[title]" ).tooltip( { theme: "tooltip-normal", container: "body" } );
+        //this.header.find( "[title]" ).tooltip( { theme: "tooltip-normal", container: "body" } );
 
         this.element.trigger( "initialized" + namespace );
     }
@@ -362,7 +362,7 @@
                 }
             } );
             //FIX 添加tooltip的title
-            dropDown.find(".dropdown-toggle" ).attr( "title", "设置显示哪些列" );
+            //dropDown.find(".dropdown-toggle" ).attr( "title", "设置显示哪些列" );
             actions.append( dropDown );
         }
     }
@@ -557,8 +557,8 @@
                         rowAttr += " aria-selected=\"true\"";
                     }
                 }
-
-                var status = row.status != null && that.options.statusMapping[ row.status ];
+                //FIX 修复status属性可能被 bean属性占用的问题
+                var status = row._status != null && that.options.statusMapping[ row._status ];
                 if ( status ) {
                     rowCss += status;
                 }
@@ -707,11 +707,14 @@
             if ( column.visible ) {
                 //FIX 添加 fa-sort
                 var sortOrder = that.sortDictionary[ column.id ],
-                    iconCss = ((sorting && sortOrder && sortOrder === "asc") ? css.iconUp + " fa-sort" :
-                        (sorting && sortOrder && sortOrder === "desc") ? css.iconDown + " fa-sort" : "" + " fa-sort"),
-                    icon = tpl.icon.resolve( getParams.call( that, { iconCss: iconCss } ) ),
-                    align = column.headerAlign,
-                    cssClass = (column.headerCssClass.length > 0) ? " " + column.headerCssClass : "";
+                    iconCss = ((sorting && sortOrder && sortOrder === "asc") ? css.iconUp :
+                        (sorting && sortOrder && sortOrder === "desc") ? css.iconDown : "");
+                if ( column.sortable == true && iconCss == "" ) {
+                    iconCss = "fa-sort";
+                }
+                var icon = tpl.icon.resolve( getParams.call( that, { iconCss: iconCss } ) );
+                var align = column.headerAlign;
+                var cssClass = (column.headerCssClass.length > 0) ? " " + column.headerCssClass : "";
                 html += tpl.headerCell.resolve( getParams.call( that, {
                     column: column, icon: icon, sortable: sorting && column.sortable && css.sortable || "",
                     css: ((align === "right") ? css.right : (align === "center") ?
@@ -1270,9 +1273,9 @@
             actions: "<div class=\"{{css.actions}}\"></div>",
             body: "<tbody></tbody>",
             cell: "<td class=\"{{ctx.css}}\" style=\"{{ctx.style}}\">{{ctx.content}}</td>",
-            footer: "<div id=\"{{ctx.id}}\" class=\"{{css.footer}}\"><div class=\"row\"><div class=\"col-sm-8\"><p class=\"{{css.pagination}}\"></p></div><div class=\"col-sm-4 infoBar\"><p class=\"{{css.infos}}\"></p></div></div></div>",
+            footer: "<div id=\"{{ctx.id}}\" class=\"{{css.footer}}\"><div class=\"row\"><div class=\"col-sm-9\"><p class=\"{{css.pagination}}\"></p></div><div class=\"col-sm-3 infoBar\"><p class=\"{{css.infos}}\"></p></div></div></div>",
             header: "<div id=\"{{ctx.id}}\" class=\"{{css.header}}\"><div class=\"row\"><div class=\"col-sm-12 actionBar\"><p class=\"{{css.search}}\"></p><p class=\"{{css.actions}}\"></p></div></div></div>",
-            headerCell: "<th data-column-id=\"{{ctx.column.id}}\" class=\"{{ctx.css}}\" style=\"{{ctx.style}}\"><a href=\"javascript:void(0);\" class=\"{{css.columnHeaderAnchor}} {{ctx.sortable}}\"><span class=\"{{css.columnHeaderText}}\">{{ctx.column.text}}</span>{{ctx.icon}}</a></th>",
+            headerCell: "<th title='{{ctx.column.text}}' data-column-id=\"{{ctx.column.id}}\" class=\"{{ctx.css}}\" style=\"{{ctx.style}}\"><a href=\"javascript:void(0);\" class=\"{{css.columnHeaderAnchor}} {{ctx.sortable}}\"><span class=\"{{css.columnHeaderText}}\">{{ctx.column.text}}</span>{{ctx.icon}}</a></th>",
             icon: "<span class=\"{{css.icon}} {{ctx.iconCss}}\"></span>",
             infos: "<div class=\"{{css.infos}}\">{{lbl.infos}}</div>",
             loading: "<tr><td colspan=\"{{ctx.columns}}\" class=\"loading\">{{lbl.loading}}</td></tr>",
@@ -1816,6 +1819,84 @@
     var old = $.fn.bootgrid;
 
     $.fn.bootgrid = function ( option ) {
+        var _this = this;
+        option = option || {};
+
+        //FIX 获取所有在 <th data-formatter="">设置的 formatter，重构 formatters 参数
+        +function(){
+            var formatters,
+                $th
+                ;
+            if ( typeof option !== "object" ) {
+                return;
+            }
+            formatters = {};
+            $th = _this.find( "th[data-formatter]" );
+            $th.each( function () {
+                var $this,
+                    formatter
+                ;
+                $this = $( this );
+                formatter = $this.data( "formatter" );
+                if ( ! ( formatter && window[ formatter ] ) ) {
+                    return;
+                }
+                formatters[ formatter ] = window[ formatter ];
+            } );
+
+            option.formatters = $.extend( option.formatters, formatters );
+
+        }();
+        // FIX 设置 _operation
+        +function(){
+            var $operation,
+                formatter,
+                opts,
+                html
+            ;
+            if ( typeof option !== "object" ) {
+                return;
+            }
+            $operation = _this.find( '[data-column-id="_operation"]' );
+
+            if ( $operation.size() == 0 ) {
+                return;
+            }
+
+            html = $operation.html();
+
+            $operation.html( $operation.attr( "data-column-title" ) || "" );
+
+            formatter = function ( column, row ) {
+                var $command
+                ;
+                $command = $( "<div>" ).append( html );
+                $command.find( "a" ).each( function () {
+                    var $this,
+                        columns
+                    ;
+                    $this = $( this );
+                    if ( ! $this.data( "row" ) ) {
+                        return;
+                    }
+                    columns = $this.data( "row" ).replace( /\s/g, "" ).split(",");
+                    $.each( columns, function () {
+                        $this.attr( "data-" + this.replace(/([A-Z])/g,"-$1" ).toLowerCase().replace( /^-/, "" ), row[ this ] );
+                    } )
+                } );
+                return $command.html();
+            };
+
+            option.formatters = $.extend( option.formatters, { "_operation": formatter } );
+
+        }();
+        // FIX 设置 Ajax url
+        //option.url = this.attr( "data-url" ) || option.url;
+
+        // FIX 关联 queryForm
+        //option.queryForm = this.attr( "data-query-form-id" );
+        //option.queryForm = option.queryForm && ( "#" + option.queryForm );
+
         var args = Array.prototype.slice.call( arguments, 1 ),
             returnValue = null,
             elements = this.each( function ( index ) {
@@ -1829,6 +1910,8 @@
                 if ( !instance ) {
                     $this.data( namespace, (instance = new Grid( this, options )) );
                     init.call( instance );
+                    // FIX
+                    $this.colResizable && $this.colResizable( { partialRefresh: true } )
                 }
                 if ( typeof option === "string" ) {
                     if ( option.indexOf( "get" ) === 0 && index === 0 ) {
@@ -1856,55 +1939,208 @@
     // ============
 
     $( "[data-toggle=\"bootgrid\"]" ).bootgrid();
-})( jQuery, window );
 
 
 
-var _defaults = jQuery.fn.bootgrid.Constructor.defaults;
 
-//FIX
+    //FIX
+    var _defaults = jQuery.fn.bootgrid.Constructor.defaults;
 
-jQuery.extend( _defaults.css, {
-    //icon: "icon fa",
-    icon: "icon fa",
-    iconColumns: "fa fa-th-list",
-    iconDown: "fa-sort-desc",
-    iconRefresh: "fa-refresh",
-    iconSearch: "fa-search",
-    iconUp: "fa-sort-asc",
-    // 隐藏搜索
-    search: "search form-group hidden", // must be a unique class name or constellation of class names within the header and footer
-    dropDownMenu: "dropdown btn-group btn-group-sm", // must be a unique class name or constellation of class names within the actionDropDown
-    dummy: null
-} );
 
-_defaults.labels = {
-    all: "全部",
-    infos: "显示 {{ctx.start}} - {{ctx.end}}， 总共 {{ctx.total}} 条",
-    loading: "加载...",
-    noResults: "没有记录!",
-    refresh: "刷新",
-    search: "搜索"
-};
-jQuery.extend( _defaults.templates, {
-    //actionDropDown: "<div class=\"{{css.dropDownMenu}}\"><button class=\"btn btn-default dropdown-toggle\" type=\"button\" data-toggle=\"dropdown\"><span class=\"{{css.dropDownMenuText}}\">{{ctx.content}}</span></button><ul class=\"{{css.dropDownMenuItems}}\" role=\"menu\"></ul></div>",
-    actionButton: "<button class=\"btn btn-default btn-sm\" type=\"button\" title=\"{{ctx.text}}\">{{ctx.content}}</button>"
-} );
-// TODO 将服务器返回的数据进行格式转换
-_defaults.responseHandler = function ( response ) {
+    jQuery.extend( _defaults.css, {
+        //icon: "icon fa",
+        icon: "icon fa",
+        iconColumns: "fa fa-th-list",
+        iconDown: "fa-sort-desc",
+        iconRefresh: "fa-refresh",
+        iconSearch: "fa-search",
+        iconUp: "fa-sort-asc",
+        // 隐藏搜索
+        search: "search form-group hidden", // must be a unique class name or constellation of class names within the header and footer
+        dropDownMenu: "dropdown btn-group ", // must be a unique class name or constellation of class names within the actionDropDown
+        dummy: null
+    } );
 
-    // 将服务器返回的数据进行格式转换
-    var _response = {
-        "current": 1,
-        "rowCount": 10,
-        "rows": [
-            {
-                "id": 1122,
-                "sender": "simon@outlook.com",
-                "received": "2016-07-14T16:44:11"
-            }
-        ],
-        "total": 1123
+    _defaults.labels = {
+        all: "全部",
+        infos: "显示 {{ctx.start}} - {{ctx.end}}， 总共 {{ctx.total}} 条",
+        loading: "<i class='fa fa-spin fa-spinner'></i> 加载...",
+        noResults: "没有记录!",
+        refresh: "刷新",
+        search: "搜索"
     };
-    return response;
-};
+    jQuery.extend( _defaults.templates, {
+        //actionDropDown: "<div class=\"{{css.dropDownMenu}}\"><button class=\"btn btn-default dropdown-toggle\" type=\"button\" data-toggle=\"dropdown\"><span class=\"{{css.dropDownMenuText}}\">{{ctx.content}}</span></button><ul class=\"{{css.dropDownMenuItems}}\" role=\"menu\"></ul></div>",
+        actionButton: "<button class=\"btn btn-default\" type=\"button\" title=\"{{ctx.text}}\">{{ctx.content}}</button>"
+    } );
+
+    jQuery.extend( _defaults, {
+        padding: 4,
+        navigation: 3,
+        rowCount: [10 ,5, 15, 20],
+        ajax: true
+    } );
+
+    // FIX 将服务器返回的数据进行格式转换
+    _defaults.responseHandler = function ( response ) {
+        // 将服务器返回的数据进行格式转换
+        var _response = {
+            "current": 1,
+            "rowCount": 10,
+            "rows": [
+                //{ "id": "010", "name": "张三10", "tel": "0000010", "addr": "某个地方10" }
+            ],
+            "total": 1123
+        };
+
+        var $this,
+            requestPage
+        ;
+
+        //
+        if ( ! response.data ) {
+            alert( "获取数据失败!" );
+            console.info( "获取数据失败!" );
+        }
+
+        $this = $( this );
+        requestPage = $this.data( "requestPage" );
+
+        _response = {
+            "current": requestPage,
+            "rowCount": 10,
+            "rows": response.data,
+            "total": response.totalRecords
+        };
+
+        return _response;
+    };
+
+    // FIX
+    _defaults.requestHandler = function ( request ) {
+        var txtQuery = {
+            "oredCriteria": _getOredCriteria( this.queryFormId ),
+            "orderByClause": "", // "USER_ID"
+            "pager": { "start": 0, "limit": 20, "pageSize": 20 }
+        };
+        var originRequest = {
+            current: 1, // 请求的页数
+            rowCount: 10, // 每页的记录数
+            sort: { // 排序
+                addr: "desc" // order by ADDR desc
+            }
+        };
+
+        var start,
+            pageSize,
+            limit,
+            current,
+            rowCount,
+            sort,
+            orderByClause,
+            $this
+            ;
+
+        $this = $( this );
+
+        current = request.current;
+        rowCount = request.rowCount;
+        sort = request.sort;
+
+        start = rowCount * ( current - 1 );
+        limit = current * rowCount;
+        pageSize = rowCount;
+
+        $this.data( "requestPage", current );
+
+        // replace(/([A-Z])/g,"_$1").toUpperCase();
+        orderByClause = "";
+        if ( sort ) {
+            for ( var prop in sort ) {
+                if ( !sort.hasOwnProperty( prop ) ) {
+                    continue;
+                }
+                if ( orderByClause ) {
+                    orderByClause += ","
+                }
+                orderByClause += prop.replace( /([A-Z])/g, "_$1" ).toUpperCase() + " " + sort[ prop ].toUpperCase();
+            }
+        }
+
+        txtQuery.orderByClause = orderByClause || "";
+
+        txtQuery.pager = {
+            "start": start,
+            "limit": limit,
+            "pageSize": pageSize
+        };
+
+        request = {
+            start: start,
+            limit: limit,
+            pageSize: pageSize,
+            txtQuery: JSON.stringify( txtQuery )
+        };
+
+        return request;
+    };
+
+    /*
+     [[
+        {"property":"deptName","operator":"like","value":"%hub%","datatype":"0"},
+        {"property":"deptName","operator":"like","value":"%hub%","datatype":"0"}
+    ]]
+     */
+    function _getOredCriteria( queryFormId ) {
+
+        var $form,
+            oredCriteria,
+            criteriaList
+        ;
+
+        oredCriteria = [];
+        criteriaList = [];
+
+        if ( ! queryFormId ) {
+            return oredCriteria;
+        }
+
+        oredCriteria.push( criteriaList );
+
+        $form = $( "#" + queryFormId );
+        $form.find( "input[name], select[name]" ).each( function () {
+            var property,
+                operator,
+                value,
+                datatype,
+                $this
+            ;
+            $this = $( this );
+
+            property = $this.data( "property" ) || $this.attr( "name" );
+            operator = $this.data( "operator" ) || "=";
+            value = $this.data( "value" ) || $this.val();
+            datatype = $this.data( "datatype" ) || "0";
+
+            value = $.trim( value );
+
+            if ( ! value ) {
+                return;
+            }
+
+            if ( operator === "like" ) {
+                value = "%" + value + "%";
+            }
+
+            criteriaList.push( {
+                property: property,
+                operator: operator,
+                value: value,
+                datatype: datatype
+            } );
+        } );
+
+        return oredCriteria;
+    }
+
+})( jQuery, window );

@@ -1,4 +1,4 @@
-require( [ "jquery", "Utils", "formvalidationI18N", "bootstrap" ], function ( $, Utils, _fv, _bs ) {
+require( [ "jquery", "Utils", "formvalidationI18N", "bootstrap", "bootgrid" ], function ( $, Utils, _fv, _bs, _bootgrid ) {
     "use strict";
     var $doc,
         LoginPage,
@@ -43,6 +43,8 @@ require( [ "jquery", "Utils", "formvalidationI18N", "bootstrap" ], function ( $,
         },
         bind: function bind() {
 
+
+
         }
     };
 
@@ -58,15 +60,20 @@ require( [ "jquery", "Utils", "formvalidationI18N", "bootstrap" ], function ( $,
         }
         if ( $doc.find( IndexPage.$container ).size() > 0 ) {
             IndexPage.init();
+            // 初始化datagrid
+            $( '[data-pku-widget="datagrid"]' ).bootgrid();
+
         }
+
+        window.Dialog = Utils.Dialog;
+
 
     } );
 
 });
 
 define( "Utils", [ "formvalidationI18N", "bootstrap" ], function () {
-    var Form,
-        Dialog
+    var Form
     ;
     //
     Form = {
@@ -94,7 +101,7 @@ define( "Utils", [ "formvalidationI18N", "bootstrap" ], function () {
                 $.post( validateUrl, $this.serialize(), null, "json" )
                  .done( function ( data ) {
                     if ( ! ( data && data.success ) ) {
-                        Dialog.show( { title: "提示", content: data.message || "用户名/密码 错误。" } );
+                        ( new Dialog ).show( { title: "提示", content: data.message || "用户名/密码 错误。" } );
                         return;
                     }
 
@@ -103,62 +110,91 @@ define( "Utils", [ "formvalidationI18N", "bootstrap" ], function () {
                         $( '<form action="' + actionUrl + '">' ).appendTo( document.body ).submit();
                     }
                  }).fail( function (){
-                    Dialog.show( { title: "错误", content: "网络异常。" } );
+                    ( new Dialog ).show( { title: "错误", content: "网络异常。" } );
                  } );
             } );
         }
     };
 
 
-    // Dialog
-    Dialog = {
-        $container: null,
-        $title: ".modal-title",
-        $content: ".modal-text",
-        $confirmBtn: ".js--btn-ok",
-        $cancelBtn: ".js--btn-cancel",
-        $closeBtn: ".js--btn-close",
-        options: null,
-        defaults: {
-            title: "提示",
-            content: "点击“取消”按钮关闭对话框。",
-            hasConfirmBtn: true,
-            hasCancelBtn: true,
-            confirmBtnText: "确定",
-            cancelBtnText: "取消",
-            confirmCallback: function () { window.console && console.info( "confirmCallback" ); },
-            cancelCallback: function () { window.console && console.info( "cancelCallback" ); }
-        },
-        init: function () {
-            this.render();
-            this.bind();
-            return this;
-        },
-        render: function () {
-            this.$container = $( this.template );
-            this.$title = this.$container.find( this.$title );
-            this.$content = this.$container.find( this.$content );
-            this.$confirmBtn = this.$container.find( this.$confirmBtn );
-            this.$cancelBtn = this.$container.find( this.$cancelBtn );
-            this.$closeBtn = this.$container.find( this.$closeBtn );
-        },
-        bind: function () {
-            // 挂载到DOM树
-            $( document.body ).append( this.$dialog );
+    function Dialog( opts ) {
+        this.$container = null;
+        this.$modalDialog = ".modal-dialog";
+        this.$modalBody = ".modal-body";
+        this.$title = ".modal-title";
+        this.$content = ".modal-text";
+        this.$confirmBtn = ".js--btn-ok";
+        this.$cancelBtn = ".js--btn-cancel";
+        this.$closeBtn = ".js--btn-close";
+        this.options = null;
 
-            // 初始化模态框
-            this.$container.modal( {
-                backdrop: "static",
-                show: false
-            } );
+        this.init();
+        this.setOptions( opts );
+    }
 
+
+    Dialog.prototype.defaults = {
+        title: "提示",
+        content: "点击“取消”按钮关闭对话框。",
+        hasConfirmBtn: true,
+        hasCancelBtn: true,
+        confirmBtnText: "确定",
+        cancelBtnText: "取消",
+        width: null,
+        remoteUrl: null, // 载入页面的URL
+        remoteHTMLModuleSelector: ".page", // 将请求的页面指定部分的内容载入
+        requestData: null,
+        requestSuccessCallback: null,
+        confirmCallback: function () {
+            // this 指向 Dialog 实例
+            window.console && console.info( "confirmCallback" );
+            this.hide();
         },
+        cancelCallback: function () {
+            // this 指向 Dialog 实例
+            window.console && console.info( "cancelCallback" );
+            this.hide();
+        }
+    };
+
+    Dialog.prototype.init = function () {
+        var _this
+        ;
+        _this = this;
+
+        this.$container = $( this.template );
+        this.$modalDialog = this.$container.find( this.$modalDialog );
+        this.$modalBody = this.$container.find( this.$modalBody );
+        this.$title = this.$container.find( this.$title );
+        this.$content = this.$container.find( this.$content );
+        this.$confirmBtn = this.$container.find( this.$confirmBtn );
+        this.$cancelBtn = this.$container.find( this.$cancelBtn );
+        this.$closeBtn = this.$container.find( this.$closeBtn );
+
+
+        this.$container.css( {
+            position: "absolute", // 当高度过高时，出现滚动条
+            overflow: "auto",
+            height: "100%"
+        } ).on( "show.bs.modal", function () {
+            _this.$container.css( "margin-top", $( window ).scrollTop() );
+        } ).modal( {
+            backdrop: "static",
+            show: true
+        } );
+    };
+
+    $.extend( Dialog.prototype, {
         show: function ( opts ) {
             this.$container.modal( 'show' );
             this.setOptions( opts );
         },
-        hide: function () {
+        hide: function ( isHidden ) {
             this.$container.modal( 'hide' );
+            // 如果不隐藏，则删除掉
+            if ( ! isHidden ) {
+                this.$container.remove();
+            }
         },
         setOptions: function ( opts ) {
             this.options = $.extend( {}, this.defaults, opts );
@@ -175,13 +211,17 @@ define( "Utils", [ "formvalidationI18N", "bootstrap" ], function () {
             this.$title.html( options.title );
             this.$content.html( options.content );
 
+            // 尺寸
+            if ( options.width ) {
+                this.$modalDialog.css( "width", options.width );
+            }
+
             // “确定”按钮
             if ( options.hasConfirmBtn ) {
                 this.$confirmBtn.removeClass( "hidden" ).html( options.confirmBtnText )
                     .off( "click.confirm.dialog" )
                     .on( "click.confirm.dialog", function () {
-                        options.confirmCallback();
-                        _this.hide();
+                        options.confirmCallback.call( _this );
                     } );
             } else {
                 this.$confirmBtn.addClass( "hidden" );
@@ -191,7 +231,9 @@ define( "Utils", [ "formvalidationI18N", "bootstrap" ], function () {
             if ( options.hasCancelBtn ) {
                 this.$cancelBtn.removeClass( "hidden" ).html( options.cancelBtnText )
                     .off( "click.cancel.dialog" )
-                    .on( "click.cancel.dialog", options.cancelCallback );
+                    .on( "click.cancel.dialog", function () {
+                        options.cancelCallback.call( _this );
+                    } );
             } else {
                 this.$cancelBtn.addClass( "hidden" );
             }
@@ -199,10 +241,34 @@ define( "Utils", [ "formvalidationI18N", "bootstrap" ], function () {
             // “关闭”按钮
             this.$closeBtn
                 .off( "click.cancel.dialog" )
-                .on( "click.cancel.dialog", options.cancelCallback );
+                .on( "click.cancel.dialog", function () {
+                    options.cancelCallback.call( _this );
+                } );
 
-        },
-        template: '\
+            // 载入页面
+            if ( options.remoteUrl ) {
+                jQuery.ajax({
+                    url: options.remoteUrl,
+                    type: "POST",
+                    dataType: "html",
+                    data: options.requestData
+                }).done(function( responseText ) {
+                    var $temp
+                    ;
+                    $temp = jQuery("<div>").append( jQuery.parseHTML( responseText ) );
+                    _this.$modalBody.html( $temp.find( options.remoteHTMLModuleSelector ).html() );
+                    if ( options.requestSuccessCallback ) {
+                        options.requestSuccessCallback.call( _this );
+                    }
+                }).fail( function () {
+                    new Dialog ( { title: "错误", content: "网络异常。" } );
+                } );
+            }
+        }
+    } );
+
+
+    Dialog.prototype.template = '\
 <div class="modal">\
     <div class="modal-dialog modal-sm">\
         <div class="modal-content">\
@@ -214,18 +280,17 @@ define( "Utils", [ "formvalidationI18N", "bootstrap" ], function () {
                 <p class="modal-text">Modal body</p>\
             </div>\
             <div class="modal-footer" style="text-align: center;">\
-                <button type="button" class="btn btn-default js--btn-cancel" data-dismiss="modal">关闭</button>\
+                <button type="button" class="btn btn-default js--btn-cancel">关闭</button>\
                 <button type="button" class="btn btn-primary js--btn-ok">确定</button>\
             </div>\
         </div>\
     </div>\
-</div>'
-    };
+</div>';
 
-    Dialog.init();
 
     return {
         Dialog: Dialog,
         Form: Form
     }
 } );
+

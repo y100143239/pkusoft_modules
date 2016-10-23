@@ -1,0 +1,65 @@
+.bootgrid-header {
+    .actionBar {
+        height : 0;
+    }
+    .actions {
+        top : -38px;
+    }
+}
+/*
+
+.pagination > li > a,
+.pagination > li > span {
+    background-color: #f1f5fd;
+    border: 1px #b0c0e7 solid;
+    min-width: 38px;
+    text-align: center;
+    padding: 8px 6px;
+    &:hover, &:active {
+        border-color     : #6583cc;
+        background-color : darken(#f1f5fd, 10%);
+    }
+}
+
+.pagination > .disabled > a,
+.pagination > .disabled > a:hover {
+    color            : #e3e3f7;
+    border           : 1px #e3e3f7 solid;
+    background-color : #f1f5fd;
+}
+
+.pagination > .active > a,
+.pagination > .active > a:hover,
+.pagination > .active > a:focus {
+    color            : #ffffff;
+    background-color : #6583cc;
+    border-color     : #6583cc;
+    cursor           : text;
+}
+*/
+
+.bootgrid-footer {
+    .infos {
+        line-height : 34px;
+        color: #888;
+    }
+}
+
+.bootgrid-table {
+    margin-bottom : 8px;
+    th {
+        background-color: #F5F5F5;
+    }
+    > tbody>tr>td {
+        border-style: dotted;
+    }
+    > thead>tr>th {
+        border-bottom-width: 1px;
+        border-bottom-style: solid;
+    }
+    > tbody>tr:hover {
+        //background-color: #f5f5f5;
+        background-color: #f5fbff;
+    }
+}
+

@@ -1,8 +1,10 @@
 
 body,html {
-    height: 100%;
-}
 
+}
+body {
+    background-color: #e3e8f7;
+}
 // reset for bs3
 .page-header {
     padding-bottom: 0;
@@ -162,7 +164,7 @@ body,html {
 .page {
     //font-family: "Microsoft Yahei", sans-serif;
     min-height: 100%;
-    background-color: #e3e8f7;
+    //background-color: #e3e8f7;
     min-width: 1200px;
     a {
         text-decoration: none;
@@ -269,7 +271,7 @@ body,html {
 
 .content-wrap {
     margin-left: 180px;
-    padding: 20px;
+    padding: 0 20px 20px 20px;
     background-color: #e3e8f7;
     position: relative;
     z-index: 2;
@@ -292,4 +294,20 @@ body,html {
     -moz-border-radius: 3px;
     border-radius: 3px;
     min-height: 300px;
+}
+.content-heading {
+    font-size: 16px;
+    line-height: 55px;
+    border-bottom: 1px solid #e8ebee;
+    margin: 0 -20px 0 -20px;
+    padding-left: 20px;
+}
+
+.control-label {
+    font-weight: normal;
+    white-space: nowrap;
+    color: #666;
+}
+.form-detail label.control-label + div[class*="col-"] {
+    padding-top: 7px;
 }

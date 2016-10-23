@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>系统管理</title>
+    <script>
+        window.onload = function () {
+            removeOverlay();
+        };
+        window.setTimeout( function () {
+            removeOverlay();
+        }, 8000 );
+        function removeOverlay() {
+            document.getElementById( "bodyLoadingOverlay" ).style.display = "none";
+            document.body.setAttribute( "class", "" );
+        }
+    </script>
+    <title></title>
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lte IE 8]>
+    <script src="../../../dev/modules/lib/ie/respond.js"></script>
+    <script src="../../../dev/modules/lib/ie/html5shiv.js"></script>
+    <script src="../../../dev/modules/lib/ie/es5-shim.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" href="../../../dev/modules/ui/css/pku.css?VERSION=v0.20161013"/>
+    <link rel="stylesheet" href="css/style.css?VERSION=v0.20161013"/>
+    <script data-main="../../../dev/modules/" src="../../../dev/modules/require.js"></script>
+    <script>
+        var VERSION,
+                DEV_MODE
+                ;
+        DEV_MODE = false;
+        VERSION = DEV_MODE ? (new Date()).getTime() : "v0.20161013";
+        require.config( {
+            urlArgs: "VERSION=" + VERSION,
+            paths: {
+                "jquery": "jquery/jquery-1.11.3",
+                "xDomainRequest": "jquery/jQuery.XDomainRequest",
+                "ajaxQueue": "jquery/jQuery.ajaxQueue",
+                "doT": "utils/doT",
+                "draggable": "utils/draggable",
+                "bootstrap": "lib/bootstrap/js/bootstrap",
+
+                "datepicker": "lib/datepicker/js/bootstrap-datepicker-zh.fix",
+
+                "select2": "lib/select2/js/select2.full.fix",
+
+                "echarts": "lib/echart/echarts.min",
+                "echartsTheme": "lib/echart/theme/macarons",
+                "echartsChinaMap": "lib/echart/map/china",
+
+                "formvalidation": "lib/formvalidate/js/formValidation.fix",
+                "formvalidationBs": "lib/formvalidate/js/framework/bootstrap.fix",
+                "formvalidationI18N": "lib/formvalidate/js/language/zh_CN",
+
+                "webuploader": "lib/webuploader/js/webuploader.fix",
+
+                "bootgrid": "lib/bootgrid/js/jquery.bootgrid.fix",
+                "colresizable": "lib/colresizable/colResizable-1.6",
+
+                "select-area": "lib/select-area/select-area",
+                "select-area-data": "lib/select-area/select-area-data",
+                "sweet-alert": "lib/sweetalert/js/sweet-alert",
+
+                "fixrecord": "lib/custom/fixrecord",
+
+                // 代码美化
+                "code-pretty": "lib/pretty/prettify.min"
+            },
+            map: {
+                '*': {
+                    'css': 'utils/css/css',
+                    'text': 'utils/text'
+                }
+            },
+            shim: {
+                "datepicker": [ "jquery" ],
+                "select2": [ "jquery", "xDomainRequest" ],
+                "bootstrap": [ "jquery" ],
+                "formvalidation": [ "jquery", "bootstrap" ],
+                "formvalidationBs": [ "formvalidation" ],
+                "formvalidationI18N": [ "formvalidation", "formvalidationBs" ],
+                "webuploader": [ "css!lib/webuploader/css/webuploader.css" ],
+                "colresizable": [ "jquery" ],
+                "bootgrid": [ "css!lib/bootgrid/css/jquery.bootgrid.css", "bootstrap", "colresizable" ],
+                "select-area": [ "css!lib/select-area/css/select-area.css" ],
+                "sweet-alert": [ "jquery" ],
+                "code-pretty": [ "css!lib/pretty/prettify.css" ]
+            },
+            // 超时
+            waitSeconds: 150
+        } );
+    </script>
+</head>
+<body class="modal-open">
+
+<div class="overlay" id="bodyLoadingOverlay">
+    <i class="fa fa-spin fa-spinner"></i>
+</div>
+<!-- page -->
+<div class="page">
+
+
+    <form class="form-horizontal form-edit" data-pku-widget="fv" action="url">
+
+        <div class="form-group">
+            <label class="col-xs-2 control-label"><span class="fa fa-star text-required"></span> 部门标识号</label>
+            <div class="col-xs-4"><input type="text" class="form-control" name="deptId" data-fv-notempty="true" value="${ sysDept.deptId }"></div>
+            <label class="col-xs-2 control-label">部门名称</label>
+            <div class="col-xs-4"><input type="text" class="form-control" name="deptName" data-fv-notempty="true" value="${ sysDept.deptName }"></div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-2 control-label">部门级别</label>
+            <div class="col-xs-4"><input type="text" class="form-control" name="deptLevel" value="${ sysDept.deptLevel }"></div>
+            <label class="col-xs-2 control-label">上级部门</label>
+            <div class="col-xs-4"><input type="text" class="form-control" name="parentDeptId" value="${ sysDept.parentDeptId }"></div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-2 control-label">电话</label>
+            <div class="col-xs-4"><input type="text" class="form-control" name="tel" value="${ sysDept.tel }"></div>
+            <label class="col-xs-2 control-label">传真</label>
+            <div class="col-xs-4"><input type="text" class="form-control" name="fax" value="${ sysDept.fax }"></div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-2 control-label">负责人</label>
+            <div class="col-xs-4"><input type="text" class="form-control" name="manager" value="${ sysDept.manager }"></div>
+            <label class="col-xs-2 control-label">部门类型</label>
+            <div class="col-xs-4"><input type="text" class="form-control" name="deptType" value="${ sysDept.deptType }"></div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-2 control-label">备注</label>
+            <div class="col-xs-10"><input type="text" class="form-control" name="memo" value="${ sysDept.memo }"></div>
+        </div>
+
+    </form>
+
+
+</div>
+<!-- /page -->
+
+
+</body>
+</html>
