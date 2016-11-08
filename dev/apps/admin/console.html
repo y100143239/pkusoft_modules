@@ -5,7 +5,7 @@
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>系统管理</title>
+    <title>系统管理-控制台</title>
     <script>
         window.onload = function () {
             removeOverlay();
@@ -27,15 +27,15 @@
     <script src="../../../dev/modules/lib/ie/html5shiv.js"></script>
     <script src="../../../dev/modules/lib/ie/es5-shim.js"></script>
     <![endif]-->
-    <link rel="stylesheet" href="../../../dev/modules/ui/css/pku.css?VERSION=v0.20161013"/>
-    <link rel="stylesheet" href="css/style.css?VERSION=v0.20161013"/>
+    <link rel="stylesheet" href="../../../dev/modules/ui/css/pku.css?VERSION=v0.20161024"/>
+    <link rel="stylesheet" href="css/style.css?VERSION=v0.20161024"/>
     <script data-main="../../../dev/modules/" src="../../../dev/modules/require.js"></script>
-    <script >
+    <script>
         var VERSION,
                 DEV_MODE
                 ;
         DEV_MODE = false;
-        VERSION = DEV_MODE ? (new Date()).getTime() : "v0.20161013";
+        VERSION = DEV_MODE ? (new Date()).getTime() : "v0.20161024";
         require.config( {
             urlArgs: "VERSION=" + VERSION,
             paths: {
@@ -78,18 +78,18 @@
                     'text': 'utils/text'
                 }
             },
-            shim : {
-                "datepicker": [ "jquery"],
-                "select2": [ "jquery", "xDomainRequest"],
-                "bootstrap": [ "jquery"],
+            shim: {
+                "datepicker": [ "jquery" ],
+                "select2": [ "jquery", "xDomainRequest" ],
+                "bootstrap": [ "jquery" ],
                 "formvalidation": [ "jquery", "bootstrap" ],
                 "formvalidationBs": [ "formvalidation" ],
                 "formvalidationI18N": [ "formvalidation", "formvalidationBs" ],
                 "webuploader": [ "css!lib/webuploader/css/webuploader.css" ],
                 "colresizable": [ "jquery" ],
-                "bootgrid": [ "css!lib/bootgrid/css/jquery.bootgrid.css" , "bootstrap", "colresizable"],
-                "select-area": ["css!lib/select-area/css/select-area.css" ],
-                "sweet-alert": ["jquery" ],
+                "bootgrid": [ "css!lib/bootgrid/css/jquery.bootgrid.css", "bootstrap", "colresizable" ],
+                "select-area": [ "css!lib/select-area/css/select-area.css" ],
+                "sweet-alert": [ "jquery" ],
                 "code-pretty": [ "css!lib/pretty/prettify.css" ]
             },
             // 超时
@@ -104,43 +104,14 @@
     <i class="fa fa-spin fa-spinner"></i>
 </div>
 <!-- page -->
-<div class="page page-login">
+<div class="page page-console">
 
+    <!--  page-header -->
+    <div class="page-header"></div>
+    <!--  /page-header -->
 
     <!-- page-content -->
     <div class="page-content">
-
-        <div class="alert alert-warning text-center">
-            <button type="button" class="close" data-dismiss="alert" tabindex="-1">×</button>
-            用户名：admin 。密码：123456 。<a href="index.html">直接进入首页</a>
-        </div>
-
-        <div class="form-login center-block">
-            <form id="loginPageForm" class="form-horizontal" action="index.html" data-fv-remote-validate-url="/servlet/validateLogin">
-                <div class="form-group">
-                    <div class="col-sm-12">
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-user "></i></span>
-                            <input type="text" class="form-control"  name="loginName" data-fv-notempty="true" tabindex="1">
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-sm-12">
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-key "></i></span>
-                            <input type="password" class="form-control" name="password" data-fv-notempty="true" tabindex="2">
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-xs-12">
-                        <button type="submit" class="btn btn-info btn-block js--btn-save" tabindex="3">登陆 <i class="fa fa-sign-in"></i></button>
-                    </div>
-                </div>
-            </form>
-
-        </div>
 
 
     </div>

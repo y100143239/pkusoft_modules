@@ -55,7 +55,16 @@
                         <li><a href="https://bce.baidu.com/doc/BAE/index.html" target="_blank">BAE</a></li>
                     </ul>
                 </li>
-
+                <li>关联 BAE git仓库，并提交
+                    <pre class="prettyprint linenums">
+                        git init
+                        git add ROOT.war
+                        git commit ROOT.war -m "commit"
+                        git remote add origin https://git.duapp.com/appidf4mjwbp3df
+                        git config http.postBuffer 524288000
+                        git push origin master
+                    </pre>
+                </li>
             </ul>
 
         </main>
