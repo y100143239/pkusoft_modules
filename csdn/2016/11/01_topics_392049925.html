@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>文本框模糊查询 [问题点数：100分]</title>
+
+    <link rel="StyleSheet" href="../../lib/dtree/dtree.css" type="text/css"/>
+    <script src="../../lib/jquery-1.11.3.js"></script>
+    <script type="text/javascript" src="../../lib/dtree/dtree.js"></script>
+
+    <style>
+        body { font-size : 14px; font-family: "Microsoft Yahei", sans-serif; }
+        .form-control { height : 20px; padding : 6px 12px; font-size : 14px;
+            line-height: 1.42858; color : #555555; background-color: #fff;
+            border: 1px solid #ccc; border-radius: 2px;
+            box-shadow: inset 0 1px 1px rgba(0,0,0,0.075); }
+        .btn-search { display : inline-block; text-align : center; vertical-align: middle;
+            padding: 6px 12px; font-size : 14px; line-height: 1.42858; border-radius: 2px;
+            color: #fff; background : #5bc0de; border : solid 1px #46b8da;
+            -webkit-appearance: button; margin-top : -3px; }
+        .dtree { margin-top : 2em; }
+    </style>
+</head>
+
+<body>
+
+
+<label for="searchInput">门禁卡检索：</label>
+<input type="text" class="form-control" id="searchInput"/>
+<button type="button" class="btn-search">搜索</button>
+
+<div class="dtree"></div>
+
+<script>
+
++function() {
+    "use strict";
+    var global_d,
+        d,
+        basePath,
+        $dtree,
+        $searchInput,
+        $searchBtn,
+        $node
+    ;
+
+    d = new dTree( 'global_d' );
+
+    basePath = "../../lib/dtree/";
+    $searchInput = $( "#searchInput" );
+    $searchBtn = $( ".btn-search" );
+    $dtree = $( ".dtree" );
+
+    window.global_d = d;
+
+    // 更改图标位置
+    d.icon = {
+        root: basePath + 'img/base.gif',
+        folder: basePath + 'img/folder.gif',
+        folderOpen: basePath + 'img/folderopen.gif',
+        node: basePath + 'img/page.gif',
+        empty: basePath + 'img/empty.gif',
+        line: basePath + 'img/line.gif',
+        join: basePath + 'img/join.gif',
+        joinBottom: basePath + 'img/joinbottom.gif',
+        plus: basePath + 'img/plus.gif',
+        plusBottom: basePath + 'img/plusbottom.gif',
+        minus: basePath + 'img/minus.gif',
+        minusBottom: basePath + 'img/minusbottom.gif',
+        nlPlus: basePath + 'img/nolines_plus.gif',
+        nlMinus: basePath + 'img/nolines_minus.gif'
+    };
+
+    d.add( 0, -1, '门禁卡列表' );
+    d.add( 1, 0,  '<label><input type="checkbox">PmCj6yQUF29g</label>', '#' );
+    d.add( 2, 0,  '<label><input type="checkbox">PuQiVTQfmhiM</label>', '#' );
+    d.add( 3, 1,  '<label><input type="checkbox">Z95NDGgI54jE</label>', '#' );
+    d.add( 4, 0,  '<label><input type="checkbox">kdtFLX1utgsc</label>', '#' );
+    d.add( 5, 3,  '<label><input type="checkbox">DPhXTXBC889Q</label>', '#' );
+    d.add( 6, 5,  '<label><input type="checkbox">r9vuLSdhS7GO</label>', '#' );
+    d.add( 7, 0,  '<label><input type="checkbox">XkirTBtVcWtb</label>', '#' );
+    d.add( 8, 1,  '<label><input type="checkbox">i5NlO8Egcn8Z</label>', '#' );
+    d.add( 9, 0,  '<label><input type="checkbox">ffy6SuctLTap</label>', '#' );
+    d.add( 10, 9, '<label><input type="checkbox">tPwzVvGTuOlh</label>', '#' );
+    d.add( 11, 9, '<label><input type="checkbox">SFcfnk7Mo5mm</label>', '#' );
+    d.add( 12, 0, '<label><input type="checkbox">zW36iT5EWBl4</label>', '#' );
+
+    //document.write( d );
+
+    $dtree.html( d.toString() );
+
+    $node = $dtree.find( "a" );
+
+
+    // 检索
+    $searchBtn.on( "click", function () {
+        var keyword,
+            regexp
+        ;
+
+        keyword = $.trim( $searchInput.val() );
+        regexp = new RegExp( keyword, "i" );
+
+        if ( ! keyword ) {
+            return;
+        }
+
+        $node.each( function () {
+            var text,
+                $checkbox,
+                $this
+            ;
+            $this = $( this );
+            $checkbox = $this.find( "input" );
+            text = $this.text();
+            if ( ! regexp.test( text ) ) {
+                $checkbox.removeAttr( "checked" );
+                return;
+            }
+            $checkbox.attr( "checked", true );
+        } );
+
+    } );
+
+} ();
+</script>
+
+</body>
+
+</html>

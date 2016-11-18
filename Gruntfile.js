@@ -181,6 +181,16 @@ module.exports = function(grunt) {
                     'cp -R /Users/forwardNow/develop/work/pkusoft/pkusoft_modules/dist/* ./static/dev/'
                 ].join('&&')
             },
+            copyCsdnTo_bae: {
+                command: [
+                    // 1. 切换到 _bae 目录
+                    'cd /Users/forwardNow/develop/work/_bae',
+                    // 2. 删除 csdn目录
+                    'rm  -Rf ./static/csdn',
+                    // 将webstorm的/csdn目录拷贝到 _bae/static/csdn
+                    'cp -R /Users/forwardNow/develop/work/pkusoft/pkusoft_modules/csdn ./static/'
+                ].join('&&')
+            },
             copyDistToEclipse: {
                 command: [
                     // 删除 dev目录 下的内容
@@ -240,6 +250,23 @@ module.exports = function(grunt) {
                     'git push origin master',
                     'git status'
                 ].join('&&')
+            },
+            clearGitRepo: {
+                command: [
+                    'cd /Users/forwardNow/develop/work/bae',
+                    "git filter-branch --force --index-filter 'git rm --cached --ignore-unmatch *.war' --prune-empty --tag-name-filter cat -- --all",
+                    'rm -rf .git/refs/original/',
+                    'git reflog expire --expire=now --all',
+                    'git gc --prune=now',
+                    'git gc --aggressive --prune=now',
+                    'cd /Users/forwardNow/develop/work/_bae/',
+                    'jar -cf ../bae/ROOT.war ./*',
+                    'cd /Users/forwardNow/develop/work/bae',
+                    'git add --all',
+                    'git commit --all -m "auto"',
+                    'git push origin master --force',
+                    'git status'
+                ].join('&&')
             }
         }
     };
@@ -272,6 +299,7 @@ module.exports = function(grunt) {
 
         //'shell:multiple' // 执行shell命令，发布到bae
         'shell:copyDistTo_bae',
+        'shell:copyCsdnTo_bae',
         'shell:copyDistToEclipse',
         'shell:copyWebInfoTo_bae',
         'shell:makeWar',

@@ -55,14 +55,31 @@
                         <li><a href="https://bce.baidu.com/doc/BAE/index.html" target="_blank">BAE</a></li>
                     </ul>
                 </li>
-                <li>关联 BAE git仓库，并提交
+                <li>克隆BAE仓库
                     <pre class="prettyprint linenums">
-                        git init
-                        git add ROOT.war
-                        git commit ROOT.war -m "commit"
-                        git remote add origin https://git.duapp.com/appidf4mjwbp3df
-                        git config http.postBuffer 524288000
-                        git push origin master
+cd /Users/forwardNow/develop/work/bae
+git clone https://git.duapp.com/appidf4mjwbp3df
+mv ./appidf4mjwbp3df/* ./
+rm appidf4mjwbp3df
+git remote add origin https://git.duapp.com/appidf4mjwbp3df
+git config http.postBuffer 524288000
+git branch --set-upstream-to=origin/master  master
+                    </pre>
+                </li>
+                <li>清理仓库
+                    <pre class="prettyprint linenums">
+git filter-branch --force --index-filter 'git rm --cached --ignore-unmatch *.war' --prune-empty --tag-name-filter cat -- --all
+rm -rf .git/refs/original/
+git reflog expire --expire=now --all
+git gc --prune=now
+git gc --aggressive --prune=now
+cd /Users/forwardNow/develop/work/_bae/
+jar -cf ../bae/ROOT.war ./*
+cd /Users/forwardNow/develop/work/bae
+git add --all
+git commit --all -m "auto"
+git push origin master --force
+git status
                     </pre>
                 </li>
             </ul>
