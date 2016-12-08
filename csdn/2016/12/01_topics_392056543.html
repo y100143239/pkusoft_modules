@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="../../lib/pretty/prettify.css"/>
+    <script src="../../lib/jquery-1.11.3.js"></script>
+    <script src="../../lib/pretty/prettify.min.js"></script>
+</head>
+<body>
+
+<div class="upload">
+    <input id="input-id-1" type="file" class="file" data-preview-file-type="text" >
+    <input id="input-id-2" type="file" class="file" data-preview-file-type="text" >
+    <input id="input-id-3" type="file" class="file" data-preview-file-type="text" >
+</div>
+
+<script>
+    $( document ).ready( function () {
+        var id,
+            $file
+        ;
+        $file = $( ".upload" ).find( ".file" );
+        id = $file.attr( "id" );
+        console.info( "id: " + id ); //=> input-id-1 ：只去第一个input的id
+
+        $file.each( function () {
+            var _id
+            ;
+            _id = $( this ).attr( "id" );
+            console.info( "_id: " + _id );
+        } );
+        /*
+         _id: input-id-1
+         _id: input-id-2
+         _id: input-id-3
+         */
+
+    } );
+</script>
+
+<pre class="prettyprint linenums">
+&lt;div class="upload">
+    &lt;input id="input-id-1" type="file" class="file" data-preview-file-type="text" >
+    &lt;input id="input-id-2" type="file" class="file" data-preview-file-type="text" >
+    &lt;input id="input-id-3" type="file" class="file" data-preview-file-type="text" >
+&lt;/div>
+
+&lt;script>
+    $( document ).ready( function () {
+        var id,
+            $file
+        ;
+        $file = $( ".upload" ).find( ".file" );
+        id = $file.attr( "id" );
+        console.info( "id: " + id ); //=> input-id-1 ：只取第一个input的id
+
+        $file.each( function () {
+            var _id
+            ;
+            _id = $( this ).attr( "id" );
+            console.info( "_id: " + _id );
+        } );
+        /*
+         _id: input-id-1
+         _id: input-id-2
+         _id: input-id-3
+         */
+
+    } );
+&lt;/script>
+</pre>
+<script>
+    PR.prettyPrint();
+</script>
+</body>
+</html>

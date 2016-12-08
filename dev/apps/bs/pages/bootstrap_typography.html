@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>我的教程</title>
+    <link rel="shortcut icon" href="../images/favicon.ico">
+    <link rel="stylesheet" href="../css/bootstrap.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../../../../dev/modules/ui/css/font-awesome.css">
+    <script data-main="../../../../dev/modules/" src="../../../../dev/modules/require.js"></script>
+    <script>
+        require.config( {
+            urlArgs: "VERSION=1.0",
+            paths: {
+                "jquery": "jquery/jquery-1.11.3",
+                "bootstrap": "lib/bootstrap/js/bootstrap",
+                "codemirror": "lib/codemirror/codemirror",
+                "codemirror-html": "lib/codemirror/mode/htmlmixed",
+                "code-pretty": "lib/pretty/prettify.min"
+            },
+            map: {
+                '*': {
+                    'css': 'utils/css/css',
+                    'text': 'utils/text'
+                }
+            },
+            shim: {
+                "bootstrap": [ "jquery" ],
+                "codemirror": ["css!lib/codemirror/codemirror.css"],
+                "code-pretty": [ "css!lib/pretty/prettify.css" ]
+            }
+        } );
+    </script>
+    <script src="../js/main.js"></script>
+</head>
+<body>
+
+<!-- page -->
+<div class="page page-index">
+
+
+    <!-- page-header -->
+    <nav class="page-header navbar navbar-default navbar-static-top js--pageHeaderContainer" role="navigation">
+    </nav>
+    <!-- /page-header -->
+
+
+    <!-- page-main -->
+    <div class="page-main">
+
+        <div class="container ">
+
+            <div class="row">
+
+                <div class="col-lg-3 js--sidebarContainer">
+
+                    <div class="bs-sidebar">
+                    </div>
+
+                </div>
+
+                <div class="col-lg-9">
+
+                    <div class="content">
+                        <article class="bs-article">
+                            <header>
+                                <h1>Bootstrap 排版</h1>
+                                <p>Bootstrap 使用 Helvetica Neue、 Helvetica、 Arial 和 sans-serif 作为其默认的字体栈。</p>
+                                <p>使用 Bootstrap 的排版特性，您可以创建标题、段落、列表及其他内联元素。</p>
+                            </header>
+                            <main>
+                                <section class="bs-section">
+                                    <h2>标题</h2>
+                                    <p>Bootstrap 中定义了所有的 HTML 标题（h1 到 h6）的样式</p>
+                                    <div class="bs-editor">
+                                        <ul class="nav nav-tabs" >
+                                            <li class="active"><a href="#edit_1" role="tab" data-toggle="tab"><i class="fa fa-edit"></i> 编辑</a></li>
+                                            <li ><a class="preview" href="#preview_1" data-toggle="tab"><i class="fa fa-eye"></i> 预览</a></li>
+                                            <li class="pull-right"><button type="button" class="btn btn-info btn-sm js--full"><i class="fa fa-arrows-alt"></i> 切换全屏</button></li>
+                                        </ul>
+                                        <div class="tab-content">
+                                            <div class="tab-pane tab-pane-editor active" id="edit_1">
+                                                <textarea class="editor hidden">
+<h1 class="">我是标题1 h1</h1>
+<h2 class="">我是标题2 h2</h2>
+<h3 class="">我是标题3 h3</h3>
+<h4 class="">我是标题4 h4</h4>
+<h5 class="">我是标题5 h5</h5>
+<h6 class="">我是标题6 h6</h6>
+                                                </textarea>
+                                            </div>
+                                            <div class="tab-pane tab-pane-preview" id="preview_1">
+                                                preview
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <section>
+                                        <h2>内联子标题</h2>
+                                        <p>如果需要向任何标题添加一个内联子标题，只需要简单地在元素两旁添加 &lt;small>，或者添加 .small class，这样子您就能得到一个字号更小的颜色更浅的文本，如下面实例所示</p>
+                                        <div class="bs-editor">
+                                            <ul class="nav nav-tabs" >
+                                                <li class="active"><a href="#edit_2" role="tab" data-toggle="tab"><i class="fa fa-edit"></i> 编辑</a></li>
+                                                <li ><a class="preview" href="#preview_2" data-toggle="tab"><i class="fa fa-eye"></i> 预览</a></li>
+                                                <li class="pull-right"><button type="button" class="btn btn-info btn-sm js--full"><i class="fa fa-arrows-alt"></i> 切换全屏</button></li>
+                                            </ul>
+                                            <div class="tab-content">
+                                                <div class="tab-pane tab-pane-editor active" id="edit_2">
+                                                <textarea class="editor hidden"><h1>我是标题1 h1. <small>我是副标题1 h1</small></h1>
+                                                </textarea>
+                                                </div>
+                                                <div class="tab-pane tab-pane-preview" id="preview_2">
+                                                    preview
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </section>
+                                </section>
+                            </main>
+                        </article>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+    <!-- /page-main -->
+
+    <!-- page-footer -->
+    <div class="page-footer">
+
+    </div>
+    <!-- /page-footer -->
+
+</div>
+<!-- /page -->
+
+
+</body>
+</html>

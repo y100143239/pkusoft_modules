@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>我的教程</title>
+    <link rel="shortcut icon" href="../images/favicon.ico">
+    <link rel="stylesheet" href="../css/bootstrap.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../../../../dev/modules/ui/css/font-awesome.css">
+    <script data-main="../../../../dev/modules/" src="../../../../dev/modules/require.js"></script>
+    <script>
+        require.config( {
+            urlArgs: "VERSION=1.0",
+            paths: {
+                "jquery": "jquery/jquery-1.11.3",
+                "bootstrap": "lib/bootstrap/js/bootstrap",
+                "codemirror": "lib/codemirror/codemirror",
+                "codemirror-html": "lib/codemirror/mode/htmlmixed",
+                "code-pretty": "lib/pretty/prettify.min"
+            },
+            map: {
+                '*': {
+                    'css': 'utils/css/css',
+                    'text': 'utils/text'
+                }
+            },
+            shim: {
+                "bootstrap": [ "jquery" ],
+                "codemirror": ["css!lib/codemirror/codemirror.css"],
+                "code-pretty": [ "css!lib/pretty/prettify.css" ]
+            }
+        } );
+    </script>
+    <script src="../js/main.js"></script>
+</head>
+<body>
+
+<!-- page -->
+<div class="page page-index">
+
+
+    <!-- page-header -->
+    <nav class="page-header navbar navbar-default navbar-static-top js--pageHeaderContainer" role="navigation">
+    </nav>
+    <!-- /page-header -->
+
+
+    <!-- page-main -->
+    <div class="page-main">
+
+        <div class="container ">
+
+            <div class="row">
+
+                <div class="col-lg-3 js--sidebarContainer">
+
+                    <div class="bs-sidebar">
+                    </div>
+
+                </div>
+
+                <div class="col-lg-9">
+
+                    <div class="content">
+                        <article class="bs-article">
+                            <header>
+                                <h1>Bootstrap 网格系统</h1>
+                                <p>本章节我们将讲解 Bootstrap 的网格系统（Grid System）。</p>
+                                <p>Bootstrap 提供了一套响应式、移动设备优先的流式网格系统，随着屏幕或视口（viewport）尺寸的增加，系统会自动分为最多12列。</p>
+                            </header>
+                            <main>
+                                <section class="bs-section">
+                                    <h2>什么是网格（Grid）？</h2>
+                                    <p>摘自维基百科：</p>
+                                    <div class="alert alert-info">在平面设计中，网格是一种由一系列用于组织内容的相交的直线（垂直的、水平的）组成的结构（通常是二维的）。它广泛应用于打印设计中的设计布局和内容结构。在网页设计中，它是一种用于快速创建一致的布局和有效地使用 HTML 和 CSS 的方法。</div>
+                                    <p>也就是说，div+css版的“table布局”</p>
+                                </section>
+                                <section class="bs-section">
+                                    <h2>什么是 Bootstrap 网格系统（Grid System）？</h2>
+                                    <p>Bootstrap 官方文档中有关网格系统的描述：</p>
+                                    <div class="alert alert-info">Bootstrap 包含了一个响应式的、移动设备优先的、不固定的网格系统，可以随着设备或视口大小的增加而适当地扩展到 12 列。它包含了用于简单的布局选项的预定义类，也包含了用于生成更多语义布局的功能强大的混合类。</div>
+                                    <p>也就是说，先针对手机端写css代码，然后适配到pad端，最后适配到pc端。</p>
+                                    <br/>
+                                    <p>响应式网格系统随着屏幕或视口（viewport）尺寸的增加，系统会自动分为最多12列。</p>
+                                    <div class="bs-grid container-fluid">
+                                        <div class="row">
+                                            <div class="col-xs-1">1</div>
+                                            <div class="col-xs-1">1</div>
+                                            <div class="col-xs-1">1</div>
+                                            <div class="col-xs-1">1</div>
+                                            <div class="col-xs-1">1</div>
+                                            <div class="col-xs-1">1</div>
+                                            <div class="col-xs-1">1</div>
+                                            <div class="col-xs-1">1</div>
+                                            <div class="col-xs-1">1</div>
+                                            <div class="col-xs-1">1</div>
+                                            <div class="col-xs-1">1</div>
+                                            <div class="col-xs-1">1</div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-xs-4">4</div>
+                                            <div class="col-xs-4">4</div>
+                                            <div class="col-xs-4">4</div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-xs-4">4</div>
+                                            <div class="col-xs-8">8</div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-xs-6">6</div>
+                                            <div class="col-xs-6">6</div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-xs-12">12</div>
+                                        </div>
+                                    </div>
+                                </section>
+                                <section class="bs-section">
+                                    <h2>Bootstrap 网格系统（Grid System）的工作原理</h2>
+                                    <p>网格系统通过一系列包含内容的行和列来创建页面布局。下面列出了 Bootstrap 网格系统是如何工作的：</p>
+                                    <ul class="list">
+                                        <li>行（row）放在容器（container/container-fluid）内</li>
+                                        <li>列（col-*-*）放在行（row）内</li>
+                                        <li>内容放在列（col-*-*）</li>
+                                        <li>预定义的网格类（.row、.col-*-*）进行快速布局</li>
+                                        <li>网格系统有12列</li>
+                                    </ul>
+                                </section>
+                                <section class="bs-section">
+                                    <h2>媒体查询</h2>
+                                    <p>媒体查询就是"有条件的 CSS 规则"：它只适用于一些基于某些规定条件的 CSS，如果满足那些条件，则应用相应的样式。</p>
+                                    <p>Bootstrap 中的媒体查询允许您基于视口大小移动、显示并隐藏内容。下面的是创建 Bootstrap 网格系统中的关键的分界点阈值</p>
+                                    <pre class="prettyprint linenums">
+/* 超小设备（手机，小于 768px） */
+/* Bootstrap 中默认情况下没有媒体查询 */
+
+/* 小型设备（平板电脑，768px 起） */
+@media (min-width: @screen-sm-min) { ... }
+
+/* 中型设备（台式电脑，992px 起） */
+@media (min-width: @screen-md-min) { ... }
+
+/* 大型设备（大台式电脑，1200px 起） */
+@media (min-width: @screen-lg-min) { ... }</pre>
+                                </section>
+                                <section class="bs-section">
+                                    <h2>网格选项</h2>
+                                    <p>下表总结了 Bootstrap 网格系统如何跨多个设备工作</p>
+                                    <table class="table table-bordered">
+                                        <thead>
+                                        <tr class="active">
+                                            <th></th>
+                                            <th>超小设备手机（<768px）</th>
+                                            <th>小型设备平板电脑（≥768px）</th>
+                                            <th>中型设备台式电脑（≥992px）</th>
+                                            <th>大型设备台式电脑（≥1200px）</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td class="active" style="width: 120px;">最大容器宽度</td>
+                                            <td>None (auto)</td>
+                                            <td>750px</td>
+                                            <td>970px</td>
+                                            <td>1170px</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="active">class 前缀</td>
+                                            <td>.col-xs-</td>
+                                            <td>.col-sm-</td>
+                                            <td>.col-md-</td>
+                                            <td>.col-lg-</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="active">列数量和</td>
+                                            <td colspan="4">12</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="active">最大列宽</td>
+                                            <td>auto</td>
+                                            <td>60px</td>
+                                            <td>78px</td>
+                                            <td>95px</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="active">间隙宽度</td>
+                                            <td colspan="4">
+                                                30px（ .container { padding-left: 15px; padding-right: 15px; } ）
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="active">可嵌套</td>
+                                            <td colspan="4"> Yes </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="active">偏移量</td>
+                                            <td colspan="4"> Yes </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="active">列排序</td>
+                                            <td colspan="4"> Yes </td>
+                                        </tr>
+                                        </tbody>
+
+                                    </table>
+                                    <section>
+                                        <h3>基本的网格结构</h3>
+                                        <p>下面是 Bootstrap 网格的基本结构：</p>
+                                        <pre class="prettyprint linenums">
+&lt;div class="container">
+    &lt;div class="row">
+        &lt;div class="col-*-*">&lt;/div>
+        &lt;div class="col-*-*">&lt;/div>
+    &lt;/div>
+    &lt;div class="row">...&lt;/div>
+&lt;/div>
+&lt;div class="container-fluid">
+    &lt;div class="row">
+        &lt;div class="col-*-*">&lt;/div>
+        &lt;div class="col-*-*">&lt;/div>
+    &lt;/div>
+    &lt;div class="row">...&lt;/div>
+&lt;/div>
+                                        </pre>
+                                    </section>
+                                </section>
+                                <section class="bs-section">
+                                    <h2>响应式的列重置</h2>
+                                    <p>通过 &lt;div class="clearfix visible-sm">&lt;/div> 解决溢出的列浮动问题。 </p>
+                                    <div class="bs-editor">
+                                        <ul class="nav nav-tabs" >
+                                            <li class="active"><a href="#edit" role="tab" data-toggle="tab"><i class="fa fa-edit"></i> 编辑</a></li>
+                                            <li ><a class="preview" href="#preview" data-toggle="tab"><i class="fa fa-eye"></i> 预览</a></li>
+                                            <li class="pull-right"><button type="button" class="btn btn-info btn-sm js--full"><i class="fa fa-arrows-alt"></i> 切换全屏</button></li>
+                                        </ul>
+                                        <div class="tab-content">
+                                            <div class="tab-pane tab-pane-editor active" id="edit">
+                                                <textarea class="editor hidden">
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+            Column 1 <br/> 学的不仅是技术，更是梦想！ <br/> 再牛逼的梦想,也抵不住你傻逼似的坚持！ <br/> 再牛逼的梦想,也抵不住你傻逼似的坚持！
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+            Column 2 <br/> 学的不仅是技术，更是梦想！ <br/> 再牛逼的梦想,也抵不住你傻逼似的坚持！
+        </div>
+
+        <div class="clearfix visible-sm"></div>
+
+        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+            Column 3 <br/> 学的不仅是技术，更是梦想！
+        </div>
+
+        <div class="clearfix visible-md"></div>
+
+        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+            Column 4
+        </div>
+    </div>
+</div>                                                    
+                                                </textarea>
+                                            </div>
+                                            <div class="tab-pane tab-pane-preview" id="preview">
+                                                preview
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+                                <section class="bs-section">
+                                    <h2>偏移列</h2>
+                                    <p>通过 margin-left 来实现偏移。</p>
+                                    <pre class="prettyprint linenums">
+.col-*-offset-3 {
+    margin-left: 25%;
+}
+</pre>
+                                </section>
+                                <section class="bs-section">
+                                    <h2>嵌套列</h2>
+                                    <p>在列中嵌套网格</p>
+                                    <pre class="prettyprint linenums">
+&lt;div class="container-fluid">
+    &lt;div class="row">
+        &lt;div class="col-md-4">
+            &lt;div class="row">
+                &lt;div class="col-md-4">...&lt;/div>
+                &lt;div class="col-md-4">...&lt;/div>
+                &lt;div class="col-md-4">...&lt;/div>
+            &lt;/div>
+            &lt;div class="row">
+                &lt;div class="col-md-4">...&lt;/div>
+                &lt;div class="col-md-4">...&lt;/div>
+                &lt;div class="col-md-4">...&lt;/div>
+            &lt;/div>
+        &lt;/div>
+    &lt;/div>
+&lt;/div>
+</pre>
+                                </section>
+                                <section class="bs-section">
+                                    <h2>列排序</h2>
+                                    <p>您可以很轻易地改变网格列的顺序，通过 .col-*-push-* 和 .col-*-pull-* 类</p>
+                                    <pre class="prettyprint linenums">
+.col-*-* {
+    position: relative;
+    ...
+}
+.col-md-push-8 {
+    left: 66.66666667%;
+}
+.col-md-pull-4 {
+    right: 33.33333333%;
+}
+</pre>
+                                </section>
+                            </main>
+                        </article>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+    <!-- /page-main -->
+
+    <!-- page-footer -->
+    <div class="page-footer">
+
+    </div>
+    <!-- /page-footer -->
+
+</div>
+<!-- /page -->
+
+
+</body>
+</html>

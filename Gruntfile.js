@@ -55,6 +55,12 @@ module.exports = function(grunt) {
                         src: ['apps/admin/**'],
                         dest: 'dist',
                         expand: true
+                    },
+                    { // app - bs
+                        cwd: 'dev/',
+                        src: ['apps/bs/**'],
+                        dest: 'dist',
+                        expand: true
                     }
 
                 ]
@@ -72,7 +78,7 @@ module.exports = function(grunt) {
                         src: [
                             'jquery/jquery-1.11.3.js',
                             'jquery/jQuery.XDomainRequest.js',
-                            'jquery/jQuery.ajaxQueue.js',
+                            'jquery/jQuery.ajaxQueue.js'
                         ],
                         dest: 'dist/modules',
                         expand: true
@@ -92,6 +98,7 @@ module.exports = function(grunt) {
                                 'lib/select-area/**',
                                 'lib/sweetalert/**',
                                 'lib/custom/**',
+                                'lib/codemirror/**',
                                 'lib/pretty/**'
                         ],
                         dest: 'dist/modules',

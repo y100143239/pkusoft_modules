@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>js实现返回上一层页面 [问题点数：20分]</title>
+    <link rel="stylesheet" href="../../lib/pretty/prettify.css"/>
+    <script src="../../lib/pretty/prettify.min.js"></script>
+    <script src="../../lib/jquery-1.11.3.js"></script>
+<style>
+</style>
+</head>
+<body>
+
+
+
+<script>
+
+function goBack( docName ) {
+    var url,
+        pos
+    ;
+    url = window.location.href;
+    docName = docName || "index.html";
+    pos = url.indexOf( docName );
+    if ( pos >= 0 ) {
+        return;
+    }
+    window.history.go( -1 );
+}
+
+
+</script>
+
+<pre class="prettyprint linenums">
+</pre>
+<script>
+    PR.prettyPrint();
+</script>
+</body>
+</html>

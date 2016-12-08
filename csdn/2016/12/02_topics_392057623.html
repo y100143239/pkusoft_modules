@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>为什么setInterval只执行一次？ [问题点数：100分]</title>
+    <link rel="stylesheet" href="../../lib/pretty/prettify.css"/>
+    <script src="../../lib/pretty/prettify.min.js"></script>
+</head>
+<body>
+
+参考：《JavaScript权威指南第6版》第14章 14.1节 计时器
+
+<script type="text/javascript">
+    function direct() {
+        console.info( "time: ", ( new Date() ).getTime() );
+    }
+    function showlog() {
+        setInterval(direct(), 1000);
+    }
+    function showlog_2() {
+        setInterval( direct, 1000 );
+    }
+    function showlog_3() {
+        setInterval( function () {
+            direct();
+        }, 1000 );
+    }
+    function showlog_4() {
+        setInterval( "direct()", 1000 );
+    }
+    // showlog(); //=> 执行一次
+    // showlog_2(); //=> 每隔 1000毫秒 执行一次
+    // showlog_3(); //=> 每隔 1000毫秒 执行一次
+    // showlog_4(); //=> 每隔 1000毫秒 执行一次
+</script>
+
+<pre class="prettyprint linenums">
+&lt;script type="text/javascript">
+    function direct() {
+        console.info( "time: ", ( new Date() ).getTime() );
+    }
+    function showlog() {
+        setInterval(direct(), 1000);
+    }
+    function showlog_2() {
+        setInterval( direct, 1000 );
+    }
+    function showlog_3() {
+        setInterval( function () {
+            direct();
+        }, 1000 );
+    }
+    function showlog_4() {
+        setInterval( "direct()", 1000 );
+    }
+    // showlog(); //=> 执行一次
+    // showlog_2(); //=> 每隔 1000毫秒 执行一次
+    // showlog_3(); //=> 每隔 1000毫秒 执行一次
+    // showlog_4(); //=> 每隔 1000毫秒 执行一次
+&lt;/script>
+</pre>
+<script>
+    PR.prettyPrint();
+</script>
+</body>
+</html>

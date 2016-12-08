@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>JQ 遍历 [问题点数：20分]</title>
+    <link rel="stylesheet" href="../../lib/pretty/prettify.css"/>
+    <script src="../../lib/pretty/prettify.min.js"></script>
+    <script src="../../lib/jquery-1.11.3.js"></script>
+<style>
+</style>
+</head>
+<body>
+
+<script>
+    var value
+    ;
+    value = [ "a", "b", "c", "d" ];
+
+    function inputfile( val ) {
+        console.info( val );
+    }
+    $.each( value, function ( index, elt ) {
+        inputfile( elt );
+    } );
+</script>
+
+<pre class="prettyprint linenums">
+</pre>
+<script>
+    PR.prettyPrint();
+</script>
+</body>
+</html>

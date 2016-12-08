@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>我的教程</title>
+    <link rel="shortcut icon" href="../images/favicon.ico">
+    <link rel="stylesheet" href="../css/bootstrap.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../../../../dev/modules/ui/css/font-awesome.css">
+    <script data-main="../../../../dev/modules/" src="../../../../dev/modules/require.js"></script>
+    <script>
+        require.config( {
+            urlArgs: "VERSION=1.0",
+            paths: {
+                "jquery": "jquery/jquery-1.11.3",
+                "bootstrap": "lib/bootstrap/js/bootstrap",
+                "codemirror": "lib/codemirror/codemirror",
+                "codemirror-html": "lib/codemirror/mode/htmlmixed",
+                "code-pretty": "lib/pretty/prettify.min"
+            },
+            map: {
+                '*': {
+                    'css': 'utils/css/css',
+                    'text': 'utils/text'
+                }
+            },
+            shim: {
+                "bootstrap": [ "jquery" ],
+                "codemirror": ["css!lib/codemirror/codemirror.css"],
+                "code-pretty": [ "css!lib/pretty/prettify.css" ]
+            }
+        } );
+    </script>
+    <script src="../js/main.js"></script>
+</head>
+<body>
+
+<!-- page -->
+<div class="page page-index">
+
+
+    <!-- page-header -->
+    <nav class="page-header navbar navbar-default navbar-static-top js--pageHeaderContainer" role="navigation">
+    </nav>
+    <!-- /page-header -->
+
+
+    <!-- page-main -->
+    <div class="page-main">
+
+        <div class="container ">
+
+            <div class="row">
+
+                <div class="col-lg-3 js--sidebarContainer">
+
+                    <div class="bs-sidebar">
+                    </div>
+
+                </div>
+
+                <div class="col-lg-9">
+
+                    <div class="content">
+                        <article class="bs-article">
+                            <header>
+                                <h1>Bootstrap CSS 概览</h1>
+                                <p>在这一章中，我们将讲解 Bootstrap 底层结构的关键部分，包括我们让 web 开发变得更好、更快、更强壮的最佳实践。</p>
+                            </header>
+                            <main>
+                                <section class="bs-section">
+                                    <h2>HTML 5 文档类型（Doctype）</h2>
+                                    <p>Bootstrap 使用了一些 HTML5 元素和 CSS 属性。为了让这些正常工作，您需要使用 HTML5 文档类型（Doctype）。 因此，请在使用 Bootstrap 项目的开头包含下面的代码段。</p>
+                                    <pre class="prettyprint linenums">
+&lt;!DOCTYPE html>
+&lt;html>
+....
+&lt;/html></pre>
+                                    <p>如果在 Bootstrap 创建的网页开头不使用 HTML5 的文档类型（Doctype），您可能会面临一些浏览器显示不一致的问题，甚至可能面临一些特定情境下的不一致，以致于您的代码不能通过 W3C 标准的验证。</p>
+                                </section>
+                                <section class="bs-section">
+                                    <h2>移动设备优先</h2>
+                                    <p>现在不一样了，Bootstrap 3 默认的 CSS 本身就对移动设备友好支持。<br/>
+                                        Bootstrap 3 的设计目标是移动设备优先，然后才是桌面设备。这实际上是一个非常及时的转变，因为现在越来越多的用户使用移动设备。</p>
+                                    <p>为了让 Bootstrap 开发的网站对移动设备友好，确保适当的绘制和触屏缩放，需要在网页的 head 之中添加 viewport meta 标签，如下所示：</p>
+                                    <pre class="prettyprint linenums">
+&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"></pre>
+                                    <ul class="list">
+                                        <li>width 属性控制设备的宽度。假设您的网站将被带有不同屏幕分辨率的设备浏览，那么将它设置为 device-width 可以确保它能正确呈现在不同设备上。</li>
+                                        <li>initial-scale=1.0 确保网页加载时，以 1:1 的比例呈现，不会有任何的缩放。</li>
+                                    </ul>
+                                </section>
+                                <section class="bs-section">
+                                    <h2>响应式图像</h2>
+                                    <pre class="prettyprint linenums">&lt;img src="..." class="img-responsive" alt="响应式图像"></pre>
+                                    <pre class="prettyprint linenums">
+.img-responsive {
+  display: inline-block;
+  height: auto;
+  max-width: 100%;
+} </pre>
+                                </section>
+                                <section class="bs-section">
+                                    <h2>全局显示、排版和链接</h2>
+                                    <section>
+                                        <h3>基本的全局显示</h3>
+                                        <p>Bootstrap 3 使用 body {margin: 0;} 来移除 body 的边距。<br/>
+                                            请看下面有关 body 的设置：</p>
+                                        <pre class="prettyprint linenums">
+body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.428571429;
+  color: #333333;
+  background-color: #ffffff;
+}</pre>
+                                    </section>
+                                    <section>
+                                        <h3>排版</h3>
+                                        <p>使用 @font-family-base、 @font-size-base 和 @line-height-base 属性作为排版样式。</p>
+                                    </section>
+                                    <section>
+                                        <h3>链接样式</h3>
+                                        <p>通过属性 @link-color 设置全局链接的颜色。<br/>对于链接的默认样式，如下设置：</p>
+                                        <pre class="prettyprint linenums">
+a:hover,
+a:focus {
+  color: #2a6496;
+  text-decoration: underline;
+}
+
+a:focus {
+  outline: thin dotted #333;
+  outline: 5px auto -webkit-focus-ring-color;
+  outline-offset: -2px;
+} </pre>
+                                        <p>以上所有这些样式都可以在 scaffolding.scss 中找到。</p>
+                                    </section>
+                                    <section>
+                                        <h3>避免跨浏览器的不一致</h3>
+                                        <p>Bootstrap 使用 <a href="http://necolas.github.io/normalize.css/">Normalize</a> 来建立跨浏览器的一致性。</p>
+                                        <p>Normalize.css 是一个很小的 CSS 文件，在 HTML 元素的默认样式中提供了更好的跨浏览器一致性。</p>
+                                    </section>
+                                </section>
+                                <section class="bs-section">
+                                    <h2>容器（Container）</h2>
+                                    <pre class="prettyprint linenums">
+&lt;div class="container">
+    ...
+&lt;/div></pre>
+                                    <p>Bootstrap 3 的 <code>.container</code> 用于包裹页面上的内容。让我们一起来看看 bootstrap.css 文件中的这个 <code>.container</code>。</p>
+                                    <br/>
+                                    <pre class="prettyprint linenums">
+.container {
+   padding-right: 15px;
+   padding-left: 15px;
+   margin-right: auto;
+   margin-left: auto;
+}</pre>
+                                    <pre class="prettyprint linenums">
+.container:before,
+.container:after {
+  display: table;
+  content: " ";
+}</pre>
+                                    <p>这会产生伪元素。设置 <code>display: table</code>，会创建一个匿名的 table-cell 和一个新的块格式化上下文。<code>:before</code> 伪元素防止垂直边距重叠，<code>:after</code> 伪元素清除浮动。</p>
+                                    <p>如果 conteneditable 属性出现在 HTML 中，由于一些 Opera bug，围绕上述元素创建一个空格。这可以通过使用 <code>content: " "</code> 来修复。</p>
+                                    <br/>
+                                    <pre class="prettyprint linenums">
+.container:after {
+  clear: both;
+}</pre>
+                                    <p>它创建了一个伪元素，并确保了所有的容器包含所有的浮动元素。</p>
+                                    <br/>
+                                    <pre class="prettyprint linenums">
+.container {
+  @include container-fixed;
+
+  @media (min-width: $screen-sm-min) {
+    width: $container-sm;
+  }
+  @media (min-width: $screen-md-min) {
+    width: $container-md;
+  }
+  @media (min-width: $screen-lg-min) {
+    width: $container-lg;
+  }
+}</pre>
+                                    <p>在不同的媒体查询阈值范围内都为 container 设置了width</p>
+                                </section>
+                                <section class="bs-section">
+                                    <h2>Bootstrap 浏览器/设备支持</h2>
+                                    <table class="table table-bordered">
+                                        <thead>
+                                        <tr>
+                                            <th></th> <th>Chrome</th> <th>Firefox</th> <th>IE</th> <th>Opera</th> <th>Safari</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td><strong>Android</strong></td>
+                                            <td>YES</td>
+                                            <td>YES</td>
+                                            <td>不适用</td>
+                                            <td>NO</td>
+                                            <td>不适用</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>iOS</strong></td>
+                                            <td>YES</td>
+                                            <td>不适用</td>
+                                            <td>不适用</td>
+                                            <td>NO</td>
+                                            <td>YES</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Mac OS X</strong></td>
+                                            <td>YES</td>
+                                            <td>YES</td>
+                                            <td>不适用</td>
+                                            <td>YES</td>
+                                            <td>YES</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Windows</strong></td>
+                                            <td>YES</td>
+                                            <td>YES</td>
+                                            <td>YES*</td>
+                                            <td>YES</td>
+                                            <td>NO</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                    <p>* Bootstrap 支持 Internet Explorer 8 及更高版本的 IE 浏览器。</p>
+                                </section>
+                            </main>
+                        </article>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+    <!-- /page-main -->
+
+    <!-- page-footer -->
+    <div class="page-footer">
+
+    </div>
+    <!-- /page-footer -->
+
+</div>
+<!-- /page -->
+
+
+</body>
+</html>

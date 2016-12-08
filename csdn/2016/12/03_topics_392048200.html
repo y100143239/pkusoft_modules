@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>同一导航条下两个页面切换 [问题点数：40分]</title>
+    <link rel="stylesheet" href="../../lib/pretty/prettify.css"/>
+    <script src="../../lib/pretty/prettify.min.js"></script>
+    <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+    <style>
+        body { font : 14px/1.5 "Microsoft Yahei"; }
+        ul { margin : 0; }
+        a { color : #428bca; text-decoration  : none; background-color : transparent; }
+        .nav-tabs { border-bottom : 1px solid #dddddd; padding-left  : 0; margin-bottom : 0; list-style : none; }
+        .nav-tabs:before { display : table; content : " "; }
+        .nav-tabs:after { display : table; content : " "; clear : both; }
+        .nav-tabs > li { position : relative; display : block; float : left; margin-bottom : -1px; }
+        .nav-tabs > li > a { position : relative; display : block; line-height   : 1.42857143;
+            border: 1px solid transparent; border-radius : 4px 4px 0 0; padding : 10px 15px; margin-right  : 2px; }
+        .nav-tabs > li.active > a,
+        .nav-tabs > li.active > a:hover,
+        .nav-tabs > li.active > a:focus { color : #555555; cursor : default; background-color : #ffffff;
+            border: 1px solid #dddddd; border-bottom-color : transparent; }
+        .tab-content { border : solid 1px #dddddd; border-top : none 0; min-height : 300px; padding : 20px; }
+        .tab-content > .tab-pane { display : none; visibility : hidden; }
+        .tab-content > .active { display : block; visibility : visible; }
+    </style>
+    <script>
+        $( document ).ready( function ( $ ) {
+            // 点击页签
+            $( ".nav-tabs" ).find( "li" ).on( "click", function () {
+                var $this,
+                    $targetPanel
+                ;
+                $this = $( this );
+                $targetPanel = $( $this.find( "a" ).attr( "href" ) );
+
+                // 1. 切换页签active
+                $this.addClass( "active" )
+                     .siblings().removeClass( "active" );
+
+                // 2. 切换面板active
+                $targetPanel.addClass( "active" )
+                            .siblings().removeClass( "active" );
+            } );
+        } );
+    </script>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- Nav tabs：active状态的会高亮显示 -->
+    <ul class="nav-tabs">
+        <li class="active"><a href="#course-list">课程列表</a></li>
+        <li><a href="#course-answer">课程回答</a></li>
+    </ul>
+
+    <!-- Tab panes：active状态的会显示，其他的会隐藏 -->
+    <div class="tab-content">
+        <div class="tab-pane active" id="course-list">
+            <ul>
+                <li><a href="#">web学习</a></li>
+                <li><a href="#">HTML入门</a></li>
+            </ul>
+        </div>
+        <div class="tab-pane" id="course-answer">
+            <ul>
+                <li><a href="#">web学习解答</a></li>
+                <li><a href="#">HTML入门解答</a></li>
+            </ul>
+        </div>
+    </div>
+
+</div>
+
+<pre class="prettyprint linenums">
+&lt;style>
+    body { font : 14px/1.5 "Microsoft Yahei"; }
+    ul { margin : 0; }
+    a { color : #428bca; text-decoration  : none; background-color : transparent; }
+    .nav-tabs { border-bottom : 1px solid #dddddd; padding-left  : 0; margin-bottom : 0; list-style : none; }
+    .nav-tabs:before { display : table; content : " "; }
+    .nav-tabs:after { display : table; content : " "; clear : both; }
+    .nav-tabs > li { position : relative; display : block; float : left; margin-bottom : -1px; }
+    .nav-tabs > li > a { position : relative; display : block; line-height   : 1.42857143;
+        border: 1px solid transparent; border-radius : 4px 4px 0 0; padding : 10px 15px; margin-right  : 2px; }
+    .nav-tabs > li.active > a,
+    .nav-tabs > li.active > a:hover,
+    .nav-tabs > li.active > a:focus { color : #555555; cursor : default; background-color : #ffffff;
+        border: 1px solid #dddddd; border-bottom-color : transparent; }
+    .tab-content { border : solid 1px #dddddd; border-top : none 0; min-height : 300px; padding : 20px; }
+    .tab-content > .tab-pane { display : none; visibility : hidden; }
+    .tab-content > .active { display : block; visibility : visible; }
+&lt;/style>
+    &lt;script>
+        $( document ).ready( function ( $ ) {
+            // 点击页签
+            $( ".nav-tabs" ).find( "li" ).on( "click", function () {
+                var $this,
+                    $targetPanel
+                ;
+                $this = $( this );
+                $targetPanel = $( $this.find( "a" ).attr( "href" ) );
+
+                // 1. 切换页签active
+                $this.addClass( "active" )
+                        .siblings().removeClass( "active" );
+
+                // 2. 切换面板active
+                $targetPanel.addClass( "active" )
+                        .siblings().removeClass( "active" );
+            } );
+        } );
+        
+    &lt;/script>
+
+&lt;div class="container">
+
+    &lt;!-- Nav tabs：active状态的会高亮显示 -->
+    &lt;ul class="nav-tabs">
+        &lt;li class="active">&lt;a href="#course-list">课程列表&lt;/a>&lt;/li>
+        &lt;li>&lt;a href="#course-answer">课程回答&lt;/a>&lt;/li>
+    &lt;/ul>
+
+    &lt;!-- Tab panes：active状态的会显示，其他的会隐藏 -->
+    &lt;div class="tab-content">
+        &lt;div class="tab-pane active" id="course-list">
+            &lt;ul>
+                &lt;li>&lt;a href="#">web学习&lt;/a>&lt;/li>
+                &lt;li>&lt;a href="#">HTML入门&lt;/a>&lt;/li>
+            &lt;/ul>
+        &lt;/div>
+        &lt;div class="tab-pane" id="course-answer">
+            &lt;ul>
+                &lt;li>&lt;a href="#">web学习解答&lt;/a>&lt;/li>
+                &lt;li>&lt;a href="#">HTML入门解答&lt;/a>&lt;/li>
+            &lt;/ul>
+        &lt;/div>
+    &lt;/div>
+
+&lt;/div>
+    
+</pre>
+<script>
+    PR.prettyPrint();
+</script>
+</body>
+</html>

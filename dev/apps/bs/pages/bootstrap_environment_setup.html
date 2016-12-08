@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>我的教程</title>
+    <link rel="shortcut icon" href="../images/favicon.ico">
+    <link rel="stylesheet" href="../css/bootstrap.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../../../../dev/modules/ui/css/font-awesome.css">
+    <script data-main="../../../../dev/modules/" src="../../../../dev/modules/require.js"></script>
+    <script>
+        require.config( {
+            urlArgs: "VERSION=1.0",
+            paths: {
+                "jquery": "jquery/jquery-1.11.3",
+                "bootstrap": "lib/bootstrap/js/bootstrap",
+                "codemirror": "lib/codemirror/codemirror",
+                "codemirror-html": "lib/codemirror/mode/htmlmixed",
+                "code-pretty": "lib/pretty/prettify.min"
+            },
+            map: {
+                '*': {
+                    'css': 'utils/css/css',
+                    'text': 'utils/text'
+                }
+            },
+            shim: {
+                "bootstrap": [ "jquery" ],
+                "codemirror": ["css!lib/codemirror/codemirror.css"],
+                "code-pretty": [ "css!lib/pretty/prettify.css" ]
+            }
+        } );
+    </script>
+    <script src="../js/main.js"></script>
+</head>
+<body>
+
+<!-- page -->
+<div class="page page-index">
+
+
+    <!-- page-header -->
+    <nav class="page-header navbar navbar-default navbar-static-top js--pageHeaderContainer" role="navigation">
+        <!--<div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="../index.html"><img class="logo" src="../images/logo.png" /></a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="#">Bootstrap</a></li>
+                    <li><a href="#">HTML</a></li>
+                    <li><a href="#">CSS</a></li>
+                </ul>
+            </div>
+        </div>-->
+    </nav>
+    <!-- /page-header -->
+
+
+    <!-- page-main -->
+    <div class="page-main">
+
+        <div class="container ">
+
+            <div class="row">
+
+                <div class="col-lg-3 js--sidebarContainer">
+
+                    <!--<div class="bs-sidebar">
+                        <ul class=" bs-nav" >
+
+                            <li class="bs-nav-header">Bootstrap 引入</li>
+                            <li><a href="bootstrap_intro.html">简介</a></li>
+                            <li class="bs-active"><a href="bootstrap_environment_setup.html">环境安装</a></li>
+
+                            <li class="bs-nav-header">Bootstrap CSS</li>
+                            <li><a href="#">CSS 概览</a></li>
+                            <li><a href="#">网格系统</a></li>
+                            <li><a href="#">排版</a></li>
+                            <li><a href="#">代码</a></li>
+                            <li><a href="#">表格</a></li>
+                            <li><a href="#">表单</a></li>
+                            <li><a href="#">按钮</a></li>
+                            <li><a href="#">图片</a></li>
+                            <li><a href="#">辅助类</a></li>
+                            <li><a href="#">响应式实用工具</a></li>
+
+                        </ul>
+                    </div>-->
+
+                </div>
+
+                <div class="col-lg-9">
+
+                    <div class="content">
+                        <article class="bs-article">
+                            <header>
+                                <h1>Bootstrap 环境安装</h1>
+                                <p>Bootstrap 安装是非常容易的。本章将讲解如何下载并安装 Bootstrap，讨论 Bootstrap 文件结构，并通过一个实例演示它的用法。</p>
+                            </header>
+                            <main>
+                                <section class="bs-section">
+                                    <h2>下载 Bootstrap</h2>
+                                    <ul class="list">
+                                        <li><b class="label label-info">用于生产环境的 Bootstrap</b>：编译并压缩后的 CSS、JavaScript 和字体文件。不包含文档和源码文件。
+                                            <a href="http://d.bootcss.com/bootstrap-3.3.0-dist.zip"><i class="fa fa-download"></i> 下载</a>
+                                        </li>
+                                        <li><b class="label label-info">Bootstrap Less 源码</b>：Less、JavaScript 和 字体文件的源码，并且带有文档。需要 Less 编译器和一些设置工作。
+                                            <a href="http://d.bootcss.com/bootstrap-3.3.0-source.zip"><i class="fa fa-download"></i> 下载</a>
+                                        </li>
+                                        <li><b class="label label-info">Bootstrap Sass 源码</b>：这是 Bootstrap 从 Less 到 Sass 的源码移植项目，用于快速地在 Rails、Compass 或 只针对 Sass 的项目中引入。
+                                            <a href="http://d.bootcss.com/bootstrap-3.3.0-sass.tar.gz"><i class="fa fa-download"></i> 下载</a>
+                                        </li>
+                                    </ul>
+                                </section>
+                                <section class="bs-section">
+                                    <h2>文件结构</h2>
+                                    <section>
+                                        <h3>预编译版</h3>
+                                        <p>下载压缩包之后，将其解压缩到任意目录即可看到以下（压缩版的）目录结构：</p>
+                                        <pre class="prettyprint linenums">
+bootstrap/
+├── css/
+│   ├── bootstrap.css
+│   ├── bootstrap.min.css
+│   ├── bootstrap-theme.css
+│   └── bootstrap-theme.min.css
+├── js/
+│   ├── bootstrap.js
+│   └── bootstrap.min.js
+└── fonts/
+    ├── glyphicons-halflings-regular.eot
+    ├── glyphicons-halflings-regular.svg
+    ├── glyphicons-halflings-regular.ttf
+    └── glyphicons-halflings-regular.woff</pre>
+                                        <p>这是最基本的 Bootstrap 文件组织形式：未压缩版的文件可以在任意web项目中直接使用。我们同时提供了压缩（bootstrap.min.*）与未压缩 (bootstrap.*) 的 CSS 和 JS 文件。字体图标文件来自于 Glyphicons。</p>
+                                    </section>
+                                    <section>
+                                        <h3>Bootstrap 源代码</h3>
+                                        <p>如果您下载了 Bootstrap 源代码，那么文件结构将如下所示：</p>
+                                        <pre class="prettyprint linenums">
+bootstrap/
+├── less/
+├── js/
+├── fonts/
+├── dist/
+│   ├── css/
+│   ├── js/
+│   └── fonts/
+└── docs/
+    └── examples/</pre>
+                                        <p>这是最基本的 Bootstrap 文件组织形式：未压缩版的文件可以在任意web项目中直接使用。我们同时提供了压缩（bootstrap.min.*）与未压缩 (bootstrap.*) 的 CSS 和 JS 文件。字体图标文件来自于 Glyphicons。</p>
+                                        <ul class="list">
+                                            <li><b class="label label-info">less/</b> <b class="label label-info">js/</b> <b class="label label-info">fonts/</b> 下的文件分别是 Bootstrap CSS、JS 和图标字体的源代码。</li>
+                                            <li><b class="label label-info">dist/</b> 文件夹包含了上面预编译下载部分中所列的文件和文件夹。</li>
+                                            <li><b class="label label-info">docs-assets/</b> <b class="label label-info">examples/</b> <b class="label label-info"> <b class="label label-info">*.html </b></b> 是 Bootstrap 文档。</li>
+                                        </ul>
+                                    </section>
+                                </section>
+
+                                <section class="bs-section">
+                                    <h2>HTML 模板</h2>
+                                    <p>一个使用了 Bootstrap 的基本的 HTML 模板如下所示：</p>
+                                    <pre class="prettyprint linenums">
+&lt;!DOCTYPE html>
+&lt;html lang="zh-cn">
+&lt;head>
+    &lt;meta charset="utf-8">
+    &lt;meta http-equiv="X-UA-Compatible" content="IE=edge">
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1">
+    &lt;title>Bootstrap 101 Template&lt;/title>
+
+    &lt;!-- Bootstrap -->
+    &lt;link href="css/bootstrap.min.css" rel="stylesheet">
+
+    &lt;!-- HTML5 Shim 和 Respond.js 用于让 IE8 支持 HTML5元素和媒体查询 -->
+    &lt;!-- 注意： 如果通过 file://  引入 Respond.js 文件，则该文件无法起效果 -->
+    &lt;!--[if lt IE 9]>
+    &lt;script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js">&lt;/script>
+    &lt;script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js">&lt;/script>
+    &lt;![endif]-->
+&lt;/head>
+&lt;body>
+&lt;h1>你好，世界！&lt;/h1>
+
+&lt;!-- jQuery (Bootstrap 的 JavaScript 插件需要引入 jQuery) -->
+&lt;script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js">&lt;/script>
+&lt;!-- 包括所有已编译的插件 -->
+&lt;script src="js/bootstrap.min.js">&lt;/script>
+&lt;/body>
+&lt;/html>
+                                    </pre>
+                                    <p>在这里，您可以看到包含了 jquery.js、bootstrap.min.js 和 bootstrap.min.css 文件，用于让一个常规的 HTML 文件变为使用了 Bootstrap 的模板。</p>
+                                </section>
+
+                            </main>
+                        </article>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+    <!-- /page-main -->
+
+    <!-- page-footer -->
+    <div class="page-footer">
+
+    </div>
+    <!-- /page-footer -->
+
+</div>
+<!-- /page -->
+
+
+</body>
+</html>

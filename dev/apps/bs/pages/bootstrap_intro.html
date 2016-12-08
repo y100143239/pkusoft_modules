@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>我的教程</title>
+    <link rel="shortcut icon" href="../images/favicon.ico">
+    <link rel="stylesheet" href="../css/bootstrap.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../../../../dev/modules/ui/css/font-awesome.css">
+    <script data-main="../../../../dev/modules/" src="../../../../dev/modules/require.js"></script>
+    <script>
+        require.config( {
+            urlArgs: "VERSION=1.0",
+            paths: {
+                "jquery": "jquery/jquery-1.11.3",
+                "bootstrap": "lib/bootstrap/js/bootstrap",
+                "codemirror": "lib/codemirror/codemirror",
+                "codemirror-html": "lib/codemirror/mode/htmlmixed",
+                "code-pretty": "lib/pretty/prettify.min"
+            },
+            map: {
+                '*': {
+                    'css': 'utils/css/css',
+                    'text': 'utils/text'
+                }
+            },
+            shim: {
+                "bootstrap": [ "jquery" ],
+                "codemirror": ["css!lib/codemirror/codemirror.css"],
+                "code-pretty": [ "css!lib/pretty/prettify.css" ]
+            }
+        } );
+    </script>
+    <script src="../js/main.js"></script>
+</head>
+<body>
+
+<!-- page -->
+<div class="page page-index">
+
+
+    <!-- page-header -->
+    <nav class="page-header navbar navbar-default navbar-static-top js--pageHeaderContainer" role="navigation">
+        <!--<div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="../index.html"><img class="logo" src="../images/logo.png" /></a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="#">Bootstrap</a></li>
+                    <li><a href="#">HTML</a></li>
+                    <li><a href="#">CSS</a></li>
+                </ul>
+            </div>
+        </div>-->
+    </nav>
+    <!-- /page-header -->
+
+
+    <!-- page-main -->
+    <div class="page-main">
+
+        <div class="container ">
+
+            <div class="row">
+
+                <div class="col-lg-3 js--sidebarContainer">
+
+                    <div class="bs-sidebar">
+                        <!--<ul class="bs-nav" >
+
+                            <li class="bs-nav-header">Bootstrap 引入</li>
+                            <li class="bs-active"><a href="bootstrap_intro.html">简介</a></li>
+                            <li><a href="bootstrap_environment_setup.html">环境安装</a></li>
+
+                            <li class="bs-nav-header">Bootstrap CSS</li>
+                            <li><a href="#">CSS 概览</a></li>
+                            <li><a href="#">网格系统</a></li>
+                            <li><a href="#">排版</a></li>
+                            <li><a href="#">代码</a></li>
+                            <li><a href="#">表格</a></li>
+                            <li><a href="#">表单</a></li>
+                            <li><a href="#">按钮</a></li>
+                            <li><a href="#">图片</a></li>
+                            <li><a href="#">辅助类</a></li>
+                            <li><a href="#">响应式实用工具</a></li>
+
+                        </ul>-->
+                    </div>
+
+                </div>
+
+                <div class="col-lg-9">
+
+                    <div class="content">
+                        <article class="bs-article">
+                            <header>
+                                <h1>Bootstrap 简介</h1>
+                            </header>
+                            <main>
+                                <section class="bs-section">
+                                    <h2>什么是 Bootstrap？</h2>
+                                    <p>Bootstrap 是一个用于快速开发 Web 应用程序和网站的前端框架（样式框架）。Bootstrap 是基于 HTML、CSS、JavaScript 的。</p>
+                                </section>
+                                <section class="bs-section">
+                                    <h2>历史</h2>
+                                    <p>Bootstrap 是由 Twitter 的 Mark Otto 和 Jacob Thornton 开发的。Bootstrap 是 2011年8月在 GitHub 上发布的开源产品。</p>
+                                </section>
+                                <section class="bs-section">
+                                    <h2>为什么使用 Bootstrap？</h2>
+                                    <ul class="list">
+                                        <li><b class="label label-info">移动设备优先</b>：自 Bootstrap 3 起，框架包含了贯穿于整个库的移动设备优先的样式。</li>
+                                        <li><b class="label label-info">浏览器支持</b>：所有的主流浏览器都支持 Bootstrap。</li>
+                                        <li><b class="label label-info">容易上手</b>：只要您具备 HTML 和 CSS 的基础知识，您就可以开始学习 Bootstrap。</li>
+                                        <li><b class="label label-info">响应式设计</b>：Bootstrap 的响应式 CSS 能够自适应于台式机、平板电脑和手机。更多有关响应式设计的内容详见
+                                            <a href="http://www.runoob.com/bootstrap/bootstrap-v2-responsive-design.html">Bootstrap 响应式设计</a>。 </li>
+                                        <li>它为开发人员创建接口提供了一个简洁统一的解决方案。</li>
+                                        <li>它包含了功能强大的内置组件，易于定制。</li>
+                                        <li>它还提供了基于 Web 的定制。</li>
+                                        <li>它是开源的。</li>
+                                    </ul>
+                                </section>
+                                <section class="bs-section">
+                                    <h2>Bootstrap 包的内容</h2>
+                                    <ul class="list">
+                                        <li><b class="label label-info">基本结构</b>：Bootstrap 提供了一个带有网格系统、链接样式、背景的基本结构。这将在 <b>Bootstrap 基本结构</b> 部分详细讲解。</li>
+                                        <li><b class="label label-info">CSS</b>：Bootstrap 自带以下特性：全局的 CSS 设置、定义基本的 HTML 元素样式、可扩展的 class，以及一个先进的网格系统。这将在 <b>Bootstrap CSS</b> 部分详细讲解。</li>
+                                        <li><b class="label label-info">组件</b>：Bootstrap 包含了十几个可重用的组件，用于创建图像、下拉菜单、导航、警告框、弹出框等等。这将在 <b>布局组件</b> 部分详细讲解。</li>
+                                        <li><b class="label label-info">JavaScript 插件</b>：Bootstrap 包含了十几个自定义的 jQuery 插件。您可以直接包含所有的插件，也可以逐个包含这些插件。这将在 <b>Bootstrap 插件</b> 部分详细讲解。 </li>
+                                        <li><b class="label label-info">定制</b>：您可以定制 Bootstrap 的组件、LESS 变量和 jQuery 插件来得到您自己的版本。 </li>
+                                    </ul>
+                                </section>
+                                <section class="bs-section">
+                                    <h2>在线实例</h2>
+                                    <p>你可以使用在线编辑器在线编辑代码，并切换到预览页签查看。</p>
+                                    <div class="bs-editor">
+                                        <ul class="nav nav-tabs" >
+                                            <li class="active"><a href="#edit" role="tab" data-toggle="tab"><i class="fa fa-edit"></i> 编辑</a></li>
+                                            <li ><a class="preview" href="#preview" data-toggle="tab"><i class="fa fa-eye"></i> 预览</a></li>
+                                            <li class="pull-right"><button type="button" class="btn btn-info btn-sm js--full"><i class="fa fa-arrows-alt"></i> 切换全屏</button></li>
+                                        </ul>
+                                        <div class="tab-content">
+                                            <div class="tab-pane tab-pane-editor active" id="edit">
+                                                <textarea class="editor hidden">
+<div class="container">
+    <div class="jumbotron">
+        <h1>我的第一个 Bootstrap 页面</h1>
+        <p>重置窗口大小，查看响应式效果！</p>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">
+            <h3>Column 1</h3>
+            <p>学的不仅是技术，更是梦想！</p>
+            <p>再牛逼的梦想,也抵不住你傻逼似的坚持！</p>
+        </div>
+        <div class="col-sm-4">
+            <h3>Column 2</h3>
+            <p>学的不仅是技术，更是梦想！</p>
+            <p>再牛逼的梦想,也抵不住你傻逼似的坚持！</p>
+        </div>
+        <div class="col-sm-4">
+            <h3>Column 3</h3>
+            <p>学的不仅是技术，更是梦想！</p>
+            <p>再牛逼的梦想,也抵不住你傻逼似的坚持！</p>
+        </div>
+    </div>
+</div>
+                                                </textarea>
+                                            </div>
+                                            <div class="tab-pane tab-pane-preview" id="preview">
+                                                preview
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </section>
+                            </main>
+                        </article>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+    <!-- /page-main -->
+
+    <!-- page-footer -->
+    <div class="page-footer">
+
+    </div>
+    <!-- /page-footer -->
+
+</div>
+<!-- /page -->
+
+
+</body>
+</html>

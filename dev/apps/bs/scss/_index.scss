@@ -1,0 +1,82 @@
+
+
+.page {
+    position: relative;
+}
+// fix bootstrap style
+.page-header {
+    margin: 0;
+    padding: 15px 0;
+    border: none;
+    background: #000;
+
+    .logo {
+        width: 24px;
+        background-color: #999;
+        border-radius: 2px;
+    }
+    &.navbar-default {
+        .navbar-nav {
+            a {
+                &:hover {
+                    color: #fff;
+                }
+            }
+            .active {
+                a,
+                a:hover,
+                a:focus  {
+                    border-radius: 3px;
+                    background-color: #2BA3D4;
+                    color: #FFF;
+                }
+            }
+        }
+    }
+    
+    
+    
+}
+
+.bs-sidebar {
+    overflow: hidden;
+    border-right: 1px solid #E5E5E5;
+    ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+    .bs-nav-header {
+        color: #222;
+        padding: 3px 0;
+        font-size: 16px;
+        margin-top: 15px;
+    }
+    li {
+        a {
+            display: block;
+            text-decoration: none;
+            color: #777;
+            padding: 3px 10px 3px 1em;
+            &:hover {
+                background: darken( #F5F5F5, 20% );
+                color: #444;
+            }
+        }
+    }
+    .bs-active {
+        a {
+            background: #F5F5F5;
+            color: #444;
+        }
+    }
+}
+.bs-grid {
+    text-align: center;
+    //padding: 0 15px;
+    [class*='col'] {
+        background-color: #C5E9F7;
+        border: solid 4px #fff;
+        padding: 4px 0;
+    }
+}

@@ -6,3 +6,12 @@ body {
     color: #d9534f;
     font-size: 65%;
 }
+.text-overflow {
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+    _width: 100%;
+}

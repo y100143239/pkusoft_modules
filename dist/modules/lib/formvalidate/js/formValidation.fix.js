@@ -5259,6 +5259,11 @@ if (typeof jQuery === 'undefined') {
             var inRange  = false,
                 rangeDef = adminDivisionCodes[provincial][prefectural];
             for (var i = 0; i < rangeDef.length; i++) {
+                // FIX：禁用行政区划代码（前5位）的校验，因为行政区划在变更，老的身份证号会校验出错
+                if ( 1 == 1 ) {
+                    inRange = true;
+                    break;
+                }
                 if (($.isArray(rangeDef[i]) && rangeDef[i][0] <= county && county <= rangeDef[i][1])
                     || (!$.isArray(rangeDef[i]) && county === rangeDef[i]))
                 {

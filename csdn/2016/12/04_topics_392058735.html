@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>如何解决多选的问题 [问题点数：80分]</title>
+    <link rel="stylesheet" href="../../lib/pretty/prettify.css"/>
+    <script src="../../lib/pretty/prettify.min.js"></script>
+    <script src="../../lib/jquery-1.11.3.js"></script>
+</head>
+<body>
+
+<style>
+    ul, li { padding: 0; margin : 0; list-style: none; }
+    .con { width : 400px; font : 14px/1.6 "Microsoft Yahei"; color : #888; border : solid #eee 1px; padding: 1em; }
+    .fl { float : left; }
+    .conUI:before,
+    .conUI:after { display: table; content: " "; }
+    .conUI:after { clear : both; }
+    .conUIR { width : 100%; }
+    .sex { width : 90%; border : solid 1px #eee; margin : 1em 0; padding: 0 5%; border-radius: 5px; cursor : pointer; }
+    .sex.active { border : solid 1px #2B67A6; color : #333; }
+    .btn { display: block; width : 100%; height : 52px; font-size: 16px;; color : #fff;
+        border: none 0; margin : 1em 0; padding: 0 5%; border-radius: 5px; cursor : pointer; background: #2B67A6; }
+    
+    .sex input {
+        /*display: none;*/
+    }
+</style>
+
+<form action="">
+    <div class="con">
+        <ul class="conUI">
+            <li>
+                <div class="conUIR fl">
+                    <div class="sex fl"><input type="checkbox" name="reason" value="1"/><p class="ml-3">审核身份证不符！</p></div>
+                    <div class="sex fl"><input type="checkbox" name="reason" value="2"/><p class="ml-3">照片模糊，请重新上传！</p></div>
+                    <div class="sex fl"><input type="checkbox" name="reason" value="3"/><p class="ml-3">分数不够！</p></div>
+                    <button type="button" class="btn">确定</button>
+                </div>
+            </li>
+        </ul>
+    </div>
+</form>
+<script>
+    $( ".conUIR" ).on( "click", ".sex", function () {
+        var $this,
+            $input
+        ;
+        $this = $( this );
+        $input = $this.find( "input" );
+        $this.toggleClass( "active" );
+        $input.prop( "checked", $this.is( ".active" ) );
+        console.info( $( "form" ).serialize() );
+    } );
+</script>
+
+<pre class="prettyprint linenums">
+
+&lt;style>
+    ul, li { padding: 0; margin : 0; list-style: none; }
+    .con { width : 400px; font : 14px/1.6 "Microsoft Yahei"; color : #888; border : solid #eee 1px; padding: 1em; }
+    .fl { float : left; }
+    .conUI:before,
+    .conUI:after { display: table; content: " "; }
+    .conUI:after { clear : both; }
+    .conUIR { width : 100%; }
+    .sex { width : 90%; border : solid 1px #eee; margin : 1em 0; padding: 0 5%; border-radius: 5px; cursor : pointer; }
+    .sex.active { border : solid 1px #2B67A6; color : #333; }
+    .btn { display: block; width : 100%; height : 52px; font-size: 16px;; color : #fff;
+        border: none 0; margin : 1em 0; padding: 0 5%; border-radius: 5px; cursor : pointer; background: #2B67A6; }
+
+    .sex input {
+        /*display: none;*/
+    }
+&lt;/style>
+
+&lt;form action="">
+    &lt;div class="con">
+        &lt;ul class="conUI">
+            &lt;li>
+                &lt;div class="conUIR fl">
+                    &lt;div class="sex fl">&lt;input type="checkbox" name="reason" value="1"/>&lt;p class="ml-3">审核身份证不符！&lt;/p>&lt;/div>
+                    &lt;div class="sex fl">&lt;input type="checkbox" name="reason" value="2"/>&lt;p class="ml-3">照片模糊，请重新上传！&lt;/p>&lt;/div>
+                    &lt;div class="sex fl">&lt;input type="checkbox" name="reason" value="3"/>&lt;p class="ml-3">分数不够！&lt;/p>&lt;/div>
+                    &lt;button type="button" class="btn">确定&lt;/button>
+                &lt;/div>
+            &lt;/li>
+        &lt;/ul>
+    &lt;/div>
+&lt;/form>
+&lt;script>
+    $( ".conUIR" ).on( "click", ".sex", function () {
+        var $this,
+            $input
+        ;
+        $this = $( this );
+        $input = $this.find( "input" );
+        $this.toggleClass( "active" );
+        $input.prop( "checked", $this.is( ".active" ) );
+        console.info( $( "form" ).serialize() );
+    } );
+&lt;/script>    
+</pre>
+<script>
+    PR.prettyPrint();
+</script>
+</body>
+</html>

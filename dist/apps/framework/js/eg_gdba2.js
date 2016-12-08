@@ -364,10 +364,11 @@ require( [ "jquery", "gdbaUtils", "draggable",
             // 发送请求：判断是否是合法的 bizcode
             $.getJSON( $form.attr( "data-validate-bizcode-url" ), $form.serialize(), function success( data ) {
                 if ( ! ( data && data.success ) ) {
-                    Utils.dialog( "提示", data.message );
+                    Utils.dialog( "提示", data.message || "未知的错误，请重试！" );
                     return;
                 }
-                window.location = $form.attr( "action" ) + "?" + $form.serialize();
+                //window.location = $form.attr( "action" ) + "?" + $form.serialize();
+                $form().clone().attr( "method", "POST" ).submit();
             } ).fail( function (){
                 Utils.dialog( "提示", "错误：网络异常。" );
             } );

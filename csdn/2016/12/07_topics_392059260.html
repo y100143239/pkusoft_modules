@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery如何关闭这种情况下的定时器 [问题点数：40分]</title>
+    <link rel="stylesheet" href="../../lib/pretty/prettify.css"/>
+    <script src="../../lib/pretty/prettify.min.js"></script>
+    <script src="../../lib/jquery-1.11.3.js"></script>
+<style>
+    * { -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
+    .wheel { position: relative; width : 340px; height : 348px; margin : 0 auto;
+        background: url("../../assert/images/wheel.png") no-repeat; background-size: cover; }
+    .awards { position: absolute; top : 24px; left : 50%; margin-left: -146px; width : 293px;
+        height: 293px; background: url("../../assert/images/circle.png") no-repeat; background-size: cover; }
+    .pointer { position: absolute; top : 110px; left : 50%; margin-left: -45px; width : 90px; height : 105px;
+        background: url("../../assert/images/pointer.png") no-repeat; background-size: cover; }
+</style>
+</head>
+<body>
+
+<section class="wheel">
+    <div class="awards"></div><a class="pointer" href="javascript:void(0)"> </a>
+</section>
+
+
+<script>
++function () {
+    var degree,
+        $awards,
+        $pointer
+    ;
+    degree = 0;
+
+    $awards = $( ".awards" );
+    $pointer = $( ".pointer" );
+
+    $pointer.on( "click", function () {
+        var timerId
+        ;
+        timerId = $.data( $awards, "timerId" );
+        if ( timerId ) {
+            stopRotate();
+        } else {
+            startRotate();
+        }
+    } );
+    function startRotate() {
+        var timerId
+        ;
+        timerId = window.setInterval( function () {
+            $awards.css( "transform", "rotate(" + degree + "deg)" );
+            degree++;
+            console.info(degree);
+        }, 16 );
+        $.data( $awards, "timerId", timerId );
+    }
+    function stopRotate() {
+        var timerId
+        ;
+        timerId = $.data( $awards, "timerId" );
+        window.clearInterval( timerId );
+        $.data( $awards, "timerId", null );
+    }
+}();
+</script>
+
+<pre class="prettyprint linenums">
+&lt;style>
+    * { -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
+    .wheel { position: relative; width : 340px; height : 348px; margin : 0 auto;
+        background: url("../../assert/images/wheel.png") no-repeat; background-size: cover; }
+    .awards { position: absolute; top : 24px; left : 50%; margin-left: -146px; width : 293px;
+        height: 293px; background: url("../../assert/images/circle.png") no-repeat; background-size: cover; }
+    .pointer { position: absolute; top : 110px; left : 50%; margin-left: -45px; width : 90px; height : 105px;
+        background: url("../../assert/images/pointer.png") no-repeat; background-size: cover; }
+&lt;/style>
+
+&lt;section class="wheel">
+    &lt;div class="awards">&lt;/div>&lt;a class="pointer" href="javascript:void(0)"> &lt;/a>
+&lt;/section>
+
+
+&lt;script>
+    +function () {
+        var degree,
+            $awards,
+            $pointer
+        ;
+        degree = 0;
+
+        $awards = $( ".awards" );
+        $pointer = $( ".pointer" );
+
+        $pointer.on( "click", function () {
+            var timerId
+                    ;
+            timerId = $.data( $awards, "timerId" );
+            if ( timerId ) {
+                stopRotate();
+            } else {
+                startRotate();
+            }
+        } );
+        function startRotate() {
+            var timerId
+            ;
+            timerId = window.setInterval( function () {
+                $awards.css( "transform", "rotate(" + degree + "deg)" );
+                degree++;
+                console.info(degree);
+            }, 16 );
+            $.data( $awards, "timerId", timerId );
+        }
+        function stopRotate() {
+            var timerId
+                    ;
+            timerId = $.data( $awards, "timerId" );
+            window.clearInterval( timerId );
+            $.data( $awards, "timerId", null );
+        }
+    }();
+&lt;/script>
+</pre>
+<script>
+    PR.prettyPrint();
+</script>
+</body>
+</html>

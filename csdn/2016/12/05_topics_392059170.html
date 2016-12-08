@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jquery中如何不同对象 队列执行 [问题点数：20分]</title>
+    <link rel="stylesheet" href="../../lib/pretty/prettify.css"/>
+    <script src="../../lib/pretty/prettify.min.js"></script>
+    <script src="../../lib/jquery-1.11.3.js"></script>
+<style>
+    div { position : relative; width : 300px; height : 112px; border : dashed 1px #eee; }
+    img { position : absolute; }
+    .oldman2 > img { left : 244px; }
+</style>
+</head>
+<body>
+
+<div class="oldman"><img src="../../images/person_01.png" alt=""/></div>
+<div class="oldman2"><img src="../../images/person_02.png" alt=""/></div>
+
+
+<script>
+    var duration = 1000; // 动画时间
+
+    // $( ".oldman > img" ).animate( { left: 200 }, duration ).animate( { top: 112 }, duration );
+    // $( ".oldman2 > img" ).animate( { left: 0 }, duration ).animate( { top: -112 }, duration );
+
+    $( ".oldman > img" ).animate( { left: 200 }, duration ).animate( { top: 112 }, duration, function () {
+        $( ".oldman2 > img" ).animate( { left: 0 }, duration ).animate( { top: -112 }, duration );
+    } );
+</script>
+
+<pre class="prettyprint linenums">
+&lt;style>
+    div { position : relative; width : 300px; height : 112px; border : dashed 1px #eee; }
+    img { position : absolute; }
+    .oldman2 > img { left : 244px; }
+&lt;/style>    
+
+&lt;div class="oldman">&lt;img src="../../images/person_01.png" alt=""/>&lt;/div>
+&lt;div class="oldman2">&lt;img src="../../images/person_02.png" alt=""/>&lt;/div>
+
+
+&lt;script>
+    var duration = 1000; // 动画时间
+
+    // $( ".oldman > img" ).animate( { left: 200 }, duration ).animate( { top: 112 }, duration );
+    // $( ".oldman2 > img" ).animate( { left: 0 }, duration ).animate( { top: -112 }, duration );
+
+    $( ".oldman > img" ).animate( { left: 200 }, duration ).animate( { top: 112 }, duration, function () {
+        $( ".oldman2 > img" ).animate( { left: 0 }, duration ).animate( { top: -112 }, duration );
+    } );
+&lt;/script>    
+</pre>
+<script>
+    PR.prettyPrint();
+</script>
+</body>
+</html>
