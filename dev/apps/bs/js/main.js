@@ -83,7 +83,7 @@ require( [ "jquery", "codemirror", "codemirror-html", "bootstrap", "code-pretty"
                 mode: "text/html",
                 lineNumbers: true
             } );
-            CodeMirrorEditor.setSize( "100%", 460 );
+            CodeMirrorEditor.setSize( "100%", 360 );
 
             $previewNav.on( "click", function () {
                 var editorText,

@@ -1,0 +1,140 @@
+@import "compass/utilities/sprites";
+@import "login/*.png";
+
+//@include login-sprite(header_bg);
+
+.page-login {
+    min-height: 100%;
+    background: url(../images/login_bg.jpg) no-repeat center center #0c70bd;
+    background-size: cover;
+
+//---
+    .page-header {
+        width: $page-width;
+        padding-top: 40px;
+        @include center-block();
+        @include clearfix();
+    }
+
+
+    .page-title {
+        text-align: right;
+    }
+    .page-title-main {
+        width: 938px;
+        height: 94px;
+        font-size: 100%;
+        margin: 0;
+        padding: 0;
+        @include login-sprite(heading);
+        @include center-block();
+    }
+    .page-title-sub {
+        display: inline-block;
+        font-size: 22px;
+        color: #fff;
+        margin: 0 33px 16px 0;
+    }
+
+    .slogan {
+        color: #ffe400;
+        font-size: 26px;
+        text-align: center;
+        margin-top: 12px;
+    }
+    .slogan-segment {
+        display: inline-block;
+        margin: 0 12px;
+    }
+    .solgan-badge {
+        width: 80px;
+        height: 80px;
+        @include login-sprite(badge);
+        vertical-align: middle;
+        margin: 0 28px;
+    }
+
+//---
+    .page-content {
+        @include center-block();
+        @include clearfix();
+        width: $page-width;
+    }
+
+    .content-column {
+        float: left;
+    }
+    .content-card {
+        width: 386px;
+        height: 176px;
+        @include login-sprite(card);
+        margin-left: -76px;
+        margin-top: 150px;
+    }
+    .content-person {
+        width: 386px;
+        height: 176px;
+        @include login-sprite(person);
+        margin-right: -96px;
+        margin-top: 160px;
+    }
+    .content-form {
+        width: 383px;
+        height: 441px;
+        @include login-sprite(form);
+        margin: 40px 6px 0 6px;
+        padding: 84px 74px 0 74px;
+    }
+    .form-heading {
+        text-align: center;
+        font-size: 25px;
+        color: #fff;
+        line-height: 1;
+        margin-bottom: 38px;
+    }
+    .form-control {
+        height: 42px;
+        border-color: #1e99dd;
+        color: #b6cdde;
+        background-color: #063d75;
+        box-shadow: 0 0 1px 1px rgba(0,0,0,0.2) inset;
+        border-radius: 3px;
+        &:focus, {
+            border-color: #66afe9;
+            outline: 0;
+            -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.075),0 0 8px rgba(102,175,233,0.6);
+            box-shadow: inset 0 1px 1px rgba(0,0,0,0.075),0 0 8px rgba(102,175,233,0.6);
+        }
+    }
+    .form-control-password {
+        background-color: #064893;
+    }
+    .btn-submit {
+        width: 113px;
+        height: 60px;
+        border: none 0;
+        font-size: 21px;
+        color: #fff;
+        background-color: transparent;
+        @include login-sprite(btn);
+        @include center-block();
+        margin-top: 32px;
+        transition: all ease-in-out 0.15s;
+        &:hover,
+        &:active {
+            @include opacity(0.8);
+        }
+
+    }
+
+
+//---
+    .page-footer {
+        @include center-block();
+        @include clearfix();
+        width: $page-width;
+        color: #a4d8ff;
+        text-align: center;
+        margin-top: 40px;
+    }
+}

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>js [问题点数：40分]</title>
+    <link rel="stylesheet" href="../../assert/js/pretty/prettify.css"/>
+    <link rel="stylesheet" href="../../assert/css/bootstrap.css"/>
+    <script src="../../assert/js/pretty/prettify.min.js"></script>
+    <script src="../../assert/js/jquery-1.11.3.js"></script>
+<style>
+</style>
+</head>
+<body>
+
+
+<table class="person-info table table-bordered">
+    <thead>
+    <tr class="active">
+        <th>ID</th> <th>NAME</th> <th>SEX</th> <th>PHONE</th>
+    </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+
+<script>
++function () {
+
+    var data,
+        $personInfo,
+        html
+    ;
+    data = [
+        { "ID": "01", "NAME": "张三01", "SEX": "男1", "PHONE": "123-01" },
+        { "ID": "02", "NAME": "张三02", "SEX": "男2", "PHONE": "123-02" },
+        { "ID": "03", "NAME": "张三03", "SEX": "男3", "PHONE": "123-03" },
+        { "ID": "04", "NAME": "张三04", "SEX": "男4", "PHONE": "123-04" },
+        { "ID": "05", "NAME": "张三05", "SEX": "男5", "PHONE": "123-05" },
+        { "ID": "06", "NAME": "张三06", "SEX": "男6", "PHONE": "123-06" }
+    ];
+
+    $personInfo = $( ".person-info" );
+    html = "";
+
+    $.each( data, function ( index, elt ) {
+        var row,
+            id,
+            name,
+            sex,
+            phone
+        ;
+        id = elt[ "ID" ];
+        name = elt[ "NAME" ];
+        sex = elt[ "SEX" ];
+        phone = elt[ "PHONE" ];
+        row = '\
+        <tr>\
+            <td>' + id + '</td>\
+            <td>' + name + '</td>\
+            <td>' + sex + '</td>\
+            <td>' + phone + '</td>\
+        </tr>';
+        html += row;
+    } );
+    $personInfo.find( "tbody" ).html( html );
+} ();
+</script>
+
+<pre class="prettyprint linenums">
+
+&lt;table class="person-info table table-bordered">
+    &lt;thead>
+    &lt;tr class="active">
+        &lt;th>ID&lt;/th> &lt;th>NAME&lt;/th> &lt;th>SEX&lt;/th> &lt;th>PHONE&lt;/th>
+    &lt;/tr>
+    &lt;/thead>
+    &lt;tbody>
+    &lt;tr>
+        &lt;td>&lt;/td>
+        &lt;td>&lt;/td>
+        &lt;td>&lt;/td>
+        &lt;td>&lt;/td>
+    &lt;/tr>
+    &lt;/tbody>
+&lt;/table>
+
+&lt;script>
++function () {
+
+    var data,
+        $personInfo,
+        html
+    ;
+    data = [
+        { "ID": "01", "NAME": "张三01", "SEX": "男1", "PHONE": "123-01" },
+        { "ID": "02", "NAME": "张三02", "SEX": "男2", "PHONE": "123-02" },
+        { "ID": "03", "NAME": "张三03", "SEX": "男3", "PHONE": "123-03" },
+        { "ID": "04", "NAME": "张三04", "SEX": "男4", "PHONE": "123-04" },
+        { "ID": "05", "NAME": "张三05", "SEX": "男5", "PHONE": "123-05" },
+        { "ID": "06", "NAME": "张三06", "SEX": "男6", "PHONE": "123-06" }
+    ];
+
+    $personInfo = $( ".person-info" );
+    html = "";
+
+    $.each( data, function ( index, elt ) {
+        var row,
+            id,
+            name,
+            sex,
+            phone
+        ;
+        id = elt[ "ID" ];
+        name = elt[ "NAME" ];
+        sex = elt[ "SEX" ];
+        phone = elt[ "PHONE" ];
+        row = '\
+    &lt;tr>\
+        &lt;td>' + id + '&lt;/td>\
+        &lt;td>' + name + '&lt;/td>\
+        &lt;td>' + sex + '&lt;/td>\
+        &lt;td>' + phone + '&lt;/td>\
+    &lt;/tr>';
+        html += row;
+    } );
+    $personInfo.find( "tbody" ).html( html );
+} ();
+&lt;/script>    
+</pre>
+<script>
+    PR.prettyPrint();
+</script>
+</body>
+</html>

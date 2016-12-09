@@ -115,6 +115,224 @@
                                         </div>
                                     </section>
                                 </section>
+
+                                <section class="bs-section">
+                                    <h2>引导主体副本</h2>
+                                    <p>为了给段落添加强调文本，则可以添加 class="lead"，这将得到更大更粗、行高更高的文本，如下面实例所示</p>
+                                    <pre class="prettyprint linenums">
+.lead {
+    margin-bottom: 20px;
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 1.4;
+}
+@media (min-width: 768px) {
+    .lead {
+        font-size: 21px;
+    }
+}</pre>
+                                    <div class="bs-editor">
+                                        <ul class="nav nav-tabs" >
+                                            <li class="active"><a href="#edit_3" role="tab" data-toggle="tab"><i class="fa fa-edit"></i> 编辑</a></li>
+                                            <li ><a class="preview" href="#preview_3" data-toggle="tab"><i class="fa fa-eye"></i> 预览</a></li>
+                                            <li class="pull-right"><button type="button" class="btn btn-info btn-sm js--full"><i class="fa fa-arrows-alt"></i> 切换全屏</button></li>
+                                        </ul>
+                                        <div class="tab-content">
+                                            <div class="tab-pane tab-pane-editor active" id="edit_3">
+                                                <textarea class="editor hidden">
+<p class="lead">
+    这是一个演示引导主体副本用法的实例。这是一个演示引导主体副本用法的实例。
+    这是一个演示引导主体副本用法的实例。这是一个演示引导主体副本用法的实例。
+    这是一个演示引导主体副本用法的实例。这是一个演示引导主体副本用法的实例。
+    这是一个演示引导主体副本用法的实例。这是一个演示引导主体副本用法的实例。</p>
+                                                </textarea>
+                                            </div>
+                                            <div class="tab-pane tab-pane-preview" id="preview_3">
+                                                preview
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+                                <section class="bs-section">
+                                    <h2>强调</h2>
+                                    <table class="table table-bordered">
+                                        <thead>
+                                        <tr class="active">
+                                            <th>标签/类</th> <th>描述</th> <th>原理</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td>&lt;small></td>
+                                            <td>设置文本为父文本大小的 85%</td>
+                                            <td><pre class="code">
+.small, small {
+    font-size: 85%;
+}</pre>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>&lt;strong></td>
+                                            <td>设置文本为更粗的文本</td>
+                                            <td><pre class="code">
+b, strong {
+    font-weight: 700;
+}</pre>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>&lt;em></td>
+                                            <td>设置文本为斜体</td>
+                                            <td><pre class="code">
+/* user agent stylesheet */
+i, cite, em, var, address, dfn {
+    font-style: italic;
+}</pre>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>.text-left</td>
+                                            <td>向左对齐文本</td>
+                                            <td><pre class="code">
+.text-left {
+    text-align: left;
+}</pre>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>.text-center</td>
+                                            <td>居中对齐文本</td>
+                                            <td><pre class="code">
+.text-center {
+    text-align: center;
+}</pre>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>.text-right</td>
+                                            <td>向右对齐文本</td>
+                                            <td><pre class="code">
+.text-right {
+    text-align: right;
+}</pre>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>.text-muted</td>
+                                            <td><span class="text-muted">本行内容是减弱的</span></td>
+                                            <td><pre class="code">
+.text-muted {
+    color: #777;
+}</pre>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>.text-primary</td>
+                                            <td><span class="text-primary">本行内容是 primary</span></td>
+                                            <td><pre class="code">
+.text-primary {
+    color: #337ab7;
+}</pre>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>.text-success</td>
+                                            <td><span class="text-success">本行内容是 success</span></td>
+                                            <td><pre class="code">
+.text-success {
+    color: #3c763d;
+}</pre>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>.text-info</td>
+                                            <td><span class="text-info">本行内容是 info</span></td>
+                                            <td><pre class="code">
+.text-info {
+    color: #31708f;
+}</pre>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>.text-warning</td>
+                                            <td><span class="text-warning">本行内容是 warning</span></td>
+                                            <td><pre class="code">
+.text-warning {
+    color: #8a6d3b;
+}</pre>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>.text-danger</td>
+                                            <td><span class="text-danger">本行内容是 danger</span></td>
+                                            <td><pre class="code">
+.text-danger {
+    color: #a94442;
+}</pre>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </section>
+                                <section class="bs-section">
+                                    <h2>缩写</h2>
+                                    <p>HTML 元素提供了用于缩写的标记，比如 WWW 或 HTTP。
+                                       Bootstrap 定义 &lt;abbr> 元素的样式为显示在文本底部的一条虚线边框，当鼠标悬停在上面时会显示完整的文本（只要您为 &lt;abbr> title 属性添加了文本）。
+                                       为了得到一个更小字体的文本，请添加 .initialism 到 &lt;abbr>。</p>
+                                    <div class="bs-editor">
+                                        <ul class="nav nav-tabs" >
+                                            <li class="active"><a href="#edit_4" role="tab" data-toggle="tab"><i class="fa fa-edit"></i> 编辑</a></li>
+                                            <li ><a class="preview" href="#preview_4" data-toggle="tab"><i class="fa fa-eye"></i> 预览</a></li>
+                                            <li class="pull-right"><button type="button" class="btn btn-info btn-sm js--full"><i class="fa fa-arrows-alt"></i> 切换全屏</button></li>
+                                        </ul>
+                                        <div class="tab-content">
+                                            <div class="tab-pane tab-pane-editor active" id="edit_4">
+                                                <textarea class="editor hidden">
+<abbr title="World Wide Web">WWW</abbr><br>
+<abbr title="Real Simple Syndication" class="initialism">RSS</abbr>
+                                                </textarea>
+                                            </div>
+                                            <div class="tab-pane tab-pane-preview" id="preview_4">
+                                                preview
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+                                <section class="bs-section">
+                                    <h2>地址（Address）</h2>
+                                    <p>使用 &lt;address> 标签，您可以在网页上显示联系信息。由于 &lt;address> 默认为 display:block;，您需要使用
+                                    标签来为封闭的地址文本添加换行。</p>
+                                    <div class="bs-editor">
+                                        <ul class="nav nav-tabs" >
+                                            <li class="active"><a href="#edit_5" role="tab" data-toggle="tab"><i class="fa fa-edit"></i> 编辑</a></li>
+                                            <li ><a class="preview" href="#preview_5" data-toggle="tab"><i class="fa fa-eye"></i> 预览</a></li>
+                                            <li class="pull-right"><button type="button" class="btn btn-info btn-sm js--full"><i class="fa fa-arrows-alt"></i> 切换全屏</button></li>
+                                        </ul>
+                                        <div class="tab-content">
+                                            <div class="tab-pane tab-pane-editor active" id="edit_5">
+                                                <textarea class="editor hidden">
+<address>
+    <strong>Some Company, Inc.</strong><br>
+    007 street<br>
+    Some City, State XXXXX<br>
+    <abbr title="Phone">P:</abbr> (123) 456-7890
+</address>
+<address>
+    <strong>Full Name</strong><br>
+    <a href="mailto:#">mailto@somedomain.com</a>
+</address>
+                                                </textarea>
+                                            </div>
+                                            <div class="tab-pane tab-pane-preview" id="preview_5">
+                                                preview
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+                                <section class="bs-section">
+                                    <h2>引用（Blockquote）</h2>
+                                    <p>您可以在任意的 HTML 文本旁使用默认的 &lt;blockquote>。其他选项包括，添加一个 &lt;small> 标签来标识引用的来源，使用 class .pull-right 向右对齐引用。下面的实例演示了这些特性：</p>
+                                </section>
                             </main>
                         </article>
 

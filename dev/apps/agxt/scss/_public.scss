@@ -1,0 +1,15 @@
+$page-width: 1000px;
+body {
+    font: 14px/1.5 "Microsoft Yahei",Arial,"宋体","Helvetica Neue",Helvetica,"Hiragino Sans GB",sans-serif;
+    color: #333;
+}
+body,
+html {
+    height: 100%;
+}
+// reset
+.page-header {
+    padding-bottom: 0;
+    margin: 0;
+    border-bottom: none 0;
+}

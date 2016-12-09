@@ -22,6 +22,11 @@ module.exports = function(grunt) {
                     { src: 'dist/apps/zfjd/images/login' }
                 ]
             },
+            dist_agxt_image: {
+                files: [
+                    { src: 'dist/apps/agxt/images/login' }
+                ]
+            },
             dist_all_scss: {
                 files: [
                     { src: 'dist/**/*.scss' }
@@ -59,6 +64,12 @@ module.exports = function(grunt) {
                     { // app - bs
                         cwd: 'dev/',
                         src: ['apps/bs/**'],
+                        dest: 'dist',
+                        expand: true
+                    },
+                    { // app - zfjd
+                        cwd: 'dev/',
+                        src: ['apps/agxt/**'],
                         dest: 'dist',
                         expand: true
                     }

@@ -1,0 +1,60 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="text/javascript">
+        function CMyObj(){
+            var n = 0;
+
+            function hello(){
+                n++;
+                console.log('n:' + n);
+            }
+
+            this.print = function(){
+                console.log('n value is:' + n);
+            };
+
+            if ( CMyObj.prototype.add == undefined)
+            {
+                CMyObj.prototype.add = function(){
+                    hello();
+                }
+            }
+        }
+        window.onload = function(){
+            document.getElementById('btn1').onclick = function(){
+
+                var m2 = new CMyObj();
+                m2.add();
+                m2.add();
+
+                console.log('/////////////////////////////');
+                var m1 = new CMyObj();
+                m1.add();
+                m1.add();
+                m1.add();
+
+                console.log('/////////////////////////////');
+                var m3 = new CMyObj();
+                m3.add();
+
+                console.log('/////////////////////////////');
+                m1.print();
+                m2.print();
+                m3.print();
+            }
+        }
+    </script>
+</head>
+
+<body>
+<button id="btn1">button1</button>
+</body>
+</html>
+
+
+
