@@ -5,7 +5,7 @@
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>系统管理</title>
+    <title>案管系统</title>
     <script>
         window.onload = function () {
             removeOverlay();
@@ -18,24 +18,22 @@
             document.body.setAttribute( "class", "" );
         }
     </script>
-    <script src="./js/variable.js" id="variablejs">/* 全局变量 */</script>
     <title></title>
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lte IE 8]>
     <script src="../../../dev/modules/lib/ie/respond.js"></script>
     <script src="../../../dev/modules/lib/ie/html5shiv.js"></script>
-    <script src="../../../dev/modules/lib/ie/es5-shim.js"></script>
     <![endif]-->
-    <link rel="stylesheet" href="../../../dev/modules/ui/css/pku.css?VERSION=v0.20161024"/>
-    <link rel="stylesheet" href="css/style.css?VERSION=v0.20161024"/>
+    <link rel="stylesheet" href="../../../dev/modules/ui/css/pku.css?VERSION=v0.20161013"/>
+    <link rel="stylesheet" href="css/style.css?VERSION=v0.20161013"/>
     <script data-main="../../../dev/modules/" src="../../../dev/modules/require.js"></script>
-    <script>
+    <script >
         var VERSION,
                 DEV_MODE
                 ;
         DEV_MODE = false;
-        VERSION = DEV_MODE ? (new Date()).getTime() : "v0.20161024";
+        VERSION = DEV_MODE ? (new Date()).getTime() : "v0.20161013";
         require.config( {
             urlArgs: "VERSION=" + VERSION,
             paths: {
@@ -78,18 +76,18 @@
                     'text': 'utils/text'
                 }
             },
-            shim: {
-                "datepicker": [ "jquery" ],
-                "select2": [ "jquery", "xDomainRequest" ],
-                "bootstrap": [ "jquery" ],
+            shim : {
+                "datepicker": [ "jquery"],
+                "select2": [ "jquery", "xDomainRequest"],
+                "bootstrap": [ "jquery"],
                 "formvalidation": [ "jquery", "bootstrap" ],
                 "formvalidationBs": [ "formvalidation" ],
                 "formvalidationI18N": [ "formvalidation", "formvalidationBs" ],
                 "webuploader": [ "css!lib/webuploader/css/webuploader.css" ],
                 "colresizable": [ "jquery" ],
-                "bootgrid": [ "css!lib/bootgrid/css/jquery.bootgrid.css", "bootstrap", "colresizable" ],
-                "select-area": [ "css!lib/select-area/css/select-area.css" ],
-                "sweet-alert": [ "jquery" ],
+                "bootgrid": [ "css!lib/bootgrid/css/jquery.bootgrid.css" , "bootstrap", "colresizable"],
+                "select-area": ["css!lib/select-area/css/select-area.css" ],
+                "sweet-alert": ["jquery" ],
                 "code-pretty": [ "css!lib/pretty/prettify.css" ]
             },
             // 超时
@@ -104,15 +102,46 @@
     <i class="fa fa-spin fa-spinner"></i>
 </div>
 <!-- page -->
-<div class="page page-login">
+<div class="page page-index">
 
     <!--  page-header -->
-    <div class="page-header"></div>
+    <div class="page-header">
+        <h1 class="page-title"><i class="page-title-icon"></i><span class="page-title-text"><!--武汉市公安局案卷v管理系v统 V2.0--></span></h1>
+        <ul class="func-list">
+            <li class="func-item"><a href="#" class="func-link"><i class="icon icon-worktable"></i><span class="text">我的工作台</span></a></li>
+            <li class="func-item"><a href="#" class="func-link"><i class="icon icon-key"></i><span class="text">密码修改</span></a></li>
+            <li class="func-item"><a href="#" class="func-link"><i class="icon icon-help"></i><span class="text">页面帮助</span></a></li>
+            <li class="func-item"><a href="#" class="func-link"><i class="icon icon-logout"></i><span class="text">安全退出</span></a></li>
+        </ul>
+    </div>
     <!--  /page-header -->
 
     <!-- page-content -->
     <div class="page-content">
 
+        <div class="col-main"></div>
+        <div class="col-sub">
+            <aside class="menu menu-agxt">
+                <div class="menu-tree">
+                    <ul class="menu-list">
+                        <li class="menu-item"><a class="menu-link" href="#"><i class="icon"></i>系统首页</a></li>
+                        <li class="menu-item menu-sub">
+                            <b class="menu-sub-indicator"></b>
+                            <a class="menu-link" href="#"><i class="icon"></i>案卷信息管理</a>
+                            <ul class="menu-sub-list">
+                                <li class="menu-sub-item"><a class="menu-sub-link" href="#"><i class="icon"></i>案卷采集</a></li>
+                                <li class="menu-sub-item"><a class="menu-sub-link" href="#"><i class="icon"></i>案卷阅卷</a></li>
+                                <li class="menu-sub-item"><a class="menu-sub-link" href="#"><i class="icon"></i>案卷创建</a></li>
+                                <li class="menu-sub-item"><a class="menu-sub-link" href="#"><i class="icon"></i>案卷处理登记</a></li>
+                                <li class="menu-sub-item"><a class="menu-sub-link" href="#"><i class="icon"></i>案卷超期预警</a></li>
+                                <li class="menu-sub-item"><a class="menu-sub-link" href="#"><i class="icon"></i>案卷办理环节维护</a></li>
+                            </ul>
+                        </li>
+                        <li class="menu-item"><a class="menu-link" href="#"><i class="icon"></i>案卷存放场所</a></li>
+                    </ul>
+                </div>
+            </aside>
+        </div>
 
     </div>
     <!-- /page-content -->

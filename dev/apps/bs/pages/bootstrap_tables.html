@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>我的教程</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="../images/favicon.ico">
+    <link rel="stylesheet" href="../css/bootstrap.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../../../../dev/modules/ui/css/font-awesome.css">
+    <script data-main="../../../../dev/modules/" src="../../../../dev/modules/require.js"></script>
+    <script>
+        require.config( {
+            urlArgs: "VERSION=1.0",
+            paths: {
+                "jquery": "jquery/jquery-1.11.3",
+                "bootstrap": "lib/bootstrap/js/bootstrap",
+                "codemirror": "lib/codemirror/codemirror",
+                "codemirror-html": "lib/codemirror/mode/htmlmixed",
+                "code-pretty": "lib/pretty/prettify.min"
+            },
+            map: {
+                '*': {
+                    'css': 'utils/css/css',
+                    'text': 'utils/text'
+                }
+            },
+            shim: {
+                "bootstrap": [ "jquery" ],
+                "codemirror": ["css!lib/codemirror/codemirror.css"],
+                "code-pretty": [ "css!lib/pretty/prettify.css" ]
+            }
+        } );
+    </script>
+    <script src="../js/main.js"></script>
+</head>
+<body>
+
+<!-- page -->
+<div class="page page-index">
+
+
+    <!-- page-header -->
+    <nav class="page-header navbar navbar-default navbar-static-top js--pageHeaderContainer" role="navigation">
+    </nav>
+    <!-- /page-header -->
+
+
+    <!-- page-main -->
+    <div class="page-main">
+
+        <div class="container ">
+
+            <div class="row">
+
+                <div class="col-lg-3 js--sidebarContainer">
+
+                    <div class="bs-sidebar">
+                    </div>
+
+                </div>
+
+                <div class="col-lg-9">
+
+                    <div class="content">
+                        <article class="bs-article">
+                            <header>
+                                <h1>Bootstrap 表格</h1>
+                                <p>Bootstrap 提供了一个清晰的创建表格的布局。</p>
+                            </header>
+                            <main>
+                                <section class="bs-section">
+                                    <h2>支持的表格元素</h2>
+                                    <table class="table table-bordered">
+                                        <thead>
+                                        <tr class="active">
+                                            <th style="width: 160px;">标签</th> <th>描述</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td>&lt;table></td>
+                                            <td>为表格添加基础样式。</td>
+                                        </tr>
+                                        <tr>
+                                            <td>&lt;thead></td>
+                                            <td>表格标题行的容器元素，用来标识表格列。</td>
+                                        </tr>
+                                        <tr>
+                                            <td>&lt;tbody></td>
+                                            <td>表格主体中的表格行的容器元素。</td>
+                                        </tr>
+                                        <tr>
+                                            <td>&lt;tr></td>
+                                            <td>一组出现在单行上的表格单元格（&lt;td>、&lt;th>）的容器元素。</td>
+                                        </tr>
+                                        <tr>
+                                            <td>&lt;td></td>
+                                            <td>默认的表格单元格。</td>
+                                        </tr>
+                                        <tr>
+                                            <td>&lt;th></td>
+                                            <td>特殊的表格单元格，用来标识列或行（取决于范围和位置）。<span class="text-danger">必须在 &lt;thead> 内使用。</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>&lt;caption></td>
+                                            <td>关于表格存储内容的描述或总结。</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </section>
+                                <section class="bs-section">
+                                    <h2>表格类</h2>
+                                    <p>下表样式可用于表格（&lt;table>）中</p>
+                                    <table class="table table-bordered">
+                                        <thead>
+                                        <tr class="active">
+                                            <th style="width: 160px;">类</th> <th>描述</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td>.table</td>
+                                            <td>为任意 &lt;table> 添加基本样式 (只有横向分隔线)</td>
+                                        </tr>
+                                        <tr>
+                                            <td>.table-striped</td>
+                                            <td>在 &lt;tbody> 内添加斑马线形式的条纹 ( IE8 不支持)</td>
+                                        </tr>
+                                        <tr>
+                                            <td>.table-bordered</td>
+                                            <td>为所有表格的单元格添加边框</td>
+                                        </tr>
+                                        <tr>
+                                            <td>.table-hover</td>
+                                            <td>在 &lt;tbody> 内的任一行启用鼠标悬停状态</td>
+                                        </tr>
+                                        <tr>
+                                            <td>.table-condensed</td>
+                                            <td>让表格更加紧凑</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+
+                                    <div class="bs-editor">
+                                        <ul class="nav nav-tabs" >
+                                            <li class="active"><a href="#edit_1" role="tab" data-toggle="tab"><i class="fa fa-edit"></i> 编辑</a></li>
+                                            <li ><a class="preview" href="#preview_1" data-toggle="tab"><i class="fa fa-eye"></i> 预览</a></li>
+                                            <li class="pull-right"><button type="button" class="btn btn-info btn-sm js--full"><i class="fa fa-arrows-alt"></i> 切换全屏</button></li>
+                                        </ul>
+                                        <div class="tab-content">
+                                            <div class="tab-pane tab-pane-editor active" id="edit_1">
+                                                <textarea class="editor hidden">
+<table class="table table-bordered">
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>Firstname</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>1</td> <td>Anna</td>
+    </tr>
+    <tr>
+        <td>2</td> <td>Debbie</td>
+    </tr>
+    <tr>
+        <td>3</td> <td>John</td>
+    </tr>
+    </tbody>
+</table>
+                                                </textarea>
+                                            </div>
+                                            <div class="tab-pane tab-pane-preview" id="preview_1">
+                                                preview
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </section>
+                            </main>
+                        </article>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+    <!-- /page-main -->
+
+    <!-- page-footer -->
+    <div class="page-footer">
+
+    </div>
+    <!-- /page-footer -->
+
+</div>
+<!-- /page -->
+
+
+</body>
+</html>

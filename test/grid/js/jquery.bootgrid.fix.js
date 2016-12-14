@@ -1841,10 +1841,9 @@
 
             option.formatters = $.extend( option.formatters, formatters );
 
+            // 设置 Ajax url
+            option.url = this.attr( "data-url" ) || option.url;
         }
-
-        // 设置 Ajax url
-        option.url = this.attr( "data-url" ) || option.url;
 
         var args = Array.prototype.slice.call( arguments, 1 ),
             returnValue = null,

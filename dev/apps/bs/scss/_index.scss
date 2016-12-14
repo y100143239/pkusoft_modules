@@ -59,15 +59,15 @@
             color: #777;
             padding: 3px 10px 3px 1em;
             &:hover {
-                background: darken( #F5F5F5, 20% );
+                background: #F5F5F5;
                 color: #444;
             }
         }
     }
-    .bs-active {
+    li.bs-active {
         a {
-            background: #F5F5F5;
             color: #444;
+            background: darken( #F5F5F5, 20% );
         }
     }
 }

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>JS或者JQ改变背景图效果 [问题点数：30分]</title>
+    <link rel="stylesheet" href="../../assert/js/pretty/prettify.css"/>
+    <link rel="stylesheet" href="../../assert/css/bootstrap.css"/>
+    <script src="../../assert/js/pretty/prettify.min.js"></script>
+    <script src="../../assert/js/jquery-1.11.3.js"></script>
+<style>
+</style>
+</head>
+<body>
+
+<style>
+    .list {
+        width: 402px;
+        border: solid 1px #eee;
+    }
+    .item {
+        float: left;
+    }
+    .item > a {
+        display: block;
+        width: 100px;
+        height: 100px;
+        line-height: 100px;
+        text-align: center;
+        color: #eee;
+    }
+    .item > a:hover {
+        background: #ddd;
+    }
+    .item.active > a {
+        color: #FD0600;
+    }
+</style>
+
+<div class="list clearfix">
+    <div class="item active"><a href="#">首页</a></div>
+    <div class="item"><a href="#">附近</a></div>
+    <div class="item"><a href="#">精选</a></div>
+    <div class="item"><a href="#">我的</a></div>
+</div>
+
+<script>
+    $( document ).ready( function () {
+        $( ".item" ).on( "click", function ( e ) {
+            e.preventDefault();
+            $( this ).addClass( "active" )
+                     .siblings().removeClass( "active" );
+        } );
+    } );
+</script>
+
+<pre class="prettyprint linenums">
+
+&lt;style>
+    .list {
+        width: 402px;
+        border: solid 1px #eee;
+    }
+    .item {
+        float: left;
+    }
+    .item > a {
+        display: block;
+        width: 100px;
+        height: 100px;
+        line-height: 100px;
+        text-align: center;
+        color: #eee;
+    }
+    .item > a:hover {
+        background: #ddd;
+    }
+    .item.active > a {
+        color: #FD0600;
+    }
+&lt;/style>
+
+&lt;div class="list clearfix">
+    &lt;div class="item active">&lt;a href="#">首页&lt;/a>&lt;/div>
+    &lt;div class="item">&lt;a href="#">附近&lt;/a>&lt;/div>
+    &lt;div class="item">&lt;a href="#">精选&lt;/a>&lt;/div>
+    &lt;div class="item">&lt;a href="#">我的&lt;/a>&lt;/div>
+&lt;/div>
+
+&lt;script>
+    $( document ).ready( function () {
+        $( ".item" ).on( "click", function ( e ) {
+            e.preventDefault();
+            $( this ).addClass( "active" )
+                    .siblings().removeClass( "active" );
+        } );
+    } );
+&lt;/script>    
+</pre>
+<script>
+    PR.prettyPrint();
+</script>
+</body>
+</html>

@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>我的教程</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" href="../images/favicon.ico">
     <link rel="stylesheet" href="../css/bootstrap.css">
     <link rel="stylesheet" href="../css/style.css">
@@ -96,7 +99,7 @@
                                     </div>
                                     <section>
                                         <h2>内联子标题</h2>
-                                        <p>如果需要向任何标题添加一个内联子标题，只需要简单地在元素两旁添加 &lt;small>，或者添加 .small class，这样子您就能得到一个字号更小的颜色更浅的文本，如下面实例所示</p>
+                                        <p>如果需要向任何标题添加一个内联子标题，只需要简单地在元素两旁添加 <code>&lt;small></code>，或者添加 <code>.small</code>，这样子您就能得到一个字号更小的颜色更浅的文本，如下面实例所示</p>
                                         <div class="bs-editor">
                                             <ul class="nav nav-tabs" >
                                                 <li class="active"><a href="#edit_2" role="tab" data-toggle="tab"><i class="fa fa-edit"></i> 编辑</a></li>
@@ -118,7 +121,7 @@
 
                                 <section class="bs-section">
                                     <h2>引导主体副本</h2>
-                                    <p>为了给段落添加强调文本，则可以添加 class="lead"，这将得到更大更粗、行高更高的文本，如下面实例所示</p>
+                                    <p>为了给段落添加强调文本，则可以添加 <code>.lead</code>，这将得到更大更粗、行高更高的文本，如下面实例所示</p>
                                     <pre class="prettyprint linenums">
 .lead {
     margin-bottom: 20px;
@@ -277,8 +280,8 @@ i, cite, em, var, address, dfn {
                                 <section class="bs-section">
                                     <h2>缩写</h2>
                                     <p>HTML 元素提供了用于缩写的标记，比如 WWW 或 HTTP。
-                                       Bootstrap 定义 &lt;abbr> 元素的样式为显示在文本底部的一条虚线边框，当鼠标悬停在上面时会显示完整的文本（只要您为 &lt;abbr> title 属性添加了文本）。
-                                       为了得到一个更小字体的文本，请添加 .initialism 到 &lt;abbr>。</p>
+                                       Bootstrap 定义 <code>&lt;abbr></code> 元素的样式为显示在文本底部的一条虚线边框，当鼠标悬停在上面时会显示完整的文本（只要您为 &lt;abbr> title 属性添加了文本）。
+                                       为了得到一个更小字体的文本，请添加 <code>.initialism</code> 到 <code>&lt;abbr></code>。</p>
                                     <div class="bs-editor">
                                         <ul class="nav nav-tabs" >
                                             <li class="active"><a href="#edit_4" role="tab" data-toggle="tab"><i class="fa fa-edit"></i> 编辑</a></li>
@@ -300,7 +303,7 @@ i, cite, em, var, address, dfn {
                                 </section>
                                 <section class="bs-section">
                                     <h2>地址（Address）</h2>
-                                    <p>使用 &lt;address> 标签，您可以在网页上显示联系信息。由于 &lt;address> 默认为 display:block;，您需要使用
+                                    <p>使用 <code>&lt;address></code> 标签，您可以在网页上显示联系信息。由于 <code>&lt;address></code> 默认为 <code>display:block;</code>，您需要使用
                                     标签来为封闭的地址文本添加换行。</p>
                                     <div class="bs-editor">
                                         <ul class="nav nav-tabs" >
@@ -331,7 +334,230 @@ i, cite, em, var, address, dfn {
                                 </section>
                                 <section class="bs-section">
                                     <h2>引用（Blockquote）</h2>
-                                    <p>您可以在任意的 HTML 文本旁使用默认的 &lt;blockquote>。其他选项包括，添加一个 &lt;small> 标签来标识引用的来源，使用 class .pull-right 向右对齐引用。下面的实例演示了这些特性：</p>
+                                    <p>您可以在任意的 HTML 文本旁使用默认的 <code>&lt;blockquote></code>。其他选项包括，添加一个 <code>&lt;small></code> 标签来标识引用的来源，使用 <code>.pull-right</code> 向右对齐引用。下面的实例演示了这些特性：</p>
+                                    <div class="bs-editor">
+                                        <ul class="nav nav-tabs" >
+                                            <li class="active"><a href="#edit_6" role="tab" data-toggle="tab"><i class="fa fa-edit"></i> 编辑</a></li>
+                                            <li ><a class="preview" href="#preview_6" data-toggle="tab"><i class="fa fa-eye"></i> 预览</a></li>
+                                            <li class="pull-right"><button type="button" class="btn btn-info btn-sm js--full"><i class="fa fa-arrows-alt"></i> 切换全屏</button></li>
+                                        </ul>
+                                        <div class="tab-content">
+                                            <div class="tab-pane tab-pane-editor active " id="edit_6">
+                                                <textarea class="editor hidden">
+<blockquote>
+    <p>
+        这是一个默认的引用实例。这是一个默认的引用实例。这是一个默认的引用实例。这是一个默认的引用实例。这是一个默认的引用实例。这是一个默认的引用实例。这是一个默认的引用实例。这是一个默认的引用实例。
+    </p>
+</blockquote>
+<blockquote>
+    这是一个带有源标题的引用。
+    <small>Someone famous in <cite title="Source Title">Source Title</cite></small>
+</blockquote>
+<blockquote class="pull-right">
+    这是一个向右对齐的引用。
+    <small>Someone famous in <cite title="Source Title">Source Title</cite></small>
+</blockquote>
+                                                </textarea>
+                                            </div>
+                                            <div class="tab-pane tab-pane-preview clearfix" id="preview_6">
+                                                preview
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+                                <section class="bs-section">
+                                    <h2>列表</h2>
+                                    <p>Bootstrap 支持有序列表（ol）、无序列表（ul）和定义列表（dl）。</p>
+                                    <ul>
+                                        <li><b>有序列表：</b>有序列表是指以数字或其他有序字符开头的列表。</li>
+                                        <li><b>无序列表：</b>无序列表是指没有特定顺序的列表，是以传统风格的着重号开头的列表。如果您不想显示这些着重号，您可以使用 <code>.list-unstyled</code> 来移除样式。您也可以通过使用 <code>.list-inline</code> 把所有的列表项放在同一行中。</li>
+                                        <li><b>定义列表：</b>在这种类型的列表中，每个列表项可以包含 <code>&lt;dt></code> 和 <code>&lt;dd></code> 元素。<code>&lt;dt></code> 代表 定义术语，就像字典，这是被定义的属于（或短语）。接着，<code>&lt;dd></code> 是 <code>&lt;dt></code> 的描述。您可以使用 <code>.dl-horizontal</code> 把 <code>&lt;dl></code> 行中的属于与描述并排显示。</li>
+                                    </ul>
+                                </section>
+                                <section class="bs-section">
+                                    <h2>更多排版类</h2>
+                                    <table class="table table-bordered">
+                                        <thead>
+                                        <tr class="active">
+                                            <th style="width: 160px;">类</th> <th>描述</th> <th>原理</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td>.lead</td>
+                                            <td>使段落突出显示</td>
+                                            <td><pre class="code">
+.lead {
+    margin-bottom: 20px;
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 1.4;
+}</pre>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>.small</td>
+                                            <td>设定小文本 (设置为父文本的 85% 大小)</td>
+                                            <td><pre class="code">
+.small, small {
+    font-size: 85%;
+}</pre>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>.text-left</td>
+                                            <td>设定文本左对齐</td>
+                                            <td><pre class="code">
+.text-left {
+    text-align: left;
+}</pre>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>.text-center</td>
+                                            <td>设定文本居中对齐</td>
+                                            <td><pre class="code">
+.text-center {
+    text-align: center;
+}</pre>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>.text-right</td>
+                                            <td>右对齐文本</td>
+                                            <td><pre class="code">
+.text-right {
+    text-align: right;
+}</pre>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>.text-justify</td>
+                                            <td>两端对齐文本</td>
+                                            <td><pre class="code">
+.text-justify {
+    text-align: justify;
+}</pre>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>.text-nowrap</td>
+                                            <td>文本不换行，单行显示</td>
+                                            <td><pre class="code">
+.text-nowrap {
+    white-space: nowrap;
+}</pre>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>.text-lowercase</td>
+                                            <td>设定文本小写</td>
+                                            <td><pre class="code">
+.text-lowercase {
+    text-transform: lowercase;
+}</pre>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>.text-uppercase</td>
+                                            <td>设定文本大写</td>
+                                            <td><pre class="code">
+.text-uppercase {
+    text-transform: uppercase;
+}</pre>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>.text-capitalize</td>
+                                            <td>设定单词首字母大写</td>
+                                            <td><pre class="code">
+.text-capitalize {
+    text-transform: capitalize;
+}</pre>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>.initialism</td>
+                                            <td>显示在 &lt;abbr> 元素中的文本以小号字体展示，且可以将小写字母转换为大写字母</td>
+                                            <td><pre class="code">
+.initialism {
+    font-size: 90%;
+    text-transform: uppercase;
+}</pre>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>.blockquote-reverse</td>
+                                            <td>设定引用右对齐</td>
+                                            <td><pre class="code">
+.blockquote-reverse,
+blockquote.pull-right {
+    padding-right: 15px;
+    padding-left: 0;
+    text-align: right;
+    border-right: 5px solid #eee;
+    border-left: 0;
+}</pre>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>.list-unstyled</td>
+                                            <td>移除默认的列表样式，列表项中左对齐 ( &lt;ul> 和 &lt;ol> 中)。 这个类仅适用于直接子列表项 (如果需要移除嵌套的列表项，你需要在嵌套的列表中使用该样式)</td>
+                                            <td><pre class="code">
+.list-unstyled {
+    padding-left: 0;
+    list-style: none;
+}</pre>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>.list-inline</td>
+                                            <td>将所有列表项放置同一行</td>
+                                            <td><pre class="code">
+.list-inline {
+    padding-left: 0;
+    margin-left: -5px;
+    list-style: none;
+}
+.list-inline > li {
+    display: inline-block;
+    padding-right: 5px;
+    padding-left: 5px;
+}</pre>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>.dl-horizontal</td>
+                                            <td>该类设置了浮动和偏移，应用于 &lt;dl> 元素和 &lt;dt> 元素中，具体实现可以查看实例</td>
+                                            <td><pre class="code">
+@media (min-width: 768px) {
+    .dl-horizontal dt {
+        float: left;
+        width: 160px;
+        overflow: hidden;
+        clear: left;
+        text-align: right;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+    .dl-horizontal dd {
+        margin-left: 180px;
+    }
+}</pre>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>.pre-scrollable</td>
+                                            <td>使 &lt;pre> 元素可滚动 scrollable</td>
+                                            <td><pre class="code">
+.pre-scrollable {
+    max-height: 340px;
+    overflow-y: scroll;
+}</pre>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
                                 </section>
                             </main>
                         </article>

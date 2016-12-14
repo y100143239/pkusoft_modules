@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>关于jQuery做二级菜单 [问题点数：20分]</title>
+    <link rel="stylesheet" href="../../assert/js/pretty/prettify.css"/>
+    <!--<link rel="stylesheet" href="../../assert/css/bootstrap.css"/>-->
+    <script src="../../assert/js/pretty/prettify.min.js"></script>
+    <script src="../../assert/js/jquery-1.11.3.js"></script>
+<style>
+</style>
+</head>
+<body>
+
+<style>
+    .item {
+        float: left;
+    }
+    a {
+        display: block;
+        padding: 1em 2em;
+    }
+    .clearfix:after {
+        content: " ";
+        display: block;
+        clear: both;
+        height: 0;
+    }
+    .sub-list {
+        display: none;
+    }
+    .item:hover .sub-list {
+        display: block;
+    }
+</style>
+
+<div class="list clearfix">
+    <div class="item"><a href="#">首页</a></div>
+    <div class="item">
+        <a href="#">我的</a>
+        <div class="sub-list">
+            <div class="sub-item"><a href="#">我的1</a></div>
+            <div class="sub-item"><a href="#">我的2</a></div>
+            <div class="sub-item"><a href="#">我的3</a></div>
+        </div>
+    </div>
+</div>
+
+
+<pre class="prettyprint linenums">
+
+&lt;style>
+    .item {
+        float: left;
+    }
+    a {
+        display: block;
+        padding: 1em 2em;
+    }
+    .clearfix:after {
+        content: " ";
+        display: block;
+        clear: both;
+        height: 0;
+    }
+    .sub-list {
+        display: none;
+    }
+    .item:hover .sub-list {
+        display: block;
+    }
+&lt;/style>
+
+&lt;div class="list clearfix">
+    &lt;div class="item">&lt;a href="#">首页&lt;/a>&lt;/div>
+    &lt;div class="item">
+        &lt;a href="#">我的&lt;/a>
+        &lt;div class="sub-list">
+            &lt;div class="sub-item">&lt;a href="#">我的1&lt;/a>&lt;/div>
+            &lt;div class="sub-item">&lt;a href="#">我的2&lt;/a>&lt;/div>
+            &lt;div class="sub-item">&lt;a href="#">我的3&lt;/a>&lt;/div>
+        &lt;/div>
+    &lt;/div>
+&lt;/div>
+</pre>
+<script>
+    PR.prettyPrint();
+</script>
+</body>
+</html>

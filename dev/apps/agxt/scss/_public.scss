@@ -13,3 +13,23 @@ html {
     margin: 0;
     border-bottom: none 0;
 }
+
+.reset {
+    padding: 0;
+    margin: 0;
+}
+
+
+.col-main {
+    float: left;
+    width: 100%;
+    min-height: 1px;
+    @include clearfix();
+}
+.col-sub {
+    float: left;
+    margin-left: -100%;
+    min-height: 1px;
+    @include clearfix();
+}
+

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>我的教程</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="../images/favicon.ico">
+    <link rel="stylesheet" href="../css/bootstrap.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../../../../dev/modules/ui/css/font-awesome.css">
+    <script data-main="../../../../dev/modules/" src="../../../../dev/modules/require.js"></script>
+    <script>
+        require.config( {
+            urlArgs: "VERSION=1.0",
+            paths: {
+                "jquery": "jquery/jquery-1.11.3",
+                "bootstrap": "lib/bootstrap/js/bootstrap",
+                "codemirror": "lib/codemirror/codemirror",
+                "codemirror-html": "lib/codemirror/mode/htmlmixed",
+                "code-pretty": "lib/pretty/prettify.min"
+            },
+            map: {
+                '*': {
+                    'css': 'utils/css/css',
+                    'text': 'utils/text'
+                }
+            },
+            shim: {
+                "bootstrap": [ "jquery" ],
+                "codemirror": ["css!lib/codemirror/codemirror.css"],
+                "code-pretty": [ "css!lib/pretty/prettify.css" ]
+            }
+        } );
+    </script>
+    <script src="../js/main.js"></script>
+</head>
+<body>
+
+<!-- page -->
+<div class="page page-index">
+
+
+    <!-- page-header -->
+    <nav class="page-header navbar navbar-default navbar-static-top js--pageHeaderContainer" role="navigation">
+    </nav>
+    <!-- /page-header -->
+
+
+    <!-- page-main -->
+    <div class="page-main">
+
+        <div class="container ">
+
+            <div class="row">
+
+                <div class="col-lg-3 js--sidebarContainer">
+
+                    <div class="bs-sidebar">
+                    </div>
+
+                </div>
+
+                <div class="col-lg-9">
+
+                    <div class="content">
+                        <article class="bs-article">
+                            <header>
+                                <h1>Bootstrap 代码</h1>
+                                <p>Bootstrap 允许您以两种方式显示代码</p>
+                                <ul>
+                                    <li><b>&lt;code></b> 以内联的方式显示代码，单行代码</li>
+                                    <li><b>&lt;pre></b> 多行显示代码</li>
+                                </ul>
+                                <pre class="prettyprint linenums">
+code {
+    padding: 2px 4px;
+    font-size: 90%;
+    color: #c7254e;
+    background-color: #f9f2f4;
+    border-radius: 4px;
+}
+
+code, kbd, pre, samp {
+    font-family: Menlo,Monaco,Consolas,"Courier New",monospace;
+}
+pre {
+    display: block;
+    padding: 9.5px;
+    margin: 0 0 10px;
+    font-size: 13px;
+    line-height: 1.42857143;
+    color: #333;
+    word-break: break-all;
+    word-wrap: break-word;
+    background-color: #f5f5f5;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}</pre>
+                                <div class="alert alert-warning">注意：&lt; 应转义 &amp;lt;</div>
+                            </header>
+                            <main>
+                                <section class="bs-section">
+                                    <h2>示例</h2>
+                                    <div class="bs-editor">
+                                        <ul class="nav nav-tabs" >
+                                            <li class="active"><a href="#edit_1" role="tab" data-toggle="tab"><i class="fa fa-edit"></i> 编辑</a></li>
+                                            <li ><a class="preview" href="#preview_1" data-toggle="tab"><i class="fa fa-eye"></i> 预览</a></li>
+                                            <li class="pull-right"><button type="button" class="btn btn-info btn-sm js--full"><i class="fa fa-arrows-alt"></i> 切换全屏</button></li>
+                                        </ul>
+                                        <div class="tab-content">
+                                            <div class="tab-pane tab-pane-editor active" id="edit_1">
+                                                <textarea class="editor hidden">
+<p>作为内联元素被包围，<code>&amp;lt;header&amp;gt;</code>。</p>
+<p>如果需要把代码显示为一个独立的块元素，请使用 &amp;lt;pre&amp;gt; 标签：</p>
+<pre>
+&amp;lt;article&amp;gt;
+    &amp;lt;h1&amp;gt;Article Heading&amp;lt;/h1&amp;gt;
+&amp;lt;/article&amp;gt;
+</pre>
+                                                </textarea>
+                                            </div>
+                                            <div class="tab-pane tab-pane-preview" id="preview_1">
+                                                preview
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+                                <section class="bs-section">
+                                    <h2>更多</h2>
+                                    <table class="table table-bordered">
+                                        <thead>
+                                        <tr class="active">
+                                            <th style="width: 160px;">类</th> <th>描述</th> <th>原理</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td>&lt;var></td>
+                                            <td>变量</td>
+                                            <td>
+                                                <p><var>x</var> = <var>a</var><var>b</var> + <var>y</var></p>
+                                                <pre class="code">
+&lt;p>&lt;var>x&lt;/var> = &lt;var>a&lt;/var>&lt;var>b&lt;/var> + &lt;var>y&lt;/var>&lt;/p>
+</pre>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>&lt;kbd></td>
+                                            <td>按键</td>
+                                            <td>
+                                                <p><kbd>ctrl + p</kbd></p>
+                                                <pre class="code">
+&lt;kbd>ctrl + p&lt;/kbd>
+</pre>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>&lt;samp></td>
+                                            <td>输出</td>
+                                            <td>
+                                                <p><samp>This text is output from a computer program....</samp></p>
+                                                <pre class="code">
+&lt;samp>This text is output from a computer program....&lt;/samp>
+</pre>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                        </table>
+                                </section>
+                            </main>
+                        </article>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+    <!-- /page-main -->
+
+    <!-- page-footer -->
+    <div class="page-footer">
+
+    </div>
+    <!-- /page-footer -->
+
+</div>
+<!-- /page -->
+
+
+</body>
+</html>

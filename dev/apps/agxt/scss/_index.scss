@@ -1,0 +1,76 @@
+@import "compass/utilities/sprites";
+@import "index/*.png";
+
+//@include index-sprite(title);
+.page-index {
+
+// ---
+    .page-header {
+        position: relative;
+        height: 70px;
+        background-color: #3498db;
+        ul {
+            list-style: none;
+        }
+        &:after {
+            content: "";
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            border-bottom: solid 1px #4196e1;
+
+        }
+    }
+    .page-title {
+        @extend .reset;
+        float: left;
+    }
+    .page-title-icon {
+        display: inline-block;
+        width: 36px;
+        height: 36px;
+        @include index-sprite(icon_home);
+        margin: 17px 0 0 29px;
+    }
+    .page-title-text {
+        display: inline-block;
+        width: 440px;
+        height: 36px;
+        @include index-sprite(title);
+        margin: 17px 0 0 18px;
+    }
+    .func-list {
+        float: right;
+        margin-top: 18px;
+        .icon {
+            display: inline-block;
+            width: 36px;
+            height: 36px;
+            vertical-align: middle;
+        }
+        .icon-worktable {
+            @include index-sprite(icon_worktable);
+        }
+        .icon-key {
+            @include index-sprite(icon_key);
+        }
+        .icon-help {
+            @include index-sprite(icon_help);
+        }
+        .icon-logout {
+            @include index-sprite(icon_logout);
+        }
+        .text {
+            padding: 0 10px;
+        }
+    }
+    .func-item {
+        float: left;
+        margin-right: 10px;
+    }
+    .func-link {
+        color: #fff;
+    }
+}

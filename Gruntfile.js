@@ -24,7 +24,8 @@ module.exports = function(grunt) {
             },
             dist_agxt_image: {
                 files: [
-                    { src: 'dist/apps/agxt/images/login' }
+                    { src: 'dist/apps/agxt/images/login' },
+                    { src: 'dist/apps/agxt/images/index' }
                 ]
             },
             dist_all_scss: {
@@ -70,6 +71,12 @@ module.exports = function(grunt) {
                     { // app - zfjd
                         cwd: 'dev/',
                         src: ['apps/agxt/**'],
+                        dest: 'dist',
+                        expand: true
+                    },
+                    { // app - summary
+                        cwd: 'dev/',
+                        src: ['apps/summary/**'],
                         dest: 'dist',
                         expand: true
                     }

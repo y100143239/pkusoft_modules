@@ -1,0 +1,36 @@
+.page-content {
+    padding-top: 70px;
+    .thumbnail {
+        border: none 0;
+        padding: 20px 0 0 0;
+        overflow: hidden;
+        transition: all .3s ease;
+        border-radius: 0;
+        img {
+            //width: 100%;
+        }
+        &:hover {
+            box-shadow: 0 0 15px #ccc;
+        }
+        .label {
+            font-size: 100%;
+            padding: 0.3em 0.6em;
+        }
+        .caption {
+            height: 128px;
+        }
+        .caption-title {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .caption-desc {
+            height: 40px;
+            overflow: hidden;
+        }
+        .progress {
+            height: 8px;
+            margin-bottom: 0;
+        }
+    }
+}

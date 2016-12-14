@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="css/grid.css"/>
+    <script src="js/jquery-1.11.3.js"></script>
+    <!--<script src="js/jquery.bootgrid.fix.js"></script>-->
+    <script src="js/jquery.bootgrid.fix.v2.js"></script>
+    <script>
+    $( document ).ready( function () {
+
+
+        var $datagrid,
+            $queryForm,
+            $doQueryBtn,
+            $addSysDeptBtn,
+            $select2,
+            URL,
+                HOST
+                ;
+        HOST = "http://localhost:8080";
+        URL = {
+            "edit": HOST + "/admin/sysDept/template/edit",
+            "detail": HOST + "/admin/sysDept/template/detail",
+            "delete": HOST + "/admin/sysDept/delete",
+            "save": HOST + "/admin/sysDept/save"
+        };
+
+        $datagrid = $( "#sysDeptDatagrid" );
+        $queryForm = $( "#sysDeptQueryForm" );
+        $doQueryBtn = $queryForm.find( ".js--doQuery" );
+
+        $datagrid.bootgrid({
+            padding: 7,
+            navigation: 2,
+            formatters: {
+                //dateFormatter: dateFormatter,
+                //deptLevelFormatter: deptLevelFormatter,
+            }
+        } ).find( "tbody" ).on( "click", ".js--viewSysDept", function () {
+            // viewSysDept( this );
+        } ).on( "click", ".js--editSysDept", function () {
+            // editSysDept( this );
+        } ).on( "click", ".js--deleteSysDept", function () {
+            // deleteSysDept( this );
+        } );
+
+        $doQueryBtn.on( "click", function () {
+            $datagrid.bootgrid( "reload" );
+        } );
+    } );
+    </script>
+</head>
+<body>
+
+<div style="padding: 20px;">
+    <div class="list-query">
+        <form class="form-inline" id="sysDeptQueryForm">
+            <div class="form-group" style="width: 340px;">
+                <label>部门名称：</label>
+                <input type="text" class="form-control" name="deptName" data-operator="like" style="width: 250px;">
+            </div>
+            <button type="button" class="btn btn-info js--doQuery"><i class="fa fa-search"></i> 搜索</button>
+        </form>
+    </div>
+    <!--
+        data-url: 请求数据
+        data-query-form-id: 查询条件Form
+    -->
+    <table id="sysDeptDatagrid" class="table table-pku"
+           data-url="http://www.20ui.cn/admin/sysDept/listData"
+           data-query-form-id="sysDeptQueryForm">
+        <!--
+         data-url="http://localhost:8080/admin/sysDeptListData"
+         data-url="http://www.20ui.cn/admin/sysDeptListData"
+        -->
+        <thead>
+        <tr>
+            <!--
+                data-column-id：对应bean的属性名
+                data-identifier： Boolean。data-row-id，行ID。（只对一个列使用）
+                data-visible：Boolean。此列是否可见。（可用于标记 行ID 的列）
+                data-sortable：Boolean。此列是否可排序（升序、降序），会拼接 order by 子句，发送请求
+                data-width：行宽度，可以使用百分比和数字，如 25%、200。
+                data-formatter：对内容进行格式化，使用全局函数，会传递两个参数 column、row
+                                    column.id 获取该列“data-column-id”
+                                    row 该行数据，如 { deptId: 123, deptName: "某部门", ... }
+            -->
+            <th data-column-id="deptId" data-identifier="true" data-visible="true" data-sortable="false" data-width="15%">部门标识号</th>
+            <th data-column-id="deptName" data-sortable="false" data-width="30%">部门名称</th>
+            <th data-column-id="deptLevel" data-sortable="true" data-formatter="deptLevelFormatter" data-width="20%">部门级别</th>
+            <th data-column-id="addTime" data-sortable="false" data-formatter="dateFormatter" data-width="20%">录入时间</th>
+
+            <th data-sortable="false" data-column-id="_operation" data-formatter="_operation" data-column-title="操作">
+                <a href="javascript:void(0);" class="js--viewSysDept" data-row="deptId,deptName">详情</a>&nbsp;&nbsp;
+                <a href="javascript:void(0);" class="js--editSysDept" data-row="deptId,deptName">编辑</a>&nbsp;&nbsp;
+                <a href="javascript:void(0);" class="js--deleteSysDept" data-row="deptId">删除</a>
+            </th>
+        </tr>
+        </thead>
+
+    </table>
+</div>
+</body>
+</html>
