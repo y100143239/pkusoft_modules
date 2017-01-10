@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>jq里面的change事件触发不了，不知道是什么原因，大神帮忙看看，急急急！！！ [问题点数：40分]</title>
+    <link rel="stylesheet" href="../../assert/js/pretty/prettify.css"/>
+    <link rel="stylesheet" href="../../assert/css/bootstrap.css"/>
+    <script src="../../assert/js/pretty/prettify.min.js"></script>
+    <script src="../../assert/js/jquery-1.11.3.js"></script>
+<style>
+</style>
+</head>
+<body>
+
+<script>
+
+    var _tr = '<tr class="coloumrow">‘+
+
+    ’<td class="headcoloum"><input type="text" class="controlwidth form-control control_th"></d>' +
+
+    '<td class="coloumsfield"><select  class="columnname controlwidth form-control"><option value="">==请选择==</option></select></td>' +
+
+    '<td class="tablename"><select class="controlwidth form-control data_type" id="id1">' +
+    '<option value="">==请选择==</option>' +
+    '</select></td>' +
+    '</tr>';
+
+    $('#app_layout_optionShow table').find('tr:last').before(_tr);
+
+    var $tr = $html.find('table .coloumrow').eq(-1)
+
+    var table_name = $($tr).find(".tablename select");
+    var field_name = $($tr).find('.coloumsfield select');
+
+    $($(table_name)).change(function () {
+
+        var $apiItem = $(this).val();
+。。。。。。。。。
+
+    })
+
+    $($(table_name)).trigger('change');
+
+</script>
+
+
+
+<pre class="prettyprint linenums">
+
+</pre>
+<script>
+    PR.prettyPrint();
+</script>
+</body>
+</html>

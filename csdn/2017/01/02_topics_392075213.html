@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>js怎么移除和修改td下a标签的onclick值 [问题点数：20分]</title>
+    <link rel="stylesheet" href="../../assert/js/pretty/prettify.css"/>
+    <link rel="stylesheet" href="../../assert/css/bootstrap.css"/>
+    <script src="../../assert/js/pretty/prettify.min.js"></script>
+    <script src="../../assert/js/jquery-1.11.3.js"></script>
+<style>
+    a { margin-right: 2em; }
+</style>
+</head>
+<body class="container">
+
+    <table class="table table-bordered">
+        <thead>
+        <tr class="active">
+            <th>示例</th> <th>代码</th> <th>说明</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>
+                <a href="javascript:void(0);" id="anchor_1">点击我</a>
+                <button type="button" id="btn_add_1" class="btn btn-info">事件注册</button>
+                <button type="button" id="btn_remove_1" class="btn btn-danger">事件取消</button>
+            </td>
+            <td>
+                <script>
+                    +function () {
+                        var anchor,
+                            addBtn,
+                            removeBtn,
+                            doc
+                        ;
+                        doc = window.document;
+                        anchor = doc.getElementById( "anchor_1" );
+                        addBtn = doc.getElementById( "btn_add_1" );
+                        removeBtn = doc.getElementById( "btn_remove_1" );
+
+                        addBtn.addEventListener( "click", handleClick, false );
+                        removeBtn.removeEventListener( "click", handleClick, false );
+
+                        function handleClick() {
+                            if ( anchor.isAddEvent ) {
+                                alert( "已经注册了事件处理程序。" );
+                                return;
+                            }
+                            anchor.addEventListener( "click", function () {
+                                anchor.isAddEvent = true;
+                                alert( "通过 elt.addEventListener( eventType, handler, false ) 注册事件" );
+                            }, false );
+                        }
+                    } ();
+
+                </script>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+
+<script>
+
+
+</script>
+
+
+
+<pre class="prettyprint linenums">
+
+</pre>
+<script>
+    PR.prettyPrint();
+</script>
+</body>
+</html>

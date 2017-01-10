@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>function里面用this和用prototype有什么区别？ [问题点数：20分]</title>
+    <link rel="stylesheet" href="../../assert/js/pretty/prettify.css"/>
+    <!--<link rel="stylesheet" href="../../assert/css/bootstrap.css"/>-->
+    <script src="../../assert/js/pretty/prettify.min.js"></script>
+    <script src="../../assert/js/jquery-1.11.3.js"></script>
+</head>
+<body>
+
+<pre class="prettyprint linenums">
+
+比如写法1：
+var A = function(){
+    this.b = function(){}
+    this.c = function(){}
+}
+写法2：
+var A = function(){}
+A.prototype.b =function(){}
+A.prototype.c =function(){}
+区别是啥呢…希望指导一下 谢谢
+
+//------
+
+其实也没啥区别，主要还是在应用场景上，比如：
+1. 对于每个实例特有的属性（或方法）定义在this上；
+2. 对于所有实例都有的方法（或属性）定义在prototype上；
+3. this上一般定义属性，prototype上一般定义方法。
+
+function Person( name, age, gender ) {
+
+    this.name = name;
+    this.age = age;
+    this.gender = gender;
+
+}
+
+Person.prototype.eat = function ( food ) {
+    // eat food
+}
+
+Person.prototype.sleep = function ( time ) {
+    // sleep on time
+}
+
+</pre>
+<script>
+    PR.prettyPrint();
+</script>
+</body>
+</html>

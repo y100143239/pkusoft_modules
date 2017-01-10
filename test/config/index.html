@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>系统管理</title>
+    <script>
+        window.onload = function () {
+            removeOverlay();
+        };
+        window.setTimeout( function () {
+            removeOverlay();
+        }, 8000 );
+        function removeOverlay() {
+            document.getElementById( "bodyLoadingOverlay" ).style.display = "none";
+            document.body.setAttribute( "class", "" );
+        }
+        function startOverlay() {
+            document.getElementById( "bodyLoadingOverlay" ).style.display = "block";
+            document.body.setAttribute( "class", "modal-open" );
+        }
+    </script>
+    <title></title>
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lte IE 8]>
+    <script src="../../dev/modules/lib/ie/respond.js"></script>
+    <script src="../../dev/modules/lib/ie/html5shiv.js"></script>
+    <script src="../../dev/modules/lib/ie/es5-shim.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" href="../../dev/modules/ui/css/pku.css?VERSION=v0.20161013"/>
+    <script data-main="../../dev/modules/" src="../../dev/modules/require.js"></script>
+    <script src="../../dev/modules/require.config.js"></script>
+</head>
+<body class="modal-open">
+
+<div class="overlay" id="bodyLoadingOverlay">
+    <i class="fa fa-spin fa-spinner"></i>
+</div>
+<!--
+
+<div data-pku-widget="datepicker" ></div>
+<div data-pku-widget="bootstrap"></div>
+<div data-pku-widget="select2"></div>
+<div data-pku-widget="formvalidation"></div>
+<div data-pku-widget="bootgrid"></div>
+
+<script data-pku-widget="webuploader" data-export="WebUploader"></script>
+
+
+-->
+
+<!--
+        data-url: 请求数据
+        data-query-form-id: 查询条件Form
+    -->
+<table id="sysDeptDatagrid" class="table table-hover table-bordered"
+       data-pku-widget="bootgrid"
+       data-navigation="2"
+       data-row-count="3"
+       data-url="http://www.20ui.cn/admin/sysDept/listData"
+       data-query-form-id="sysDeptQueryForm">
+    <!--
+     data-url="http://localhost:8080/admin/sysDeptListData"
+     data-url="http://www.20ui.cn/admin/sysDeptListData"
+    -->
+    <thead>
+    <tr>
+        <!--
+            data-column-id：对应bean的属性名
+            data-identifier： Boolean。data-row-id，行ID。（只对一个列使用）
+            data-visible：Boolean。此列是否可见。（可用于标记 行ID 的列）
+            data-sortable：Boolean。此列是否可排序（升序、降序），会拼接 order by 子句，发送请求
+            data-width：行宽度，可以使用百分比和数字，如 25%、200。
+            data-formatter：对内容进行格式化，使用全局函数，会传递两个参数 column、row
+                                column.id 获取该列“data-column-id”
+                                row 该行数据，如 { deptId: 123, deptName: "某部门", ... }
+        -->
+        <th data-column-id="deptId" data-identifier="true" data-visible="true" data-sortable="false" data-width="15%">部门标识号</th>
+        <th data-column-id="deptName" data-sortable="false" data-width="30%">部门名称</th>
+        <th data-column-id="deptLevel" data-sortable="true" data-formatter="deptLevelFormatter" data-width="20%">部门级别</th>
+        <th data-column-id="addTime" data-sortable="false" data-formatter="dateFormatter" data-width="20%">录入时间</th>
+
+        <th data-sortable="false" data-formatter="operation">操作</th>
+    </tr>
+    </thead>
+
+</table>
+<script>
+    function operation( column, row ) {
+        console.info( column, row );
+        return '<a href="javascript:void(0);" onclick="doViewDetail(\'' + row.deptId + '\')">详情</a>';
+    }
+    function doViewDetail( deptId ) {
+        
+    }
+</script>
+
+</body>
+</html>

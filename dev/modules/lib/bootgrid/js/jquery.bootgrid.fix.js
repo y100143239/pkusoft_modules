@@ -1822,6 +1822,8 @@
         var _this = this;
         option = option || {};
 
+        //FIX 获取data-* 属性
+
         //FIX 获取所有在 <th data-formatter="">设置的 formatter，重构 formatters 参数
         +function(){
             var formatters,
@@ -2142,5 +2144,9 @@
 
         return oredCriteria;
     }
+
+    $( document ).ready( function () {
+        $( '[data-pku-widget="bootgrid"]' ).bootgrid( {} );
+    } );
 
 })( jQuery, window );

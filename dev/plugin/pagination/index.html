@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="./css/pagination.css"/>
+    <script src="../../modules/jquery/jquery-1.11.3.js"></script>
+    <script src="./js/jquery.pagination.pku.js"></script>
+    <style>
+        body { background : #00417d; }
+    </style>
+    <script>
+        $( document ).ready( function () {
+            var $container,
+                $overlay,
+                $tbody,
+                $totalRecords
+            ;
+            $container = $( ".pg-container" );
+            $overlay = $container.find( ".pg-overlay" );
+            $tbody = $container.find( "tbody" );
+            $totalRecords = $container.find( ".pg-total-records-num" );
+
+            $container.pagination( {
+                url: "http://www.20ui.cn/admin/sysDept/listData",
+                pageSize: 3,
+                showLoading: function ( instance ) {
+                    // console.info( "Loading...", instance );
+                    $overlay.fadeIn( 300 )
+                },
+                hideLoading: function ( instance ) {
+                    // console.info( "Close loading", instance );
+                    $overlay.fadeOut( 300 )
+                },
+                requestErrorHandler: function ( instance ) {
+                    alert( "网络错误，请求失败。" );
+                },
+                requestSuccessHandler: function ( responseData, instance ) {
+                    // Ajax 请求成功：服务端处理成功
+                    // console.info( responseData, instance );
+                    var html,
+                        row,
+                        deptId,
+                        deptName,
+                        addUserName
+                    ;
+                    html = "";
+                    $totalRecords.text( responseData.totalRecords );
+                    $.each( responseData.data, function ( index, elt ) {
+                        deptId = elt.deptId;
+                        deptName = elt.deptName;
+                        addUserName = elt.addUserName;
+                        row = '<tr> ' +
+                                '<td title="'+deptId+'">' + deptId + '</td> ' +
+                                '<td title="'+deptName+'">' + deptName + '</td> ' +
+                                '<td title="'+addUserName+'">' + addUserName + '</td>' +
+                              '</tr>';
+                        html += row;
+                    } );
+                    $tbody.html( html );
+                },
+                requestFailHandler: function ( responseData, instance ) {
+                    // Ajax 请求成功：服务端处理失败
+                    console.info( responseData, instance );
+                }
+            } );
+        } );
+    </script>
+</head>
+<body>
+
+<div class="pg-container js--pg-container">
+    <div class="pg-pager">
+        <div class="pg-total-records"><span class="pg-total-records-num">-</span>处理超期总数</div>
+        <div class="pg-btn-group">
+            <a href="#" class="pg-btn pg-btn-prev js--pg-btn-prev"> <i class="pg-btn-icon pg-btn-icon-up"></i><span class="pg-btn-text">上一页</span> </a>
+            <a href="#" class="pg-btn pg-btn-next js--pg-btn-next"> <i class="pg-btn-icon pg-btn-icon-down"></i><span class="pg-btn-text">下一页</span> </a>
+        </div>
+    </div>
+    <div class="pg-grid">
+        <div class="pg-overlay"></div>
+        <table class="pg-table">
+            <thead>
+                <tr> <th style="width: 160px;">名称</th> <th>超期类型</th> <th style="width: 76px;">超期时间</th> </tr>
+            </thead>
+            <tbody>
+                <!--
+                <tr> <td>奔驰S600</td> <td>调用超期</td> <td>50天</td> </tr>
+                <tr> <td>电动车</td> <td>超期未处理</td> <td>20天</td> </tr>
+                <tr> <td>奔驰S600</td> <td>调用超期</td> <td>50天</td> </tr>
+                <tr> <td>电动车</td> <td>超期未处理</td> <td>20天</td> </tr>
+                <tr> <td>奔驰S600</td> <td>调用超期</td> <td>50天</td> </tr>
+                <tr> <td>电动车</td> <td>超期未处理</td> <td>20天</td> </tr>
+                <tr> <td>奔驰S600</td> <td>调用超期</td> <td>50天</td> </tr>
+                <tr> <td>电动车</td> <td>超期未处理</td> <td>20天</td> </tr>
+                -->
+            </tbody>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>

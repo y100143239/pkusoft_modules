@@ -38,6 +38,12 @@ module.exports = function(grunt) {
         copy: {
             app: {
                 files: [
+                    { // plugin
+                        cwd: 'dev/',
+                        src: ['plugin/**'],
+                        dest: 'dist',
+                        expand: true
+                    },
                     { // app
                         cwd: 'dev/',
                         src: ['apps/framework/**'],
@@ -77,6 +83,12 @@ module.exports = function(grunt) {
                     { // app - summary
                         cwd: 'dev/',
                         src: ['apps/summary/**'],
+                        dest: 'dist',
+                        expand: true
+                    },
+                    { // app - read
+                        cwd: 'dev/',
+                        src: ['apps/read/**'],
                         dest: 'dist',
                         expand: true
                     }
