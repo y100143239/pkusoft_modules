@@ -86,6 +86,22 @@ define( [ 'jquery' ], function ( $ ) {
                     doError( );
                 }
             } );
+        },
+        format: function ( urls, type ) {
+            switch ( type ) {
+                case "select2": {
+                    break;
+                }
+                case "datagrid": {
+                    /*
+                    {
+                        url1: { code1: text1, code2: text2, ... }
+                        url2: { code1: text1, code2: text2, ... }
+                    }
+                    */
+                    break;
+                }
+            }
         }
     };
     return DataSource;
