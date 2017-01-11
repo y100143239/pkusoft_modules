@@ -5,7 +5,7 @@ define( [ 'jquery' ], function ( $ ) {
     var DataSource
     ;
 
-
+  
     DataSource = {
         cache: {},
         /* 请求xml文件 */
