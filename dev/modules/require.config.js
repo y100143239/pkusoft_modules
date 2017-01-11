@@ -42,6 +42,10 @@
             "select-area-data": "lib/select-area/select-area-data",
             "sweet-alert": "lib/sweetalert/js/sweet-alert",
 
+            "layer": "lib/layer/layer.fix",
+
+            "dataSource": "utils/dataSource",
+
             "fixrecord": "lib/custom/fixrecord",
 
             // 代码美化
@@ -82,6 +86,8 @@
         "select-area": "select-area",
         "formvalidation": "formvalidationI18N",
         "bootgrid": "bootgrid",
+        "layer": "^$layer",
+        "dataSource": "^$dataSource",
         "webuploader": "^$webuploader"
     };
 
@@ -94,24 +100,26 @@
 
             $( "[data-pku-widget]" ).each( function() {
                 var $this,
-                    module_,
+                    moduleID,
                     globalName
                 ;
                 $this = $( this );
-                module_ = MODULES[ $.trim( $this.attr( "data-pku-widget" ) ) ];
+                moduleID = MODULES[ $.trim( $this.attr( "data-pku-widget" ) ) ];
                 // 判断是否是合法的
-                if ( ! module_ ) {
-                    throw "[" + module_ + "] is not exist.";
+                if ( ! moduleID ) {
+                    throw "[" + moduleID + "] is not exist.";
                 }
                 // 处理非jQuery插件：符合AMD规范的
-                if ( module_.indexOf("^$") === 0 ) {
-                    module_ = module_.replace( "^$", "" );
-                    globalName = $this.attr( "data-export" ) || module_;
-                    window[ globalName ] = require( [ module_ ] );
+                if ( moduleID.indexOf("^$") === 0 ) {
+                    moduleID = moduleID.replace( "^$", "" );
+                    globalName = $this.attr( "data-export" ) || moduleID;
+                    require( [ moduleID ], function ( m ) {
+                        window[ globalName ] = m;
+                    } );
                     return ;
                 }
 
-                modules.push( module_ );
+                modules.push( moduleID );
             } );
             $.unique( modules );
 

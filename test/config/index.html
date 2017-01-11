@@ -52,6 +52,9 @@
 
 -->
 
+<script data-pku-widget="layer" data-export="layer"></script>
+<script data-pku-widget="dataSource" data-export="dataSource"></script>
+
 <!--
         data-url: 请求数据
         data-query-form-id: 查询条件Form
@@ -80,7 +83,7 @@
         -->
         <th data-column-id="deptId" data-identifier="true" data-visible="true" data-sortable="false" data-width="15%">部门标识号</th>
         <th data-column-id="deptName" data-sortable="false" data-width="30%">部门名称</th>
-        <th data-column-id="deptLevel" data-sortable="true" data-formatter="deptLevelFormatter" data-width="20%">部门级别</th>
+        <th data-column-id="deptLevel" data-sortable="true" data-dic-url="DIC_DEPT_LEVEL" data-width="20%">部门级别</th>
         <th data-column-id="addTime" data-sortable="false" data-formatter="dateFormatter" data-width="20%">录入时间</th>
 
         <th data-sortable="false" data-formatter="operation">操作</th>
@@ -94,8 +97,18 @@
         return '<a href="javascript:void(0);" onclick="doViewDetail(\'' + row.deptId + '\')">详情</a>';
     }
     function doViewDetail( deptId ) {
-        
+        layer.open({
+            type: 1,
+            // skin: 'layui-layer-rim', //加上边框
+            area: ['420px', '240px'], //宽高
+            content: 'html内容'
+        });
     }
+
+    dataSource.cacheXmlDocument([
+        "http://localhost:8080/gdbaweb/static/dic/DIC_DEPT_LEVEL.xml",
+        "http://localhost:8080/gdbaweb/static/dic/DIC_GENDER.xml"
+    ]);
 </script>
 
 </body>

@@ -1,87 +1,92 @@
 /*
     1. 根据 xml url 缓存请求数据
  */
-define( [ 'jquery', "Ajax" ], function ( $, Ajax ) {
-    var DataSource,
-        Cache
-        ;
+define( [ 'jquery' ], function ( $ ) {
+    var DataSource
+    ;
 
-    Cache = {};
 
     DataSource = {
+        cache: {},
         /* 请求xml文件 */
-        cacheXmlDocument: function ( urlArray, completeCallback ) {
+        cacheXmlDocument: function ( urlArray ) {
+            var len,
+                i,
+                url,
+                _this
+                ;
 
-            // 反转：pop()是弹出末尾的元素的
-            urlArray.reverse();
+            _this = this;
+
             // 去重
             urlArray = $.unique( urlArray );
 
-            Ajax.sync(
-                urlArray,
-                function success ( url, data ) {
-                    var isSuccess = data && data.getElementsByTagName;
-                    if ( isSuccess ) {
-                        console.info( url, "\t字典获取成功" );
-                    } else {
-                        console.info( url, "\t字典获取失败！！" );
-                    }
-                    // 缓存数据
-                    if ( ! Cache[ url ] ) {
-                        Cache[ url ] = data;
-                    }
-                },
-                function error( url ) {
-                    console.info( url, "\t字典获取失败！！" );
-                },
-                function end() {
-                    completeCallback( Cache );
-                }
-            );
-
-        }
-    };
-
-    return DataSource;
-} );
-define( "Ajax", [ 'jquery' ], function ( $ ) {
-    var Ajax
-    ;
-    Ajax = {
-        sync: function ( urlArray, successFn, errorFn, endFn ) {
-            var _this,
-                _arguments,
-                url
-                ;
-            _this = this;
-            _arguments = arguments;
-
-            if ( urlArray.length == 0 ) {
-                endFn();
-                return;
+            for ( i = 0, len = urlArray.length; i < len; i++ ) {
+                url = urlArray[ i ];
+                +function( url ) {
+                    _this.request(
+                        url,
+                        function ( data ) {
+                            doSuccess( url, data );
+                        },
+                        function () {
+                            doError( url );
+                        }
+                    );
+                } ( url );
             }
 
-            url = urlArray.pop();
-
+            function doSuccess ( url, data ) {
+                var isSuccess,
+                    cache
+                ;
+                isSuccess = data && ( data.getElementsByTagName( "row" ).length > 0 );
+                cache = _this.cache;
+                if ( isSuccess ) {
+                    console.info( url, "\t字典获取成功。" );
+                } else {
+                    if ( cache[ url ] == "isRepeated" ) {
+                        console.info( url, "\t字典获取失败: 第二次获取失败。" );
+                    }
+                    console.info( url, "\t字典获取失败: 进行第二次获取。" );
+                    // 尝试再次获取，通过POST请求
+                    cache[ url ] = "isRepeated";
+                    _this.request(
+                        url,
+                        function ( data ) {
+                            doSuccess( url, data );
+                        },
+                        function () {
+                            doError( url );
+                        },
+                        "POST"
+                    );
+                }
+                // 缓存数据
+                cache[ url ] = data;
+            }
+            function doError( url ) {
+                console.info( url, "\t字典获取失败: 网络原因/路径错误。" );
+            }
+        },
+        request: function ( url, doSuccess, doError, method  ) {
+            method = method || "GET";
             $.ajax( {
-                type: "GET",
+                type: method,
                 url: url,
+                async: false, // 同步请求
                 timeout: 30000, // 设置请求超时时间（毫秒）
                 contentType: "application/x-www-form-urlencoded; charset=utf-8",
                 cache: true, // 缓存此页面
                 dataType: "xml", // 预期服务器返回的数据类型。
                 success: function ( data ) {
-                    successFn( url, data );
-                    //递归
-                    _this.sync.apply( _this, _arguments );
+                    doSuccess( data );
                 },
                 error: function () {
-                    errorFn( url );
-                    //递归
-                    _this.sync.apply( _this, _arguments );
+                    doError( );
                 }
-            } )
+            } );
         }
     };
-    return Ajax;
+    return DataSource;
 } );

@@ -129,6 +129,7 @@ module.exports = function(grunt) {
                                 'lib/sweetalert/**',
                                 'lib/custom/**',
                                 'lib/codemirror/**',
+                                'lib/layer/**',
                                 'lib/pretty/**'
                         ],
                         dest: 'dist/modules',
@@ -149,6 +150,7 @@ module.exports = function(grunt) {
                             'utils/css/**',
                             'utils/doT.js',
                             'utils/text.js',
+                            'utils/dataSource.js',
                             //'utils/jquery.sortable.js',
                             'utils/draggable.js'
                         ],
