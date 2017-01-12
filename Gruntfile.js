@@ -249,6 +249,15 @@ module.exports = function(grunt) {
                     'cp -R /Users/forwardNow/develop/work/tomcat/webapps/_bae/WEB-INF /Users/forwardNow/develop/work/_bae/'
                 ].join('&&')
             },
+            copyDicTo_bae: {
+                command: [
+                    // 删除 临时_bae 的 static/dic/*
+                    'rm -f /Users/forwardNow/develop/work/_bae/static/dic/*',
+
+                    // 将 tomcat/webapps/_bae/static/dic/* 文件 拷贝到 _bae/static/dic
+                    'cp -R /Users/forwardNow/develop/work/tomcat/webapps/_bae/static/dic/* /Users/forwardNow/develop/work/_bae/static/dic/'
+                ].join('&&')
+            },
             makeWar: {
                 command: [
                     // 删除 bae 里的war包
