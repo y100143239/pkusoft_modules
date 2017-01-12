@@ -7,8 +7,13 @@
     "use strict";
     var VERSION,
         DEV_MODE,
-        MODULES
+        MODULES,
+        PKUI
         ;
+
+    PKUI = {}; // 名称空间
+    window.PKUI = PKUI;
+
     DEV_MODE = false;
     VERSION = DEV_MODE ? (new Date()).getTime() : "v0.20161013";
     require.config( {
@@ -60,7 +65,7 @@
         shim: {
             "datepicker": [ "jquery" ],
             "select2": [ "jquery", "xDomainRequest" ],
-            "bootstrap": [ "jquery" ],
+            "bootstrap": [ "jquery", "dataSource" ],
             "formvalidation": [ "jquery", "bootstrap" ],
             "formvalidationBs": [ "formvalidation" ],
             "formvalidationI18N": [ "formvalidation", "formvalidationBs" ],
@@ -76,8 +81,8 @@
     } );
 
     /**
-     * 以 “^$” 打头的，不是jQuery插件，会有一个全局对象，
-     * 全局对象名默认是插件名，也可以通过“data-export”指定。
+     * 以 “^$” 打头的，是AMD模块，返回的对象会挂载到PKUI名称空间，也会挂载到window对象上，
+     * 名称默认是插件名，全局变量名也可以通过“data-export”指定。
      */
     MODULES = {
         "bootstrap": "bootstrap",
@@ -86,6 +91,7 @@
         "select-area": "select-area",
         "formvalidation": "formvalidationI18N",
         "bootgrid": "bootgrid",
+
         "layer": "^$layer",
         "dataSource": "^$dataSource",
         "webuploader": "^$webuploader"
@@ -109,12 +115,16 @@
                 if ( ! moduleID ) {
                     throw "[" + moduleID + "] is not exist.";
                 }
-                // 处理非jQuery插件：符合AMD规范的
+                // 处理非jQuery插件：符合AMD规范的模块
                 if ( moduleID.indexOf("^$") === 0 ) {
                     moduleID = moduleID.replace( "^$", "" );
                     globalName = $this.attr( "data-export" ) || moduleID;
                     require( [ moduleID ], function ( m ) {
                         window[ globalName ] = m;
+                        // 挂载到名称空间PKUI
+                        if ( window.PKUI ) {
+                            window.PKUI[ moduleID ] = m;
+                        }
                     } );
                     return ;
                 }
@@ -128,5 +138,6 @@
         } );
 
     } );
+
 
 }();
