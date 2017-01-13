@@ -193,8 +193,10 @@ define( [ 'jquery' ], function ( $ ) {
         },
         handleRequestDicSuccess: function ( url, xmlDoc ) {
             var isSuccess,
-                listCache
+                listCache,
+                _this
                 ;
+            _this = this;
             isSuccess = xmlDoc && ( xmlDoc.getElementsByTagName( "row" ).length > 0 );
             listCache = DataSource.cache[ "list" ];
             if ( isSuccess ) {
@@ -209,10 +211,10 @@ define( [ 'jquery' ], function ( $ ) {
                 DataSource.request(
                     url,
                     function ( data ) {
-                        handleRequestDicSuccess( url, data );
+                        _this.handleRequestDicSuccess( url, data );
                     },
                     function () {
-                        handleRequestDicError( url );
+                        _this.handleRequestDicError( url );
                     },
                     "POST"
                 );
