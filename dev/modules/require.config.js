@@ -71,7 +71,7 @@
             "formvalidationI18N": [ "formvalidation", "formvalidationBs" ],
             "webuploader": [ "css!lib/webuploader/css/webuploader.css" ],
             "colresizable": [ "jquery" ],
-            "bootgrid": [ "css!lib/bootgrid/css/jquery.bootgrid.css", "bootstrap", "colresizable" ],
+            "bootgrid": [ "css!lib/bootgrid/css/jquery.bootgrid.css", "bootstrap", "colresizable", "dataSource" ],
             "select-area": [ "css!lib/select-area/css/select-area.css" ],
             "sweet-alert": [ "jquery" ],
             "code-pretty": [ "css!lib/pretty/prettify.css" ]

@@ -21,7 +21,7 @@ define( [ 'jquery' ], function ( $ ) {
     DataSource = {
         cache: {},
         /* 请求xml文件 */
-        cacheXmlDocument: function ( urls ) {
+        getXmlAndCache: function ( urls ) {
             var len,
                 i,
                 url,

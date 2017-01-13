@@ -101,24 +101,27 @@
         firstHeadRow.children().each( function () {
             var $this = $( this ),
                 data = $this.data(),
-                column = {
-                    id: data.columnId,
-                    identifier: that.identifier == null && data.identifier || false,
-                    converter: that.options.converters[ data.converter || data.type ] || that.options.converters[ "string" ],
-                    text: $this.text(),
-                    align: data.align || "left",
-                    headerAlign: data.headerAlign || "left",
-                    cssClass: data.cssClass || "",
-                    headerCssClass: data.headerCssClass || "",
-                    formatter: that.options.formatters[ data.formatter ] || null,
-                    order: (!sorted && (data.order === "asc" || data.order === "desc")) ? data.order : null,
-                    searchable: !(data.searchable === false), // default: true
-                    sortable: !(data.sortable === false), // default: true
-                    visible: !(data.visible === false), // default: true
-                    visibleInSelection: !(data.visibleInSelection === false), // default: true
-                    width: ($.isNumeric( data.width )) ? data.width + "px" :
-                        (typeof(data.width) === "string") ? data.width : null
-                };
+                column
+            ;
+            //FIX: th上设置的 data-* 属性都会存在于column上
+            column = $.extend( {}, data, {
+                id: data.columnId,
+                identifier: that.identifier == null && data.identifier || false,
+                converter: that.options.converters[ data.converter || data.type ] || that.options.converters[ "string" ],
+                text: $this.text(),
+                align: data.align || "left",
+                headerAlign: data.headerAlign || "left",
+                cssClass: data.cssClass || "",
+                headerCssClass: data.headerCssClass || "",
+                formatter: that.options.formatters[ data.formatter ] || null,
+                order: (!sorted && (data.order === "asc" || data.order === "desc")) ? data.order : null,
+                searchable: !(data.searchable === false), // default: true
+                sortable: !(data.sortable === false), // default: true
+                visible: !(data.visible === false), // default: true
+                visibleInSelection: !(data.visibleInSelection === false), // default: true
+                width: ($.isNumeric( data.width )) ? data.width + "px" :
+                    (typeof(data.width) === "string") ? data.width : null
+            } );
             that.columns.push( column );
             if ( column.order != null ) {
                 that.sortDictionary[ column.id ] = column.order;
@@ -569,6 +572,15 @@
                                 column.formatter.call( that, column, row ) :
                                 column.converter.to( row[ column.id ] ),
                             cssClass = (column.cssClass.length > 0) ? " " + column.cssClass : "";
+
+                        //FIX: 字典翻译
+                        var dicUrl = column[ "dicUrl" ];
+                        var dicDataset;
+                        if ( dicUrl ) {
+                            dicDataset = window.PKUI.dataSource.getDataSet( dicUrl );
+                            value = dicDataset[ value ];
+                        }
+
                         cells += tpl.cell.resolve( getParams.call( that, {
                             content: (value == null || value === "") ? "&nbsp;" : value,
                             css: ((column.align === "right") ? css.right : (column.align === "center") ?
