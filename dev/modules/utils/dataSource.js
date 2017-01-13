@@ -2,6 +2,7 @@
  * 字典数据源
  */
 define( [ 'jquery' ], function ( $ ) {
+    "use strict";
     var DataSource
     ;
 
@@ -97,10 +98,10 @@ define( [ 'jquery' ], function ( $ ) {
          * 获取扩展的dataList
          * @param url 字典文件的url
          * @param extType 扩展类型，一般是插件名称
-         * @param extConvertor 有预定义好的转换器，也可以用自定义的
+         * @param extConverter 有预定义好的转换器，也可以用自定义的
          * @returns {*}
          */
-        getExtDataList: function ( url, extType, extConvertor ) {
+        getExtDataList: function ( url, extType, extConverter ) {
             var dataList,
                 extDataList,
                 extCache
@@ -121,7 +122,7 @@ define( [ 'jquery' ], function ( $ ) {
             dataList = this.getDataList( url );
 
             // 3. 将 dataList 转化为 extType类型 的数据格式
-            extDataList = this.utils.convertDataListToExtDataList( dataList, extType, extConvertor );
+            extDataList = this.utils.convertDataListToExtDataList( dataList, extType, extConverter );
 
             // 4. 缓存，并返回
             extCache[ extType ][ url ] = extDataList;
@@ -262,18 +263,18 @@ define( [ 'jquery' ], function ( $ ) {
             } );
             return dataSet;
         },
-        convertDataListToExtDataList: function ( dataList, extType, extConvertor ) {
+        convertDataListToExtDataList: function ( dataList, extType, extConverter ) {
             var extDataList
                 ;
 
-            // 如果传了自定义的extConvertor，则调用自定义的extConvertor
-            if ( extConvertor ) {
-                return extConvertor( dataList );
+            // 如果传了自定义的extConverter，则调用自定义的extConverter
+            if ( extConverter ) {
+                return extConverter( dataList );
             }
 
             switch ( extType ) {
-                case "select2": { // 预定义的 extConvertor
-                    extDataList = DataSource.convertor.get( "select2" )( dataList );
+                case "select2": { // 预定义的 extConverter
+                    extDataList = DataSource.converter.get( "select2" )( dataList );
                     break;
                 }
             }
@@ -283,7 +284,7 @@ define( [ 'jquery' ], function ( $ ) {
 
 
     // 转换器
-    DataSource.convertor = {
+    DataSource.converter = {
         get: function ( type ) {
             return this[ type ];
         },
@@ -301,7 +302,6 @@ define( [ 'jquery' ], function ( $ ) {
             return extDataList;
         }
     };
-
 
     return DataSource;
 } );
