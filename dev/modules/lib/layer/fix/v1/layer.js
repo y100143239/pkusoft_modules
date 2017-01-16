@@ -4,7 +4,11 @@
  @Author：贤心
  @Site：http://layer.layui.com
  @License：LGPL
-    
+
+ @Fix 1:
+     //FIX 1.1: 初始化完毕后，设置path，便于引入皮肤
+     //FIX 1.2: 修复 requirejs 引入模块后，css不引入的问题，重新设置 path
+
  */
 
 ;!function(window, undefined){
@@ -1229,6 +1233,7 @@ window.layui && layui.define ? (
 ) : (
   typeof define === 'function' ? define(['jquery'], function(){ //requirejs加载
     ready.run(window.jQuery);
+    //FIX 1.1: 初始化完毕后，设置path，便于引入皮肤
     setPath();
     return layer;
   }) : function(){ //普通script标签加载
@@ -1237,15 +1242,17 @@ window.layui && layui.define ? (
   }()
 );
 
-  //FIX: 修复 requirejs 引入模块后，css不引入的问题
-  function setPath() {
-    var layerPath
-        ;
-    layerPath = require.toUrl( "layer" );
-    layerPath = layerPath.substring( 0, layerPath.lastIndexOf( "layer" ) );
-    layer.config({
-      path: layerPath
-    });
-  }
+    //FIX 1.2: 修复 requirejs 引入模块后，css不引入的问题，重新设置 path
+    function setPath() {
+        var layerPath,
+            pos
+            ;
+        layerPath = require.toUrl( "layer" );
+        pos = layerPath.indexOf( "layer" ) + "layer".length + 1;
+        layerPath = layerPath.substring( 0, pos );
+        layer.config( {
+            path: layerPath
+        } );
+    }
 
 }(window);

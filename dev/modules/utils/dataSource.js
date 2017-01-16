@@ -1,19 +1,12 @@
 /**
  * 字典数据源
  */
-define( [ 'jquery' ], function ( $ ) {
+define( [ 'jquery', "pku/pkui" ], function ( $, PKUI ) {
     "use strict";
     var DataSource
     ;
 
     DataSource = {};
-
-
-    // 挂载到名称空间PKUI
-    if ( window.PKUI ) {
-        window.PKUI.dataSource = DataSource;
-    }
-
 
     // 缓存
     DataSource.cache = {
@@ -302,6 +295,9 @@ define( [ 'jquery' ], function ( $ ) {
             return extDataList;
         }
     };
+
+    // 注册
+    PKUI.regModule( "dataSource", DataSource );
 
     return DataSource;
 } );
