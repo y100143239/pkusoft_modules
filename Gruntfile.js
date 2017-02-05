@@ -230,6 +230,18 @@ module.exports = function(grunt) {
                     'cp -R /Users/forwardNow/develop/work/pkusoft/pkusoft_modules/csdn ./static/'
                 ].join('&&')
             },
+            copyPkuiTo_bae: {
+                command: [
+                    // 1. 切换到 _bae 目录
+                    'cd /Users/forwardNow/develop/work/_bae',
+                    // 2. 删除 csdn目录
+                    'rm  -Rf ./static/pkui',
+                    // 将webstorm的/pkui目录拷贝到 _bae/static/pkui
+                    'cp -R /Users/forwardNow/develop/work/pkusoft/pkusoft_modules/pkui ./static/',
+                    // 删除所欲scss文件
+                    'find /Users/forwardNow/develop/work/pkusoft/pkusoft_modules/pkui/css/ -name *.scss | xargs rm -Rf'
+                ].join('&&')
+            },
             copyDistToEclipse: {
                 command: [
                     // 删除 dev目录 下的内容

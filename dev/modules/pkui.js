@@ -88,8 +88,7 @@ define( "pku/config", [], function () {
 } );
 
 /**
- * 以 “__AMD__” 打头的，是AMD模块，返回的对象会挂载到PKUI名称空间，也会挂载到window对象上，
- * 名称默认是插件名，全局变量名也可以通过“data-export”指定。
+ * 以 “__AMD__” 打头的，是AMD模块
  */
 define( "pku/moduleMapping", [], function () {
     var ModuleMapping
@@ -265,8 +264,6 @@ require( [ "pku/config" ], function ( Config ) {
 
 require( [  "pku/pkui" ], function ( PKUI ) {
     "use strict";
-
-    require(   )
 
     // 初始化PKUI
     PKUI.init();
