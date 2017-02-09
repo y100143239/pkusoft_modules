@@ -1215,25 +1215,31 @@ ready.run = function(_$){
   };
 };
 
-//加载方式
-window.layui && layui.define ? (
-  layer.ready()
-  ,layui.define('jquery', function(exports){ //layui加载
-    layer.path = layui.cache.dir;
-    ready.run(layui.jquery);
+    //加载方式
+    // sea.js模块加载
+    if ( typeof define === "function" && define.cmd ) {
+        define( function(require, exports, module) {
+            var jq = require( "jquery" );
+            ready.run( jq );
+            setPath( module.uri );
+            return layer;
+        });
+    } else {
+        //普通script标签加载
+        ready.run(window.jQuery);
+        layer.ready();
+    }
 
-    //暴露模块
-    window.layer = layer;
-    exports('layer', layer);
-  })
-) : (
-  typeof define === 'function' ? define(['jquery'], function(){ //requirejs加载
-    ready.run(window.jQuery);
-    return layer;
-  }) : function(){ //普通script标签加载
-    ready.run(window.jQuery);
-    layer.ready();
-  }()
-);
+    function setPath( absPath ) {
+        var layerPath,
+            pos
+            ;
+        layerPath = absPath;
+        pos = layerPath.lastIndexOf( "layer" );
+        layerPath = layerPath.substring( 0, pos );
+        layer.config( {
+            path: layerPath
+        } );
+    }
 
 }(window);

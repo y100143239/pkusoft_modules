@@ -3,8 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="../../pkui/css/pkui/1.0.0/pkui.css">
+    <link rel="stylesheet" href="../../pkui/css/theme/default/1.0.0/pkui.css">
     <script src="../../pkui/lib/sea-modules/seajs/3.0.0/sea.js"></script>
+    <script>
+        seajs.config( {
+
+            // 别名配置
+            alias: {
+                "layer": "lib/layer/3.0.1.x/layer",
+                'jquery': 'lib/jquery/1.11.3.x/jquery'
+            },
+            // 调试模式
+            debug: true,
+            // Sea.js 的基础路径
+            base: '../../pkui/',
+            // 文件编码
+            charset: 'utf-8'
+        } );
+    </script>
+    <script>
+        seajs.use('layer', function () {
+            layer.alert("123");
+        });
+    </script>
 </head>
 <body>
 <i class="glyphicon glyphicon-asterisk"></i>
