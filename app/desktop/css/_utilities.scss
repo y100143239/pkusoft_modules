@@ -1,0 +1,12 @@
+.list {
+    @include clearfix();
+    .list-item {
+        float: left;
+    }
+}
+.menu {
+    @include clearfix();
+    .menu-item {
+        float: left;
+    }
+}
