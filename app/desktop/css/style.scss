@@ -1,22 +1,35 @@
 // bootstrap mixins
 @import "../../../pkui/css/bootstrap/3.3.6/bootstrap/mixins";
 
-@import "mixins";
+@import "common/mixins";
+
+// 变量
+@import "page/variables";
 
 // 雪碧图
-@import "css-sprite";
+@import "common/css-sprite";
 
 // 基础样式
 @import "../../../pkui/css/base/1.0.0/base";
 
+
 // 工具类
-@import "utilities";
+@import "base/utilities";
 
 // 基本样式
-@import "base";
+@import "base/base";
+
+// 菜单
+@import "common/menu";
 
 // 骨架
-@import "skeleton";
+@import "page/skeleton";
+
+// 主题
+@import "common/theme";
 
 // 顶部条
-@import "topbar";
+@import "page/topbar";
+
+// 窗口区域
+@import "page/window";

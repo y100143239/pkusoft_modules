@@ -1,4 +1,4 @@
-@import "compass/utilities/sprites";
+@import "../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/utilities/sprites";
 @import "desktop/*.png";
 
 //@include desktop-sprite(header_bg);
@@ -46,4 +46,21 @@
     width: 24px;
     height: 24px;
     @include desktop-sprite(icon_user);
+}
+.icon-triangle-down {
+    width: 10px;
+    height: 5px;
+    @include desktop-sprite(icon_triangle_down);
+}
+
+.icon-add {
+    width: 16px;
+    height: 16px;
+    @include desktop-sprite(icon_add);
+}
+
+.icon-setting {
+    width: 16px;
+    height: 16px;
+    @include desktop-sprite(icon_setting);
 }
