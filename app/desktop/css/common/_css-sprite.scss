@@ -64,3 +64,15 @@
     height: 16px;
     @include desktop-sprite(icon_setting);
 }
+
+.icon-arrow-left {
+    width: 33px;
+    height: 60px;
+    @include desktop-sprite(icon_arrow_left);
+}
+
+.icon-arrow-right {
+    width: 33px;
+    height: 60px;
+    @include desktop-sprite(icon_arrow_right);
+}

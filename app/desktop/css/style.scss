@@ -12,7 +12,6 @@
 // 基础样式
 @import "../../../pkui/css/base/1.0.0/base";
 
-
 // 工具类
 @import "base/utilities";
 
@@ -22,14 +21,17 @@
 // 菜单
 @import "common/menu";
 
-// 骨架
-@import "page/skeleton";
-
 // 主题
 @import "common/theme";
+
+// 应用启动面板
+@import "common/launchpad";
+
+@import "common/swiper";
+
+// 骨架
+@import "page/skeleton";
 
 // 顶部条
 @import "page/topbar";
 
-// 窗口区域
-@import "page/window";
