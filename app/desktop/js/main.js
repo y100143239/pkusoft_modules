@@ -1,21 +1,23 @@
 define( function ( require ) {
     var $,
-        swiper
+        Swiper,
+        launchpadSwiper
         ;
     $ = require( "jquery" );
-    require( "swiper" );
-    var mySwiper = new window.Swiper( '.swiper-container', {
-        pagination: '.launchpad-pagination-switchList',
+    Swiper = require( "swiper" );
+
+    launchpadSwiper = new Swiper( ".swiper-container", {
+        pagination: ".launchpad-pagination-switchList",
         loop: true,
         grabCursor: true,
         paginationClickable: true
     } );
-    $( '.launchpad-pagination-previous' ).on( 'click', function ( e ) {
+    $( ".launchpad-pagination-previous" ).on( "click", function ( e ) {
         e.preventDefault();
-        mySwiper.swipePrev();
+        launchpadSwiper.swipePrev();
     } );
-    $( '.launchpad-pagination-next' ).on( 'click', function ( e ) {
+    $( ".launchpad-pagination-next" ).on( "click", function ( e ) {
         e.preventDefault();
-        mySwiper.swipeNext();
+        launchpadSwiper.swipeNext();
     } );
 } );
