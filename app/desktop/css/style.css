@@ -491,6 +491,14 @@ a {
   border-color: rgba(255, 255, 255, 0.2);
 }
 
+.launchpad-shortcut-placeholder {
+  float: left;
+  width: 138px;
+  height: 138px;
+  border: solid 1px rgba(255, 255, 255, 0.1);
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
 .launchpad-shortcut-icon {
   display: block;
   width: 76px;

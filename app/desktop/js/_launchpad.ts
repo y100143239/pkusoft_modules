@@ -1,11 +1,15 @@
+declare function define(...args: any[]): any;
 /**
  * Created by forwardNow on 2/20/17.
  */
 define(function (require) {
-    var $, Swiper, Launchpad;
+    let $,
+        Swiper,
+        Launchpad
+        ;
     $ = require("jquery");
     Swiper = require("swiper");
-    require("jquery-ui");
+    require( "jquery-ui" );
     Launchpad = {
         swiper: null,
         previousBtn: ".launchpad-pagination-previous",
@@ -17,15 +21,17 @@ define(function (require) {
             this.bind();
         },
         render: function () {
+
             this.previousBtn = $(this.previousBtn);
             this.nextBtn = $(this.nextBtn);
-            this.shortcut = $(this.shortcut);
+            this.shortcut = $( this.shortcut );
         },
         bind: function () {
-            var that;
+            let that;
             that = this;
+
             this.swiper = new Swiper(".swiper-container", {
-                eventTarget: 'wrapper',
+                eventTarget : 'wrapper',
                 // noSwiping : true,
                 pagination: this.pagination,
                 loop: true,
@@ -40,14 +46,19 @@ define(function (require) {
                 e.preventDefault();
                 that.swiper.swipeNext();
             });
-            $(".launchpad-shortcutpad").sortable({
+
+
+
+            $( ".launchpad-shortcutpad" ).sortable({
                 connectWith: ".launchpad-shortcutpad",
                 handle: ".launchpad-shortcut-icon",
                 placeholder: "launchpad-shortcut-placeholder"
             }).disableSelection();
+
         }
     };
-    $(document).ready(function () {
+
+    $( document ).ready( function() {
         Launchpad.init();
-    });
+    } );
 });

@@ -1367,6 +1367,12 @@ var Swiper = function (selector, params) {
             if (document.activeElement !== eventTarget) document.activeElement.blur();
         }
 
+        // FIX 硬编码解决某些元素不可拖动
+        if ( jQuery( eventTarget ).is( ".launchpad-shortcut" ) || jQuery( eventTarget ).parents(".launchpad-shortcut").size() > 0) {
+            // console.info( "launchpad-shortcut" );
+            return false;
+        }
+
         // Form tag names
         var formTagNames = ('input select textarea').split(' ');
 

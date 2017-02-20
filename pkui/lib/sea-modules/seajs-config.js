@@ -41,8 +41,14 @@
             // 是IE8识别HTML5标记
             "html5shiv": "lib/html5shiv/3.7.3/html5shiv",
 
+            // jQuery
             "jquery": "lib/jquery/1.11.3.x/jquery",
-            "swiper": "lib/swiper/2.7.6.x/swiper"
+
+            // 轮播图组件
+            "swiper": "lib/swiper/2.7.6.x/swiper",
+
+            // jQuery UI
+            "jquery-ui": "lib/jquery/plugin/jquery-ui/1.12.1.x/jquery-ui.min"
 
         },
 
@@ -64,6 +70,7 @@
         // 预加载项
         preload: [
             window.jQuery ? "" : "jquery",
+            // "jquery-ui",
             isSupportES5 ? "" : "es5-sham",
             isSupportJSON ? "" : "json3",
             isSupportMediaQuery ? "" : "respond",

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../pkui/lib/jquery/1.11.3.x/jquery.js"></script>
+    <script src="../../pkui/lib/jquery/plugin/jquery-ui/1.12.1.x/jquery-ui.min.js"></script>
+
+</head>
+<body>
+<script>
+    $( function() {
+        $( "#sortable1, #sortable2" ).sortable({
+            connectWith: ".connectedSortable"
+        }).disableSelection();
+
+        $( "#sortable1" ).on( "mousedown", function() {
+            console.info( "#sortable1 mousedown" );
+        } );
+        $( "#sortable1" ).append( '<li class="ui-state-default">Item 6</li>' );
+    } );
+</script>
+
+<ul id="sortable1" class="connectedSortable">
+    <li class="ui-state-default">Item 1</li>
+    <li class="ui-state-default">Item 2</li>
+    <li class="ui-state-default">Item 3</li>
+    <li class="ui-state-default">Item 4</li>
+    <li class="ui-state-default">Item 5</li>
+</ul>
+
+<ul id="sortable2" class="connectedSortable">
+    <li class="ui-state-highlight">Item 11</li>
+    <li class="ui-state-highlight">Item 22</li>
+    <li class="ui-state-highlight">Item 33</li>
+    <li class="ui-state-highlight">Item 44</li>
+    <li class="ui-state-highlight">Item 55</li>
+</ul>
+
+<div class="a">
+    <div class="b">
+        <div class="c"></div>
+    </div>
+</div>
+
+
+</body>
+</html>
